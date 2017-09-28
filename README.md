@@ -4,6 +4,8 @@ Baza - mongodb.
 Clijent Angular4
 Da vidim mogu li i klijenta da podignem
 
+Test iz root direktorija
+
 
 
 

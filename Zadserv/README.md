@@ -11,4 +11,5 @@ Ponovo ga vracam server bio sam ga skinuo i radi lokalno na web serveru
 
 Podigao sam ga na matlab i pravim prvo modele, pa cu posle route i kontrolere.
 Bice serverski deo back-end deo aplikacije zadruge. Project Code(NodeJs i MongoDb)
+Test iz direktorija zadserv
 
