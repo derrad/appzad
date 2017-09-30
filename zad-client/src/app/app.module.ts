@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router'; 
 import { GrowlModule } from 'primeng/primeng';
 import {MessagesModule} from 'primeng/primeng';
+import {FlashMessagesModule} from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -44,7 +45,8 @@ const appRoutes: Routes =  [
     HttpModule,
     RouterModule.forRoot(appRoutes), 
     MessagesModule,
-    GrowlModule
+    GrowlModule,
+    FlashMessagesModule
   ],
   providers: [ValidateService, AuthService,AuthGuard],
   bootstrap: [AppComponent]

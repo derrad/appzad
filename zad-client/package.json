@@ -28,7 +28,8 @@
     "bootstrap": "*",  
     "jquery": "*",
     "font-awesome": "*",
-    "primeng": "*"
+    "primeng": "*",
+    "angular2-flash-messages": "*" 
   },
   "devDependencies": {
     "@angular/cli": "1.4.3",
