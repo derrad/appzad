@@ -17,7 +17,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
-import {AuthGuard} from './guards/auth.guard'; 
+import {AuthGuard} from './guards/auth.guard';
+import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component'; 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -38,6 +39,7 @@ const appRoutes: Routes =  [
     ProfileComponent,
     RegisterComponent,
     NavbarComponent,
+    NavbarLeftComponent,
   ],
   imports: [
     BrowserModule,

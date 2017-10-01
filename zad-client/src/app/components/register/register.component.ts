@@ -24,11 +24,12 @@ export class RegisterComponent implements OnInit {
     private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
+  
   }
 
   onRegisterSubmit(){
 
-    alert("Usao u onSubmit");
+    //alert("Usao u onSubmit");
 
     const user = {
       name: this.name,
@@ -46,7 +47,7 @@ export class RegisterComponent implements OnInit {
       //       summary: 'warn Message',
       //       detail: 'Please fill in all fields'
       //   });
-      alert("Nisam prosao");
+      //alert("Nisam prosao");
       return false;
     }
 
