@@ -94,7 +94,7 @@ nav:hover .forAnimate{
 /*small/medium side display*/
 @media (min-width: 768px) {
 
-    /*Allow main to be next to Nav*/
+    Allow main to be next to Nav
     .container-main{
         position: absolute;
         width: calc(100% - 40px); /*keeps 100% minus nav size*/
