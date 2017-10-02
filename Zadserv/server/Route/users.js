@@ -37,7 +37,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
-        console.log("pre pravljena jwt.sign");
+      //  console.log("pre pravljena jwt.sign");
         const token = jwt.sign({
           exp: Math.floor(Date.now() / 1000) + (60 * 60),
           data: user
@@ -52,7 +52,7 @@ router.post('/authenticate', (req, res, next) => {
         //   expiresIn: 604800 // 1 week
         // });
 
-        console.log("posle pravljena jwt.sign");
+      //  console.log("posle pravljena jwt.sign");
         res.json({
           success: true,
           token: 'JWT '+ token, 

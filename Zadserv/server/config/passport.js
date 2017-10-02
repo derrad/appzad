@@ -9,8 +9,8 @@ module.exports = function(passport){
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');// .fromAuthHeaderAsBearerToken();
   opts.secretOrKey = config.secret;
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-   console.log("username" + jwt_payload.data.username);
-   console.log("ID " + jwt_payload.data._id);
+ //  console.log("username" + jwt_payload.data.username);
+ //  console.log("ID " + jwt_payload.data._id);
 //jwt_payload._doc._id
     User.getUserById(jwt_payload.data._id, (err, user) => {
       if(err){
