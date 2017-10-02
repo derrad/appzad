@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router'; 
-import { GrowlModule } from 'primeng/primeng';
-import {MessagesModule} from 'primeng/primeng';
+//import { GrowlModule } from 'primeng/primeng';
+//import {MessagesModule} from 'primeng/primeng';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
@@ -46,11 +46,13 @@ const appRoutes: Routes =  [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes), 
-    MessagesModule,
-    GrowlModule,
     FlashMessagesModule
   ],
   providers: [ValidateService, AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+// MessagesModule,
+// GrowlModule,

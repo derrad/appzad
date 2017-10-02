@@ -21,61 +21,91 @@
                <li  *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" 
                   [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">
                     Dashboard <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer" aria-hidden="true"></i></a>
-                
                 </li>
-
-                  <!-- <a [routerLink]="['/dashboard']">
-                    <span class="pull-right hidden-xs showopacity glyphicon material-icons">av_timer</span> Dashboard
-                </a>
-
-              </li> -->
-           
-              <!-- Banner -->
-              <!-- <li class="">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">burst_mode</span>
-                      Banners <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu forAnimate" role="menu">
-                      <li><a href="#"><i class="material-icons">add</i> Add</a></li>
-                      <li><a href="#"><i class="material-icons">sort</i> List</a></li>
-                  </ul>
-              </li>-->
+            
               <li class="separator">Content</li>
-              <!-- Page -->
+              <!-- Sifarnik -->
               <li class="">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
-                      Šifarnik <span class="caret"></span>
+                      <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
+                      Šifarnik <span class="caret"></span> -->
+                    <span>
+                      <i class="fa fa-file-o menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                      Šifarnik<span class="caret"></span> 
+                    </span>
+
                   </a>
                   <ul class="dropdown-menu forAnimate" role="menu">
-                      <li><a href="#"><i class="material-icons">add</i> Add</a></li>
-                      <li><a href="#"><i class="material-icons">sort</i> List</a></li>
+                        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i> Zadrugari</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i> Kupci</a></li> 
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Zanimanja</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Poslovi</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
+                        <li *ngIf="authService.loggedIn()">
+                            <a [routerLink]="['/dashboard']" >
+                                <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Države
+                            </a>
+                        </li>
+                    
                   </ul>
               </li>
-              <!-- Blog -->
+              <!-- Obrade -->
               <li class="">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">chat_bubble_outline</span>
-                      Obrade <span class="caret"></span>
+                     <span><i class="fa fa-book menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                       Obrade <span class="caret"></span>
+                      </span>
                   </a>
                   <ul class="dropdown-menu forAnimate" role="menu">
-                      <li><a href="#"><i class="material-icons">add</i> Add</a></li>
-                      <li><a href="#"><i class="material-icons">sort</i> List</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uputi</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Fakture</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uplate</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-money" aria-hidden="true"></i> Isplate</a></li>
                   </ul>
               </li>
-              <!-- Tags -->
+              <!-- Pregledi -->
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon material-icons">label</span>
-                      Pregledi <span class="caret"></span>
+                      <!-- <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon material-icons">label</span>
+                      Pregledi <span class="caret"></span> -->
+
+                      <span><i class="fa fa-eye menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Pregledi <span class="caret"></span>
+                        </span>
+
                   </a>
                   <ul class="dropdown-menu forAnimate" role="menu">
-                      <li><a href="#"> <i class="material-icons">add</i> Add</a></li>
-                      <li><a href="#"> <i class="material-icons">sort</i> List</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Add</a></li>
+                      <!-- <li><a href="#"> <i class="material-icons">add</i> Add</a></li>
+                      <li><a href="#"> <i class="material-icons">sort</i> List</a></li> -->
                   </ul>
               </li>
               <li class="separator">System</li>
+
+              <li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
+                        Šifarnik <span class="caret"></span> -->
+                      <span>
+                        <i class="fa fa-cog menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Opcije<span class="caret"></span> 
+                      </span>
+  
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                          <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Vlasnik</a></li>
+                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li> 
+                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li>
+                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li>
+                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri</a></li>
+                          
+                    </ul>
+                </li>
+              
+
               <!-- Users -->
               <li class="#">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -88,8 +118,8 @@
                   </a>
                   <!-- [routerLinkActiveOptions] = "{exact:true}"   [routerLinkActive]="['active']"-->
                   <ul class="dropdown-menu forAnimate" role="menu">
-                      <li><a href="#"><i class="material-icons">add</i> Add</a></li>
-                       <li><a href="#"><i class="material-icons">sort</i> List</a></li>
+                      <!-- <li><a href="#"><i class="material-icons">add</i> Add</a></li>
+                       <li><a href="#"><i class="material-icons">sort</i> List</a></li> -->
                       <li *ngIf="authService.loggedIn()"   >
                         <a [routerLink]="['/profile']">Profile
                           <i class=" menu-icon pull-left hidden-xs showopacity fa fa-user-md" aria-hidden="true"></i>
@@ -102,11 +132,17 @@
                       
 
                   </ul>
-              </li>
+              </li
+              
+              >
               <!-- Exit -->
               <li>
                   <a href="#">
-                      <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">exit_to_app</span> Exit
+                      <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">exit_to_app</span> Exit -->
+
+                      <span><i class="fa fa-sign-out menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Exit
+                      </span>
                   </a>
               </li>
           </ul>

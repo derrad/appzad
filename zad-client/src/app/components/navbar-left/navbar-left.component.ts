@@ -5,8 +5,9 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar-left',
-  templateUrl: './navbar-left.component.html',
-  styleUrls: ['./navbar-left.component.css']
+ templateUrl: './navbar-left.component.html',
+ styleUrls: ['./navbar-left.component.css']
+ 
 })
 export class NavbarLeftComponent implements OnInit {
 
@@ -19,3 +20,7 @@ export class NavbarLeftComponent implements OnInit {
 
 }
 
+
+
+// templateUrl: './navbar-left.obican.html',
+// styleUrls: ['./navbar-left.obican.css']

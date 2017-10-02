@@ -2,16 +2,16 @@
 
 body,html{
     height: 100%;
-} 
+}  
 
 /* remove outer padding */
- .container-main .row{
+ /* .container-main .row{
     padding: 0px;
     margin: 0px;
-}
+} */
 
-body{
+/* body{
     padding-top: 3.5rem;
-}
+} */
 
 
