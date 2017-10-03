@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
-//import {ServiceConfig} from '../service.config'
+import {ServiceConfig} from '../service.config'
 
 @Injectable()
 export class AuthService {
@@ -11,7 +11,7 @@ export class AuthService {
   isDev:boolean;
 
   constructor(private http:Http) {
-    this.isDev = true; // Change to false before deployment  sredi ovo
+    this.isDev = false; // Change to false before deployment  sredi ovo
 
    }
 
@@ -19,15 +19,22 @@ export class AuthService {
     let headers = new Headers();
     //this.serviceConfig.hosturl
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/register', user,{headers: headers})
-      .map(res => res.json());
+    let ep = this.prepEndpoint('users/register'); 
+    return this.http.post(ep, user,{headers: headers})
+    .map(res => res.json());
+
+    // return this.http.post('http://localhost:3000/users/register', user,{headers: headers})
+    //   .map(res => res.json());
   }
 
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
-      .map(res => res.json());
+    let ep = this.prepEndpoint('users/authenticate'); 
+    return this.http.post(ep, user,{headers: headers})
+    .map(res => res.json());
+    // return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
+    //   .map(res => res.json());
   }
 
   getProfile(){
@@ -35,8 +42,11 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/profile',{headers: headers})
-      .map(res => res.json());
+    let ep = this.prepEndpoint('users/profile'); 
+    return this.http.get(ep,{headers: headers})
+    .map(res => res.json());
+    // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
+    //   .map(res => res.json());
   }
 
   storeUserData(token, user){
@@ -64,5 +74,16 @@ export class AuthService {
   }
 
 
+  prepEndpoint(ep){
+   console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+   return ServiceConfig.PrepareHost(this.isDev,ep);
+
+    // if(this.isDev){
+    //   return ep;
+    // } else {
+    //   //return 'http://localhost:8080/'+ep;
+    //   return ServiceConfig.HostUrl + ep;
+    // }
+  } 
 
 }
