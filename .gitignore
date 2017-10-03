@@ -9,7 +9,7 @@
 # dependencies
 /Zadserv/node_modules
 /zad-client/node_modules
-/Zadserv/log
+/Zadserv/log/*.log
 
 # IDEs and editors
 /.idea
