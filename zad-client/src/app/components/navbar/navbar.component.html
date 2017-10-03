@@ -18,7 +18,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         
-        <li><a (click)="onClickHelp()" href="#">
+        <!-- (click)="onClickQuickMenu()" -->
+        <li><a (click)="modal1.show()">
           <span class="glyphicon glyphicon-plus-sign fa-2x" aria-hidden="true" title="Quick add"></span>
         <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
       </a></li>
@@ -76,4 +77,29 @@
 </nav>
  -->
 
+ <app-modal #modal1>
+  <div class="app-modal-header">
+    header
+  </div>
+  <div class="app-modal-body">
+    <!-- Whatever content you like, form fields, anything
+    <input type="text"> -->
+    <ul>
+            
+      <li (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+      <li (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a [routerLink]="['/profile']">Profile</a></li>
+      <li (click)="modal1.hide()"><a (click)="onClickHelp()" href="#">
+          <span class="glyphicon glyphicon-question-sign fa-2x" aria-hidden="true" title="Help"></span>
+        <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
+        </a>
+    </li>
+      
+    </ul>
 
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
+    <!-- <button type="button" class="btn btn-default" (click)="modal2.show()">Show modal 2</button> -->
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</app-modal>

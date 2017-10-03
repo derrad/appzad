@@ -166,3 +166,17 @@
 ::1 - - [03/Oct/2017:12:05:05 +0000] "POST /users/authenticate HTTP/1.1" 200 653
 ::1 - - [03/Oct/2017:12:05:18 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
 ::1 - - [03/Oct/2017:12:05:18 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:41:09 +0000] "OPTIONS /users/authenticate HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:41:09 +0000] "POST /users/authenticate HTTP/1.1" 200 653
+::1 - - [03/Oct/2017:13:48:12 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:48:12 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:49:50 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:49:50 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:53:16 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:53:16 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:54:02 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:54:02 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:54:09 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:54:09 +0000] "GET /users/profile HTTP/1.1" 200 282
+::1 - - [03/Oct/2017:13:55:37 +0000] "OPTIONS /users/profile HTTP/1.1" 204 0
+::1 - - [03/Oct/2017:13:55:37 +0000] "GET /users/profile HTTP/1.1" 200 282

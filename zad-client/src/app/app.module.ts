@@ -18,14 +18,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 import {AuthGuard} from './guards/auth.guard';
-import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component'; 
+import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { QuickMenuComponent } from './components/quick-menu/quick-menu.component'; 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]}
+  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+  {path:'quickmenu', component: QuickMenuComponent, canActivate:[AuthGuard]}
   // {path:'drzave', component: SfdrzaveComponent, canActivate:[AuthGuard]},
   // {path:'adddrzave', component: AdddrzaveComponent, canActivate:[AuthGuard]}
 ] 
@@ -40,6 +43,8 @@ const appRoutes: Routes =  [
     RegisterComponent,
     NavbarComponent,
     NavbarLeftComponent,
+    ModalComponent,
+    QuickMenuComponent,
   ],
   imports: [
     BrowserModule,
