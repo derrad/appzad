@@ -10,7 +10,8 @@ export const ServiceConfig = {
           }
 
         //return 'HOST PREPARE' + ServiceConfig.HostUrl;
-    }
+    },
+    isDev:false
   };
 
 

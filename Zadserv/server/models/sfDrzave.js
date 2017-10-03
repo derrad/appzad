@@ -23,6 +23,8 @@ var sfDrzave = new Schema({
         minlength:[3,"Minimalna duzina 3 karaktera"],
         maxlength:3},
    Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'],unique: true,trim: true, minlength:1 },
+  // Contry :{ type: String, required: [true, 'Naziv je obavezan !!!'],unique: true,trim: true, minlength:1 },
+  // State :{ type: String, required: [true, 'Naziv je obavezan !!!'],unique: true,trim: true, minlength:1 },
    EuClan: {type:Boolean, default:false},
    Opis  :{ type: String },
    NameUser: {type:String},

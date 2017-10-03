@@ -1,37 +1,133 @@
 var mongoose = require('mongoose');
 var Drzava = require('../models/sfDrzave');
 
-module.exports.create = function (req, res) {
- // var error;
-  var drzava = new Drzava(req.body);
-  
-//  error = drzava.validateSync();
-//  if(error){
- //   error.CustomError ="Nisam ni otisao na server";
- //    res.json(error); 
-//  }
 
-drzava.save(function (err, result) {
-    console.log("Usao u save drzave kada je ovo");
-      
-     //debugger;
-      if(err){
-        console.log(err); 
-        //result.errors = [];
-        //result.errors.push(err);
-        res.json(err); 
-       // res.json(result); 
+module.exports.create = function (req, res,next) {
+  const uid = req.params.id ;
+  const KodDrzave=req.body.KodDrzave ;
+  const Naziv = req.body.Naziv;
+  const EuClan =req.body.EuClan  || false;
+  const Opis = req.body.Opis ;
+  const NameUser = req.body.NameUser || "TEST";
+
+  console.log("uid je :" + uid + " ovo je koddrzave " + req.body.KodDrzave);
+
+  
+if (!KodDrzave || !Naziv ) {
+     return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+} 
+else 
+{
+  
+  if (uid) {
+    //Edit opstina
+    Drzava.findById(uid).exec(function(err, drzava){
+      if(err){ 
+        return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
       }
-   // console.log( " ovo saljem nazad" + result.toString());
-    res.json(result);
-  });
+        
+      if(drzava) {
+        drzava.KodDrzave=KodDrzave ;
+        drzava.Naziv = Naziv;
+        drzava.EuClan=EuClan;
+        drzava.Opis = Opis ;
+        if(NameUser){drzava.NameUser = NameUser;}
+        
+      }
+      drzava.save(function(err,results) {
+        if(err){ 
+          return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
+        }
+        return res.status(201).json({
+          success: true,
+          message: 'Država updated successfully',
+          data:results
+        });
+      });
+    });
+
+  }else{
+    
+    // Add new DRZAVU
+    let oDrzava = new Drzava(
+        { 
+        KodDrzave:KodDrzave ,
+        Naziv : Naziv,
+        EuClan:EuClan,
+        Opis : Opis ,
+        NameUser : NameUser
+      });
+    
+      oDrzava.save(function(err,result) {
+        if(err){ 
+        return  res.status(400).json(
+            { success: false, message: 'Error processing request '+ err , data:[]});
+        }
+
+
+        oDrzava.find({_id:oDrzava._id}).exec(function(err, result){
+          if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+          }
+            return res.status(201).json({
+            success: true,
+            message:'Drzava saved successfully', 
+            data: result
+            });
+          });
+          
+      });
+
+    }
+}
 }
 
 
-module.exports.list = function (req, res) {
-  console.log("Usao u list drzave - tu sam");
-  Drzava.find({}, function (err, results) {
-    //console.log( results.toString());
-    res.json(results);
+// // );
+
+
+module.exports.listdrzave = function (req, res,next) {
+  console.log("Usao u list Drzava");
+  
+  Drzava.find({}).exec(function(err, result){
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+    }
+   // console.log( "Hvatam ga " +  result.Drzava.Naziv);
+      return res.status(200).json({
+      success: true,
+      message:'Successfully', 
+      data: result
+      });
+    });
+
+}
+
+
+module.exports.getdrzava = function (req, res,next) {
+  console.log("Usao u get drzava parametar je  " + req.params.id);
+  Drzava.find({_id:req.params.id}).exec(function(err, result){
+    if(err){ 
+      return res.status(400).json(
+      { success: false, message:'Error processing request '+ err , data:null }
+      ); 
+    }
+      return res.status(200).json({
+      success: true, 
+      message:'Successfully',
+      data: result
+      });
+    });
+}
+
+
+module.exports.deledrzava = function(req, res, next) {
+  console.log("delete drzava parametar je : " + req.params.id);
+ // const uid = req.params.id || '1234';
+ Drzava.remove({_id: req.params.id }, function(err){
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+        return res.status(201).json({
+            success: true,
+            message: 'Država removed successfully',
+            data:[]
+          });
   });
 }

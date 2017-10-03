@@ -52,7 +52,7 @@ router.post('/authenticate', (req, res, next) => {
         //   expiresIn: 604800 // 1 week
         // });
 
-      //  console.log("posle pravljena jwt.sign");
+        console.log("posle pravljena jwt.sign");
         res.json({
           success: true,
           token: 'JWT '+ token, 

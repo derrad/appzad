@@ -1,0 +1,54 @@
+<!-- <p>
+    drzave works!
+  </p>
+  
+  <div class="row">
+    <div *ngIf="drzave" class="col-lg-9 col-md-9 col-xs-10">
+      <h2 class="page-header">{{Title}}</h2>
+      <ul class="list-group" >
+          <li *ngFor="let drzava of drzave">
+              {{drzava.KodDrzave}}
+            </li> -->
+       <!-- <li class="list-group-item" *ngFor="let drzava of Drzave"> {{drzava.KodDrzave}}</li> -->
+        <!-- <li class="list-group-item">Naziv: {{drzava.Naziv}}</li>
+      <li class="list-group-item">Eu: {{drzava.EuClan}}</li>
+      <li class="list-group-item">Opis: {{drzava.Opis}}</li>
+      <li class="list-group-item">User: {{drzava.NameUser}}</li> -->
+    <!-- </ul>
+  </div> 
+</div> -->
+
+<div class="row">
+    <div *ngIf="drzave" class="col-lg-9 col-md-9 col-xs-10">
+      <h3 class="first">TABELA DRZAVA</h3>
+      <input #gb type="text" placeholder="Global search" pInputText focus>
+      <p></p>
+
+      <p-dataTable [value]="drzave"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+                selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" styleClass="table table-striped" >
+      <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
+      <!--     drzaveID-->                                                                                          
+      <p-column field="KodDrzave" header="Kod" sortable="true"></p-column>                               
+      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
+      <p-column field="EuClan" header="EuClan" sortable="true"></p-column>
+      <p-column field="Opis" header="Opis" sortable="true"></p-column>
+      <p-column field="NameUser" header="User" sortable="true"></p-column>
+      
+      <p-column styleClass="col-button" heder="Opcije">
+          <!--<template pTemplate="header">
+              <button type="button" pButton icon="fa-refresh"></button>
+          </template>-->
+          <ng-template let-drz="rowData" let-i="rowIndex" pTemplate="body">
+              <button type="button" pButton (click)="selectDrzavu(drz._id)" icon="fa-hand-o-up"></button>
+          </ng-template>
+
+          <!-- <template let-drz="rowData" pTemplate="body">
+              <button type="button" pButton (click)="selectDrzavu(drz._id)" icon="fa-hand-o-up"></button>
+              <button type="button" pButton (click)="selectDrzavu(drz._id)" icon="fa-minus-square"></button>
+          </template> -->
+
+      </p-column>
+      <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+      </p-dataTable>
+    </div>
+</div>

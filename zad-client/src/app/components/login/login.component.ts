@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           //       summary: 'Info Message',
           //       detail: 'You are now logged in'
           //   });
-       // alert("Logovan sam");
+        alert("Logovan sam");
         this.router.navigate(['dashboard']);
       } else {
         // this.messageService.add({severity:'error', summary:'Login error', detail:data.msg});
