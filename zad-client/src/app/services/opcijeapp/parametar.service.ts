@@ -5,22 +5,19 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'; 
 import { Observable } from 'rxjs/Observable';
-import {ServiceConfig} from '../service.config'
+import {ServiceConfig} from '../service.config';
 
 @Injectable()
 export class ParametarService {
 
   authToken: any;
-  //drzave: any; 
   isDev:boolean;
 
   constructor(private http:Http) {
     this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
-
    }
 
-
-  loadToken(){
+   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
@@ -33,9 +30,8 @@ export class ParametarService {
     let ep = this.prepEndpoint('api/parametar'); 
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); ;
-    // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
-    //   .map(res => res.json());
+    .map(res => res.json()).catch(this.handleError); 
+    
   }
 
   prepEndpoint(ep){

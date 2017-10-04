@@ -9,7 +9,7 @@ module.exports.create = function (req, res,next) {
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
 
-  console.log("uid je :" + uid + " ovo je koddrzave " + req.body.KodDrzave);
+  //console.log("uid je :" + uid + " ovo je koddrzave " + req.body.KodDrzave);
 
   
 if (!KodDrzave || !Naziv ) {
@@ -85,7 +85,7 @@ else
 
 
 module.exports.listdrzave = function (req, res,next) {
-  console.log("Usao u list Drzava");
+  //console.log("Usao u list Drzava");
   
   Drzava.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
@@ -102,7 +102,7 @@ module.exports.listdrzave = function (req, res,next) {
 
 
 module.exports.getdrzava = function (req, res,next) {
-  console.log("Usao u get drzava parametar je  " + req.params.id);
+//  console.log("Usao u get drzava parametar je  " + req.params.id);
   Drzava.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
@@ -119,7 +119,7 @@ module.exports.getdrzava = function (req, res,next) {
 
 
 module.exports.deledrzava = function(req, res, next) {
-  console.log("delete drzava parametar je : " + req.params.id);
+ // console.log("delete drzava parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
  Drzava.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }

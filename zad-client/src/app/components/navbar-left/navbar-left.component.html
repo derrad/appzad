@@ -41,11 +41,22 @@
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i> Kupci</a></li> 
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Zanimanja</a></li>
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Poslovi</a></li>
-                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li>
-                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
+                        <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li> -->
+                        <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
+                         -->
+                         <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/mesta']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Mesta
+                                </a>
+                        </li>
+                        <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/opstine']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Opštine
+                                </a>
+                        </li>
                         <li *ngIf="authService.loggedIn()">
                             <a [routerLink]="['/drzave']" >
-                                <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Države
+                                <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Države
                             </a>
                         </li>
                     
@@ -96,13 +107,35 @@
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
                           <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
-                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Vlasnik</a></li>
-                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li> 
-                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li>
-                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li>
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Vlasnik</a></li> -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li>  -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li> -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li> -->
+                         
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/vlasnik']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Vlasnik
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/konstanta']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Konstante
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/fondsati']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Fond sati
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/radnik']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Radnik
+                                </a>
+                          </li>
+                          
                           <li *ngIf="authService.loggedIn()">
                             <a [routerLink]="['/parametar']" >
-                                <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri
+                                <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Parametri
                             </a>
                          </li>
 

@@ -72,7 +72,7 @@ module.exports.create = function (req, res,next) {
 
 
 module.exports.listparam = function (req, res,next) {
- console.log("Usao u list param" + req.user);
+// console.log("Usao u list param" + req.user);
 
  Parametar.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:null });}
@@ -89,7 +89,7 @@ module.exports.listparam = function (req, res,next) {
 
 
 module.exports.getparam = function (req, res,next) {
-  console.log("Usao u get param parametar je  " + req.params.id);
+ // console.log("Usao u get param parametar je  " + req.params.id);
   Parametar.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
@@ -106,7 +106,7 @@ module.exports.getparam = function (req, res,next) {
 }
 
 module.exports.deleparam = function(req, res, next) {
-  console.log("delete parametar parametar je : " + req.params.id);
+//  console.log("delete parametar parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
  Parametar.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:null }); }

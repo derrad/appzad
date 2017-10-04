@@ -5,7 +5,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'; 
 import { Observable } from 'rxjs/Observable';
-import {ServiceConfig} from '../service.config'
+import {ServiceConfig} from '../service.config';
 
 @Injectable()
 export class OpstineService {
