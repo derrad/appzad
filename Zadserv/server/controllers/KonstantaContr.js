@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Konst = require('../models/sfKonstanta');
+const mongoose = require('mongoose');
+const Konst = require('../models/sfKonstanta');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;

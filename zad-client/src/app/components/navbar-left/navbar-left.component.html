@@ -100,7 +100,13 @@
                           <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li> 
                           <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li>
                           <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li>
-                          <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri</a></li>
+                          <li *ngIf="authService.loggedIn()">
+                            <a [routerLink]="['/parametar']" >
+                                <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri
+                            </a>
+                         </li>
+
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri</a></li> -->
                           
                     </ul>
                 </li>

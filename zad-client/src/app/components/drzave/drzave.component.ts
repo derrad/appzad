@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DrzaveService} from '../../services/drzave/drzave.service';
 import {Router} from '@angular/router';
-import {IDrzave} from './drzave.model'
+import {IDrzave} from './drzave.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';

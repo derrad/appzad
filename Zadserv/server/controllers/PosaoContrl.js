@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Posao = require('../models/sfPosao.js');
+const mongoose = require('mongoose');
+const Posao = require('../models/sfPosao.js');
 
 
 module.exports.create = function (req, res,next) {

@@ -1,8 +1,6 @@
-var mongoose = require('mongoose');
-var Opstina = require('../models/sfOpstine');
-var sfDrzava = require('../models/sfDrzave');
-
-
+const mongoose = require('mongoose');
+const Opstina = require('../models/sfOpstine');
+const sfDrzava = require('../models/sfDrzave');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;

@@ -22,13 +22,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 import {DrzaveService} from './services/drzave/drzave.service';
-
-
+import {ParametarService} from './services/opcijeapp/parametar.service';
 import {AuthGuard} from './guards/auth.guard';
+
 import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { QuickMenuComponent } from './components/quick-menu/quick-menu.component';
-import { DrzaveComponent } from './components/drzave/drzave.component'; 
+import { DrzaveComponent } from './components/drzave/drzave.component';
+import { ParametarComponent } from './components/parametar/parametar.component'; 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -36,7 +36,8 @@ const appRoutes: Routes =  [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]}
+  {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
+  {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]}
   // {path:'drzave', component: SfdrzaveComponent, canActivate:[AuthGuard]},
   // {path:'adddrzave', component: AdddrzaveComponent, canActivate:[AuthGuard]}
 ] 
@@ -52,8 +53,8 @@ const appRoutes: Routes =  [
     NavbarComponent,
     NavbarLeftComponent,
     ModalComponent,
-    QuickMenuComponent,
     DrzaveComponent,
+    ParametarComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +68,7 @@ const appRoutes: Routes =  [
     InputTextModule
 
   ],
-  providers: [ValidateService, AuthService,AuthGuard,DrzaveService],
+  providers: [ValidateService, AuthService,AuthGuard,DrzaveService,ParametarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var FondSati = require('../models/sfFondSati');
+const mongoose = require('mongoose');
+const FondSati = require('../models/sfFondSati');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;

@@ -19,16 +19,14 @@
       <ul class="nav navbar-nav navbar-right">
         
         <!-- (click)="onClickQuickMenu()" -->
-        <li><a (click)="modal1.show()">
+        <li *ngIf="authService.loggedIn()" ><a (click)="modal1.show()">
           <span class="glyphicon glyphicon-plus-sign fa-2x" aria-hidden="true" title="Quick add"></span>
         <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
-      </a></li>
-      
-        
+          </a>
+        </li>
+              
         <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Dashboard</a></li>
         <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/profile']">Profile</a></li>
-
-        
 
         <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/login']">Login</a></li>
         <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/register']">Register</a></li>
@@ -79,7 +77,9 @@
 
  <app-modal #modal1>
   <div class="app-modal-header">
-    header
+    <a (click)="modal1.hide()">
+     <span class="text-right" class="glyphicon glyphicon-remove fa-2x" aria-hidden="true" title="Close"></span>
+    </a>
   </div>
   <div class="app-modal-body">
     <!-- Whatever content you like, form fields, anything
