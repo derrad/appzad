@@ -19,7 +19,7 @@ export class DrzaveComponent implements OnInit {
   Title:string;
   selectedDrzave: Object;
   loading: boolean;
-  
+  drzava:IDrzave;
   
   constructor(private drzaveService:DrzaveService, private router:Router) {
     this.Title="PREGLED DRŽAVA";
@@ -44,7 +44,8 @@ export class DrzaveComponent implements OnInit {
     
   );
   this.loading = false;
-  }
+  
+  } 
 
   onAddDrzavu() {
     alert("Add drzavu");
@@ -59,10 +60,39 @@ selectDrzavu( tId: string) {
   //  
 
 }
+addDrzave(){
+
+  this.router.navigate(['drzave/new'])
+
+}
+
+deleteDrzavu(tdrzava){
+  // console.log(tdrzava);
+  if (confirm("Are you sure you want to delete " + tdrzava.Naziv + "?")) {
+    var index = this.drzave.indexOf(tdrzava);
+    console.log("index je " + index);
+    this.drzave.splice(index, 1);
+
+    this.drzaveService.delDrzava(tdrzava._id)
+      .subscribe(null,
+        err => {
+          alert("Could not delete drzavu.");
+          // Revert the view back to its original state
+          this.drzave.splice(index, 0, tdrzava);
+        });
+  }
+}
 
 
-showDialogToAdd() {
-    alert("Add");
+
+showDialogToAdd(tdrzava) {
+    //alert("Add");
+    console.log("Broj slogova u drzavama(pre brisanja) " + this.drzave.length);
+    var index = this.drzave.indexOf(tdrzava);
+    console.log("index je " + index);
+    this.drzave.splice(index, 1);
+
+    console.log("Broj slogova u drzavama(showDialogToAdd) " + this.drzave.length);
 }
 
 

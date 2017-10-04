@@ -38,7 +38,68 @@ export class DrzaveService {
     //   .map(res => res.json());
   }
 
+  getDrzava(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/drzave/'+id);
+    return this.http.get(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+    
+   
+    // return this.http.get(this.getUserUrl(id))
+    //   .map(res => res.json());
+  }
 
+
+  addDrzava(drzava){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/drzave');
+    // return this.http.get(ep,{headers: headers})
+    // .map(res => res.json()).catch(this.handleError); ;
+    
+    return this.http.post(ep, JSON.stringify(drzava),{headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+
+   
+    // return this.http.get(this.getUserUrl(id))
+    //   .map(res => res.json());
+  }
+
+updateDrzava(drzava){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/drzave/' + drzava.id);
+    // return this.http.get(ep,{headers: headers})
+    // .map(res => res.json()).catch(this.handleError); ;
+    
+    return this.http.put(ep, JSON.stringify(drzava),{headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+
+   
+    // return this.http.get(this.getUserUrl(id))
+    //   .map(res => res.json());
+  }
+
+  delDrzava(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/drzave/'+id);
+    return this.http.delete(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+    
+   
+    // return this.http.get(this.getUserUrl(id))
+    //   .map(res => res.json());
+  }
 
 
   prepEndpoint(ep){

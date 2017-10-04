@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router'; 
 import { ButtonModule,InputTextModule } from 'primeng/primeng';
@@ -40,7 +40,9 @@ import { OpstineComponent } from './components/opstine/opstine.component';
 import { MestaComponent } from './components/mesta/mesta.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
 import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
-import { KonstantaComponent } from './components/konstanta/konstanta.component'; 
+import { KonstantaComponent } from './components/konstanta/konstanta.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component'; 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -49,13 +51,17 @@ const appRoutes: Routes =  [
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
+  {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
+  {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
   {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
   {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
   {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
   {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
   {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
   {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
-  {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]}
+  {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' }
   
   
   // {path:'drzave', component: SfdrzaveComponent, canActivate:[AuthGuard]},
@@ -81,10 +87,13 @@ const appRoutes: Routes =  [
     VlasnikComponent,
     FondSatiComponent,
     KonstantaComponent,
+    NotFoundComponent,
+    DrzaveFormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule ,
     HttpModule,
     RouterModule.forRoot(appRoutes), 
     FlashMessagesModule,

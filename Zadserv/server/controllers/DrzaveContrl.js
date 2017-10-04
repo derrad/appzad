@@ -64,7 +64,7 @@ else
         }
 
 
-        oDrzava.find({_id:oDrzava._id}).exec(function(err, result){
+        Drzava.find({_id:oDrzava._id}).exec(function(err, result){
           if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
           }
             return res.status(201).json({

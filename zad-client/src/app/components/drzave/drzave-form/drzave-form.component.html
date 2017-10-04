@@ -1,0 +1,49 @@
+<div class="col-lg-9 col-md-9 col-xs-10" >
+<h5>{{ title }}</h5>
+<div class="row">
+  <form materialize class="col-lg-9 col-md-9 col-xs-10" [formGroup]="form" (ngSubmit)="save()">
+    <div class="row">
+      <div class="input-field col s12">
+        <!-- <i class="material-icons prefix">account_circle</i> -->
+        <input id="KodDrzave" type="text" class="validate"
+               [(ngModel)]="drzava.KodDrzave" formControlName="KodDrzave"
+               [class.invalid]="form.controls['KodDrzave'].touched && !form.controls['KodDrzave'].valid"
+        >
+        <label for="KodDrzave"
+               [class.active]="drzava.KodDrzave"
+               data-error="KodDrzave is required and needs to contain at least 3 chars">
+               KodDrzave
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <!-- <i class="material-icons prefix">email</i> -->
+        <input id="Naziv" type="Naziv" class="validate"
+               [(ngModel)]="drzava.Naziv" formControlName="Naziv"
+               [class.invalid]="form.controls['Naziv'].touched && !form.controls['Naziv'].valid">
+        <label for="Naziv"
+               [class.active]="drzava.Naziv"
+               data-error="Invalid Naziv">
+          Naziv
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <!-- <i class="material-icons prefix">phone</i> -->
+        <input id="Opis" type="text" class="validate" [(ngModel)]="drzava.Opis" formControlName="Opis">
+        <label for="Opis" [class.active]="drzava.Opis">Opis</label>
+      </div>
+    </div>
+    
+  
+    <button class="btn waves-effect waves-light" type="submit"
+            [disabled]="!form.valid">Submit
+      <!-- Submit<i class="material-icons right">send</i> -->
+    </button>
+  </form>
+</div>
+
+
+</div>
