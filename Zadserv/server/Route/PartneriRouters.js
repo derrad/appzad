@@ -1,7 +1,6 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express');
+const router = express.Router();
 //var PartnerController = require('../controllers/PartnerContrl');
-
 
 router.get('/api/partner',(req,res)=>{
     res.send("GET partner");

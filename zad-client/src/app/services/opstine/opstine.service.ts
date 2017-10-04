@@ -7,11 +7,9 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import {ServiceConfig} from '../service.config'
 
-
 @Injectable()
-export class DrzaveService {
+export class OpstineService {
   authToken: any;
-  //drzave: any; 
   isDev:boolean;
 
   constructor(private http:Http) {
@@ -25,20 +23,18 @@ export class DrzaveService {
     this.authToken = token;
   }
 
-  getDrzave(){
+  getOpstine(){
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave'); 
+    let ep = this.prepEndpoint('api/opstine'); 
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); ;
-    // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
-    //   .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError); ;
+   
   }
-
-
 
 
   prepEndpoint(ep){
@@ -51,6 +47,5 @@ export class DrzaveService {
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');
 } 
-
 
 }

@@ -1,12 +1,23 @@
-var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
+ const Schema = mongoose.Schema ; 
+ //,//  ID  = Schema.ObjectId;
 
 
-var apParametar = new Schema({
-   Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
+const apParametar = new Schema({
+   Naziv : { type: String, 
+                required: [true, 'Naziv je obavezan !!!'],
+                uppercase: true,
+                unique: true,
+                trim: true, 
+                match : [
+                            new RegExp('^[a-z0-9_-]+$', 'i'),
+                            '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore.'
+                        ],
+                minlength:[3,"Minimalna duzina 3 karaktera"],
+                maxlength:[25,"Maksimalna duzina 25 karaktera"]
+   },
    Koristi: {type:Boolean, default:false},
    VredString: {type: String },
    VredNumeric:{type:Number,default:0},
@@ -19,34 +30,8 @@ var apParametar = new Schema({
 { 
     retainKeyOrder: true 
  }
- //,
-// {
-//     collection : 'apParametar'
-// }
-);
-//apParametar.set('collection', 'apParametar');
+ );
 
- apParametar.pre('save', function(next) {
-         console.log("PARAM PRE SAVE");
-         next();
-//         error = apParametar.validateSync();
-//         if(error){
-//             error.CustomError ="Nisam ni otisao na server";
-//             res.json(error); 
-
-//         }  
-
- });
- 
-// var error = apParametar.validateSync();
-// if(error){
-//     error.CustomError ="Nisam ni otisao na server";
-//     console.log(" u apParametar shemi pre poziva serveru  " + error.CustomError);
-//   // res.json(error); 
-// }  
 
 apParametar.plugin(mongoosePaginate);
-
-var collectionName = 'apParametar';
-
-module.exports = mongoose.model('apParametar', apParametar,collectionName);
+module.exports = mongoose.model('apParametar', apParametar,'apParametar');

@@ -15,7 +15,7 @@ module.exports.create = function (req, res,next) {
   const PozivNaBr=req.body.PozivNaBr;
 
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
 
   console.log("uid je :" + uid + " ovo je Drzava " + req.body.Drzava);
 
@@ -155,7 +155,7 @@ if (uid) {
 module.exports.listopstine = function (req, res,next) {
   console.log("Usao u list Opstina");
   
-  Opstina.find({}).populate('Drzava',['KodDrzave','Naziv']).exec(function(err, result){
+  Opstina.find({}).sort({created_at:-1}).populate('Drzava',['KodDrzave','Naziv']).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
    // console.log( "Hvatam ga " +  result.Drzava.Naziv);

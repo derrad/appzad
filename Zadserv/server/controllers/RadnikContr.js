@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Radnik = require('../models/sfRadnik');
+const mongoose = require('mongoose');
+const Radnik = require('../models/sfRadnik');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -9,11 +9,7 @@ module.exports.create = function (req, res,next) {
   const Jmbg = req.body.Jmbg ;
   const Aktivan = req.body.Aktivan  || false;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
- // const radnik_id = req.body.radnik_id ;
-
-  console.log("uid je :" + uid + " ovo je sifra " + req.body.SifraRad);
- // console.log("radnik_id je :" + radnik_id);
+  const NameUser = req.user.email || "System";
   
   if (!SifraRad || !Ime || !Prezime) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:null });
@@ -50,7 +46,7 @@ if (uid) {
 
 }else{
   
-  // Add new expense
+  // Add new radnik
   let oRadnik = new Radnik({
     SifraRad :SifraRad,
     Ime :Ime,
@@ -59,11 +55,6 @@ if (uid) {
     Aktivan:Aktivan,
     Opis:Opis,
     NameUser :NameUser
-
-    // expensedate: dt,
-    // expensetype: typ,
-    // expenseamt: amt,
-    // expensedesc: desc
   });
 
   oRadnik.save(function(err,result) {
@@ -86,13 +77,8 @@ if (uid) {
 
 
 module.exports.listradnik = function (req, res,next) {
-  console.log("Usao u list Radnik - tu sam");
-  // Radnik.find({}, function (err, results) {
-
-  //   //console.log( results.toString());
-  //   res.json(results);
-  // });
-  Radnik.find({}).exec(function(err, result){
+  //console.log("Usao u list Radnik - tu sam");
+  Radnik.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err , data:null}); 
     }
       return res.status(200).json({
@@ -105,7 +91,7 @@ module.exports.listradnik = function (req, res,next) {
 
 
 module.exports.getradnik = function (req, res,next) {
-  console.log("Usao u list Radnik - tu sam  " + req.params.id);
+ // console.log("Usao u list Radnik - tu sam  " + req.params.id);
   Radnik.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
@@ -121,7 +107,7 @@ module.exports.getradnik = function (req, res,next) {
 }
 
 module.exports.deleradnik = function(req, res, next) {
-  console.log("parametar je : " + req.params.id);
+ // console.log("parametar je : " + req.params.id);
 	Radnik.remove({_id: req.params.id}, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null}); }
         return res.status(201).json({

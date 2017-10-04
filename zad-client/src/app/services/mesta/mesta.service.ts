@@ -7,11 +7,10 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import {ServiceConfig} from '../service.config'
 
-
 @Injectable()
-export class DrzaveService {
+export class MestaService {
+
   authToken: any;
-  //drzave: any; 
   isDev:boolean;
 
   constructor(private http:Http) {
@@ -25,27 +24,25 @@ export class DrzaveService {
     this.authToken = token;
   }
 
-  getDrzave(){
+  getMesta(){
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave'); 
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/mesta') ; //this.prepEndpoint('api/mesta'); 
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); ;
-    // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
-    //   .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError); ;
+   
   }
 
 
-
-
-  prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
+  // prepEndpoint(ep){
+  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //   return ServiceConfig.PrepareHost(this.isDev,ep);
  
-  }
+  // }
 
   private handleError(error: Response) {
     console.error(error);

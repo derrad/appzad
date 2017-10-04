@@ -12,7 +12,7 @@ module.exports.create = function (req, res,next) {
   const Naziv = req.body.Naziv;
   const Ptt =req.body.Ptt;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
 
   console.log("uid je :" + uid + " ovo je Opstina " + req.body.Opstina);
 
@@ -102,7 +102,7 @@ module.exports.listmesta = function (req, res,next) {
   console.log("Usao u list Mesta");
   
   //Mesta.find({}).populate('Opstina',['RegOzn','Naziv','Drzava']).populate('Drzava').exec(function(err, result){
-  Mesta.find({}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
+  Mesta.find({}).sort({created_at:-1}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
 

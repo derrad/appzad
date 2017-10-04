@@ -1,49 +1,123 @@
-var mongoose = require('mongoose');
-var Parametar = require('../models/apParametar');
+const mongoose = require('mongoose');
+const Parametar = require('../models/apParametar');
 
-module.exports.create = function (req, res) {
- // var error;
-  var parametar = new Parametar(req.body);
-  //  parametar.pre('save', function(next) {
-  //   console.log("appparameter u pre nego save");
-  //   next();
-  // });
-  // error = parametar.validateSync();
-  // if(error){
-  //  error.CustomError ="Nisam ni otisao na server";
-  //   res.json(error); 
-  // }
-  //var error = parametar.validateSync();
 
-  parametar.save(function (err, result) {
-      console.log("Usao u save Parametar");
-     
-      //  if(error){
-      //    console.error("PARAMETAR SAVE IMAM ERROR IZ parametar.validateSync() " + error); 
-      //    // next(error);
-      //    res.status(400);
-      //    res.json(error); 
-      //   //400 
-      // }
 
-     //debugger;
-      if(err){
-         //console.log(err); 
-        res.json(err); 
-      }
-    //console.log( " ovo saljem nazad" + result.toString());
-    res.json(result);
+module.exports.create = function (req, res,next) {
+  const uid = req.params.id ;
+  const Naziv=req.body.Naziv ;
+  const Koristi=req.body.Koristi || false;
+  const VredString = req.body.VredString;
+  const VredNumeric =req.body.VredNumeric || 0;
+  const Opis = req.body.Opis ;
+  const NameUser = req.user.email || "System";// req.body.NameUser || "System";
+
+  if (!Naziv) {
+        return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+  } 
+  else 
+  {
+    if (uid) {
+      //Edit paarmetar
+      Parametar.findById(uid).exec(function(err, param){
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+
+        if(param) {
+          param.Naziv = Naziv ;
+          param.Koristi = Koristi ;
+          param.VredString = VredString;
+          param.VredNumeric = VredNumeric ;
+          param.Opis = Opis ;
+          param.NameUser = NameUser;
+        
+          param.save(function(err,results) {
+                if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+                  return res.status(201).json({
+                          success: true,
+                          message: 'Parametarupdated successfully',
+                          data:results});
+                });
+        }
+          
+      });
+
+    }else{
+          
+          // Add new Parametar
+          let oParam = new Parametar({
+            Naziv : Naziv ,
+            Koristi : Koristi ,
+            VredString : VredString,
+            VredNumeric : VredNumeric ,
+            Opis : Opis ,
+            NameUser : NameUser
+          });
+
+          oParam.save(function(err,result) {
+            if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null});}
+              
+          return res.status(201).json({
+              success: true,
+              message: 'Parametar saved successfully',
+              data: result
+
+            });
+          });
+    }//if (uid) and else n
+
+  }// if (!Naziv )
+
+}//module.exports.create
+
+
+
+module.exports.listparam = function (req, res,next) {
+ console.log("Usao u list param" + req.user);
+
+ Parametar.find({}).sort({created_at:-1}).exec(function(err, result){
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:null });}
+
+    return res.status(200).json({
+    success: true,
+    message:'Successfully', 
+    data: result
+    });
+
+  });
+
+}
+
+
+module.exports.getparam = function (req, res,next) {
+  console.log("Usao u get param parametar je  " + req.params.id);
+  Parametar.find({_id:req.params.id}).exec(function(err, result){
+    if(err){ 
+      return res.status(400).json(
+      { success: false, message:'Error processing request '+ err , data:null }
+      ); 
+    }
+      return res.status(200).json({
+      success: true, 
+      message:'Successfully',
+      data: result
+      });
+    });
+
+}
+
+module.exports.deleparam = function(req, res, next) {
+  console.log("delete parametar parametar je : " + req.params.id);
+ // const uid = req.params.id || '1234';
+ Parametar.remove({_id: req.params.id }, function(err){
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:null }); }
+        return res.status(201).json({
+            success: true,
+            message: 'Parametar removed successfully',
+            data:null
+          });
   });
 }
 
 
 
 
-
-module.exports.list = function (req, res) {
-  console.log("Usao u list parametara");
-  Parametar.find({}, function (err, results) {
-    //console.log( results.toString());
-    res.json(results);
-  });
-}

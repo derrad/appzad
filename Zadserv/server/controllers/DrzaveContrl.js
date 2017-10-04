@@ -8,7 +8,7 @@ module.exports.create = function (req, res,next) {
   const Naziv = req.body.Naziv;
   const EuClan =req.body.EuClan  || false;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
 
   console.log("uid je :" + uid + " ovo je koddrzave " + req.body.KodDrzave);
 
@@ -70,7 +70,7 @@ else
           }
             return res.status(201).json({
             success: true,
-            message:'Drzava saved successfully', 
+            message:'Država saved successfully', 
             data: result
             });
           });
@@ -88,7 +88,7 @@ else
 module.exports.listdrzave = function (req, res,next) {
   console.log("Usao u list Drzava");
   
-  Drzava.find({}).exec(function(err, result){
+  Drzava.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
    // console.log( "Hvatam ga " +  result.Drzava.Naziv);

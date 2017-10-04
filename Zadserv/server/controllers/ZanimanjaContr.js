@@ -8,7 +8,7 @@ module.exports.create = function (req, res,next) {
   const StepenSS = req.body.StepenSS ;
   const NivoUnosa = req.body.NivoUnosa ;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
  // const radnik_id = req.body.radnik_id ;
 
   console.log("uid je :" + uid + " ovo je Naziv " + req.body.Naziv);

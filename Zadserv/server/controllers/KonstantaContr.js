@@ -22,7 +22,7 @@ module.exports.create = function (req, res,next) {
   const OsMinOsDop = req.body.OsMinOsDop  ;
   const OsMaxOsDop = req.body.OsMaxOsDop  ;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
  // const radnik_id = req.body.radnik_id ;
 
   console.log("uid je :" + uid + " ovo je datum " + req.body.Datum);
@@ -121,9 +121,9 @@ if (uid) {
 
 
 module.exports.listkonst = function (req, res,next) {
-  console.log("Usao u list konstante");
+ // console.log("Usao u list konstante");
   
-  Konst.find({}).exec(function(err, result){
+  Konst.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:null }); 
     }
       return res.status(200).json({

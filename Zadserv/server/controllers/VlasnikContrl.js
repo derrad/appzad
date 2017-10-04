@@ -1,4 +1,4 @@
-var Vlasnik = require('../models/apVlasnik.js');
+const Vlasnik = require('../models/apVlasnik.js');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -121,7 +121,7 @@ if (uid) {
 
 
 module.exports.getvlasnik = function (req, res,next) {
-  console.log("Usao u get vlasnik  - tu sam  " + req.params.id);
+ // console.log("Usao u get vlasnik  - tu sam  " + req.params.id);
   Vlasnik.find({_id:req.params.id}).exec(function(err, vlasnik){
     if(err){ 
       return res.status(400).json(

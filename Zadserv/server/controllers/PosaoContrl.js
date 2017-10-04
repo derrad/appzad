@@ -10,7 +10,7 @@ module.exports.create = function (req, res,next) {
   const Sifra = req.body.Sifra ;
   const Sifra1 = req.body.Sifra1  ;
   const Opis = req.body.Opis ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "System";
  // const radnik_id = req.body.radnik_id ;
 
   console.log("uid je :" + uid + " ovo je Naziv " + req.body.Naziv);

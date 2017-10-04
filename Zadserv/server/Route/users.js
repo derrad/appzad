@@ -39,7 +39,7 @@ router.post('/authenticate', (req, res, next) => {
       if(isMatch){
       //  console.log("pre pravljena jwt.sign");
         const token = jwt.sign({
-          exp: Math.floor(Date.now() / 1000) + (60 * 60),
+          exp: Math.floor(Date.now() / 1000) + ((60 * 60) * 180),
           data: user
         }, config.secret);
 
@@ -52,7 +52,7 @@ router.post('/authenticate', (req, res, next) => {
         //   expiresIn: 604800 // 1 week
         // });
 
-        console.log("posle pravljena jwt.sign");
+     //   console.log("posle pravljena jwt.sign");
         res.json({
           success: true,
           token: 'JWT '+ token, 
