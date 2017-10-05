@@ -1,3 +1,4 @@
+import { Message } from 'primeng/components/common/api';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -59,7 +60,15 @@ export class ParmetarFormComponent implements OnInit {
     if (paramValue._id){
       result = this.paramService.updateParametar(paramValue);
     } else {
-      result = this.paramService.addParametar(paramValue);
+      try{
+        result = this.paramService.addParametar(paramValue);
+      }catch(er){
+        console.log("SAVE KOD ADD catch error" + er.Message); 
+      }
+      
+      if (result) {
+        console.log("SAVE KOD ADD" + result) ;
+      }
     }
 
     result.subscribe(data => this.router.navigate(['parametar']));

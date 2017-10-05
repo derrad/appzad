@@ -25,7 +25,7 @@
           <ng-template let-param="rowData" let-i="rowIndex" pTemplate="body">
               <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="selectParam(param)" icon="fa fa-trash" title="Delete"></button>
+              <button type="button" pButton (click)="deleteParam(param)" icon="fa fa-trash" title="Delete"></button>
           
             </ng-template>
       </p-column>

@@ -87,8 +87,12 @@ export class ParametarService {
   }
 
   private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    console.error("handleError "  + error);
+    //console.error("handleError +"  + error.json().error);
+    if (!error.ok){
+      console.error("handleError greska text statusText "  + error.statusText);
+    }
+    return Observable.throw(error.json() || 'Server error');
 } 
 
 }
