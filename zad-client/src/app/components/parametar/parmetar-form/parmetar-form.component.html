@@ -1,0 +1,44 @@
+<p>
+  parmetar-form works!
+</p>
+<div class="row">
+  <div class="col-lg-9 col-md-9 col-xs-10">
+      <form [formGroup]="frParam" (ngSubmit)="save()">
+           <div class="form-group">
+              <label class="center-block">Naziv:
+                <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" >
+              </label>
+            </div>
+            <div class="checkbox">
+                <label class="center-block">
+                  <input type="checkbox" formControlName="Koristi" [(ngModel)]="parametar.Koristi"  value="1">Koristi.
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Text vrednost:
+                  <input class="form-control" formControlName="VredString"  [(ngModel)]="parametar.VredString" >
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Brojčana vrednost:
+                  <input class="form-control" formControlName="VredNumeric"  [(ngModel)]="parametar.VredNumeric" >
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Opis:
+                  <!-- <input class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis" > -->
+                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis">
+
+                  </textarea>
+                </label>
+            </div>
+            <div style="margin-bottom: 1em">
+                <button type="submit"
+                        [disabled]="!frParam.valid" class="btn btn-success">Save</button> &nbsp;
+                </div>
+      </form>
+
+
+  </div>
+
+</div>

@@ -10,7 +10,8 @@
 
       <p-dataTable [value]="params"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedParam" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" 
-                styleClass="table table-striped" >
+                styleClass="table table-striped" [immutable]=false >
+                
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <!--     drzaveID-->                                                                                          
       <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
@@ -22,13 +23,15 @@
       
       <p-column styleClass="col-button" heder="Opcije">
           <ng-template let-param="rowData" let-i="rowIndex" pTemplate="body">
-              <button type="button" pButton (click)="selectParam(param._id)" icon="fa-hand-o-up"></button>
-              <button type="button" pButton (click)="selectParam(param._id)" icon="fa-minus-square"></button>
-          </ng-template>
+              <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-pencil" title="Update"></button>
+              <button type="button" pButton (click)="selectParam(param)" icon="fa fa-trash" title="Delete"></button>
+          
+            </ng-template>
       </p-column>
       <p-footer>
           <div class="ui-helper-clearfix" style="width:100%">
-              <button type="button" pButton icon="fa-plus" style="float:left" (click)="onAddParam()" label="Add"></button>
+              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="onAddParam()" label="Add"></button>
             </div>
         </p-footer>
       </p-dataTable>

@@ -12,8 +12,8 @@ const apParametar = new Schema({
                 unique: true,
                 trim: true, 
                 match : [
-                            new RegExp('^[a-z0-9_-]+$', 'i'),
-                            '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore.'
+                        new RegExp('^[a-z0-9_-]+$', 'i'),
+                        '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore.'
                         ],
                 minlength:[3,"Minimalna duzina 3 karaktera"],
                 maxlength:[25,"Maksimalna duzina 25 karaktera"]

@@ -44,9 +44,28 @@ export class ParametarComponent implements OnInit {
   this.loading = false;
   }
 
-  onAddParam() {
-    alert("Add param");
+onAddParam() {
+    //alert("Add param");
+    this.router.navigate(['parametar/new'])
 }
+
+deleteParam(tparam){
+  // console.log(tdrzava);
+  if (confirm("Are you sure you want to delete " + tparam.Naziv + "?")) {
+    var index = this.params.indexOf(tparam);
+    console.log("index je " + index);
+    this.params.splice(index, 1);
+
+    this.paramService.delParametar(tparam._id)
+      .subscribe(null,
+        err => {
+          alert("Could not delete drzavu.");
+          // Revert the view back to its original state
+          this.params.splice(index, 0, tparam);
+        });
+  }
+}
+
 
 selectParam( tId: string) {
     if (tId) {

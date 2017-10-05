@@ -1,3 +1,4 @@
+import { IDrzave } from './drzave.model';
 export interface IDrzave {
     KodDrzave: string;
     Naziv: string;
@@ -6,7 +7,7 @@ export interface IDrzave {
     NameUser?: string;
 }
 
-export class Drzave {
+export class Drzave implements IDrzave{
     KodDrzave: string;
     Naziv: string;
     EuClan: boolean;

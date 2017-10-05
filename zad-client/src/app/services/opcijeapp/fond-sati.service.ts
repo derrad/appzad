@@ -33,12 +33,10 @@ export class FondSatiService {
     .map(res => res.json()).catch(this.handleError); 
     
   }
-
+  
   prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
- 
-  }
+     return ServiceConfig.PrepareHost(this.isDev,ep);
+ }
 
   private handleError(error: Response) {
     console.error(error);

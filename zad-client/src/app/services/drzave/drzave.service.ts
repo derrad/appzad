@@ -34,8 +34,7 @@ export class DrzaveService {
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); ;
-    // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
-    //   .map(res => res.json());
+ 
   }
 
   getDrzava(id){
@@ -46,10 +45,7 @@ export class DrzaveService {
     let ep = this.prepEndpoint('api/drzave/'+id);
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
-    
-   
-    // return this.http.get(this.getUserUrl(id))
-    //   .map(res => res.json());
+
   }
 
 
@@ -59,15 +55,10 @@ export class DrzaveService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('api/drzave');
-    // return this.http.get(ep,{headers: headers})
-    // .map(res => res.json()).catch(this.handleError); ;
     
     return this.http.post(ep, JSON.stringify(drzava),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
-
    
-    // return this.http.get(this.getUserUrl(id))
-    //   .map(res => res.json());
   }
 
 updateDrzava(drzava){
@@ -75,16 +66,12 @@ updateDrzava(drzava){
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave/' + drzava.id);
-    // return this.http.get(ep,{headers: headers})
-    // .map(res => res.json()).catch(this.handleError); ;
+    let ep = this.prepEndpoint('api/drzave/' + drzava._id);
     
     return this.http.put(ep, JSON.stringify(drzava),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
-
+  
    
-    // return this.http.get(this.getUserUrl(id))
-    //   .map(res => res.json());
   }
 
   delDrzava(id){
@@ -97,8 +84,7 @@ updateDrzava(drzava){
     .map(res => res.json()).catch(this.handleError); 
     
    
-    // return this.http.get(this.getUserUrl(id))
-    //   .map(res => res.json());
+   
   }
 
 

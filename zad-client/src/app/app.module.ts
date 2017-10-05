@@ -42,7 +42,8 @@ import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
 import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component'; 
+import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
+import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -54,6 +55,9 @@ const appRoutes: Routes =  [
   {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
   {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
   {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
+  {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
+  {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
+  
   {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
   {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
   {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
@@ -89,6 +93,7 @@ const appRoutes: Routes =  [
     KonstantaComponent,
     NotFoundComponent,
     DrzaveFormComponent,
+    ParmetarFormComponent,
   ],
   imports: [
     BrowserModule,
