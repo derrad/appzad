@@ -17,6 +17,7 @@ export class ParmetarFormComponent implements OnInit {
   frParam: FormGroup;
   title: string;
   parametar: Parametar = new Parametar();
+  titleAlertNaziv:string = 'This field is required !!!';
 
   constructor(private router:Router,private route: ActivatedRoute, 
               formBuilder: FormBuilder,private paramService:ParametarService,
@@ -94,6 +95,21 @@ export class ParmetarFormComponent implements OnInit {
 
     result.subscribe(data => this.router.navigate(['parametar']));
   }
+
+  revert() { this.ngOnChanges(); }
+  
+  ngOnChanges() {
+    this.frParam.reset({
+      Naziv: "",
+      Koristi:0,
+      VredString:"",
+      VredNumeric:0,
+      Opis:""
+    });
+
+    
+  }
+
 
 
 

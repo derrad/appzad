@@ -28,11 +28,14 @@
               <label class="center-block">Naziv:
                 <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" >
               </label>
+              <div class="text-danger" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">{{ titleAlertNaziv }}</div>
+              
             </div>
             <div class="checkbox">
                 <label class="center-block">
                   <input type="checkbox" formControlName="Koristi" [(ngModel)]="parametar.Koristi"  value="1">Koristi.
                 </label>
+                
             </div>
             <div class="form-group">
                 <label class="center-block">Text vrednost:
@@ -57,13 +60,17 @@
                         [disabled]="!frParam.valid" class="btn btn-success">Save</button> &nbsp;
             </div> -->
             <div class="form-group">
-                    <div class="col-md-offset-2 col-md-12">
+                    <div class="col-md-offset-4 col-md-12">
                         <button type="submit" [disabled]="!frParam.valid"
                             class="btn btn-default">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>
 
+                      <button type="reset" class="btn btn-danger"  [disabled]="frParam.pristine"  (click)="revert()">
+                          <i class="fa fa-undo" aria-hidden="true"></i>
+                          Revert
+                      </button>
                       
                    </div>
               

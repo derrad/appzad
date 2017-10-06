@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../drzave.model';
 import {DrzaveService} from '../../../services/drzave/drzave.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-drzave-form',
@@ -11,18 +12,24 @@ import {DrzaveService} from '../../../services/drzave/drzave.service';
 })
 export class DrzaveFormComponent implements OnInit {
 
-  form: FormGroup;
+  formDR: FormGroup;
   title: string;
   drzava: Drzave = new Drzave();
+  titleAlertNaziv:string ="This field is required !!!";
+  titleAlertKod:string ="KOD-ima jos, This field is required !!!";
 
-  constructor(private drzaveService:DrzaveService, private router:Router,private route: ActivatedRoute, formBuilder: FormBuilder,) { 
 
-    this.form = formBuilder.group({
+  constructor(private drzaveService:DrzaveService, private router:Router,private route: ActivatedRoute, 
+    formBuilder: FormBuilder,private _location: Location) { 
+
+    this.formDR = formBuilder.group({
+      _id:[],
       KodDrzave: ['', [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(3)
       ]],
+      EuClan:[],
       Naziv: ['', [
         Validators.required
       ]],
@@ -45,7 +52,13 @@ export class DrzaveFormComponent implements OnInit {
 
       this.drzaveService.getDrzava(id)
         .subscribe(
-          drzava => this.drzava = drzava,
+          (drzava) =>{
+            if(drzava.success){
+              this.drzava = drzava.data[0];
+            }else{
+              this.router.navigate(['NotFound']);
+            }
+          } ,
           response => {
             if (response.status == 404) {
               this.router.navigate(['NotFound']);
@@ -59,7 +72,7 @@ export class DrzaveFormComponent implements OnInit {
 
   save() {
     var result,
-        drzaveValue = this.form.value;
+        drzaveValue = this.formDR.value;
 
     if (drzaveValue._id){
       result = this.drzaveService.updateDrzava(drzaveValue);
@@ -68,6 +81,25 @@ export class DrzaveFormComponent implements OnInit {
     }
 
     result.subscribe(data => this.router.navigate(['drzave']));
+  }
+
+  backClicked(event: any) {
+    this._location.back();
+    //event.stopPropagation();
+    
+  }
+
+  revert() { this.ngOnChanges(); }
+  
+  ngOnChanges() {
+    this.formDR.reset({
+      KodDrzave:"",
+      Naziv: "",
+      EuClan:0,
+      Opis:""
+    });
+
+    
   }
 
 

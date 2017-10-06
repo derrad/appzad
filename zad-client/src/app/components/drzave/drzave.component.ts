@@ -32,8 +32,10 @@ export class DrzaveComponent implements OnInit {
         // console.log(profile);
         // console.log(" data je " + profile.data);
         this.drzave = profile.data;
+        
         console.log(this.drzave[0].Naziv);
         this.loading = false;
+        //this.drzave =null;
       }
       
     },
@@ -65,6 +67,11 @@ addDrzave(){
   this.router.navigate(['drzave/new'])
 
 }
+
+updateDrzavu(id) {
+  this.router.navigate(['drzave/', id]);
+}
+
 
 deleteDrzavu(tdrzava){
   // console.log(tdrzava);

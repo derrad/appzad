@@ -6,6 +6,7 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 
 @Component({
@@ -18,21 +19,39 @@ export class ParametarComponent implements OnInit {
   Title:string;
   selectedParam: Object;
   loading: boolean;
+  valuekraj: number = 0;
   
   
-  constructor(private paramService:ParametarService, private router:Router) {
+  constructor(private paramService:ParametarService, private router:Router,private flashMessage:FlashMessagesService) {
     this.Title="PREGLED PARAMETARA";
    }
 
   ngOnInit() {
+    // let interval = setInterval(() => {
+    //     this.valuekraj = this.valuekraj + Math.floor(Math.random() * 10) + 1;
+    //     if(this.valuekraj >= 100) {
+    //         this.valuekraj = 100;
+    //          this.flashMessage.show('Success-Process Completed', {
+    //           cssClass: 'alert-success',
+    //           timeout: 2000});
+    //         clearInterval(interval);
+    //     }
+    // }, 1000);
+
     this.loading = true;
     this.paramService.getParametars().subscribe(profile => {
       if (profile.success === true) { 
          
          this.params = profile.data;
-         console.log(this.params[0].Naziv);
-         this.loading = false;
+        // console.log(this.params[0].Naziv);
+        this.loading = false;
+         this.flashMessage.show('Success-Process Completed', {
+                     cssClass: 'alert-success',
+                     timeout: 500});
+         
       }
+
+
       
     },
     err => {

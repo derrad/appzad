@@ -1,17 +1,28 @@
 <div class="col-lg-9 col-md-9 col-xs-10">
-  <h2 class="page-header">Login</h2>
-  <form (submit)="onLoginSubmit()">
-    
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" class="form-control" [(ngModel)]="username" name="username">
+
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            <h3>Login</h3>
+        </div>
+      <div class="panel-body panel-info ">
+
+ 
+        <form (submit)="onLoginSubmit()">
+          
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="username" name="username">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" [(ngModel)]="password" name="password">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+
+      </div>
+
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="password" name="password">
-    </div>
-    <input type="submit" class="btn btn-primary" value="Login">
-  </form>
 </div>
 <!-- 
 <p-growl [(value)]="msgs" class="zindex"></p-growl>  -->
