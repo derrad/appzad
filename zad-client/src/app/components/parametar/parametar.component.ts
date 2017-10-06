@@ -48,6 +48,10 @@ onAddParam() {
     //alert("Add param");
     this.router.navigate(['parametar/new'])
 }
+updateParam(id) {
+   this.router.navigate(['parametar/', id]);
+}
+
 
 deleteParam(tparam){
   // console.log(tdrzava);

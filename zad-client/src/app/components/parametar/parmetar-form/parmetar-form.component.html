@@ -1,9 +1,29 @@
-<p>
+<!-- <p>
   parmetar-form works!
-</p>
+</p>  col-lg-9 col-md-9 col-xs-10-->
 <div class="row">
-  <div class="col-lg-9 col-md-9 col-xs-10">
+<div class="col-lg-9 col-md-9 col-xs-10">
+<div class="panel panel-default ">
+  <div class="panel-heading">
+      <h3>{{title}}</h3>
+
+  </div>
+<div class="panel-body panel-info ">
+
+  <!-- <div   ng-repeat="item in ERROR" ng-value="item" class="text-danger" >
+      <p>{{ERROR.KodDrzave.message}}</p>
+      <p>{{ERROR.Naziv.message}}</p>
+      
+  </div> -->
+ 
       <form [formGroup]="frParam" (ngSubmit)="save()">
+          <div class="form-group" >
+              <!-- <label class="center-block">ID: -->
+                <input class="form-control" formControlName="_id"  [(ngModel)]="parametar._id"   type="hidden">
+              <!-- </label> -->
+            </div>
+        
+
            <div class="form-group">
               <label class="center-block">Naziv:
                 <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" >
@@ -32,13 +52,47 @@
                   </textarea>
                 </label>
             </div>
-            <div style="margin-bottom: 1em">
+            <!-- <div style="margin-bottom: 1em">
                 <button type="submit"
                         [disabled]="!frParam.valid" class="btn btn-success">Save</button> &nbsp;
-                </div>
+            </div> -->
+            <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <button type="submit" [disabled]="!frParam.valid"
+                            class="btn btn-default">
+                        <span class="glyphicon glyphicon-saved"></span>
+                        Save
+                        </button>
+
+                      
+                   </div>
+              
+                      <!-- <div class="col-md-offset-2 col-md-6">
+                              <button type="submit" [disabled]="!frParam.valid"
+                                class="btn btn-default">
+                               <span class="glyphicon glyphicon-saved"></span>
+                              Save
+                              </button>
+              
+                      </div> -->
+                    </div>
+              
+
+
       </form>
+      <div class="col-md-offset-2 col-md-12">
+        <button (click)="backClicked()" 
+        class="btn btn-default">
+        <i class="fa fa-undo" aria-hidden="true"></i>
+        Back
+      </button>
+    </div>
 
-
-  </div>
 
 </div>
+    
+</div>
+</div> <!--  coll -->
+</div> <!--  row -->
+
+    

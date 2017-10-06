@@ -3,14 +3,14 @@
 </p> -->
 
 <div class="row">
-    <div *ngIf="params" class="col-lg-9 col-md-9 col-xs-10">
+    <div *ngIf="params" class=" table-responsive col-lg-9 col-md-9 col-xs-10">
       <h3 class="first">TABELA PARAMETARA</h3>
       <input #gb type="text" placeholder="Global search" pInputText focus>
       <p></p>
 
       <p-dataTable [value]="params"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedParam" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" 
-                styleClass="table table-striped" [immutable]=false >
+                styleClass="table  table-striped table-condensed" [immutable]=false >
                 
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <!--     drzaveID-->                                                                                          
@@ -24,7 +24,7 @@
       <p-column styleClass="col-button" heder="Opcije">
           <ng-template let-param="rowData" let-i="rowIndex" pTemplate="body">
               <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-info" title="Info"></button>
-              <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-pencil" title="Update"></button>
+              <button type="button" pButton (click)="updateParam(param._id)" icon="fa fa-pencil" title="Update"></button>
               <button type="button" pButton (click)="deleteParam(param)" icon="fa fa-trash" title="Delete"></button>
           
             </ng-template>
