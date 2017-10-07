@@ -35,6 +35,54 @@ export class OpstineService {
       .catch(this.handleError); ;
    
   }
+  getOpstina(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/opstine/'+id);
+    return this.http.get(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+
+  }
+
+  addOpstine(opstina){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/opstine');
+    
+    return this.http.post(ep, JSON.stringify(opstina),{headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+   
+  }
+
+  updateOpstine(opstina){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/opstine/' + opstina._id);
+    
+    return this.http.put(ep, JSON.stringify(opstina),{headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+     
+  }
+
+  delOpstine(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/opstine/'+id);
+    return this.http.delete(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+    
+   
+   
+  }
+
 
 
   prepEndpoint(ep){
@@ -45,7 +93,7 @@ export class OpstineService {
 
   private handleError(error: Response) {
     console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    return Observable.throw(error.json() || 'Server error');
 } 
 
 }

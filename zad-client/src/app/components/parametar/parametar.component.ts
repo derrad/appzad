@@ -6,7 +6,9 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import {FlashMessagesService} from 'angular2-flash-messages';
+//import {FlashMessagesService} from 'angular2-flash-messages';
+import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
+//import * as $ from 'jquery';
 
 
 @Component({
@@ -22,11 +24,15 @@ export class ParametarComponent implements OnInit {
   valuekraj: number = 0;
   
   
-  constructor(private paramService:ParametarService, private router:Router,private flashMessage:FlashMessagesService) {
+  constructor(private paramService:ParametarService, private router:Router,private confirmationService: ConfirmationService) {
     this.Title="PREGLED PARAMETARA";
    }
 
   ngOnInit() {
+   // $("#glparam").hide();
+    // $( "#glparam" ).hide( "slow", function() {
+    //   alert( "Animation complete." );
+    // });
     // let interval = setInterval(() => {
     //     this.valuekraj = this.valuekraj + Math.floor(Math.random() * 10) + 1;
     //     if(this.valuekraj >= 100) {
@@ -42,12 +48,16 @@ export class ParametarComponent implements OnInit {
     this.paramService.getParametars().subscribe(profile => {
       if (profile.success === true) { 
          
-         this.params = profile.data;
-        // console.log(this.params[0].Naziv);
-        this.loading = false;
-         this.flashMessage.show('Success-Process Completed', {
-                     cssClass: 'alert-success',
-                     timeout: 500});
+          this.params = profile.data;
+          // console.log(this.params[0].Naziv);
+          this.loading = false;
+          // this.flashMessage.show('Success-Process Completed', {
+          //             cssClass: 'alert-success',
+          //             timeout: 500});
+          if ( this.params.length == 0) {
+            this.params=null;
+          }
+
          
       }
 
@@ -60,7 +70,8 @@ export class ParametarComponent implements OnInit {
     }
     
   );
-  this.loading = false;
+   this.loading = false;
+    //$("#glparam").show(1000);
   }
 
 onAddParam() {

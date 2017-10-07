@@ -1,8 +1,19 @@
 <!-- <p>
   parametar works!
+  <select [(ngModel)]="objValue"> // value is an object
+    <option *ngFor="#obj of objArray" [ngValue]="obj">{{obj.name}}</option>
+</select>
+
+<md-select placeholder="Select Categorie"  
+    name="Select Categorie" >
+  <md-option *ngFor="let list of categ" [value]="list.value" (click)="sub_cat(list.category_id)" >
+    {{ list.category }}
+  </md-option>
+</md-select>
+style="display: none;" ;else  waiting
 </p> -->
 
-<div class="row">
+<div id="glparam" class="row" >
     <div *ngIf="params" class=" table-responsive col-lg-9 col-md-9 col-xs-10">
       <h3 class="first">TABELA PARAMETARA</h3>
       <input #gb type="text" placeholder="Global search" pInputText focus>
@@ -14,10 +25,10 @@
                 
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <!--     drzaveID-->                                                                                          
-      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="Koristi" header="Koristi" sortable="true"></p-column>
+      <p-column field="Naziv" header="Naziv" sortable="true" ></p-column>
+      <p-column field="Koristi" header="Koristi" sortable="true" styleClass="text-center"></p-column>
       <p-column field="VredString" header="STRING" sortable="true"></p-column> 
-      <p-column field="VredNumeric" header="NUMERIC" sortable="true"></p-column> 
+      <p-column field="VredNumeric" header="NUMERIC" sortable="true" styleClass="text-right"></p-column> 
       <p-column field="Opis" header="Opis" sortable="true"></p-column>
       <p-column field="NameUser" header="User" sortable="true"></p-column>
       
@@ -36,4 +47,24 @@
         </p-footer>
       </p-dataTable>
     </div>
+
+   
 </div>
+<ng-template #waiting >
+    <div class="col-lg-9 col-md-9 col-xs-10">
+     <div class="panel panel-default ">
+        <div class="panel-heading">
+            <h2>Nema parametara</h2>
+      
+        </div>
+      <div class="panel-body panel-info ">
+      <p>Možete uneti nove parametre</p>
+         <button type="button" class="btn btn-info btn-lg" (click)="onAddParam()" > 
+            <span class="glyphicon glyphicon-plus-sign fa-2x "></span>
+          Add</button>
+      </div>
+        
+    </div>
+
+  </div>
+  </ng-template>

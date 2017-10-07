@@ -58,9 +58,10 @@ if (uid) {
   //var Drz = new sfDrzava();
   var slog = sfDrzava.findById(Drzava,(err, doc)=>{
     if(err){ 
-      return null;
+      return  res.status(400).json(
+        { success: false, message: 'Error Drzava not exist '+ err , data:[]});
      }
-     console.log(" vracam ovaj doc ali da vidim kako ide " + doc);
+     //console.log(" vracam ovaj doc ali da vidim kako ide " + doc);
    //  return doc;
 
      let oOpstina = new Opstina(
@@ -111,12 +112,12 @@ if (uid) {
   //   );
   // });
 
-  if (slog){
-    //console.log("postoji drzava " + slog.data._id);
-    console.log("postoji drzava " + slog.toString());
+  // if (slog){
+  //   //console.log("postoji drzava " + slog.data._id);
+  //   console.log("postoji drzava " + slog.toString());
     
 
-  }
+  // }
 
 
   // let oOpstina = new Opstina(
@@ -151,7 +152,7 @@ if (uid) {
 }
 
 module.exports.listopstine = function (req, res,next) {
-  console.log("Usao u list Opstina");
+  //console.log("Usao u list Opstina");
   
   Opstina.find({}).sort({created_at:-1}).populate('Drzava',['KodDrzave','Naziv']).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
@@ -168,7 +169,7 @@ module.exports.listopstine = function (req, res,next) {
 
 
 module.exports.getopstine = function (req, res,next) {
-  console.log("Usao u get Opstina parametar je  " + req.params.id);
+//  console.log("Usao u get Opstina parametar je  " + req.params.id);
   Opstina.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
@@ -185,7 +186,7 @@ module.exports.getopstine = function (req, res,next) {
 }
 
 module.exports.deleopstine = function(req, res, next) {
-  console.log("delete Opstina parametar je : " + req.params.id);
+  //console.log("delete Opstina parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
  Opstina.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }

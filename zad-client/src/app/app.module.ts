@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -6,7 +7,10 @@ import {RouterModule, Routes} from '@angular/router';
 import { ButtonModule,InputTextModule } from 'primeng/primeng';
 import { DataTableModule,SharedModule } from 'primeng/primeng';
 import {FlashMessagesModule} from 'angular2-flash-messages';
+import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
+import {DialogModule} from 'primeng/primeng';
 import { AppComponent } from './app.component';
+
 
 //Meni and app komponente
 import { HomeComponent } from './components/home/home.component';
@@ -44,6 +48,7 @@ import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
+import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -57,7 +62,9 @@ const appRoutes: Routes =  [
   {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
   {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
   {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-  
+  {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
+  {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
+  {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
   {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
   {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
   {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
@@ -94,9 +101,11 @@ const appRoutes: Routes =  [
     NotFoundComponent,
     DrzaveFormComponent,
     ParmetarFormComponent,
+    OpstineFormComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule ,
     HttpModule,
@@ -105,12 +114,14 @@ const appRoutes: Routes =  [
     ButtonModule,
     DataTableModule,
     SharedModule,
-    InputTextModule
+    InputTextModule,
+    ConfirmDialogModule,
+    DialogModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,
     DrzaveService,MestaService,OpstineService,
-    ParametarService,FondSatiService,KonstanteService,RadnikService,VlasnikService],
+    ParametarService,FondSatiService,KonstanteService,RadnikService,VlasnikService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

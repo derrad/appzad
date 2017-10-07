@@ -1,0 +1,109 @@
+<!-- <p>
+  opstine-form works!
+</p> -->
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-xs-10">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+          <h3>{{title}}</h3>
+    
+      </div>
+    <div class="panel-body panel-info">
+            
+          <form [formGroup]="formOPST" (ngSubmit)="save()" novalidate>
+              <div class="form-group" >
+                  <!-- <label class="center-block">ID: -->
+                    <input class="form-control" formControlName="_id"  [(ngModel)]="opstina._id"   type="hidden">
+                  <!-- <label> -->
+              </div>
+              <div class="form-group">
+                  <label class="center-block">Država:
+                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" >
+                      <option *ngFor="let list of drzave" [value]="list._id"   >
+                        {{ list.Naziv }}
+                      </option>
+                    </select>
+                  </label>
+              </div>
+               
+                <div class="form-group">
+                    <label class="center-block">Kod opštine:
+                      <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn" >
+                    </label>
+                    <div class="text-danger" *ngIf="!formOPST.controls['RegOzn'].valid && formOPST.controls['RegOzn'].touched">{{ titleAlertRegOzn }}</div>
+                    
+                  </div>
+    
+               <div class="form-group">
+                  <label class="center-block">Naziv opštine:
+                    <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv" >
+                  </label>
+                  <div class="text-danger" *ngIf="!formOPST.controls['Naziv'].valid && formOPST.controls['Naziv'].touched">{{ titleAlertNaziv }}</div>
+                  
+                </div>
+               
+                <div class="form-group">
+                    <label class="center-block">šifra poreza opštine:
+                      <input class="form-control" formControlName="SifPorez"  [(ngModel)]="opstina.SifPorez" >
+                    </label>
+                  </div>
+                 
+                  <div class="form-group">
+                      <label class="center-block">Kontrolni broj opštine:
+                        <input class="form-control" formControlName="KontBr"  [(ngModel)]="opstina.KontBr" >
+                      </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="center-block">Poziv na broj opštine:
+                          <input class="form-control" formControlName="PozivNaBr"  [(ngModel)]="opstina.PozivNaBr" >
+                        </label>
+                      </div>
+
+                 <div class="form-group">
+                    <label class="center-block">Opis:
+                      <textarea class="form-control" formControlName="Opis"  [(ngModel)]="opstina.Opis">
+    
+                      </textarea>
+                    </label>
+                </div>
+              
+                <div class="form-group">
+                        <div class="col-md-offset-5 col-md-12">
+                            <button type="submit" [disabled]="!formOPST.valid"
+                                class="btn btn-default">
+                            <span class="glyphicon glyphicon-saved"></span>
+                            Save
+                            </button>
+    
+                          <button type="reset" class="btn btn-danger"  [disabled]="formOPST.pristine"  (click)="revert()">
+                              <i class="fa fa-undo" aria-hidden="true"></i>
+                              Revert
+                          </button>
+                          
+                       </div>
+                  
+                        
+              </div>
+                  
+    
+    
+          </form>
+          
+    
+    
+    </div>
+        
+    </div>
+    <div class="col-md-offset-2 col-md-9">
+        <button (click)="backClicked()"  class="btn btn-default btn-block">
+        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+        Back
+      </button>
+    </div>
+    </div> <!--  coll -->
+    </div> <!--  row -->
+
+    
+

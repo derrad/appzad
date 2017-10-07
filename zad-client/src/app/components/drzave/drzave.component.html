@@ -17,7 +17,7 @@
       
       <p-column styleClass="col-button" heder="Opcije">
           <ng-template let-drz="rowData" let-i="rowIndex" pTemplate="body">
-              <button type="button" pButton (click)="showDialogToAdd(drz)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="selectDrzavu(drz)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateDrzavu(drz._id)" icon="fa fa-pencil" title="Update"></button>
               <button type="button" pButton (click)="deleteDrzavu(drz)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>

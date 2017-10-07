@@ -47,8 +47,7 @@ export class DrzaveService {
     .map(res => res.json()).catch(this.handleError); 
 
   }
-
-
+  
   addDrzava(drzava){
     let headers = new Headers();
     this.loadToken();

@@ -92,15 +92,15 @@ deleteDrzavu(tdrzava){
 
 
 
-showDialogToAdd(tdrzava) {
-    //alert("Add");
-    console.log("Broj slogova u drzavama(pre brisanja) " + this.drzave.length);
-    var index = this.drzave.indexOf(tdrzava);
-    console.log("index je " + index);
-    this.drzave.splice(index, 1);
+// showDialogToAdd(tdrzava) {
+//   //alert("Add");
+//   console.log("Broj slogova u drzavama(pre brisanja) " + this.drzave.length);
+//   var index = this.drzave.indexOf(tdrzava);
+//   console.log("index je " + index);
+//   this.drzave.splice(index, 1);
 
-    console.log("Broj slogova u drzavama(showDialogToAdd) " + this.drzave.length);
-}
+//   console.log("Broj slogova u drzavama(showDialogToAdd) " + this.drzave.length);
+// }
 
 
 }

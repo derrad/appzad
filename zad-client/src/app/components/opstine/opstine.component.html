@@ -1,3 +1,128 @@
-<p>
+<!-- <p>
   opstine works!
-</p>
+</p> -->
+
+<div class="row">
+    <div *ngIf="opstine" class="col-lg-9 col-md-9 col-xs-10">
+      <h3 class="first">PREGLED OPŠTINA</h3>
+      <input #gb type="text" placeholder="Global search" pInputText focus>
+      <p></p>
+
+      <p-dataTable [value]="opstine"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+                selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
+                styleClass="table table-striped" [responsive]="true"  [immutable]=false resizableColumns="true" columnResizeMode="expand">
+    
+                <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
+      <p-column field="Drzava.Naziv" header="Drzava" sortable="true"></p-column>  
+      <p-column field="RegOzn" header="Oznaka" sortable="true"></p-column>                               
+      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
+      <p-column field="SifPorez" header="SifPorez" sortable="true"></p-column>
+      <!-- <p-column field="KontBr" header="KontBr" sortable="true"></p-column>
+      <p-column field="PozivNaBr" header="PozivNaBr" sortable="true"></p-column> -->
+      
+      <p-column styleClass="col-button" heder="Opcije">
+          <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
+              <button type="button" pButton (click)="selectOpstina(opst)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="updateOpstinu(opst._id)" icon="fa fa-pencil" title="Update"></button>
+              <button type="button" pButton (click)="deleteOpstinu(opst)" icon="fa fa-trash" title="Delete"></button>
+          </ng-template>
+     </p-column>
+      <p-footer>
+          <div class="ui-helper-clearfix" style="width:100%">
+              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addOpstine()" label="Add"></button>
+            </div>
+        </p-footer>
+      </p-dataTable>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+        <p-footer>
+            <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+        </p-footer>
+</p-confirmDialog>
+
+
+
+<p-dialog header="Opština" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+
+        <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                     ID
+                    </dt>
+                    <dd class="text-success">
+                       {{opstShow._id}}
+                    </dd>
+                  
+                    <dt>
+                      KOD OPŠTINE
+                    </dt>
+                    <dd class="text-success">
+                         {{opstShow.RegOzn}} 
+                    </dd>
+                    <dt>
+                    NAZIV OPŠTINE
+                    </dt>
+                    <dd class="text-success">
+                         {{opstShow.Naziv}}
+                    </dd>
+                    <dt>
+                     ŠIFRA POREZA OPŠTINE
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.SifPorez}}
+                        
+                    </dd>
+                    <dt>
+                    KONTROLNI BROJ OPŠTINE
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.KontBr}}
+                        
+                    </dd>
+                    <dt>
+                    POZIV NA BROJ OPŠTINE
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.PozivNaBr}}
+                        
+                    </dd>
+                    <dt>
+                    OPIS
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.Opis}}
+                        
+                    </dd>
+                    <dt>
+                    DATUM UNOSA
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.created_at}}
+                        
+                    </dd>
+                    <dt>
+                    DATUM AŽURIRANJA
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.updatedAt}}
+                        
+                    </dd>
+                    <dt>
+                    KORISNIK
+                    </dt>
+                    <dd class="text-success">
+                        {{opstShow.NameUser}}
+                        
+                    </dd>
+            
+                </dl>                        
+        </div>
+                        
+
+        <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->
+            <p-footer>
+                 <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+            </p-footer>
+</p-dialog>
