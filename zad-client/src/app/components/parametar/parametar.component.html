@@ -1,40 +1,25 @@
-<!-- <p>
-  parametar works!
-  <select [(ngModel)]="objValue"> // value is an object
-    <option *ngFor="#obj of objArray" [ngValue]="obj">{{obj.name}}</option>
-</select>
+<div class="row" >
+    <div *ngIf="params;else  waiting" class=" table-responsive col-lg-9 col-md-9 col-xs-10">
 
-<md-select placeholder="Select Categorie"  
-    name="Select Categorie" >
-  <md-option *ngFor="let list of categ" [value]="list.value" (click)="sub_cat(list.category_id)" >
-    {{ list.category }}
-  </md-option>
-</md-select>
-style="display: none;" ;else  waiting
-</p> -->
-
-<div id="glparam" class="row" >
-    <div *ngIf="params" class=" table-responsive col-lg-9 col-md-9 col-xs-10">
-      <h3 class="first">TABELA PARAMETARA</h3>
-      <input #gb type="text" placeholder="Global search" pInputText focus>
-      <p></p>
-
+      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+      </div>
       <p-dataTable [value]="params"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedParam" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" 
                 styleClass="table  table-striped table-condensed" [immutable]=false >
-                
+      <p-header><strong>List of Parameters</strong></p-header>        
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
-      <!--     drzaveID-->                                                                                          
       <p-column field="Naziv" header="Naziv" sortable="true" ></p-column>
       <p-column field="Koristi" header="Koristi" sortable="true" styleClass="text-center"></p-column>
       <p-column field="VredString" header="STRING" sortable="true"></p-column> 
       <p-column field="VredNumeric" header="NUMERIC" sortable="true" styleClass="text-right"></p-column> 
-      <p-column field="Opis" header="Opis" sortable="true"></p-column>
-      <p-column field="NameUser" header="User" sortable="true"></p-column>
+      <!-- <p-column field="Opis" header="Opis" sortable="true"></p-column> -->
+      <!-- <p-column field="NameUser" header="User" sortable="true"></p-column> -->
       
       <p-column styleClass="col-button" heder="Opcije">
           <ng-template let-param="rowData" let-i="rowIndex" pTemplate="body">
-              <button type="button" pButton (click)="selectParam(param._id)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="selectParam(param)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateParam(param._id)" icon="fa fa-pencil" title="Update"></button>
               <button type="button" pButton (click)="deleteParam(param)" icon="fa fa-trash" title="Delete"></button>
           
@@ -47,24 +32,93 @@ style="display: none;" ;else  waiting
         </p-footer>
       </p-dataTable>
     </div>
-
-   
-</div>
-<ng-template #waiting >
-    <div class="col-lg-9 col-md-9 col-xs-10">
-     <div class="panel panel-default ">
-        <div class="panel-heading">
-            <h2>Nema parametara</h2>
-      
-        </div>
-      <div class="panel-body panel-info ">
-      <p>Možete uneti nove parametre</p>
-         <button type="button" class="btn btn-info btn-lg" (click)="onAddParam()" > 
-            <span class="glyphicon glyphicon-plus-sign fa-2x "></span>
-          Add</button>
-      </div>
-        
-    </div>
-
+  
   </div>
-  </ng-template>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
+
+
+
+<p-dialog header="Parametar" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+
+    <div>
+            <dl class="dl-horizontal">
+                <dt>
+                 ID
+                </dt>
+                <dd class="text-success">
+                   {{parShow._id}}
+                </dd>
+                <dt>
+                NAZIV PARAMETRA
+                </dt>
+                <dd class="text-success">
+                     {{parShow.Naziv}}
+                </dd>
+                <dt>
+                 KORISTI PARAMETAR
+                </dt>
+                <dd class="text-success">
+                    {{parShow.Koristi}}
+                    
+                </dd>
+                <dt>
+                STRING VREDNOST PARAMETRA
+                </dt>
+                <dd class="text-success">
+                    {{parShow.VredString}}
+                    
+                </dd>
+                <dt>
+                NUMERIČKA VREDNOST PARAMETRA
+                </dt>
+                <dd class="text-success">
+                    {{parShow.VredNumeric}}
+                    
+                </dd>
+                <dt>
+                OPIS
+                </dt>
+                <dd class="text-success">
+                    {{parShow.Opis}}
+                    
+                </dd>
+                <dt>
+                DATUM UNOSA
+                </dt>
+                <dd class="text-success">
+                    {{parShow.created_at}}
+                    
+                </dd>
+                <dt>
+                DATUM AŽURIRANJA
+                </dt>
+                <dd class="text-success">
+                    {{parShow.updatedAt}}
+                    
+                </dd>
+                <dt>
+                KORISNIK
+                </dt>
+                <dd class="text-success">
+                    {{parShow.NameUser}}
+                    
+                </dd>
+        
+            </dl>                        
+    </div>
+                    
+
+    <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->
+        <p-footer>
+             <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+        </p-footer>
+</p-dialog>
+
+<ng-template #waiting >Waiting...</ng-template>
+

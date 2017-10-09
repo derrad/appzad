@@ -1,0 +1,994 @@
+[
+    {
+        "KodDrzave": "LTU",
+        "Naziv": "Litvanija"
+    },
+    {
+        "KodDrzave": "KNA",
+        "Naziv": "Sent Kits i Nevis"
+    },
+    {
+        "KodDrzave": "SWE",
+        "Naziv": "Švedska"
+    },
+    {
+        "KodDrzave": "ESH",
+        "Naziv": "Zapadna sahara"
+    },
+    {
+        "KodDrzave": "JOR",
+        "Naziv": "Jordan"
+    },
+    {
+        "KodDrzave": "ZAF",
+        "Naziv": "Južnoafrička republika"
+    },
+    {
+        "KodDrzave": "HMD",
+        "Naziv": "Herd i MekDonald ostrva"
+    },
+    {
+        "KodDrzave": "SYR",
+        "Naziv": "Sirija"
+    },
+    {
+        "KodDrzave": "SXM",
+        "Naziv": "Sent Martin"
+    },
+    {
+        "KodDrzave": "PCN",
+        "Naziv": "Pitkern"
+    },
+    {
+        "KodDrzave": "LIE",
+        "Naziv": "Lihtenštajn"
+    },
+    {
+        "KodDrzave": "COM",
+        "Naziv": "Komorska ostrva"
+    },
+    {
+        "KodDrzave": "BRB",
+        "Naziv": "Barbados"
+    },
+    {
+        "KodDrzave": "HTI",
+        "Naziv": "Haiti"
+    },
+    {
+        "KodDrzave": "ALB",
+        "Naziv": "Albanija"
+    },
+    {
+        "KodDrzave": "COD",
+        "Naziv": "Kongo"
+    },
+    {
+        "KodDrzave": "MTQ",
+        "Naziv": "Matinik"
+    },
+    {
+        "KodDrzave": "CYP",
+        "Naziv": "Kipar"
+    },
+    {
+        "KodDrzave": "NRU",
+        "Naziv": "Nauru"
+    },
+    {
+        "KodDrzave": "LVA",
+        "Naziv": "Letonija"
+    },
+    {
+        "KodDrzave": "BGR",
+        "Naziv": "Bugarska"
+    },
+    {
+        "KodDrzave": "HND",
+        "Naziv": "Honduras"
+    },
+    {
+        "KodDrzave": "SJM",
+        "Naziv": "Svalbard i Jan Majen"
+    },
+    {
+        "KodDrzave": "HKG",
+        "Naziv": "Hong Kong"
+    },
+    {
+        "KodDrzave": "LBY",
+        "Naziv": "Libija"
+    },
+    {
+        "KodDrzave": "SOM",
+        "Naziv": "Somalija"
+    },
+    {
+        "KodDrzave": "SAU",
+        "Naziv": "Saudijska Arabija"
+    },
+    {
+        "KodDrzave": "KHM",
+        "Naziv": "Kambodža"
+    },
+    {
+        "KodDrzave": "GEO",
+        "Naziv": "Gruzija"
+    },
+    {
+        "KodDrzave": "COL",
+        "Naziv": "Kolumbija"
+    },
+    {
+        "KodDrzave": "AFG",
+        "Naziv": "Avganistan"
+    },
+    {
+        "KodDrzave": "CMR",
+        "Naziv": "Kamerun"
+    },
+    {
+        "KodDrzave": "MAC",
+        "Naziv": "Makao"
+    },
+    {
+        "KodDrzave": "VUT",
+        "Naziv": "Vanuatu"
+    },
+    {
+        "KodDrzave": "ERI",
+        "Naziv": "Eritreja"
+    },
+    {
+        "KodDrzave": "SLE",
+        "Naziv": "Sijera Leone"
+    },
+    {
+        "KodDrzave": "DMA",
+        "Naziv": "Dominikana"
+    },
+    {
+        "KodDrzave": "PAK",
+        "Naziv": "Pakistan"
+    },
+    {
+        "KodDrzave": "LAO",
+        "Naziv": "Laos"
+    },
+    {
+        "KodDrzave": "BDI",
+        "Naziv": "Burundi"
+    },
+    {
+        "KodDrzave": "MSR",
+        "Naziv": "Montserat"
+    },
+    {
+        "KodDrzave": "YEM",
+        "Naziv": "Jemen"
+    },
+    {
+        "KodDrzave": "ECU",
+        "Naziv": "Ekvador"
+    },
+    {
+        "KodDrzave": "BHS",
+        "Naziv": "Bahami"
+    },
+    {
+        "KodDrzave": "BMU",
+        "Naziv": "Bermuda"
+    },
+    {
+        "KodDrzave": "USA",
+        "Naziv": "Sjedinjene Američke Države"
+    },
+    {
+        "KodDrzave": "CRI",
+        "Naziv": "Kostarika"
+    },
+    {
+        "KodDrzave": "UKR",
+        "Naziv": "Ukrajina"
+    },
+    {
+        "KodDrzave": "CAN",
+        "Naziv": "Kanada"
+    },
+    {
+        "KodDrzave": "PER",
+        "Naziv": "Peru"
+    },
+    {
+        "KodDrzave": "IRL",
+        "Naziv": "Irska"
+    },
+    {
+        "KodDrzave": "KAZ",
+        "Naziv": "Kazahstan"
+    },
+    {
+        "KodDrzave": "MDA",
+        "Naziv": "Moldavija"
+    },
+    {
+        "KodDrzave": "CHL",
+        "Naziv": "Ćile"
+    },
+    {
+        "KodDrzave": "SUR",
+        "Naziv": "Surinam"
+    },
+    {
+        "KodDrzave": "KOR",
+        "Naziv": "Južna Koreja"
+    },
+    {
+        "KodDrzave": "BWA",
+        "Naziv": "Bocvana"
+    },
+    {
+        "KodDrzave": "KEN",
+        "Naziv": "Kenija"
+    },
+    {
+        "KodDrzave": "AUS",
+        "Naziv": "Australija"
+    },
+    {
+        "KodDrzave": "KGZ",
+        "Naziv": "Kirgistan"
+    },
+    {
+        "KodDrzave": "MAR",
+        "Naziv": "Maroko"
+    },
+    {
+        "KodDrzave": "URY",
+        "Naziv": "Urugvaj"
+    },
+    {
+        "KodDrzave": "COK",
+        "Naziv": "Kukova ostrva"
+    },
+    {
+        "KodDrzave": "SWZ",
+        "Naziv": "Svazilend"
+    },
+    {
+        "KodDrzave": "PHL",
+        "Naziv": "Filinini"
+    },
+    {
+        "KodDrzave": "IRN",
+        "Naziv": "Iran"
+    },
+    {
+        "KodDrzave": "TKM",
+        "Naziv": "Turkmenistan"
+    },
+    {
+        "KodDrzave": "NIU",
+        "Naziv": "Niue"
+    },
+    {
+        "KodDrzave": "ZWE",
+        "Naziv": "Zimbabve"
+    },
+    {
+        "KodDrzave": "ABW",
+        "Naziv": "Aruba"
+    },
+    {
+        "KodDrzave": "BEN",
+        "Naziv": "Benin"
+    },
+    {
+        "KodDrzave": "VCT",
+        "Naziv": "Sent Vinsent i Grenadini"
+    },
+    {
+        "KodDrzave": "AIA",
+        "Naziv": "Anguila"
+    },
+    {
+        "KodDrzave": "CPV",
+        "Naziv": "Cape Verda"
+    },
+    {
+        "KodDrzave": "CHN",
+        "Naziv": "Kina"
+    },
+    {
+        "KodDrzave": "TCD",
+        "Naziv": "Čad"
+    },
+    {
+        "KodDrzave": "BLZ",
+        "Naziv": "Belize"
+    },
+    {
+        "KodDrzave": "MDG",
+        "Naziv": "Madagaskar"
+    },
+    {
+        "KodDrzave": "FJI",
+        "Naziv": "Fidži"
+    },
+    {
+        "KodDrzave": "ETH",
+        "Naziv": "Etiopija"
+    },
+    {
+        "KodDrzave": "ARG",
+        "Naziv": "Argentina"
+    },
+    {
+        "KodDrzave": "MHL",
+        "Naziv": "Maršalska ostrva"
+    },
+    {
+        "KodDrzave": "TUN",
+        "Naziv": "Tunis"
+    },
+    {
+        "KodDrzave": "BLM",
+        "Naziv": "Sent Bartelem"
+    },
+    {
+        "KodDrzave": "PLW",
+        "Naziv": "Palau"
+    },
+    {
+        "KodDrzave": "SVN",
+        "Naziv": "Slovenija"
+    },
+    {
+        "KodDrzave": "POL",
+        "Naziv": "Poljska"
+    },
+    {
+        "KodDrzave": "BVT",
+        "Naziv": "Bouvet ostrva"
+    },
+    {
+        "KodDrzave": "TKL",
+        "Naziv": "Tokelau"
+    },
+    {
+        "KodDrzave": "PNG",
+        "Naziv": "Panua Nova Gvineja"
+    },
+    {
+        "KodDrzave": "TZA",
+        "Naziv": "Tanzanija"
+    },
+    {
+        "KodDrzave": "MOZ",
+        "Naziv": "Mozambik"
+    },
+    {
+        "KodDrzave": "LUX",
+        "Naziv": "Luksenburg"
+    },
+    {
+        "KodDrzave": "SRB",
+        "Naziv": "Srbija"
+    },
+    {
+        "KodDrzave": "BES",
+        "Naziv": "Bonaire"
+    },
+    {
+        "KodDrzave": "MLI",
+        "Naziv": "Mali"
+    },
+    {
+        "KodDrzave": "PRK",
+        "Naziv": "Severna Koreja"
+    },
+    {
+        "KodDrzave": "FRO",
+        "Naziv": "Farska ostrva"
+    },
+    {
+        "KodDrzave": "ITA",
+        "Naziv": "Italija"
+    },
+    {
+        "KodDrzave": "ZMB",
+        "Naziv": "Zambija"
+    },
+    {
+        "KodDrzave": "EGY",
+        "Naziv": "Egipat"
+    },
+    {
+        "KodDrzave": "SLV",
+        "Naziv": "El Salvador"
+    },
+    {
+        "KodDrzave": "ARE",
+        "Naziv": "Ujedinjeni Arapski Emirati"
+    },
+    {
+        "KodDrzave": "BTN",
+        "Naziv": "Butan"
+    },
+    {
+        "KodDrzave": "GBR",
+        "Naziv": "Velika Britanija"
+    },
+    {
+        "KodDrzave": "RUS",
+        "Naziv": "Rusija"
+    },
+    {
+        "KodDrzave": "DZA",
+        "Naziv": "Alžir"
+    },
+    {
+        "KodDrzave": "TJK",
+        "Naziv": "Tadžikistan"
+    },
+    {
+        "KodDrzave": "GUF",
+        "Naziv": "Francuska Gvajana"
+    },
+    {
+        "KodDrzave": "FSM",
+        "Naziv": "Mikronezija"
+    },
+    {
+        "KodDrzave": "ISL",
+        "Naziv": "Irska"
+    },
+    {
+        "KodDrzave": "SPM",
+        "Naziv": "Sent Pjer i Mikelon"
+    },
+    {
+        "KodDrzave": "THA",
+        "Naziv": "Tailand"
+    },
+    {
+        "KodDrzave": "SYC",
+        "Naziv": "Sejšeli"
+    },
+    {
+        "KodDrzave": "ROU",
+        "Naziv": "Rumunija"
+    },
+    {
+        "KodDrzave": "SGP",
+        "Naziv": "Singapur"
+    },
+    {
+        "KodDrzave": "ARM",
+        "Naziv": "Jermenija"
+    },
+    {
+        "KodDrzave": "AUT",
+        "Naziv": "Austrija"
+    },
+    {
+        "KodDrzave": "AND",
+        "Naziv": "Andora"
+    },
+    {
+        "KodDrzave": "BEL",
+        "Naziv": "Belgija"
+    },
+    {
+        "KodDrzave": "SDN",
+        "Naziv": "Sudan"
+    },
+    {
+        "KodDrzave": "ESP",
+        "Naziv": "Španija"
+    },
+    {
+        "KodDrzave": "CYM",
+        "Naziv": "Kajmanska ostrva"
+    },
+    {
+        "KodDrzave": "TCA",
+        "Naziv": "Ostrva Turks i Kaikos"
+    },
+    {
+        "KodDrzave": "STP",
+        "Naziv": "Sao Tome i Principe"
+    },
+    {
+        "KodDrzave": "MCO",
+        "Naziv": "Monako"
+    },
+    {
+        "KodDrzave": "GRD",
+        "Naziv": "Grenada"
+    },
+    {
+        "KodDrzave": "SSD",
+        "Naziv": "Južni Sudan"
+    },
+    {
+        "KodDrzave": "DOM",
+        "Naziv": "Dominikanska republika"
+    },
+    {
+        "KodDrzave": "BRA",
+        "Naziv": "Brazil"
+    },
+    {
+        "KodDrzave": "AGO",
+        "Naziv": "Angola"
+    },
+    {
+        "KodDrzave": "FLK",
+        "Naziv": "Foklanska ostrva"
+    },
+    {
+        "KodDrzave": "NCL",
+        "Naziv": "Nova Kaledonija"
+    },
+    {
+        "KodDrzave": "PRI",
+        "Naziv": "Portoriko"
+    },
+    {
+        "KodDrzave": "UMI",
+        "Naziv": "SAD manja udaljena ostrva"
+    },
+    {
+        "KodDrzave": "DNK",
+        "Naziv": "Danska"
+    },
+    {
+        "KodDrzave": "GGY",
+        "Naziv": "Guernsey"
+    },
+    {
+        "KodDrzave": "WLF",
+        "Naziv": "Valis i Futuna"
+    },
+    {
+        "KodDrzave": "CIV",
+        "Naziv": "Obala Slonovače"
+    },
+    {
+        "KodDrzave": "TON",
+        "Naziv": "Tonga"
+    },
+    {
+        "KodDrzave": "MKD",
+        "Naziv": "Makedonija"
+    },
+    {
+        "KodDrzave": "HRV",
+        "Naziv": "Hrvatska"
+    },
+    {
+        "KodDrzave": "FRA",
+        "Naziv": "Francuska"
+    },
+    {
+        "KodDrzave": "LSO",
+        "Naziv": "Lesoto"
+    },
+    {
+        "KodDrzave": "ATG",
+        "Naziv": "Antigva i Barbuda"
+    },
+    {
+        "KodDrzave": "NFK",
+        "Naziv": "Norfolk ostrva"
+    },
+    {
+        "KodDrzave": "MDV",
+        "Naziv": "Maldivi"
+    },
+    {
+        "KodDrzave": "GAB",
+        "Naziv": "Gabon"
+    },
+    {
+        "KodDrzave": "PYF",
+        "Naziv": "Francuska polinezija"
+    },
+    {
+        "KodDrzave": "TUV",
+        "Naziv": "Tuvalu"
+    },
+    {
+        "KodDrzave": "BFA",
+        "Naziv": "Burkina Faso"
+    },
+    {
+        "KodDrzave": "MYT",
+        "Naziv": "Majot"
+    },
+    {
+        "KodDrzave": "ISR",
+        "Naziv": "Izrael"
+    },
+    {
+        "KodDrzave": "MNG",
+        "Naziv": "Mongolija"
+    },
+    {
+        "KodDrzave": "VAT",
+        "Naziv": "Vatikan"
+    },
+    {
+        "KodDrzave": "MUS",
+        "Naziv": "Mauricijus"
+    },
+    {
+        "KodDrzave": "MNE",
+        "Naziv": "Crna Gora"
+    },
+    {
+        "KodDrzave": "GRL",
+        "Naziv": "Grenland"
+    },
+    {
+        "KodDrzave": "ATF",
+        "Naziv": "Francuske Južne teritorije"
+    },
+    {
+        "KodDrzave": "NOR",
+        "Naziv": "Norveška"
+    },
+    {
+        "KodDrzave": "LBN",
+        "Naziv": "Liban"
+    },
+    {
+        "KodDrzave": "PRY",
+        "Naziv": "Paragvaj"
+    },
+    {
+        "KodDrzave": "AZE",
+        "Naziv": "Azerbejdžan"
+    },
+    {
+        "KodDrzave": "BHR",
+        "Naziv": "Bahrein"
+    },
+    {
+        "KodDrzave": "UZB",
+        "Naziv": "Uzbekistan"
+    },
+    {
+        "KodDrzave": "TWN",
+        "Naziv": "Tajvan"
+    },
+    {
+        "KodDrzave": "GUY",
+        "Naziv": "Gvajana"
+    },
+    {
+        "KodDrzave": "NPL",
+        "Naziv": "Nepal"
+    },
+    {
+        "KodDrzave": "VIR",
+        "Naziv": "Devičanska ostrva (SAD)"
+    },
+    {
+        "KodDrzave": "ASM",
+        "Naziv": "Američka Samoa"
+    },
+    {
+        "KodDrzave": "BOL",
+        "Naziv": "Bolivija"
+    },
+    {
+        "KodDrzave": "CXR",
+        "Naziv": "Božićna ostrva"
+    },
+    {
+        "KodDrzave": "JEY",
+        "Naziv": "Jersey"
+    },
+    {
+        "KodDrzave": "VGB",
+        "Naziv": "Devičanska ostrva (Britanija)"
+    },
+    {
+        "KodDrzave": "NZL",
+        "Naziv": "Novi Zeland"
+    },
+    {
+        "KodDrzave": "CAF",
+        "Naziv": "Centralnoafrička Republika"
+    },
+    {
+        "KodDrzave": "MNP",
+        "Naziv": "Severna Marijanska ostrva"
+    },
+    {
+        "KodDrzave": "SGS",
+        "Naziv": "Južna Džordžija i Južna Sendvidžka ostrva"
+    },
+    {
+        "KodDrzave": "MEX",
+        "Naziv": "Meksiko"
+    },
+    {
+        "KodDrzave": "NLD",
+        "Naziv": "Holandija"
+    },
+    {
+        "KodDrzave": "IRQ",
+        "Naziv": "Irak"
+    },
+    {
+        "KodDrzave": "MMR",
+        "Naziv": "Mijanmar"
+    },
+    {
+        "KodDrzave": "VEN",
+        "Naziv": "Venecuela"
+    },
+    {
+        "KodDrzave": "SEN",
+        "Naziv": "Senegal"
+    },
+    {
+        "KodDrzave": "CUB",
+        "Naziv": "Kuba"
+    },
+    {
+        "KodDrzave": "UGA",
+        "Naziv": "Uganda"
+    },
+    {
+        "KodDrzave": "CHE",
+        "Naziv": "Švajcarska"
+    },
+    {
+        "KodDrzave": "BLR",
+        "Naziv": "Belorusija"
+    },
+    {
+        "KodDrzave": "CCK",
+        "Naziv": "Kokosova ostrva"
+    },
+    {
+        "KodDrzave": "IND",
+        "Naziv": "Indija"
+    },
+    {
+        "KodDrzave": "REU",
+        "Naziv": "Reunion"
+    },
+    {
+        "KodDrzave": "KIR",
+        "Naziv": "Kiribati"
+    },
+    {
+        "KodDrzave": "NER",
+        "Naziv": "Nigerija"
+    },
+    {
+        "KodDrzave": "JPN",
+        "Naziv": "Japan"
+    },
+    {
+        "KodDrzave": "GMB",
+        "Naziv": "Gambija"
+    },
+    {
+        "KodDrzave": "PSE",
+        "Naziv": "Palestina"
+    },
+    {
+        "KodDrzave": "DEU",
+        "Naziv": "Nemačka"
+    },
+    {
+        "KodDrzave": "OMN",
+        "Naziv": "Oman"
+    },
+    {
+        "KodDrzave": "GNB",
+        "Naziv": "Gvineja Bisao"
+    },
+    {
+        "KodDrzave": "TLS",
+        "Naziv": "Timor"
+    },
+    {
+        "KodDrzave": "QAT",
+        "Naziv": "Katar"
+    },
+    {
+        "KodDrzave": "RWA",
+        "Naziv": "Ruanda"
+    },
+    {
+        "KodDrzave": "LBR",
+        "Naziv": "Liberija"
+    },
+    {
+        "KodDrzave": "BIH",
+        "Naziv": "Bosna i Hercegovina"
+    },
+    {
+        "KodDrzave": "COG",
+        "Naziv": "Kongo"
+    },
+    {
+        "KodDrzave": "PRT",
+        "Naziv": "Portugal"
+    },
+    {
+        "KodDrzave": "NAM",
+        "Naziv": "Namibija"
+    },
+    {
+        "KodDrzave": "MWI",
+        "Naziv": "Malavi"
+    },
+    {
+        "KodDrzave": "IOT",
+        "Naziv": "Britanske Indijske teritorije"
+    },
+    {
+        "KodDrzave": "MRT",
+        "Naziv": "Mauritanija"
+    },
+    {
+        "KodDrzave": "DJI",
+        "Naziv": "Džibuti"
+    },
+    {
+        "KodDrzave": "SMR",
+        "Naziv": "San Marino"
+    },
+    {
+        "KodDrzave": "MLT",
+        "Naziv": "Malta"
+    },
+    {
+        "KodDrzave": "TTO",
+        "Naziv": "Trinidad i Tobago"
+    },
+    {
+        "KodDrzave": "KWT",
+        "Naziv": "Kuvajt"
+    },
+    {
+        "KodDrzave": "SHN",
+        "Naziv": "Sveta Helena"
+    },
+    {
+        "KodDrzave": "SVK",
+        "Naziv": "Slovačka"
+    },
+    {
+        "KodDrzave": "GHA",
+        "Naziv": "Gana"
+    },
+    {
+        "KodDrzave": "SLB",
+        "Naziv": "Solomonska ostrva"
+    },
+    {
+        "KodDrzave": "BGD",
+        "Naziv": "Bangladeš"
+    },
+    {
+        "KodDrzave": "GIN",
+        "Naziv": "Gvineja"
+    },
+    {
+        "KodDrzave": "LKA",
+        "Naziv": "Šri Lanka"
+    },
+    {
+        "KodDrzave": "GIB",
+        "Naziv": "Gibraltar"
+    },
+    {
+        "KodDrzave": "NIC",
+        "Naziv": "Nikaragva"
+    },
+    {
+        "KodDrzave": "BRN",
+        "Naziv": "Bruneji"
+    },
+    {
+        "KodDrzave": "MYS",
+        "Naziv": "Malezija"
+    },
+    {
+        "KodDrzave": "MAF",
+        "Naziv": "Sent Martin (Francuski)"
+    },
+    {
+        "KodDrzave": "CZE",
+        "Naziv": "Češka"
+    },
+    {
+        "KodDrzave": "EST",
+        "Naziv": "Estonija"
+    },
+    {
+        "KodDrzave": "HUN",
+        "Naziv": "Mađarska"
+    },
+    {
+        "KodDrzave": "ALA",
+        "Naziv": "Alanska ostrva"
+    },
+    {
+        "KodDrzave": "GLP",
+        "Naziv": "Gvadalupe"
+    },
+    {
+        "KodDrzave": "TUR",
+        "Naziv": "Turska"
+    },
+    {
+        "KodDrzave": "FIN",
+        "Naziv": "Finska"
+    },
+    {
+        "KodDrzave": "PAN",
+        "Naziv": "Panama"
+    },
+    {
+        "KodDrzave": "IMN",
+        "Naziv": "Isle of Man"
+    },
+    {
+        "KodDrzave": "JAM",
+        "Naziv": "Jamajka"
+    },
+    {
+        "KodDrzave": "GRC",
+        "Naziv": "Grčka"
+    },
+    {
+        "KodDrzave": "NGA",
+        "Naziv": "Nigerija"
+    },
+    {
+        "KodDrzave": "LCA",
+        "Naziv": "Santa Lucija"
+    },
+    {
+        "KodDrzave": "GTM",
+        "Naziv": "Gvatemala"
+    },
+    {
+        "KodDrzave": "VNM",
+        "Naziv": "Vijetnam"
+    },
+    {
+        "KodDrzave": "CUW",
+        "Naziv": "Kurakao"
+    },
+    {
+        "KodDrzave": "TGO",
+        "Naziv": "Togo"
+    },
+    {
+        "KodDrzave": "WSM",
+        "Naziv": "Samoa"
+    },
+    {
+        "KodDrzave": "GNQ",
+        "Naziv": "Ekvatorijalna Gvineja"
+    },
+    {
+        "KodDrzave": "IDN",
+        "Naziv": "Indonezija"
+    },
+    {
+        "KodDrzave": "GUM",
+        "Naziv": "Guam"
+    }
+]
