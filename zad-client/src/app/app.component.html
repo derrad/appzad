@@ -1,6 +1,16 @@
-<div class="row">
 <app-navbar></app-navbar>
-</div> 
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-3'>
+            <app-navbar-left></app-navbar-left>
+        </div>
+        <div class='col-sm-9 body-content'>
+            <flash-messages></flash-messages>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
 
 <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
@@ -8,21 +18,21 @@
 <!-- <p-messages [(value)]="msgs"></p-messages> -->
 <!-- <div class="container"> -->
 
- <div class="container-fluid">
+ <!-- <div class="container-fluid">
      <div class="row">
-                <!-- <div class="col-sm-2 col-md-2 d-none d-sm-block bg-light"> -->
-               <app-navbar-left></app-navbar-left>
+                <div class="col-sm-2 col-md-2 d-none d-sm-block bg-light"> -->
+               <!-- <app-navbar-left></app-navbar-left> -->
                 <!-- </div> -->
                 <!-- <main class="container-main col-sm-10 ml-sm-auto col-md-10 pt-3" role="main"> -->
-              
+<!--               
                 <main class="container-main" role="main">
                         <flash-messages class="col-lg-9 col-md-9 col-xs-10"></flash-messages>
-                        <router-outlet></router-outlet>
+                        <router-outlet></router-outlet> -->
                 <!-- </div> -->
-                </main>
+                <!-- </main>
               
   </div>
- </div>
+ </div>  -->
     
         <!-- <div class="col-lg-10"> 
         <div class="row"> -->

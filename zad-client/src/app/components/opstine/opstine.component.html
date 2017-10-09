@@ -2,8 +2,8 @@
   opstine works!
 </p> -->
 
-<div class="row">
-    <div *ngIf="opstine;else  waiting" class="col-lg-9 col-md-9 col-xs-10">
+<!-- <div class="row"> -->
+    <div *ngIf="opstine;else  waiting" >
       <!-- <h3 class="first">PREGLED OPŠTINA</h3>
       <input #gb type="text" placeholder="Global search" pInputText focus>
       <p></p> -->
@@ -15,8 +15,7 @@
       <p-dataTable [value]="opstine"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false resizableColumns="true" columnResizeMode="expand">
-    
-      <p-header>List of Opštine</p-header>       
+          <p-header><strong>List of Opštine</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <p-column field="Drzava.Naziv" header="Drzava" sortable="true"></p-column>  
       <p-column field="RegOzn" header="Oznaka" sortable="true"></p-column>                               
@@ -25,7 +24,9 @@
       <!-- <p-column field="KontBr" header="KontBr" sortable="true"></p-column>
       <p-column field="PozivNaBr" header="PozivNaBr" sortable="true"></p-column> -->
       
-      <p-column styleClass="col-button" heder="Opcije">
+      <!-- <p-column styleClass="col-button text-center" heder="Opcije" > -->
+
+      <p-column styleClass="col-button text-center" heder="Opcije">
           <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
               <button type="button" pButton (click)="selectOpstina(opst)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateOpstinu(opst._id)" icon="fa fa-pencil" title="Update"></button>
@@ -39,7 +40,11 @@
         </p-footer>
       </p-dataTable>
     </div>
-</div>
+
+<!-- </div> -->
+
+
+
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
         <p-footer>
             <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>

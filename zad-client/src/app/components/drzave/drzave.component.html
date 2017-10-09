@@ -1,6 +1,6 @@
-<div class="row">
-    <div *ngIf="drzave; else  waiting" class="col-lg-9 col-md-9 col-xs-10">
-      <!-- <h3 class="first">TABELA DRZAVA</h3>
+<!-- <div class="row"> -->
+    <div *ngIf="drzave; else  waiting" >
+      <!-- <h3 class="first">TABELA DRZAVA</h3> class="col-lg-9 col-md-9 col-xs-10"
       <input #gb type="text" placeholder="Global search" pInputText focus>
       <p></p> -->
 
@@ -35,7 +35,7 @@
         </p-footer>
       </p-dataTable>
     </div>
-</div>
+<!-- </div> -->
 
 
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
