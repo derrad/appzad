@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {ValidateService} from '../../services/auth/validate.service'
 import {AuthService} from '../../services/auth/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -41,50 +41,22 @@ export class RegisterComponent implements OnInit {
     // Required Fields
     if(!this.validateService.validateRegister(user)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
-      // this.msgs.push(
-      //   {
-      //       severity: 'warn',
-      //       summary: 'warn Message',
-      //       detail: 'Please fill in all fields'
-      //   });
-      //alert("Nisam prosao");
       return false;
     }
 
     // Validate Email
     if(!this.validateService.validateEmail(user.email)){
       this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
-      // this.msgs.push(
-      //   {
-      //       severity: 'warn',
-      //       summary: 'warn Message',
-      //       detail: 'Please use a valid email'
-      //   });
-
-      return false;
+       return false;
     }
 
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if(data.success){
         this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 3000});
-        // this.msgs.push(
-        //   {
-        //       severity: 'info',
-        //       summary: 'Info Message',
-        //       detail: 'You are now registered and can log in'
-        //   });
-
-        this.router.navigate(['/login']);
+         this.router.navigate(['/login']);
       } else {
         this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
-        // this.msgs.push(
-        //   {
-        //       severity: 'error',
-        //       summary: 'Error Message',
-        //       detail: 'Something went wrong'
-        //   });
-
         this.router.navigate(['/register']);
       }
     });
