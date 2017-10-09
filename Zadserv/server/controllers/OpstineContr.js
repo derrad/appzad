@@ -30,7 +30,7 @@ if (uid) {
     }
       
     if(opstina) {
-      //opstina.Drzava=Drzava ;
+      opstina.Drzava=Drzava ;
       opstina.RegOzn=RegOzn ;
       opstina.Naziv = Naziv;
       opstina.SifPorez=SifPorez;

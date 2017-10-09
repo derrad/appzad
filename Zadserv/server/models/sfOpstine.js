@@ -30,11 +30,11 @@ var sfOpstine = new Schema({
 );
 //sfOpstine.plugin(relationship, { relationshipPathName:'Drzava' });
 
-sfOpstine.pre('save', function(next) {
-    // do stuff
-    console.log("sfOpstine PRE SAVE");
-    next();
-});
+// sfOpstine.pre('save', function(next) {
+//     // do stuff
+//     console.log("sfOpstine PRE SAVE");
+//     next();
+// });
 
 //var Child = new sfOpstine({Drzava:Drzava._id});
 
