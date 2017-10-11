@@ -4,7 +4,7 @@
         <a [routerLink]="['/parametar']" class="list-group-item"  *ngIf="authService.loggedIn()">
             <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Parametri
         </a>
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item" ngIf="authService.loggedIn()">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item" *ngIf="authService.loggedIn()">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard
         </a>
         <a [routerLink]="['not-found']" [routerLinkActive]="['router-link-active']" class="list-group-item">
@@ -32,13 +32,13 @@
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>Submenu</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>Submenu</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>Submenu</span></a>
                     </li>
                 </ul>
             </li>
