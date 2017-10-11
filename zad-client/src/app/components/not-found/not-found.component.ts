@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { routerTransition } from '../../animation/router.animations' 
 
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.css']
+  styleUrls: ['./not-found.component.css'],
+  animations: [routerTransition()]
 })
 export class NotFoundComponent implements OnInit {
 
@@ -13,3 +15,14 @@ export class NotFoundComponent implements OnInit {
   }
 
 }
+
+
+
+
+// @Component({
+//     selector: 'app-not-found',
+//     templateUrl: './not-found.component.html',
+//     styleUrls: ['not-found.component.scss'],
+//     animations: [routerTransition()]
+// })
+// export class NotFoundComponent { }

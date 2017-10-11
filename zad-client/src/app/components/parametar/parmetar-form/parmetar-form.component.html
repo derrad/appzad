@@ -28,7 +28,16 @@
               <label class="center-block">Naziv:
                 <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" >
               </label>
-              <div class="text-danger" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">{{ titleAlertNaziv }}</div>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">
+                <!-- <i class="fa fa-close"></i> -->
+                <!-- {{ titleAlertNaziv }} -->
+                <span *ngIf="frParam.controls['Naziv'].errors['required']">Naziv is required</span>
+                <span *ngIf="frParam.controls['Naziv'].errors['minlength']">Naziv be longer than min 3 characters</span>
+                <span *ngIf="frParam.controls['Naziv'].errors['maxlength']">Naziv be longer than max 25 characters</span>
+                
+
+            </div>
+              <!-- <div class="text-danger" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">{{ titleAlertNaziv }}</div> -->
               
             </div>
             <div class="checkbox">
