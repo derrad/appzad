@@ -39,9 +39,9 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
            // {path:'', component: HomeComponent},
-            { path: '', loadChildren: './../components/home/home.module#HomeModule' },
-            // {path:'register', component: RegisterComponent},
-            // {path:'login', component: LoginComponent},
+             { path: '', loadChildren: './../components/home/home.module#HomeModule' },
+            // { path:'register', component: RegisterComponent},
+            // { path:'login', component: LoginComponent},
             // {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
             // {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
             // {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
