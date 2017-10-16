@@ -1,4 +1,3 @@
-import { HomeComponent } from './../components/home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,20 +7,22 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent, SidebarComponent } from '../shared';
+import { NotFoundComponent } from './../components/not-found/not-found.component';
+//import { HomeComponent } from './../components/home/home.component';
+
 
 
 @NgModule({
     imports: [
         CommonModule,
-   //     NgbDropdownModule.forRoot(),
         LayoutRoutingModule,
         FlashMessagesModule
-   //     TranslateModule
     ],
     declarations: [
         LayoutComponent,
         HeaderComponent,
         SidebarComponent,
+        NotFoundComponent
     ]
 })
 export class LayoutModule { }

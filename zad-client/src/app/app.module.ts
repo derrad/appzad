@@ -14,12 +14,12 @@ import { AppComponent } from './app.component';
 
 //Meni and app komponente
 //import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+//import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+//import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
+//import { NavbarComponent } from './components/navbar/navbar.component';
+//import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
 
 //Service
 import {AuthService} from './services/auth/auth.service';
@@ -45,7 +45,7 @@ import { MestaComponent } from './components/mesta/mesta.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
 import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+//import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
@@ -80,12 +80,12 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
   //  HomeComponent,
-    LoginComponent,
+  //  LoginComponent,
     DashboardComponent,
-   ProfileComponent,
+     //ProfileComponent,
     RegisterComponent,
-    NavbarComponent,
-    NavbarLeftComponent,
+    // NavbarComponent,
+    // NavbarLeftComponent,
     ModalComponent,
     DrzaveComponent,
    ParametarComponent,
@@ -97,8 +97,8 @@ import { AppRoutingModule } from './app-routing.module';
     KonstantaComponent,
      DrzaveFormComponent,
      ParmetarFormComponent,
-     OpstineFormComponent,
-    NotFoundComponent
+     OpstineFormComponent
+   // NotFoundComponent
   ],
   imports: [
     BrowserModule,

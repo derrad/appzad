@@ -12,6 +12,7 @@
  import { Routes, RouterModule } from '@angular/router';
  import { LayoutComponent } from './layout.component';
  import { AuthGuard } from './../guards/auth.guard';
+ import { NotFoundComponent } from './../components/not-found/not-found.component';
 // //import { NotFoundComponent } from './../components/not-found/not-found.component';
 // import { KonstantaComponent } from './../components/konstanta/konstanta.component';
 // import { FondSatiComponent } from './../components/fond-sati/fond-sati.component';
@@ -41,9 +42,9 @@ const routes: Routes = [
            // {path:'', component: HomeComponent},
              { path: '', loadChildren: './../components/home/home.module#HomeModule' },
             // { path:'register', component: RegisterComponent},
-            // { path:'login', component: LoginComponent},
+             { path:'login',loadChildren: './../components/login/login.module#LoginModule'},
             // {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-            // {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+             {path:'/profile', loadChildren: './../components/login/profile.module#ProfileModule', canActivate:[AuthGuard]},
             // {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
             // {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
             // {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
@@ -70,6 +71,8 @@ const routes: Routes = [
             // { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             // { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             // { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
+            { path: 'not-found', component: NotFoundComponent },
+            { path: '**', redirectTo: 'not-found' }
 
 
         ]
