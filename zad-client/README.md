@@ -19,3 +19,18 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 
+  // "../node_modules/bootstrap/dist/css/sandstone.css" 
+
+   "styles": [
+        "styles.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/themes/bootstrap/theme.css",  
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/bootstrap/dist/css/sandstone.css" 
+      
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        
+      ],
