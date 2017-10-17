@@ -9,13 +9,15 @@ import { Footer } from 'primeng/primeng';
 //import {FlashMessagesService} from 'angular2-flash-messages';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
+import { routerTransition } from '../../animation/router.animations' 
 //import * as $ from 'jquery';
 
 
 @Component({
   selector: 'app-parametar',
   templateUrl: './parametar.component.html',
-  styleUrls: ['./parametar.component.css']
+  styleUrls: ['./parametar.component.css'],
+  animations: [routerTransition()]
 })
 export class ParametarComponent implements OnInit {
   params:Array<IParametar>;

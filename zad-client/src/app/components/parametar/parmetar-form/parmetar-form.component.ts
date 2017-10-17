@@ -5,11 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Parametar} from '../parametar.model';
 import {ParametarService} from '../../../services/opcijeapp/parametar.service';
 import {Location} from '@angular/common';
+import { routerTransition } from '../../../animation/router.animations' 
 
 @Component({
   selector: 'app-parmetar-form',
   templateUrl: './parmetar-form.component.html',
-  styleUrls: ['./parmetar-form.component.css']
+  styleUrls: ['./parmetar-form.component.css'],
+  animations: [routerTransition()]
   
 })
 export class ParmetarFormComponent implements OnInit {

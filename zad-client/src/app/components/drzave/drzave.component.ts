@@ -8,12 +8,14 @@ import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
+import { routerTransition } from '../../animation/router.animations' 
 
 
 @Component({
   selector: 'app-drzave',
   templateUrl: './drzave.component.html',
-  styleUrls: ['./drzave.component.css']
+  styleUrls: ['./drzave.component.css'],
+  animations: [routerTransition()]
 })
 export class DrzaveComponent implements OnInit {
   drzave:Array<IDrzave>;

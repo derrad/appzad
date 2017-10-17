@@ -1,3 +1,122 @@
-<p>
+<!-- <p>
   mesta works!
-</p>
+</p> -->
+
+<div *ngIf="mesta;else  waiting" >
+
+    <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+    </div>
+    <p-dataTable [value]="mesta"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+              selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
+              styleClass="table table-striped" [responsive]="true"  [immutable]=false resizableColumns="true" columnResizeMode="expand">
+        <p-header><strong>List of Mesta</strong></p-header>       
+    <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
+    <p-column field="Opstina.Drzava.Naziv" header="Država" sortable="true"></p-column>   
+     <p-column field="Opstina.Naziv" header="Opština" sortable="true"></p-column> 
+    <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
+    <p-column field="Ptt" header="Ptt" sortable="true"></p-column>
+
+    <p-column styleClass="col-button text-center" heder="Opcije">
+        <ng-template let-mes="rowData" let-i="rowIndex" pTemplate="body">
+            <button type="button" pButton (click)="selectMesto(mes)" icon="fa fa-info" title="Info"></button>
+            <button type="button" pButton (click)="updateMesta(mes._id)" icon="fa fa-pencil" title="Update"></button>
+            <button type="button" pButton (click)="deleteOpstinu(mes)" icon="fa fa-trash" title="Delete"></button>
+        </ng-template>
+    </p-column>
+    <p-footer>
+        <div class="ui-helper-clearfix" style="width:100%">
+            <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addMesta()" label="Add"></button>
+          </div>
+      </p-footer>
+    </p-dataTable>
+  </div>
+  
+  
+  
+  <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+          <p-footer>
+              <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+              <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+          </p-footer>
+  </p-confirmDialog>
+  
+  
+  
+  <p-dialog header="Mesto" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+  
+          <div>
+                  <dl class="dl-horizontal">
+                      <dt>
+                       ID
+                      </dt>
+                      <dd class="text-success">
+                         {{mesShow._id}}
+                      </dd>
+                      <!-- <dt>
+                          DRŽAVA
+                        </dt>
+                        <dd class="text-success">
+                             {{mesShow.Opstina.Drzava.Naziv}} 
+                        </dd> -->
+                
+                       <!-- <dt>
+                        OPŠTINA
+                      </dt>
+                      <dd class="text-success">
+                           {{mesShow.Opstina.Naziv}} 
+                      </dd>   -->
+                      <dt>
+                      NAZIV MESTA
+                      </dt>
+                      <dd class="text-success">
+                           {{mesShow.Naziv}}
+                      </dd>
+                      <dt>
+                       PTT
+                      </dt>
+                      <dd class="text-success">
+                          {{mesShow.Ptt}}
+                          
+                      </dd>
+                      
+                      <dt>
+                      OPIS
+                      </dt>
+                      <dd class="text-success">
+                          {{mesShow.Opis}}
+                          
+                      </dd>
+                      <dt>
+                      DATUM UNOSA
+                      </dt>
+                      <dd class="text-success">
+                          {{mesShow.created_at}}
+                          
+                      </dd>
+                      <dt>
+                      DATUM AŽURIRANJA
+                      </dt>
+                      <dd class="text-success">
+                          {{mesShow.updatedAt}}
+                          
+                      </dd>
+                      <dt>
+                      KORISNIK
+                      </dt>
+                      <dd class="text-success">
+                          {{mesShow.NameUser}}
+                          
+                      </dd>
+              
+                  </dl>                        
+          </div>
+          <p-footer>
+                  <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+         </p-footer>
+  </p-dialog>
+  
+  
+  <ng-template #waiting >Waiting...</ng-template>
+  

@@ -4,11 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../drzave.model';
 import {DrzaveService} from '../../../services/drzave/drzave.service';
 import {Location} from '@angular/common';
+import { routerTransition } from '../../../animation/router.animations' 
 
 @Component({
   selector: 'app-drzave-form',
   templateUrl: './drzave-form.component.html',
-  styleUrls: ['./drzave-form.component.css']
+  styleUrls: ['./drzave-form.component.css'],
+  animations: [routerTransition()]
 })
 export class DrzaveFormComponent implements OnInit {
 
