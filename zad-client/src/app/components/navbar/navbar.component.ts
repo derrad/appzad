@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
+//import * as $ from 'jquery';
+import {SidebarModule} from 'primeng/primeng';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  visibleSidebar1;
   constructor( private authService:AuthService,
     private router:Router ,private flashMessage:FlashMessagesService) { }
 

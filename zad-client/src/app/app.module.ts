@@ -9,6 +9,7 @@ import { DataTableModule,SharedModule } from 'primeng/primeng';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
+import {SidebarModule} from 'primeng/primeng';
 import { AppComponent } from './app.component';
 
 
@@ -117,7 +118,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
     SharedModule,
     InputTextModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    SidebarModule
     //AppRoutingModule
 
   ],
