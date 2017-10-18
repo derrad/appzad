@@ -117,14 +117,14 @@
 </app-modal>
 
 
-<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000" styleClass="ui-sidebar"  >
-
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  styleClass="ui-sidebar-sm"  >
+        <h1></h1>
         <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"  *ngIf="authService.loggedIn()"><a href="#">
+                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false"><a href="#">
                     <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i>&nbsp;Zadrugari</a></li>
-                <li role="presentation"  *ngIf="authService.loggedIn()"><a href="#">
+                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false"><a href="#">
                     <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
-                <li role="presentation"  *ngIf="authService.loggedIn()">
+                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
                     <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
                 <li role="presentation" (click)="visibleSidebar1 = false"  *ngIf="authService.loggedIn()">
                     <a  [routerLink]="['/posao']" >
@@ -138,12 +138,12 @@
                             <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Mesta
                         </a>
                 </li>
-                <li role="presentation"  *ngIf="authService.loggedIn()">
+                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
                         <a [routerLink]="['/opstine']" >
                             <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Opštine
                         </a>
                 </li>
-                <li role="presentation" *ngIf="authService.loggedIn()">
+                <li role="presentation" *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
                     <a [routerLink]="['/drzave']" >
                         <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Države
                     </a>

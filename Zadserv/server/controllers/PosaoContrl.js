@@ -84,7 +84,7 @@ if (uid) {
 module.exports.listposao = function (req, res,next) {
 //  console.log("Usao u list posao - tu sam");
   
-  Posao.find({}).exec(function(err, result){
+  Posao.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
       return res.status(200).json({

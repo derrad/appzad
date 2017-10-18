@@ -1,8 +1,23 @@
 
-p-sidebar.ui-sidebar{
+/* p-sidebar.ui-sidebar{
     background-color: #00464f;
     border-color: #00464f;
 }
+p-sidebar.ui-widget-content {
+    background-color: black;
+    border: 1px solid  black;
+}
+p-sidebar.ui-sidebar-left.ui-sidebar-active, .ui-sidebar-right.ui-sidebar-active {
+    background-color: #000000;
+    border-color: #000000;
+}
+p-sidebar.ui-sidebar-left.ui-sidebar-sm, .ui-sidebar-right.ui-sidebar-sm {
+    background-color: black;
+}
+p-sidebar.ui-sidebar {
+    background-color: black;
+}
+ui-widget ui-widget-content ui-shadow ui-sidebar-active ui-sidebar-left */
 
 nav.sidebar.navbar {
     border-radius: 0px;
