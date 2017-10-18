@@ -31,16 +31,16 @@ var sfPosao = new Schema({
  );
 
 
- sfPosao.pre('save', function(next) {
-   // do stuff
-   console.log("PRE SAVE POSAO");
-  next();
-});
+//  sfPosao.pre('save', function(next) {
+//    // do stuff
+//    console.log("PRE SAVE POSAO");
+//   next();
+// });
 
  sfPosao.plugin(mongoosePaginate);
- var collectionName = 'sfPosao';
+//  var collectionName = 'sfPosao';
 
-module.exports = mongoose.model('sfPosao', sfPosao,collectionName);
+module.exports = mongoose.model('sfPosao', sfPosao,'sfPosao');
 
 
 // Naziv : {  type:String,

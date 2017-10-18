@@ -30,17 +30,62 @@ export class VlasnikService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/vlasnik'); 
-   
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/vlasnik') ; 
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
   }
 
-  prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
- 
+  getVlasnik(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/vlasnik/' + id) ;
+    return this.http.get(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+
   }
+
+  addVlasnik(vlasnik){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/vlasnik/') ;
+    
+    return this.http.post(ep, JSON.stringify(vlasnik),{headers: headers})
+     .map(res => res.json()).catch(this.handleError);
+   
+  }
+
+  updateVlasnik(vlasnik){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep =  ServiceConfig.PrepareHost(this.isDev,'api/vlasnik/' + vlasnik._id) ;
+    
+    return this.http.put(ep, JSON.stringify(vlasnik),{headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  
+  }
+
+
+  delVlasnik(id){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/vlasnik/' + id) ;
+    return this.http.delete(ep,{headers: headers})
+    .map(res => res.json()).catch(this.handleError); 
+  }
+
+  // prepEndpoint(ep){
+  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //   return ServiceConfig.PrepareHost(this.isDev,ep);
+ 
+  // }
 
   private handleError(error: Response) {
     console.error(error);

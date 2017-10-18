@@ -23,20 +23,66 @@ export class FondSatiService {
     this.authToken = token;
   }
 
-  getParametars(){
+  getFondSate(){
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/fondsati'); 
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati') ; 
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
-    
   }
+ 
+ getFondSati(id){
+  let headers = new Headers();
+  this.loadToken();
+  headers.append('Authorization', this.authToken);
+  headers.append('Content-Type','application/json');
+  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + id) ;
+  return this.http.get(ep,{headers: headers})
+  .map(res => res.json()).catch(this.handleError); 
+
+}
+
+
+addFondSati(fsati){
+  let headers = new Headers();
+  this.loadToken();
+  headers.append('Authorization', this.authToken);
+  headers.append('Content-Type','application/json');
+  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/') ;
   
-  prepEndpoint(ep){
-     return ServiceConfig.PrepareHost(this.isDev,ep);
- }
+   return this.http.post(ep, JSON.stringify(fsati),{headers: headers})
+   .map(res => res.json()).catch(this.handleError);
+ 
+}
+
+updateFondSati(fsati){
+  let headers = new Headers();
+  this.loadToken();
+  headers.append('Authorization', this.authToken);
+  headers.append('Content-Type','application/json');
+  let ep =  ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + fsati._id) ;
+  
+  return this.http.put(ep, JSON.stringify(fsati),{headers: headers})
+  .map(res => res.json()).catch(this.handleError);
+}
+
+
+delFondSati(id){
+  let headers = new Headers();
+  this.loadToken();
+  headers.append('Authorization', this.authToken);
+  headers.append('Content-Type','application/json');
+  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + id) ;
+  return this.http.delete(ep,{headers: headers})
+  .map(res => res.json()).catch(this.handleError); 
+}
+
+
+//   prepEndpoint(ep){
+//      return ServiceConfig.PrepareHost(this.isDev,ep);
+//  }
 
   private handleError(error: Response) {
     console.error(error);
