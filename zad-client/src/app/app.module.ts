@@ -9,7 +9,8 @@ import { DataTableModule,SharedModule } from 'primeng/primeng';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
-import { AppComponent } from './app.component';
+import {SidebarModule} from 'primeng/primeng';
+import {AppComponent } from './app.component';
 
 
 //Meni and app komponente
@@ -49,6 +50,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
+import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 //import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
@@ -70,8 +72,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
    {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
    {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
    {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
-  //  {path:'mesta/new', component: MestaComponent, canActivate:[AuthGuard]},
-  //  {path:'mesta/:id', component: MestaComponent, canActivate:[AuthGuard]},
+   {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
+   {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},
   
    {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
    {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
@@ -102,7 +104,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
      DrzaveFormComponent,
      ParmetarFormComponent,
      OpstineFormComponent,
-     NotFoundComponent
+     NotFoundComponent,
+     MestaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
     SharedModule,
     InputTextModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    SidebarModule
     //AppRoutingModule
 
   ],
