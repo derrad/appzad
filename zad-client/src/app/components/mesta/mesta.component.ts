@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MestaService } from './../../services/mesta/mesta.service';
 import {Router} from '@angular/router';
@@ -58,10 +57,10 @@ export class MestaComponent implements OnInit {
 selectMesto( mesto:Mesta) {
     // this.selectedOpstina=opstina;  
      this.displayDetals = true;
-      console.log(" dobio" + mesto.Opstina);
+     // console.log(" dobio" + mesto.Opstina);
      // console.log(this.selectedOpstina);
      this.mesShow = this.cloneData(mesto);
-    console.log(" klonirao" + this.mesShow.Opstina);
+    //console.log(" klonirao" + this.mesShow.Opstina);
  //   if (tId) {
  //       alert("opstina je "  +tId);
  //   } else {
@@ -89,7 +88,7 @@ updateMesta(id) {
 }
 
 
-deleteOpstinu(tmesto){
+deleteMesto(tmesto){
   // console.log(tdrzava);
 
   this.confirmationService.confirm({

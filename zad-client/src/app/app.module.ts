@@ -33,6 +33,7 @@ import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
 import {RadnikService} from './services/opcijeapp/radnik.service';
 import {VlasnikService} from './services/opcijeapp/vlasnik.service';
+import { PosaoService} from './components/posao/posao.service';
 import {AuthGuard} from './guards/auth.guard';
 
 
@@ -79,6 +80,11 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
    {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
    {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},
   
+   {path:'posao', component: PosaoComponent, canActivate:[AuthGuard]},
+   {path:'posao/new', component: PosaoFormComponent, canActivate:[AuthGuard]},
+   {path:'posao/:id', component: PosaoFormComponent, canActivate:[AuthGuard]},
+  
+
    {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
    {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
    {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
@@ -135,7 +141,7 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
   ],
   providers: [ValidateService, AuthService,AuthGuard,
     DrzaveService,MestaService,OpstineService,
-    ParametarService,FondSatiService,KonstanteService,RadnikService,VlasnikService,ConfirmationService],
+    ParametarService,FondSatiService,KonstanteService,RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,9 +9,10 @@
         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
     </div>
     <p-dataTable [value]="mesta"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-              selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
+              selectionMode="single" [(selection)]="selectedMesto" dataKey="_id"  
               styleClass="table table-striped" [responsive]="true"  [immutable]=false resizableColumns="true" columnResizeMode="expand">
         <p-header><strong>List of Mesta</strong></p-header>       
+        
     <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
     <p-column field="Opstina.Drzava.Naziv" header="Država" sortable="true"></p-column>   
      <p-column field="Opstina.Naziv" header="Opština" sortable="true"></p-column> 
@@ -22,7 +23,7 @@
         <ng-template let-mes="rowData" let-i="rowIndex" pTemplate="body">
             <button type="button" pButton (click)="selectMesto(mes)" icon="fa fa-info" title="Info"></button>
             <button type="button" pButton (click)="updateMesta(mes._id)" icon="fa fa-pencil" title="Update"></button>
-            <button type="button" pButton (click)="deleteOpstinu(mes)" icon="fa fa-trash" title="Delete"></button>
+            <button type="button" pButton (click)="deleteMesto(mes)" icon="fa fa-trash" title="Delete"></button>
         </ng-template>
     </p-column>
     <p-footer>

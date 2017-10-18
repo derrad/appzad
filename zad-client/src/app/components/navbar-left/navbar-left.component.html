@@ -40,7 +40,11 @@
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i> Zadrugari</a></li>
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i> Kupci</a></li> 
                         <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Zanimanja</a></li>
-                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Poslovi</a></li>
+                        <li *ngIf="authService.loggedIn()">
+                            <a  [routerLink]="['/posao']" ><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> 
+                                Poslovi
+                            </a>
+                        </li>
                         <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li> -->
                         <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
                          -->
