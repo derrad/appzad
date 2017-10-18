@@ -16,10 +16,10 @@
             <i class="fa fa-sliders fa-2x" aria-hidden="true"></i>
           </a>
         </li>
-        &nbsp;
+        &nbsp;&nbsp;
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/']">
           <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-          Home</a>
+          OMLADINSKA ZADRUGA</a>
         </li>
           
       </ul>
@@ -57,226 +57,104 @@
  <app-modal #modal1>
   <div class="app-modal-header">
     <a (click)="modal1.hide()">
-     <span class="text-right" class="glyphicon glyphicon-remove fa-2x" aria-hidden="true" title="Close"></span>
+     <span class="text-right" class="glyphicon glyphicon-remove" aria-hidden="true" title="Close"></span>
     </a>
   </div>
   <div class="app-modal-body">
-    <!-- Whatever content you like, form fields, anything
-    <input type="text"> -->
-    <ul>
-            
-      <li (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a [routerLink]="['/dashboard']">Dashboard</a></li>
-      <li (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a [routerLink]="['/profile']">Profile</a></li>
-      <li (click)="modal1.hide()"><a (click)="onClickHelp()" href="#">
-          <span class="glyphicon glyphicon-question-sign fa-2x" aria-hidden="true" title="Help"></span>
-        <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
-        </a>
-    </li>
-      
-    </ul>
+      <div class="row">
+            <div class="col-xs-6">
+                <h3 class="text-primary">Dokumenti</h3>
+                <ul class="nav nav-pills nav-stacked" >
+                    <li role="navigation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"> <a [routerLink]="['/dashboard']">Uputi</a></li>
+                    <li role="navigation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"> <a [routerLink]="['/dashboard']">Fakture</a></li>
+                    <li role="navigation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"> <a [routerLink]="['/dashboard']">Uplate</a></li>        
+                    <li role="navigation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"> <a [routerLink]="['/dashboard']">Isplate</a></li>        
+                </ul>
+            </div>
+             <div class="col-xs-6">
+                <h3 class="text-primary">Šifarnici</h3>
+                <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a href="#">
+                            <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i>&nbsp;Zadrugari</a></li>
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a href="#">
+                            <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+                            <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+                            <a  [routerLink]="['/posao/new']" >
+                            <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp; 
+                                Poslovi
+                            </a>
+                        </li>
+                     
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/mesta/new']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Mesta
+                                </a>
+                        </li>
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/opstine/new']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Opštine
+                                </a>
+                        </li>
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+                            <a [routerLink]="['/drzave/new']" >
+                                <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Države
+                            </a>
+                        </li>
+                </ul>
+             </div>
+          
+      </div>
+       
 
   </div>
-  <div class="app-modal-footer">
+
+  <!-- <div class="app-modal-footer">
     <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
-    <!-- <button type="button" class="btn btn-default" (click)="modal2.show()">Show modal 2</button> -->
     <button type="button" class="btn btn-primary">Save changes</button>
-  </div>
+  </div> -->
 </app-modal>
 
 
-<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  >
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000" styleClass="ui-sidebar"  >
 
-    <nav class="navbar navbar-m2p sidebar" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                    OMLADINSKA ZADRUGA
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <!-- Dashboard -->
-                    <!-- <li class="active open"> -->
-                     <li  *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" 
-                        [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">
-                          Dashboard <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer" aria-hidden="true"></i></a>
-                      </li>
-                  
-                    <li class="separator">Content</li>
-                    <!-- Sifarnik -->
-                    <li class="">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
-                            Šifarnik <span class="caret"></span> -->
-                          <span>
-                            <i class="fa fa-file-o menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
-                            Šifarnik<span class="caret"></span> 
-                          </span>
-      
+        <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"  *ngIf="authService.loggedIn()"><a href="#">
+                    <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i>&nbsp;Zadrugari</a></li>
+                <li role="presentation"  *ngIf="authService.loggedIn()"><a href="#">
+                    <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
+                <li role="presentation"  *ngIf="authService.loggedIn()">
+                    <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
+                <li role="presentation" (click)="visibleSidebar1 = false"  *ngIf="authService.loggedIn()">
+                    <a  [routerLink]="['/posao']" >
+                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp; 
+                        Poslovi
+                    </a>
+                </li>
+             
+                <li role="presentation" (click)="visibleSidebar1 = false" *ngIf="authService.loggedIn()">
+                        <a [routerLink]="['/mesta']" >
+                            <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Mesta
                         </a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                              <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
-                              <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i> Zadrugari</a></li>
-                              <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i> Kupci</a></li> 
-                              <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Zanimanja</a></li>
-                              <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Poslovi</a></li>
-                              <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li> -->
-                              <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
-                               -->
-                               <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/mesta']" >
-                                          <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Mesta
-                                      </a>
-                              </li>
-                              <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/opstine']" >
-                                          <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Opštine
-                                      </a>
-                              </li>
-                              <li *ngIf="authService.loggedIn()">
-                                  <a [routerLink]="['/drzave']" >
-                                      <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Države
-                                  </a>
-                              </li>
-                          
-                        </ul>
-                    </li>
-                    <!-- Obrade -->
-                    <li class="">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                           <span><i class="fa fa-book menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
-                             Obrade <span class="caret"></span>
-                            </span>
+                </li>
+                <li role="presentation"  *ngIf="authService.loggedIn()">
+                        <a [routerLink]="['/opstine']" >
+                            <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Opštine
                         </a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                              <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uputi</a></li>
-                              <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Fakture</a></li>
-                              <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uplate</a></li>
-                              <li><a href="#"><i class="menu-icon hidden-xs fa fa-money" aria-hidden="true"></i> Isplate</a></li>
-                        </ul>
-                    </li>
-                    <!-- Pregledi -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon material-icons">label</span>
-                            Pregledi <span class="caret"></span> -->
-      
-                            <span><i class="fa fa-eye menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
-                              Pregledi <span class="caret"></span>
-                              </span>
-      
-                        </a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                              <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Add</a></li>
-                            <!-- <li><a href="#"> <i class="material-icons">add</i> Add</a></li>
-                            <li><a href="#"> <i class="material-icons">sort</i> List</a></li> -->
-                        </ul>
-                    </li>
-                    <li class="separator">System</li>
-      
-                    <li class="">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
-                              Šifarnik <span class="caret"></span> -->
-                            <span>
-                              <i class="fa fa-cog menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
-                              Opcije<span class="caret"></span> 
-                            </span>
-        
-                          </a>
-                          <ul class="dropdown-menu forAnimate" role="menu">
-                                <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
-                                <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Vlasnik</a></li> -->
-                                <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li>  -->
-                                <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li> -->
-                                <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li> -->
-                               
-                                <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/vlasnik']" >
-                                          <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Vlasnik
-                                      </a>
-                                </li>
-                                <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/konstanta']" >
-                                          <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Konstante
-                                      </a>
-                                </li>
-                                <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/fondsati']" >
-                                          <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Fond sati
-                                      </a>
-                                </li>
-                                <li *ngIf="authService.loggedIn()">
-                                      <a [routerLink]="['/radnik']" >
-                                          <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Radnik
-                                      </a>
-                                </li>
-                                
-                                <li *ngIf="authService.loggedIn()">
-                                  <a [routerLink]="['/parametar']" >
-                                      <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Parametri
-                                  </a>
-                               </li>
-      
-                                <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri</a></li> -->
-                                
-                          </ul>
-                      </li>
-                    
-      
-                    <!-- Users -->
-                    <li class="#">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">group</span>
-                            Users <span class="caret"></span> -->
-                            <span>Users
-                                <i class=" menu-icon pull-right hidden-xs showopacity fa fa-users" aria-hidden="true"></i>
-                            </span>
-                           
-                        </a>
-                        <!-- [routerLinkActiveOptions] = "{exact:true}"   [routerLinkActive]="['active']"-->
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                            <!-- <li><a href="#"><i class="material-icons">add</i> Add</a></li>
-                             <li><a href="#"><i class="material-icons">sort</i> List</a></li> -->
-                            <li *ngIf="authService.loggedIn()"   >
-                              <a [routerLink]="['/profile']">Profile
-                                <i class=" menu-icon pull-left hidden-xs showopacity fa fa-user-md" aria-hidden="true"></i>
-                              </a>
-                            </li>
-      
-                            <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
-                              <a [routerLink]="['/register']">Register</a>
-                            </li>
-                            
-      
-                        </ul>
-                    </li
-                    
-                    >
-                    <!-- Exit -->
-                    <li>
-                        <a href="#">
-                            <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">exit_to_app</span> Exit -->
-      
-                            <span><i class="fa fa-sign-out menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
-                              Exit
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-      </nav>
-
+                </li>
+                <li role="presentation" *ngIf="authService.loggedIn()">
+                    <a [routerLink]="['/drzave']" >
+                        <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Države
+                    </a>
+                </li>
+        </ul>
+ 
+     
   <!-- <h1 style="font-weight:normal">Left Sidebar</h1>
   <button pButton type="button" (click)="visibleSidebar1 = false" label="Save" class="ui-button-success"></button>
   <button pButton type="button" (click)="visibleSidebar1 = false" label="Cancel" class="ui-button-secondary"></button> -->
+
+
+
 </p-sidebar>

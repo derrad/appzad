@@ -1,4 +1,9 @@
 
+p-sidebar.ui-sidebar{
+    background-color: #00464f;
+    border-color: #00464f;
+}
+
 nav.sidebar.navbar {
     border-radius: 0px;
 }
