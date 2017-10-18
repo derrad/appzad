@@ -9,11 +9,13 @@ import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
+import { routerTransition } from '../../animation/router.animations' 
 
 @Component({
   selector: 'app-mesta',
   templateUrl: './mesta.component.html',
-  styleUrls: ['./mesta.component.css']
+  styleUrls: ['./mesta.component.css'],
+  animations: [routerTransition()]
 })
 export class MestaComponent implements OnInit {
   Title:string;
@@ -34,7 +36,7 @@ export class MestaComponent implements OnInit {
     this.mestaService.getMesta().subscribe(profile => {
       if (profile.success === true) { 
         // console.log(profile);
-         console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
+      //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
         this.mesta = profile.data;
         this.loading = false;
       }
@@ -78,12 +80,12 @@ cloneData(c: Mesta):Mesta {
 }
 
 addMesta(){
- this.router.navigate(['mesta/new'])
+ this.router.navigate(['/mesta/new'])
 
 }
 
 updateMesta(id) {
- this.router.navigate(['mesta/', id]);
+ this.router.navigate(['/mesta/', id]);
 }
 
 
