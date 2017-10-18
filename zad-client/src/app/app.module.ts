@@ -51,6 +51,10 @@ import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
+import { PosaoComponent } from './components/posao/posao.component';
+import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
+//Pipe 
+import { KeysPipe } from './shared/pipeapp/keys.pipe';
 //import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
@@ -105,7 +109,11 @@ import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.com
      ParmetarFormComponent,
      OpstineFormComponent,
      NotFoundComponent,
-     MestaFormComponent
+     MestaFormComponent,
+     PosaoComponent,
+     PosaoFormComponent,
+     KeysPipe
+    
   ],
   imports: [
     BrowserModule,
