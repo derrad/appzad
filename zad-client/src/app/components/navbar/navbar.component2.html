@@ -11,16 +11,27 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
-         <li>
-          <a (click)="visibleSidebar1 = true">
+         <!-- <li> -->
+          <!-- <a (click)="visibleSidebar1 = true">
             <i class="fa fa-sliders fa-2x" aria-hidden="true"></i>
-          </a>
+          </a> -->
+         <!-- </li>  -->
+        <li>
+           <!-- <a>
+               
+            </a> -->
+          <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+               <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button> 
         </li>
+      
         &nbsp;&nbsp;
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/']">
           <i class="fa fa-home fa-2x" aria-hidden="true"></i>
           OMLADINSKA ZADRUGA</a>
-        </li>
+        </li> 
           
       </ul>
 
@@ -117,70 +128,5 @@
 </app-modal>
 
 
-<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  styleClass="ui-sidebar-sm"  >
-        <h1></h1>
-        <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false"><a href="#">
-                    <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i>&nbsp;Zadrugari</a></li>
-                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false"><a href="#">
-                    <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
-                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
-                    <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
-                <li role="presentation" (click)="visibleSidebar1 = false"  *ngIf="authService.loggedIn()">
-                    <a  [routerLink]="['/posao']" >
-                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp; 
-                        Poslovi
-                    </a>
-                </li>
-             
-                <li role="presentation" (click)="visibleSidebar1 = false" *ngIf="authService.loggedIn()">
-                        <a [routerLink]="['/mesta']" >
-                            <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Mesta
-                        </a>
-                </li>
-                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
-                        <a [routerLink]="['/opstine']" >
-                            <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Opštine
-                        </a>
-                </li>
-                <li role="presentation" *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false">
-                    <a [routerLink]="['/drzave']" >
-                        <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Države
-                    </a>
-                </li>
-                <li *ngIf="authService.loggedIn()" role="presentation" (click)="visibleSidebar1 = false">
-                        <a [routerLink]="['/vlasnik']" >
-                            <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Vlasnik
-                        </a>
-                  </li>
-                  <li *ngIf="authService.loggedIn()" role="presentation" (click)="visibleSidebar1 = false">
-                        <a [routerLink]="['/konstanta']" >
-                            <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Konstante
-                        </a>
-                  </li>
-                  <li *ngIf="authService.loggedIn()" role="presentation" (click)="visibleSidebar1 = false">
-                        <a [routerLink]="['/fondsati']" >
-                            <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Fond sati
-                        </a>
-                  </li>
-                  <li *ngIf="authService.loggedIn()" role="presentation" (click)="visibleSidebar1 = false"> 
-                        <a [routerLink]="['/radnik']" >
-                            <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Radnik
-                        </a>
-                  </li>
-                  
-                  <li *ngIf="authService.loggedIn()" role="presentation" (click)="visibleSidebar1 = false">
-                    <a [routerLink]="['/parametar']" >
-                        <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Parametri
-                    </a>
-                 </li>
-        </ul>
- 
-     
-  <!-- <h1 style="font-weight:normal">Left Sidebar</h1>
-  <button pButton type="button" (click)="visibleSidebar1 = false" label="Save" class="ui-button-success"></button>
-  <button pButton type="button" (click)="visibleSidebar1 = false" label="Cancel" class="ui-button-secondary"></button> -->
 
-
-
-</p-sidebar>
+<!-- /#sidebar-wrapper -->

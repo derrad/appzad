@@ -10,6 +10,60 @@ export class AppComponent implements OnInit {
   title = 'Omladinske zadruge';
   
   ngOnInit() {
+
+    // $(document).ready(function () {
+
+      // var litriger = $('.listav');
+    
+      //  litriger.click(function () {
+      //   li_hamburger_cross();      
+      //  });
+    
+        // var trigger = $('.hamburger'),
+        //    overlay = $('.overlay'),
+        //   isClosed = false;
+
+        //  trigger.click(function () {
+        //    hamburger_cross();      
+        //  });
+
+      //  function li_hamburger_cross() {
+        
+      //       if (isClosed == true) {          
+      //         overlay.hide();
+      //         litriger.removeClass('is-open');
+      //         litriger.addClass('is-closed');
+      //         isClosed = false;
+      //       } else {   
+      //         overlay.show();
+      //         litriger.removeClass('is-closed');
+      //         litriger.addClass('is-open');
+      //         isClosed = true;
+      //       }
+      //   }
+          
+
+     
+    
+    //     function hamburger_cross() {
+    
+    //       if (isClosed == true) {          
+    //         overlay.hide();
+    //         trigger.removeClass('is-open');
+    //         trigger.addClass('is-closed');
+    //         isClosed = false;
+    //       } else {   
+    //         overlay.show();
+    //         trigger.removeClass('is-closed');
+    //         trigger.addClass('is-open');
+    //         isClosed = true;
+    //       }
+    //   }
+      
+    //   $('[data-toggle="offcanvas"]').click(function () {
+    //         $('#wrapper').toggleClass('toggled');
+    //   });  
+    // });
     
     // (function($) {
     //     "use strict"; // Start of use strict
