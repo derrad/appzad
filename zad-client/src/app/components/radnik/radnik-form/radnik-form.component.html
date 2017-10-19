@@ -1,0 +1,88 @@
+<!-- <p>
+  radnik-form works!
+</p> -->
+
+<div class="panel panel-primary" [@routerTransition]>
+  <div class="panel-heading">
+      <h3>{{title}}</h3>
+  </div>
+  <div class="panel-body">
+      <form [formGroup]="formRAD" (ngSubmit)="save()" novalidate>
+          <div class="form-group" >
+               <input class="form-control" formControlName="_id"  [(ngModel)]="radnikN._id"   type="hidden">
+          </div>
+          
+          <div class="form-group">
+              <label class="center-block">Šifra:
+                <input class="form-control" formControlName="SifraRad"  [(ngModel)]="radnikN.SifraRad" >
+              </label>
+               <div class="text-danger" *ngIf="!formRAD.controls['SifraRad'].valid && formRAD.controls['SifraRad'].touched">Šifra nije uneta</div> 
+              
+            </div>
+            <div class="form-group">
+              <label class="center-block">Prezime:
+                <input class="form-control" formControlName="Prezime"  [(ngModel)]="radnikN.Prezime" >
+              </label>
+               <div class="text-danger" *ngIf="!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched">Prezime nije uneto</div> 
+              
+            </div>
+            <div class="form-group">
+              <label class="center-block">Ime:
+                <input class="form-control" formControlName="Ime"  [(ngModel)]="radnikN.Ime" >
+              </label>
+               <div class="text-danger" *ngIf="!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched">Ime nije uneto</div> 
+            </div>
+            
+            <div class="form-group">
+                <label class="center-block">Jmbg:
+                  <input class="form-control" formControlName="Jmbg"  [(ngModel)]="radnikN.Jmbg" >
+                </label>
+              </div>
+              
+              <div class="checkbox">
+                <label class="center-block">
+                  <input type="checkbox" formControlName="Aktivan" [(ngModel)]="radnikN.Aktivan"  value="1">Aktivan.
+                </label>
+                
+              </div>
+
+              <div class="form-group">
+                <label class="center-block">Opis:
+                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="radnikN.Opis">
+                  </textarea>
+                </label>
+            </div>
+          
+            <div class="form-group">
+                    <div class="col-md-offset-5 col-md-12">
+                        <button type="submit" [disabled]="!formRAD.valid"
+                            class="btn btn-default">
+                        <span class="glyphicon glyphicon-saved"></span>
+                        Save
+                        </button>
+
+                      <button type="reset" class="btn btn-danger"  [disabled]="formRAD.pristine"  (click)="revert()">
+                          <i class="fa fa-undo" aria-hidden="true"></i>
+                          Revert
+                      </button>
+                      
+                    </div>
+              
+                    
+          </div>
+              
+
+
+      </form>
+  </div>
+ 
+  <div class="panel-footer">
+      
+          <button (click)="backClicked()"  class="btn btn-primary btn-block">
+            <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+            Back
+        </button>
+ 
+  </div>
+  
+</div>

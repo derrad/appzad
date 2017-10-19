@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate');
-var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
-     
+var Schema = mongoose.Schema;
+         
 var sfRadnik = new Schema({
    SifraRad:{
             type:String,
@@ -14,10 +13,10 @@ var sfRadnik = new Schema({
                     '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore.'
                     ],
             minlength:[4,"Minimalna duzina 4 karaktera"],
-            maxlength:[4,"Maksimalna duzina 4 karaktera"]},
-   Ime:{type:String,required: [true, 'Ime je obavezno !!!']},
-   Prezime : { type: String, required: [true, 'Prezime je obavezno !!!'] },
-   Jmbg:{ type: String},
+            maxlength:[12,"Maksimalna duzina 12 karaktera"]},
+   Ime:{type:String,required: [true, 'Ime je obavezno !!!'],trim:true},
+   Prezime : { type: String, required: [true, 'Prezime je obavezno !!!'] ,trim:true},
+   Jmbg:{ type: String,trim:true},
    Aktivan:{type:Boolean,default:false},
    Opis  :{ type: String },
    NameUser: {type:String}
@@ -31,16 +30,19 @@ var sfRadnik = new Schema({
 
 );
 
-sfRadnik.pre('save', function(next) {
-   console.log("PRE SAVE RADNIK");
-   next();
- });
+sfRadnik.virtual('fullName').get(function () {
+    return this.Ime + ' ' + this.Prezime;
+  });
 
-var collectionName = 'sfRadnik';
+// sfRadnik.pre('save', function(next) {
+//    console.log("PRE SAVE RADNIK");
+//    next();
+//  });
+
 
 sfRadnik.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('sfRadnik', sfRadnik,collectionName); 
+module.exports = mongoose.model('sfRadnik', sfRadnik,'sfRadnik'); 
 
 
 

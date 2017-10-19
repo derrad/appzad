@@ -25,9 +25,18 @@ var sfMesta = new Schema({
 }
 );
 
+//  sfMesta.virtual('nazivOpstine', {
+//      ref: 'sfOpstine', // The model to use
+//      localField: 'Opstina.Naziv', // Find people where `localField`
+//      foreignField: 'Naziv', // is equal to `foreignField`
+//      // If `justOne` is true, 'members' will be a single doc as opposed to
+//      // an array. `justOne` is false by default.
+//      justOne: true
+//    });
+
 sfMesta.plugin(mongoosePaginate);
 //sfMesta.plugin(relationship, { relationshipPathName:'Opstina' });
 //var child = new sfMesta({Opstina:Opstina._id});
 var collectionName = 'sfMesta';
 
-module.exports = mongoose.model('sfMesta', sfMesta,collectionName);
+module.exports = mongoose.model('sfMesta', sfMesta, collectionName);

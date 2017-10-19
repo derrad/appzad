@@ -22,7 +22,6 @@ export class PosaoComponent implements OnInit {
 
   Title:string;
   selectedPosao : Posao;
-  loading: boolean;
   poslovi:Array<Posao>;
   displayDetals: boolean = false;
   posShow: Posao = new Posao();

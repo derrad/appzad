@@ -34,13 +34,11 @@ export class PosaoFormComponent implements OnInit {
         Naziv: ['', [
           Validators.required
         ]],
-        Skola:[],
+        Skola: [],
         Sifra:[],
         Sifra1:[],
         Opis: []
       });
-
-
     }
 
   ngOnInit() {

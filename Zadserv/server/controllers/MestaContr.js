@@ -100,6 +100,7 @@ module.exports.listmesta = function (req, res,next) {
  // console.log("Usao u list Mesta");
   
   //Mesta.find({}).populate('Opstina',['RegOzn','Naziv','Drzava']).populate('Drzava').exec(function(err, result){
+    //.populate({path:'Opstina', populate:{path:'Drzava'}})
   Mesta.find({}).sort({created_at:-1}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }

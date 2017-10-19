@@ -12,16 +12,22 @@ module.exports.create = function (req, res,next) {
   const NameUser = req.user.email || "System";
   
   if (!SifraRad || !Ime || !Prezime) {
-      return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:null });
+      res.statusMessage='Posted data is not correct or incompleted.';
+      return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] }).end();
   } else {
   
 if (uid) {
   //Edit radnik
   Radnik.findById(uid).exec(function(err, radnik){
     if(err){ 
-      return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:null }); 
+     // console.log("Radnika nema !!!");
+      res.statusMessage = err;
+      return res.status(400).json({ success: false, message: 'Error processing request ', data:[] }).end(); 
     }
-      
+    // res.statusMessage = "RALE - Current password does not match";
+     //return res.status(400).json({ success: false, message: 'RALE - Hocu ovu gresku', data:[] }); 
+   
+
     if(radnik) {
       radnik.SifraRad = SifraRad;
       radnik.Ime = Ime;
@@ -34,7 +40,10 @@ if (uid) {
     }
     radnik.save(function(err,result) {
       if(err){ 
-        return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:null }); 
+        //console.log("GRESKA UPDATE -" + err);
+        res.statusMessage = err;
+        return res.status(400).
+        json({ success: false, message: 'Error processing request ', data:[] }).end(); 
       }
       return res.status(201).json({
         success: true,
@@ -59,8 +68,10 @@ if (uid) {
 
   oRadnik.save(function(err,result) {
     if(err){ 
-     return  res.status(400).json(
-        { success: false, message: 'Error processing request '+ err, data:null });
+      if(err.errmsg){res.statusMessage = err.errmsg; }else{res.statusMessage = err; }
+      
+      return  res.status(400).json(
+          { success: false, message: 'Error processing request ', data:[] }).end();
     }
       
    return res.status(201).json({
@@ -79,7 +90,9 @@ if (uid) {
 module.exports.listradnik = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
   Radnik.find({}).sort({created_at:-1}).exec(function(err, result){
-    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err , data:null}); 
+    if(err){ 
+      res.statusMessage = err;
+      return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
     }
       return res.status(200).json({
       success: true, 
@@ -92,14 +105,17 @@ module.exports.listradnik = function (req, res,next) {
 
 module.exports.getradnik = function (req, res,next) {
  // console.log("Usao u list Radnik - tu sam  " + req.params.id);
-  Radnik.find({_id:req.params.id}).exec(function(err, result){
+  Radnik.find({_id : req.params.id }).exec(function(err, result){
     if(err){ 
-      return res.status(400).json(
-      { success: false, message:'Error processing request '+ err , data:null }
-      ); 
+      res.statusMessage = err;
+      return res.status(404).json(
+        { success: false, message:'Error processing request ' , data:[] }
+        ).end(); 
     }
-      return res.status(200).json({
+    
+     return res.status(200).json({
       success: true, 
+      message:'Radnik find successfully',
       data: result
       });
     });
@@ -107,13 +123,19 @@ module.exports.getradnik = function (req, res,next) {
 }
 
 module.exports.deleradnik = function(req, res, next) {
- // console.log("parametar je : " + req.params.id);
+  // res.statusMessage = "Nema brisanja" + req.params.id;
+  // return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}).end(); 
+
+  //console.log("Brisanje radnika : " + req.params.id);
 	Radnik.remove({_id: req.params.id}, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null}); }
+        if(err){ 
+          res.statusMessage = err;
+          return res.status(400).json({ success: false, message: 'Error processing request ' , data:[]}).end(); 
+        }
         return res.status(201).json({
             success: true,
             message: 'Radnik removed successfully', 
-            data:null
+            data:[]
           });
   });
 }

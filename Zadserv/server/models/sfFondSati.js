@@ -22,17 +22,19 @@ var sfFondSati = new Schema({
 
 );
 
-sfFondSati.pre('save', function(next) {
-   // do stuff
-   console.log("sfFondSati PRE SAVE");
-   next();
- });
+// sfFondSati.pre('save', function(next) {
+//    // do stuff
+//    console.log("sfFondSati PRE SAVE");
+//    next();
+//  });
 
+sfFondSati.index({Mesec: 1, Godina: 1}, {unique: true});
+ 
 sfFondSati.plugin(mongoosePaginate);
 
-var collectionName = 'sfFondSati';
+// var collectionName = 'sfFondSati';
 
-module.exports = mongoose.model('sfFondSati', sfFondSati,collectionName);
+module.exports = mongoose.model('sfFondSati', sfFondSati,'sfFondSati');
 
 
 // #region IsfFondSati Members

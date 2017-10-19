@@ -13,7 +13,7 @@ export class RadnikService {
 
   authToken: any;
   isDev:boolean;
-
+  data:any;
   constructor(private http:Http) {
     this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
    }
@@ -52,9 +52,10 @@ export class RadnikService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
     let ep = ServiceConfig.PrepareHost(this.isDev,'api/radnik/') ;
-    
+        
      return this.http.post(ep, JSON.stringify(radnik),{headers: headers})
-     .map(res => res.json()).catch(this.handleError);
+     .map(res => res.json())
+     .catch(this.handleError);
    
   }
 
@@ -87,8 +88,10 @@ export class RadnikService {
   // }
 
   private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
+    let greska =error.status + "  " + error.statusText;
+    //return Observable.throw(error.statusText || 'Server error');
+    return Observable.throw(greska || 'Server error');
 } 
 
 }

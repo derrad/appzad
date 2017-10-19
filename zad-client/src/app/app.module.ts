@@ -56,6 +56,7 @@ import { PosaoComponent } from './components/posao/posao.component';
 import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
 //Pipe 
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
+import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
 //import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
@@ -75,6 +76,10 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
    {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
 
    {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
+   {path:'radnik/new', component: RadnikFormComponent, canActivate:[AuthGuard]},
+   {path:'radnik/:id', component: RadnikFormComponent, canActivate:[AuthGuard]},
+   
+
    {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
    {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
    {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
@@ -118,7 +123,8 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
      MestaFormComponent,
      PosaoComponent,
      PosaoFormComponent,
-     KeysPipe
+     KeysPipe,
+     RadnikFormComponent
     
   ],
   imports: [
