@@ -12,7 +12,8 @@ module.exports.create = function (req, res,next) {
   const NameUser = req.user.email || "System";
 
 //  console.log("uid je :" + uid + " ovo je Mesec " + req.body.Mesec);
-  if (!Sati || !Mesec || Godina ) {
+  // console.log("Sati :" + Sati + " ovo je Mesec " + Mesec + " ovo je godina" + Godina) ;
+  if (!Sati || !Mesec || !Godina ) {
         return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
   } 
   else 
@@ -56,7 +57,7 @@ module.exports.create = function (req, res,next) {
           });
 
           oFondSati.save(function(err,result) {
-            if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null});}
+            if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]});}
               
           return res.status(201).json({
               success: true,
@@ -76,7 +77,8 @@ module.exports.create = function (req, res,next) {
 module.exports.listfondsati = function (req, res,next) {
  //console.log("Usao u list fond sati");
 
-  FondSati.find({}).sort({created_at:-1}).exec(function(err, result){
+ //FondSati.find({}).sort({created_at:-1}).exec(function(err, result){
+  FondSati.find({}).sort({Godina:1,Mesec:1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] });}
 
     return res.status(200).json({

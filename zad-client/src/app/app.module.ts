@@ -58,7 +58,8 @@ import { PosaoComponent } from './components/posao/posao.component';
 import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
 //Pipe 
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
-
+//import { DecimalMask } from './directive/decimal-mask.directive';
+// import { DecimalPipe } from '@angular/common';
 //import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
@@ -94,6 +95,10 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
 
    {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
    {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
+   {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+   {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+   
+
    {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
    { path: 'not-found', component: NotFoundComponent },
    { path: '**', redirectTo: 'not-found' }
@@ -128,6 +133,7 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
       KeysPipe,
       RadnikFormComponent,
       FondSatiFormComponent
+    //  DecimalMask
     
   ],
   imports: [
