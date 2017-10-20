@@ -40,23 +40,25 @@ import {AuthGuard} from './guards/auth.guard';
 //Komponente 
 import { ModalComponent } from './components/modal/modal.component';
 import { DrzaveComponent } from './components/drzave/drzave.component';
+import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParametarComponent } from './components/parametar/parametar.component';
+import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
+import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
 import { OpstineComponent } from './components/opstine/opstine.component';
+import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 import { MestaComponent } from './components/mesta/mesta.component';
+import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
 import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
+import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
-import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
-import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
-import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { PosaoComponent } from './components/posao/posao.component';
 import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
 //Pipe 
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
-import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
+
 //import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
@@ -99,32 +101,33 @@ import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    DashboardComponent,
-     ProfileComponent,
-    RegisterComponent,
-     NavbarComponent,
-     NavbarLeftComponent,
-    ModalComponent,
-    DrzaveComponent,
-   ParametarComponent,
-    RadnikComponent,
-    OpstineComponent,
-    MestaComponent,
-    VlasnikComponent,
-    FondSatiComponent,
-    KonstantaComponent,
-     DrzaveFormComponent,
-     ParmetarFormComponent,
-     OpstineFormComponent,
-     NotFoundComponent,
-     MestaFormComponent,
-     PosaoComponent,
-     PosaoFormComponent,
-     KeysPipe,
-     RadnikFormComponent
+      AppComponent,
+      HomeComponent,
+      LoginComponent,
+      DashboardComponent,
+      ProfileComponent,
+      RegisterComponent,
+      NavbarComponent,
+      NavbarLeftComponent,
+      ModalComponent,
+      DrzaveComponent,
+      ParametarComponent,
+      RadnikComponent,
+      OpstineComponent,
+      MestaComponent,
+      VlasnikComponent,
+      FondSatiComponent,
+      KonstantaComponent,
+      DrzaveFormComponent,
+      ParmetarFormComponent,
+      OpstineFormComponent,
+      NotFoundComponent,
+      MestaFormComponent,
+      PosaoComponent,
+      PosaoFormComponent,
+      KeysPipe,
+      RadnikFormComponent,
+      FondSatiFormComponent
     
   ],
   imports: [
