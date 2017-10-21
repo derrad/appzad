@@ -11,7 +11,7 @@ export class AuthService {
   isDev:boolean;
 
   constructor(private http:Http) {
-    this.isDev = false; // Change to false before deployment  sredi ovo
+    this.isDev = ServiceConfig.isDev; 
 
    }
 
@@ -19,7 +19,8 @@ export class AuthService {
     let headers = new Headers();
     //this.serviceConfig.hosturl
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('users/register'); 
+    //let ep = this.prepEndpoint('users/register'); 
+    let ep =  ServiceConfig.PrepareHost(this.isDev,'users/register') ;
     return this.http.post(ep, user,{headers: headers})
     .map(res => res.json());
 
@@ -30,7 +31,8 @@ export class AuthService {
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('users/authenticate'); 
+    //let ep = this.prepEndpoint('users/authenticate'); 
+    let ep =  ServiceConfig.PrepareHost(this.isDev,'users/authenticate') ;
     return this.http.post(ep, user,{headers: headers})
     .map(res => res.json());
     // return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
@@ -42,7 +44,8 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('users/profile'); 
+    //let ep = this.prepEndpoint('users/profile'); 
+    let ep =  ServiceConfig.PrepareHost(this.isDev,'users/profile') ;
     return this.http.get(ep,{headers: headers})
     .map(res => res.json());
     // return this.http.get('http://localhost:3000/users/profile',{headers: headers})
@@ -74,16 +77,16 @@ export class AuthService {
   }
 
 
-  prepEndpoint(ep){
-   console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-   return ServiceConfig.PrepareHost(this.isDev,ep);
+  // prepEndpoint(ep){
+  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //  return ServiceConfig.PrepareHost(this.isDev,ep);
 
-    // if(this.isDev){
-    //   return ep;
-    // } else {
-    //   //return 'http://localhost:8080/'+ep;
-    //   return ServiceConfig.HostUrl + ep;
-    // }
-  } 
+  //   // if(this.isDev){
+  //   //   return ep;
+  //   // } else {
+  //   //   //return 'http://localhost:8080/'+ep;
+  //   //   return ServiceConfig.HostUrl + ep;
+  //   // }
+  // } 
 
 }

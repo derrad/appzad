@@ -28,7 +28,8 @@ export class OpstineService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/opstine'); 
+    //let ep = this.prepEndpoint('api/opstine'); 
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/opstine/' ) ;
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
       .map(res => res.json())
@@ -40,7 +41,8 @@ export class OpstineService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/opstine/'+id);
+    //let ep = this.prepEndpoint('api/opstine/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/opstine/' +id) ;
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
 
@@ -51,8 +53,9 @@ export class OpstineService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/opstine');
-    
+   // let ep = this.prepEndpoint('api/opstine');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/opstine/' ) ;
+        
     return this.http.post(ep, JSON.stringify(opstina),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
    
@@ -63,7 +66,8 @@ export class OpstineService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/opstine/' + opstina._id);
+    //let ep = this.prepEndpoint('api/opstine/' + opstina._id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/opstine/' + opstina._id) ;
     
     return this.http.put(ep, JSON.stringify(opstina),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
@@ -75,7 +79,8 @@ export class OpstineService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/opstine/'+id);
+    //let ep = this.prepEndpoint('api/opstine/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/opstine/' + id) ;
     return this.http.delete(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
     
@@ -85,11 +90,11 @@ export class OpstineService {
 
 
 
-  prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
+  // prepEndpoint(ep){
+  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //   return ServiceConfig.PrepareHost(this.isDev,ep);
  
-  }
+  // }
 
   private handleError(error: Response) {
     console.error(error);

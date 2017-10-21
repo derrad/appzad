@@ -18,4 +18,16 @@ export class ValidateService {
     return re.test(email);
   } 
 
+  validateGlavni(user){
+    console.log("user name je " + user.username);
+    if(user.name == undefined ){
+      return false;
+    } else {
+      if(user.username == 'derrad' ){
+          return true;
+      }
+      return false;
+    }
+  }
+
 }

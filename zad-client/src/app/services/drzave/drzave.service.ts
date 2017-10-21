@@ -30,7 +30,8 @@ export class DrzaveService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave'); 
+   // let ep = this.prepEndpoint('api/drzave'); 
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' ) ;
    // console.log("getDrzave link", ep );
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); ;
@@ -42,7 +43,8 @@ export class DrzaveService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave/'+id);
+    //let ep = this.prepEndpoint('api/drzave/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + id) ;
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
 
@@ -53,8 +55,8 @@ export class DrzaveService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave');
-    
+   // let ep = this.prepEndpoint('api/drzave');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' ) ;
     return this.http.post(ep, JSON.stringify(drzava),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
    
@@ -65,7 +67,8 @@ updateDrzava(drzava){
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave/' + drzava._id);
+    //let ep = this.prepEndpoint('api/drzave/' + drzava._id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + drzava._id) ;
     
     return this.http.put(ep, JSON.stringify(drzava),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
@@ -78,7 +81,8 @@ updateDrzava(drzava){
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/drzave/'+id);
+   // let ep = this.prepEndpoint('api/drzave/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + id) ;
     return this.http.delete(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
     
@@ -87,11 +91,11 @@ updateDrzava(drzava){
   }
 
 
-  prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
+  // prepEndpoint(ep){
+  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //   return ServiceConfig.PrepareHost(this.isDev,ep);
  
-  }
+  // }
 
   private handleError(error: Response) {
     console.error(error);

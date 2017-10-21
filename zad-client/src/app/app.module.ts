@@ -35,6 +35,7 @@ import {RadnikService} from './services/opcijeapp/radnik.service';
 import {VlasnikService} from './services/opcijeapp/vlasnik.service';
 import { PosaoService} from './components/posao/posao.service';
 import {AuthGuard} from './guards/auth.guard';
+import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 
 
 //Komponente 
@@ -60,46 +61,50 @@ import { PosaoFormComponent } from './components/posao/posao-form/posao-form.com
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
 //import { DecimalMask } from './directive/decimal-mask.directive';
 // import { DecimalPipe } from '@angular/common';
-//import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
-   {path:'register', component: RegisterComponent},
-   {path:'login', component: LoginComponent},
-   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-   {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
-   {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
-   {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
-   {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
-   {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-   {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-   {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
-   {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
-   {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
+    {path:'register', component: RegisterComponent,canActivate:[AuthGuardGlavni]},
+    {path:'login', component: LoginComponent},
+    {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+    {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
 
-   {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
-   {path:'radnik/new', component: RadnikFormComponent, canActivate:[AuthGuard]},
-   {path:'radnik/:id', component: RadnikFormComponent, canActivate:[AuthGuard]},
+  //  {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
+  //  {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
+  //  {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
+  //  {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
+  //  {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
+  //  {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
+  //  {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
+  //  {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
+  //  {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
+
+  //  {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
+  //  {path:'radnik/new', component: RadnikFormComponent, canActivate:[AuthGuard]},
+  //  {path:'radnik/:id', component: RadnikFormComponent, canActivate:[AuthGuard]},
    
 
-   {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
-   {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
-   {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
-   {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},
+  //  {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
+  //  {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
+  //  {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
+  //  {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},
   
-   {path:'posao', component: PosaoComponent, canActivate:[AuthGuard]},
-   {path:'posao/new', component: PosaoFormComponent, canActivate:[AuthGuard]},
-   {path:'posao/:id', component: PosaoFormComponent, canActivate:[AuthGuard]},
+  //  {path:'posao', component: PosaoComponent, canActivate:[AuthGuard]},
+  //  {path:'posao/new', component: PosaoFormComponent, canActivate:[AuthGuard]},
+  //  {path:'posao/:id', component: PosaoFormComponent, canActivate:[AuthGuard]},
   
 
-   {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
-   {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
-   {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
-   {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+  //  {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
+  //  {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
+  //  {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+  //  {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
    
 
-   {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
+  //  {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
+
+
+
    { path: 'not-found', component: NotFoundComponent },
    { path: '**', redirectTo: 'not-found' }
  ] 
@@ -150,13 +155,14 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
     InputTextModule,
     ConfirmDialogModule,
     DialogModule,
-    SidebarModule
-    //AppRoutingModule
+    SidebarModule,
+    AppRoutingModule
 
   ],
-  providers: [ValidateService, AuthService,AuthGuard,
+  providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
     DrzaveService,MestaService,OpstineService,
-    ParametarService,FondSatiService,KonstanteService,RadnikService,VlasnikService,ConfirmationService,PosaoService],
+    ParametarService,FondSatiService,KonstanteService,
+    RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,8 +27,9 @@ export class ParametarService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/parametar'); 
-   // console.log("getDrzave link", ep );
+  //  let ep = this.prepEndpoint('api/parametar'); 
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/parametar/') ;
+  
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
     
@@ -39,7 +40,9 @@ export class ParametarService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/parametar/'+id);
+    //let ep = this.prepEndpoint('api/parametar/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/parametar/'+id) ;
+  
     return this.http.get(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
   
@@ -50,7 +53,8 @@ export class ParametarService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/parametar');
+    //let ep = this.prepEndpoint('api/parametar');
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/parametar/') ;
 
     return this.http.post(ep, JSON.stringify(param),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
@@ -62,7 +66,8 @@ export class ParametarService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/parametar/' + param._id);
+   // let ep = this.prepEndpoint('api/parametar/' + param._id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/parametar/' + param._id) ;
     
     return this.http.put(ep, JSON.stringify(param),{headers: headers})
     .map(res => res.json()).catch(this.handleError);
@@ -73,18 +78,19 @@ export class ParametarService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/parametar/'+id);
+    //let ep = this.prepEndpoint('api/parametar/'+id);
+    let ep = ServiceConfig.PrepareHost(this.isDev,'api/parametar/' + id) ;
     return this.http.delete(ep,{headers: headers})
     .map(res => res.json()).catch(this.handleError); 
     
   }
 
 
-  prepEndpoint(ep){
-  //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    return ServiceConfig.PrepareHost(this.isDev,ep);
+  // prepEndpoint(ep){
+  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
+  //   return ServiceConfig.PrepareHost(this.isDev,ep);
  
-  }
+  // }
 
   private handleError(error: Response) {
     console.error("handleError "  + error);
