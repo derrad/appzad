@@ -134,7 +134,7 @@
                 
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
                         [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
-                    <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a>
+                    <a [routerLink]="['/zanimanja']" ><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a>
                 </li>
                
                 <li role="presentation" (click)="visibleSidebar1 = false"  *ngIf="authService.loggedIn()" 

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate');
+var EnumSS = require('../enum/serverenum');
 
  var Schema = mongoose.Schema,
      ID  = Schema.ObjectId;
@@ -14,20 +15,14 @@ var sfZanimanja = new Schema({
             ],
     minlength:[4,"Minimalna duzina 4 karaktera"],
     maxlength:[4,"Maksimalna duzina 4 karaktera"]},
-   Naziv : { type: String, required: [true, 'Naziv je obavezan'] },
-   StepenSS  :  {
+    Naziv : { type: String, required: [true, 'Naziv je obavezan'] },
+    StepenSS  :  {
                  type : String,
                  default : 'Nekvalifikovan',
-                 enum : ['Nekvalifikovan', 'Polukvalifikovan', 'Kvalifikovan','Srednja Strucna Sprema','VKV','Visa skola','Fakultet','Magistar','Doktor Nauka']
+                 enum : EnumSS.StepenSS
                 },
-   NivoUnosa   : {
-                 type : String,
-                 required: [true, 'Nivo unosa je obavezan'],
-                 default : 'Unos',
-                 enum : ['Unos', 'Pregled']
-                },
-   Opis  :{ type: String },
-   NameUser: {type:String}
+    Opis  :{ type: String },
+    NameUser: {type:String}
  },
  {
  timestamps: { createdAt: 'created_at' }

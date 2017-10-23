@@ -6,15 +6,15 @@ module.exports.create = function (req, res,next) {
   const Sifra = req.body.Sifra ;
   const Naziv = req.body.Naziv ;
   const StepenSS = req.body.StepenSS ;
-  const NivoUnosa = req.body.NivoUnosa ;
+ // const NivoUnosa = req.body.NivoUnosa ;
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
  // const radnik_id = req.body.radnik_id ;
 
-  console.log("uid je :" + uid + " ovo je Naziv " + req.body.Naziv);
+  //console.log("uid je :" + uid + " ovo je Naziv " + req.body.Naziv);
  // console.log("radnik_id je :" + radnik_id);
   
-  if (!Naziv || !StepenSS || !Sifra || !NivoUnosa) {
+  if (!Naziv || !StepenSS || !Sifra ) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
   } else {
   
@@ -29,14 +29,13 @@ if (uid) {
       zanimanja.Sifra = Sifra ;
       zanimanja.Naziv = Naziv ;
       zanimanja.StepenSS = StepenSS ;
-      zanimanja.NivoUnosa = NivoUnosa ;
       zanimanja.Opis = Opis ;
       zanimanja.NameUser = NameUser;
      
     }
     zanimanja.save(function(err,results) {
       if(err){ 
-        return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:null }); 
+        return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
       }
       return res.status(201).json({
         success: true,
@@ -53,7 +52,6 @@ if (uid) {
     Sifra : Sifra ,
     Naziv: Naziv,
     StepenSS: StepenSS ,
-    NivoUnosa : NivoUnosa,
     Opis : Opis ,
     NameUser : NameUser
   });
@@ -61,12 +59,12 @@ if (uid) {
   oZanimanja.save(function(err,result) {
     if(err){ 
      return  res.status(400).json(
-        { success: false, message: 'Error processing request '+ err , data:null});
+        { success: false, message: 'Error processing request '+ err , data:[]});
     }
       
    return res.status(201).json({
       success: true,
-      message: 'oZanimanje saved successfully',
+      message: 'Zanimanje saved successfully',
       data: result
 
     });
@@ -79,10 +77,10 @@ if (uid) {
 
 
 module.exports.listzanimanja = function (req, res,next) {
-  console.log("Usao u list zanimanja");
+ // console.log("Usao u list zanimanja");
   
   Zanimanja.find({}).exec(function(err, result){
-    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:null }); 
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
       return res.status(200).json({
       success: true, 
@@ -94,11 +92,11 @@ module.exports.listzanimanja = function (req, res,next) {
 
 
 module.exports.getzanimanja = function (req, res,next) {
-  console.log("Usao u get Zanimanja " + req.params.id);
+  //console.log("Usao u get Zanimanja " + req.params.id);
   Zanimanja.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
-      { success: false, message:'Error processing request '+ err , data:null }
+      { success: false, message:'Error processing request '+ err , data:[] }
       ); 
     }
       return res.status(200).json({
@@ -110,13 +108,13 @@ module.exports.getzanimanja = function (req, res,next) {
 }
 
 module.exports.delezanimanja = function(req, res, next) {
-  console.log("delete  zanimanja parametar je : " + req.params.id);
+ // console.log("delete  zanimanja parametar je : " + req.params.id);
 	Zanimanja.remove({_id: req.params.id}, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null}); }
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}); }
         return res.status(201).json({
             success: true,
             message: 'Zanimanje removed successfully',
-             data:null
+            data:[]
           });
   });
 }

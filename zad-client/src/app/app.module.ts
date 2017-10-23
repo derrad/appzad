@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -62,6 +63,9 @@ import { KeysPipe } from './shared/pipeapp/keys.pipe';
 //import { DecimalMask } from './directive/decimal-mask.directive';
 // import { DecimalPipe } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+// import { ZanimanjaComponent } from './components/zanimanja/zanimanja.component';
+// import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
+import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -138,6 +142,7 @@ import { AppRoutingModule } from './app-routing.module';
       KeysPipe,
       RadnikFormComponent,
       FondSatiFormComponent
+     
     //  DecimalMask
     
   ],
@@ -147,7 +152,7 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule ,
     HttpModule,
-    RouterModule.forRoot(appRoutes), 
+    RouterModule.forRoot(appRoutes,{ enableTracing: true }), // <-- debugging purposes only
      FlashMessagesModule,
     ButtonModule,
     DataTableModule,
@@ -156,6 +161,7 @@ import { AppRoutingModule } from './app-routing.module';
     ConfirmDialogModule,
     DialogModule,
     SidebarModule,
+    ZanimanjaModule,
     AppRoutingModule
 
   ],
