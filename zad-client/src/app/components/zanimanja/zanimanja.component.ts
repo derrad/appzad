@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { ZanimanjaModel } from './zanimanja.model';
@@ -7,8 +6,8 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
-import {DialogModule} from 'primeng/primeng';
+import { ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
+import { DialogModule} from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations' 
 import {FlashMessagesService} from 'angular2-flash-messages';
 
@@ -35,7 +34,7 @@ export class ZanimanjaComponent implements OnInit {
 
     this.zanService.getZanimanja().subscribe(profile => {
       if (profile.success === true) { 
-        // console.log(profile);
+       //  console.log(profile);
       //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
         this.zanimanja = profile.data;
       }
@@ -77,17 +76,17 @@ cloneData(c: ZanimanjaModel):ZanimanjaModel {
   this.router.navigate(['/zanimanja/', id]);
  }
 
- deleteRadnik(tradnik){
+ deleteZanimanje(tzanim){
   
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
         accept: () => {
           //Actual logic to perform a confirmation
-          var index = this.zanimanja.indexOf(tradnik);
+          var index = this.zanimanja.indexOf(tzanim);
          // console.log("index je " + index);
           this.zanimanja.splice(index, 1);
       
-          this.zanService.delZanimanje(tradnik._id)
+          this.zanService.delZanimanje(tzanim._id)
             .subscribe((pos) =>{
               if(pos.success){
                  this.flashMessage.show('Zanimanje removed successfully ...', {
@@ -103,7 +102,7 @@ cloneData(c: ZanimanjaModel):ZanimanjaModel {
                   cssClass: 'alert-danger',
                   timeout: 5000});
                 // Revert the view back to its original state
-                this.zanimanja.splice(index, 0, tradnik);
+                this.zanimanja.splice(index, 0, tzanim);
               });
         }
       });

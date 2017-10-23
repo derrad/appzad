@@ -152,8 +152,8 @@ import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
     FormsModule,
     ReactiveFormsModule ,
     HttpModule,
-    RouterModule.forRoot(appRoutes,{ enableTracing: true }), // <-- debugging purposes only
-     FlashMessagesModule,
+    RouterModule.forRoot(appRoutes), // <-- debugging purposes only { enableTracing: true }
+    FlashMessagesModule,
     ButtonModule,
     DataTableModule,
     SharedModule,
