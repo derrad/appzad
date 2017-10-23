@@ -34,7 +34,7 @@ import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
 import {RadnikService} from './services/opcijeapp/radnik.service';
 import {VlasnikService} from './services/opcijeapp/vlasnik.service';
-import { PosaoService} from './components/posao/posao.service';
+import {PosaoService} from './components/posao/posao.service';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 

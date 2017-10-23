@@ -79,7 +79,7 @@ if (uid) {
 module.exports.listzanimanja = function (req, res,next) {
  // console.log("Usao u list zanimanja");
   
-  Zanimanja.find({}).exec(function(err, result){
+  Zanimanja.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
       return res.status(200).json({

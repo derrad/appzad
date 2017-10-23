@@ -79,7 +79,8 @@ cloneData(c: ZanimanjaModel):ZanimanjaModel {
  deleteZanimanje(tzanim){
   
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to perform this action?',
+        message: `Jeste li sigurni da žeite uklonite izabrano zanimanje ?   ` ,
+        header: `${tzanim.Naziv}`,
         accept: () => {
           //Actual logic to perform a confirmation
           var index = this.zanimanja.indexOf(tzanim);

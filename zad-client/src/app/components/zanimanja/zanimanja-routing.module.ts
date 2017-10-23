@@ -7,8 +7,9 @@ import { ZanimanjaFormComponent } from './zanimanja-form/zanimanja-form.componen
 
 const zanimanjaRoutes: Routes = [
   { path: 'zanimanja',  component: ZanimanjaComponent, canActivate:[AuthGuard] },
-  { path: 'zanimanja/:id', component: ZanimanjaFormComponent, canActivate:[AuthGuard] },
   { path: 'zanimanja/new', component: ZanimanjaFormComponent, canActivate:[AuthGuard] },
+  { path: 'zanimanja/:id', component: ZanimanjaFormComponent, canActivate:[AuthGuard] }
+  
 ]
  
 @NgModule({

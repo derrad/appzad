@@ -45,7 +45,7 @@ export class PosaoFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje posla' : 'Novi posao';
+      this.title = id ? 'Ažuriranje posla' : 'Novi posao';
 
       if (!id)
         return;
@@ -67,12 +67,12 @@ export class PosaoFormComponent implements OnInit {
     });
   }
 
+
   backClicked(event: any) {
     this._location.back();
     //event.stopPropagation();
     
   }
-
 
   save() {
     var result,
