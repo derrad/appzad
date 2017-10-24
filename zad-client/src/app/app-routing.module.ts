@@ -9,8 +9,8 @@ import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
 import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
-import { OpstineComponent } from './components/opstine/opstine.component';
-import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
+// import { OpstineComponent } from './components/opstine/opstine.component';
+// import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 import { MestaComponent } from './components/mesta/mesta.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
@@ -31,16 +31,16 @@ const routes: Routes = [
     {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
     {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
     {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-    {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
-    {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
-    {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
+    // {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
+    // {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
+    // {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
  
     {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
     {path:'radnik/new', component: RadnikFormComponent, canActivate:[AuthGuard]},
     {path:'radnik/:id', component: RadnikFormComponent, canActivate:[AuthGuard]},
-    
+   
  
-    {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
+   
     {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
     {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
     {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OpstineService } from './../../services/opstine/opstine.service';
+import { OpstineService } from './opstine.service';
 import {Router} from '@angular/router';
 import {Opstine} from './opstine.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';

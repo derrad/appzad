@@ -27,7 +27,6 @@ import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 // import {DrzaveService} from './services/drzave/drzave.service';
 import {MestaService} from './services/mesta/mesta.service';
-import {OpstineService} from './services/opstine/opstine.service';
 import {ParametarService} from './services/opcijeapp/parametar.service';
 import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
@@ -46,8 +45,8 @@ import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
 import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
-import { OpstineComponent } from './components/opstine/opstine.component';
-import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
+// import { OpstineComponent } from './components/opstine/opstine.component';
+// import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 import { MestaComponent } from './components/mesta/mesta.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
@@ -66,6 +65,7 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 import { DrzaveModule } from './components/drzave/drzave.module';
+import { OpstineModule} from './components/opstine/opstine.module';
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -126,13 +126,11 @@ import { DrzaveModule } from './components/drzave/drzave.module';
       ModalComponent,
       ParametarComponent,
       RadnikComponent,
-      OpstineComponent,
       MestaComponent,
       VlasnikComponent,
       FondSatiComponent,
       KonstantaComponent,
       ParmetarFormComponent,
-      OpstineFormComponent,
       NotFoundComponent,
       MestaFormComponent,
       PosaoComponent,
@@ -160,12 +158,13 @@ import { DrzaveModule } from './components/drzave/drzave.module';
     DialogModule,
     SidebarModule,
     DrzaveModule,
+    OpstineModule,
     ZanimanjaModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
-    MestaService,OpstineService,
+    MestaService,
     ParametarService,FondSatiService,KonstanteService,
     RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]

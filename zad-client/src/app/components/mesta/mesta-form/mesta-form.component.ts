@@ -1,13 +1,13 @@
-import { LoginComponent } from './../../login/login.component';
+//import { LoginComponent } from './../../login/login.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Mesta } from './../mesta.model';
 import { MestaService } from './../../../services/mesta/mesta.service';
-import {OpstineService } from './../../../services/opstine/opstine.service';
 import {Opstine} from '../../opstine/opstine.model';
 import {Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations' 
+import { OpstineService} from './../../opstine/opstine.service';
 
 @Component({
   selector: 'app-mesta-form',

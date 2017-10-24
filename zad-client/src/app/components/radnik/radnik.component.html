@@ -39,12 +39,11 @@
     
     
     <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
-            <p-footer>
-                <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-                <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
-            </p-footer>
+        <p-footer>
+            <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+         </p-footer>
     </p-confirmDialog>
-    
     
     
     <p-dialog header="Radnik" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
@@ -128,6 +127,11 @@
     </p-dialog>
     
     
-    <ng-template #waiting >Waiting...</ng-template>
+    <ng-template #waiting  >
+        <div class="centerWait">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        Loading...
+        </div>
+    </ng-template>
     
   
