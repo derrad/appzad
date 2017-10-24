@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../../drzave/drzave.model'
-import {DrzaveService} from '../../../services/drzave/drzave.service';
+import {DrzaveService} from '../../drzave/drzave.service';
 import {OpstineService } from './../../../services/opstine/opstine.service';
 import {Opstine} from '../opstine.model';
 import {Location} from '@angular/common';

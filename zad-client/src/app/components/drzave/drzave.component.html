@@ -9,20 +9,20 @@
         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
     </div>
       <p-dataTable [value]="drzave"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
+                selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false >
 
-    <p-header>List of Države</p-header>
+    <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
                                                                                          
-      <p-column styleClass="text-danger" field="KodDrzave" header="Kod" sortable="true"></p-column>                               
+      <p-column field="KodDrzave" header="Kod" sortable="true"></p-column>                               
       <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="EuClan" header="EuClan" sortable="true"></p-column>
+      <p-column field="EuClan" header="EuClan" sortable="true" styleClass="text-center"></p-column>
       <p-column field="Opis" header="Opis" sortable="true"></p-column>
-      <p-column field="NameUser" header="User" sortable="true"></p-column>
+      <!-- <p-column field="NameUser" header="User" sortable="true"></p-column> -->
       
-      <p-column styleClass="col-button" heder="Opcije">
-          <ng-template let-drz="rowData" let-i="rowIndex" pTemplate="body">
+      <p-column styleClass="col-button text-center" heder="Opcije">
+          <ng-template let-drz="rowData" let-i="rowIndex" pTemplate="body"  > 
               <button type="button" pButton (click)="selectDrzavu(drz)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateDrzavu(drz._id)" icon="fa fa-pencil" title="Update"></button>
               <button type="button" pButton (click)="deleteDrzavu(drz)" icon="fa fa-trash" title="Delete"></button>
@@ -40,9 +40,9 @@
 
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
     <p-footer>
-        <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
-    </p-footer>
+        <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+     </p-footer>
 </p-confirmDialog>
 
 
@@ -117,4 +117,9 @@
 </p-dialog>
 
 
-  <ng-template #waiting >Waiting...</ng-template>
+<ng-template #waiting  >
+    <div class="centerWait">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    Loading...
+    </div>
+</ng-template>

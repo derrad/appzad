@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
 import { ModalComponent } from './components/modal/modal.component';
-import { DrzaveComponent } from './components/drzave/drzave.component';
-import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
+// import { DrzaveComponent } from './components/drzave/drzave.component';
+// import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
@@ -25,9 +25,9 @@ import { PosaoFormComponent } from './components/posao/posao-form/posao-form.com
 
 const routes: Routes = [
    
-    {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
-    {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
-    {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
+    // {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
+    // {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
+    // {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
     {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
     {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
     {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},

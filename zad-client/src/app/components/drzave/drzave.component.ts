@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DrzaveService} from '../../services/drzave/drzave.service';
+import {DrzaveService} from './drzave.service';
 import {Router} from '@angular/router';
 import {IDrzave, Drzave} from './drzave.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
@@ -21,8 +21,7 @@ export class DrzaveComponent implements OnInit {
   drzave:Array<IDrzave>;
   Title:string;
   selectedDrzave: Object;
-  loading: boolean;
-  drzava:IDrzave;
+  //drzava:IDrzave;
   displayDetals: boolean = false;
   drzShow: Drzave = new Drzave();
   
@@ -31,7 +30,7 @@ export class DrzaveComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.loading = true;
+   
     setTimeout(()=>{
       this.drzaveService.getDrzave().subscribe(profile => {
         if (profile.success === true) { 
@@ -44,28 +43,16 @@ export class DrzaveComponent implements OnInit {
       }
       
     );
-    this.loading = false;
     },1000);
        
 //  this.loading = false;
   
   } 
 
-// onAddDrzavu() {
-//     alert("Add drzavu");
-// }
 
 selectDrzavu( tdrz:Drzave) {
-    // if (tId) {
-    //     alert("Drzava je "  +tId);
-    // } else {
-    //     alert("Select" + this.selectedDrzave);
-    // }
-  // 
-  this.displayDetals = true;
-  // console.log(opstina);
-  // console.log(this.selectedOpstina);
-  this.drzShow = this.cloneData(tdrz); 
+   this.displayDetals = true;
+   this.drzShow = this.cloneData(tdrz); 
 
 }
 
@@ -93,7 +80,8 @@ deleteDrzavu(tdrzava){
   // console.log(tdrzava);
 
   this.confirmationService.confirm({
-    message: 'Are you sure that you want to perform this action?',
+    message: `Jeste li sigurni da žeite uklonite izabranu državu ?   ` ,
+    header: `${tdrzava.Naziv}`,
       accept: () => {
         //Actual logic to perform a confirmation
         var index = this.drzave.indexOf(tdrzava);
@@ -111,18 +99,7 @@ deleteDrzavu(tdrzava){
     });
 
 
-  // // if (confirm("Are you sure you want to delete " + tdrzava.Naziv + "?")) {
-  // //   var index = this.drzave.indexOf(tdrzava);
-  // //   console.log("index je " + index);
-  // //   this.drzave.splice(index, 1);
 
-  // //   this.drzaveService.delDrzava(tdrzava._id)
-  // //     .subscribe(null,
-  // //       err => {
-  // //         alert("Could not delete drzavu.");
-  // //         // Revert the view back to its original state
-  // //         this.drzave.splice(index, 0, tdrzava);
-  // //       });
   }
 }
 

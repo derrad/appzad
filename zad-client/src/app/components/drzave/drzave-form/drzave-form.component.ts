@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../drzave.model';
-import {DrzaveService} from '../../../services/drzave/drzave.service';
+import { DrzaveService } from '../drzave.service';
 import {Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations' 
 

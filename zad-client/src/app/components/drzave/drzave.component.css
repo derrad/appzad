@@ -1,3 +1,14 @@
 /* .ui-column-title{
     font-size:15px ;
 } */
+
+.centerWait {
+    /* width: 500px; */
+  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    /* background-color: rgb(241, 241, 241); */
+}

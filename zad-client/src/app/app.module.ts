@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -26,7 +25,7 @@ import { NavbarLeftComponent } from './components/navbar-left/navbar-left.compon
 //Service
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
-import {DrzaveService} from './services/drzave/drzave.service';
+// import {DrzaveService} from './services/drzave/drzave.service';
 import {MestaService} from './services/mesta/mesta.service';
 import {OpstineService} from './services/opstine/opstine.service';
 import {ParametarService} from './services/opcijeapp/parametar.service';
@@ -41,8 +40,8 @@ import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 
 //Komponente 
 import { ModalComponent } from './components/modal/modal.component';
-import { DrzaveComponent } from './components/drzave/drzave.component';
-import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
+// import { DrzaveComponent } from './components/drzave/drzave.component';
+// import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
@@ -66,6 +65,7 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ZanimanjaComponent } from './components/zanimanja/zanimanja.component';
 // import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
+import { DrzaveModule } from './components/drzave/drzave.module';
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -124,7 +124,6 @@ import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
       NavbarComponent,
       NavbarLeftComponent,
       ModalComponent,
-      DrzaveComponent,
       ParametarComponent,
       RadnikComponent,
       OpstineComponent,
@@ -132,7 +131,6 @@ import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
       VlasnikComponent,
       FondSatiComponent,
       KonstantaComponent,
-      DrzaveFormComponent,
       ParmetarFormComponent,
       OpstineFormComponent,
       NotFoundComponent,
@@ -161,12 +159,13 @@ import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
     ConfirmDialogModule,
     DialogModule,
     SidebarModule,
+    DrzaveModule,
     ZanimanjaModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
-    DrzaveService,MestaService,OpstineService,
+    MestaService,OpstineService,
     ParametarService,FondSatiService,KonstanteService,
     RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]
