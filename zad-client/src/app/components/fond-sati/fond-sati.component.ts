@@ -8,7 +8,7 @@ import { ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import { DialogModule} from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations' 
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { FondSatiService } from './../../services/opcijeapp/fond-sati.service';
+import { FondSatiService } from './fond-sati.service';
 import { FondSati } from './fondsati.model';
 
 

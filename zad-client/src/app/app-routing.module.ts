@@ -14,8 +14,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
 import { MestaComponent } from './components/mesta/mesta.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
-import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
-import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
+// import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
+// import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PosaoComponent } from './components/posao/posao.component';
@@ -51,9 +51,10 @@ const routes: Routes = [
    
  
     {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
-    {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
-    {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
-    {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+
+    // {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
+    // {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
+    // {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
     
  
     {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},

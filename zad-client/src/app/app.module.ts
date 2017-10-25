@@ -29,7 +29,7 @@ import {ValidateService} from './services/auth/validate.service';
 import {MestaService} from './services/mesta/mesta.service';
 import {OpstineService} from './services/opstine/opstine.service';
 import {ParametarService} from './services/opcijeapp/parametar.service';
-import {FondSatiService} from './services/opcijeapp/fond-sati.service';
+//import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
 import {RadnikService} from './services/opcijeapp/radnik.service';
 import {VlasnikService} from './services/opcijeapp/vlasnik.service';
@@ -51,8 +51,8 @@ import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-
 import { MestaComponent } from './components/mesta/mesta.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
-import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
-import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
+// import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
+// import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PosaoComponent } from './components/posao/posao.component';
@@ -66,6 +66,7 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 import { DrzaveModule } from './components/drzave/drzave.module';
+import { FondSatiModule } from './components/fond-sati/fond-sati.module';
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -129,7 +130,6 @@ import { DrzaveModule } from './components/drzave/drzave.module';
       OpstineComponent,
       MestaComponent,
       VlasnikComponent,
-      FondSatiComponent,
       KonstantaComponent,
       ParmetarFormComponent,
       OpstineFormComponent,
@@ -138,8 +138,8 @@ import { DrzaveModule } from './components/drzave/drzave.module';
       PosaoComponent,
       PosaoFormComponent,
       KeysPipe,
-      RadnikFormComponent,
-      FondSatiFormComponent
+      RadnikFormComponent
+     
      
     //  DecimalMask
     
@@ -161,12 +161,13 @@ import { DrzaveModule } from './components/drzave/drzave.module';
     SidebarModule,
     DrzaveModule,
     ZanimanjaModule,
+    FondSatiModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
     MestaService,OpstineService,
-    ParametarService,FondSatiService,KonstanteService,
+    ParametarService,KonstanteService,
     RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]
 })

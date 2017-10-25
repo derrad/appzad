@@ -1,11 +1,11 @@
-import { Message } from 'primeng/components/common/api';
+// import { Message } from 'primeng/components/common/api';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations' 
-import { FondSatiService } from './../../../services/opcijeapp/fond-sati.service';
-import { FondSati } from './../fondsati.model';
+import { FondSatiService } from '../fond-sati.service';
+import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 //import { DecimalMask } from './../../../directive/decimal-mask.directive';
 
@@ -49,7 +49,7 @@ export class FondSatiFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje radnika' : 'Novi radnik';
+      this.title = id ? 'Ažurianje fonda sati' : 'Novi fond sati';
 
       if (!id)
         return;
