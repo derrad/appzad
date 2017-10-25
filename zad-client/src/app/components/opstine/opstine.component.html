@@ -13,9 +13,11 @@
          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
       <p-dataTable [value]="opstine"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id"  [loading]="loading" loadingIcon="fa fa-spinner" 
-                styleClass="table table-striped" [responsive]="true"  [immutable]=false resizableColumns="true" columnResizeMode="expand">
-          <p-header><strong>List of Opštine</strong></p-header>       
+                selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id" 
+                styleClass="table table-striped" [responsive]="true"  
+                [immutable]=false resizableColumns="true" columnResizeMode="expand">
+
+                <p-header><strong>{{Title}}</strong></p-header>         
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <p-column field="Drzava.Naziv" header="Drzava" sortable="true"></p-column>  
       <p-column field="RegOzn" header="Oznaka" sortable="true"></p-column>                               
@@ -44,17 +46,14 @@
 <!-- </div> -->
 
 
-
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
-        <p-footer>
-            <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-            <button type="button" pButton icon="fa-check" label="Yes" (click)="cd.accept()"></button>
-        </p-footer>
+    <p-footer>
+        <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+     </p-footer>
 </p-confirmDialog>
 
-
-
-<p-dialog header="Opština" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+<p-dialog header="OPŠTINA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
 
         <div>
                 <dl class="dl-horizontal">
@@ -138,4 +137,9 @@
 </p-dialog>
 
 
-<ng-template #waiting >Waiting...</ng-template>
+<ng-template #waiting  >
+    <div class="centerWait">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    Loading...
+    </div>
+</ng-template>

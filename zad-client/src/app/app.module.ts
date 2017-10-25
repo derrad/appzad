@@ -27,7 +27,6 @@ import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 // import {DrzaveService} from './services/drzave/drzave.service';
 import {MestaService} from './services/mesta/mesta.service';
-import {OpstineService} from './services/opstine/opstine.service';
 import {ParametarService} from './services/opcijeapp/parametar.service';
 //import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
@@ -46,8 +45,8 @@ import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 import { RadnikComponent } from './components/radnik/radnik.component';
 import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
-import { OpstineComponent } from './components/opstine/opstine.component';
-import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
+// import { OpstineComponent } from './components/opstine/opstine.component';
+// import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
 import { MestaComponent } from './components/mesta/mesta.component';
 import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
@@ -66,7 +65,11 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 import { DrzaveModule } from './components/drzave/drzave.module';
+<<<<<<< HEAD
 import { FondSatiModule } from './components/fond-sati/fond-sati.module';
+=======
+import { OpstineModule} from './components/opstine/opstine.module';
+>>>>>>> 07590c09dbbf01392630bb00c4c143ce278ac27a
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -127,12 +130,10 @@ import { FondSatiModule } from './components/fond-sati/fond-sati.module';
       ModalComponent,
       ParametarComponent,
       RadnikComponent,
-      OpstineComponent,
       MestaComponent,
       VlasnikComponent,
       KonstantaComponent,
       ParmetarFormComponent,
-      OpstineFormComponent,
       NotFoundComponent,
       MestaFormComponent,
       PosaoComponent,
@@ -160,14 +161,20 @@ import { FondSatiModule } from './components/fond-sati/fond-sati.module';
     DialogModule,
     SidebarModule,
     DrzaveModule,
+    OpstineModule,
     ZanimanjaModule,
     FondSatiModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
+<<<<<<< HEAD
     MestaService,OpstineService,
     ParametarService,KonstanteService,
+=======
+    MestaService,
+    ParametarService,FondSatiService,KonstanteService,
+>>>>>>> 07590c09dbbf01392630bb00c4c143ce278ac27a
     RadnikService,VlasnikService,ConfirmationService,PosaoService],
   bootstrap: [AppComponent]
 })

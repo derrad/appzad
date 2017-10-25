@@ -4,10 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../../drzave/drzave.model'
 import {DrzaveService} from '../../drzave/drzave.service';
-import {OpstineService } from './../../../services/opstine/opstine.service';
+import {OpstineService } from '../opstine.service';
 import {Opstine} from '../opstine.model';
 import {Location} from '@angular/common';
-
 
 
 @Component({
