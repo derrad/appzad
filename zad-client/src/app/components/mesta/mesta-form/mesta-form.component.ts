@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Mesta } from './../mesta.model';
-import { MestaService } from './../../../services/mesta/mesta.service';
+import { MestaService } from './../mesta.service';
 import {Opstine} from '../../opstine/opstine.model';
 import {Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations' 

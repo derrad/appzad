@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations' 
-import { Radnik } from './../radnik.model';
-import { RadnikService} from '../../../services/opcijeapp/radnik.service';
+import { Radnik } from '../radnik.model';
+import { RadnikService} from '../radnik.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({

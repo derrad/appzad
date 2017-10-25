@@ -26,13 +26,13 @@ import { NavbarLeftComponent } from './components/navbar-left/navbar-left.compon
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 // import {DrzaveService} from './services/drzave/drzave.service';
-import {MestaService} from './services/mesta/mesta.service';
+//import {MestaService} from './services/mesta/mesta.service';
 import {ParametarService} from './services/opcijeapp/parametar.service';
 //import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
-import {RadnikService} from './services/opcijeapp/radnik.service';
+//import {RadnikService} from './services/opcijeapp/radnik.service';
 import {VlasnikService} from './services/opcijeapp/vlasnik.service';
-import {PosaoService} from './components/posao/posao.service';
+//import {PosaoService} from './components/posao/posao.service';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 
@@ -43,19 +43,20 @@ import { ModalComponent } from './components/modal/modal.component';
 // import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
 import { ParametarComponent } from './components/parametar/parametar.component';
 import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
-import { RadnikComponent } from './components/radnik/radnik.component';
-import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
+// import { RadnikComponent } from './components/radnik/radnik.component';
+// import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
 // import { OpstineComponent } from './components/opstine/opstine.component';
 // import { OpstineFormComponent } from './components/opstine/opstine-form/opstine-form.component';
-import { MestaComponent } from './components/mesta/mesta.component';
-import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
+// import { MestaComponent } from './components/mesta/mesta.component';
+// import { MestaFormComponent } from './components/mesta/mesta-form/mesta-form.component';
+
 import { VlasnikComponent } from './components/vlasnik/vlasnik.component';
 // import { FondSatiComponent } from './components/fond-sati/fond-sati.component';
 // import { FondSatiFormComponent } from './components/fond-sati/fond-sati-form/fond-sati-form.component';
 import { KonstantaComponent } from './components/konstanta/konstanta.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { PosaoComponent } from './components/posao/posao.component';
-import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
+// import { PosaoComponent } from './components/posao/posao.component';
+// import { PosaoFormComponent } from './components/posao/posao-form/posao-form.component';
 //Pipe 
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
 //import { DecimalMask } from './directive/decimal-mask.directive';
@@ -65,11 +66,12 @@ import { AppRoutingModule } from './app-routing.module';
 // import { ZanimanjaFormComponent } from './components/zanimanja/zanimanja-form/zanimanja-form.component';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 import { DrzaveModule } from './components/drzave/drzave.module';
-<<<<<<< HEAD
+import { OpstineModule } from './components/opstine/opstine.module';
 import { FondSatiModule } from './components/fond-sati/fond-sati.module';
-=======
-import { OpstineModule} from './components/opstine/opstine.module';
->>>>>>> 07590c09dbbf01392630bb00c4c143ce278ac27a
+import { MestaModule } from './components/mesta/mesta.module';
+import { RadnikModule } from './components/radnik/radnik.module';
+import { PosaoModule } from './components/posao/posao.module';
+
 
  const appRoutes: Routes =  [
    {path:'', component: HomeComponent},
@@ -129,17 +131,11 @@ import { OpstineModule} from './components/opstine/opstine.module';
       NavbarLeftComponent,
       ModalComponent,
       ParametarComponent,
-      RadnikComponent,
-      MestaComponent,
       VlasnikComponent,
       KonstantaComponent,
       ParmetarFormComponent,
       NotFoundComponent,
-      MestaFormComponent,
-      PosaoComponent,
-      PosaoFormComponent,
-      KeysPipe,
-      RadnikFormComponent
+      KeysPipe
      
      
     //  DecimalMask
@@ -164,21 +160,16 @@ import { OpstineModule} from './components/opstine/opstine.module';
     OpstineModule,
     ZanimanjaModule,
     FondSatiModule,
+    MestaModule,
+    RadnikModule,
+    PosaoModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
-<<<<<<< HEAD
-    MestaService,OpstineService,
     ParametarService,KonstanteService,
-=======
-    MestaService,
-    ParametarService,FondSatiService,KonstanteService,
->>>>>>> 07590c09dbbf01392630bb00c4c143ce278ac27a
-    RadnikService,VlasnikService,ConfirmationService,PosaoService],
+    VlasnikService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-// MessagesModule,
-// GrowlModule,

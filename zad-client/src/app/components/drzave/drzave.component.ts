@@ -80,7 +80,7 @@ deleteDrzavu(tdrzava){
   // console.log(tdrzava);
 
   this.confirmationService.confirm({
-    message: `Jeste li sigurni da žeite uklonite izabranu državu ?   ` ,
+    message: `Jeste li sigurni da želite uklonite izabranu državu ?   ` ,
     header: `${tdrzava.Naziv}`,
       accept: () => {
         //Actual logic to perform a confirmation

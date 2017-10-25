@@ -14,7 +14,7 @@
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false 
                 resizableColumns="true" columnResizeMode="expand">
 
-              <p-header><strong>{{Title}}</strong></p-header>       
+      <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
       <p-column field="SifraRad" header="Šifra" sortable="true"></p-column> 
       <p-column field="Prezime" header="Prezime" sortable="true"></p-column>
@@ -46,7 +46,7 @@
     </p-confirmDialog>
     
     
-    <p-dialog header="Radnik" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+    <p-dialog header="RADNIK" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
     
             <div>
                     <dl class="dl-horizontal">

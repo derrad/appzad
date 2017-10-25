@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MestaService } from './../../services/mesta/mesta.service';
+import { MestaService } from './mesta.service';
 import {Router} from '@angular/router';
 import { Mesta } from './mesta.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';

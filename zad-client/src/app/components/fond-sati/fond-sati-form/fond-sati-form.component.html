@@ -12,17 +12,17 @@
                <input class="form-control" formControlName="_id"  [(ngModel)]="fnsatN._id"   type="hidden">
           </div>
           <div class="form-group">
+            <label class="center-block">Godina:
+              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina" >
+            </label>
+             <div class="text-danger" *ngIf="!formFSAT.controls['Godina'].valid && formFSAT.controls['Godina'].touched">Godina nije uneta</div> 
+            
+          </div>
+          <div class="form-group">
               <label class="center-block">Mesec:
                 <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec" >
               </label>
                <div class="text-danger" *ngIf="!formFSAT.controls['Mesec'].valid && formFSAT.controls['Mesec'].touched">Mesec nije unet</div> 
-              
-            </div>
-            <div class="form-group">
-              <label class="center-block">Godina:
-                <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina" >
-              </label>
-               <div class="text-danger" *ngIf="!formFSAT.controls['Godina'].valid && formFSAT.controls['Godina'].touched">Godina nije uneta</div> 
               
             </div>
             <div class="form-group">

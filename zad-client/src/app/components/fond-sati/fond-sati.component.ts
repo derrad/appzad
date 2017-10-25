@@ -78,7 +78,8 @@ export class FondSatiComponent implements OnInit {
    deleteFSati(tfnsati){
     
       this.confirmationService.confirm({
-        message: 'Are you sure that you want to perform this action?',
+        message: `Jeste li sigurni da želite uklonite izabrani podatak ?   ` ,
+        header: `${tfnsati.Godina} - ${tfnsati.Mesec}`,
           accept: () => {
             //Actual logic to perform a confirmation
             var index = this.fnsati.indexOf(tfnsati);
@@ -88,7 +89,7 @@ export class FondSatiComponent implements OnInit {
             this.fnsatiService.delFondSati(tfnsati._id)
               .subscribe((pos) =>{
                 if(pos.success){
-                   this.flashMessage.show('Radnik removed successfully ...', {
+                   this.flashMessage.show(pos.message ,{
                       cssClass: 'alert-success',
                       timeout: 1000});
                 }else{
@@ -97,7 +98,7 @@ export class FondSatiComponent implements OnInit {
                 } ,
                 err => {
                   //alert("Could not delete radnik.");
-                  this.flashMessage.show('Could not delete radnik !!!', {
+                  this.flashMessage.show('Could not delete fond sati !!!', {
                     cssClass: 'alert-danger',
                     timeout: 5000});
                   // Revert the view back to its original state

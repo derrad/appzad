@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { Radnik } from './radnik.model';
-import { RadnikService} from '../../services/opcijeapp/radnik.service';
+import { RadnikService} from './radnik.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
@@ -75,7 +75,8 @@ export class RadnikComponent implements OnInit {
  deleteRadnik(tradnik){
   
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to perform this action?',
+      message: `Jeste li sigurni da želite uklonite izabranog radnika ?   ` ,
+      header: `${tradnik.Prezime} ${tradnik.Ime}`,
         accept: () => {
           //Actual logic to perform a confirmation
           var index = this.radnici.indexOf(tradnik);
