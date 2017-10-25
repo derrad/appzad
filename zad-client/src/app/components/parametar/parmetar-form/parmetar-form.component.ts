@@ -3,15 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Parametar} from '../parametar.model';
-import {ParametarService} from '../../../services/opcijeapp/parametar.service';
+import {ParametarService} from '../parametar.service';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition} from '../../../animation/forms.animations'
+import {FlashMessagesService} from 'angular2-flash-messages'; 
 
 @Component({
   selector: 'app-parmetar-form',
   templateUrl: './parmetar-form.component.html',
   styleUrls: ['./parmetar-form.component.css'],
-  animations: [routerTransition()]
+  animations: [formsTransition()]
   
 })
 export class ParmetarFormComponent implements OnInit {
@@ -23,7 +24,7 @@ export class ParmetarFormComponent implements OnInit {
 
   constructor(private router:Router,private route: ActivatedRoute, 
               formBuilder: FormBuilder,private paramService:ParametarService,
-              private _location: Location) { 
+              private _location: Location,private flashMessage:FlashMessagesService) { 
 
     this.frParam = formBuilder.group({
       _id:[],

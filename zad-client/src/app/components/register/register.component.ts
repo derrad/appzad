@@ -14,17 +14,14 @@ import {Location} from '@angular/common';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
-  
 })
 export class RegisterComponent implements OnInit {
   name: String;
   username: String;
   email: String;
   password: String
-  //public msgs: Message[] = [];
   formReg: FormGroup;
   userN: UserModel = new UserModel();
-
 
   constructor(private validateService: ValidateService,
     private authService:AuthService,
@@ -45,8 +42,6 @@ export class RegisterComponent implements OnInit {
         password:[],
         Opis: []
       });
-
-
      }
 
   ngOnInit() {
@@ -57,15 +52,7 @@ export class RegisterComponent implements OnInit {
 
     //alert("Usao u onSubmit");
     const user = this.formReg.value;
-
-    // const user = {
-    //   name: this.name,
-    //   email: this.email,
-    //   username: this.username,
-    //   password: this.password
-    // }
-
-    // Required Fields
+      // Required Fields
     if(!this.validateService.validateRegister(user)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;

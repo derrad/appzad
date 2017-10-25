@@ -9,7 +9,7 @@
                 selectionMode="single" [(selection)]="selectedParam" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" 
                 styleClass="table  table-striped " [immutable]=false [responsive]="true"  >
 
-                <p-header><strong>{{Title}}</strong></p-header>             
+      <p-header><strong>{{Title}}</strong></p-header>             
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <p-column field="Naziv" header="Naziv" sortable="true" ></p-column>
       <p-column field="Koristi" header="Koristi" sortable="true" styleClass="text-center"></p-column>
@@ -45,7 +45,7 @@
 
 
 
-<p-dialog header="Parametar" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+<p-dialog header="PARAMETAR" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
 
     <div>
             <dl class="dl-horizontal">

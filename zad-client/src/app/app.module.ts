@@ -27,7 +27,7 @@ import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
 // import {DrzaveService} from './services/drzave/drzave.service';
 //import {MestaService} from './services/mesta/mesta.service';
-import {ParametarService} from './services/opcijeapp/parametar.service';
+//import {ParametarService} from './services/opcijeapp/parametar.service';
 //import {FondSatiService} from './services/opcijeapp/fond-sati.service';
 import {KonstanteService} from './services/opcijeapp/konstante.service';
 //import {RadnikService} from './services/opcijeapp/radnik.service';
@@ -41,8 +41,8 @@ import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 import { ModalComponent } from './components/modal/modal.component';
 // import { DrzaveComponent } from './components/drzave/drzave.component';
 // import { DrzaveFormComponent } from './components/drzave/drzave-form/drzave-form.component';
-import { ParametarComponent } from './components/parametar/parametar.component';
-import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
+//import { ParametarComponent } from './components/parametar/parametar.component';
+//import { ParmetarFormComponent } from './components/parametar/parmetar-form/parmetar-form.component'; 
 // import { RadnikComponent } from './components/radnik/radnik.component';
 // import { RadnikFormComponent } from './components/radnik/radnik-form/radnik-form.component';
 // import { OpstineComponent } from './components/opstine/opstine.component';
@@ -71,10 +71,12 @@ import { FondSatiModule } from './components/fond-sati/fond-sati.module';
 import { MestaModule } from './components/mesta/mesta.module';
 import { RadnikModule } from './components/radnik/radnik.module';
 import { PosaoModule } from './components/posao/posao.module';
+import { ParametarModule } from './components/parametar/parametar.module';
+
 
 
  const appRoutes: Routes =  [
-   {path:'', component: HomeComponent},
+    {path:'', component: HomeComponent},
     {path:'register', component: RegisterComponent,canActivate:[AuthGuardGlavni]},
     {path:'login', component: LoginComponent},
     {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
@@ -114,7 +116,6 @@ import { PosaoModule } from './components/posao/posao.module';
   //  {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
 
 
-
    { path: 'not-found', component: NotFoundComponent },
    { path: '**', redirectTo: 'not-found' }
  ] 
@@ -130,10 +131,8 @@ import { PosaoModule } from './components/posao/posao.module';
       NavbarComponent,
       NavbarLeftComponent,
       ModalComponent,
-      ParametarComponent,
       VlasnikComponent,
       KonstantaComponent,
-      ParmetarFormComponent,
       NotFoundComponent,
       KeysPipe
      
@@ -163,11 +162,12 @@ import { PosaoModule } from './components/posao/posao.module';
     MestaModule,
     RadnikModule,
     PosaoModule,
+    ParametarModule,
     AppRoutingModule
 
   ],
   providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
-    ParametarService,KonstanteService,
+    KonstanteService,
     VlasnikService,ConfirmationService],
   bootstrap: [AppComponent]
 })
