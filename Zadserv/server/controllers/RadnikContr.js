@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 const Radnik = require('../models/sfRadnik');
+const LogAct = require('../models/apActlog');
+
+const TIP_TRANS_INSERT ="ADD RADNIK";
+const TIP_TRANS_UPDATE ="UPDATE RADNIK";
+const TIP_TRANS_DEL = "DELETE RADNIK";
+
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -45,6 +51,9 @@ if (uid) {
         return res.status(400).
         json({ success: false, message: 'Error processing request ', data:[] }).end(); 
       }
+
+      AddActivity(TIP_TRANS_UPDATE,SifraRad + Prezime+Ime ,NameUser);
+
       return res.status(201).json({
         success: true,
         message: 'Radnik updated successfully', 
@@ -74,6 +83,7 @@ if (uid) {
           { success: false, message: 'Error processing request ', data:[] }).end();
     }
       
+  AddActivity(TIP_TRANS_INSERT,SifraRad + Prezime+Ime ,NameUser);
    return res.status(201).json({
       success: true,
       message: 'Radnik saved successfully',
@@ -84,6 +94,7 @@ if (uid) {
 }
   }
 }
+
 
 
 
@@ -125,7 +136,7 @@ module.exports.getradnik = function (req, res,next) {
 module.exports.deleradnik = function(req, res, next) {
   // res.statusMessage = "Nema brisanja" + req.params.id;
   // return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}).end(); 
-
+  AddActivity(TIP_TRANS_DEL,req.params.id ,req.user.email);
   //console.log("Brisanje radnika : " + req.params.id);
 	Radnik.remove({_id: req.params.id}, function(err){
         if(err){ 
@@ -138,4 +149,23 @@ module.exports.deleradnik = function(req, res, next) {
             data:[]
           });
   });
+}
+
+
+ function AddActivity(tactivnost,topis, tuser){
+   let oLog = new LogAct({
+     Transact:tactivnost,
+     Opis:topis,
+     NameUser:tuser
+   });
+
+   oLog.save(function(err,result) {
+     if(err){ 
+       if(err.errmsg){res.statusMessage = err.errmsg; }else{res.statusMessage = err; }
+       console.log("Error add aktivnost");
+     }
+      
+     console.log("add aktivnost successfully");
+   });
+
 }
