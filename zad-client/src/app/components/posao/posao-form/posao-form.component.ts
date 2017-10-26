@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition} from '../../../animation/forms.animations'
 import { Posao } from './../posao.model';
 import { PosaoService } from './../posao.service';
 
@@ -12,7 +12,7 @@ import { PosaoService } from './../posao.service';
   selector: 'app-posao-form',
   templateUrl: './posao-form.component.html',
   styleUrls: ['./posao-form.component.css'],
-  animations: [routerTransition()]
+  animations: [formsTransition()]
   //pipes: [KeysPipe]
   
 })
