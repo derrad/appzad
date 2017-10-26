@@ -34,3 +34,15 @@ module.exports.StepenSS =[
     'Doktor Nauka'];
 
 
+
+module.exports.Activities =[
+    'Start',
+    'Changes',
+    'Status',
+    'Create/Add new',
+    'Void',
+    'Delete'
+];
+
+
+

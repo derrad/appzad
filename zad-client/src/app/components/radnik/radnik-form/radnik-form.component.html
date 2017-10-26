@@ -34,7 +34,10 @@
                       MIN SifraRad must be at least 4 characters long.
                     </div>
                     <div *ngIf="SifraRad.errors.maxlength">
-                      MAX  SifraRad must be at least 4 characters long.
+                      MAX  SifraRad must be at least 12 characters long.
+                    </div>
+                    <div *ngIf="SifraRad.errors.validateSifru">
+                      Loša šifra 
                     </div>
                 </div>
 
@@ -49,14 +52,14 @@
             </div>
             <div class="form-group">
               <label class="center-block">Prezime:
-                <input class="form-control" formControlName="Prezime"  [(ngModel)]="radnikN.Prezime" >
+                <input class="form-control" formControlName="Prezime"  [(ngModel)]="radnikN.Prezime" required>
               </label>
                <div class="alert alert-danger" *ngIf="!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched">Prezime nije uneto</div> 
               
             </div>
             <div class="form-group">
               <label class="center-block">Ime:
-                <input class="form-control" formControlName="Ime"  [(ngModel)]="radnikN.Ime" >
+                <input class="form-control" formControlName="Ime"  [(ngModel)]="radnikN.Ime" required>
               </label>
                <div class="alert alert-danger" *ngIf="!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched">Ime nije uneto</div> 
             </div>
@@ -84,7 +87,7 @@
             <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formRAD.valid"
-                            class="btn btn-default">
+                            class="btn btn-success">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>
