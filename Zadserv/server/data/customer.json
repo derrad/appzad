@@ -50,11 +50,6 @@
     "time": "2015-07-23T10:58:12.099-07:00"
 }
 
-S TOOLS RELEASE NOTES
-(js, JSON)
-
-Accounting API overview
-Transaction resources
 SAMPLE OBJECT
 {
     "Customer": {
@@ -97,114 +92,7 @@ SAMPLE OBJECT
     },
     "time": "2015-07-23T11:04:15.496-07:00"
 }
-Id:
-required for update
-String, filterable, sortable 
-Unique identifier for this object. 
-Sort order is ASC by default.
-SyncToken:
-required for update
-String 
-Version number of the object. It is used to lock an object for use by one app at a time. As soon as an application modifies an object, its SyncToken is incremented. Attempts to modify an object specifying an older SyncToken fails. Only the latest version of the object is maintained by QuickBooks Online.
-MetaData:
-optional
-ModificationMetaData 
-Descriptive information about the entity. The MetaData values are set by Data Services and are read only for all applications.
-Child attributes
-Title:
-conditionally required
-String, maximum of 15 chars, default is null 
-Title of the person. This tag supports i18n, all locales. The DisplayName attribute or at least one of Title, GivenName, MiddleName, FamilyName, or Suffix attributes is required.
-GivenName:
-conditionally required
-String, maximum of 25 chars, filterable, sortable, default is null 
-Given name or first name of a person. The DisplayName attribute or at least one of Title, GivenName, MiddleName, FamilyName, or Suffix attributes is required.
-MiddleName:
-conditionally required
-String, maximum of 25 chars, filterable, sortable, default is null 
-Middle name of the person. The person can have zero or more middle names. The DisplayName attribute or at least one of Title, GivenName, MiddleName, FamilyName, or Suffix attributes is required.
-FamilyName:
-conditionally required
-String, maximum of 25 chars, filterable, sortable, default is null 
-Family name or the last name of the person. The DisplayName attribute or at least one of Title, GivenName, MiddleName, FamilyName, or Suffix attributes is required.
-Suffix:
-conditionally required
-String, maximum of 10 chars, filterable, sortable, default is null 
-Suffix of the name. For example, Jr. The DisplayName attribute or at least one of Title, GivenName, MiddleName, FamilyName, or Suffix attributes is required.
-DisplayName:
-conditionally required
-String, maximum of 100 chars, filterable, sortable 
-The name of the person or organization as displayed. Must be unique across all Customer, Vendor, and Employee objects. Cannot be removed with sparse update. 
-If not supplied, the system generates DisplayName by concatenating customer name components supplied in the request from the following list: Title, GivenName, MiddleName, FamilyName, and Suffix.
-FullyQualifiedName:
-optional
-String, system generated, filterable, sortable, default is null 
-Fully qualified name of the object. The fully qualified name prepends the topmost parent, followed by each sub element separated by colons. Takes the form of Customer:Job:Sub-job. System generated. Limited to 5 levels.
-CompanyName:
-optional
-String, maximum of 50 chars, filterable, sortable, default is null 
-The name of the company associated with the person or organization.
-PrintOnCheckName:
-optional
-String, maximum of 110 chars, filterable, sortable 
-Name of the person or organization as printed on a check. If not provided, this is populated from DisplayName. 
-Constraints: Cannot be removed with sparse update.
-Active:
-optional
-Boolean, filterable, sortable, default is true 
-If true, this entity is currently enabled for use by QuickBooks. 
-If there is an amount in Customer.Balance when setting this Customer object to inactive through the QuickBooks UI, a CreditMemo balancing transaction is created for the amount.
-PrimaryPhone:
-optional
-TelephoneNumber, maximum of 20 chars 
-Primary phone number.
-Child attributes
-AlternatePhone:
-optional
-TelephoneNumber, maximum of 20 chars 
-Alternate phone number.
-Child attributes
-Mobile:
-optional
-TelephoneNumber, maximum of 20 chars 
-Mobile phone number.
-Child attributes
-Fax:
-optional
-TelephoneNumber, maximum of 20 chars 
-Fax number.
-Child attributes
-PrimaryEmailAddr:
-optional
-EmailAddress, filterable 
-Primary email address.
-Child attributes
-WebAddr:
-optional
-WebSiteAddress, maximum of 1000 chars 
-Website address.
-Child attributes
-DefaultTaxCodeRef:
-optional
-ReferenceType 
-Reference to a default tax code associated with this Customer object. Reference is valid if Customer.Taxable is set to true; otherwise, it is ignored. Query the TaxCode name list resource to determine the appropriate TaxCode object for this reference. Use TaxCode.Id and TaxCode.Name from that object for DefaultTaxCodeRef.value and DefaultTaxCodeRef.name, respectively.
-Child attributes
-Taxable:
-optional
-Boolean 
-If true, transactions for this customer are taxable. Default behavior with minor version 10 and above: true, if DefaultTaxCodeRef is defined or false if TaxExemptionReasonId is set.
-TaxExemptionReasonId:
-required if Customer.Taxable is set to false
-minor version 10
-String, default is null 
-The tax exemption reason associated with this customer object.
-BillAddr:
-optional
-PhysicalAddress 
-Default billing address.
-Child attributes
-ShipAddr:
-optional
+
 PhysicalAddress 
 {
     "BillAddr": {
