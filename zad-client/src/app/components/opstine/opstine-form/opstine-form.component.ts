@@ -7,12 +7,14 @@ import {DrzaveService} from '../../drzave/drzave.service';
 import {OpstineService } from '../opstine.service';
 import {Opstine} from '../opstine.model';
 import {Location} from '@angular/common';
+import {formsTransition} from '../../../animation/forms.animations'
 
 
 @Component({
   selector: 'app-opstine-form',
   templateUrl: './opstine-form.component.html',
-  styleUrls: ['./opstine-form.component.css']
+  styleUrls: ['./opstine-form.component.css'],
+  animations: [formsTransition()]
 })
 export class OpstineFormComponent implements OnInit {
 
@@ -65,7 +67,7 @@ export class OpstineFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje opštine' : 'Nova opština';
+      this.title = id ? 'Ažuriranje opštine' : 'Nova opština';
 
       if (!id)
         return;

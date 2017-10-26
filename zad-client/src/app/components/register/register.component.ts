@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   password: String
   formReg: FormGroup;
   userN: UserModel = new UserModel();
+  title: string;
 
   constructor(private validateService: ValidateService,
     private authService:AuthService,
@@ -45,7 +46,7 @@ export class RegisterComponent implements OnInit {
      }
 
   ngOnInit() {
-  
+    this.title = 'Register' ;
   }
 
   onRegisterSubmit(){

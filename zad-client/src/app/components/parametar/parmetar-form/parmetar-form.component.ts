@@ -45,7 +45,7 @@ export class ParmetarFormComponent implements OnInit {
   ngOnInit() {
     var id = this.route.params.subscribe(params => {
     var id = params['id'];
-    this.title = id ? 'Edit Parametar' : 'ADD Parametar';
+    this.title = id ? 'Ažuriranje Parametar' : 'Novi Parametar';
 
       if (!id)
         return;

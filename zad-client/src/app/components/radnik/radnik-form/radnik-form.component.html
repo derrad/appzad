@@ -1,36 +1,64 @@
 <!-- <p>
-  radnik-form works!
+  radnik-form works! 
 </p> -->
 
-<div class="panel panel-primary" [@routerTransition]>
+<div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <h3>{{title}}</h3>
+      <div class="row">
+          <div class="text-left col-lg-9 col-md-9 col-xs-9">
+            <h3>{{title}}</h3> 
+          </div>
+          <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+            <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
+          </div>
+      </div>
   </div>
   <div class="panel-body">
-      <form [formGroup]="formRAD" (ngSubmit)="save()" novalidate>
+      <form [formGroup]="formRAD" (ngSubmit)="save()" novalidate >
           <div class="form-group" >
                <input class="form-control" formControlName="_id"  [(ngModel)]="radnikN._id"   type="hidden">
           </div>
           
           <div class="form-group">
               <label class="center-block">Šifra:
-                <input class="form-control" formControlName="SifraRad"  [(ngModel)]="radnikN.SifraRad" >
+                <input class="form-control" formControlName="SifraRad"  [(ngModel)]="radnikN.SifraRad" required >
               </label>
-               <div class="text-danger" *ngIf="!formRAD.controls['SifraRad'].valid && formRAD.controls['SifraRad'].touched">Šifra nije uneta</div> 
               
+              <div *ngIf="SifraRad.invalid && (SifraRad.dirty || SifraRad.touched)"
+                        class="alert alert-danger">
+                  
+                    <div *ngIf="SifraRad.errors.required">
+                        SifraRad is required.
+                    </div>
+                    <div *ngIf="SifraRad.errors.minlength">
+                      MIN SifraRad must be at least 4 characters long.
+                    </div>
+                    <div *ngIf="SifraRad.errors.maxlength">
+                      MAX  SifraRad must be at least 4 characters long.
+                    </div>
+                </div>
+
+              <!-- <div class="alert alert-danger" *ngIf="!formRAD.controls['SifraRad'].valid && formRAD.controls['SifraRad'].touched">Šifra nije uneta</div> 
+              <div class="alert alert-danger" *ngIf="!formRAD.controls['SifraRad'].minlength || !formRAD.controls['SifraRad'].maxlength && formRAD.controls['SifraRad'].touched" >
+                  Šifra must be at least 4 characters long.
+                </div> -->
+              <!-- <div class="alert alert-danger" *ngIf="!formRAD.controls['SifraRad'].maxlength" >
+                  Šifra must be at least 4 characters long.
+                </div> -->
+
             </div>
             <div class="form-group">
               <label class="center-block">Prezime:
                 <input class="form-control" formControlName="Prezime"  [(ngModel)]="radnikN.Prezime" >
               </label>
-               <div class="text-danger" *ngIf="!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched">Prezime nije uneto</div> 
+               <div class="alert alert-danger" *ngIf="!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched">Prezime nije uneto</div> 
               
             </div>
             <div class="form-group">
               <label class="center-block">Ime:
                 <input class="form-control" formControlName="Ime"  [(ngModel)]="radnikN.Ime" >
               </label>
-               <div class="text-danger" *ngIf="!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched">Ime nije uneto</div> 
+               <div class="alert alert-danger" *ngIf="!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched">Ime nije uneto</div> 
             </div>
             
             <div class="form-group">
@@ -38,14 +66,14 @@
                   <input class="form-control" formControlName="Jmbg"  [(ngModel)]="radnikN.Jmbg" >
                 </label>
               </div>
-              
-              <div class="checkbox">
-                <label class="center-block">
-                  <input type="checkbox" formControlName="Aktivan" [(ngModel)]="radnikN.Aktivan"  value="1">Aktivan.
-                </label>
-                
+              <div class="form-group">
+                <div class="checkbox">
+                  <label class="center-block">
+                    <input type="checkbox" formControlName="Aktivan" [(ngModel)]="radnikN.Aktivan"> Aktivan
+                  </label>
+                  
+                </div>
               </div>
-
               <div class="form-group">
                 <label class="center-block">Opis:
                   <textarea class="form-control" formControlName="Opis"  [(ngModel)]="radnikN.Opis">

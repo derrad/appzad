@@ -6,14 +6,14 @@ import { Mesta } from './../mesta.model';
 import { MestaService } from './../mesta.service';
 import {Opstine} from '../../opstine/opstine.model';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition} from '../../../animation/forms.animations'
 import { OpstineService} from './../../opstine/opstine.service';
 
 @Component({
   selector: 'app-mesta-form',
   templateUrl: './mesta-form.component.html',
   styleUrls: ['./mesta-form.component.css'],
-   animations: [routerTransition()]
+   animations: [formsTransition()]
 
 })
 export class MestaFormComponent implements OnInit {
@@ -64,7 +64,7 @@ export class MestaFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje mesta' : 'Novo mesto';
+      this.title = id ? 'Ažuriranje mesta' : 'Novo mesto';
 
       if (!id)
         return;

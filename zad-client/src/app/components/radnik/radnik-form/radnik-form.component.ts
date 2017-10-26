@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition} from '../../../animation/forms.animations'
 import { Radnik } from '../radnik.model';
 import { RadnikService} from '../radnik.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -12,7 +12,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   selector: 'app-radnik-form',
   templateUrl: './radnik-form.component.html',
   styleUrls: ['./radnik-form.component.css'],
-  animations: [routerTransition()]
+  animations: [formsTransition()]
 })
 export class RadnikFormComponent implements OnInit {
   formRAD: FormGroup;
@@ -24,7 +24,7 @@ export class RadnikFormComponent implements OnInit {
       
       this.formRAD = formBuilder.group({
         _id:[],
-        SifraRad:['',[Validators.required]],
+        SifraRad:['',[Validators.required, Validators.minLength(4),Validators.maxLength(4)]],
         Ime: ['', [
           Validators.required
         ]],
@@ -44,7 +44,7 @@ export class RadnikFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje radnika' : 'Novi radnik';
+      this.title = id ? 'Ažuriranje radnika' : 'Novi radnik';
 
       if (!id)
         return;
@@ -67,8 +67,10 @@ export class RadnikFormComponent implements OnInit {
             // }
           });
     });
-  }
 
+   
+  }
+  get SifraRad() { return this.formRAD.get('SifraRad'); }
 
   backClicked(event: any) {
     this._location.back();
@@ -80,7 +82,7 @@ save() {
         radValue = this.formRAD.value;
       
     if (radValue._id){
-      result = this.radService.updateRadnik(radValue).subscribe(
+       this.radService.updateRadnik(radValue).subscribe(
         (pos) =>{
           if(pos.success){
             this.flashMessage.show(pos.message, {
@@ -96,7 +98,7 @@ save() {
             cssClass: 'alert-danger',
             timeout: 9000});
         
-          console.log(" forma UPDATE  " + error);
+        //  console.log(" forma UPDATE  " + error);
          
         },
         

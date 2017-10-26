@@ -4,13 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Drzave} from '../drzave.model';
 import { DrzaveService } from '../drzave.service';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition } from '../../../animation/forms.animations' 
 
 @Component({
   selector: 'app-drzave-form',
   templateUrl: './drzave-form.component.html',
   styleUrls: ['./drzave-form.component.css'],
-  animations: [routerTransition()]
+  animations: [ formsTransition()]
 })
 export class DrzaveFormComponent implements OnInit {
 
@@ -47,7 +47,7 @@ export class DrzaveFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Edit Država' : 'New Država';
+      this.title = id ? 'Ažuriranje Države' : 'NOVA Država';
 
       if (!id)
         return;

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import { routerTransition } from '../../../animation/router.animations' 
+import {formsTransition} from '../../../animation/forms.animations'
 import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -15,7 +15,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   selector: 'app-fond-sati-form',
   templateUrl: './fond-sati-form.component.html',
   styleUrls: ['./fond-sati-form.component.css'],
-  animations: [routerTransition()]
+  animations: [formsTransition()]
 })
 export class FondSatiFormComponent implements OnInit {
   formFSAT: FormGroup;
@@ -49,7 +49,7 @@ export class FondSatiFormComponent implements OnInit {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
-      this.title = id ? 'Ažurianje fonda sati' : 'Novi fond sati';
+      this.title = id ? 'Ažuriranje fonda sati' : 'Novi fond sati';
 
       if (!id)
         return;
