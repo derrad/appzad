@@ -1,6 +1,13 @@
 var mongoose = require('mongoose');
 var Partner = require('../models/sfPartneri');
 
+const LogAct = require('../models/apActlog');
+const TypeA = require('../enum/serverenum');
+
+const TIP_TRANS_INSERT ="ADD KUPAC";
+const TIP_TRANS_UPDATE ="CHANGES KUPAC";
+const TIP_TRANS_DEL = "DELETE KUPAC";
+
 module.exports.create = function (req, res) {
  // var error;
   var customer = new Partner(req.body);

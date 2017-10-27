@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 const Parametar = require('../models/apParametar');
+const TypeA = require('../enum/serverenum');
+const SetActivity = require('./SetActivity');
+
+
+const TIP_TRANS_INSERT ="ADD PARAMETAR";
+const TIP_TRANS_UPDATE ="CHANGES PARAMETAR";
+const TIP_TRANS_DEL = "DELETE PARAMETAR";
 
 
 module.exports.create = function (req, res,next) {
@@ -31,9 +38,13 @@ module.exports.create = function (req, res,next) {
         
           param.save(function(err,results) {
                 if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-                  return res.status(201).json({
+                try{
+                  SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
+                } catch(ex){}                
+                
+                return res.status(201).json({
                           success: true,
-                          message: 'Parametarupdated successfully',
+                          message: 'Parametar updated successfully',
                           data:results});
                 });
         }
@@ -53,8 +64,12 @@ module.exports.create = function (req, res,next) {
           });
 
           oParam.save(function(err,result) {
-            if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:null});}
+            if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]});}
               
+            try{
+              SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, Naziv , NameUser)
+            } catch(ex){}
+
           return res.status(201).json({
               success: true,
               message: 'Parametar saved successfully',
@@ -95,6 +110,7 @@ module.exports.getparam = function (req, res,next) {
       { success: false, message:'Error processing request '+ err , data:[] }
       ); 
     }
+
       return res.status(200).json({
       success: true, 
       message:'Successfully',
@@ -109,6 +125,10 @@ module.exports.deleparam = function(req, res, next) {
  // const uid = req.params.id || '1234';
  Parametar.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+     
+        try{
+          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Parametar" , req.user.email)
+          } catch(ex){}
         return res.status(201).json({
             success: true,
             message: 'Parametar removed successfully',
@@ -119,4 +139,21 @@ module.exports.deleparam = function(req, res, next) {
 
 
 
+// function AddActivity(tActivnost,tTrans,tNumber,topis, tuser){
+//   let oLogNew = new LogAct({
+//     TypeAct:tActivnost || TypeA.Activities[0], // ; Start,
+//     Transact:tTrans,
+//     TransactNumber:tNumber,
+//     Opis:topis,
+//     NameUser:tuser
+//   });
+//   LogAct.addLog(oLogNew, (err, logNew) => {
+//      if(err){
+//        console.log("Error add aktivnost");
+
+//      } else {
+//        console.log("add aktivnost successfully");
+//      }
+//   });
+// }
 

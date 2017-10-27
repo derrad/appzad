@@ -90,12 +90,14 @@ const FondSatiRouter= require('./server/Route/FondSatiRouters');
 const KorisnikRouter= require('./server/Route/KorisnikRouters');
 const MestaRouter= require('./server/Route/MestaRouters');
 const VezbeRouter= require('./server/Route/VezbaRouters');
+const ActLogRouter= require('./server/Route/ActLogRouters');
 
 app.use('/users', users); 
 
 app.use('/', [index,DrzaveRoute,PosaoRoute,ParamRoute,VlasnikRoute,ZadrugarRouter,
               ZanimanjaRouter,RadnikRouter,PartneriRouter,OpstineRouter,MestaRouter,
-              KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,VezbeRouter])
+              KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,VezbeRouter,
+              ActLogRouter])
 
 
 //Route in app

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Radnik = require('../models/sfRadnik');
-const LogAct = require('../models/apActlog');
 const TypeA = require('../enum/serverenum');
+const SetActivity = require('./SetActivity');
 
 const TIP_TRANS_INSERT ="ADD RADNIK";
 const TIP_TRANS_UPDATE ="CHANGES RADNIK";
@@ -55,7 +55,7 @@ if (uid) {
 
       try{
         const UpdRad = SifraRad + " " + Prezime+ " " + Ime;
-        AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, UpdRad , NameUser)
+        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, UpdRad , NameUser)
       } catch(ex){}
       
 
@@ -90,7 +90,7 @@ if (uid) {
       
     try{
       const NoviRad = SifraRad + " " + Prezime+ " " + Ime;
-      AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, NoviRad , NameUser)
+      SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, NoviRad , NameUser)
     } catch(ex){}
    return res.status(201).json({
       success: true,
@@ -152,7 +152,7 @@ module.exports.deleradnik = function(req, res, next) {
           return res.status(400).json({ success: false, message: 'Error processing request ' , data:[]}).end(); 
         }
         try{
-          AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Radnik" , req.user.email)
+          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Radnik" , req.user.email)
           } catch(ex){}
         return res.status(201).json({
             success: true,
@@ -163,20 +163,20 @@ module.exports.deleradnik = function(req, res, next) {
 }
 
 
-function AddActivity(tActivnost,tTrans,tNumber,topis, tuser){
-   let oLogNew = new LogAct({
-     TypeAct:tActivnost || TypeA.Activities[0], // ; Start,
-     Transact:tTrans,
-     TransactNumber:tNumber,
-     Opis:topis,
-     NameUser:tuser
-   });
-   LogAct.addLog(oLogNew, (err, logNew) => {
-      if(err){
-        console.log("Error add aktivnost");
+// function AddActivity(tActivnost,tTrans,tNumber,topis, tuser){
+//    let oLogNew = new LogAct({
+//      TypeAct:tActivnost || TypeA.Activities[0], // ; Start,
+//      Transact:tTrans,
+//      TransactNumber:tNumber,
+//      Opis:topis,
+//      NameUser:tuser
+//    });
+//    LogAct.addLog(oLogNew, (err, logNew) => {
+//       if(err){
+//         console.log("Error add aktivnost");
 
-      } else {
-        console.log("add aktivnost successfully");
-      }
-   });
-}
+//       } else {
+//         console.log("add aktivnost successfully");
+//       }
+//    });
+// }
