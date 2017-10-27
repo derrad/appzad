@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,7 @@ import { NavbarLeftComponent } from './components/navbar-left/navbar-left.compon
 //Service
 import {AuthService} from './services/auth/auth.service';
 import {ValidateService} from './services/auth/validate.service'; 
+import { ServiceValidateShared } from './services/service.validate.shared';
 // import {DrzaveService} from './services/drzave/drzave.service';
 //import {MestaService} from './services/mesta/mesta.service';
 //import {ParametarService} from './services/opcijeapp/parametar.service';
@@ -166,7 +168,7 @@ import { ParametarModule } from './components/parametar/parametar.module';
     AppRoutingModule
 
   ],
-  providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,
+  providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,ServiceValidateShared,
     KonstanteService,
     VlasnikService,ConfirmationService],
   bootstrap: [AppComponent]

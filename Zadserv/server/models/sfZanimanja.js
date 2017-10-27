@@ -7,7 +7,7 @@ var EnumSS = require('../enum/serverenum');
 
 var sfZanimanja = new Schema({
    IDZanimanjaID:{type:Schema.Types.Mixed},
-   Sifra  :{ type: String , unique: true,
+    Sifra  :{ type: String , unique: true,
     trim: true, 
     match : [
             new RegExp('^[a-z0-9_-]+$', 'i'),

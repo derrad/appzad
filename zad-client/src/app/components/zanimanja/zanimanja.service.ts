@@ -81,7 +81,7 @@ export class ZanimanjaService {
   }
 
  private handleError(error: Response) {
-    console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
+    //console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
     let greska =error.status + "  " + error.statusText;
     //return Observable.throw(error.statusText || 'Server error');
     return Observable.throw(greska || 'Server error');

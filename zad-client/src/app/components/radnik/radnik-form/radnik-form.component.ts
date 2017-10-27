@@ -1,5 +1,5 @@
-import { Message } from 'primeng/components/common/api';
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
@@ -7,6 +7,8 @@ import {formsTransition} from '../../../animation/forms.animations'
 import { Radnik } from '../radnik.model';
 import { RadnikService} from '../radnik.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import { ServiceValidateShared } from './../../../services/service.validate.shared';
+//import { PlatformLocation } from '@angular/common'
 
 @Component({
   selector: 'app-radnik-form',
@@ -14,17 +16,19 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./radnik-form.component.css'],
   animations: [formsTransition()]
 })
-export class RadnikFormComponent implements OnInit {
+export class RadnikFormComponent implements OnInit, OnDestroy  {
   formRAD: FormGroup;
   title: string;
   radnikN : Radnik = new Radnik();
+  saveTemp:boolean = true;
    
   constructor(private radService:RadnikService, private router:Router,private route: ActivatedRoute, 
-    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService) {
+    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
+    private serValidate:ServiceValidateShared ) {
       
       this.formRAD = formBuilder.group({
         _id:[],
-        SifraRad:['',[Validators.required, Validators.minLength(4),Validators.maxLength(12),this.validateSifru]],
+        SifraRad:['',[Validators.required, Validators.minLength(4),Validators.maxLength(12),serValidate.validateRegExpSifru]],
         Ime: ['', [Validators.required,Validators.maxLength(100)]],
         Prezime: ['', [Validators.required,Validators.maxLength(100)]],
         Jmbg:[],
@@ -32,7 +36,11 @@ export class RadnikFormComponent implements OnInit {
         Opis: []
       });
 
-
+      //   plloc.onPopState(() => {
+          
+      //             console.log('pressed back!');
+          
+      // });
 
     }
 
@@ -43,13 +51,17 @@ export class RadnikFormComponent implements OnInit {
 
 
   ngOnInit() {
+   // this._location.subscribe(x => console.log(x));
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
       this.title = id ? 'Ažuriranje radnika' : 'Novi radnik';
 
-      if (!id)
+      if (!id){
+        this.loadTempData();
         return;
+      }
+       
 
       this.radService.getRadnik(id)
         .subscribe(
@@ -73,8 +85,30 @@ export class RadnikFormComponent implements OnInit {
    
   }
   
+  loadTempData(){
+    const radnik = JSON.parse(localStorage.getItem('data_radnik'));
+   // console.log(radnik);
+    if(radnik){
+      this.radnikN =radnik;
+    }
+    
+  }
+  setTempData(){
+    const  radValue = JSON.stringify(this.formRAD.value);
+    if(radValue){
+      if(this.saveTemp){
+      localStorage.setItem('data_radnik',radValue);
+      }
+    }
+    
+   }
+  clearTempData(){
+  //  console.log("CLear data pozvan");
+    localStorage.removeItem('data_radnik');
+  }
 
   backClicked(event: any) {
+    this.setTempData();
     this._location.back();
     //event.stopPropagation();
     
@@ -87,10 +121,13 @@ save() {
        this.radService.updateRadnik(radValue).subscribe(
         (pos) =>{
           if(pos.success){
+            this.clearTempData();
+            this.saveTemp=false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
               this.router.navigate(['radnik'])
+            
           }else{
             this.router.navigate(['NotFound']);
           }
@@ -112,6 +149,8 @@ save() {
       .subscribe(
         (pos) =>{
           if(pos.success){
+            this.clearTempData();
+            this.saveTemp=false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
@@ -129,9 +168,6 @@ save() {
         },
         
       );
-      
-      
-      
     }
 
     //result.subscribe(data => this.router.navigate(['radnik']));
@@ -152,16 +188,20 @@ save() {
 
 }
 
-
-validateSifru(c: FormControl) {
-  let SIFRA_REGEXP = new RegExp('^[a-z0-9_-]+$', 'i');
-
-  return SIFRA_REGEXP.test(c.value) ? null : {
-    validateSifru: {
-      valid: false
-    }
-  };
+ngOnDestroy() {
+ // console.log("radnik destroy");
+  this.setTempData();
 }
+
+// validateSifru(c: FormControl) {
+//   let SIFRA_REGEXP = new RegExp('^[a-z0-9_-]+$', 'i');
+
+//   return SIFRA_REGEXP.test(c.value) ? null : {
+//     validateSifru: {
+//       valid: false
+//     }
+//   };
+// }
 
 
 
