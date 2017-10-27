@@ -85,8 +85,11 @@ delFondSati(id){
 //  }
 
   private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    let greska =error.status + "  " + error.statusText;
+    
+    //console.log(JSON.stringify(error));
+    //return Observable.throw(error.statusText || 'Server error');
+    return Observable.throw(greska || 'Server error');
 } 
 
 }

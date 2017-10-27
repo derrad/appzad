@@ -42,6 +42,10 @@ module.exports.create = function (req, res,next) {
                   SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
                 } catch(ex){}                
                 
+                try{
+                   SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
+                } catch(ex){}
+
                 return res.status(201).json({
                           success: true,
                           message: 'Parametar updated successfully',

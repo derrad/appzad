@@ -1,32 +1,31 @@
-//import { KeysPipe } from './../../../shared/PipeApp/keys.pipe';
-import {StepenSS} from './../../../shared/EnumApp/StepenSS.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations'
 import { Posao } from './../posao.model';
 import { PosaoService } from './../posao.service';
+import {StepenSS} from './../../../shared/EnumApp/StepenSS.enum';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-posao-form',
   templateUrl: './posao-form.component.html',
   styleUrls: ['./posao-form.component.css'],
   animations: [formsTransition()]
-  //pipes: [KeysPipe]
   
 })
-export class PosaoFormComponent implements OnInit {
+export class PosaoFormComponent implements OnInit , OnDestroy{
 
   formPOSAO: FormGroup;
   title: string;
   posaoN : Posao = new Posao();
-  titleAlertNaziv:string ="Naziv,This field is required !!!";
   strSprema = StepenSS;
+  saveTemp:boolean = true;
 
 
   constructor(private posService:PosaoService, private router:Router,private route: ActivatedRoute, 
-    formBuilder: FormBuilder ,private _location: Location) { 
+    formBuilder: FormBuilder ,private _location: Location, private flashMessage:FlashMessagesService) { 
 
       this.formPOSAO = formBuilder.group({
         _id:[],
@@ -41,34 +40,71 @@ export class PosaoFormComponent implements OnInit {
       });
     }
 
+  get Naziv() { return this.formPOSAO.get('Naziv'); }
+  get StepenSS() { return this.formPOSAO.get('StepenSS'); }
+
   ngOnInit() {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
       this.title = id ? 'Ažuriranje posla' : 'Novi posao';
 
-      if (!id)
+      if (!id){
+        this.loadTempData();
         return;
+      }
 
       this.posService.getPosao(id)
         .subscribe(
           (pos) =>{
             if(pos.success){
+              this.saveTemp = false;
               this.posaoN = pos.data[0];
             }else{
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
-          response => {
-            if (response.status == 404) {
+          error => {
+            this.flashMessage.show(error, {
+              cssClass: 'alert-danger',
+              timeout: 9000});
+          //  if (error.status == 404) {
               this.router.navigate(['NotFound']);
-            }
+         //   }
           });
     });
   }
 
 
+  loadTempData(){
+    const posao = JSON.parse(localStorage.getItem('data_posao'));
+    if(posao){
+      this.posaoN =posao;
+    }
+    
+  }
+
+  setTempData(){
+    const  posValue = JSON.stringify(this.formPOSAO.value);
+    if(posValue){
+      if(this.saveTemp){
+        localStorage.setItem('data_posao',posValue);
+      }else{
+        this.clearTempData();
+      }
+    }
+    
+   }
+ 
+ clearTempData(){
+     localStorage.removeItem('data_posao');
+  }
+
   backClicked(event: any) {
+    this.setTempData();
     this._location.back();
     //event.stopPropagation();
     
@@ -78,14 +114,58 @@ export class PosaoFormComponent implements OnInit {
     var result,
         posValue = this.formPOSAO.value;
 
-      
-    if (posValue._id){
-      result = this.posService.updatePosao(posValue);
-    } else {
-      result = this.posService.addPosao(posValue);
-    }
 
-    result.subscribe(data => this.router.navigate(['posao']));
+        if (posValue._id){
+          this.posService.updatePosao(posValue).subscribe(
+           (pos) =>{
+             if(pos.success){
+               this.clearTempData();
+               this.saveTemp=false;
+               this.flashMessage.show(pos.message, {
+                 cssClass: 'alert-success',
+                 timeout: 5000});
+                 this.router.navigate(['posao'])
+               
+             }else{
+               this.router.navigate(['NotFound']);
+             }
+           } ,
+           error => {
+             this.flashMessage.show(error, {
+               cssClass: 'alert-danger',
+               timeout: 9000});
+            
+           },
+           
+         );
+   
+       } else {
+   
+        this.posService.addPosao(posValue)
+         .subscribe(
+           (pos) =>{
+             if(pos.success){
+               this.clearTempData();
+               this.saveTemp=false;
+               this.flashMessage.show(pos.message, {
+                 cssClass: 'alert-success',
+                 timeout: 5000});
+                 this.router.navigate(['posao'])
+             }else{
+               this.router.navigate(['NotFound']);
+             }
+           } ,
+           error => {
+             this.flashMessage.show(error, {
+               cssClass: 'alert-danger',
+               timeout: 9000});
+                     
+           },
+           
+         );
+       }
+      
+ 
   }
 
   revert() { this.ngOnChanges(); }
@@ -98,9 +178,13 @@ export class PosaoFormComponent implements OnInit {
       Sifra1:"",
       Opis:""
     });
-
-
 }
+
+ngOnDestroy() {
+  this.setTempData();
+}
+
+
 
 }
 

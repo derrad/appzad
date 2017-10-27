@@ -1,5 +1,5 @@
 import { Message } from 'primeng/components/common/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location} from '@angular/common';
@@ -16,11 +16,12 @@ import { ServiceValidateShared } from './../../../services/service.validate.shar
   styleUrls: ['./zanimanja-form.component.css'],
   animations: [routerTransition()]
 })
-export class ZanimanjaFormComponent implements OnInit {
+export class ZanimanjaFormComponent implements OnInit , OnDestroy{
   formZAN: FormGroup;
   title: string;
   zanimN : ZanimanjaModel = new ZanimanjaModel();
   strSprema = StepenSS;
+  saveTemp:boolean = true;
 
   constructor(private zanService:ZanimanjaService, private router:Router,private route: ActivatedRoute, 
     formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
@@ -49,15 +50,21 @@ export class ZanimanjaFormComponent implements OnInit {
 
       this.title = id ? 'Ažuriranje zanimanja' : 'Novo zanimanje';
 
-      if (!id)
+      if (!id){
+        this.loadTempData();
         return;
+      }
 
         this.zanService.getZanimanje(id)
         .subscribe(
           (pos) =>{
             if(pos.success){
+              this.saveTemp = false;
               this.zanimN = pos.data[0];
             }else{
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
@@ -75,10 +82,10 @@ export class ZanimanjaFormComponent implements OnInit {
 
 
   backClicked(event: any) {
+    this.setTempData();
     this._location.back();
     //event.stopPropagation();
-    
-  }
+ }
 
   save() {
     var result,
@@ -89,6 +96,8 @@ export class ZanimanjaFormComponent implements OnInit {
           this.zanService.updateZanimanje(zanValue).subscribe(
            (pos) =>{
              if(pos.success){
+              this.clearTempData();
+              this.saveTemp=false;
                this.flashMessage.show(pos.message, {
                  cssClass: 'alert-success',
                  timeout: 5000});
@@ -101,9 +110,7 @@ export class ZanimanjaFormComponent implements OnInit {
              this.flashMessage.show(error, {
                cssClass: 'alert-danger',
                timeout: 9000});
-           
-           //  console.log(" forma UPDATE  " + error);
-            
+                     
            },
            
          );
@@ -114,6 +121,8 @@ export class ZanimanjaFormComponent implements OnInit {
          .subscribe(
            (pos) =>{
              if(pos.success){
+              this.clearTempData();
+              this.saveTemp=false;
                this.flashMessage.show(pos.message, {
                  cssClass: 'alert-success',
                  timeout: 5000});
@@ -132,17 +141,37 @@ export class ZanimanjaFormComponent implements OnInit {
            
          );
        }
-     
-    // if (zanValue._id){
-    //   result = this.zanService.updateZanimanje(zanValue);
-    // } else {
-    //   result = this.zanService.addZanimanje(zanValue);
-    // }
-
-    // result.subscribe(data => this.router.navigate(['zanimanja']));
+   
   }
 
+  loadTempData(){
+    const zanim = JSON.parse(localStorage.getItem('data_zanim'));
+    if(zanim){
+      this.zanimN =zanim;
+    }
+    
+  }
 
+  setTempData(){
+    const  radValue = JSON.stringify(this.formZAN.value);
+    if(radValue){
+      if(this.saveTemp){
+       localStorage.setItem('data_zanim',radValue);
+      }else{
+        this.clearTempData();
+      }
+    }
+    
+   }
+ 
+   clearTempData(){
+      localStorage.removeItem('data_zanim');
+  }
+
+  ngOnDestroy() {
+    // console.log("radnik destroy");
+     this.setTempData();
+   }
 
   revert() { this.ngOnChanges(); }
   

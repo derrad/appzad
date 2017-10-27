@@ -1,5 +1,5 @@
-import { Message } from 'primeng/components/common/api';
-import { Component, OnInit } from '@angular/core';
+//import { Message } from 'primeng/components/common/api';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Parametar} from '../parametar.model';
@@ -7,6 +7,7 @@ import {ParametarService} from '../parametar.service';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations'
 import {FlashMessagesService} from 'angular2-flash-messages'; 
+import { ServiceValidateShared } from './../../../services/service.validate.shared';
 
 @Component({
   selector: 'app-parmetar-form',
@@ -15,88 +16,156 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   animations: [formsTransition()]
   
 })
-export class ParmetarFormComponent implements OnInit {
+export class ParmetarFormComponent implements OnInit,OnDestroy {
 
   frParam: FormGroup;
   title: string;
   parametar: Parametar = new Parametar();
-  titleAlertNaziv:string = 'This field is required !!!';
+  saveTemp:boolean = true;
 
   constructor(private router:Router,private route: ActivatedRoute, 
               formBuilder: FormBuilder,private paramService:ParametarService,
-              private _location: Location,private flashMessage:FlashMessagesService) { 
+              private _location: Location,private flashMessage:FlashMessagesService,
+              private serValidate:ServiceValidateShared) { 
 
     this.frParam = formBuilder.group({
       _id:[],
       Naziv: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(25)
+        Validators.maxLength(25),
+        serValidate.validateRegExpSifru
       ]],
       Koristi:[],
       VredString:[],
       VredNumeric:[],
       Opis: []
     });
-
-
   }
+
+  get Naziv() { return this.frParam.get('Naziv'); }
 
   ngOnInit() {
     var id = this.route.params.subscribe(params => {
     var id = params['id'];
-    this.title = id ? 'Ažuriranje Parametar' : 'Novi Parametar';
+    this.title = id ? 'Ažuriranje Parametra' : 'Novi Parametar';
 
-      if (!id)
-        return;
+    if (!id){
+      this.loadTempData();
+      return;
+    }
 
       this.paramService.getParametar(id)
         .subscribe(
         (param) => {
-          console.log(param);
           if(param.success){
+            this.saveTemp = false;
             this.parametar = param.data[0];
           }else{
+            this.flashMessage.show(param.message, {
+              cssClass: 'alert-danger',
+              timeout: 9000});
             this.router.navigate(['NotFound']);
           }
-          
-        
         },
-          response => {
-            if (response.status == 404) {
+          error => {
+            this.flashMessage.show(error, {
+              cssClass: 'alert-danger',
+              timeout: 9000});
               this.router.navigate(['NotFound']);
-            }
           });
     });
 
   }
 
+  loadTempData(){
+    const par = JSON.parse(localStorage.getItem('data_param'));
+    if(par){
+      this.parametar =par;
+    }
+    
+  }
+
+  setTempData(){
+    const  parValue = JSON.stringify(this.frParam.value);
+    if(parValue){
+      if(this.saveTemp){
+      localStorage.setItem('data_param',parValue);
+      }else{
+        this.clearTempData();
+      }
+    }
+    
+   }
+ 
+ clearTempData(){
+     localStorage.removeItem('data_param');
+  }
+
   backClicked(event: any) {
+    this.setTempData();
     this._location.back();
     //event.stopPropagation();
     
   }
 
+ 
+
   save() {
     var result,
         paramValue = this.frParam.value;
 
-    if (paramValue._id){
-      console.log("usao u parametar");
-      result = this.paramService.updateParametar(paramValue);
-    } else {
-      try{
-        result = this.paramService.addParametar(paramValue);
-      }catch(er){
-        console.log("SAVE KOD ADD catch error" + er.Message); 
-      }
-      
-      if (result) {
-        console.log("SAVE KOD ADD" + result) ;
-      }
-    }
 
-    result.subscribe(data => this.router.navigate(['parametar']));
+        if (paramValue._id){
+          this.paramService.updateParametar(paramValue).subscribe(
+           (pos) =>{
+             if(pos.success){
+               this.clearTempData();
+               this.saveTemp=false;
+               this.flashMessage.show(pos.message, {
+                 cssClass: 'alert-success',
+                 timeout: 5000});
+                 this.router.navigate(['parametar'])
+               
+             }else{
+               this.router.navigate(['NotFound']);
+             }
+           } ,
+           error => {
+             this.flashMessage.show(error, {
+               cssClass: 'alert-danger',
+               timeout: 9000});
+            
+           },
+           
+         );
+   
+       } else {
+   
+        this.paramService.addParametar(paramValue)
+         .subscribe(
+           (pos) =>{
+             if(pos.success){
+               this.clearTempData();
+               this.saveTemp=false;
+               this.flashMessage.show(pos.message, {
+                 cssClass: 'alert-success',
+                 timeout: 5000});
+                 this.router.navigate(['parametar'])
+             }else{
+               this.router.navigate(['NotFound']);
+             }
+           } ,
+           error => {
+             this.flashMessage.show(error, {
+               cssClass: 'alert-danger',
+               timeout: 9000});
+                     
+           },
+           
+         );
+       }
+
   }
 
   revert() { this.ngOnChanges(); }
@@ -113,6 +182,10 @@ export class ParmetarFormComponent implements OnInit {
     
   }
 
+  ngOnDestroy() {
+    this.setTempData();
+  }
+  
 
 
 

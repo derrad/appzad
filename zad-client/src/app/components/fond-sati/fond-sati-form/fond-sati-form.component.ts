@@ -1,5 +1,5 @@
 // import { Message } from 'primeng/components/common/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
@@ -7,9 +7,8 @@ import {formsTransition} from '../../../animation/forms.animations'
 import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
-//import { DecimalMask } from './../../../directive/decimal-mask.directive';
+import { ServiceValidateShared } from './../../../services/service.validate.shared';
 
-//import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-fond-sati-form',
@@ -17,27 +16,30 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./fond-sati-form.component.css'],
   animations: [formsTransition()]
 })
-export class FondSatiFormComponent implements OnInit {
+export class FondSatiFormComponent implements OnInit, OnDestroy {
   formFSAT: FormGroup;
   title: string;
   fnsatN : FondSati = new FondSati();
+  saveTemp:boolean = true;
+
   constructor(private fnsatService:FondSatiService, private router:Router,private route: ActivatedRoute, 
-    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService) {
+    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
+    private serValidate:ServiceValidateShared ) {
 
       this.formFSAT = formBuilder.group({
         _id:[],
-        Mesec:['',[Validators.required]],
+        Mesec:['',[Validators.required,serValidate.maxValue(12),serValidate.minValue(1)]],
         Godina: ['', [
           Validators.required
         ]],
         Sati: ['', [
-          Validators.required
+          Validators.required,,serValidate.maxValue(248),serValidate.minValue(0)
         ]],
         MinOsnov: ['', [
-          Validators.required
+          Validators.required,serValidate.minValue(0)
         ]],
         MaxOsnov: ['', [
-          Validators.required
+          Validators.required,serValidate.minValue(0)
         ]],
         Opis: []
       });
@@ -45,21 +47,34 @@ export class FondSatiFormComponent implements OnInit {
 
      }
 
+
+  get Mesec() { return this.formFSAT.get('Mesec'); }
+  get Godina() { return this.formFSAT.get('Godina'); }
+  get Sati() { return this.formFSAT.get('Sati'); }
+  get MinOsnov() { return this.formFSAT.get('MinOsnov'); }
+  get MaxOsnov() { return this.formFSAT.get('MaxOsnov'); }
+
   ngOnInit() {
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
 
       this.title = id ? 'Ažuriranje fonda sati' : 'Novi fond sati';
 
-      if (!id)
+      if (!id){
+        this.loadTempData();
         return;
+      }
 
       this.fnsatService.getFondSati(id)
         .subscribe(
           (pos) =>{
             if(pos.success){
+              this.saveTemp = false;
               this.fnsatN = pos.data[0];
             }else{
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
@@ -83,6 +98,8 @@ export class FondSatiFormComponent implements OnInit {
       result = this.fnsatService.updateFondSati(FSValue).subscribe(
         (pos) =>{
           if(pos.success){
+            this.clearTempData();
+            this.saveTemp=false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
@@ -108,6 +125,8 @@ export class FondSatiFormComponent implements OnInit {
       .subscribe(
         (pos) =>{
           if(pos.success){
+            this.clearTempData();
+            this.saveTemp=false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
@@ -131,7 +150,32 @@ export class FondSatiFormComponent implements OnInit {
 
 
 
+  loadTempData(){
+    const posao = JSON.parse(localStorage.getItem('data_fnsati'));
+    if(posao){
+      this.fnsatN =posao;
+    }
+    
+  }
+
+  setTempData(){
+    const  fsValue = JSON.stringify(this.formFSAT.value);
+    if(fsValue){
+      if(this.saveTemp){
+        localStorage.setItem('data_fnsati',fsValue);
+      }else{
+        this.clearTempData();
+      }
+    }
+    
+   }
+ 
+ clearTempData(){
+     localStorage.removeItem('data_fnsati');
+  }
+
   backClicked(event: any) {
+    this.setTempData();
     this._location.back();
     //event.stopPropagation();
     
@@ -144,12 +188,14 @@ export class FondSatiFormComponent implements OnInit {
       Mesec: "",
       Godina: "",
       Sati:"",
-      MinOsnov:"",
-      MaxOsnov:"",
+      MinOsnov:0,
+      MaxOsnov:0,
       Opis:""
     });
-
-
 }
+ngOnDestroy() {
+  this.setTempData();
+}
+
 
 }

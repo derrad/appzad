@@ -5,11 +5,20 @@ var mongoosePaginate = require('mongoose-paginate');
      ID  = Schema.ObjectId;
 
 var sfFondSati = new Schema({
-    Mesec:{ type: Number,default:1,required:true},
-    Godina:{ type: Number,default:1,required:true},
-    Sati:{ type: Number,default:0,required:true},
-    MinOsnov:{ type: Number,default:0,required:true},
-    MaxOsnov:{ type: Number,default:0,required:true},
+    Mesec:{ type: Number,default:1,required:true, min: 1, max: 12,validate : {
+        validator : Number.isInteger,
+        message   : '{VALUE} is not an integer value'
+      }},
+    Godina:{ type: Number,default:1,required:true, min: 2000, max: 2030, validate : {
+        validator : Number.isInteger,
+        message   : '{VALUE} is not an integer value'
+      }},
+    Sati:{ type: Number,default:0,required:true,min: 0, max: 248,validate : {
+        validator : Number.isInteger,
+        message   : '{VALUE} is not an integer value'
+      }},
+    MinOsnov:{ type: Number,default:0,required:true,min: 0},
+    MaxOsnov:{ type: Number,default:0,required:true,min: 0},
     Opis  :{ type: String,trim: true },
     NameUser: {type:String,trim: true}
 },

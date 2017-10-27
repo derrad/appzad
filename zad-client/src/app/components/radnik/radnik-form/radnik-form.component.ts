@@ -35,15 +35,9 @@ export class RadnikFormComponent implements OnInit, OnDestroy  {
         Aktivan:[],
         Opis: []
       });
-
-      //   plloc.onPopState(() => {
-          
-      //             console.log('pressed back!');
-          
-      // });
-
     }
 
+  
   get SifraRad() { return this.formRAD.get('SifraRad'); }
   get Ime() { return this.formRAD.get('Ime'); }
   get Prezime() { return this.formRAD.get('Prezime'); }
@@ -67,8 +61,12 @@ export class RadnikFormComponent implements OnInit, OnDestroy  {
         .subscribe(
           (pos) =>{
             if(pos.success){
+              this.saveTemp = false;
               this.radnikN = pos.data[0];
             }else{
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
@@ -87,24 +85,26 @@ export class RadnikFormComponent implements OnInit, OnDestroy  {
   
   loadTempData(){
     const radnik = JSON.parse(localStorage.getItem('data_radnik'));
-   // console.log(radnik);
     if(radnik){
       this.radnikN =radnik;
     }
     
   }
+
   setTempData(){
     const  radValue = JSON.stringify(this.formRAD.value);
     if(radValue){
       if(this.saveTemp){
       localStorage.setItem('data_radnik',radValue);
+      }else{
+        this.clearTempData();
       }
     }
     
    }
-  clearTempData(){
-  //  console.log("CLear data pozvan");
-    localStorage.removeItem('data_radnik');
+ 
+ clearTempData(){
+     localStorage.removeItem('data_radnik');
   }
 
   backClicked(event: any) {
@@ -113,6 +113,7 @@ export class RadnikFormComponent implements OnInit, OnDestroy  {
     //event.stopPropagation();
     
   }
+
 save() {
     var result,
         radValue = this.formRAD.value;
@@ -136,8 +137,6 @@ save() {
           this.flashMessage.show(error, {
             cssClass: 'alert-danger',
             timeout: 9000});
-        
-        //  console.log(" forma UPDATE  " + error);
          
         },
         
@@ -163,14 +162,13 @@ save() {
           this.flashMessage.show(error, {
             cssClass: 'alert-danger',
             timeout: 9000});
-          //console.log(" forma INSERT "  + error.toString()  + " ima li jos nesto" + error);
-          
+                  
         },
         
       );
     }
 
-    //result.subscribe(data => this.router.navigate(['radnik']));
+   
   }
 
   revert() { this.ngOnChanges(); }
@@ -184,25 +182,19 @@ save() {
       Aktivan:false,
       Opis:""
     });
-
-
 }
 
 ngOnDestroy() {
- // console.log("radnik destroy");
   this.setTempData();
 }
 
-// validateSifru(c: FormControl) {
-//   let SIFRA_REGEXP = new RegExp('^[a-z0-9_-]+$', 'i');
-
-//   return SIFRA_REGEXP.test(c.value) ? null : {
-//     validateSifru: {
-//       valid: false
-//     }
-//   };
-// }
-
 
 
 }
+
+
+  //   plloc.onPopState(() => {
+          
+      //             console.log('pressed back!');
+          
+      // });

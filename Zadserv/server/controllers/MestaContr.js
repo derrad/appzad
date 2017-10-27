@@ -90,6 +90,8 @@ if (uid) {
       Mesta.find({}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
         if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
         }
+
+        
           return res.status(201).json({
           success: true,
           message:'Mesto saved successfully', 

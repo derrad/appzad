@@ -20,37 +20,77 @@
           </div>
           <div class="form-group">
             <label class="center-block">Godina:
-              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina" >
+              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina"  required>
             </label>
-             <div class="text-danger" *ngIf="!formFSAT.controls['Godina'].valid && formFSAT.controls['Godina'].touched">Godina nije uneta</div> 
+            <div *ngIf="Godina.invalid && (Godina.dirty || Godina.touched)" class="alert alert-danger">
+                <div *ngIf="Godina.errors.required">
+                    <strong>Godina je obavezan podatak !!!</strong>
+                </div>
+                
+               </div>
             
           </div>
           <div class="form-group">
               <label class="center-block">Mesec:
-                <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec" >
+                <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec"  required>
               </label>
-               <div class="text-danger" *ngIf="!formFSAT.controls['Mesec'].valid && formFSAT.controls['Mesec'].touched">Mesec nije unet</div> 
+              <div *ngIf="Mesec.invalid && (Mesec.dirty || Mesec.touched)" class="alert alert-danger">
+                  <div *ngIf="Mesec.errors.required">
+                      <strong>Mesec je obavezan podatak !!!</strong>
+                  </div>
+                  <div *ngIf="Mesec.errors.maxValue">
+                      <strong>Mesec nije dobar(>12)  !!!</strong>
+                    </div>
+                  <div *ngIf="Mesec.errors.minValue">
+                      <strong>Mesec nije dobar(<1)  !!!</strong>
+                    </div>
+              </div>
               
             </div>
             <div class="form-group">
               <label class="center-block">Sati:
-                <input class="form-control" formControlName="Sati"  [(ngModel)]="fnsatN.Sati" >
+                <input class="form-control" formControlName="Sati"  [(ngModel)]="fnsatN.Sati" required>
               </label>
-               <div class="text-danger" *ngIf="!formFSAT.controls['Sati'].valid && formFSAT.controls['Sati'].touched">Sati nisu uneti</div> 
+              <div *ngIf="Sati.invalid && (Sati.dirty || Sati.touched)" class="alert alert-danger">
+                  <div *ngIf="Sati.errors.required">
+                      <strong>Sati je obavezan podatak !!!</strong>
+                  </div>
+                  <div *ngIf="Sati.errors.maxValue">
+                      <strong>Sati pogrešan podatak(>248)  !!!</strong>
+                    </div>
+                  <div *ngIf="Sati.errors.minValue">
+                      <strong>Sati pogrešan podatak(<1)  !!!</strong>
+                    </div>
+              </div>
             </div>
             
             <div class="form-group">
                 <label class="center-block">Minimalna osnovica:
-                  <input  class="form-control" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov" >
+                  <input  class="form-control" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov" required>
                 </label>
-                <div class="text-danger" *ngIf="!formFSAT.controls['MinOsnov'].valid && formFSAT.controls['MinOsnov'].touched">Minimalna osnovica nije uneta</div> 
+                <div *ngIf="MinOsnov.invalid && (MinOsnov.dirty || MinOsnov.touched)" class="alert alert-danger">
+                    <div *ngIf="MinOsnov.errors.required">
+                        <strong>Minimalna osnovica je obavezan podatak !!!</strong>
+                    </div>
+                    <div *ngIf="MinOsnov.errors.minValue">
+                        <strong>Minimalna osnovica pogrešan podatak(<1)  !!!</strong>
+                      </div>
+                </div>
               </div>
 
               <div class="form-group">
                 <label class="center-block">Maksimalna osnovica:
-                  <input class="form-control" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov" >
+                  <input class="form-control" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov" required>
                 </label>
-                <div class="text-danger" *ngIf="!formFSAT.controls['MaxOsnov'].valid && formFSAT.controls['MaxOsnov'].touched">Maksimalna osnovica nije uneta</div> 
+                
+                <div *ngIf="MaxOsnov.invalid && (MaxOsnov.dirty || MaxOsnov.touched)" class="alert alert-danger">
+                    <div *ngIf="MaxOsnov.errors.required">
+                        <strong>Maksimalna osnovica je obavezan podatak !!!</strong>
+                    </div>
+                    <div *ngIf="MaxOsnov.errors.minValue">
+                        <strong>Maksimalna osnovica pogrešan podatak(<1)  !!!</strong>
+                      </div>
+                </div>
               </div>
               
 
@@ -64,7 +104,7 @@
             <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formFSAT.valid"
-                            class="btn btn-default">
+                            class="btn btn-success">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>

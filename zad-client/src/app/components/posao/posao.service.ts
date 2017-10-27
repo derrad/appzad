@@ -81,9 +81,11 @@ export class PosaoService {
 
 
 
-private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
-} 
+  private handleError(error: Response) {
+    // console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
+     let greska =error.status + "  " + error.statusText;
+     //return Observable.throw(error.statusText || 'Server error');
+     return Observable.throw(greska || 'Server error');
+ } 
 
 }

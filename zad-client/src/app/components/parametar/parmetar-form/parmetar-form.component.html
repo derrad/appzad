@@ -3,38 +3,33 @@
       <div class="row">
       <div class="text-left col-lg-9 col-md-9 col-xs-9"><h3>{{title}}</h3> </div>
       <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-        <!-- <i class="fa  fa-window-close fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>-->
-       <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
-        
-      </div>
+           <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
+       </div>
     </div>
   </div>
 <div class="panel-body ">
-
-  
       <form [formGroup]="frParam" (ngSubmit)="save()">
           <div class="form-group" >
-              <!-- <label class="center-block">ID: -->
-                <input class="form-control" formControlName="_id"  [(ngModel)]="parametar._id"   type="hidden">
-              <!-- </label> -->
-            </div>
-        
-
-           <div class="form-group">
+                  <input class="form-control" formControlName="_id"  [(ngModel)]="parametar._id"   type="hidden">
+          </div>
+          <div class="form-group">
               <label class="center-block">Naziv:
-                <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" >
+                <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" required >
               </label>
-              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">
-                <!-- <i class="fa fa-close"></i> -->
-                <!-- {{ titleAlertNaziv }} -->
-                <span *ngIf="frParam.controls['Naziv'].errors['required']">Naziv is required</span>
-                <span *ngIf="frParam.controls['Naziv'].errors['minlength']">Naziv be longer than min 3 characters</span>
-                <span *ngIf="frParam.controls['Naziv'].errors['maxlength']">Naziv be longer than max 25 characters</span>
-                
-
-            </div>
-              <!-- <div class="text-danger" *ngIf="!frParam.controls['Naziv'].valid && frParam.controls['Naziv'].touched">{{ titleAlertNaziv }}</div> -->
-              
+              <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                <div *ngIf="Naziv.errors.required">
+                    <strong>Naziv je obavezan podatak !!!</strong>
+                </div>
+                <div *ngIf="Naziv.errors.minlength">
+                  <strong>Naziv mora biti minimalno 3 karaktera dužine !!!</strong>
+                </div>
+                <div *ngIf="Naziv.errors.maxlength">
+                  <strong>Predugački naziv !!!</strong>
+                </div>
+                <div *ngIf="Naziv.errors.validateSifru">
+                  <strong>Naziv nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
+                </div>
+              </div>
             </div>
             <div class="checkbox">
                 <label class="center-block">
@@ -54,20 +49,14 @@
             </div>
             <div class="form-group">
                 <label class="center-block">Opis:
-                  <!-- <input class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis" > -->
-                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis">
-
+                       <textarea class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis">
                   </textarea>
                 </label>
             </div>
-            <!-- <div style="margin-bottom: 1em">
-                <button type="submit"
-                        [disabled]="!frParam.valid" class="btn btn-success">Save</button> &nbsp;
-            </div> -->
             <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!frParam.valid"
-                            class="btn btn-default">
+                            class="btn btn-success">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>

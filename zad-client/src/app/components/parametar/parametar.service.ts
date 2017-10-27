@@ -93,12 +93,13 @@ export class ParametarService {
   // }
 
   private handleError(error: Response) {
-    console.error("handleError "  + error);
-    //console.error("handleError +"  + error.json().error);
-    if (!error.ok){
-      console.error("handleError greska text statusText "  + error.statusText);
-    }
-    return Observable.throw(error.json() || 'Server error');
+    // console.error("handleError "  + error);
+    // //console.error("handleError +"  + error.json().error);
+    // if (!error.ok){
+    //   console.error("handleError greska text statusText "  + error.statusText);
+    // }
+    let greska =error.status + "  " + error.statusText;
+    return Observable.throw(greska || 'Server error');
 } 
 
 }

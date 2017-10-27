@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const FondSati = require('../models/sfFondSati');
 
+const TypeA = require('../enum/serverenum');
+const SetActivity = require('./SetActivity');
+
+const TIP_TRANS_INSERT ="ADD FOND SATI";
+const TIP_TRANS_UPDATE ="CHANGES FOND SATI";
+const TIP_TRANS_DEL = "DELETE FOND SATI";
+
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
   const Mesec=req.body.Mesec || new Date().getMonth()+1;
@@ -34,6 +41,11 @@ module.exports.create = function (req, res,next) {
         
             fondsati.save(function(err,results) {
                 if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+
+                try{
+                  SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Mesec + "/" + Godina , NameUser)
+                } catch(ex){}      
+
                   return res.status(201).json({
                           success: true,
                           message: 'Fond Sati updated successfully',
@@ -59,6 +71,10 @@ module.exports.create = function (req, res,next) {
           oFondSati.save(function(err,result) {
             if(err){  return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]});}
               
+            try{
+              SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, Mesec + "/" + Godina , NameUser)
+            } catch(ex){}
+
           return res.status(201).json({
               success: true,
               message: 'Fond sati saved successfully',
@@ -114,6 +130,10 @@ module.exports.delefondsati = function(req, res, next) {
  // const uid = req.params.id || '1234';
  FondSati.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+        try{
+          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Fond sati" , req.user.email)
+          } catch(ex){}
+
         return res.status(201).json({
             success: true,
             message: 'Fond sati removed successfully',
