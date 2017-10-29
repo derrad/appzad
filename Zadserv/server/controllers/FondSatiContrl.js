@@ -1,16 +1,22 @@
 const mongoose = require('mongoose');
 const FondSati = require('../models/sfFondSati');
-
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
+
+const AppError = require('../error/AppError');
+const PostDataTakenError = require('../error/postdataerror');
+const RequestValidationError = require('../error/RequestValidationError');
+
 
 const TIP_TRANS_INSERT ="ADD FOND SATI";
 const TIP_TRANS_UPDATE ="CHANGES FOND SATI";
 const TIP_TRANS_DEL = "DELETE FOND SATI";
 
+
+
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
-  const Mesec=req.body.Mesec || new Date().getMonth()+1;
+  var Mesec=req.body.Mesec || new Date().getMonth()+1;
   const Godina=req.body.Godina || new Date().getFullYear();
   const Sati = req.body.Sati;
   const MinOsnov =req.body.MinOsnov;
@@ -18,10 +24,20 @@ module.exports.create = function (req, res,next) {
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
 
-//  console.log("uid je :" + uid + " ovo je Mesec " + req.body.Mesec);
+  //console.log("uid je :" + uid + " ovo je Mesec " + req.body.Mesec);
   // console.log("Sati :" + Sati + " ovo je Mesec " + Mesec + " ovo je godina" + Godina) ;
-  if (!Sati || !Mesec || !Godina ) {
+  Mesec = null;
+  if (!Sati || !Mesec || !Godina || !MinOsnov || !MaxOsnov) {
+        console.log("vracam gresku");
         return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+      //  try{
+      //   throw new PostDataTakenError();
+      //  }catch(err){
+      //  if (err instanceof PostDataTakenError) {
+      //     return   res.status(400).send(err.message)
+      //  }
+      //  }
+     
   } 
   else 
   {

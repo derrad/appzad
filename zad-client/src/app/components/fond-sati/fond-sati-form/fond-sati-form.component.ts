@@ -8,7 +8,7 @@ import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-
+import { RestCustom}  from './../../../shared/Interface/ErrorReq';
 
 @Component({
   selector: 'app-fond-sati-form',
@@ -91,11 +91,10 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
 
 
   save() {
-    var result,
-        FSValue = this.formFSAT.value;
+    var FSValue = this.formFSAT.value;
       
     if (FSValue._id){
-      result = this.fnsatService.updateFondSati(FSValue).subscribe(
+       this.fnsatService.updateFondSati(FSValue).subscribe(
         (pos) =>{
           if(pos.success){
             this.clearTempData();
@@ -108,8 +107,8 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
             this.router.navigate(['NotFound']);
           }
         } ,
-        error => {
-          this.flashMessage.show(error, {
+        (error:RestCustom) => {
+          this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         
