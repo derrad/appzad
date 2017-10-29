@@ -78,8 +78,8 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
               this.router.navigate(['NotFound']);
             }
           } ,
-          error => {
-            this.flashMessage.show(error, {
+          (error:RestCustom) => {
+            this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
             // if (error == 404 || error.status == 400 ) {

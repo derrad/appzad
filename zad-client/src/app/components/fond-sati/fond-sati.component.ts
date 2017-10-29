@@ -10,6 +10,7 @@ import { routerTransition } from '../../animation/router.animations'
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FondSatiService } from './fond-sati.service';
 import { FondSati } from './fondsati.model';
+import { RestCustom}  from './../../shared/Interface/ErrorReq';
 
 
 @Component({
@@ -34,15 +35,27 @@ export class FondSatiComponent implements OnInit {
 
 
   ngOnInit() {
-    this.fnsatiService.getFondSate().subscribe(profile => {
+    this.fnsatiService.getFondSate()
+      // .map((res)=>{
+      //   //res.text();
+      //   console.log(" map funkcija" + res);}
+      // )
+      .subscribe((profile) => {
       if (profile.success === true) { 
-         //console.log(profile);
-      //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
-        this.fnsati = profile.data;
+        // console.log(" subscribe funkcije " + profile);
+        //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
+         //this.fnsati = profile.data;
+        this.fnsati= profile.data;
       }
+     // }
     },
-    err => {
-      console.log(err);
+    (error:RestCustom) => {
+      this.flashMessage.show(error.message, {
+        cssClass: 'alert-danger',
+        timeout: 9000});
+        console.log(error.message);
+        this.fnsati=[];
+
       return false;
     }
   );

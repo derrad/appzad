@@ -14,7 +14,7 @@
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false 
                 resizableColumns="true" columnResizeMode="expand">
 
-              <p-header><strong>{{Title}}</strong></p-header>       
+      <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
       <p-column field="Godina" header="Godina" sortable="true" styleClass="text-center"></p-column>
       <p-column field="Mesec" header="Mesec" sortable="true"  styleClass="text-center" ></p-column> 
@@ -40,11 +40,32 @@
               <button type="button" pButton (click)="deleteFSati(fsat)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>
       </p-column>
-      <p-footer>
+       <p-footer *ngIf="fnsati.length > 0">
           <div class="ui-helper-clearfix" style="width:100%">
               <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addFSati()" label="Add"></button>
             </div>
         </p-footer>
+
+        <ng-template pTemplate="emptymessage">
+            <!-- Custom content goes here -->
+           
+            <div class="row">
+                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                  <h2>No records found</h2>
+                  <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i>
+                 
+                  <!-- <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addFSati()" label="Add"></button> -->
+                  <h3>
+                  <a   (click)="addFSati()">
+                    Add records       
+                  </a>
+                </h3>
+
+                </div>
+               >
+            </div>
+        </ng-template>
+
       </p-dataTable>
     </div>
     
