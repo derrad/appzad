@@ -112,11 +112,11 @@ module.exports.listfondsati = function (req, res,next) {
  //FondSati.find({}).sort({created_at:-1}).exec(function(err, result){
   FondSati.find({}).sort({Godina:1,Mesec:1}).exec(function(err, result){
 
-      // try{
-      //    throw new PostDataTakenError();
-      //    }catch(err){
-      //         return res.status(400).json({ success: false, message: 'Error processing request '+ err.message, data:[] });
-      //  }
+      //  try{
+      //     throw new PostDataTakenError();
+      //     }catch(err){
+      //          return res.status(400).json({ success: false, message: 'Error processing request '+ err.message, data:[] });
+      //   }
 
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] });}
 

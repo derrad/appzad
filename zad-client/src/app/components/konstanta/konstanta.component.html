@@ -54,18 +54,36 @@
             <!-- Custom content goes here -->
             <div class="row">
                  <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                    <div class="dtempty_message_h1">You Haven't Created A Konstant Yet.</div>
+                    <div class="hidden-xs dtempty_message_h1">
+                        <!-- You Haven't Created A Konstant Yet. -->
+                        Još niste kreirali podatak.
+                    </div>
+                    
+                    <h4 class="visible-xs">Još niste kreirali podatak.</h4>
                     <br/>
-                    <!-- <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i> -->
-                    <div >
+                    <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                    <!-- <div >
                         <img src="./assets/images/wrench.svg" alt="Malo malo" class="center_pic"/> 
-                     </div>
-                    <h3 class="dtempty_message" >
-                    To manually add new one click here:
-                    <a  class="dtempty_message_text" (click)="addKonst()">
-                            Create konstant      
-                    </a>
+                     </div> -->
+                    <h3 class=" hidden-xs dtempty_message" >
+                        <!-- To manually add new one click here: -->
+                        Da biste ručno dodali podatak kliknite: 
+                        <a  class="dtempty_message_text" (click)="addKonst()">
+                                <!-- Create konstant       -->
+                                <!--  konstantu -->
+                                Kreiraj podatak
+                        </a>
                     </h3>
+
+                    <h5 class="visible-xs" >
+                        <!-- To manually add new one click here: -->
+                        Da biste ručno dodali podatak kliknite : 
+                        <a   (click)="addKonst()">
+                                <!-- Create konstant       -->
+                                Kreiraj podatak
+                        </a>
+                    </h5>
+
                 </div>
             </div>
         </ng-template>

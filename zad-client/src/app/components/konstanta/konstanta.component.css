@@ -1,57 +1,27 @@
-.dtempty_message_h1 {
-    
-    font-size: 1.8em;
-    font-weight: 300;
-    color: #009fc9;
-    text-transform: capitalize;
-    padding:1em;
-}
-
-h3.dtempty_message {
-    margin-top: 10%;
-
-}
-
-div.dtempty_message {
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    /* position: absolute;
-    left: 50%;
-    top: 50%; */
-    height: 50%;
-    width: 50%;
-     transform: translate(-50%, -50%); 
-    /* display: inline-block; */
-    padding: 5px;
-    text-align: center;
-}
 
 
-.dtempty_pic {
+/* img {
+   display: block;
+   width:100%;
+  }
+
+dtempty_pic {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     height:50%;
     width:50%;
-    /* transform: translate(-50%, -50%); */
-    /* display: inline-block; */
     padding: 5px;
     text-align: center;
 }
+ */
 
-
-.dtempty_message_text {
-    font-size: 1em;
-    font-weight: 500;
-    color: darkgray;
-}
-
-.center_pic {
+/*
+img.center_pic {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     position: absolute;
     left: 50%;
     top: 50%;
     
     margin-top: 2%;
-    margin-bottom: 15%;
-
     /*
     Nope =(
     margin-left: -25%;
@@ -61,12 +31,12 @@ div.dtempty_message {
     /* 
     Yep!
     */
-    transform: translate(-50%, -50%);
+  /*  transform: translate(-50%, -50%);
     
     /*
     Not even necessary really. 
     e.g. Height could be left out!
     */
-    width: 50%;
+    /*width: 50%;
     height: 50%;
-  }
+  }*/
