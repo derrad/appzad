@@ -52,21 +52,17 @@
 
         <ng-template pTemplate="emptymessage">
             <!-- Custom content goes here -->
-           
             <div class="row">
                  <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                  <h2>No records found</h2>
-                  <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i>
-                 
-                  <!-- <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addFSati()" label="Add"></button> -->
-                  <h3>
-                  <a   (click)="addKonst()">
-                    Add records       
-                  </a>
-                </h3>
-
+                    <div class="dtempty_message_h1">You Haven't Created A Konstant Yet.</div>
+                    <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i>
+                    <h3 >
+                    To manually add new one click here:
+                    <a  class="dtempty_message_text" (click)="addKonst()">
+                            Create konstant      
+                    </a>
+                    </h3>
                 </div>
-              
             </div>
         </ng-template>
 
