@@ -8,7 +8,7 @@ import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { RestCustom}  from './../../../shared/Interface/ErrorReq';
+import { ResponeCustom}  from './../../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-fond-sati-form',
@@ -78,7 +78,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
               this.router.navigate(['NotFound']);
             }
           } ,
-          (error:RestCustom) => {
+          (error:ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
@@ -107,7 +107,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:RestCustom) => {
+        (error:ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
@@ -134,8 +134,8 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
             this.router.navigate(['NotFound']);
           }
         } ,
-        error => {
-          this.flashMessage.show(error, {
+        (error:ResponeCustom) => {
+          this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
           //console.log(" forma INSERT "  + error.toString()  + " ima li jos nesto" + error);

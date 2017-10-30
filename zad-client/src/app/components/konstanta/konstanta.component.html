@@ -1,3 +1,175 @@
 <p>
   konstanta works!
 </p>
+
+
+
+
+<div *ngIf="konstL;else  waiting"  [@routerTransition]>
+  
+      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+      </div>
+      <p-dataTable [value]="konstL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+                selectionMode="single" [(selection)]="selectedKonst" dataKey="_id"   
+                styleClass="table table-striped" [responsive]="true"  [immutable]=false 
+                resizableColumns="true" columnResizeMode="expand">
+
+      <p-header><strong>{{Title}}</strong></p-header>       
+      <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
+      <p-column field="Datum" header="Datum"  styleClass="text-center"></p-column>
+      <p-column field="UcPenz" header="UcPenz"   styleClass="text-center" ></p-column> 
+      <p-column field="OsPio1" header="OsPio1"  styleClass="text-right"></p-column>   
+      <p-column field="Clanarin" header="Clanarin"  styleClass="text-right" >
+        <ng-template let-col let-konst="rowData" pTemplate="body">
+            <span>{{konst[col.field] | number:'1.0-4'}}</span>
+        </ng-template>
+
+      </p-column>
+      <p-column field="Pdv" header="Pdv" styleClass="text-right">
+        <ng-template let-col let-konst="rowData" pTemplate="body">
+            <span>{{konst[col.field] | number:'1.0-4'}}</span>
+        </ng-template>
+
+
+      </p-column>
+      
+      <p-column  styleClass="col-button text-center" heder="ACTION">
+       
+          <ng-template let-konst="rowData" let-i="rowIndex" pTemplate="body" >
+
+              <button type="button" pButton (click)="selectItem(konst)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="updateKonst(konst._id)" icon="fa fa-pencil" title="Update"></button>
+              <button type="button" pButton (click)="deleteKonst(konst)" icon="fa fa-trash" title="Delete"></button>
+          </ng-template>
+      </p-column>
+       <!-- <p-footer *ngIf="konstL.length == 0">
+          <div class="ui-helper-clearfix" style="width:100%">
+              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addKonst()" label="Add"></button>
+            </div>
+        </p-footer> -->
+
+        <ng-template pTemplate="emptymessage">
+            <!-- Custom content goes here -->
+           
+            <div class="row">
+                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                  <h2>No records found</h2>
+                  <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i>
+                 
+                  <!-- <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addFSati()" label="Add"></button> -->
+                  <h3>
+                  <a   (click)="addKonst()">
+                    Add records       
+                  </a>
+                </h3>
+
+                </div>
+              
+            </div>
+        </ng-template>
+
+      </p-dataTable>
+    </div>
+    
+    
+    
+    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+        <p-footer>
+            <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+         </p-footer>
+    </p-confirmDialog>
+    
+    
+    <p-dialog header="KONSTANTA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+    
+            <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                         ID
+                        </dt>
+                        <dd class="text-success">
+                           {{konstShow._id}}
+                        </dd>
+                        <dt>
+                          DATUM
+                        </dt>
+                        <dd class="text-success">
+                             {{konstShow.Datum}} 
+                        </dd>
+                        <dt>
+                          UcPenz
+                        </dt>
+                        <dd class="text-success">
+                              {{konstShow.UcPenz}}
+                        </dd>
+                          
+                        <dt>
+                          UcZdrav
+                          </dt>
+                          <dd class="text-success">
+                               {{konstShow.UcZdrav}} 
+                          </dd> 
+                     
+                        <dt>
+                          UcNormTr
+                        </dt>
+                        <dd class="text-success">
+                            {{konstShow.UcNormTr}}
+                            
+                        </dd>
+                        <dt>
+                          UcOlak
+                           </dt>
+                           <dd class="text-success">
+                               {{konstShow.UcOlak}}
+                               
+                           </dd>
+                        
+                        <dt>
+                        OPIS
+                        </dt>
+                        <dd class="text-success">
+                            {{konstShow.Opis}}
+                            
+                        </dd>
+                        <dt>
+                        DATUM UNOSA
+                        </dt>
+                        <dd class="text-success">
+                            {{konstShow.created_at}}
+                            
+                        </dd>
+                        <dt>
+                        DATUM AŽURIRANJA
+                        </dt>
+                        <dd class="text-success">
+                            {{konstShow.updatedAt}}
+                            
+                        </dd>
+                        <dt>
+                        KORISNIK
+                        </dt>
+                        <dd class="text-success">
+                            {{konstShow.NameUser}}
+                            
+                        </dd>
+                
+                    </dl>                        
+            </div>
+            <p-footer>
+                    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+           </p-footer>
+    </p-dialog>
+    
+    
+ 
+<ng-template #waiting  >
+    <div class="centerWait">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    Loading...
+    </div>
+</ng-template>
+    

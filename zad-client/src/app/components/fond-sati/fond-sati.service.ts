@@ -7,9 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'; 
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-//import { Animal, ErrorReq } from './../../shared/Interface/errorinterface';
-import { Animal } from './../../shared/Interface/Animal';
-import { RestCustom}  from './../../shared/Interface/ErrorReq';
+import { ResponeCustom}  from './../../shared/models/ErrorRes';
 
 @Injectable()
 export class FondSatiService {
@@ -88,17 +86,17 @@ delFondSati(id){
 //  }
 
   private handleError(error: Response) {
-    let greska =error.status + "  " + error.statusText;
+    //let greska =error.status + "  " + error.statusText;
     //  let myerror = new Animal('Pera');
     //  console.log(myerror.move(5));
     
-     let myerror = new RestCustom().fromJSON(error.json());
+     let myerror = new ResponeCustom().fromJSON(error.json());
     //  console.log(myerror.getPorukaG());
     //  console.log(myerror.getTextP());
-     console.log( "samo status text " + myerror.message);
+   //  console.log( "samo status text " + myerror.message);
 
      
-     console.log('error.json' + JSON.stringify(error.json()));
+     //console.log('error.json' + JSON.stringify(error.json()));
 
      
     //  myerror.fillFromJSON(JSON.parse(JSON.stringify(error)));
@@ -108,12 +106,17 @@ delFondSati(id){
     // if(myerror._body){
     //   greska =error.status + "  " + error._body.message;
     // }
-    let texterror:string= JSON.stringify(error);
-    console.log('moj text error' + texterror);
+    // let texterror:string= JSON.stringify(error);
+    // console.log('moj text error' + texterror);
     //console.log(JSON.parse(JSON.stringify(error)));
 
     //return Observable.throw(error.statusText || 'Server error');
-    return Observable.throw(myerror || 'Server error');
+    let servererr = new ResponeCustom();
+    servererr.message='Server error';
+    servererr.success=false;
+    servererr.data=[];
+
+    return Observable.throw(myerror || servererr);
 } 
 
 }

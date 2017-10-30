@@ -10,7 +10,7 @@ import { routerTransition } from '../../animation/router.animations'
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FondSatiService } from './fond-sati.service';
 import { FondSati } from './fondsati.model';
-import { RestCustom}  from './../../shared/Interface/ErrorReq';
+import { ResponeCustom}  from './../../shared/models/ErrorRes';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class FondSatiComponent implements OnInit {
       }
      // }
     },
-    (error:RestCustom) => {
+    (error:ResponeCustom) => {
       this.flashMessage.show(error.message, {
         cssClass: 'alert-danger',
         timeout: 9000});
@@ -109,9 +109,9 @@ export class FondSatiComponent implements OnInit {
                   this.router.navigate(['NotFound']);
                 }
                 } ,
-                err => {
+                (error:ResponeCustom)  => {
                   //alert("Could not delete radnik.");
-                  this.flashMessage.show('Could not delete fond sati !!!', {
+                  this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 5000});
                   // Revert the view back to its original state
