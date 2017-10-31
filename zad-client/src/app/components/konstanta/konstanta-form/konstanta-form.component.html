@@ -20,15 +20,18 @@
           </div>
           <div class="form-group">
             <label class="center-block">Datum:
-              <input class="form-control" formControlName="Datum"  [(ngModel)]="konstN.Datum"  required>
+                    <div class="input-group">
+                        <div class="input-group">
+                           <input type="date" class="form-control" formControlName="Datum" useValueAsDate  required>
+                        </div>
+                        <!-- [(ngModel)]="konstN.Datum"      -->
+                    </div>
             </label>
             <div *ngIf="Datum.invalid && (Datum.dirty || Datum.touched)" class="alert alert-danger">
                 <div *ngIf="Datum.errors.required">
                     <strong>Datum je obavezan podatak !!!</strong>
                 </div>
-                
-               </div>
-            
+            </div>
           </div>
           <div class="form-group">
               <label class="center-block">Učeničko penziono:

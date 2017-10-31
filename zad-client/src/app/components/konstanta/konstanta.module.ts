@@ -9,6 +9,7 @@ import { KonstantaComponent } from './konstanta.component';
 import { KonstantaFormComponent } from './konstanta-form/konstanta-form.component';
 import { KonstantaService } from './konstanta.service';
 import { KonstantaRoutingModule } from './konstanta-routing.module';
+//import {DateValueAccessorModule} from './../../shared/frmDatum/DateValueAccessorModule ';
  
 @NgModule({
   imports: [

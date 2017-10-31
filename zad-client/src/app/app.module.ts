@@ -11,6 +11,7 @@ import {RouterModule, Routes} from '@angular/router';
  import {SidebarModule} from 'primeng/primeng';
 import {AppComponent } from './app.component';
 import {FlashMessagesModule} from 'angular2-flash-messages';
+import {DateValueAccessorModule} from './shared/frmDatum/DateValueAccessorModule ';
 
 
 //Meni and app komponente
@@ -137,6 +138,7 @@ import { KonstantaModule } from './components/konstanta/konstanta.module';
       ModalComponent,
       NotFoundComponent,
       KeysPipe
+
      
      
     //  DecimalMask
@@ -156,6 +158,7 @@ import { KonstantaModule } from './components/konstanta/konstanta.module';
     // InputTextModule,
     // ConfirmDialogModule,
     // DialogModule,
+    DateValueAccessorModule,
     SidebarModule,
     DrzaveModule,
     OpstineModule,

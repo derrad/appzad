@@ -15,6 +15,8 @@ import { ResponeCustom}  from './../../../shared/models/ErrorRes';
   templateUrl: './konstanta-form.component.html',
   styleUrls: ['./konstanta-form.component.css'],
   animations: [formsTransition()]
+  
+  
 })
 export class KonstantaFormComponent implements OnInit {
   formKonst: FormGroup;
@@ -126,6 +128,10 @@ export class KonstantaFormComponent implements OnInit {
               // this.formKonst.setValue(this.konstN.Datum.toLocaleDateString);
               // var datePipe = new DatePipe();
               // this.setDob = datePipe.transform(userdate, 'dd/MM/yyyy');
+              console.log("Prikazan datum je " + this.konstN.Datum.toString());
+              //this.konstN.Datum = new Date(this.getExcatDate(this.konstN.Datum.toString()));
+              this.getExcatDate(this.konstN.Datum.toString());
+              this.konstN.Datum = new Date();
             }else{
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
@@ -230,8 +236,25 @@ export class KonstantaFormComponent implements OnInit {
     });
 }
 
+getExcatDate(string){
+   //let year=new Date(this.konstN.Datum.toString()).getFullYear();
+  // let month=new Date(this.konstN.Datum.toString()).getMonth();
+   //let date=new Date(this.konstN.Datum.toString()).getDate();
+  //  let year= this.konstN.Datum.getFullYear();
+  //  let month= this.konstN.Datum.getMonth();
+   let date  = new Date().getDay() ;
+  // console.log(" datum iz konstante " + date);
+   let year=  new Date().getFullYear();//date.getFullYear();
+   let month= new Date().getMonth();
+   
+  let local= ( date.toString().length===1 ?  '0' + date : date) + '/' +
+              ( month.toString().length===1 ?  '0' +month : month) 
+               + '/' +  year.toString().substring(0);
 
 
-
+  console.log(" proba local "  + local);
+  this.konstN.Datum= new Date(local);
+  return local;
+}
 
 }
