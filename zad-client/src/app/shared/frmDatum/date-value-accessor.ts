@@ -22,8 +22,13 @@ export const DATE_VALUE_ACCESSOR: any = {
 })
 export class DateValueAccessor implements ControlValueAccessor {
 
-  @HostListener('input', ['$event.target.valueAsDate']) onChange = (_: any) => { };
-  @HostListener('blur', []) onTouched = () => { };
+  @HostListener('input', ['$event.target.valueAsDate']) onChange = (_: any) => {
+   // console.log("HostListener input");
+   };
+  @HostListener('blur', []) onTouched = () => { 
+    //console.log("HostListener blur");
+
+  };
 
   constructor(private _renderer: Renderer, private _elementRef: ElementRef) { }
 

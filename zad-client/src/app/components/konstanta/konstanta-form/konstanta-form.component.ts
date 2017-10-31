@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { KonstantaModel } from '../konstanta-model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
+import {MyDateInput} from '../../../shared/frmDatum/date.input';
+
 
 @Component({
   selector: 'app-konstanta-form',
@@ -128,10 +130,10 @@ export class KonstantaFormComponent implements OnInit {
               // this.formKonst.setValue(this.konstN.Datum.toLocaleDateString);
               // var datePipe = new DatePipe();
               // this.setDob = datePipe.transform(userdate, 'dd/MM/yyyy');
-              console.log("Prikazan datum je " + this.konstN.Datum.toString());
+              //console.log("Prikazan datum je " + this.konstN.Datum.toString());
               //this.konstN.Datum = new Date(this.getExcatDate(this.konstN.Datum.toString()));
-              this.getExcatDate(this.konstN.Datum.toString());
-              this.konstN.Datum = new Date();
+              // this.getExcatDate(this.konstN.Datum.toString());
+              //this.konstN.Datum = new Date();
             }else{
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
@@ -151,6 +153,17 @@ export class KonstantaFormComponent implements OnInit {
 
   }
 
+
+  validateOnlyNumbers(evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode( key );
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 
   save() {
     var FormValue = this.formKonst.value;

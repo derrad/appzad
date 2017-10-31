@@ -22,7 +22,12 @@
             <label class="center-block">Datum:
                     <div class="input-group">
                         <div class="input-group">
-                           <input type="date" class="form-control" formControlName="Datum" useValueAsDate  required>
+                            <!-- <input type="date" class="form-control" formControlName="Datum" [(ngModel)]="konstN.Datum"  useValueAsDate  required> -->
+                            <!-- <input type="date" class="form-control" formControlName="Datum" ngModel  useValueAsDate  required>-->
+                            <!-- <my-input class="form-control" [formControlName]="Datum"   required></my-input>  (ngModelChange)="konstN.Datum = $event" -->
+                            <input [ngModel]="konstN.Datum | date:'yyyy-MM-dd'" 
+                            type="date" formControlName="Datum" name="Datum" class="form-control" required>
+                         
                         </div>
                         <!-- [(ngModel)]="konstN.Datum"      -->
                     </div>
@@ -37,7 +42,7 @@
               <label class="center-block">Učeničko penziono:
                   <div class="input-group">
                   <div class="input-group">
-                    <input class="form-control" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz"  required>
+                    <input class="form-control" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz" (keypress)="validateOnlyNumbers($event)"  required>
                     <span class="input-group-addon">%</span>
                   </div>
                   </div>
@@ -54,10 +59,12 @@
             </div>
             <div class="form-group">
               <label class="center-block">Učeničko zdravstveno:
-                <div class="input-group">
-                    <input class="form-control" formControlName="UcZdrav"  [(ngModel)]="konstN.UcZdrav" required>
-                    <span class="input-group-addon">%</span>
-                  </div>
+                <div class="input-group"> 
+                    <div class="input-group">
+                        <input class="form-control" formControlName="UcZdrav"  [(ngModel)]="konstN.UcZdrav" required>
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
               </label>
               <div *ngIf="UcZdrav.invalid && (UcZdrav.dirty || UcZdrav.touched)" class="alert alert-danger">
                   <div *ngIf="UcZdrav.errors.required">
@@ -85,9 +92,11 @@
 
               <div class="form-group">
                 <label class="center-block">Učenička stopa olakšice:
-                  <div class="input-group">
+                    <div class="input-group">
+                    <div class="input-group">
                       <input class="form-control" formControlName="UcOlak"  [(ngModel)]="konstN.UcOlak" required>
                       <span class="input-group-addon">%</span>
+                    </div>
                     </div>
                 </label>
                 
