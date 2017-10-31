@@ -66,6 +66,34 @@
             </div>
         </ng-template>
 
+        <ng-template pTemplate="emptymessage">
+                <!-- Custom content goes here -->
+                <div class="row">
+                     <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                        <div class="hidden-xs dtempty_message_h1">
+                            Još niste kreirali podatak.
+                        </div>
+                        <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                        <br/>
+                        <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                         <h3 class=" hidden-xs dtempty_message" >
+                             Da biste ručno dodali podatak kliknite: 
+                            <a  class="dtempty_message_text" (click)="addFSati()">
+                                    Kreiraj podatak
+                            </a>
+                        </h3>
+                        <h5 class="visible-xs" >
+                            Da biste ručno dodali podatak kliknite : 
+                            <a   (click)="addFSati()">
+                                    Kreiraj podatak
+                            </a>
+                        </h5>
+    
+                    </div>
+                </div>
+            </ng-template>
+
+
       </p-dataTable>
     </div>
     

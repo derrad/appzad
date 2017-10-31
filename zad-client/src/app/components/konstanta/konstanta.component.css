@@ -1,0 +1,42 @@
+
+
+/* img {
+   display: block;
+   width:100%;
+  }
+
+dtempty_pic {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    height:50%;
+    width:50%;
+    padding: 5px;
+    text-align: center;
+}
+ */
+
+/*
+img.center_pic {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    
+    margin-top: 2%;
+    /*
+    Nope =(
+    margin-left: -25%;
+    margin-top: -25%;
+    */
+  
+    /* 
+    Yep!
+    */
+  /*  transform: translate(-50%, -50%);
+    
+    /*
+    Not even necessary really. 
+    e.g. Height could be left out!
+    */
+    /*width: 50%;
+    height: 50%;
+  }*/
