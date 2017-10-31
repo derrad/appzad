@@ -30,10 +30,9 @@ module.exports.create = function (req, res,next) {
   const OsMaxOsDop = req.body.OsMaxOsDop  ;
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
- // const radnik_id = req.body.radnik_id ;
 
  // console.log("uid je :" + uid + " ovo je datum " + req.body.Datum);
- // console.log("radnik_id je :" + radnik_id);
+
   
   if (!Datum  ) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
@@ -75,7 +74,7 @@ if (uid) {
       }
 
       try{
-        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, "Update parametar" , NameUser)
+        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, "Update konstanta" , NameUser)
       } catch(ex){}    
 
       return res.status(201).json({
@@ -119,7 +118,7 @@ if (uid) {
     }
     
     try{
-      SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, "Parametar insert" , NameUser)
+      SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, "Konstanta insert" , NameUser)
     } catch(ex){}
 
    return res.status(201).json({
@@ -175,7 +174,7 @@ module.exports.delekonst = function(req, res, next) {
 	Konst.remove({_id: req.params.id }, function(err){
         if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
         try{
-          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Parametar" , req.user.email)
+          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Konstanta" , req.user.email)
           } catch(ex){}
 
         return res.status(201).json({
