@@ -33,7 +33,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
           Validators.required
         ]],
         Sati: ['', [
-          Validators.required,,serValidate.maxValue(248),serValidate.minValue(0)
+          Validators.required,serValidate.maxValue(248),serValidate.minValue(0)
         ]],
         MinOsnov: ['', [
           Validators.required,serValidate.minValue(0)

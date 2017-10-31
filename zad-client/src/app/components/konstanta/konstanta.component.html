@@ -1,8 +1,6 @@
-<p>
+<!-- <p>
   konstanta works!
-</p>
-
-
+</p> -->
 
 
 <div *ngIf="konstL;else  waiting"  [@routerTransition]>
@@ -18,7 +16,12 @@
 
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Datum" header="Datum"  styleClass="text-center"></p-column>
+      <p-column field="Datum" header="Datum"  styleClass="text-center">
+                <ng-template let-col let-konst="rowData" pTemplate="body">
+                    <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>
+                </ng-template>
+        
+      </p-column>
       <p-column field="UcPenz" header="UcPenz"   styleClass="text-center" ></p-column> 
       <p-column field="OsPio1" header="OsPio1"  styleClass="text-right"></p-column>   
       <p-column field="Clanarin" header="Clanarin"  styleClass="text-right" >

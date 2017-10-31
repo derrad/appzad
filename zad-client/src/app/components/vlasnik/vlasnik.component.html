@@ -17,57 +17,56 @@
 
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Datum" header="Datum"  styleClass="text-center"></p-column>
-      <p-column field="UcPenz" header="UcPenz"   styleClass="text-center" ></p-column> 
-      <p-column field="OsPio1" header="OsPio1"  styleClass="text-right"></p-column>   
-      <p-column field="Clanarin" header="Clanarin"  styleClass="text-right" >
-        <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.0-4'}}</span>
-        </ng-template>
-
-      </p-column>
-      <p-column field="Pdv" header="Pdv" styleClass="text-right">
-        <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.0-4'}}</span>
-        </ng-template>
-
-
-      </p-column>
+      <p-column field="Ime" header="Ime"  ></p-column>
+      <p-column field="Adresa" header="Adresa"    ></p-column> 
+      <p-column field="Mesto" header="Mesto"  ></p-column>   
+      <p-column field="PttReon" header="PttReon"   ></p-column>
+      <p-column field="Direktor" header="Direktor"   ></p-column>
+      <p-column field="Pib" header="Pib" ></p-column>
       
       <p-column  styleClass="col-button text-center" heder="ACTION">
        
-          <ng-template let-konst="rowData" let-i="rowIndex" pTemplate="body" >
+          <ng-template let-vlasn="rowData" let-i="rowIndex" pTemplate="body" >
 
-              <button type="button" pButton (click)="selectItem(konst)" icon="fa fa-info" title="Info"></button>
-              <button type="button" pButton (click)="updateKonst(konst._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="deleteKonst(konst)" icon="fa fa-trash" title="Delete"></button>
+              <button type="button" pButton (click)="selectItem(vlasn)" icon="fa fa-info" title="Info"></button>
+              <button type="button" pButton (click)="updateVasnik(vlasn._id)" icon="fa fa-pencil" title="Update"></button>
+              <button type="button" pButton (click)="deleteVlasnik(vlasn)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>
       </p-column>
        <!-- <p-footer *ngIf="vlasnL.length == 0">
           <div class="ui-helper-clearfix" style="width:100%">
-              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addKonst()" label="Add"></button>
+              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="vlasnL()" label="Add"></button>
             </div>
         </p-footer> -->
 
         <ng-template pTemplate="emptymessage">
-            <!-- Custom content goes here -->
-           
-            <div class="row">
-                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                  <h2>No records found</h2>
-                  <i class="fa fa-file-text-o fa-5x cursorpointer" aria-hidden="true"></i>
-                 
-                  <!-- <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addFSati()" label="Add"></button> -->
-                  <h3>
-                  <a   (click)="addVlasnik()">
-                    Add records       
-                  </a>
-                </h3>
+          <!-- Custom content goes here -->
+          <div class="row">
+               <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                  <div class="hidden-xs dtempty_message_h1">
+                     Još niste kreirali podatak.
+                  </div>
+                  
+                  <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                  <br/>
+                  <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                 <h3 class=" hidden-xs dtempty_message" >
+                      Da biste ručno dodali podatak kliknite: 
+                      <a  class="dtempty_message_text" (click)="addVlasnik()">
+                           Kreiraj podatak
+                      </a>
+                  </h3>
 
-                </div>
-              
-            </div>
-        </ng-template>
+                  <h5 class="visible-xs" >
+                     Da biste ručno dodali podatak kliknite : 
+                      <a   (click)="addVlasnik()">
+                          Kreiraj podatak
+                      </a>
+                  </h5>
+
+              </div>
+          </div>
+      </ng-template>
 
       </p-dataTable>
     </div>
@@ -93,40 +92,48 @@
                            {{vlasnShow._id}}
                         </dd>
                         <dt>
-                          DATUM
+                          IME
                         </dt>
                         <dd class="text-success">
-                             {{vlasnShow.Datum}} 
+                             {{vlasnShow.Ime}} 
                         </dd>
                         <dt>
-                          UcPenz
+                          Adresa
                         </dt>
                         <dd class="text-success">
-                              {{vlasnShow.UcPenz}}
+                              {{vlasnShow.Adresa}}
                         </dd>
                           
                         <dt>
-                          UcZdrav
+                          Mesto
                           </dt>
                           <dd class="text-success">
-                               {{vlasnShow.UcZdrav}} 
+                               {{vlasnShow.Mesto}} 
                           </dd> 
                      
                         <dt>
-                          UcNormTr
+                          PttReon
                         </dt>
                         <dd class="text-success">
-                            {{vlasnShow.UcNormTr}}
+                            {{vlasnShow.PttReon}}
                             
                         </dd>
                         <dt>
-                          UcOlak
+                          Direktor
                            </dt>
                            <dd class="text-success">
-                               {{vlasnShow.UcOlak}}
+                               {{vlasnShow.Direktor}}
                                
                            </dd>
-                        
+                      
+                        <dt>
+                          Pib
+                           </dt>
+                           <dd class="text-success">
+                               {{vlasnShow.Pib}}
+                               
+                           </dd>
+
                         <dt>
                         OPIS
                         </dt>

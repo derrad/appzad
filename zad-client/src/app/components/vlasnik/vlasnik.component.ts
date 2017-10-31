@@ -77,7 +77,7 @@ export class VlasnikComponent implements OnInit {
     this.router.navigate(['/vlasnik/', id]);
    }
 
-   deleteKonst(tvlasn){
+   deleteVlasnik(tvlasn){
     
       this.confirmationService.confirm({
         message: `Jeste li sigurni da želite uklonite izabrani podatak ?   ` ,
