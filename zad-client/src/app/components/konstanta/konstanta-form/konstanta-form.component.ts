@@ -9,8 +9,7 @@ import { KonstantaModel } from '../konstanta-model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
-import {MyDateInput} from '../../../shared/frmDatum/date.input';
-
+//import {MyDateInput} from '../../../shared/frmDatum/date.input';
 
 @Component({
   selector: 'app-konstanta-form',
@@ -31,7 +30,7 @@ export class KonstantaFormComponent implements OnInit {
 
       this.formKonst = formBuilder.group({
         _id:[],
-        Datum:['',[Validators.required]],
+        Ime:['',[Validators.required]],
         UcPenz: ['', [
           Validators.required,serValidate.minValue(0)
         ]],
