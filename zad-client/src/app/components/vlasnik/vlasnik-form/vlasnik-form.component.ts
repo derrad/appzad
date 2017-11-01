@@ -11,11 +11,12 @@ import { ServiceValidateShared } from './../../../services/service.validate.shar
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
 //https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
 //https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
+//https://github.com/scotch-io/angular2-forms-course
 
 
 @Component({
-  selector: 'app-vlasnik-form',
   templateUrl: './vlasnik-form.component.html',
+  selector: 'app-vlasnik-form',
   styleUrls: ['./vlasnik-form.component.css'],
   animations: [formsTransition()]
   
