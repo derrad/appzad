@@ -24,7 +24,7 @@ module.exports.create = function (req, res,next) {
   const TelefVlasnik =  req.body.TelefVlasnik || [];
   
  
-  console.log("uid je :" + uid + " ovo je ime " + req.body.Ime);
+  //console.log("uid je :" + uid + " ovo je ime " + req.body.Ime);
   
   if (!Ime || !Adresa || !Mesto) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.' });
@@ -130,6 +130,7 @@ module.exports.getvlasnik = function (req, res,next) {
     }
       return res.status(200).json({
       success: true, 
+      message:'Successfully request ',
       data: vlasnik
       });
     });
@@ -142,6 +143,7 @@ module.exports.listavlasnik = function (req, res,next) {
     }
       return res.status(200).json({
       success: true, 
+      message:'Successfully request ',
       data: vlasnik
       });
     });
