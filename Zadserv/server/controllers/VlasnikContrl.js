@@ -66,7 +66,7 @@ if (uid) {
       }
       return res.status(201).json({
         success: true,
-        message: 'Expense updated successfully',
+        message: 'Vlasnik updated successfully',
         data:result
       });
     });

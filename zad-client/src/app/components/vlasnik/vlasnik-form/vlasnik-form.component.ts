@@ -1,6 +1,6 @@
 import { Component, OnInit, Directive } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormArray,FormControl  } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations'
@@ -10,6 +10,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
 //https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
+//https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
 
 
 @Component({
@@ -35,7 +36,7 @@ export class VlasnikFormComponent implements OnInit {
           Validators.required,
           Validators.minLength(2)
         ]],
-        Adresa:['',[Validators.required,Validators.minLength(2)]],
+        Adresa:['',[Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
         Mesto: ['', [Validators.required,Validators.minLength(2)]],
         PttReon:[''],
         PttPak:[''],
@@ -50,9 +51,26 @@ export class VlasnikFormComponent implements OnInit {
         Sud:[''],
         UplRacPorJed:[''],
         NazPorJed:[''],
-        ZiroVlasnik:this._fb.array([
-          this.initZiroVlas()
-        ]),
+        // ZiroVlasnik: new FormArray([
+        //   new FormControl('Naziv'),
+        //   new FormControl('Racun'),
+        //   new FormControl('Glavni'),
+        //   new FormControl('Opis'),
+        // ]),
+        // ZiroVlasnik: this._fb.group({
+        //   Naziv:[''],
+        //   Racun:[''],
+        //   Glavni:[''],
+        //   Opis:[''],
+        // }),
+
+         ZiroVlasnik:this._fb.array([
+           this._fb.group({
+             Naziv: ['', Validators.required],
+            Racun: ['', Validators.required],
+            Glavni:[''],
+            Opis: ['']})
+         ]),
         TelefVlasnik:this._fb.array([
           // this.initZiroVlas(),
         ]),
@@ -64,6 +82,8 @@ export class VlasnikFormComponent implements OnInit {
   get Adresa() { return this.formVlasn.get('Adresa'); }
   get Mesto() { return this.formVlasn.get('Mesto'); }
   
+ // get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
+ get ZiroVlasnik(): FormArray { return this.formVlasn.get('ZiroVlasnik') as FormArray; }
 
 //Ziro racun vlasnika
 initZiroVlas() {
@@ -119,6 +139,8 @@ removeTelVlas(i: number) {
           (pos) =>{
             if(pos.success){
                this.vlasnN = pos.data[0];
+               console.log(JSON.stringify(this.vlasnN ));
+
             }else{
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
