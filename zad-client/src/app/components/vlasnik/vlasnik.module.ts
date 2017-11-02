@@ -11,6 +11,7 @@ import { VlasnikComponent } from './vlasnik.component';
 import { VlasnikFormComponent } from './vlasnik-form/vlasnik-form.component';
 import { VlasnikService } from './vlasnik.service';
 import { VlasnikRoutingModule } from './vlasnik-routing.module';
+import { ZiroVlasnikComponent } from './vlasnik-form/zirovlasnik.component';
 
  
 
@@ -30,7 +31,8 @@ import { VlasnikRoutingModule } from './vlasnik-routing.module';
   ],
   declarations: [
     VlasnikComponent,
-    VlasnikFormComponent
+    VlasnikFormComponent,
+    ZiroVlasnikComponent
   ],
   providers: [ VlasnikService,ConfirmationService ]
 })
