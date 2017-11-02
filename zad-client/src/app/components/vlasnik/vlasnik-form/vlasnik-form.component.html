@@ -73,16 +73,20 @@
               <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index">
                 <!-- <input [formControlName]="i.Naziv" value="formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv" > -->
                 <!-- {{formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv}} -->
-                {{i}}
-                
-              </div>
-              <div *ngFor="let stavka of vlasnN.ZiroVlasnik;let i=index">
-                  {{stavka.Naziv}}
-                  <br/>
-                 Kroz objekt Model - {{vlasnN.ZiroVlasnik[i].Naziv}}
+                <div [formGroupName]="i">
+                    <!--replace address implementation with our new address component-->
+                    <zirovlasnik [group]="formVlasn.controls.ZiroVlasnik.controls[i]"></zirovlasnik>
+                </div>
+
+                </div>
+              <div class="margin-20">
+                <a (click)="addZiroVlas()" style="cursor: default">
+                  Add Žiro račun +
+                </a>
+                <span class="glyphicon glyphicon-remove pull-right" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length > 1" (click)="removeZiroVlas(i)"></span>
               </div>
              
-            </div>
+          </div>
           
              
           <!-- <div formGroupName="ZiroVlasnik">
@@ -139,14 +143,16 @@
          <!-- </div> -->
 
 
-        
+<!--         
           <div class="form-group">
             <label class="center-block">Opis:
               <textarea class="form-control" formControlName="Opis"  [(ngModel)]="vlasnN.Opis">
               </textarea>
             </label>
           </div>
-          
+           -->
+
+           
           <div class="form-group">
                 <div class="col-md-offset-5 col-md-12">
                     <button type="submit" [disabled]="!formVlasn.valid"

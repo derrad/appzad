@@ -11,8 +11,12 @@ import { ServiceValidateShared } from './../../../services/service.validate.shar
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
 //https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
 //https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
+<<<<<<< HEAD
 //https://github.com/scotch-io/angular2-forms-course
 
+=======
+//https://evening-beyond-59286.herokuapp.com
+>>>>>>> 563d706ee51ae0b5b7f3e48168067417f6b4a326
 
 @Component({
   templateUrl: './vlasnik-form.component.html',
@@ -65,13 +69,13 @@ export class VlasnikFormComponent implements OnInit {
         //   Opis:[''],
         // }),
 
-         ZiroVlasnik:this._fb.array([
-           this._fb.group({
-             Naziv: ['', Validators.required],
-            Racun: ['', Validators.required],
-            Glavni:[''],
-            Opis: ['']})
-         ]),
+        ZiroVlasnik:this._fb.array([
+          this._fb.group({
+            Naziv: ['', Validators.required],
+          Racun: ['', Validators.required],
+          Glavni:[''],
+          Opis: ['']})
+        ]),
         TelefVlasnik:this._fb.array([
           // this.initZiroVlas(),
         ]),
