@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations'
 import { VlasnikService } from '../vlasnik.service';
-import { VlasnikModel } from '../vlasnik-model';
+import { VlasnikModel,TelefVlasnikModel,ZiroVlasnikModel } from '../vlasnik-model';
+
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom}  from './../../../shared/models/ErrorRes';
@@ -66,12 +67,7 @@ export class VlasnikFormComponent implements OnInit {
         // }),
 
         ZiroVlasnik:this._fb.array([
-          this._fb.group({
-            Naziv: ['', Validators.required],
-          Racun: ['', Validators.required],
-          Glavni:[''],
-          Opis: ['']})
-        ]),
+         ]),
         TelefVlasnik:this._fb.array([
           // this.initZiroVlas(),
         ]),
@@ -86,18 +82,31 @@ export class VlasnikFormComponent implements OnInit {
  // get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
  get ZiroVlasnik(): FormArray { return this.formVlasn.get('ZiroVlasnik') as FormArray; }
 
+ initDataZiro(){
+// foreach this.vlasnN.ZiroVlasnik
+
+  for ( let ziroitem of this.vlasnN.ZiroVlasnik) {
+        // console.log(ziroitem.Naziv);
+        // console.log(ziroitem.Racun);
+        // console.log(ziroitem.Glavni);
+        // console.log(ziroitem.Opis);
+        const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
+        control.push(this.initZiroVlas(ziroitem.Naziv,ziroitem.Racun,ziroitem.Glavni,ziroitem.Opis));
+  }
+ }
+
 //Ziro racun vlasnika
-initZiroVlas() {
+initZiroVlas(tNaziv:string,tRacun:string,tGlavni:boolean,tOpis:string) {
     return this._fb.group({
-        Naziv: ['', Validators.required],
-        Racun: ['', Validators.required],
-        Glavni:[''],
-        Opis: ['']
+        Naziv: [tNaziv, Validators.required],
+        Racun: [tRacun, Validators.required],
+        Glavni:[tGlavni],
+        Opis: [tOpis]
    });
 }
 addZiroVlas() {
     const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
-    control.push(this.initZiroVlas());
+    control.push(this.initZiroVlas("","",false,""));
 }
 removeZiroVlas(i: number) {
     const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
@@ -140,7 +149,8 @@ removeTelVlas(i: number) {
           (pos) =>{
             if(pos.success){
                this.vlasnN = pos.data[0];
-               console.log(JSON.stringify(this.vlasnN ));
+               //console.log(JSON.stringify(this.vlasnN ));
+               this.initDataZiro();
 
             }else{
               this.flashMessage.show(pos.message, {

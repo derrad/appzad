@@ -71,19 +71,16 @@
 
           <div formArrayName="ZiroVlasnik">
               <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index">
-                <!-- <input [formControlName]="i.Naziv" value="formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv" > -->
-                <!-- {{formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv}} -->
-                <div [formGroupName]="i">
-                    <!--replace address implementation with our new address component-->
-                    <zirovlasnik [group]="formVlasn.controls.ZiroVlasnik.controls[i]"></zirovlasnik>
-                </div>
-
+                  <div [formGroupName]="i">
+                      <!--replace address implementation with our new address component-->
+                      <zirovlasnik [group]="formVlasn.controls.ZiroVlasnik.controls[i]"></zirovlasnik>
+                  </div>
                 </div>
               <div class="margin-20">
                 <a (click)="addZiroVlas()" style="cursor: default">
                   Add Žiro račun +
                 </a>
-                <span class="glyphicon glyphicon-remove pull-right" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length > 1" (click)="removeZiroVlas(i)"></span>
+               
               </div>
              
           </div>
