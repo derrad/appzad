@@ -192,6 +192,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
       Opis:""
     });
 }
+
 ngOnDestroy() {
   this.setTempData();
 }

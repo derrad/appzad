@@ -77,7 +77,10 @@ export class RadnikFormComponent implements OnInit, OnDestroy  {
             // if (error == 404 || error.status == 400 ) {
                 this.router.navigate(['NotFound']);
             // }
-          });
+          },
+         () => {
+           console.log("Radnik servic get radnik kraj")
+         });
     });
 
    

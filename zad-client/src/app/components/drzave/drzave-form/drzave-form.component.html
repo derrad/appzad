@@ -2,44 +2,66 @@
     <div class="panel-heading">
       <div class="row">
         <div class="text-left col-lg-9 col-md-9 col-xs-9">
-          <h3>{{title}}</h3> 
+          <h5>{{title}}</h5> 
         </div>
         <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-          <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
+          <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
         </div>
     </div>
   </div>
-
+  <!-- fa-2x -->
   <div class="panel-body">
         <form [formGroup]="formDR" (ngSubmit)="save()">
           <div class="form-group" >
-                <input class="form-control" formControlName="_id"  [(ngModel)]="drzava._id"   type="hidden">
+                <input class="form-control" formControlName="_id"  [(ngModel)]="drzavaN._id"  type="hidden">
           </div>
             <div class="form-group">
               <label class="center-block">Kod:
-                <input class="form-control" formControlName="KodDrzave"  [(ngModel)]="drzava.KodDrzave" >
+                <input class="form-control " formControlName="KodDrzave"  [(ngModel)]="drzavaN.KodDrzave"   
+               required>
               </label>
-              <div class="text-danger" *ngIf="!formDR.controls['KodDrzave'].valid && formDR.controls['KodDrzave'].touched">{{ titleAlertKod }}</div>
+              <div *ngIf="KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)" class="alert alert-danger">
+
+                <div *ngIf="KodDrzave.errors.required">
+                    <strong>Kod drzave je obavezan podatak !!!</strong>
+                </div>
+                <div *ngIf="KodDrzave.errors.minlength">
+                  <strong>Kod drzave mora biti minimalno 2 karaktera dužine !!!</strong>
+                </div>
+                <div *ngIf="KodDrzave.errors.maxlength">
+                  <strong>Predugački kod drzave (max 3) !!!</strong>
+                </div>
+                <div *ngIf="KodDrzave.errors.validateSifru">
+                  <strong>Kod drzave nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
                 <label class="center-block">Naziv:
-                  <input class="form-control" formControlName="Naziv"  [(ngModel)]="drzava.Naziv" >
+                  <input class="form-control" formControlName="Naziv"  [(ngModel)]="drzavaN.Naziv"   required  >
                 </label>
-                <div class="text-danger" *ngIf="!formDR.controls['Naziv'].valid && formDR.controls['Naziv'].touched">{{ titleAlertNaziv }}</div>
+                <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                  <div *ngIf="Naziv.errors.required">
+                      <strong>Naziv je obavezan podatak !!!</strong>
+                  </div>
+                  <div *ngIf="Naziv.errors.maxlength">
+                    <strong>Predugački naziv !!!</strong>
+                  </div>
+                 </div>
             </div>
 
             <div class="form-group">
               <div class="checkbox">
                 <label class="center-block">
-                    <input type="checkbox" formControlName="EuClan" [(ngModel)]="drzava.EuClan"  value="1">EuClan
+                    <input type="checkbox" formControlName="EuClan" [(ngModel)]="drzavaN.EuClan"  value="1">EuClan
                 </label>
               </div>
             </div>
 
               <div class="form-group">
                 <label class="center-block">Opis:
-                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="drzava.Opis">
+                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="drzavaN.Opis">
                   </textarea>
                 </label>
               </div>
@@ -47,12 +69,12 @@
               <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formDR.valid"
-                            class="btn btn-default">
+                            class="btn btn-success btn-sm">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>
 
-                      <button type="reset" class="btn btn-danger"  [disabled]="formDR.pristine"  (click)="revert()">
+                      <button type="reset" class="btn btn-danger btn-sm"  [disabled]="formDR.pristine"  (click)="revert()">
                           <i class="fa fa-undo" aria-hidden="true"></i>
                           Revert
                       </button>
@@ -62,7 +84,7 @@
         </form>
   </div>
   <div class="panel-footer">
-      <button (click)="backClicked()"  class="btn btn-primary btn-block">
+      <button (click)="backClicked()"  class="btn btn-primary btn-block btn-sm">
           <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
           Back
       </button>
