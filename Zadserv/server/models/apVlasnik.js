@@ -7,9 +7,9 @@ var apVlasnik = new Schema({
     ZiroVlasnik:  [{Naziv:{type:String,required: [true, 'Naziv je obavezan !!!']},Racun:{type:String,required: [true, 'Racun je obavezan !!!']},Glavni:{type:Boolean, default:false},Opis:String}] ,
     TelefVlasnik: [{Naziv:{type:String,required: [true, 'Naziv je obavezan !!!']},Telefon:{type:String,required: [true, 'Telefon je obavezan !!!']},Glavni:{type:Boolean, default:false},Opis:String}] ,
     Ime: { type: String, required: [true, 'Ime vlasnika je obavezno !!!'] },
-    Adresa:{ type: String},
+    Adresa:{ type: String, required: [true, 'Adresa vlasnika je obavezna !!!'] },
     Glavni  : {type:Boolean, default:false},
-    Mesto:{ type: String},
+    Mesto:{ type: String, required: [true, 'Mesto vlasnika je obavezno !!!'] },
     PttReon:{ type: String},
     PttPak:{ type: String},
     Direktor:{ type: String},
@@ -23,6 +23,7 @@ var apVlasnik = new Schema({
     Sud:{ type: String},
     UplRacPorJed:{ type: String},
     NazPorJed:{ type: String},
+    Opis  :{ type: String },
     NameUser: {type:String}
     
 },
@@ -35,11 +36,11 @@ var apVlasnik = new Schema({
 { minimize: false }
 );
 
-apVlasnik.pre('save', function(next) {
-    // do stuff
-    console.log("PRE SAVE VLASNIK");
-    next();
-  });
+// apVlasnik.pre('save', function(next) {
+//     // do stuff
+//     console.log("PRE SAVE VLASNIK");
+//     next();
+//   });
 //apVlasnik.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('apVlasnik', apVlasnik,"apVlasnik");

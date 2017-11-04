@@ -1,35 +1,38 @@
-<div [formGroup]="ziroForm" class="center-block ">
-    <!-- <span class="glyphicon glyphicon-remove pull-right" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length > 1" (click)="removeZiroVlas(i)"></span> -->
-    <!-- <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiroVlas(i)"></span> -->
-    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<div [formGroup]="ziroForm">
     <div class="row">
+        <div class="form-group col-xs-2">
+        </div>
         <div class="form-group col-xs-4">
             <label>Naziv</label>
-            <input type="text" class="form-control input-sm" formControlName="Naziv">
+            <input type="text" class="form-control input-sm" formControlName="Naziv" required>
             <small [hidden]="ziroForm.controls.Naziv.valid" class="text-danger">
-                Naziv is required
+                Naziv je obavezan
             </small>
         </div>
         <div class="form-group col-xs-4">
             <label>Racun</label>
-            <input type="text" class="form-control input-sm" formControlName="Racun">
+            <input type="text" class="form-control input-sm" formControlName="Racun" required>
+            <small [hidden]="ziroForm.controls.Racun.valid" class="text-danger">
+                   Racun je obavezan
+            </small>
         </div>
-        <div class="form-group col-xs-2">
+    </div>
+    <div class="row">
+            <div class="form-group col-xs-2">
+            </div>
+            <div class="form-group col-xs-2">
                 <div class="checkbox">
                     <label >
                         <input type="checkbox"  class="form-control input-sm" formControlName="Glavni" >
                         Glavni
                     </label>
                 </div>
-      </div>
-    </div>
-    <div class="row">
-        
-        <div class="form-group col-xs-9">
-            <label class="center-block">Opis:
-             <textarea class="form-control input-sm" formControlName="Opis">
-            </textarea>
-            </label>
-        </div>
+            </div>
+            <div class="form-group col-xs-8">
+                <label class="center-block">Opis:
+                    <textarea class="form-control input-sm" formControlName="Opis">
+                </textarea>
+                </label>
+            </div>
     </div>
 </div>

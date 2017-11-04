@@ -7,7 +7,8 @@ import { FormGroup } from '@angular/forms';
     templateUrl: './zirovlasnik.component.html'
 })
 export class ZiroVlasnikComponent {
-    // we will pass in address from App component
-    @Input('group')
+    // we will pass in ziro from App component
+    @Input('groupziro')
     public ziroForm: FormGroup;
+   
 }

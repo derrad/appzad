@@ -1,16 +1,16 @@
-<p>
+<!-- <p>
   vlasnik-form works!
-</p>
+</p> -->
 
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
       <div class="row">
           <div class="text-left col-lg-9 col-md-9 col-xs-9">
-            <h3>{{title}}</h3> 
-          </div>
-          <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-            <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
-          </div>
+              <h5>{{title}}</h5> 
+            </div>
+            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+            </div>
       </div>
   </div>
   <div class="panel-body">
@@ -69,88 +69,134 @@
               </label>
           </div>
 
-          <div formArrayName="ZiroVlasnik">
-              <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index">
-                  <div [formGroupName]="i">
-                      <!--replace address implementation with our new address component-->
-                      <zirovlasnik [group]="formVlasn.controls.ZiroVlasnik.controls[i]"></zirovlasnik>
-                  </div>
-                </div>
-              <div class="margin-20">
-                <a (click)="addZiroVlas()" style="cursor: default">
-                  Add Žiro račun +
-                </a>
-               
-              </div>
-             
+          <div class="form-group">
+              <label class="center-block">Ptt reon:
+                <input class="form-control" formControlName="PttPak"  [(ngModel)]="vlasnN.PttPak" >
+              </label>
+          </div>
+
+          <div class="form-group">
+              <label class="center-block">Direktor:
+                <input class="form-control" formControlName="Direktor"  [(ngModel)]="vlasnN.Direktor" >
+              </label>
+          </div>
+
+          <div class="form-group">
+              <label class="center-block">Komercijalni rukovodioc:
+                <input class="form-control" formControlName="KomRukovac"  [(ngModel)]="vlasnN.KomRukovac" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Blagajnik:
+                <input class="form-control" formControlName="Blagajnik"  [(ngModel)]="vlasnN.Blagajnik" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Pib:
+                <input class="form-control" formControlName="Pib"  [(ngModel)]="vlasnN.Pib" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Matični broj:
+                <input class="form-control" formControlName="MatBroj"  [(ngModel)]="vlasnN.MatBroj" >
+              </label>
+          </div>
+        
+          <div class="form-group">
+              <label class="center-block">Šifra delatnosti:
+                <input class="form-control" formControlName="SifDelat"  [(ngModel)]="vlasnN.SifDelat" >
+              </label>
           </div>
           
-             
-          <!-- <div formGroupName="ZiroVlasnik">
-              <input formControlName="Naziv"  [(ngModel)]="ZiroVlasnik.Naziv">
-              <input formControlName="Racun"   [(ngModel)]="ZiroVlasnik.Racun">
-          </div> -->
-
-           <!-- Ziro racun -->
-          <!-- <div formArrayName="ZiroVlasnik">
-            <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index" class="panel panel-default">
-            <div class="panel-heading">
-              <span>Žiro račun {{i + 1}}</span>
-              <span class="glyphicon glyphicon-remove pull-right" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length > 1" (click)="removeZiroVlas(i)"></span>
-            </div>
-            <div class="panel-body" [formGroupName]="i">
-                    <div class="form-group">
-                        <label class="center-block">Naziv:
-                          <input class="form-control" formControlName="Naziv" required >
-                        </label>
-                        <small [hidden]="formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv.valid" class="text-danger">
-                            Naziv  je obavezan podatak !!!
-                        </small> -->
-
-                        <!-- <div *ngIf="formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv.invalid && (formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv.dirty || formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv.touched)" class="alert alert-danger">
-                          <div *ngIf="formVlasn.controls.ZiroVlasnik.controls[i].controls.Naziv.required">
-                            <strong>Naziv  je obavezan podatak !!!</strong>
-                          </div>
-                        </div> -->
-<!--                         
-                    </div>
-                    -->
-                    <!-- <div class="form-group ">
-                      <label class="center-block">Racun:
-                        <input class="form-control" formControlName="Racun"  required >
-                      </label>
-                      <small [hidden]="formVlasn.controls.ZiroVlasnik.controls[i].controls.Racun.valid" class="text-danger">
-                          Racun  je obavezan podatak !!!
-                      </small> -->
-                      <!-- <div *ngIf="formVlasn.controls.ZiroVlasnik.controls[i].controls.Racun.invalid && (formVlasn.controls.ZiroVlasnik.controls[i].controls.Racun.dirty || formVlasn.controls.ZiroVlasnik.controls[i].controls.Racun.touched)" class="alert alert-danger">
-                        <div *ngIf="formVlasn.controls.ZiroVlasnik.controls[i].controls.Racun.required">
-                          <strong>Racun  je obavezan podatak !!!</strong>
-                        </div>
-                      </div> -->
-                    <!-- </div>
-                  </div> 
-
-
-            </div> -->
-              <!-- <div class="margin-20">
-                <a (click)="addZiroVlas()" style="cursor: default">
-                  Add Žiro račun +
-                </a>
-              </div> -->
-         <!-- </div> -->
-
-
-<!--         
           <div class="form-group">
-            <label class="center-block">Opis:
-              <textarea class="form-control" formControlName="Opis"  [(ngModel)]="vlasnN.Opis">
-              </textarea>
-            </label>
+              <label class="center-block">Pdv broj:
+                <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="vlasnN.PdvBroj" >
+              </label>
           </div>
-           -->
+          <div class="form-group">
+              <label class="center-block">Sud:
+                <input class="form-control" formControlName="Sud"  [(ngModel)]="vlasnN.Sud" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Uplatni račun poreske jedinice:
+                <input class="form-control" formControlName="UplRacPorJed"  [(ngModel)]="vlasnN.UplRacPorJed" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Naziv poreske jedinice:
+                <input class="form-control" formControlName="NazPorJed"  [(ngModel)]="vlasnN.NazPorJed" >
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Opis:
+                <textarea class="form-control" formControlName="Opis"  [(ngModel)]="vlasnN.Opis">
+                </textarea>
+              </label>
+            </div>
 
+          <div class="form-group">
+            <div formArrayName="ZiroVlasnik">
+                <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index" class="panel panel-info"> 
+                    <div class="panel-heading">
+                        <span><strong>Ziro racun {{i + 1}} </strong></span>
+                        <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiroVlas(i)"></span>
+                    </div>
+
+                    <div [formGroupName]="i" class="panel-body" > 
+                        <zirovlasnik [groupziro]="formVlasn.controls.ZiroVlasnik.controls[i]"></zirovlasnik>
+                    </div>
+                </div>
+          
+                <div class="margin-20" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length < 6">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      </div>
+                      <div class=" col-xs-10 ">
+                          <button type="button" class="btn btn-info btn-block"   (click)="addZiroVlas()" title=" Add Žiro račun">
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                              Dodaj žiro račun
+                          </button>
+                         
+                    </div>
+                  </div>
+                </div>
+              
+            </div>
+          </div> 
            
           <div class="form-group">
+              <div formArrayName="TelefVlasnik">
+                  <div *ngFor="let TelefVlasnik of formVlasn.controls.TelefVlasnik.controls; let j=index" class="panel panel-info"> 
+                      <div class="panel-heading">
+                          <span><strong>Telefon {{j + 1}} </strong></span>
+                          <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelVlas(j)"></span>
+                      </div>
+                        <div [formGroupName]="j" class="panel-body" > 
+                           <telefonvlasnik  [group]="formVlasn.controls.TelefVlasnik.controls[j]"></telefonvlasnik>
+                      </div>
+                  </div>
+            
+                  <div class="margin-20" *ngIf="formVlasn.controls.TelefVlasnik.controls.length < 10">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        </div>
+                        <div class=" col-xs-10 ">
+                           <button type="button" class="btn btn-info btn-block"   (click)="addATelVlas()" title=" Add Phone">
+                                  <i class="fa fa-plus" aria-hidden="true"></i>
+                                  Dodaj telefon
+                              </button>
+                          
+                      </div>
+                    </div>
+                  </div>
+                
+              </div>
+          </div>
+
+          <div class="clearfix"></div> 
+         
+            <div class="form-group">
                 <div class="col-md-offset-5 col-md-12">
                     <button type="submit" [disabled]="!formVlasn.valid"
                         class="btn btn-success">

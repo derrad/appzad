@@ -12,7 +12,7 @@ import { VlasnikFormComponent } from './vlasnik-form/vlasnik-form.component';
 import { VlasnikService } from './vlasnik.service';
 import { VlasnikRoutingModule } from './vlasnik-routing.module';
 import { ZiroVlasnikComponent } from './vlasnik-form/zirovlasnik.component';
-
+import { TelefonVlasnikComponent } from './vlasnik-form/telefonvlasnik.component';
  
 
  
@@ -32,7 +32,8 @@ import { ZiroVlasnikComponent } from './vlasnik-form/zirovlasnik.component';
   declarations: [
     VlasnikComponent,
     VlasnikFormComponent,
-    ZiroVlasnikComponent
+    ZiroVlasnikComponent,
+    TelefonVlasnikComponent
   ],
   providers: [ VlasnikService,ConfirmationService ]
 })

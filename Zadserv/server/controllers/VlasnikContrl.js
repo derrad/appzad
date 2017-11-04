@@ -1,4 +1,10 @@
 const Vlasnik = require('../models/apVlasnik.js');
+const TypeA = require('../enum/serverenum');
+const SetActivity = require('./SetActivity');
+
+const TIP_TRANS_INSERT ="ADD VLASNIK";
+const TIP_TRANS_UPDATE ="CHANGES VLASNIK";
+const TIP_TRANS_DEL = "DELETE VLASNIK";
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -19,9 +25,10 @@ module.exports.create = function (req, res,next) {
   const Sud = req.body.Sud ;
   const UplRacPorJed = req.body.UplRacPorJed ;
   const NazPorJed = req.body.NazPorJed ;
-  const NameUser = req.body.NameUser || "TEST";
+  const NameUser = req.user.email || "TEST";
   const ZiroVlasnik =  req.body.ZiroVlasnik || [];
   const TelefVlasnik =  req.body.TelefVlasnik || [];
+  const Opis = req.body.Opis ;
   
  
   //console.log("uid je :" + uid + " ovo je ime " + req.body.Ime);
@@ -58,12 +65,17 @@ if (uid) {
       vlasnik.NameUser = NameUser ;
       vlasnik.ZiroVlasnik = ZiroVlasnik ;
       vlasnik.TelefVlasnik =  TelefVlasnik ;
+      vlasnik.Opis = Opis ;
       
     }
     vlasnik.save(function(err,result) {
       if(err){ 
         return res.status(400).json({ success: false, message: 'Error processing request '+ err }); 
       }
+      try{
+        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Ime , NameUser)
+      } catch(ex){}
+
       return res.status(201).json({
         success: true,
         message: 'Vlasnik updated successfully',
@@ -95,7 +107,8 @@ if (uid) {
     NazPorJed : NazPorJed ,
     NameUser :NameUser ,
     ZiroVlasnik : ZiroVlasnik ,
-    TelefVlasnik :  TelefVlasnik 
+    TelefVlasnik :  TelefVlasnik,
+    Opis : Opis  
   });
 
   oVlasnik.save(function(err,result) {
@@ -103,7 +116,11 @@ if (uid) {
      return  res.status(400).json(
         { success: false, message: 'Error processing request '+ err });
     }
-      
+    
+    try{
+      SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, Ime , NameUser)
+    } catch(ex){}
+
    return res.status(201).json({
       success: true,
       message: 'Vlasnik saved successfully',
@@ -115,8 +132,6 @@ if (uid) {
 }
   }
 }
-
-
 
 
 
@@ -148,4 +163,20 @@ module.exports.listavlasnik = function (req, res,next) {
       });
     });
 
+}
+
+module.exports.delevlasnik = function(req, res, next) {
+  //console.log("parametar je : " + req.params.id);
+	Vlasnik.remove({_id: req.params.id}, function(err){
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}); }
+        try{
+          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Vlasnik" , req.user.email)
+          } catch(ex){}
+
+        return res.status(201).json({
+            success: true,
+            message: 'Vlasnik removed successfully',
+             data:[]
+          });
+  });
 }

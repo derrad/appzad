@@ -30,7 +30,7 @@ export class KonstantaFormComponent implements OnInit {
 
       this.formKonst = formBuilder.group({
         _id:[],
-        Ime:['',[Validators.required]],
+        Datum:['',[Validators.required]],
         UcPenz: ['', [
           Validators.required,serValidate.minValue(0)
         ]],

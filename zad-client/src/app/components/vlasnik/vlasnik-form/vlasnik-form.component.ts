@@ -1,6 +1,6 @@
 import { Component, OnInit, Directive } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators,FormArray,FormControl  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormArray,FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations'
@@ -53,19 +53,6 @@ export class VlasnikFormComponent implements OnInit {
         Sud:[''],
         UplRacPorJed:[''],
         NazPorJed:[''],
-        // ZiroVlasnik: new FormArray([
-        //   new FormControl('Naziv'),
-        //   new FormControl('Racun'),
-        //   new FormControl('Glavni'),
-        //   new FormControl('Opis'),
-        // ]),
-        // ZiroVlasnik: this._fb.group({
-        //   Naziv:[''],
-        //   Racun:[''],
-        //   Glavni:[''],
-        //   Opis:[''],
-        // }),
-
         ZiroVlasnik:this._fb.array([
          ]),
         TelefVlasnik:this._fb.array([
@@ -79,17 +66,11 @@ export class VlasnikFormComponent implements OnInit {
   get Adresa() { return this.formVlasn.get('Adresa'); }
   get Mesto() { return this.formVlasn.get('Mesto'); }
   
- // get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
+ get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
  get ZiroVlasnik(): FormArray { return this.formVlasn.get('ZiroVlasnik') as FormArray; }
 
  initDataZiro(){
-// foreach this.vlasnN.ZiroVlasnik
-
   for ( let ziroitem of this.vlasnN.ZiroVlasnik) {
-        // console.log(ziroitem.Naziv);
-        // console.log(ziroitem.Racun);
-        // console.log(ziroitem.Glavni);
-        // console.log(ziroitem.Opis);
         const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
         control.push(this.initZiroVlas(ziroitem.Naziv,ziroitem.Racun,ziroitem.Glavni,ziroitem.Opis));
   }
@@ -114,25 +95,32 @@ removeZiroVlas(i: number) {
 }
 //Kraj ziro racuna
 //Telefon
-initTelVlas() {
+
+initDataTelef(){
+  for ( let telitem of this.vlasnN.TelefVlasnik) {
+        const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
+        control.push(this.initTelVlas(telitem.Naziv,telitem.Telefon,telitem.Glavni,telitem.Opis));
+  }
+ }
+
+
+initTelVlas(tNaziv:string,tTelefon:string,tGlavni:boolean,tOpis:string) {
   return this._fb.group({
-      Naziv: ['', Validators.required],
-      Telefon: ['', Validators.required],
-      Glavni:[''],
-      Opis: ['']
+      Naziv: [tNaziv, Validators.required],
+      Telefon: [tTelefon, Validators.required],
+      Glavni:[tGlavni],
+      Opis: [tOpis]
  });
 }
 addATelVlas() {
   const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
-  control.push(this.initTelVlas());
+  control.push(this.initTelVlas("","",false,""));
 }
 removeTelVlas(i: number) {
   const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
   control.removeAt(i);
 }
 //Kraj telefona
-
-
 
   ngOnInit() {
     var id = this.route.params.subscribe(params => {
@@ -151,6 +139,7 @@ removeTelVlas(i: number) {
                this.vlasnN = pos.data[0];
                //console.log(JSON.stringify(this.vlasnN ));
                this.initDataZiro();
+               this.initDataTelef();
 
             }else{
               this.flashMessage.show(pos.message, {
@@ -223,8 +212,7 @@ removeTelVlas(i: number) {
     }
   }
 
-
-  
+ 
   backClicked(event: any) {
      this._location.back();
      

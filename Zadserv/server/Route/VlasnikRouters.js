@@ -7,6 +7,7 @@ router.get('/api/vlasnik',passport.authenticate('jwt', {session:false}), Vlasnik
 router.get('/api/vlasnik/:id',passport.authenticate('jwt', {session:false}), VlasnikController.getvlasnik); 
 router.post('/api/vlasnik',passport.authenticate('jwt', {session:false}), VlasnikController.create);
 router.put('/api/vlasnik/:id',passport.authenticate('jwt', {session:false}), VlasnikController.create);
+router.delete('/api/vlasnik/:id',passport.authenticate('jwt', {session:false}),  VlasnikController.delevlasnik);
 //router.delete('/api/vlasnik/:id', VlasnikController.delevlasnik);
 
 module.exports = router

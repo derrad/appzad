@@ -17,22 +17,31 @@
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
       <p-column field="Datum" header="Datum"  styleClass="text-center">
-                <ng-template let-col let-konst="rowData" pTemplate="body">
-                    <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>
-                </ng-template>
+            <ng-template let-col let-konst="rowData" pTemplate="body">
+                <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>
+            </ng-template>
         
       </p-column>
-      <p-column field="UcPenz" header="UcPenz"   styleClass="text-center" ></p-column> 
-      <p-column field="OsPio1" header="OsPio1"  styleClass="text-right"></p-column>   
-      <p-column field="Clanarin" header="Clanarin"  styleClass="text-right" >
+      <p-column field="UcPenz" header="Porez Učenici"   styleClass="text-right" >
+            <ng-template let-col let-konst="rowData" pTemplate="body">
+                    <span>{{konst[col.field] | number:'1.2-2'}}</span>
+            </ng-template> 
+      </p-column> 
+
+      <p-column field="OsPorez" header="Porez osiguranici"  styleClass="text-right">
+            <ng-template let-col let-konst="rowData" pTemplate="body">
+                    <span>{{konst[col.field] | number:'1.2-2'}}</span>
+            </ng-template>
+      </p-column>   
+      <p-column field="Clanarin" header="Članarina"  styleClass="text-right" >
         <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.0-4'}}</span>
+            <span>{{konst[col.field] | number:'1.2-2'}}</span>
         </ng-template>
 
       </p-column>
       <p-column field="Pdv" header="Pdv" styleClass="text-right">
         <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.0-4'}}</span>
+            <span>{{konst[col.field] | number:'1.2-4'}}</span>
         </ng-template>
 
 
@@ -104,7 +113,7 @@
     </p-confirmDialog>
     
     
-    <p-dialog header="KONSTANTA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+    <p-dialog header="KONSTANTA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto" >
     
             <div>
                     <dl class="dl-horizontal">
@@ -180,8 +189,16 @@
                 
                     </dl>                        
             </div>
-            <p-footer>
-                    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+            <p-footer> 
+                <div class="row">
+                   <div class="col-xs-3">
+                <button styleClass="text-left" type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+            </div> 
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-3">
+            </div>
+            </div>
            </p-footer>
     </p-dialog>
     
