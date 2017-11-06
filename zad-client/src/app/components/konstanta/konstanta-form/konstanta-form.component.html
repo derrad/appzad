@@ -34,6 +34,54 @@
                 </div>
             </div>
           </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Zadruga
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6" > <!-- PDV porez -->
+                    <label class="center-block">Stopa poreza(Pdv):
+                        <div class="input-group">   
+                            <div class="input-group">
+                                <input class="form-control text-right" formControlName="Pdv"  [(ngModel)]="konstN.Pdv" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </label>
+                    <div *ngIf="Pdv.invalid && (Pdv.dirty || Pdv.touched)" class="alert alert-danger">
+                        <div *ngIf="Pdv.errors.required">
+                            <strong>Pdv je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="Pdv.errors.minValue">
+                            <strong>Pdv nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="form-group col-md-3" > <!-- Članarina zadruzi -->
+                    <label class="center-block">Članarina(zadruzi):
+                            <div class="input-group"> 
+                                <div class="input-group"> 
+                                    <input class="form-control text-right" formControlName="Clanarin"  [(ngModel)]="konstN.Clanarin"  (keypress)="serValidate.validateOnlyNumbers($event)"required>
+                                    <span class="input-group-addon">RSD</span>
+                                </div>
+                            </div>
+                    </label>
+                    
+                    <div *ngIf="Clanarin.invalid && (Clanarin.dirty || Clanarin.touched)" class="alert alert-danger">
+                        <div *ngIf="Clanarin.errors.required">
+                            <strong>Članarina je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="Clanarin.errors.minValue">
+                            <strong>Članarina nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+  
     <div class="panel panel-default">
         <div class="panel-heading">
             Učenici
@@ -46,7 +94,7 @@
                 <label class="center-block">Doprinosi penziono:
                     <div class="input-group">
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz" (keypress)="validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz" (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -84,7 +132,7 @@
                     <label class="center-block">Normirani troškovi:
                         <div class="input-group"> 
                             <div class="input-group">
-                                <input  class="form-control text-right" formControlName="UcNormTr"  [(ngModel)]="konstN.UcNormTr" required>
+                                <input  class="form-control text-right" formControlName="UcNormTr"  [(ngModel)]="konstN.UcNormTr"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">%</span>
                             </div>
                         </div>
@@ -99,12 +147,13 @@
                     </div>
             </div>
         </div> <!-- kraj prve grupe-->
+
         <div class="row">
             <div class="form-group col-md-3">
                 <label class="center-block">Stopa olakšice:
                     <div class="input-group">
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcOlak"  [(ngModel)]="konstN.UcOlak" required>
+                            <input class="form-control text-right" formControlName="UcOlak"  [(ngModel)]="konstN.UcOlak" (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -119,268 +168,261 @@
                     </div>
                 </div>
             </div>
-        <div class="form-group col-md-3"> <!-- učenička stopa poreza -->
-            <label class="center-block">Stopa poreza:
-                <div class="input-group">
+            <div class="form-group col-md-3"> <!-- učenička stopa poreza -->
+                <label class="center-block">Stopa poreza:
                     <div class="input-group">
-                        <input class="form-control text-right" formControlName="UcPorez"  [(ngModel)]="konstN.UcPorez" required>
-                        <span class="input-group-addon">%</span>
+                        <div class="input-group">
+                            <input class="form-control text-right" formControlName="UcPorez"  [(ngModel)]="konstN.UcPorez" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                </label>
+                <div *ngIf="UcPorez.invalid && (UcPorez.dirty || UcPorez.touched)" class="alert alert-danger">
+                    <div *ngIf="UcPorez.errors.required">
+                        <strong>Stopa poreza je obavezan podatak !!!</strong>
+                    </div>
+                    <div *ngIf="UcPorez.errors.minValue">
+                        <strong>Stopa poreza nije pravilno uneta (<0) !!!</strong>
+                    </div>
                     </div>
                 </div>
-            </label>
-            <div *ngIf="UcPorez.invalid && (UcPorez.dirty || UcPorez.touched)" class="alert alert-danger">
-                <div *ngIf="UcPorez.errors.required">
-                    <strong>Stopa poreza je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="UcPorez.errors.minValue">
-                    <strong>Stopa poreza nije pravilno uneta (<0) !!!</strong>
-                </div>
-                </div>
-             </div>
-        </div>
-    </div><!-- Kraj druge grupe-->
+            </div>
+        </div><!-- Kraj druge grupe-->
     
     </div>
 
-
-        <div class="form-group"> <!-- PDV porez -->
-            <label class="center-block">Stopa poreza(Pdv):
-                <div class="input-group">   
-                    <div class="input-group">
-                        <input class="form-control" formControlName="Pdv"  [(ngModel)]="konstN.Pdv" required>
-                        <span class="input-group-addon">%</span>
-                    </div>
-                </div>
-            </label>
-            <div *ngIf="Pdv.invalid && (Pdv.dirty || Pdv.touched)" class="alert alert-danger">
-                <div *ngIf="Pdv.errors.required">
-                    <strong>Pdv je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="Pdv.errors.minValue">
-                    <strong>Pdv nije dobar podatak (<0) !!!</strong>
-                </div>
-            </div>
-        </div>
   
 
-        <div class="form-group"> <!-- Članarina zadruzi -->
-            <label class="center-block">Članarina(zadruzi):
-                <input class="form-control" formControlName="Clanarin"  [(ngModel)]="konstN.Clanarin" required>
-            </label>
-            
-            <div *ngIf="Clanarin.invalid && (Clanarin.dirty || Clanarin.touched)" class="alert alert-danger">
-                <div *ngIf="Clanarin.errors.required">
-                    <strong>Članarina je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="Clanarin.errors.minValue">
-                    <strong>Članarina nije dobar podatak (<0) !!!</strong>
-                    </div>
-            </div>
-            </div>
-              
-            <div class="form-group">  <!-- Osnovica poreza -->
-                <label class="center-block">OsPorez:
-                <input class="form-control" formControlName="OsPorez"  [(ngModel)]="konstN.OsPorez" required>
-                </label>
-                
-                <div *ngIf="OsPorez.invalid && (OsPorez.dirty || OsPorez.touched)" class="alert alert-danger">
-                    <div *ngIf="OsPorez.errors.required">
-                        <strong>OsPorez je obavezan podatak !!!</strong>
-                    </div>
-                    <div *ngIf="OsPorez.errors.minValue">
-                        <strong>OsPorez nije dobar podatak (<0) !!!</strong>
-                    </div>
-                </div>
-            </div>
-
-                    <div class="form-group">
-                        <label class="center-block">Umanjene poreske osnovice:
-                          <input class="form-control" formControlName="OsUmanjen"  [(ngModel)]="konstN.OsUmanjen" required>
+    <div class="panel panel-default">   
+        <div class="panel-heading">
+            Osiguranici
+        </div>  
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-6">  <!-- Osnovica poreza -->
+                        <label class="center-block">OsPorez:
+                            <div class="input-group"> 
+                                <div class="input-group"> 
+                                <input class="form-control text-right" formControlName="OsPorez"  [(ngModel)]="konstN.OsPorez"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <span class="input-group-addon">RSD</span>
+                                </div>
+                            </div>
                         </label>
                         
-                        <div *ngIf="OsUmanjen.invalid && (OsUmanjen.dirty || OsUmanjen.touched)" class="alert alert-danger">
-                            <div *ngIf="OsUmanjen.errors.required">
-                                <strong>Umanjenje poreske osnovice je obavezan podatak !!!</strong>
+                        <div *ngIf="OsPorez.invalid && (OsPorez.dirty || OsPorez.touched)" class="alert alert-danger">
+                            <div *ngIf="OsPorez.errors.required">
+                                <strong>OsPorez je obavezan podatak !!!</strong>
                             </div>
-                            <div *ngIf="OsUmanjen.errors.minValue">
-                                <strong>Umanjenje poreske osnovice nije dobar podatak (<0) !!!</strong>
-                              </div>
+                            <div *ngIf="OsPorez.errors.minValue">
+                                <strong>OsPorez nije dobar podatak (<0) !!!</strong>
+                            </div>
                         </div>
-                      </div>
+                </div>
 
-
-                      <div class="form-group">
-                          <label class="center-block">Stopa pio(prema radniku):
-                                <div class="input-group">
-                                    <div class="input-group">
-                                        <input class="form-control" formControlName="OsPio1"  [(ngModel)]="konstN.OsPio1" required>
-                                        <span class="input-group-addon">%</span>
-                                    </div>
-                                </div>
-                          </label>
-                          <div *ngIf="OsPio1.invalid && (OsPio1.dirty || OsPio1.touched)" class="alert alert-danger">
-                              <div *ngIf="OsPio1.errors.required">
-                                  <strong>Stopa pio je obavezan podatak !!!</strong>
-                              </div>
-                              <div *ngIf="OsPio1.errors.minValue">
-                                  <strong>Stopa pio nije dobar podatak (<0) !!!</strong>
-                                </div>
-                          </div>
+                <div class="form-group col-md-6">  <!-- Umanjenje osnovice poreza za osiguranika -->
+                    <label class="center-block">Umanjene poreske osnovice:
+                        <div class="input-group"> 
+                            <div class="input-group"> 
+                                <input class="form-control text-right" formControlName="OsUmanjen"  [(ngModel)]="konstN.OsUmanjen"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <span class="input-group-addon">RSD</span>
+                            </div>
                         </div>
-
-
-                        <div class="form-group">
-                            <label class="center-block">Stopa pio(prema poslodavcu):
-                                  <div class="input-group">
-                                        <div class="input-group">
-                                    <input class="form-control" formControlName="OsPio2"  [(ngModel)]="konstN.OsPio2" required>
-                                    <span class="input-group-addon">%</span>
-                                        </div>
-                                  </div>
-                            </label>
-                            <div *ngIf="OsPio2.invalid && (OsPio2.dirty || OsPio2.touched)" class="alert alert-danger">
-                                <div *ngIf="OsPio2.errors.required">
-                                    <strong>Stopa pio je obavezan podatak !!!</strong>
-                                </div>
-                                <div *ngIf="OsPio2.errors.minValue">
-                                    <strong>Stopa pio nije dobar podatak (<0) !!!</strong>
-                                  </div>
-                            </div>
-                          </div>
-  
-                          <div class="form-group">
-                              <label class="center-block">Stopa zdravstveno(prema radniku):
-                                    <div class="input-group">
-                                            <div class="input-group">
-                                      <input class="form-control" formControlName="OsZdrav1"  [(ngModel)]="konstN.OsZdrav1" required>
-                                      <span class="input-group-addon">%</span>
-                                            </div>
-                                    </div>
-                              </label>
-                              <div *ngIf="OsZdrav1.invalid && (OsZdrav1.dirty || OsZdrav1.touched)" class="alert alert-danger">
-                                  <div *ngIf="OsZdrav1.errors.required">
-                                      <strong>Stopa zdravstveno je obavezan podatak !!!</strong>
-                                  </div>
-                                  <div *ngIf="OsZdrav1.errors.minValue">
-                                      <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>
-                                    </div>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="center-block">Stopa zdravstveno(prema poslodavcu):
-                                      <div class="input-group">
-                                            <div class="input-group">
-                                        <input class="form-control" formControlName="OsZdrav2"  [(ngModel)]="konstN.OsZdrav2" required>
-                                        <span class="input-group-addon">%</span>
-                                            </div>
-                                      </div>
-                                </label>
-                                <div *ngIf="OsZdrav2.invalid && (OsZdrav2.dirty || OsZdrav2.touched)" class="alert alert-danger">
-                                    <div *ngIf="OsZdrav2.errors.required">
-                                        <strong>Stopa zdravstveno je obavezan podatak !!!</strong>
-                                    </div>
-                                    <div *ngIf="OsZdrav2.errors.minValue">
-                                        <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>
-                                      </div>
-                                </div>
-                              </div>
-
-                              <div class="form-group">
-                                  <label class="center-block">Stopa nezaposlenost(prema radniku):
-                                        <div class="input-group">
-                                                <div class="input-group">
-                                          <input class="form-control" formControlName="OsNez1"  [(ngModel)]="konstN.OsNez1" required>
-                                          <span class="input-group-addon">%</span>
-                                                </div>
-                                        </div>
-                                  </label>
-                                  <div *ngIf="OsNez1.invalid && (OsNez1.dirty || OsNez1.touched)" class="alert alert-danger">
-                                      <div *ngIf="OsNez1.errors.required">
-                                          <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>
-                                      </div>
-                                      <div *ngIf="OsNez1.errors.minValue">
-                                          <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>
-                                        </div>
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="center-block">Stopa nezaposlenost(prema poslodavcu):
-                                          <div class="input-group">
-                                                <div class="input-group">
-                                            <input class="form-control" formControlName="OsNez2"  [(ngModel)]="konstN.OsNez2" required>
-                                            <span class="input-group-addon">%</span>
-                                                </div>
-                                          </div>
-                                    </label>
-                                    <div *ngIf="OsNez2.invalid && (OsNez2.dirty || OsNez2.touched)" class="alert alert-danger">
-                                        <div *ngIf="OsNez2.errors.required">
-                                            <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>
-                                        </div>
-                                        <div *ngIf="OsNez2.errors.minValue">
-                                            <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>
-                                          </div>
-                                    </div>
-                                  </div>
-
-                                  <div class="form-group">
-                                      <label class="center-block">Minimalna osnovica doprinosa:
-                                        <input class="form-control" formControlName="OsMinOsDop"  [(ngModel)]="konstN.OsMinOsDop" required>
-                                      </label>
-                                      
-                                      <div *ngIf="OsMinOsDop.invalid && (OsMinOsDop.dirty || OsMinOsDop.touched)" class="alert alert-danger">
-                                          <div *ngIf="OsMinOsDop.errors.required">
-                                              <strong>Minimalna osnovica doprinosa je obavezan podatak !!!</strong>
-                                          </div>
-                                          <div *ngIf="OsMinOsDop.errors.minValue">
-                                              <strong>Minimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>
-                                            </div>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="center-block">Maksimalna osnovica doprinosa:
-                                          <input class="form-control" formControlName="OsMaxOsDop"  [(ngModel)]="konstN.OsMaxOsDop" required>
-                                        </label>
-                                        
-                                        <div *ngIf="OsMaxOsDop.invalid && (OsMaxOsDop.dirty || OsMaxOsDop.touched)" class="alert alert-danger">
-                                            <div *ngIf="OsMaxOsDop.errors.required">
-                                                <strong>Maksimalna osnovica doprinosa je obavezan podatak !!!</strong>
-                                            </div>
-                                            <div *ngIf="OsMaxOsDop.errors.minValue">
-                                                <strong>Maksimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>
-                                              </div>
-                                        </div>
-                                      </div>
-
-
-              <div class="form-group">
-                <label class="center-block">Opis:
-                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="konstN.Opis">
-                  </textarea>
-                </label>
-            </div>
-          
-            <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
-                        <button type="submit" [disabled]="!formKonst.valid"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
-
-                      <button type="reset" class="btn btn-danger"  [disabled]="formKonst.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Revert
-                      </button>
-                      
+                    </label>
+                    <div *ngIf="OsUmanjen.invalid && (OsUmanjen.dirty || OsUmanjen.touched)" class="alert alert-danger">
+                        <div *ngIf="OsUmanjen.errors.required">
+                            <strong>Umanjenje poreske osnovice je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsUmanjen.errors.minValue">
+                            <strong>Umanjenje poreske osnovice nije dobar podatak (<0) !!!</strong>
+                        </div>
                     </div>
-              
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">  <!-- Stopa pio prema radniku-->
+                    <label class="center-block">Stopa pio(prema radniku):
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input  class="form-control text-right"  formControlName="OsPio1"  [(ngModel)]="konstN.OsPio1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </label>
+                    <div *ngIf="OsPio1.invalid && (OsPio1.dirty || OsPio1.touched)" class="alert alert-danger">
+                        <div *ngIf="OsPio1.errors.required">
+                            <strong>Stopa pio je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsPio1.errors.minValue">
+                            <strong>Stopa pio nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">  <!-- Stopa pio prema poslodavcu  -->
+                    <label class="center-block">Stopa pio(prema poslodavcu):
+                            <div class="input-group">
+                                <div class="input-group">
+                            <input class="form-control text-right" formControlName="OsPio2"  [(ngModel)]="konstN.OsPio2"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                    </label>
+                    <div *ngIf="OsPio2.invalid && (OsPio2.dirty || OsPio2.touched)" class="alert alert-danger">
+                        <div *ngIf="OsPio2.errors.required">
+                            <strong>Stopa pio je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsPio2.errors.minValue">
+                            <strong>Stopa pio nije dobar podatak (<0) !!!</strong>
+                            </div>
+                    </div>
+                </div> 
+            </div> <!--Kraj rowa za stopu pio -->
+            <div class="row">
+                <div class="form-group col-md-6">  <!-- Stopa zdravstveno prema radniku  -->
+                    <label class="center-block">Stopa zdravstveno(prema radniku):
+                        <div class="input-group">
+                                <div class="input-group">
+                            <input class="form-control text-right" formControlName="OsZdrav1"  [(ngModel)]="konstN.OsZdrav1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <span class="input-group-addon">%</span>
+                                </div>
+                        </div>
+                    </label>
+                    <div *ngIf="OsZdrav1.invalid && (OsZdrav1.dirty || OsZdrav1.touched)" class="alert alert-danger">
+                        <div *ngIf="OsZdrav1.errors.required">
+                            <strong>Stopa zdravstveno je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsZdrav1.errors.minValue">
+                            <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6"> <!-- Stopa zdravstvo prema poslodavcu  -->
+                    <label class="center-block">Stopa zdravstveno(prema poslodavcu):
+                            <div class="input-group">
+                                <div class="input-group">
+                            <input class="form-control text-right" formControlName="OsZdrav2"  [(ngModel)]="konstN.OsZdrav2" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                    </label>
+                    <div *ngIf="OsZdrav2.invalid && (OsZdrav2.dirty || OsZdrav2.touched)" class="alert alert-danger">
+                        <div *ngIf="OsZdrav2.errors.required">
+                            <strong>Stopa zdravstveno je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsZdrav2.errors.minValue">
+                            <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>
+                            </div>
+                    </div>
+                </div>
+            </div> <!--Kraj rowa za stopu zdravstvenog -->
+
+            <div class="row">
+                <div class="form-group col-md-6"><!-- Stopa nezaposlenost prema radniku  -->
+                    <label class="center-block">Stopa nezaposlenost(prema radniku):
+                        <div class="input-group">
+                                <div class="input-group">
+                            <input class="form-control text-right" formControlName="OsNez1"  [(ngModel)]="konstN.OsNez1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <span class="input-group-addon">%</span>
+                                </div>
+                        </div>
+                    </label>
+                    <div *ngIf="OsNez1.invalid && (OsNez1.dirty || OsNez1.touched)" class="alert alert-danger">
+                        <div *ngIf="OsNez1.errors.required">
+                            <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsNez1.errors.minValue">
+                            <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6"><!-- Stopa nezaposlenost prema poslodavcu  -->
+                        <label class="center-block">Stopa nezaposlenost(prema poslodavcu):
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input class="form-control text-right" formControlName="OsNez2"  [(ngModel)]="konstN.OsNez2" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </label>
+                            <div *ngIf="OsNez2.invalid && (OsNez2.dirty || OsNez2.touched)" class="alert alert-danger">
+                            <div *ngIf="OsNez2.errors.required">
+                                <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>
+                            </div>
+                            <div *ngIf="OsNez2.errors.minValue">
+                                <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>
+                            </div>
+                        </div>
+                </div>
+            </div> <!--Kraj rowa za stopu nezaposlenosti osiguranici  -->
+
+            <div class="row">
+                <div class="form-group col-md-6"> <!-- Minimalna osnovica za placanje doprinosa  -->
+                    <label class="center-block">Minimalna osnovica doprinosa:
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input class="form-control text-right" formControlName="OsMinOsDop"  [(ngModel)]="konstN.OsMinOsDop" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                    <span class="input-group-addon">RSD</span>
+                                </div>
+                            </div>
+                    </label>
                     
-          </div>
-              
+                    <div *ngIf="OsMinOsDop.invalid && (OsMinOsDop.dirty || OsMinOsDop.touched)" class="alert alert-danger">
+                        <div *ngIf="OsMinOsDop.errors.required">
+                            <strong>Minimalna osnovica doprinosa je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsMinOsDop.errors.minValue">
+                            <strong>Minimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="form-group col-md-6"> <!--Maksimalna osnovica za placanje doprinosa  -->
+                    <label class="center-block">Maksimalna osnovica doprinosa:
+                            <div class="input-group">
+                                    <div class="input-group">
+                                        <input class="form-control text-right" formControlName="OsMaxOsDop"  [(ngModel)]="konstN.OsMaxOsDop" (keypress)="serValidate.validateOnlyNumbers($event)"  required>
+                                        <span class="input-group-addon">RSD</span>
 
+                                    </div>
+                            </div>
+                    </label>
+                    
+                    <div *ngIf="OsMaxOsDop.invalid && (OsMaxOsDop.dirty || OsMaxOsDop.touched)" class="alert alert-danger">
+                        <div *ngIf="OsMaxOsDop.errors.required">
+                            <strong>Maksimalna osnovica doprinosa je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="OsMaxOsDop.errors.minValue">
+                            <strong>Maksimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>
+                            </div>
+                    </div>
+                </div>
+            </div> <!--Kraj rowa za osnovice osiguranici  -->
+        </div>
+    </div>
+        <div class="form-group">
+            <label class="center-block">Opis:
+                <textarea class="form-control" formControlName="Opis"  [(ngModel)]="konstN.Opis">
+                </textarea>
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-12">
+                    <button type="submit" [disabled]="!formKonst.valid"
+                        class="btn btn-success">
+                    <span class="glyphicon glyphicon-saved"></span>
+                       Save
+                    </button>
+
+                <button type="reset" class="btn btn-danger"  [disabled]="formKonst.pristine"  (click)="revert()">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                    Revert
+                </button>
+                
+            </div>
+        </div>
+          
       </form>
   </div>
  

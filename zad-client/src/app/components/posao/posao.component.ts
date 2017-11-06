@@ -74,8 +74,7 @@ cloneData(c: Posao):Posao {
  }
  
  deletePosao(tposao){
-  
-    this.confirmationService.confirm({
+   this.confirmationService.confirm({
       message: `Jeste li sigurni da želite uklonite izabrani posao ?   ` ,
       header: `${tposao.Naziv}`,
         accept: () => {
@@ -104,8 +103,6 @@ cloneData(c: Posao):Posao {
               });
         }
       });
-  
-    
   }
 
 

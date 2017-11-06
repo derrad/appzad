@@ -79,7 +79,7 @@ cloneData(c: KonstantaModel):KonstantaModel {
  deleteKonst(tkonst){
   
     this.confirmationService.confirm({
-      message: `Jeste li sigurni da želite uklonite izabrani podatak ?   ` ,
+      message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
       header: `KONSTANTA`,
         accept: () => {
           //Actual logic to perform a confirmation

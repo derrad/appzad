@@ -9,6 +9,7 @@ import { Footer } from 'primeng/primeng';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations' 
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-mesta',
@@ -20,26 +21,25 @@ export class MestaComponent implements OnInit {
   Title:string;
   selectedMesto : Mesta;
   loading: boolean;
-  mesta:Array<Mesta>;
+  mestaL:Array<Mesta>;
   displayDetals: boolean = false;
   mesShow: Mesta = new Mesta();
 
-  constructor(private router:Router,private mestaService:MestaService,private confirmationService: ConfirmationService ) {
+  constructor(private router:Router,private mestaService:MestaService,
+              private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService  ) {
     this.Title="PREGLED MESTA";
 
    }
 
   ngOnInit() {
 
-    this.loading = true;
     this.mestaService.getMesta().subscribe(profile => {
       if (profile.success === true) { 
-        // console.log(profile);
+         //console.log(profile.data);
       //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
-        this.mesta = profile.data;
-        this.loading = false;
+        this.mestaL = profile.data;
+
       }
-      
     },
     err => {
       console.log(err);
@@ -47,27 +47,13 @@ export class MestaComponent implements OnInit {
     }
     
   );
-
-  this.loading = false;
-
   }
 
 
 
 selectMesto( mesto:Mesta) {
-    // this.selectedOpstina=opstina;  
      this.displayDetals = true;
-     // console.log(" dobio" + mesto.Opstina);
-     // console.log(this.selectedOpstina);
      this.mesShow = this.cloneData(mesto);
-    //console.log(" klonirao" + this.mesShow.Opstina);
- //   if (tId) {
- //       alert("opstina je "  +tId);
- //   } else {
-     //alert("Select" + this.selectedOpstina);
- //   }
- // //  
-
 }
 
 cloneData(c: Mesta):Mesta {
@@ -88,29 +74,61 @@ updateMesta(id) {
 }
 
 
-deleteMesto(tmesto){
-  // console.log(tdrzava);
+// deleteMesto(tmesto){
+//   // console.log(tdrzava);
 
-  this.confirmationService.confirm({
-    message: 'Are you sure that you want to perform this action?',
-      accept: () => {
-        //Actual logic to perform a confirmation
-        var index = this.mesta.indexOf(tmesto);
-       // console.log("index je " + index);
-        this.mesta.splice(index, 1);
+//   this.confirmationService.confirm({
+//     message: 'Are you sure that you want to perform this action?',
+//       accept: () => {
+//         //Actual logic to perform a confirmation
+//         var index = this.mestaL.indexOf(tmesto);
+//        // console.log("index je " + index);
+//         this.mestaL.splice(index, 1);
     
-        this.mestaService.delMesto(tmesto._id)
-          .subscribe(null,
-            err => {
-              alert("Could not delete mesto.");
-              // Revert the view back to its original state
-              this.mesta.splice(index, 0, tmesto);
-            });
-      }
-    });
+//         this.mestaService.delMesto(tmesto._id)
+//           .subscribe(null,
+//             err => {
+//               alert("Could not delete mesto.");
+//               // Revert the view back to its original state
+//               this.mestaL.splice(index, 0, tmesto);
+//             });
+//       }
+//     });
 
   
-}
+// }
+
+deleteMesto(tmesto){
+  this.confirmationService.confirm({
+     message: `Jeste li sigurni da želite uklonite izabrano mesto ?   ` ,
+     header: `${tmesto.Naziv}`,
+       accept: () => {
+         //Actual logic to perform a confirmation
+         var index = this.mestaL.indexOf(tmesto);
+        // console.log("index je " + index);
+         this.mestaL.splice(index, 1);
+     
+         this.mestaService.delMesto(tmesto._id)
+           .subscribe((pos) =>{
+             if(pos.success){
+                this.flashMessage.show(pos.message, {
+                   cssClass: 'alert-success',
+                   timeout: 1000});
+             }else{
+               this.router.navigate(['NotFound']);
+             }
+             } ,
+             err => {
+               //alert("Could not delete radnik.");
+               this.flashMessage.show('Could not delete mesto !!!', {
+                 cssClass: 'alert-danger',
+                 timeout: 5000});
+               // Revert the view back to its original state
+               this.mestaL.splice(index, 0, tmesto);
+             });
+       }
+     });
+ }
 
 
 

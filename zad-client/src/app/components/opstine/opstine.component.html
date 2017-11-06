@@ -3,7 +3,7 @@
 </p> -->
 
 <!-- <div class="row"> -->
-    <div *ngIf="opstine;else  waiting" >
+    <div *ngIf="opstineL;else  waiting" >
       <!-- <h3 class="first">PREGLED OPŠTINA</h3>
       <input #gb type="text" placeholder="Global search" pInputText focus>
       <p></p> -->
@@ -12,7 +12,7 @@
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
-      <p-dataTable [value]="opstine"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+      <p-dataTable [value]="opstineL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id" 
                 styleClass="table table-striped" [responsive]="true"  
                 [immutable]=false resizableColumns="true" columnResizeMode="expand">
@@ -23,10 +23,7 @@
       <p-column field="RegOzn" header="Oznaka" sortable="true"></p-column>                               
       <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
       <p-column field="SifPorez" header="SifPorez" sortable="true"></p-column>
-      <!-- <p-column field="KontBr" header="KontBr" sortable="true"></p-column>
-      <p-column field="PozivNaBr" header="PozivNaBr" sortable="true"></p-column> -->
-      
-      <!-- <p-column styleClass="col-button text-center" heder="Opcije" > -->
+     
 
       <p-column styleClass="col-button text-center" heder="Opcije">
           <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
@@ -46,14 +43,14 @@
 <!-- </div> -->
 
 
-<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
     <p-footer>
         <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
         <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
      </p-footer>
 </p-confirmDialog>
 
-<p-dialog header="OPŠTINA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="850" [height]="auto">
+<p-dialog header="OPŠTINA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
 
         <div>
                 <dl class="dl-horizontal">

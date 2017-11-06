@@ -1,14 +1,43 @@
-var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
+var sfDrzave = require('./sfDrzave');
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
+ var Schema = mongoose.Schema;
 
 var sfPartnerRacun = new Schema({
-     Naziv   : { type: String, required: [true,'Naziv je obavezan !!!'] },
-     Racun   : { type: String, required: [true,'Racun je obavezan !!!'] },
-     Opis    : { type: String },
-     NameUser: {type:String}
+    KyeSearch : { type: String, required: [true,'Kljuc pretrage je obavezan !!!'] }, 
+    Naziv     : { type: String, required: [true,'Naziv je obavezan !!!'] },
+    UgovProc:{ type: Number,default:0,required:true},
+    Adresa:{  AdUlica:{ type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
+              AdBroj: { type: String },
+              AdMesto: { type: String ,required: [true,'Mesto je obavezan podatak !!!']},
+              AdPttReon: { type: String },
+              AdPttPak: { type: String },
+              AdDrzava: { type: String }
+            },  
+    Email:{ type: String},
+    Drzava: { type:Schema.ObjectId, ref:'sfDrzave', required:true},        
+    Aktivan:{type:Boolean,default:false},
+    Pib:{ type: String},
+    MatBroj:{ type: String},
+    SifDelat:{ type: String},
+    PdvBroj:{ type: String},
+    Ziro:  [{ PzNaziv:{type:String,required: [true, 'Naziv je obavezan !!!']},
+              PzRacun:{type:String,required: [true, 'Racun je obavezan !!!']},
+              PzGlavni:{type:Boolean, default:false},
+              PzOpis:String}] ,
+    Telefon:  [{ TlNaziv:{type:String,required: [true, 'Naziv je obavezan !!!']},
+            TlBroj:{type:String,required: [true, 'Broj telefona je obavezan !!!']},
+            TlGlavni:{type:Boolean, default:false},
+            TlOpis:String}] ,
+    Kontakt:  [{ KoNaziv:{type:String,required: [true, 'Naziv je obavezan !!!']},
+                KoFunkcija:{type:String},
+                KoEmail:{ type: String},
+                KoTelef:{ type: String},
+                KoMobilni:{ type: String},
+                KoOpis:String}] ,
+    Opis      : { type: String },
+    NameUser  : {type:String}
 },
 {
  timestamps: { createdAt: 'created_at' }
@@ -61,6 +90,8 @@ var sfPartner = new Schema({
     retainKeyOrder: true 
 }
 );
+
 sfPartner.plugin(mongoosePaginate);
+
 var collectionName = 'sfPartner';
-module.exports = mongoose.model('sfPartner', sfPartner,collectionName);
+module.exports = mongoose.model('sfPartner', sfPartner,'sfPartner');
