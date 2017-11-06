@@ -8,6 +8,8 @@ var sfPartnerRacun = new Schema({
     KyeSearch : { type: String, required: [true,'Kljuc pretrage je obavezan !!!'] }, 
     Naziv     : { type: String, required: [true,'Naziv je obavezan !!!'] },
     UgovProc:{ type: Number,default:0,required:true},
+    Drzava: { type:Schema.ObjectId, ref:'sfDrzave', required:true},        
+    Aktivan:{type:Boolean,default:false},
     Adresa:{  AdUlica:{ type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
               AdBroj: { type: String },
               AdMesto: { type: String ,required: [true,'Mesto je obavezan podatak !!!']},
@@ -16,8 +18,6 @@ var sfPartnerRacun = new Schema({
               AdDrzava: { type: String }
             },  
     Email:{ type: String},
-    Drzava: { type:Schema.ObjectId, ref:'sfDrzave', required:true},        
-    Aktivan:{type:Boolean,default:false},
     Pib:{ type: String},
     MatBroj:{ type: String},
     SifDelat:{ type: String},
@@ -93,5 +93,4 @@ var sfPartner = new Schema({
 
 sfPartner.plugin(mongoosePaginate);
 
-var collectionName = 'sfPartner';
 module.exports = mongoose.model('sfPartner', sfPartner,'sfPartner');

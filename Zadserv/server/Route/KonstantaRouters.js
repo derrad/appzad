@@ -9,4 +9,4 @@ router.post('/api/konstanta',passport.authenticate('jwt', {session:false}), Kons
 router.put('/api/konstanta/:id',passport.authenticate('jwt', {session:false}), KonstantaController.create);
 router.delete('/api/konstanta/:id',passport.authenticate('jwt', {session:false}), KonstantaController.delekonst);
 
-module.exports = router
+module.exports = router;
