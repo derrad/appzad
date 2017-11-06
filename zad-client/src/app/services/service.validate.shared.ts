@@ -41,10 +41,43 @@ validateRegExpSifru(c: FormControl) {
 
 
 validateOnlyNumbers(evt) {
+  const theEvent = evt || window.event;
+  let key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode( key );
+  const regex = /[0-9]|\./;
+  const TABKEY = 9;
+  if(theEvent.keyCode == TABKEY) {
+    //console.log("Uhvatio tab");
+   // if(theEvent.preventDefault) theEvent.preventDefault();
+    return true;
+  }
+  const BACKSPACE = 8;
+  if(theEvent.keyCode == BACKSPACE) {
+    return true;
+  }
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+
+
+
+validateOnlyDigit(evt) {
   var theEvent = evt || window.event;
   var key = theEvent.keyCode || theEvent.which;
   key = String.fromCharCode( key );
-  var regex = /[0-9]|\./;
+  var regex = /[0-9]/; // [^0-9] 
+  const TABKEY = 9;
+  if(theEvent.keyCode == TABKEY) {
+   // console.log("Uhvatio tab");
+   // if(theEvent.preventDefault) theEvent.preventDefault();
+    return true;
+  }
+  const BACKSPACE = 8;
+  if(theEvent.keyCode == BACKSPACE) {
+    return true;
+  }
   if( !regex.test(key) ) {
     theEvent.returnValue = false;
     if(theEvent.preventDefault) theEvent.preventDefault();

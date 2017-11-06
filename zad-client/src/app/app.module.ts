@@ -78,52 +78,7 @@ import { VlasnikModule } from './components/vlasnik/vlasnik.module';
 import { KonstantaModule } from './components/konstanta/konstanta.module';
 
 
-
-
-//  const appRoutes: Routes =  [
-//     {path:'', component: HomeComponent},
-//     {path:'register', component: RegisterComponent,canActivate:[AuthGuardGlavni]},
-//     {path:'login', component: LoginComponent},
-//     {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-//     {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-
-  //  {path:'drzave', component: DrzaveComponent, canActivate:[AuthGuard]},
-  //  {path:'drzave/new', component: DrzaveFormComponent, canActivate:[AuthGuard]},
-  //  {path:'drzave/:id', component: DrzaveFormComponent, canActivate:[AuthGuard]},
-  //  {path:'parametar', component: ParametarComponent, canActivate:[AuthGuard]},
-  //  {path:'parametar/new', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-  //  {path:'parametar/:id', component: ParmetarFormComponent, canActivate:[AuthGuard]},
-  //  {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
-  //  {path:'opstine/new', component: OpstineFormComponent, canActivate:[AuthGuard]},
-  //  {path:'opstine/:id', component: OpstineFormComponent, canActivate:[AuthGuard]},
-
-  //  {path:'radnik', component: RadnikComponent, canActivate:[AuthGuard]},
-  //  {path:'radnik/new', component: RadnikFormComponent, canActivate:[AuthGuard]},
-  //  {path:'radnik/:id', component: RadnikFormComponent, canActivate:[AuthGuard]},
-   
-
-  //  {path:'opstine', component: OpstineComponent, canActivate:[AuthGuard]},
-  //  {path:'mesta', component: MestaComponent, canActivate:[AuthGuard]},
-  //  {path:'mesta/new', component: MestaFormComponent, canActivate:[AuthGuard]},
-  //  {path:'mesta/:id', component: MestaFormComponent, canActivate:[AuthGuard]},
   
-  //  {path:'posao', component: PosaoComponent, canActivate:[AuthGuard]},
-  //  {path:'posao/new', component: PosaoFormComponent, canActivate:[AuthGuard]},
-  //  {path:'posao/:id', component: PosaoFormComponent, canActivate:[AuthGuard]},
-  
-
-  //  {path:'vlasnik', component: VlasnikComponent, canActivate:[AuthGuard]},
-  //  {path:'fondsati', component: FondSatiComponent, canActivate:[AuthGuard]},
-  //  {path:'fondsati/new', component: FondSatiFormComponent, canActivate:[AuthGuard]},
-  //  {path:'fondsati/:id', component: FondSatiFormComponent, canActivate:[AuthGuard]},
-   
-
-  //  {path:'konstanta', component: KonstantaComponent, canActivate:[AuthGuard]},
-
-
-//    { path: 'not-found', component: NotFoundComponent },
-//    { path: '**', redirectTo: 'not-found' }
-//  ] 
 
 @NgModule({
   declarations: [
@@ -150,14 +105,7 @@ import { KonstantaModule } from './components/konstanta/konstanta.module';
     FormsModule,
     ReactiveFormsModule ,
     HttpModule,
-  //  RouterModule.forRoot(appRoutes), // <-- debugging purposes only { enableTracing: true }
     FlashMessagesModule,
-    // ButtonModule,
-    // DataTableModule,
-    // SharedModule,
-    // InputTextModule,
-    // ConfirmDialogModule,
-    // DialogModule,
     DateValueAccessorModule,
     SidebarModule,
     DrzaveModule,

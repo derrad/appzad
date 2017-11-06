@@ -21,16 +21,14 @@
       <p-column field="Sati" header="Sati" sortable="true" styleClass="text-right"></p-column>   
       <p-column field="MinOsnov" header="MinOsnov" sortable="true" styleClass="text-right" >
         <ng-template let-col let-fsati="rowData" pTemplate="body">
-            <span>{{fsati[col.field] | currency:'USD':true:'.00'}}</span>
+            <span>{{fsati[col.field] | number:'1.2-6'}}</span>
         </ng-template>
 
       </p-column>
       <p-column field="MaxOsnov" header="MaxOsnov" sortable="true" styleClass="text-right">
         <ng-template let-col let-fsati="rowData" pTemplate="body">
-            <span>{{fsati[col.field] | number:'1.0-6'}}</span>
+            <span>{{fsati[col.field] | number:'1.2-6'}}</span>
         </ng-template>
-
-
       </p-column>
       
       <p-column  styleClass="col-button text-center" heder="ACTION">

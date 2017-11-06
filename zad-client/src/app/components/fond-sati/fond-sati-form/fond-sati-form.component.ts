@@ -30,7 +30,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
         _id:[],
         Mesec:['',[Validators.required,serValidate.maxValue(12),serValidate.minValue(1)]],
         Godina: ['', [
-          Validators.required
+          Validators.required,serValidate.maxValue(2040),serValidate.minValue(2000)
         ]],
         Sati: ['', [
           Validators.required,serValidate.maxValue(248),serValidate.minValue(0)

@@ -26,18 +26,10 @@ module.exports.create = function (req, res,next) {
 
   //console.log("uid je :" + uid + " ovo je Mesec " + req.body.Mesec);
   // console.log("Sati :" + Sati + " ovo je Mesec " + Mesec + " ovo je godina" + Godina) ;
-  Mesec = null;
+  //Mesec = null;
   if (!Sati || !Mesec || !Godina || !MinOsnov || !MaxOsnov) {
         console.log("vracam gresku");
         return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
-      //  try{
-      //   throw new PostDataTakenError();
-      //  }catch(err){
-      //  if (err instanceof PostDataTakenError) {
-      //     return   res.status(400).send(err.message)
-      //  }
-      //  }
-     
   } 
   else 
   {

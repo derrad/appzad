@@ -4,14 +4,14 @@
 
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-            <h3>{{title}}</h3> 
-          </div>
-          <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-            <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
-          </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5> 
       </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
+  </div>
   </div>
   <div class="panel-body">
       <form [formGroup]="formFSAT" (ngSubmit)="save()" novalidate>
@@ -20,66 +20,72 @@
           </div>
           <div class="form-group">
             <label class="center-block">Godina:
-              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina"  required>
+              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina"  (keypress)="serValidate.validateOnlyDigit($event)" required>
             </label>
             <div *ngIf="Godina.invalid && (Godina.dirty || Godina.touched)" class="alert alert-danger">
                 <div *ngIf="Godina.errors.required">
                     <strong>Godina je obavezan podatak !!!</strong>
+                </div>
+                <div *ngIf="Godina.errors.maxValue">
+                  <strong>Godina nije pravilno uneta (>2040)  !!!</strong>
+                </div>
+              <div *ngIf="Godina.errors.minValue">
+                  <strong>Godina nije pravilno uneta (<2000)  !!!</strong>
                 </div>
             </div>
             
           </div>
           <div class="form-group">
               <label class="center-block">Mesec:
-                <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec"  required>
+                <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec"  (keypress)="serValidate.validateOnlyDigit($event)" required>
               </label>
               <div *ngIf="Mesec.invalid && (Mesec.dirty || Mesec.touched)" class="alert alert-danger">
                   <div *ngIf="Mesec.errors.required">
                       <strong>Mesec je obavezan podatak !!!</strong>
                   </div>
                   <div *ngIf="Mesec.errors.maxValue">
-                      <strong>Mesec nije dobar(>12)  !!!</strong>
+                      <strong>Mesec nije pravilno unet(>12)  !!!</strong>
                     </div>
                   <div *ngIf="Mesec.errors.minValue">
-                      <strong>Mesec nije dobar(<1)  !!!</strong>
+                      <strong>Mesec nije pravilno unet(<1)  !!!</strong>
                     </div>
               </div>
               
             </div>
             <div class="form-group">
               <label class="center-block">Sati:
-                <input class="form-control" formControlName="Sati"  [(ngModel)]="fnsatN.Sati" required>
+                <input class="form-control" formControlName="Sati"  [(ngModel)]="fnsatN.Sati"  (keypress)="serValidate.validateOnlyDigit($event)" required>
               </label>
               <div *ngIf="Sati.invalid && (Sati.dirty || Sati.touched)" class="alert alert-danger">
                   <div *ngIf="Sati.errors.required">
                       <strong>Sati je obavezan podatak !!!</strong>
                   </div>
                   <div *ngIf="Sati.errors.maxValue">
-                      <strong>Sati pogrešan podatak(>248)  !!!</strong>
+                      <strong>Sati nisu pravilno uneti(>248)  !!!</strong>
                     </div>
                   <div *ngIf="Sati.errors.minValue">
-                      <strong>Sati pogrešan podatak(<1)  !!!</strong>
+                      <strong>Sati nisu pravilno uneti(<1)  !!!</strong>
                     </div>
               </div>
             </div>
             
             <div class="form-group">
                 <label class="center-block">Minimalna osnovica:
-                  <input  class="form-control" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov" required>
+                  <input  class="form-control" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
                 </label>
                 <div *ngIf="MinOsnov.invalid && (MinOsnov.dirty || MinOsnov.touched)" class="alert alert-danger">
                     <div *ngIf="MinOsnov.errors.required">
                         <strong>Minimalna osnovica je obavezan podatak !!!</strong>
                     </div>
                     <div *ngIf="MinOsnov.errors.minValue">
-                        <strong>Minimalna osnovica pogrešan podatak(<1)  !!!</strong>
+                        <strong>Minimalna osnovica nije pravilno uneta(<1)  !!!</strong>
                       </div>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="center-block">Maksimalna osnovica:
-                  <input class="form-control" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov" required>
+                  <input class="form-control" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
                 </label>
                 
                 <div *ngIf="MaxOsnov.invalid && (MaxOsnov.dirty || MaxOsnov.touched)" class="alert alert-danger">
@@ -87,10 +93,11 @@
                         <strong>Maksimalna osnovica je obavezan podatak !!!</strong>
                     </div>
                     <div *ngIf="MaxOsnov.errors.minValue">
-                        <strong>Maksimalna osnovica pogrešan podatak(<1)  !!!</strong>
+                        <strong>Maksimalna osnovica nije pravilno uneta(<1)  !!!</strong>
                       </div>
                 </div>
               </div>
+
               
 
               <div class="form-group">
