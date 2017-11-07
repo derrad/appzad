@@ -16,7 +16,7 @@
             <i class="fa fa-sliders fa-2x" aria-hidden="true"></i>
           </a>
         </li>
-        &nbsp;&nbsp;
+        <!-- &nbsp;&nbsp; -->
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/']">
           <i class="fa fa-home fa-2x" aria-hidden="true"></i>
           OMLADINSKA ZADRUGA</a>
@@ -79,6 +79,7 @@
                         <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a href="#">
                             <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
                         <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
+
                             <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
                         <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
                             <a  [routerLink]="['/posao/new']" >
@@ -123,12 +124,12 @@
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
                         [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
                 <a href="#">
-                    <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true" ></i>&nbsp;Zadrugari</a>
+                    <i class="menu-icon hidden-xs fa fa-users" aria-hidden="true" ></i>&nbsp;Zadrugari</a>
                 </li>
                 
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
                     [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
-                    <a href="#">
+                    <a [routerLink]="['/partner']">
                     <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"  ></i>&nbsp;Kupci</a>
                 </li> 
                 

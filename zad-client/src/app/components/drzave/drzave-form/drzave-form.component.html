@@ -69,12 +69,12 @@
               <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formDR.valid"
-                            class="btn btn-success btn-sm">
+                            class="btn btn-success ">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>
 
-                      <button type="reset" class="btn btn-danger btn-sm"  [disabled]="formDR.pristine"  (click)="revert()">
+                      <button type="reset" class="btn btn-danger"  [disabled]="formDR.pristine"  (click)="revert()">
                           <i class="fa fa-undo" aria-hidden="true"></i>
                           Revert
                       </button>
@@ -84,7 +84,7 @@
         </form>
   </div>
   <div class="panel-footer">
-      <button (click)="backClicked()"  class="btn btn-primary btn-block btn-sm">
+      <button (click)="backClicked()"  class="btn btn-primary btn-block">
           <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
           Back
       </button>

@@ -17,7 +17,13 @@
                                                                                          
       <p-column field="KodDrzave" header="Kod" sortable="true"></p-column>                               
       <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="EuClan" header="EuClan" sortable="true" styleClass="text-center"></p-column>
+      <p-column field="EuClan" header="EuClan" sortable="true" styleClass="text-center">
+            <ng-template let-col let-drz="rowData" pTemplate="body">
+                    <span [hidden]="drz[col.field]==false"> DA</span> 
+                    <span [hidden]="drz[col.field]==true"> NE</span> 
+            </ng-template> 
+
+      </p-column>
       <p-column field="Opis" header="Opis" sortable="true"></p-column>
       <!-- <p-column field="NameUser" header="User" sortable="true"></p-column> -->
       

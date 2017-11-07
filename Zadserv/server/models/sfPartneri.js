@@ -4,7 +4,7 @@ var sfDrzave = require('./sfDrzave');
 
  var Schema = mongoose.Schema;
 
-var sfPartnerRacun = new Schema({
+var sfPartner = new Schema({
     KyeSearch : { type: String, required: [true,'Kljuc pretrage je obavezan !!!'] }, 
     Naziv     : { type: String, required: [true,'Naziv je obavezan !!!'] },
     UgovProc:{ type: Number,default:0,required:true},
@@ -47,49 +47,49 @@ var sfPartnerRacun = new Schema({
 
 );
 
-var sfPartnerTelefon = new Schema({
-     Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-     Telefon: { type: String, required: [true, 'Telefon je obavezan !!!'] },
-     Opis    : { type: String },
-     NameUser: {type:String}
-},
-{
- timestamps: { createdAt: 'created_at' }
-},{ 
-    retainKeyOrder: true 
-}
-);
+// var sfPartnerTelefon = new Schema({
+//      Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
+//      Telefon: { type: String, required: [true, 'Telefon je obavezan !!!'] },
+//      Opis    : { type: String },
+//      NameUser: {type:String}
+// },
+// {
+//  timestamps: { createdAt: 'created_at' }
+// },{ 
+//     retainKeyOrder: true 
+// }
+// );
 
-var sfPartnerKontakt = new Schema({
-     Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-   //nastavi
+// var sfPartnerKontakt = new Schema({
+//      Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
+//    //nastavi
    
    
-     Opis    : { type: String },
-     NameUser: {type:String}
-},
-{
- timestamps: { createdAt: 'created_at' }
-},{ 
-    retainKeyOrder: true 
-}
-);
+//      Opis    : { type: String },
+//      NameUser: {type:String}
+// },
+// {
+//  timestamps: { createdAt: 'created_at' }
+// },{ 
+//     retainKeyOrder: true 
+// }
+// );
 
 
-var sfPartner = new Schema({
-    Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-    Ptt:{type:String},
-    Opis  :{ type: String },
-    NameUser: {type:String}
+// var sfPartner = new Schema({
+//     Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
+//     Ptt:{type:String},
+//     Opis  :{ type: String },
+//     NameUser: {type:String}
 
-},
-{
-    timestamps: { createdAt: 'created_at' }
-},
-{ 
-    retainKeyOrder: true 
-}
-);
+// },
+// {
+//     timestamps: { createdAt: 'created_at' }
+// },
+// { 
+//     retainKeyOrder: true 
+// }
+// );
 
 sfPartner.plugin(mongoosePaginate);
 

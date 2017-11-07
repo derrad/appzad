@@ -9,6 +9,9 @@ import { Footer } from 'primeng/primeng';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations' 
+import { ResponeCustom}  from './../../shared/models/ErrorRes';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 
 @Component({
@@ -20,32 +23,35 @@ import { routerTransition } from '../../animation/router.animations'
 export class DrzaveComponent implements OnInit {
   drzave:Array<IDrzave>;
   Title:string;
-  selectedDrzave: Object;
-  //drzava:IDrzave;
+  selectedDrzave: Drzave;
   displayDetals: boolean = false;
   drzShow: Drzave = new Drzave();
   
-  constructor(private drzaveService:DrzaveService, private router:Router,private confirmationService: ConfirmationService) {
+  constructor(private drzaveService:DrzaveService, private router:Router,
+              private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService) {
     this.Title="PREGLED DRŽAVA";
    }
 
   ngOnInit() {
    
-    setTimeout(()=>{
-      this.drzaveService.getDrzave().subscribe(profile => {
-        if (profile.success === true) { 
-          this.drzave = profile.data;
-        }
-      },
-      err => {
-        console.log(err);
-        return false;
-      }
-      
+
+    this.drzaveService.getDrzave()
+    .subscribe((profile) => {
+    if (profile.success === true) { 
+      this.drzave= profile.data;
+    }
+    // }
+    },
+    (error:ResponeCustom) => {
+    this.flashMessage.show(error.message, {
+      cssClass: 'alert-danger',
+      timeout: 9000});
+  //  console.log(error.message);
+    this.drzave=[];
+
+    return false;
+    }
     );
-    },1000);
-       
-//  this.loading = false;
   
   } 
 
@@ -78,43 +84,43 @@ updateDrzavu(id) {
 
 deleteDrzavu(tdrzava){
   // console.log(tdrzava);
-
   this.confirmationService.confirm({
-    message: `Jeste li sigurni da želite uklonite izabranu državu ?   ` ,
+    message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
     header: `${tdrzava.Naziv}`,
       accept: () => {
         //Actual logic to perform a confirmation
         var index = this.drzave.indexOf(tdrzava);
-        console.log("index je " + index);
+       // console.log("index je " + index);
         this.drzave.splice(index, 1);
     
         this.drzaveService.delDrzava(tdrzava._id)
-          .subscribe(null,
-            err => {
-              alert("Could not delete drzavu.");
+          .subscribe((pos) =>{
+            if(pos.success){
+               this.flashMessage.show(pos.message ,{
+                  cssClass: 'alert-success',
+                  timeout: 1000});
+            }else{
+              this.router.navigate(['NotFound']);
+            }
+            } ,
+            (error:ResponeCustom)  => {
+              //alert("Could not delete radnik.");
+              this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 5000});
               // Revert the view back to its original state
               this.drzave.splice(index, 0, tdrzava);
             });
       }
     });
-
-
-
-  }
+  
 }
 
+}
+
+ 
 
 
-// showDialogToAdd(tdrzava) {
-//   //alert("Add");
-//   console.log("Broj slogova u drzavama(pre brisanja) " + this.drzave.length);
-//   var index = this.drzave.indexOf(tdrzava);
-//   console.log("index je " + index);
-//   this.drzave.splice(index, 1);
-
-//   console.log("Broj slogova u drzavama(showDialogToAdd) " + this.drzave.length);
-// }
 
 
-//}
 

@@ -43,7 +43,7 @@ export class KonstantaComponent implements OnInit {
     this.flashMessage.show(error.message, {
       cssClass: 'alert-danger',
       timeout: 9000});
-      console.log(error.message);
+      //console.log(error.message);
       this.konstL=[];
 
     return false;
@@ -77,8 +77,7 @@ cloneData(c: KonstantaModel):KonstantaModel {
  }
 
  deleteKonst(tkonst){
-  
-    this.confirmationService.confirm({
+  this.confirmationService.confirm({
       message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
       header: `KONSTANTA`,
         accept: () => {
