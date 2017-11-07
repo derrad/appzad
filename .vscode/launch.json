@@ -1,11 +1,34 @@
 {
         "version": "0.2.0",
         "configurations": [
+
             {
                 "type": "node",
                 "request": "launch",
                 "name": "Launch Program",
                 "program": "${workspaceRoot}\\zadserv\\server.js" 
+            },
+            {
+                "name": "Launch Chrome against localhost, with sourcemaps",
+                "type": "chrome",
+                "request": "launch",
+                "url": "http://localhost:3000/",
+                "runtimeArgs": [
+                   "--user-data-dir",
+                   "--remote-debugging-port=9222"
+                ],
+                "sourceMaps": true,
+                // "diagnosticLogging": true,
+                "webRoot": "${workspaceRoot}",
+                "userDataDir": "${workspaceRoot}/.vscode/chrome"
+            },
+            {
+                "name": "Launch localhost with sourcemaps",
+                "type": "chrome",
+                "request": "launch",
+                "url": "http://localhost:4200/",
+                "sourceMaps": true,
+                "webRoot": "${workspaceRoot}"
             }
         ]
     }
