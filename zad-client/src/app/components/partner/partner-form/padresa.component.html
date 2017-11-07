@@ -1,37 +1,39 @@
-<div [formGroup]="adresaForm">
+<div class="form-group" [formGroup]="Adresa">
     <div class="row">
-        <div class="form-group col-xs-2">
-        </div>
-        <div class="form-group col-xs-4">
-            <label>Naziv</label>
-            <input type="text" class="form-control input-sm" formControlName="Naziv" required>
-            <small [hidden]="ziroForm.controls.Naziv.valid" class="text-danger">
-                Naziv je obavezan
+        <div class="form-group col-md-5">
+            <label class="center-block">Ulica:
+              <input type="text" class="form-control input-sm" formControlName="AdUlica" required>
+            </label>
+            <small [hidden]="Adresa.controls.AdUlica.valid" class="text-danger">
+                Ulica je obavezna
             </small>
         </div>
-        <div class="form-group col-xs-4">
-            <label>Racun</label>
-            <input type="text" class="form-control input-sm" formControlName="Racun" required>
-            <small [hidden]="ziroForm.controls.Racun.valid" class="text-danger">
-                   Racun je obavezan
-            </small>
+        <div class="form-group col-md-2">
+                <label>Broj:
+                    <input type="text" class="form-control input-sm" formControlName="AdBroj">
+                </label>
         </div>
+        <div class="form-group col-md-5">
+            <label class="center-block">Mesto:
+                <input type="text" class="form-control input-sm" formControlName="AdMesto" >
+            </label>
+        </div>
+       
     </div>
     <div class="row">
-            <div class="form-group col-xs-2">
-            </div>
-            <div class="form-group col-xs-2">
-                <div class="checkbox">
-                    <label >
-                        <input type="checkbox"  class="form-control input-sm" formControlName="Glavni" >
-                        Glavni
+            <div class="form-group col-md-3">
+                    <label class="center-block">Ptt:
+                        <input type="text" class="form-control input-sm" formControlName="AdPttReon" >
                     </label>
-                </div>
             </div>
-            <div class="form-group col-xs-8">
-                <label class="center-block">Opis:
-                    <textarea class="form-control input-sm" formControlName="Opis">
-                </textarea>
+            <div class="form-group col-md-3">
+                 <label class="center-block">Ptt pak:
+                    <input type="text" class="form-control input-sm" formControlName="AdPttPak" >
+                </label>
+            </div>
+            <div class="form-group col-md-6">
+                 <label class="center-block">Zemlja:
+                    <input type="text" class="form-control input-sm" formControlName="AdDrzava" >
                 </label>
             </div>
     </div>

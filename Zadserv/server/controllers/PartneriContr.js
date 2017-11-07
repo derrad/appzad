@@ -15,11 +15,8 @@ module.exports.create = function (req, res,next) {
   const UgovProc = req.body.UgovProc || 0 ;
   const Drzava =  req.body.Drzava ;
   const Aktivan = req.body.Aktivan  || false;
-
   const Adresa = req.body.Adresa ;
   const Email =  req.body.Email ;
-  
- 
   const Pib =  req.body.Pib ;
   const MatBroj =  req.body.MatBroj ;
   const SifDelat =  req.body.SifDelat ;
@@ -27,21 +24,21 @@ module.exports.create = function (req, res,next) {
   const Ziro =  req.body.Ziro ;
   const Telefon =  req.body.Telefon ;
   const Kontakt =  req.body.Kontakt ;
-  
- 
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
-  
-  if (!KyeSearch || !Naziv || !Prezime) {
-      res.statusMessage='Posted data is not correct or incompleted.';
+
+
+
+  if (!KyeSearch || !Naziv || !Drzava) {
+     // res.statusMessage='Posted data is not correct or incompleted.';
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] }).end();
   } else {
   
-if (uid) {
-  //Edit partner
-  Partner.findById(uid).exec(function(err, kupac){
+  if (uid) {
+    //Edit partner
+    Partner.findById(uid).exec(function(err, kupac){
     if(err){ 
-     // console.log("Partnera nema !!!");
+      // console.log("Partnera nema !!!");
     // res.statusMessage = err;
       return res.status(400).json({ success: false, message: 'Error processing request ', data:[] }).end(); 
     }
@@ -83,14 +80,14 @@ if (uid) {
 
       return res.status(201).json({
         success: true,
-        message: 'Kupac updated successfully', 
+        message: 'Customer updated successfully', 
         data:result
       });
     });
   });
 
 }else{
-  
+ // console.log("Usao u ADD");
   // Add new Kupac
   let oKupac = new Partner({
 
@@ -115,9 +112,9 @@ if (uid) {
   oKupac.save(function(err,result) {
     if(err){ 
       const emsg = " Error processing request";
-      if(err.errmsg){emsg = err.errmsg; }else{emsg = err; }
-      return  res.status(400).json(
-          { success: false, message:emsg, data:[] }).end();
+      console.log(JSON.stringify(err));
+      return res.status(400).json(
+            { success: false, message:emsg, data:[] }).end();
     }
     try{
       SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, Naziv , NameUser)
@@ -125,7 +122,7 @@ if (uid) {
 
    return res.status(201).json({
       success: true,
-      message: 'Kupac saved successfully',
+      message: 'Customer saved successfully',
       data: result
     });
   });
@@ -173,15 +170,11 @@ module.exports.getpartner = function (req, res,next) {
 }
 
 module.exports.delepartner = function(req, res, next) {
-  // res.statusMessage = "Nema brisanja" + req.params.id;
-  // return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}).end(); 
-   
-  //console.log("Brisanje kupca : " + req.params.id);
-	Partner.remove({_id: req.params.id}, function(err){
+ 	Partner.remove({_id: req.params.id}, function(err){
         if(err){ 
-          res.statusMessage = err;
+          //res.statusMessage = err;
           const emsg = "Error processing request";
-          if(err.errmsg){emsg = err.errmsg; }else{emsg = err; }
+          // if(err.errmsg){emsg = err.errmsg; }else{emsg = err; }
           return res.status(400).json({ success: false, message: emsg , data:[]}).end(); 
         }
         try{

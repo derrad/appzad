@@ -52,7 +52,8 @@ export class PartnerService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
     let ep = ServiceConfig.PrepareHost(this.isDev,'api/partner/') ;
-        
+    //console.log("add partner" + JSON.stringify(tpartner));    
+
      return this.http.post(ep, JSON.stringify(tpartner),{headers: headers})
      .map(res => res.json())
      .catch(this.handleError);

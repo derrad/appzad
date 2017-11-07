@@ -55,8 +55,8 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
   get MaxOsnov() { return this.formFSAT.get('MaxOsnov'); }
 
   ngOnInit() {
-    var id = this.route.params.subscribe(params => {
-      var id = params['id'];
+     this.route.params.subscribe(params => {
+      let id = params['id'];
 
       this.title = id ? 'Ažuriranje fonda sati' : 'Novi fond sati';
 
@@ -150,9 +150,9 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
 
 
   loadTempData(){
-    const posao = JSON.parse(localStorage.getItem('data_fnsati'));
-    if(posao){
-      this.fnsatN =posao;
+    const wdata = JSON.parse(localStorage.getItem('data_fnsati'));
+    if(wdata){
+      this.fnsatN =wdata;
     }
     
   }

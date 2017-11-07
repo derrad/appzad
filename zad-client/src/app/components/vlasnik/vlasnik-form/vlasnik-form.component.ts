@@ -123,7 +123,7 @@ removeTelVlas(i: number) {
 //Kraj telefona
 
   ngOnInit() {
-    var id = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       var id = params['id'];
 
       this.title = id ? 'Ažuriranje vlasnika' : 'Novi vlasnik';

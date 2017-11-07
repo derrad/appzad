@@ -9,6 +9,8 @@ import { DataTableModule,SharedModule } from 'primeng/primeng';
 
 import { PartnerComponent } from './partner.component';
 import { PartnerFormComponent } from './partner-form/partner-form.component';
+import { PadresaComponent } from './partner-form/padresa.component';
+
 import {PartnerService} from './partner.service';
 import { PartnerRoutingModule } from './partner-routing.module';
 
@@ -30,7 +32,8 @@ import { PartnerRoutingModule } from './partner-routing.module';
   ],
   declarations: [
     PartnerComponent,
-    PartnerFormComponent
+    PartnerFormComponent,
+    PadresaComponent
   ],
   providers: [ PartnerService,ConfirmationService ]
 })

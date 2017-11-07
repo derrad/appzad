@@ -12,7 +12,7 @@ var sfPartner = new Schema({
     Aktivan:{type:Boolean,default:false},
     Adresa:{  AdUlica:{ type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
               AdBroj: { type: String },
-              AdMesto: { type: String ,required: [true,'Mesto je obavezan podatak !!!']},
+              AdMesto: { type: String,required: [true,'Mesto je obavezan podatak !!!'] },
               AdPttReon: { type: String },
               AdPttPak: { type: String },
               AdDrzava: { type: String }

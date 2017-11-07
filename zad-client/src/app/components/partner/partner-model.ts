@@ -44,9 +44,9 @@ export class ParnerModel {
     MatBroj:string
     SifDelat:string
     PdvBroj:string
-    Ziro:  PAZiroModel;
-    Telefon:  PATelefonModel;
-    Kontakt:  PAKontaktModel;
+    Ziro:  PAZiroModel[];
+    Telefon:  PATelefonModel[];
+    Kontakt:  PAKontaktModel[];
     Opis?: string;
     NameUser?: string;
     created_at?:Date;

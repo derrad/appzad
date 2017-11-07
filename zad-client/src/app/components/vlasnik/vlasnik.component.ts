@@ -19,7 +19,6 @@ import { ResponeCustom}  from './../../shared/models/ErrorRes';
   animations: [routerTransition()]
 })
 export class VlasnikComponent implements OnInit {
-
   Title:string;
   selectedVlasn: VlasnikModel;
   vlasnL: Array<VlasnikModel>;

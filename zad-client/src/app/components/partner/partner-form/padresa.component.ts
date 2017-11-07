@@ -9,6 +9,6 @@ import { FormGroup } from '@angular/forms';
 export class PadresaComponent {
     // we will pass in ziro from App component
     @Input('groupadresa')
-    public adresaForm: FormGroup;
+    public Adresa: FormGroup;
    
 }
