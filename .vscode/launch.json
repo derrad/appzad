@@ -22,7 +22,7 @@
                 "webRoot": "${workspaceRoot}",
                 "userDataDir": "${workspaceRoot}/.vscode/chrome"
             },
-            {
+            {   //ovu sam probao i radila je
                 "name": "Launch localhost with sourcemaps",
                 "type": "chrome",
                 "request": "launch",
