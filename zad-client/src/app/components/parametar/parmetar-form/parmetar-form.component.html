@@ -1,10 +1,12 @@
 <div class="panel panel-primary"  [@formsTransition] >
   <div class="panel-heading">
       <div class="row">
-      <div class="text-left col-lg-9 col-md-9 col-xs-9"><h3>{{title}}</h3> </div>
-      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-           <i class="fa fa-times fa-4x cursorpointer" aria-hidden="true" (click)="backClicked()"></i>
-       </div>
+          <div class="text-left col-lg-9 col-md-9 col-xs-9">
+              <h5>{{title}}</h5> 
+            </div>
+            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+            </div>
     </div>
   </div>
 <div class="panel-body ">
@@ -31,11 +33,19 @@
                 </div>
               </div>
             </div>
-            <div class="checkbox">
-                <label class="center-block">
-                  <input type="checkbox" formControlName="Koristi" [(ngModel)]="parametar.Koristi"  value="1">Koristi.
-                </label>
-                
+            <div class="form-group"> <!-- class="pull-left" -->
+              <div class="row">
+                  <div class="col-md-2">
+                  <label class="center-block text-center" >Koristi</label>
+                  <label class="center-block" >
+                    <div class="checkbox">
+                      <label class="left-block" >
+                       <input type="checkbox" class="form-control input-sm" formControlName="Koristi" [(ngModel)]="parametar.Koristi">
+                    </label>
+                    </div>
+                  </label>
+                </div>
+              </div>
             </div>
             <div class="form-group">
                 <label class="center-block">Text vrednost:
@@ -54,7 +64,7 @@
                 </label>
             </div>
             <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
+                    <div class="col-md-offset-4 col-md-12">
                         <button type="submit" [disabled]="!frParam.valid"
                             class="btn btn-success">
                         <span class="glyphicon glyphicon-saved"></span>
@@ -63,7 +73,7 @@
 
                       <button type="reset" class="btn btn-danger"  [disabled]="frParam.pristine"  (click)="revert()">
                           <i class="fa fa-undo" aria-hidden="true"></i>
-                          Revert
+                          Clear data
                       </button>
                       
                    </div>

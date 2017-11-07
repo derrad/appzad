@@ -19,7 +19,12 @@
       <p-column field="SifraRad" header="Šifra" sortable="true"></p-column> 
       <p-column field="Prezime" header="Prezime" sortable="true"></p-column>
       <p-column field="Ime" header="Ime" sortable="true"></p-column>   
-      <p-column field="Aktivan" header="Aktivan" sortable="true"></p-column>
+      <p-column field="Aktivan" header="Aktivan" sortable="true" styleClass="text-center">
+        <ng-template let-col let-rad="rowData" pTemplate="body">
+            <span [hidden]="rad[col.field]==false">DA</span> 
+            <span [hidden]="rad[col.field]==true">NE</span> 
+        </ng-template> 
+      </p-column>
   
       <p-column  styleClass="col-button text-center" heder="ACTION">
           <ng-template let-rad="rowData" let-i="rowIndex" pTemplate="body">

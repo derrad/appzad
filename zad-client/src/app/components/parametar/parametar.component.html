@@ -6,17 +6,22 @@
          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
       <p-dataTable [value]="params"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedParam" dataKey="_id"  [loading]="loading" loadingIcon="fa-spinner" 
+                selectionMode="single" [(selection)]="selectedParam" dataKey="_id"
                 styleClass="table  table-striped " [immutable]=false [responsive]="true"  >
 
       <p-header><strong>{{Title}}</strong></p-header>             
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
       <p-column field="Naziv" header="Naziv" sortable="true" ></p-column>
-      <p-column field="Koristi" header="Koristi" sortable="true" styleClass="text-center"></p-column>
+      <p-column field="Koristi" header="Koristi" sortable="true" styleClass="text-center">
+        <ng-template let-col let-param="rowData" pTemplate="body">
+            <span [hidden]="param[col.field]==false">DA</span> 
+            <span [hidden]="param[col.field]==true">NE</span> 
+        </ng-template> 
+      </p-column>
       <p-column field="VredString" header="STRING" sortable="true"></p-column> 
       <p-column field="VredNumeric" header="NUMERIC" sortable="true" styleClass="text-right">
             <ng-template let-col let-param="rowData" pTemplate="body">
-                    <span>{{param[col.field] | number:'1.0-2'}}</span>
+                    <span>{{param[col.field] | number:'1.2-6'}}</span>
                 </ng-template>    
       </p-column> 
       <!-- <p-column field="Opis" header="Opis" sortable="true"></p-column> -->

@@ -16,7 +16,8 @@
           </div>
           <div class="form-group">
               <label class="center-block">Opština:
-                <select  formControlName="Opstina" class="form-control" placeholder="Select Opštinu"  name="Select Opštinu" [(ngModel)]="mesto.Opstina" >
+                <select  formControlName="Opstina" class="form-control" 
+                    placeholder="Select Opštinu"  name="Select Opštinu" [(ngModel)]="mesto.Opstina" >
                   <option *ngFor="let list of opstine" [value]="list._id"   >
                     {{ list.Naziv }}
                   </option>
@@ -57,7 +58,7 @@
 
                       <button type="reset" class="btn btn-danger"  [disabled]="formMEST.pristine"  (click)="revert()">
                           <i class="fa fa-undo" aria-hidden="true"></i>
-                          Revert
+                          Clear Data
                       </button>
                       
                     </div>

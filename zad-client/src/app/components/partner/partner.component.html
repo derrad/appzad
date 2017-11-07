@@ -1,6 +1,6 @@
-<p>
+<!-- <p>
   partner works!
-</p>
+</p> -->
 
 <div *ngIf="partnerL;else  waiting"  [@routerTransition]>
   
@@ -15,20 +15,20 @@
 
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="KyeSearch" header="Ključ"  styleClass="text-center"></p-column>
-      <p-column field="Naziv" header="Naziv"  styleClass="text-center"></p-column>
+      <p-column field="KyeSearch" header="Ključ" ></p-column>
+      <p-column field="Naziv" header="Naziv"  ></p-column>
       <p-column field="UgovProc" header="Ugovoreni %"   styleClass="text-right" >
             <ng-template let-col let-partn="rowData" pTemplate="body">
                     <span>{{partn[col.field] | number:'1.2-2'}}</span>
             </ng-template> 
       </p-column> 
-      <p-column field="Email" header="Email"  styleClass="text-center"></p-column>
-      <p-column field="Pib" header="Pib"  styleClass="text-center"></p-column>
+      <p-column field="Email" header="Email" ></p-column>
+      <p-column field="Pib" header="Pib"  ></p-column>
       
-      <p-column field="Aktivan" header="Aktivan"   styleClass="text-right" >
+      <p-column field="Aktivan" header="Aktivan"   styleClass="text-center" >
         <ng-template let-col let-partn="rowData" pTemplate="body">
-                <span [hidden]="partn[col.field]==false"> DA</span> 
-                <span [hidden]="partn[col.field]==true"> NE</span> 
+                <span [hidden]="partn[col.field]==false">DA</span> 
+                <span [hidden]="partn[col.field]==true">NE</span> 
                 
         </ng-template> 
       </p-column>

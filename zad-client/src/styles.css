@@ -4,6 +4,9 @@ body,html{
   overflow-x: hidden;
 }   
 
+body{
+  margin-bottom: 45px;
+}
 /* remove outer padding */
 .container-main .row{
   padding: 0px;
@@ -26,9 +29,19 @@ footer.sticky-footer {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 46px;
+  height: 45px;
   background-color: #e9ecef;
-  line-height: 35px;  
+  /* line-height: 35px;   */
+}
+
+
+body > .container {
+  padding: 45px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
 }
   
 

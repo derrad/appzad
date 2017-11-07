@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {ParametarService} from './parametar.service';
 import {Router} from '@angular/router';
-import {IParametar,Parametar} from './parametar.model';
+import {Parametar} from './parametar.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
@@ -10,6 +10,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import {routerTransition } from '../../animation/router.animations' 
+import { ResponeCustom}  from './../../shared/models/ErrorRes';
 //import * as $ from 'jquery';
 
 
@@ -20,11 +21,9 @@ import {routerTransition } from '../../animation/router.animations'
   animations: [routerTransition()]
 })
 export class ParametarComponent implements OnInit {
-  params:Array<IParametar>;
+  params:Array<Parametar>;
   Title:string;
-  selectedParam: Object;
-  loading: boolean;
-  valuekraj: number = 0;
+  selectedParam: Parametar;
   displayDetals: boolean = false;
   parShow: Parametar = new Parametar();
   
@@ -35,21 +34,25 @@ export class ParametarComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.loading = true;
-    this.paramService.getParametars().subscribe(profile => {
-      if (profile.success === true) { 
-          this.params = profile.data;
-          this.loading = false;
-      }
+
+    this.paramService.getParametars()
+    .subscribe((profile) => {
+    if (profile.success === true) { 
+      this.params= profile.data;
+    }
+    // }
     },
-    err => {
-      console.log(err);
+    (error:ResponeCustom) => {
+    this.flashMessage.show(error.message, {
+      cssClass: 'alert-danger',
+      timeout: 9000});
+  //  console.log(error.message);
+      this.params=[];
+
       return false;
     }
-    
-  );
-   this.loading = false;
-    //$("#glparam").show(1000);
+    );
+
   }
 
 
@@ -84,9 +87,9 @@ deleteParam(tparam){
               this.router.navigate(['NotFound']);
             }
             } ,
-            err => {
+            (error:ResponeCustom)  => {
               //alert("Could not delete radnik.");
-              this.flashMessage.show('Could not delete parametar !!!', {
+              this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
                 timeout: 5000});
               // Revert the view back to its original state
