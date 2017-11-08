@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Partner = require('../models/sfPartneri');
-const LogAct = require('../models/apActlog');
 const TypeA = require('../enum/serverenum');
+const SetActivity = require('./SetActivity');
 
 const TIP_TRANS_INSERT ="ADD KUPAC";
 const TIP_TRANS_UPDATE ="CHANGES KUPAC";
@@ -73,9 +73,9 @@ module.exports.create = function (req, res,next) {
         json({ success: false, message: 'Error processing request ', data:[] }).end(); 
       }
 
-      try{
-        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
-      } catch(ex){}
+        try{
+          SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
+        } catch(ex){}
       
 
       return res.status(201).json({

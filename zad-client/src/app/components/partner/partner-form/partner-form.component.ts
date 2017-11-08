@@ -102,8 +102,8 @@ export class PartnerFormComponent implements OnInit,OnDestroy {
                this.partAdresa = pos.data[0].Adresa;
                this.initAdresa(this.partAdresa);
                //console.log(JSON.stringify(this.vlasnN ));
-              // this.initDataZiro();
-              // this.initAdresa();
+               this.initDataZiro();
+               this.initDataTelefon();
 
             }else{
               this.flashMessage.show(pos.message, {
@@ -130,6 +130,7 @@ export class PartnerFormComponent implements OnInit,OnDestroy {
   get Adresa():FormGroup { return this.formPartn.get('Adresa') as FormGroup; }
 
   get Ziro(): FormArray { return this.formPartn.get('Ziro') as FormArray; }
+  get Telefon(): FormArray { return this.formPartn.get('Telefon') as FormArray; }
   get Kontakt(): FormArray { return this.formPartn.get('Kontakt') as FormArray; }
   
 // initAdresa(tAdUlica:string,tAdBroj:string,tAdMesto:string,tAdPttReon:string,tAdPttPak:string,tAdDrzava:string) {
@@ -159,6 +160,56 @@ initAdresa(tAdresa:PAdresaModel) {
 
 }
 
+
+initDataZiro(){
+  for ( let ziroitem of this.partnN.Ziro) {
+        const control = <FormArray>this.formPartn.controls['Ziro'];
+        control.push(this.initZiro(ziroitem.PzNaziv,ziroitem.PzRacun,ziroitem.PzGlavni,ziroitem.PzOpis));
+  }
+ }
+
+//Ziro racun vlasnika
+initZiro(tNaziv:string,tRacun:string,tGlavni:boolean,tOpis:string) {
+    return this._fb.group({
+      PzNaziv: [tNaziv, Validators.required],
+      PzRacun: [tRacun, Validators.required],
+      PzGlavni:[tGlavni],
+      PzOpis: [tOpis]
+   });
+}
+addZiro() {
+    const control = <FormArray>this.formPartn.controls['Ziro'];
+    control.push(this.initZiro("","",false,""));
+}
+removeZiro(i: number) {
+    const control = <FormArray>this.formPartn.controls['Ziro'];
+    control.removeAt(i);
+}
+
+initDataTelefon(){
+  for ( let item of this.partnN.Telefon) {
+        const control = <FormArray>this.formPartn.controls['Telefon'];
+        control.push(this.initTelefon(item.TlNaziv,item.TlBroj,item.TlGlavni,item.TlOpis));
+  }
+ }
+
+//Ziro racun vlasnika
+initTelefon(tNaziv:string,tRacun:string,tGlavni:boolean,tOpis:string) {
+    return this._fb.group({
+      TlNaziv: [tNaziv, Validators.required],
+      TlBroj: [tRacun, Validators.required],
+      TlGlavni:[tGlavni],
+      TlOpis: [tOpis]
+   });
+}
+addTelefon() {
+    const control = <FormArray>this.formPartn.controls['Telefon'];
+    control.push(this.initTelefon("","",false,""));
+}
+removeTelefon(i: number) {
+    const control = <FormArray>this.formPartn.controls['Telefon'];
+    control.removeAt(i);
+}
 
   
   save() {

@@ -1,6 +1,6 @@
-<p>
+<!-- <p>
   partner-form works!
-</p>
+</p> -->
 
 <div class="panel panel-primary"  [@formsTransition]>
     <div class="panel-heading">
@@ -43,7 +43,7 @@
                 </label>
                 <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
                     <div *ngIf="Naziv.errors.required">
-                        <strong>Naziv jeobavezan podatak !!!</strong>
+                        <strong>Naziv je obavezan podatak !!!</strong>
                     </div>
                     <div *ngIf="Naziv.errors.minlength">
                         <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
@@ -77,8 +77,6 @@
               </div>
 
              
-             
-
               <div class="form-group">
                   <div class="checkbox">
                     <label class="center-block">
@@ -86,17 +84,53 @@
                     </label>
                   </div>
                 </div>
-
-
-                <partadresa [groupadresa]="Adresa" ></partadresa>
-
-    
+                <!-- <fieldset>
+                    <legend> <h5>Adresa:</h5></legend> -->
+                <div class="panel panel-default">
+                  <div class="panel-heading"><strong>Adresa:</strong></div>
+                  <div class="panel-body">
+                    <partadresa [groupadresa]="Adresa" ></partadresa>
+                  </div>
+              </div> 
+                <!-- </fieldset> -->
                 <div class="form-group">
                     <label class="center-block">Email:
                       <input class="form-control" formControlName="Email"  [(ngModel)]="partnN.Email" >
                     </label>
-                  </div>
+                </div>
               
+              <div class="form-group">
+                  <div formArrayName="Telefon">
+                      <div *ngFor="let Telefon of formPartn.controls.Telefon.controls; let i=index" class="panel panel-info"> 
+                          <div class="panel-heading">
+                              <span><strong>Telefon {{i + 1}} </strong></span>
+                              <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelefon(i)"></span>
+                          </div>
+      
+                          <div [formGroupName]="i" class="panel-body" > 
+                              <telefonpartner [grouptel]="formPartn.controls.Telefon.controls[i]"></telefonpartner>
+                          </div>
+                      </div>
+                
+                      <div class="margin-20" *ngIf="formPartn.controls.Telefon.controls.length < 6">
+                        <div class="row">
+                          <div class="col-xs-2">
+                            </div>
+                            <div class=" col-xs-10 ">
+                                <button type="button" class="btn btn-info btn-block"   (click)="addTelefon()" title=" Add telefon">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Dodaj telefon
+                                </button>
+                                
+                          </div>
+                        </div>
+                      </div>
+                    
+                  </div>
+                </div> 
+
+
+
                 <div class="form-group">
                   <label class="center-block">Pib:
                     <input class="form-control" formControlName="Pib"  [(ngModel)]="partnN.Pib" >
@@ -118,6 +152,39 @@
                         <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="partnN.PdvBroj" >
                       </label>
                 </div>
+
+
+                <div class="form-group">
+                    <div formArrayName="Ziro">
+                        <div *ngFor="let Ziro of formPartn.controls.Ziro.controls; let i=index" class="panel panel-info"> 
+                            <div class="panel-heading">
+                                <span><strong>Ziro racun {{i + 1}} </strong></span>
+                                <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiro(i)"></span>
+                            </div>
+        
+                            <div [formGroupName]="i" class="panel-body" > 
+                                <ziropartner [groupziro]="formPartn.controls.Ziro.controls[i]"></ziropartner>
+                            </div>
+                        </div>
+                  
+                        <div class="margin-20" *ngIf="formPartn.controls.Ziro.controls.length < 6">
+                          <div class="row">
+                            <div class="col-xs-2">
+                              </div>
+                              <div class=" col-xs-10 ">
+                                  <button type="button" class="btn btn-info btn-block"   (click)="addZiro()" title=" Add Žiro račun">
+                                      <i class="fa fa-plus" aria-hidden="true"></i>
+                                      Dodaj žiro račun
+                                  </button>
+                                 
+                            </div>
+                          </div>
+                        </div>
+                      
+                    </div>
+                  </div> 
+
+
                 <div class="form-group">
                   <label class="center-block">Opis:
                     <textarea class="form-control" formControlName="Opis"  [(ngModel)]="partnN.Opis">

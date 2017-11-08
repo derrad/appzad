@@ -1,0 +1,38 @@
+<div [formGroup]="Telefon">
+        <div class="row">
+            <div class="form-group col-md-2">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Naziv</label>
+                <input type="text" class="form-control input-sm" formControlName="TlNaziv" required>
+                 <small [hidden]="Telefon.controls.TlNaziv.valid" class="text-danger">
+                    Naziv je obavezan
+                </small> 
+            </div>
+            <div class="form-group col-md-4">
+                <label>Telefon</label>
+                <input type="text" class="form-control input-sm" formControlName="TlBroj" required>
+                 <small [hidden]="Telefon.controls.TlBroj.valid" class="text-danger">
+                        Telefon je obavezan
+                </small>
+            </div>
+        </div>
+        <div class="row">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="checkbox">
+                        <label >
+                            <input type="checkbox"  class="form-control input-sm" formControlName="TlGlavni" >
+                            Glavni
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-8">
+                    <label class="center-block">Opis:
+                        <textarea class="form-control input-sm" formControlName="TlOpis">
+                    </textarea>
+                    </label>
+                </div>
+        </div>
+    </div>
