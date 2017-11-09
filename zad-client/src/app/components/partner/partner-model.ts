@@ -1,32 +1,32 @@
-export class PAdresaModel{
-    AdUlica:string;
-    AdBroj:string;
-    AdMesto:string;
-    AdPttReon:string;
-    AdPttPak:string;
-    AdDrzava:string;   
+export class PAdresaModel {
+    AdUlica: string;
+    AdBroj: string;
+    AdMesto: string;
+    AdPttReon: string;
+    AdPttPak: string;
+    AdDrzava: string;
 }
 
-export class PAZiroModel{
-    PzNaziv:string;
-    PzRacun:string;
-    PzGlavni:boolean;
+export class PAZiroModel {
+    PzNaziv: string;
+    PzRacun: string;
+    PzGlavni: boolean;
     PzOpis?: string;
 }
 
-export class PATelefonModel{
-    TlNaziv:string;
-    TlBroj:string;
-    TlGlavni:boolean;
+export class PATelefonModel {
+    TlNaziv: string;
+    TlBroj: string;
+    TlGlavni: boolean;
     TlOpis?: string;
 }
 
-export class PAKontaktModel{
-    KoNaziv:string;
-    KoFunkcija:string;
-    KoEmail:string;
-    KoTelef:string;
-    KoMobilni:string;
+export class PAKontaktModel {
+    KoNaziv: string;
+    KoFunkcija: string;
+    KoEmail: string;
+    KoTelef: string;
+    KoMobilni: string;
     KoOpis?: string;
 }
 

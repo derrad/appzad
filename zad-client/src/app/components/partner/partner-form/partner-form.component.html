@@ -21,6 +21,23 @@
                 <!-- <label> -->
             </div>
             <div class="form-group">
+                    <label class="center-block">Naziv:
+                      <input class="form-control" formControlName="Naziv"  [(ngModel)]="partnN.Naziv"  required>
+                    </label>
+                    <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                        <div *ngIf="Naziv.errors.required">
+                            <strong>Naziv je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="Naziv.errors.minlength">
+                            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
+                          </div>
+                        <div *ngIf="Naziv.errors.maxlength">
+                            <strong>Predugačak naziv !!!</strong>
+                       </div>
+                    </div>
+            </div>
+
+            <div class="form-group col-md-8">
                   <label class="center-block">Kod pretrage:
                     <input class="form-control" formControlName="KyeSearch"  [(ngModel)]="partnN.KyeSearch" required>
                   </label>
@@ -36,26 +53,8 @@
                      </div>
                   </div>
             </div>
-
-              <div class="form-group">
-                <label class="center-block">Naziv:
-                  <input class="form-control" formControlName="Naziv"  [(ngModel)]="partnN.Naziv"  required>
-                </label>
-                <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                    <div *ngIf="Naziv.errors.required">
-                        <strong>Naziv je obavezan podatak !!!</strong>
-                    </div>
-                    <div *ngIf="Naziv.errors.minlength">
-                        <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
-                      </div>
-                    <div *ngIf="Naziv.errors.maxlength">
-                        <strong>Predugačak naziv !!!</strong>
-                   </div>
-                </div>
-                
-              </div>
-
-              <label class="center-block">Ugovoreni procenat:
+            <div class="form-group col-md-4">
+            <label class="center-block">Ugovoreni procenat:
                   <div class="input-group">
                       <div class="input-group">
                           <input class="form-control text-right" formControlName="UgovProc"  
@@ -63,18 +62,18 @@
                           <span class="input-group-addon">%</span>
                       </div>
                   </div>
-              </label>
-
-              <div class="form-group">
-                  <label class="center-block">Država:
-                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  
-                      name="Select Državu" [(ngModel)]="partnN.Drzava"  required>
-                      <option *ngFor="let list of drzave" [value]="list._id"   >
-                        {{ list.Naziv }}
-                      </option>
-                    </select>
-                  </label>
-              </div>
+            </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Država:
+                <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  
+                    name="Select Državu" [(ngModel)]="partnN.Drzava"  required>
+                    <option *ngFor="let list of drzave" [value]="list._id"   >
+                    {{ list.Naziv }}
+                    </option>
+                </select>
+                </label>
+            </div>
 
              
               <div class="form-group">
@@ -84,75 +83,78 @@
                     </label>
                   </div>
                 </div>
-                <!-- <fieldset>
-                    <legend> <h5>Adresa:</h5></legend> -->
-                <div class="panel panel-default">
-                  <div class="panel-heading"><strong>Adresa:</strong></div>
-                  <div class="panel-body">
-                    <partadresa [groupadresa]="Adresa" ></partadresa>
-                  </div>
-              </div> 
-                <!-- </fieldset> -->
+              
+                <div class="form-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Adresa:</strong></div>
+                        <div class="panel-body">
+                            <partadresa [groupadresa]="Adresa" ></partadresa>
+                        </div>
+                    </div> 
+                </div>
                 <div class="form-group">
                     <label class="center-block">Email:
-                      <input class="form-control" formControlName="Email"  [(ngModel)]="partnN.Email" >
+                        <input class="form-control" formControlName="Email"  [(ngModel)]="partnN.Email" >
                     </label>
                 </div>
-              
-              <div class="form-group">
-                  <div formArrayName="Telefon">
-                      <div *ngFor="let Telefon of formPartn.controls.Telefon.controls; let i=index" class="panel panel-info"> 
-                          <div class="panel-heading">
-                              <span><strong>Telefon {{i + 1}} </strong></span>
-                              <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelefon(i)"></span>
-                          </div>
-      
-                          <div [formGroupName]="i" class="panel-body" > 
-                              <telefonpartner [grouptel]="formPartn.controls.Telefon.controls[i]"></telefonpartner>
-                          </div>
-                      </div>
-                
-                      <div class="margin-20" *ngIf="formPartn.controls.Telefon.controls.length < 6">
-                        <div class="row">
-                          <div class="col-xs-2">
-                            </div>
-                            <div class=" col-xs-10 ">
-                                <button type="button" class="btn btn-info btn-block"   (click)="addTelefon()" title=" Add telefon">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    Dodaj telefon
-                                </button>
-                                
-                          </div>
-                        </div>
-                      </div>
-                    
-                  </div>
-                </div> 
-
-
-
                 <div class="form-group">
-                  <label class="center-block">Pib:
-                    <input class="form-control" formControlName="Pib"  [(ngModel)]="partnN.Pib" >
-                  </label>
-                </div>
-                <div class="form-group">
-                    <label class="center-block">Matični broj:
-                      <input class="form-control" formControlName="MatBroj"  [(ngModel)]="partnN.MatBroj" >
-                    </label>
-                  </div>
+                        <div formArrayName="Telefon">
+                            <div *ngFor="let Telefon of formPartn.controls.Telefon.controls; let i=index" class="panel panel-info"> 
+                                <div class="panel-heading">
+                                    <span><strong>Telefon {{i + 1}} </strong></span>
+                                    <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelefon(i)"></span>
+                                </div>
             
-                <div class="form-group">
-                    <label class="center-block">Šifra delatnosti:
-                      <input class="form-control" formControlName="SifDelat"  [(ngModel)]="partnN.SifDelat" >
+                                <div [formGroupName]="i" class="panel-body" > 
+                                    <telefonpartner [grouptel]="formPartn.controls.Telefon.controls[i]"></telefonpartner>
+                                </div>
+                            </div>
+                      
+                            <div class="margin-20" *ngIf="formPartn.controls.Telefon.controls.length < 6">
+                              <div class="row">
+                                <div class="col-xs-2">
+                                  </div>
+                                  <div class=" col-xs-10 ">
+                                      <button type="button" class="btn btn-info btn-block"   (click)="addTelefon()" title=" Add telefon">
+                                          <i class="fa fa-plus" aria-hidden="true"></i>
+                                          Dodaj telefon
+                                      </button>
+                                      
+                                </div>
+                              </div>
+                            </div>
+                          
+                        </div>
+                  </div> 
+      
+
+                <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="center-block">Pib:
+                        <input class="form-control" formControlName="Pib"  [(ngModel)]="partnN.Pib" >
                     </label>
                 </div>
-                <div class="form-group">
-                      <label class="center-block">Pdv broj:
-                        <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="partnN.PdvBroj" >
-                      </label>
+                      
+                <div class="form-group col-md-6">
+                    <label class="center-block">Matični broj:
+                         <input class="form-control" formControlName="MatBroj"  [(ngModel)]="partnN.MatBroj" >
+                    </label>
                 </div>
-
+                  
+            <div class="form-group col-md-6">
+                <label class="center-block">Šifra delatnosti:
+                <input class="form-control" formControlName="SifDelat"  [(ngModel)]="partnN.SifDelat" >
+                </label>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="center-block">Pdv broj:
+                    <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="partnN.PdvBroj" >
+                </label>
+            </div>
+        </div>
+              
+       
+            
 
                 <div class="form-group">
                     <div formArrayName="Ziro">
@@ -182,8 +184,37 @@
                         </div>
                       
                     </div>
-                  </div> 
+                </div> 
 
+                <div class="form-group">
+                        <div formArrayName="Kontakt">
+                            <div *ngFor="let kontak of formPartn.controls.Kontakt.controls; let i=index" class="panel panel-info"> 
+                                <div class="panel-heading">
+                                    <span><strong>Kontakt {{i + 1}} </strong></span>
+                                    <span class="glyphicon glyphicon-remove pull-right" (click)="removeKontakt(i)"></span>
+                                </div>
+            
+                                <div [formGroupName]="i" class="panel-body" > 
+                                    <kontaktpartner [groupkontakt]="formPartn.controls.Kontakt.controls[i]"></kontaktpartner>
+                                </div>
+                            </div>
+                      
+                            <div class="margin-20" *ngIf="formPartn.controls.Kontakt.controls.length < 6">
+                              <div class="row">
+                                <div class="col-xs-2">
+                                  </div>
+                                  <div class=" col-xs-10 ">
+                                      <button type="button" class="btn btn-info btn-block"   (click)="addKontakt()" title=" Add kontakt">
+                                          <i class="fa fa-plus" aria-hidden="true"></i>
+                                          Dodaj kontakt
+                                      </button>
+                                     
+                                </div>
+                              </div>
+                            </div>
+                          
+                        </div>
+                </div> 
 
                 <div class="form-group">
                   <label class="center-block">Opis:
