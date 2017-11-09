@@ -12,9 +12,6 @@ const path = require('path');
 const rfs = require('rotating-file-stream');
 const fs = require('fs');
 
-
-
-
 // express initialize
 const app = express();
 
@@ -84,20 +81,20 @@ const ZanimanjaRouter = require('./server/Route/ZanimanjaRouters');
 const RadnikRouter = require('./server/Route/RadnikRouters');
 const PartneriRouter = require('./server/Route/PartneriRouters');
 const OpstineRouter= require('./server/Route/OpstineRouters');
-//const MestaRouter= require('./server/Route/MestaRouters');
-const KonstantaRouter= require('./server/Route/KonstantaRouters');
-const FondSatiRouter= require('./server/Route/FondSatiRouters');
-const KorisnikRouter= require('./server/Route/KorisnikRouters');
-const MestaRouter= require('./server/Route/MestaRouters');
-const VezbeRouter= require('./server/Route/VezbaRouters');
-const ActLogRouter= require('./server/Route/ActLogRouters');
+const KonstantaRouter = require('./server/Route/KonstantaRouters');
+const FondSatiRouter = require('./server/Route/FondSatiRouters');
+const KorisnikRouter = require('./server/Route/KorisnikRouters');
+const MestaRouter = require('./server/Route/MestaRouters');
+const VezbeRouter = require('./server/Route/VezbaRouters');
+const ActLogRouter = require('./server/Route/ActLogRouters');
+const BankeRouter = require('./server/Route/BankeRouters');
 
 app.use('/users', users); 
 
 app.use('/', [index,DrzaveRoute,PosaoRoute,ParamRoute,VlasnikRoute,ZadrugarRouter,
               ZanimanjaRouter,RadnikRouter,PartneriRouter,OpstineRouter,MestaRouter,
               KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,VezbeRouter,
-              ActLogRouter])
+              ActLogRouter,BankeRouter])
 
 
 //Route in app

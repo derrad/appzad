@@ -23,4 +23,4 @@ router.put('/api/drzave/:id',passport.authenticate('jwt', {session:false}), Drza
 router.delete('/api/drzave/:id', passport.authenticate('jwt', {session:false}),DrzavaController.deledrzava);
 
 
-module.exports = router
+module.exports = router;

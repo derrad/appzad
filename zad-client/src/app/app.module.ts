@@ -47,6 +47,8 @@ import { ParametarModule } from './components/parametar/parametar.module';
 import { VlasnikModule } from './components/vlasnik/vlasnik.module';
 import { KonstantaModule } from './components/konstanta/konstanta.module';
 import { PartnerModule } from './components/partner/partner.module';
+import { BankeComponent } from './components/banke/banke.component';
+import { BankeFormComponent } from './components/banke/banke-form/banke-form.component';
 
 
 
@@ -64,7 +66,9 @@ import { PartnerModule } from './components/partner/partner.module';
      // NavbarLeftComponent,
       ModalComponent,
       NotFoundComponent,
-      KeysPipe
+      KeysPipe,
+      BankeComponent,
+      BankeFormComponent
    
 
      

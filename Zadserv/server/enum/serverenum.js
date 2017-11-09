@@ -44,5 +44,28 @@ module.exports.Activities =[
     'Delete'
 ];
 
+module.exports.TipIsplate =[
+    'Gotovina',
+    'Tekuci',
+    'Stedna'
+];
 
+module.exports.TipZadrugar =[
+    'Ucenik',
+    'Osiguranik'
+];
+
+module.exports.PolZadruga =[
+    'Musko',
+    'Zensko',
+    'Neodredjen'
+];
+
+module.exports.IdentZadrugara =[
+    'JMBG_EBS',
+    'Izbeglicka_Legitimacija',
+    'Pasos',
+    'Eksterni_Identifikator',
+    'Ostalo'
+];
 

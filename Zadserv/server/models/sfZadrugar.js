@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
-var relationship = require("mongoose-relationship");
-var mongoosePaginate = require('mongoose-paginate');
-var Drzave = require('./server/models/sfDrzave');
-var Mesta = require('./server/models/sfMesta');
-var Zanimanja = require('./server/models/sfZanimanja');
-var Partner = require('./server/models/sfPartneri');
+const mongoose = require('mongoose');
+//var relationship = require("mongoose-relationship");
+//var mongoosePaginate = require('mongoose-paginate');
+const sfDrzave = require('./server/models/sfDrzave');
+const sfMesta = require('./server/models/sfMesta');
+const sfZanimanja = require('./server/models/sfZanimanja');
+const sfBanke = require('./server/models/sfBanke');
+const EnumServ = require('./enum/serverenum');
 
 
 
@@ -13,28 +14,51 @@ var Schema = mongoose.Schema,
 ID  = Schema.ObjectId;
 
 var sfZadrugar = new Schema({
-    IDZadrugar:{ type: Number,default:0},
+    IDZadrugar:{ type: Number, required: [true, 'ID numericki je obavezan!!!'],default:0},
     Ime:{type:String,required: [true, 'Ime je obavezno !!!']},
     Prezime : { type: String, required: [true, 'Prezime je obavezno !!!'] },
     ImeRoditelja : { type: String},
     DatRodjenja:{type:Date, default: Date.now,required: [true, 'Datum je obavezan !!!']},
     Aktivan:{type:Boolean,default:false},
-    Pol:{type : String, default : 'Neodredjen',required: [true, 'Pol je obavezan !!!'],enum:["Musko","Zensko","Neodredjen"]},
+    Pol: {
+            type : String,
+            default : 'Neodredjen',
+            enum : EnumServ.PolZadruga
+       },
     OpstinaRodj : { type: String},
     MestoRodj: { type: String},
-    VrstaIdentifikatoraPrimaoca:{type : String, default : 'Jmbg',required: [true, 'Idendifikator je obavezan !!!'],enum:["Jmbg","Zensko","Neodredjen"]},
+    VrstaIdentifikatoraPrimaoca:{
+        type : String,
+        default : 'JMBG_EBS',
+        enum : EnumServ.IdentZadrugara
+    },
     Jmbg:{ type: String},
-    Adresa:{ type: String},
+    Adresa:{ 
+        AdUlica: { type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
+        AdBroj: { type: String },
+        AdMesto: { type: String,required: [true,'Mesto je obavezan podatak !!!'] },
+        AdPttReon: { type: String },
+        AdPttPak: { type: String },
+        AdDrzava: { type: String }
+        } ,
     BrLK:{ type: String},
     Telefon:{ type: String},
     ZadEmail:{ type: String},
-    MestaID:{type:Schema.ObjectId, ref:"sfMesta", childPath:"childMesta" },
-    ZanimanjaID:{type:Schema.ObjectId, ref:"sfZanimanja", childPath:"childZanimanja" },
-    TipZadrugar:{type : String, default : 'Ucenik',required: [true, 'Tip je obavezan !!!'],enum:["Ucenik","Nezaposlen"]},
+    MestaID:{type:Schema.ObjectId, ref:"sfMesta", required:true},
+    ZanimanjaID:{type:Schema.ObjectId, ref:"sfZanimanja", required:true },
+    TipZadrugar:{    
+        type : String,
+        default : 'Ucenik',
+        enum : EnumServ.TipZadrugar
+    },
     BrRadneKnjiz:{ type: String},
     BrIndexa:{ type: String},
-    TipIsplate:{type : String, default : 'Gotovina',required: [true, 'Tip je obavezan !!!'],enum:["Gotovina","Tekuci","Stedna"]},
-    PartneriID:{type:Schema.ObjectId, ref:"sfPartner", childPath:"childPartner" },
+    TipIsplate:{ 
+        type : String,
+        default : 'Gotovina',
+        enum : EnumServ.TipIsplate
+    },
+    BankaID:{type:Schema.ObjectId, ref:"sfBanke"},
     BrojRacuna:{ type: String},
     BeliBroj:{ type: String},
     BrojDana:{ type: Number,default:0},
@@ -52,29 +76,29 @@ var sfZadrugar = new Schema({
 
 
 
-sfZadrugar.plugin(relationship, { relationshipPathName:'MestaID' });
-var childMesta = new sfOpstine({Mesta:sfMesta._id});
+// sfZadrugar.plugin(relationship, { relationshipPathName:'MestaID' });
+// var childMesta = new sfOpstine({Mesta:sfMesta._id});
 
-sfZadrugar.plugin(relationship, { relationshipPathName:'ZanimanjaID' });
-var childZanimanja = new sfZanimanja({Zanimanja:sfZanimanja._id});
-
-
-sfZadrugar.plugin(relationship, { relationshipPathName:'PartneriID' });
-var childPartner = new sfPartner({Partner:sfPartner._id});
+// sfZadrugar.plugin(relationship, { relationshipPathName:'ZanimanjaID' });
+// var childZanimanja = new sfZanimanja({Zanimanja:sfZanimanja._id});
 
 
-sfZadrugar.pre('save', function(next) {
-    // do stuff
-    console.log("PRE SAVE zadrugar");
-    next();
-  });
+// sfZadrugar.plugin(relationship, { relationshipPathName:'PartneriID' });
+// var childPartner = new sfPartner({Partner:sfPartner._id});
+
+
+// sfZadrugar.pre('save', function(next) {
+//     // do stuff
+//     console.log("PRE SAVE zadrugar");
+//     next();
+//   });
 
 
 sfZadrugar.plugin(mongoosePaginate);
 
-var collectionName = 'sfZadrugar';
+const collectionName = 'sfZadrugar';
 
-module.exports = mongoose.model('sfZadrugar', sfZadrugar,collectionName); //mongoose.model('sfDrzave', sfDrzave);
+module.exports = mongoose.model('sfZadrugar', sfZadrugar,'sfZadrugar'); 
 
 
 // public class sfZadrugar : IsfZadrugar
