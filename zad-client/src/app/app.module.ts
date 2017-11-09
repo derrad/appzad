@@ -1,40 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {RouterModule, Routes} from '@angular/router'; 
+import {RouterModule, Routes} from '@angular/router';
 import {SidebarModule} from 'primeng/primeng';
 import {AppComponent } from './app.component';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {DateValueAccessorModule} from './shared/frmDatum/DateValueAccessorModule ';
 
 
-//Meni and app komponente
+// Meni and app komponente
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-//import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
+// import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
 
-//Service
+// Service
 import {AuthService} from './services/auth/auth.service';
-import {ValidateService} from './services/auth/validate.service'; 
+import {ValidateService} from './services/auth/validate.service';
 import { ServiceValidateShared } from './services/service.validate.shared';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthGuardGlavni} from './guards/auth.guard.glavni';
 
 
-//Komponente 
+// Komponente
 import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-//Pipe 
+// Pipe
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
-
-//Module
+// Module
 import { AppRoutingModule } from './app-routing.module';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
 import { DrzaveModule } from './components/drzave/drzave.module';
@@ -47,12 +46,8 @@ import { ParametarModule } from './components/parametar/parametar.module';
 import { VlasnikModule } from './components/vlasnik/vlasnik.module';
 import { KonstantaModule } from './components/konstanta/konstanta.module';
 import { PartnerModule } from './components/partner/partner.module';
-import { BankeComponent } from './components/banke/banke.component';
-import { BankeFormComponent } from './components/banke/banke-form/banke-form.component';
+import { BankeModule } from './components/banke/banke.module';
 
-
-
-  
 
 @NgModule({
   declarations: [
@@ -66,15 +61,7 @@ import { BankeFormComponent } from './components/banke/banke-form/banke-form.com
      // NavbarLeftComponent,
       ModalComponent,
       NotFoundComponent,
-      KeysPipe,
-      BankeComponent,
-      BankeFormComponent
-   
-
-     
-     
-    //  DecimalMask
-    
+      KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -96,10 +83,11 @@ import { BankeFormComponent } from './components/banke/banke-form/banke-form.com
     VlasnikModule,
     KonstantaModule,
     PartnerModule,
+    BankeModule,
     AppRoutingModule
 
   ],
-  providers: [ValidateService, AuthService,AuthGuard,AuthGuardGlavni,ServiceValidateShared],
+  providers: [ValidateService, AuthService, AuthGuard, AuthGuardGlavni, ServiceValidateShared],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

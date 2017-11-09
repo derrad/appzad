@@ -4,13 +4,13 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import { ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
+import { ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
 import { DialogModule} from 'primeng/primeng';
-import { routerTransition } from '../../animation/router.animations' 
+import { routerTransition } from '../../animation/router.animations';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { KonstantaService } from './konstanta.service';
 import { KonstantaModel } from './konstanta-model';
-import { ResponeCustom}  from './../../shared/models/ErrorRes';
+import { ResponeCustom} from './../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-konstanta',
@@ -19,32 +19,31 @@ import { ResponeCustom}  from './../../shared/models/ErrorRes';
   animations: [routerTransition()]
 })
 export class KonstantaComponent implements OnInit {
-  Title:string;
+  Title: string;
   selectedKonst: KonstantaModel;
   konstL: Array<KonstantaModel>;
-  displayDetals: boolean = false;
+  displayDetals = false;
   konstShow: KonstantaModel = new KonstantaModel();
 
-  constructor(private router:Router,private konstService:KonstantaService,
-    private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService ) {
-    this.Title="PREGLED KONSTANTE"; 
+  constructor(private router: Router, private konstService: KonstantaService,
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    this.Title = 'PREGLED KONSTANTE';
 }
 
   ngOnInit() {
 
     this.konstService.getKonstante()
       .subscribe((profile) => {
-    if (profile.success === true) { 
-        this.konstL= profile.data;
+    if (profile.success === true) {
+        this.konstL = profile.data;
     }
    // }
   },
-  (error:ResponeCustom) => {
+  (error: ResponeCustom) => {
     this.flashMessage.show(error.message, {
       cssClass: 'alert-danger',
       timeout: 9000});
-      //console.log(error.message);
-      this.konstL=[];
+      this.konstL = [];
 
     return false;
   }
@@ -52,62 +51,50 @@ export class KonstantaComponent implements OnInit {
 }
 
 
-selectItem( work:KonstantaModel) {
-  // this.selectedOpstina=opstina;  
+selectItem( work: KonstantaModel) {
    this.displayDetals = true;
    this.konstShow = this.cloneData(work);
-  
 }
 
-cloneData(c: KonstantaModel):KonstantaModel {
-  let work = new KonstantaModel();
-  for(let prop in c) {
+cloneData(c: KonstantaModel): KonstantaModel {
+  const work = new KonstantaModel();
+  // tslint:disable-next-line:forin
+  for (const prop in c) {
     work[prop] = c[prop];
   }
   return work;
  }
-
- addKonst(){
-  this.router.navigate(['/konstanta/new'])
- 
+ addKonst() {
+  this.router.navigate(['/konstanta/new']);
  }
- 
  updateKonst(id) {
   this.router.navigate(['/konstanta/', id]);
  }
-
- deleteKonst(tkonst){
-  this.confirmationService.confirm({
+  deleteKonst(tkonst) {
+    this.confirmationService.confirm({
       message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
       header: `KONSTANTA`,
         accept: () => {
-          //Actual logic to perform a confirmation
-          var index = this.konstL.indexOf(tkonst);
-         // console.log("index je " + index);
+          const index = this.konstL.indexOf(tkonst);
           this.konstL.splice(index, 1);
-      
           this.konstService.delKonstanta(tkonst._id)
-            .subscribe((pos) =>{
-              if(pos.success){
-                 this.flashMessage.show(pos.message ,{
+            .subscribe((pos) => {
+              if (pos.success) {
+                 this.flashMessage.show(pos.message , {
                     cssClass: 'alert-success',
                     timeout: 1000});
-              }else{
+              }else {
                 this.router.navigate(['NotFound']);
               }
               } ,
-              (error:ResponeCustom)  => {
-                //alert("Could not delete radnik.");
+              (error: ResponeCustom)  => {
                 this.flashMessage.show(error.message, {
                   cssClass: 'alert-danger',
                   timeout: 5000});
-                // Revert the view back to its original state
                 this.konstL.splice(index, 0, tkonst);
               });
         }
-      });
-  
-    
+    });
   }
 
 

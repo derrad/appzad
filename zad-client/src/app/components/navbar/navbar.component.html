@@ -78,8 +78,8 @@
                             <i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i>&nbsp;Zadrugari</a></li>
                         <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()"><a href="#">
                             <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i>&nbsp;Kupci</a></li> 
-                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
 
+                        <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
                             <a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>&nbsp;Zanimanja</a></li>
                         <li role="presentation" (click)="modal1.hide()" *ngIf="authService.loggedIn()">
                             <a  [routerLink]="['/posao/new']" >
@@ -132,6 +132,13 @@
                     <a [routerLink]="['/partner']">
                     <i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"  ></i>&nbsp;Kupci</a>
                 </li> 
+
+                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
+                    [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+                    <a [routerLink]="['/banke']">
+                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"  ></i>&nbsp;Banke</a>
+                </li> 
+
                 
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
                         [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >

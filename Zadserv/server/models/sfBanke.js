@@ -17,3 +17,4 @@ var sfBanke = new Schema({
 }
 
 );
+module.exports = mongoose.model('sfBanke', sfBanke,'sfBanke');

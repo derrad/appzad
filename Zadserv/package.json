@@ -23,15 +23,16 @@
     "mongoose-paginate": "*",
     "morgan": "*",
     "rotating-file-stream": "*",
-    "@reactivex/rxjs": "*", 
-    "bcryptjs": "*", 
+    "@reactivex/rxjs": "*",
+    "bcryptjs": "*",
     "cors": "*",
-    "jsonwebtoken": "*", 
+    "jsonwebtoken": "*",
     "serve-favicon": "*",
     "passport": "*",
-    "passport-jwt": "*" 
+    "passport-jwt": "*"
   },
   "devDependencies": {
+    "eslint": "^4.10.0",
     "nodemon": "*"
   }
 }

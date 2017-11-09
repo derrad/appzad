@@ -3,21 +3,19 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
+import {formsTransition} from '../../../animation/forms.animations';
 import { KonstantaService } from '../konstanta.service';
 import { KonstantaModel } from '../konstanta-model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { ResponeCustom}  from './../../../shared/models/ErrorRes';
-//import {MyDateInput} from '../../../shared/frmDatum/date.input';
+import { ResponeCustom } from './../../../shared/models/ErrorRes';
+// import {MyDateInput} from '../../../shared/frmDatum/date.input';
 
 @Component({
   selector: 'app-konstanta-form',
   templateUrl: './konstanta-form.component.html',
   styleUrls: ['./konstanta-form.component.css'],
   animations: [formsTransition()]
-  
-  
 })
 export class KonstantaFormComponent implements OnInit {
   formKonst: FormGroup;
@@ -123,16 +121,10 @@ export class KonstantaFormComponent implements OnInit {
 
       this.konstService.getKonstanta(id)
         .subscribe(
-          (pos) =>{
+          (pos) => {
             if(pos.success){
                this.konstN = pos.data[0];
-              // this.formKonst.setValue(this.konstN.Datum.toLocaleDateString);
-              // var datePipe = new DatePipe();
-              // this.setDob = datePipe.transform(userdate, 'dd/MM/yyyy');
-              //console.log("Prikazan datum je " + this.konstN.Datum.toString());
-              //this.konstN.Datum = new Date(this.getExcatDate(this.konstN.Datum.toString()));
-              // this.getExcatDate(this.konstN.Datum.toString());
-              //this.konstN.Datum = new Date();
+              
             }else{
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
