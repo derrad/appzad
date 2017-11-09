@@ -8,18 +8,13 @@ module.exports.create = function (req, res,next) {
   const Aktivan =req.body.Aktivan  || false;
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
-
-  //console.log("uid je :" + uid + " ovo je koddrzave " + req.body.KodDrzave);
-
   
 if (!Racun || !Naziv ) {
      return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
 } 
-else 
-{
-  
-  if (uid) {
-    //Edit opstina
+else {
+if (uid) {
+    //Edit banka
     Banke.findById(uid).exec(function(err, banka){
       if(err){ 
         return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
