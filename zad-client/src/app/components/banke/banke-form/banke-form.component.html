@@ -1,3 +1,94 @@
-<p>
-  banke-form works!
-</p>
+<div class="panel panel-primary"  [@formsTransition]>
+  <div class="panel-heading">
+      <div class="row">
+          <div class="text-left col-lg-9 col-md-9 col-xs-9">
+              <h5>{{title}}</h5> 
+            </div>
+            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+              <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+            </div>
+     </div>
+  </div>
+  <div class="panel-body">
+      <form [formGroup]="frmBank" (ngSubmit)="save()" novalidate>
+
+         <div class="form-group" >
+               <input class="form-control" formControlName="_id"  [(ngModel)]="bankaN._id"   type="hidden">
+          </div>
+
+          <div class="form-group">
+                  <label class="center-block">Naziv:
+                    <input class="form-control" formControlName="Naziv"  [(ngModel)]="bankaN.Naziv"  required>
+                  </label>
+                  <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                      <div *ngIf="Naziv.errors.required">
+                          <strong>Naziv je obavezan podatak !!!</strong>
+                      </div>
+                     <div *ngIf="Naziv.errors.maxlength">
+                          <strong>Predugačak naziv !!!</strong>
+                     </div>
+                  </div>
+          </div>
+
+          <div class="form-group">
+                <label class="center-block">Racun:
+                  <input class="form-control" formControlName="Racun"  [(ngModel)]="bankaN.Racun" required>
+                </label>
+                <div *ngIf="Racun.invalid && (Racun.dirty || Racun.touched)" class="alert alert-danger">
+                    <div *ngIf="Racun.errors.required">
+                        <strong>Racun je obavezan podatak !!!</strong>
+                    </div>
+                    <div *ngIf="Racun.errors.minlength">
+                        <strong>Racun mora biti minimalno 2 karaktera dužine !!!</strong>
+                      </div>
+                    <div *ngIf="Racun.errors.maxlength">
+                        <strong>Predugačak racun !!!</strong>
+                   </div>
+                </div>
+          </div>
+          <div class="form-group">
+              <div class="checkbox">
+                <label class="center-block">
+                    <input type="checkbox" formControlName="Aktivan" [(ngModel)]="bankaN.Aktivan">Aktivan
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="center-block">Opis:
+                <textarea class="form-control" formControlName="Opis"  [(ngModel)]="bankaN.Opis">
+                </textarea>
+              </label>
+            </div>
+          
+            <div class="form-group">
+                    <div class="col-md-offset-5 col-md-12">
+                        <button type="submit" [disabled]="!frmBank.valid"
+                            class="btn btn-success">
+                        <span class="glyphicon glyphicon-saved"></span>
+                        Save
+                        </button>
+
+                      <button type="reset" class="btn btn-danger"  [disabled]="frmBank.pristine"  (click)="revert()">
+                          <i class="fa fa-undo" aria-hidden="true"></i>
+                          Clear data
+                      </button>
+                      
+                    </div>
+              
+                    
+          </div>
+              
+
+
+      </form>
+  </div>
+ 
+  <div class="panel-footer">
+    <button (click)="backClicked()"  class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+  </div>
+  
+</div>

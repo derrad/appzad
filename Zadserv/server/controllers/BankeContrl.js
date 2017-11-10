@@ -28,7 +28,7 @@ if (uid) {
         if(NameUser){banka.NameUser = NameUser;}
         
       }
-      drzava.save(function(err,results) {
+      banka.save(function(err,results) {
         if(err){ 
           return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
         }

@@ -57,7 +57,7 @@ getBanka(id) {
      .catch(this.handleError);
   }
 
-  updateKonstanta(tbanke) {
+  updateBanka(tbanke) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
