@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,8 @@ import {ValidateService} from './services/auth/validate.service';
 import { ServiceValidateShared } from './services/service.validate.shared';
 import {AuthGuard} from './guards/auth.guard';
 import {AuthGuardGlavni} from './guards/auth.guard.glavni';
+// import { DashboardService } from '. ./dashboard/dashboard.service';
+import { DashboardService } from './components/dashboard/dashboard.service';
 
 
 // Komponente
@@ -87,7 +90,7 @@ import { BankeModule } from './components/banke/banke.module';
     AppRoutingModule
 
   ],
-  providers: [ValidateService, AuthService, AuthGuard, AuthGuardGlavni, ServiceValidateShared],
+  providers: [ValidateService, AuthService, AuthGuard, AuthGuardGlavni, ServiceValidateShared, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

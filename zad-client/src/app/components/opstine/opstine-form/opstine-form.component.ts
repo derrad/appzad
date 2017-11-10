@@ -20,15 +20,15 @@ export class OpstineFormComponent implements OnInit {
 
   formOPST: FormGroup;
   title: string;
-  opstina : Opstine = new Opstine();
+  opstina: Opstine = new Opstine();
   drzave: Array<Drzave>;
-  titleAlertNaziv:string ="Naziv,This field is required !!!";
-  titleAlertRegOzn:string = "Regionalna oznaka, This field is required !!!";
+  titleAlertNaziv = 'Naziv,This field is required !!!';
+  titleAlertRegOzn = 'Regionalna oznaka, This field is required !!!';
 
 
-  constructor(private opstService:OpstineService,
-              private drzaveService:DrzaveService, private router:Router,private route: ActivatedRoute, 
-              formBuilder: FormBuilder ,private _location: Location) {
+  constructor(private opstService: OpstineService,
+              private drzaveService: DrzaveService, private router: Router, private route: ActivatedRoute,
+              formBuilder: FormBuilder, private _location: Location) {
 
                 this.formOPST = formBuilder.group({
                   _id:[],
@@ -50,19 +50,16 @@ export class OpstineFormComponent implements OnInit {
 
   ngOnInit() {
     this.drzaveService.getDrzave().subscribe(profile => {
-      if (profile.success === true) { 
+      if (profile.success === true) {
         // console.log(profile);
         // console.log(" data je " + profile.data);
         this.drzave = profile.data;
        }
-      
     },
     err => {
       console.log(err);
       return false;
-    }
-    
-  );
+    });
 
     var id = this.route.params.subscribe(params => {
       var id = params['id'];

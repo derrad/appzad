@@ -17,16 +17,16 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./opstine.component.css']
 })
 export class OpstineComponent implements OnInit {
-  Title:string;
-  selectedOpstina : Opstine;
-   opstineL:Array<Opstine>;
-  displayDetals: boolean = false;
+  Title: string;
+  selectedOpstina: Opstine;
+  opstineL: Array<Opstine>;
+  displayDetals = false;
   opstShow: Opstine = new Opstine();
 
 
-  constructor(private router:Router,private opstService:OpstineService,
-              private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService  ) { 
-    this.Title="PREGLED OPŠTINA";
+  constructor(private router: Router, private opstService: OpstineService,
+              private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
+    this.Title = '"PREGLED OPŠTINA';
 
   }
 

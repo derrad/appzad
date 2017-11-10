@@ -19,40 +19,35 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 })
 export class ZanimanjaComponent implements OnInit {
 
-  Title:string;
-  selectedZan : ZanimanjaModel;
-  zanimanja:Array<ZanimanjaModel>;
-  displayDetals: boolean = false;
+  Title: string;
+  selectedZan: ZanimanjaModel;
+  zanimanja: Array<ZanimanjaModel>;
+  displayDetals = false;
   zanShow: ZanimanjaModel = new ZanimanjaModel();
 
-  constructor(private router:Router,private zanService:ZanimanjaService,
-              private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService ) {
-    this.Title="PREGLED ZANIMANJA"; 
+  constructor(private router: Router, private zanService: ZanimanjaService,
+              private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    this.Title = 'PREGLED ZANIMANJA';
   }
 
   ngOnInit() {
 
     this.zanService.getZanimanja().subscribe(profile => {
-      if (profile.success === true) { 
+      if (profile.success === true) {
        //  console.log(profile);
       //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
         this.zanimanja = profile.data;
       }
-      
     },
     err => {
       console.log(err);
       return false;
-    }
-    
-  );
+    });
+    // this.flashMessage.grayOut(false);
 
   }
-
-
-  
  selectPosao( work:ZanimanjaModel) {
-  // this.selectedOpstina=opstina;  
+  // this.selectedOpstina=opstina;
    this.displayDetals = true;
    this.zanShow = this.cloneData(work);
   

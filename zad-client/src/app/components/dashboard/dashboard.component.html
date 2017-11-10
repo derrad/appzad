@@ -118,7 +118,7 @@
                                         <div>Unetih zadrugara</div>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">15</div>
+                                        <div class="badge">15</div>
                                         <div>Aktivnih zadrugara</div>
                                     </div>
                                 </div>
@@ -142,14 +142,19 @@
                                         <div class="col-xs-3">
                                             <i class="fa fa-address-card fa-5x"></i>
                                         </div>
-                                        <div class="col-xs-9 text-right">
-                                                <div class="huge">26</div>
-                                                <div>Kupaca ukupno</div>
+                                        
+                                        <div class="form-group col-xs-9 text-right">
+                                                <div>Kupaca ukupno
+                                                    <span class="badge">{{CkupacAll}}</span>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="form-group col-xs-9 text-right">
+                                            <div>Aktivnih kupaca
+                                                <span class="badge">15</span>
                                             </div>
-                                            <div class="col-xs-9 text-right">
-                                                <div class="huge">15</div>
-                                                <div>Aktivnih kupaca</div>
-                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <a [routerLink]="['/partner']">
@@ -168,13 +173,15 @@
                                         <div class="col-xs-3">
                                             <i class="fa fa-list-alt fa-5x"></i>
                                         </div>
-                                        <div class="col-xs-9 text-right">
-                                                <div class="huge">26</div>
-                                                <div>Poslova ukupno</div>
+                                        <div class="form-group col-xs-9 text-right">
+                                                <div>Poslova ukupno
+                                                    <span class="badge">{{CposaoAll}}</span>
+                                                </div>
                                             </div>
-                                            <div class="col-xs-9 text-right">
-                                                <div class="huge">15</div>
-                                                <div>Aktivnih poslova</div>
+                                            <div class="form-group col-xs-9 text-right">
+                                                 <div>Aktivnih poslova
+                                                    <span class="badge">15</span>
+                                                 </div>
                                             </div>
                                     </div>
                                 </div>

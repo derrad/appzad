@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../animation/router.animations' 
+import { routerTransition } from '../../animation/router.animations';
+import { DashboardService } from './dashboard.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +10,35 @@ import { routerTransition } from '../../animation/router.animations'
   animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
+  CposaoAll: number;
+  CkupacAll: number;
+  constructor(private dashService: DashboardService ) { }
 
-  constructor() { }
-
-  
   ngOnInit() {
+
+      this.dashService.getPosaoCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CposaoAll = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CposaoAll = 0;
+        return false;
+      });
+
+      this.dashService.getKupciCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CkupacAll = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CkupacAll = 0;
+        return false;
+      });
+
+
   }
 
 }

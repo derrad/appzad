@@ -88,13 +88,14 @@ const MestaRouter = require('./server/Route/MestaRouters');
 const VezbeRouter = require('./server/Route/VezbaRouters');
 const ActLogRouter = require('./server/Route/ActLogRouters');
 const BankeRouter = require('./server/Route/BankeRouters');
+const CountRotes = require('./server/Route/CountRouters');
 
 app.use('/users', users); 
 
 app.use('/', [index,DrzaveRoute,PosaoRoute,ParamRoute,VlasnikRoute,ZadrugarRouter,
               ZanimanjaRouter,RadnikRouter,PartneriRouter,OpstineRouter,MestaRouter,
               KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,VezbeRouter,
-              ActLogRouter,BankeRouter])
+              ActLogRouter,BankeRouter,CountRotes])
 
 
 //Route in app

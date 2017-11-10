@@ -3,34 +3,32 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators,FormArray,FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
+import {formsTransition} from '../../../animation/forms.animations';
 import { VlasnikService } from '../vlasnik.service';
-import { VlasnikModel,TelefVlasnikModel,ZiroVlasnikModel } from '../vlasnik-model';
-
+import { VlasnikModel, TelefVlasnikModel, ZiroVlasnikModel } from '../vlasnik-model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { ResponeCustom}  from './../../../shared/models/ErrorRes';
-//https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
-//https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
-//https://github.com/scotch-io/angular2-forms-course
-//https://evening-beyond-59286.herokuapp.com
+import { ResponeCustom} from './../../../shared/models/ErrorRes';
+// https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
+// https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
+// https://github.com/scotch-io/angular2-forms-course
+
 
 @Component({
   templateUrl: './vlasnik-form.component.html',
   selector: 'app-vlasnik-form',
   styleUrls: ['./vlasnik-form.component.css'],
   animations: [formsTransition()]
-  
 })
 export class VlasnikFormComponent implements OnInit {
   formVlasn: FormGroup;
   title: string;
-  vlasnN : VlasnikModel = new VlasnikModel();
+  vlasnN: VlasnikModel = new VlasnikModel();
 
 
-  constructor(private vlasnService:VlasnikService, private router:Router,private route: ActivatedRoute, 
-    private _fb: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
-    private serValidate:ServiceValidateShared) { 
+  constructor(private vlasnService: VlasnikService, private router: Router, private route: ActivatedRoute,
+    private _fb: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService,
+    private serValidate: ServiceValidateShared) {
 
       this.formVlasn = this._fb.group({
         _id:[],
@@ -38,24 +36,24 @@ export class VlasnikFormComponent implements OnInit {
           Validators.required,
           Validators.minLength(2)
         ]],
-        Adresa:['',[Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
-        Mesto: ['', [Validators.required,Validators.minLength(2)]],
-        PttReon:[''],
-        PttPak:[''],
-        Direktor:[''],
-        KomRukovac:[''],
-        Blagajnik:[''],
-        Pib:[''],
-        MatBroj:[''],
-        SifDelat:[''],
-        PdvBroj:[''],
-        Slika:[''],
-        Sud:[''],
-        UplRacPorJed:[''],
-        NazPorJed:[''],
-        ZiroVlasnik:this._fb.array([
+        Adresa: ['', [Validators.required, Validators.minLength(2),Validators.maxLength(100)]],
+        Mesto: ['', [Validators.required, Validators.minLength(2)]],
+        PttReon: [''],
+        PttPak: [''],
+        Direktor: [''],
+        KomRukovac: [''],
+        Blagajnik: [''],
+        Pib: [''],
+        MatBroj: [''],
+        SifDelat: [''],
+        PdvBroj: [''],
+        Slika: [''],
+        Sud: [''],
+        UplRacPorJed: [''],
+        NazPorJed: [''],
+        ZiroVlasnik: this._fb.array([
          ]),
-        TelefVlasnik:this._fb.array([
+        TelefVlasnik: this._fb.array([
           // this.initZiroVlas(),
         ]),
         Opis: ['']
@@ -65,46 +63,44 @@ export class VlasnikFormComponent implements OnInit {
   get Ime() { return this.formVlasn.get('Ime'); }
   get Adresa() { return this.formVlasn.get('Adresa'); }
   get Mesto() { return this.formVlasn.get('Mesto'); }
-  
- get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
- get ZiroVlasnik(): FormArray { return this.formVlasn.get('ZiroVlasnik') as FormArray; }
+  get TelefVlasnik(): FormArray { return this.formVlasn.get('TelefVlasnik') as FormArray; }
+  get ZiroVlasnik(): FormArray { return this.formVlasn.get('ZiroVlasnik') as FormArray; }
 
- initDataZiro(){
-  for ( let ziroitem of this.vlasnN.ZiroVlasnik) {
+ initDataZiro() {
+  for ( const ziroitem of this.vlasnN.ZiroVlasnik) {
         const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
-        control.push(this.initZiroVlas(ziroitem.Naziv,ziroitem.Racun,ziroitem.Glavni,ziroitem.Opis));
+        control.push(this.initZiroVlas(ziroitem.Naziv, ziroitem.Racun, ziroitem.Glavni, ziroitem.Opis));
   }
  }
 
-//Ziro racun vlasnika
-initZiroVlas(tNaziv:string,tRacun:string,tGlavni:boolean,tOpis:string) {
+// Ziro racun vlasnika
+initZiroVlas(tNaziv: string, tRacun: string, tGlavni: boolean, tOpis: string) {
     return this._fb.group({
         Naziv: [tNaziv, Validators.required],
         Racun: [tRacun, Validators.required],
-        Glavni:[tGlavni],
+        Glavni: [tGlavni],
         Opis: [tOpis]
    });
 }
 addZiroVlas() {
     const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
-    control.push(this.initZiroVlas("","",false,""));
+    control.push(this.initZiroVlas('', '', false, ''));
 }
 removeZiroVlas(i: number) {
     const control = <FormArray>this.formVlasn.controls['ZiroVlasnik'];
     control.removeAt(i);
 }
-//Kraj ziro racuna
-//Telefon
-
-initDataTelef(){
-  for ( let telitem of this.vlasnN.TelefVlasnik) {
+// Kraj ziro racuna
+// Telefon
+initDataTelef() {
+  for ( const telitem of this.vlasnN.TelefVlasnik) {
         const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
-        control.push(this.initTelVlas(telitem.Naziv,telitem.Telefon,telitem.Glavni,telitem.Opis));
+        control.push(this.initTelVlas(telitem.Naziv, telitem.Telefon, telitem.Glavni, telitem.Opis));
   }
  }
 
 
-initTelVlas(tNaziv:string,tTelefon:string,tGlavni:boolean,tOpis:string) {
+initTelVlas(tNaziv: string, tTelefon: string, tGlavni: boolean, tOpis: string) {
   return this._fb.group({
       Naziv: [tNaziv, Validators.required],
       Telefon: [tTelefon, Validators.required],
@@ -114,17 +110,17 @@ initTelVlas(tNaziv:string,tTelefon:string,tGlavni:boolean,tOpis:string) {
 }
 addATelVlas() {
   const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
-  control.push(this.initTelVlas("","",false,""));
+  control.push(this.initTelVlas('', '', false, ''));
 }
 removeTelVlas(i: number) {
   const control = <FormArray>this.formVlasn.controls['TelefVlasnik'];
   control.removeAt(i);
 }
-//Kraj telefona
+// Kraj telefona
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      var id = params['id'];
+      const id = params['id'];
 
       this.title = id ? 'Ažuriranje vlasnika' : 'Novi vlasnik';
 
@@ -134,10 +130,10 @@ removeTelVlas(i: number) {
 
       this.vlasnService.getVlasnik(id)
         .subscribe(
-          (pos) =>{
-            if(pos.success){
+          (pos) => {
+            if (pos.success){
                this.vlasnN = pos.data[0];
-               //console.log(JSON.stringify(this.vlasnN ));
+               // console.log(JSON.stringify(this.vlasnN ));
                this.initDataZiro();
                this.initDataTelef();
 
@@ -148,7 +144,7 @@ removeTelVlas(i: number) {
               this.router.navigate(['NotFound']);
             }
           } ,
-          (error:ResponeCustom) => {
+          (error: ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
@@ -162,85 +158,74 @@ removeTelVlas(i: number) {
 
 
   save() {
-    var FormValue = this.formVlasn.value;
-      
-    if (FormValue._id){
+    const FormValue = this.formVlasn.value;
+    if (FormValue._id) {
        this.vlasnService.updateVlasnik(FormValue).subscribe(
-        (pos) =>{
-          if(pos.success){
-           
-            this.flashMessage.show(pos.message, {
+        (pos) => {
+          if (pos.success) {
+              this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
               this.router.navigate(['vlasnik'])
-          }else{
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-         
         },
-        
       );
-
     } else {
-
       this.vlasnService.addVlasnik(FormValue)
       .subscribe(
-        (pos) =>{
-          if(pos.success){
-           
+        (pos) => {
+          if (pos.success) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
               this.router.navigate(['vlasnik'])
-          }else{
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-                 
         },
-        
       );
     }
   }
 
- 
   backClicked(event: any) {
      this._location.back();
-     
   }
 
-  revert() { this.ngOnChanges(); }
-  
-  ngOnChanges() {
+  revert() { this.clearData(); }
+
+  clearData() {
     this.formVlasn.reset({
-      Ime: "",
-      Adresa:"",
-      Mesto: "",
-      PttReon:'',
-      PttPak:'',
-      Direktor:'',
-      KomRukovac:'',
-      Blagajnik:'',
-      Pib:'',
-      MatBroj:'',
-      SifDelat:'',
-      PdvBroj:'',
-      Slika:'',
-      Sud:'',
-      UplRacPorJed:'',
-      NazPorJed:'',
-      ZiroVlasnik:null,
-      TelefVlasnik:null,
-      Opis:""
+      Ime:  '',
+      Adresa: '',
+      Mesto:  '',
+      PttReon: '',
+      PttPak: '',
+      Direktor: '',
+      KomRukovac: '',
+      Blagajnik: '',
+      Pib: '',
+      MatBroj: '',
+      SifDelat: '',
+      PdvBroj: '',
+      Slika: '',
+      Sud: '',
+      UplRacPorJed: '',
+      NazPorJed: '',
+      ZiroVlasnik: null,
+      TelefVlasnik: null,
+      Opis: ''
     });
 }
 

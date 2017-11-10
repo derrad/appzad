@@ -9,4 +9,4 @@ router.post('/api/posao',passport.authenticate('jwt', {session:false}),  PosaoCo
 router.put('/api/posao/:id',passport.authenticate('jwt', {session:false}),  PosaoController.create);
 router.delete('/api/posao/:id',passport.authenticate('jwt', {session:false}),  PosaoController.deleposao);
 
-module.exports = router
+module.exports = router;

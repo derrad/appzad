@@ -144,6 +144,20 @@ module.exports.deleposao = function(req, res, next) {
 }
 
 
+module.exports.countposao = function(req, res, next) {
+  //console.log("parametar je : " + req.params.id);
+	Posao.count({}, function(err,count){
+        //console.log("DA VIDIM COUNT" +  count);
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+       // console.log("VRACAM BROJ KOJI JE  : " + count);
+         return res.status(200).json({
+            success: true,
+            message: 'Successfully',
+            number:count
+          });
+  });
+}
+
 // function AddActivity(tActivnost,tTrans,tNumber,topis, tuser){
 //   let oLogNew = new LogAct({
 //     TypeAct:tActivnost || TypeA.Activities[0], // ; Start,
