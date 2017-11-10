@@ -9,8 +9,11 @@ module.exports.create = function (req, res,next) {
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
   
+  console.log('Naziv je  >'+  Naziv);
+
 if (!Racun || !Naziv ) {
-     return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+    return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+
 } 
 else {
 if (uid) {

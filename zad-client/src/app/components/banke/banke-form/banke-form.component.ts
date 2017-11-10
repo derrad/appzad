@@ -8,6 +8,8 @@ import { formsTransition } from '../../../animation/forms.animations';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
 import { FlashMessagesService} from 'angular2-flash-messages';
+// import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-banke-form',
@@ -76,7 +78,15 @@ export class BankeFormComponent implements OnInit, OnDestroy {
   }
 
   save() {
+  //  this.sizeTheOverlays();
+  // $('#mainpanel').addClass('overlay');
+  // $('.panel').addClass('overlay');
+  //  let i: number;
+  //  for (i = 0; i < 10000 ; i++) {
+  //    console.log(i);
+  //  }
    const  frmValue = this.frmBank.value;
+   // frmValue.Naziv = null;
    if (frmValue._id) {
        this.bankeService.updateBanka(frmValue).subscribe(
         (pos) => {
@@ -92,9 +102,10 @@ export class BankeFormComponent implements OnInit, OnDestroy {
           }
         } ,
         (error: ResponeCustom) => {
+          console.log('greska je');
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
+           timeout: 9000});
         },
       );
 
@@ -121,7 +132,19 @@ export class BankeFormComponent implements OnInit, OnDestroy {
         }
       );
     }
+    // $('#mainpanel').removeClass('overlay');
+    // $('.panel').removeClass('overlay');
   }
+
+ // sizeTheOverlays() {
+   // $('#mainpanel').addClass('overlay');
+    // $('.overlay').resize().each(function() {
+    //   const h: any = $(this).parent().outerHeight();
+    //   const w: any = $(this).parent().outerWidth();
+    //   $(this).css('height', h);
+    //   $(this).css('width', w);
+    // });
+// }
 
 
  loadTempData() {

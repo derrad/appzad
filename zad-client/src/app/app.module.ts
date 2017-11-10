@@ -17,7 +17,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-// import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
+import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
 
 // Service
 import {AuthService} from './services/auth/auth.service';
@@ -58,7 +58,7 @@ import { BankeModule } from './components/banke/banke.module';
       ProfileComponent,
       RegisterComponent,
       NavbarComponent,
-     // NavbarLeftComponent,
+      NavbarLeftComponent,
       ModalComponent,
       NotFoundComponent,
       KeysPipe

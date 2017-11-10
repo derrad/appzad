@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class TelefonVlasnikComponent {
     // we will pass in telefon from App component
+    // tslint:disable-next-line:no-input-rename
     @Input('group')
     public telefForm: FormGroup;
-   
 }

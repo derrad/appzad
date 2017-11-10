@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
-//import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import {SidebarModule} from 'primeng/primeng';
 
 @Component({
@@ -11,16 +11,17 @@ import {SidebarModule} from 'primeng/primeng';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  visibleSidebar1;
-  constructor( private authService:AuthService,
-    private router:Router ,private flashMessage:FlashMessagesService) { }
+  @Input()
+  public visibleSidebar1;
+  constructor( private authService: AuthService,
+    private router: Router, private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
-  
-   // console.log("pozvao sam fukciju za meni");
+    // console.log("pozvao sam fukciju za meni");
     // Configure tooltips for collapsed side navigation
     //  $('.navbar-sidenav [data-toggle="tooltip"]').tooltip({
-    //    template: '<div class="tooltip navbar-sidenav-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+    // tslint:disable-next-line:max-line-length
+    // template: '<div class="tooltip navbar-sidenav-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
     //  })
     // Toggle the side navigation
     // $("#sidenavToggler").click(function(e) {
@@ -35,6 +36,7 @@ export class NavbarComponent implements OnInit {
     //   $("body").removeClass("sidenav-toggled");
     // });
     // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+    // tslint:disable-next-line:max-line-length
     // $('body.fixed-nav .navbar-sidenav, body.fixed-nav .sidenav-toggler, body.fixed-nav .navbar-collapse').on('mousewheel DOMMouseScroll', function(e) {
     //   var e0 = e.originalEvent,
     //     delta = e0.wheelDelta || -e0.detail;
@@ -61,37 +63,40 @@ export class NavbarComponent implements OnInit {
     //   event.preventDefault();
     // });
 
-  
   }
 
 
+  getNotification(evt) {
+    // Do something with the notification (evt) sent by the child!
+    console.log('"getNotification u  navbaru');
+    this.visibleSidebar1 = false;
+  }
 
-
-  onLogoutClick(){
+  onLogoutClick() {
     this.authService.logout();
     this.flashMessage.show('You are logged out', {
-       cssClass:'alert-success',
+       cssClass: 'alert-success',
        timeout: 3000
      });
 
     this.router.navigate(['/login']);
     return false;
-  } 
+  }
 
-  onClickHelp(){
+  onClickHelp() {
   // alert("Provera help-a");
     this.flashMessage.show('Trebalo bi help da prikazemo', {
-      cssClass:'alert-success',
+      cssClass: 'alert-success',
       timeout: 3000
     });
     // this.messageService.add({severity:'info', summary:'Help info', detail:'Trebalo bi help da prikazemo'});
     return false;
   }
 
-  onClickQuickMenu(){
+  onClickQuickMenu() {
     // alert("Provera help-a");
       this.flashMessage.show('Trebalo quick menu da prikazemo', {
-        cssClass:'alert-success',
+        cssClass: 'alert-success',
         timeout: 3000
       });
       // this.messageService.add({severity:'info', summary:'Help info', detail:'Trebalo bi help da prikazemo'});

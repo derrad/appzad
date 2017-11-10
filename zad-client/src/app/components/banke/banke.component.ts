@@ -12,6 +12,7 @@ import { BankeService } from './banke.service';
 import { BankeModel } from './banke-model';
 import { ResponeCustom} from './../../shared/models/ErrorRes';
 
+
 @Component({
   selector: 'app-banke',
   templateUrl: './banke.component.html',

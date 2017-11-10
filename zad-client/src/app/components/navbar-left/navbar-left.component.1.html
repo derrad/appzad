@@ -1,0 +1,199 @@
+
+<nav class="navbar navbar-m2p sidebar" role="navigation">
+  <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+              OMLADINSKA ZADRUGA
+          </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+              <!-- Dashboard -->
+              <!-- <li class="active open"> -->
+               <li  *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" 
+                  [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">
+                    Dashboard <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer" aria-hidden="true"></i></a>
+                </li>
+            
+              <li class="separator">Content</li>
+              <!-- Sifarnik -->
+              <li class="">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
+                      Šifarnik <span class="caret"></span> -->
+                    <span>
+                      <i class="fa fa-file-o menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                      Šifarnik<span class="caret"></span> 
+                    </span>
+
+                  </a>
+                  <ul class="dropdown-menu forAnimate" role="menu">
+                        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-neuter" aria-hidden="true"></i> Zadrugari</a></li>
+                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-address-card" aria-hidden="true"></i> Kupci</a></li> 
+                        <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Zanimanja</a></li>
+                        <li *ngIf="authService.loggedIn()">
+                            <a  [routerLink]="['/posao']" ><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> 
+                                Poslovi
+                            </a>
+                        </li>
+                        <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Mesta</a></li> -->
+                        <!-- <li *ngIf="authService.loggedIn()"><a href="#"><i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i> Opštine</a></li>
+                         -->
+                         <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/mesta']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Mesta
+                                </a>
+                        </li>
+                        <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/opstine']" >
+                                    <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Opštine
+                                </a>
+                        </li>
+                        <li *ngIf="authService.loggedIn()">
+                            <a [routerLink]="['/drzave']" >
+                                <i class="menu-icon hidden-xs fa fa-list-alt" aria-hidden="true"></i>Države
+                            </a>
+                        </li>
+                    
+                  </ul>
+              </li>
+              <!-- Obrade -->
+              <li class="">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     <span><i class="fa fa-book menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                       Obrade <span class="caret"></span>
+                      </span>
+                  </a>
+                  <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uputi</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Fakture</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Uplate</a></li>
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-money" aria-hidden="true"></i> Isplate</a></li>
+                  </ul>
+              </li>
+              <!-- Pregledi -->
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <!-- <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon material-icons">label</span>
+                      Pregledi <span class="caret"></span> -->
+
+                      <span><i class="fa fa-eye menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Pregledi <span class="caret"></span>
+                        </span>
+
+                  </a>
+                  <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="#"><i class="menu-icon hidden-xs fa fa-plus" aria-hidden="true"></i> Add</a></li>
+                      <!-- <li><a href="#"> <i class="material-icons">add</i> Add</a></li>
+                      <li><a href="#"> <i class="material-icons">sort</i> List</a></li> -->
+                  </ul>
+              </li>
+              <li class="separator">System</li>
+
+              <li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
+                        Šifarnik <span class="caret"></span> -->
+                      <span>
+                        <i class="fa fa-cog menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Opcije<span class="caret"></span> 
+                      </span>
+  
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                          <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Vlasnik</a></li> -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-ticket" aria-hidden="true"></i> Konstante</a></li>  -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Fond sati</a></li> -->
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Radnik </a></li> -->
+                         
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/vlasnik']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Vlasnik
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/konstanta']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Konstante
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/fondsati']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Fond sati
+                                </a>
+                          </li>
+                          <li *ngIf="authService.loggedIn()">
+                                <a [routerLink]="['/radnik']" >
+                                    <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Radnik
+                                </a>
+                          </li>
+                          
+                          <li *ngIf="authService.loggedIn()">
+                            <a [routerLink]="['/parametar']" >
+                                <i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i>Parametri
+                            </a>
+                         </li>
+
+                          <!-- <li><a href="#"><i class="menu-icon hidden-xs fa fa-object-group" aria-hidden="true"></i> Parametri</a></li> -->
+                          
+                    </ul>
+                </li>
+              
+
+              <!-- Users -->
+              <li class="#">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">group</span>
+                      Users <span class="caret"></span> -->
+                      <span>Users
+                          <i class=" menu-icon pull-right hidden-xs showopacity fa fa-users" aria-hidden="true"></i>
+                      </span>
+                     
+                  </a>
+                  <!-- [routerLinkActiveOptions] = "{exact:true}"   [routerLinkActive]="['active']"-->
+                  <ul class="dropdown-menu forAnimate" role="menu">
+                      <!-- <li><a href="#"><i class="material-icons">add</i> Add</a></li>
+                       <li><a href="#"><i class="material-icons">sort</i> List</a></li> -->
+                      <li *ngIf="authService.loggedIn()"   >
+                        <a [routerLink]="['/profile']">Profile
+                          <i class=" menu-icon pull-left hidden-xs showopacity fa fa-user-md" aria-hidden="true"></i>
+                        </a>
+                      </li>
+
+                      <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+                        <a [routerLink]="['/register']">Register</a>
+                      </li>
+                      
+
+                  </ul>
+              </li
+              
+              >
+              <!-- Exit -->
+              <li>
+                  <a href="#">
+                      <!-- <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">exit_to_app</span> Exit -->
+
+                      <span><i class="fa fa-sign-out menu-icon pull-right hidden-xs showopacity" aria-hidden="true"></i>
+                        Exit
+                      </span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+    
+    
+      
+    
+    

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default  fixed-top">
-  <!-- <div class="container"> -->
+<nav class="navbar navbar-inverse  fixed-top">
+  <!-- <div class="container"> navbar-default -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -27,9 +27,9 @@
       <ul class="nav navbar-nav navbar-right">
         
         <!-- (click)="onClickQuickMenu()" -->
-        <li *ngIf="authService.loggedIn()" ><a (click)="modal1.show()">
-          <span class="glyphicon glyphicon-plus-sign fa-2x" aria-hidden="true" title="Quick add"></span>
-        <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
+        <li *ngIf="authService.loggedIn()" >
+          <a (click)="modal1.show()">
+            <span class="glyphicon glyphicon-plus-sign fa-2x" aria-hidden="true" title="Quick add"></span>
           </a>
         </li>
               
@@ -39,13 +39,12 @@
         <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/login']">Login</a></li>
         <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/register']">Register</a></li>
         <li *ngIf="authService.loggedIn()"><a (click)="onLogoutClick()" href="#">Logout</a></li>
-        <li>|</li>
-        
+                
         <li><a (click)="onClickHelp()" href="#">
             <span class="glyphicon glyphicon-question-sign fa-2x" aria-hidden="true" title="Help"></span>
-          <!-- <i class="menu-icon pull-right hidden-xs showopacity fa fa-tachometer fa-2x" aria-hidden="true"></i> -->
+          
         </a></li>
-        <li>eee</li>
+        
 
       </ul>
     </div>
@@ -117,8 +116,11 @@
   </div> -->
 </app-modal>
 
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  styleClass="ui-sidebar-sm" >
+    <app-navbar-left (closeSB)="getNotification($event)"></app-navbar-left>
+</p-sidebar> 
 
-<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  styleClass="ui-sidebar-sm"  >
+<!-- <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"  styleClass="ui-sidebar-sm"  >
         <h1></h1>
         <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="visibleSidebar1 = false" 
@@ -214,12 +216,5 @@
                     <a [routerLink]="['/register']">Register</a>
                   </li>
         </ul>
- 
-     
-  <!-- <h1 style="font-weight:normal">Left Sidebar</h1>
-  <button pButton type="button" (click)="visibleSidebar1 = false" label="Save" class="ui-button-success"></button>
-  <button pButton type="button" (click)="visibleSidebar1 = false" label="Cancel" class="ui-button-secondary"></button> -->
+</p-sidebar> -->
 
-
-
-</p-sidebar>
