@@ -1,23 +1,31 @@
-var express = require('express')
-var router = express.Router()
-//var ZadrugarController = require('../controllers/ZadrugarContrl');
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const ZadrugarController = require('../controllers/ZadrugarContr');
 
 
-router.get('/api/zadrugar',(req,res)=>{
-    res.send("GET zadrugar");
-});
-
-router.post('/api/zadrugar', (req,res)=>{
-    res.send("POST zadrugar");
-});
-
-router.put('/api/zadrugar', (req,res)=>{
-    res.send("PUT zadrugar");
-});
-
-router.delete('/api/zadrugar', (req,res)=>{
-    res.send("DELETE zadrugar");
-});
+router.get('/api/zadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.listzadrugar);
+router.get('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), ZadrugarController.getzadrugar); 
+router.post('/api/zadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.create);
+router.put('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), ZadrugarController.create);
+router.delete('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), ZadrugarController.delezadrugar);
 
 
-module.exports = router
+// router.get('/api/zadrugar',(req,res)=>{
+//     res.send("GET zadrugar");
+// });
+
+// router.post('/api/zadrugar', (req,res)=>{
+//     res.send("POST zadrugar");
+// });
+
+// router.put('/api/zadrugar', (req,res)=>{
+//     res.send("PUT zadrugar");
+// });
+
+// router.delete('/api/zadrugar', (req,res)=>{
+//     res.send("DELETE zadrugar");
+// });
+
+
+module.exports = router;

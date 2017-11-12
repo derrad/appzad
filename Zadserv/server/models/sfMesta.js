@@ -1,14 +1,10 @@
-var mongoose = require('mongoose');
-//var relationship = require("mongoose-relationship");
-var mongoosePaginate = require('mongoose-paginate');
-var sfOpstine = require('../models/sfOpstine');
-//var sfDrzave = require('../models/sfDrzave');
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
+const sfOpstine = require('../models/sfOpstine');
 
+const Schema = mongoose.Schema;
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
-
-var sfMesta = new Schema({
+const sfMesta = new Schema({
    //Opstina: { type:Schema.ObjectId, ref:"Opstina", childPath:"child" },
    Opstina: { type:Schema.ObjectId, ref:"sfOpstine",required:true },
    Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] ,unique: true},
@@ -34,9 +30,8 @@ var sfMesta = new Schema({
 //      justOne: true
 //    });
 
-sfMesta.plugin(mongoosePaginate);
 //sfMesta.plugin(relationship, { relationshipPathName:'Opstina' });
 //var child = new sfMesta({Opstina:Opstina._id});
-var collectionName = 'sfMesta';
 
-module.exports = mongoose.model('sfMesta', sfMesta, collectionName);
+
+module.exports = mongoose.model('sfMesta', sfMesta, 'sfMesta');
