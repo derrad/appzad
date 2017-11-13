@@ -31,26 +31,26 @@ export class PAKontaktModel {
 }
 
 
-export class ParnerModel {
-    _id:string;
-    KyeSearch : string;
-    Naziv     : string;
-    UgovProc:Number;
-    Drzava: Object;      
-    Aktivan:boolean;
-    Adresa:PAdresaModel;  
-    Email:string
-    Pib:string
-    MatBroj:string
-    SifDelat:string
-    PdvBroj:string
+export class PartnerModel {
+    _id: string;
+    KyeSearch: string;
+    Naziv: string;
+    UgovProc: Number;
+    Drzava: Object;
+    Aktivan: boolean;
+    Adresa: PAdresaModel;
+    Email: string;
+    Pib: string;
+    MatBroj: string;
+    SifDelat: string;
+    PdvBroj: string;
     Ziro:  PAZiroModel[];
     Telefon:  PATelefonModel[];
     Kontakt:  PAKontaktModel[];
     Opis?: string;
     NameUser?: string;
-    created_at?:Date;
-    updatedAt?:Date;
+    created_at?: Date;
+    updatedAt?: Date;
 
 }
 

@@ -8,9 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
 import { ResponeCustom} from './../../shared/models/ErrorRes';
 
-
 @Injectable()
-export class PartnerService {
+export class ZadrugarService {
 
   authToken: any;
   isDev: boolean;
@@ -24,56 +23,56 @@ export class PartnerService {
     this.authToken = token;
   }
 
-  getPartneri() {
+  getZadrugari() {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/partner');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/zadrugar');
     return this.http.get(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
   }
 
-  getPartner(id) {
+  getZadrugar(id) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/partner/' + id) ;
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/zadrugar/' + id) ;
     return this.http.get(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
 
   }
 
-  addPartner(tpartner) {
+  addZadrugar(tzadrugar) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/partner/') ;
-    return this.http.post(ep, JSON.stringify(tpartner), {headers: headers})
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/zadrugar/') ;
+    return this.http.post(ep, JSON.stringify(tzadrugar), {headers: headers})
      .map(res => res.json())
      .catch(this.handleError);
   }
 
-  updatePartner(tpartner) {
+  updateZadrugar(tzadrugar) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/partner/' + tpartner._id) ;
+    const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/zadrugar/' + tzadrugar._id) ;
 
-    return this.http.put(ep, JSON.stringify(tpartner), {headers: headers})
+    return this.http.put(ep, JSON.stringify(tzadrugar), {headers: headers})
     .map(res => res.json()).catch(this.handleError);
 
   }
 
-  delPartner(id) {
+  delZadrugar(id) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/partner/' + id) ;
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/zadrugar/' + id) ;
     return this.http.delete(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
   }
@@ -87,6 +86,5 @@ export class PartnerService {
     servererr.data = [];
     return Observable.throw(myerror || servererr);
 }
-
 
 }

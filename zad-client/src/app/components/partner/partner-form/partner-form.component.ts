@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations';
 import { PartnerService } from '../partner.service';
-import { PAdresaModel, PAZiroModel, PATelefonModel, PAKontaktModel, ParnerModel } from '../partner-model';
+import { PAdresaModel, PAZiroModel, PATelefonModel, PAKontaktModel, PartnerModel } from '../partner-model';
 import {DrzaveService} from '../../drzave/drzave.service';
 import {Drzave} from '../../drzave/drzave.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -21,7 +21,7 @@ import { ResponeCustom} from './../../../shared/models/ErrorRes';
 export class PartnerFormComponent implements OnInit, OnDestroy {
   formPartn: FormGroup;
   title: string;
-  partnN: ParnerModel = new ParnerModel();
+  partnN: PartnerModel = new PartnerModel();
   partAdresa: PAdresaModel;
   saveTemp = true;
   drzave: Array<Drzave>;
@@ -33,15 +33,15 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
       this.formPartn = this._fb.group({
         _id: [],
         KyeSearch: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(12)]],
-        Naziv: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-        UgovProc: [0,[Validators.required, serValidate.minValue(0), serValidate.maxValue(100)]],
-        Drzava: ['',[Validators.required]],
+        Naziv: ['', [ Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
+        UgovProc: [0, [ Validators.required, serValidate.minValue(0), serValidate.maxValue(100)]],
+        Drzava: ['', [ Validators.required]],
         Aktivan: [''],
         Adresa : this._fb.group({
-          AdUlica:['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+          AdUlica: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
           AdBroj: [''],
-          AdMesto:[''],
-          AdPttReon:[''],
+          AdMesto: [''],
+          AdPttReon: [''],
           AdPttPak: [''],
           AdDrzava: ['']
         }),
@@ -68,7 +68,7 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
     this.drzaveService.getDrzave().subscribe(profile => {
         if (profile.success === true) {
             this.drzave = profile.data;
-          }else{
+          }else {
           this.flashMessage.show(profile.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000});
@@ -88,7 +88,7 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
   this.route.params.subscribe(params => {
       const id = params['id'];
       this.title = id ? 'Ažuriranje kupca' : 'Novi kupac';
-      if (!id){
+      if (!id) {
          // this.initAdresa("","","","","","");
          this.loadTempData();
          return;
@@ -96,7 +96,7 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
 
       this.partnService.getPartner(id)
         .subscribe(
-          (pos) =>{
+          (pos) => {
             if (pos.success) {
               this.saveTemp = false;
                this.partnN = pos.data[0];
@@ -307,9 +307,9 @@ backClicked(event: any) {
     this._location.back();
 }
 
-revert() { this.ngOnChanges(); }
+revert() { this.ClearData(); }
 
-ngOnChanges() {
+ClearData() {
     this.formPartn.reset({
       KyeSearch: '',
       Naziv: '',

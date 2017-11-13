@@ -7,35 +7,37 @@ import { Footer } from 'primeng/primeng';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { PartnerService } from './partner.service';
-import { PartnerModel } from './partner-model';
+import { ZadrugarService } from './zadrugar.service';
+import { ZadrugarModel } from './zadrugar-model';
 import { routerTransition } from '../../animation/router.animations';
 import { ResponeCustom } from './../../shared/models/ErrorRes';
 
+
 @Component({
-  selector: 'app-partner',
-  templateUrl: './partner.component.html',
-  styleUrls: ['./partner.component.css'],
+  selector: 'app-zadrugar',
+  templateUrl: './zadrugar.component.html',
+  styleUrls: ['./zadrugar.component.css'],
   animations: [routerTransition()]
 })
-export class PartnerComponent implements OnInit {
-  Title: string;
-  selectedPartner: PartnerModel;
-  partnerL: Array<PartnerModel>;
-  displayDetals = false;
-  partnerShow: PartnerModel = new PartnerModel();
+export class ZadrugarComponent implements OnInit {
 
-  constructor(private router: Router, private partService: PartnerService,
+  Title: string;
+  selectedZadrugar: ZadrugarModel;
+  zadrL: Array<ZadrugarModel>;
+  displayDetals = false;
+  zadrShow: ZadrugarModel = new ZadrugarModel();
+
+  constructor(private router: Router, private zadrService: ZadrugarService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
-    this.Title = 'PREGLED KUPACA';
+    this.Title = 'PREGLED ZADRUGARA';
   }
 
   ngOnInit() {
 
-      this.partService.getPartneri()
+      this.zadrService.getZadrugari()
       .subscribe((profile) => {
       if (profile.success === true) {
-        this.partnerL = profile.data;
+        this.zadrL = profile.data;
       }
       // }
       },
@@ -44,19 +46,19 @@ export class PartnerComponent implements OnInit {
           cssClass: 'alert-danger',
           timeout: 9000});
       //  console.log(error.message);
-        this.partnerL = [];
+        this.zadrL = [];
         return false;
       }
       );
 
   }
 
-  selectItem( work: PartnerModel) {
+  selectItem( work: ZadrugarModel) {
      this.displayDetals = true;
-     this.partnerShow = this.cloneData(work);
+     this.zadrShow = this.cloneData(work);
   }
-  cloneData(c: PartnerModel): PartnerModel {
-    const work = new PartnerModel();
+  cloneData(c: ZadrugarModel): ZadrugarModel {
+    const work = new ZadrugarModel();
     // tslint:disable-next-line:forin
     for (const prop in c) {
       work[prop] = c[prop];
@@ -64,24 +66,24 @@ export class PartnerComponent implements OnInit {
     return work;
    }
 
-  addPartner() {
-    this.router.navigate(['/partner/new']);
+  addZadrugar() {
+    this.router.navigate(['/zadrugar/new']);
   }
-  updatePartner(id) {
-    this.router.navigate(['/partner/', id]);
+  updateZadrugar(id) {
+    this.router.navigate(['/zadrugar/', id]);
   }
 
 
-  deletePartner(tpartner) {
+  deleteZadrugar(tzadrugar) {
     this.confirmationService.confirm({
         message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
-        header: `${tpartner.Naziv}`,
+        header: `${tzadrugar.Ime}  ${tzadrugar.Prezime}`,
           accept: () => {
-            const index = this.partnerL.indexOf(tpartner);
+            const index = this.zadrL.indexOf(tzadrugar);
            // console.log("index je " + index);
-            this.partnerL.splice(index, 1);
+            this.zadrL.splice(index, 1);
 
-            this.partService.delPartner(tpartner._id)
+            this.zadrService.delZadrugar(tzadrugar._id)
               .subscribe((pos) => {
                 if (pos.success) {
                    this.flashMessage.show(pos.message , {
@@ -96,11 +98,10 @@ export class PartnerComponent implements OnInit {
                     cssClass: 'alert-danger',
                     timeout: 5000});
                   // Revert the view back to its original state
-                  this.partnerL.splice(index, 0, tpartner);
+                  this.zadrL.splice(index, 0, tzadrugar);
                 });
           }
         });
     }
-
 
 }

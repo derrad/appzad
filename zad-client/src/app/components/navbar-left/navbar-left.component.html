@@ -4,7 +4,7 @@
         <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
                         [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
-                <a href="#">
+                <a [routerLink]="['/zadrugar']">
                     <i class="menu-icon hidden-xs fa fa-users" aria-hidden="true" ></i>&nbsp;Zadrugari</a>
                 </li>
                 

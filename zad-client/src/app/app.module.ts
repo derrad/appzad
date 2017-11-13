@@ -10,7 +10,6 @@ import {AppComponent } from './app.component';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {DateValueAccessorModule} from './shared/frmDatum/DateValueAccessorModule ';
 
-
 // Meni and app komponente
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -50,6 +49,8 @@ import { VlasnikModule } from './components/vlasnik/vlasnik.module';
 import { KonstantaModule } from './components/konstanta/konstanta.module';
 import { PartnerModule } from './components/partner/partner.module';
 import { BankeModule } from './components/banke/banke.module';
+import { ZadrugarModule } from './components/zadrugar/zadrugar.module';
+
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { BankeModule } from './components/banke/banke.module';
     KonstantaModule,
     PartnerModule,
     BankeModule,
+    ZadrugarModule,
     AppRoutingModule
 
   ],
