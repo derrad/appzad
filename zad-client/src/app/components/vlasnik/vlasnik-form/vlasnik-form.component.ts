@@ -1,6 +1,6 @@
 import { Component, OnInit, Directive } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators,FormArray,FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations';
@@ -12,7 +12,6 @@ import { ResponeCustom} from './../../../shared/models/ErrorRes';
 // https://scotch.io/tutorials/how-to-build-nested-model-driven-forms-in-angular-2
 // https://stackoverflow.com/questions/42968619/angular-2-how-to-use-array-of-objects-for-controls-in-reactive-forms
 // https://github.com/scotch-io/angular2-forms-course
-
 
 @Component({
   templateUrl: './vlasnik-form.component.html',
@@ -31,12 +30,12 @@ export class VlasnikFormComponent implements OnInit {
     private serValidate: ServiceValidateShared) {
 
       this.formVlasn = this._fb.group({
-        _id:[],
+        _id: [],
         Ime: ['', [
           Validators.required,
           Validators.minLength(2)
         ]],
-        Adresa: ['', [Validators.required, Validators.minLength(2),Validators.maxLength(100)]],
+        Adresa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
         Mesto: ['', [Validators.required, Validators.minLength(2)]],
         PttReon: [''],
         PttPak: [''],
@@ -76,9 +75,9 @@ export class VlasnikFormComponent implements OnInit {
 // Ziro racun vlasnika
 initZiroVlas(tNaziv: string, tRacun: string, tGlavni: boolean, tOpis: string) {
     return this._fb.group({
-        Naziv: [tNaziv, Validators.required],
-        Racun: [tRacun, Validators.required],
-        Glavni: [tGlavni],
+        Naziv: [ tNaziv, [Validators.required,  Validators.minLength(2), Validators.maxLength(25)]],
+        Racun: [ tRacun, Validators.required],
+        Glavni: [ tGlavni],
         Opis: [tOpis]
    });
 }
@@ -102,9 +101,9 @@ initDataTelef() {
 
 initTelVlas(tNaziv: string, tTelefon: string, tGlavni: boolean, tOpis: string) {
   return this._fb.group({
-      Naziv: [tNaziv, Validators.required],
+      Naziv: [tNaziv, [Validators.required,  Validators.minLength(2), Validators.maxLength(25)]],
       Telefon: [tTelefon, Validators.required],
-      Glavni:[tGlavni],
+      Glavni: [tGlavni],
       Opis: [tOpis]
  });
 }
@@ -124,20 +123,20 @@ removeTelVlas(i: number) {
 
       this.title = id ? 'Ažuriranje vlasnika' : 'Novi vlasnik';
 
-      if (!id){
+      if (!id) {
          return;
       }
 
       this.vlasnService.getVlasnik(id)
         .subscribe(
           (pos) => {
-            if (pos.success){
+            if (pos.success) {
                this.vlasnN = pos.data[0];
                // console.log(JSON.stringify(this.vlasnN ));
                this.initDataZiro();
                this.initDataTelef();
 
-            }else{
+            }else {
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000});
@@ -166,7 +165,7 @@ removeTelVlas(i: number) {
               this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['vlasnik'])
+              this.router.navigate(['vlasnik']);
           }else {
             this.router.navigate(['NotFound']);
           }
@@ -185,7 +184,7 @@ removeTelVlas(i: number) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['vlasnik'])
+              this.router.navigate(['vlasnik']);
           }else {
             this.router.navigate(['NotFound']);
           }

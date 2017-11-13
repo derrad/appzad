@@ -8,8 +8,6 @@ import { formsTransition } from '../../../animation/forms.animations';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
 import { FlashMessagesService} from 'angular2-flash-messages';
-// import * as $ from 'jquery';
-
 
 @Component({
   selector: 'app-banke-form',
@@ -18,14 +16,12 @@ import { FlashMessagesService} from 'angular2-flash-messages';
   animations: [ formsTransition()]
 })
 export class BankeFormComponent implements OnInit, OnDestroy {
-
   frmBank: FormGroup;
   title: string;
   bankaN: BankeModel = new BankeModel();
   private saveTemp = true;
 
-
-  constructor(private bankeService: BankeService, private router: Router, private route: ActivatedRoute,
+ constructor(private bankeService: BankeService, private router: Router, private route: ActivatedRoute,
     formBuilder: FormBuilder, private _location: Location, private serValidate: ServiceValidateShared,
     private flashMessage: FlashMessagesService) {
 
@@ -44,15 +40,12 @@ export class BankeFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-
       this.title = id ? 'Ažuriranje banke' : 'NOVA BANKA';
-
       if (!id) {
         this.loadTempData();
         return;
       }
-
-        this.bankeService.getBanka(id)
+      this.bankeService.getBanka(id)
         .subscribe(
           (pos) => {
             if (pos.success) {
@@ -69,24 +62,13 @@ export class BankeFormComponent implements OnInit, OnDestroy {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-            // if (error == 404 || error.status == 400 ) {
                 this.router.navigate(['NotFound']);
-            // }
           });
       });
-
-  }
+}
 
   save() {
-  //  this.sizeTheOverlays();
-  // $('#mainpanel').addClass('overlay');
-  // $('.panel').addClass('overlay');
-  //  let i: number;
-  //  for (i = 0; i < 10000 ; i++) {
-  //    console.log(i);
-  //  }
    const  frmValue = this.frmBank.value;
-   // frmValue.Naziv = null;
    if (frmValue._id) {
        this.bankeService.updateBanka(frmValue).subscribe(
         (pos) => {
@@ -132,20 +114,7 @@ export class BankeFormComponent implements OnInit, OnDestroy {
         }
       );
     }
-    // $('#mainpanel').removeClass('overlay');
-    // $('.panel').removeClass('overlay');
   }
-
- // sizeTheOverlays() {
-   // $('#mainpanel').addClass('overlay');
-    // $('.overlay').resize().each(function() {
-    //   const h: any = $(this).parent().outerHeight();
-    //   const w: any = $(this).parent().outerWidth();
-    //   $(this).css('height', h);
-    //   $(this).css('width', w);
-    // });
-// }
-
 
  loadTempData() {
     const valuetemp = JSON.parse(localStorage.getItem('data_banka'));

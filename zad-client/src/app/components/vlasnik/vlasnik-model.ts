@@ -43,28 +43,28 @@ export interface IVlasnikModel {
 
 
 export class VlasnikModel implements IVlasnikModel {
-    _id:string;
-    ZiroVlasnik:ZiroVlasnikModel[];  
-    TelefVlasnik:TelefVlasnikModel[];
+    _id: string;
+    ZiroVlasnik: ZiroVlasnikModel[];
+    TelefVlasnik: TelefVlasnikModel[];
     Ime: string;
-    Adresa:string;
-    Glavni  : string;
-    Mesto:string;
-    PttReon:string;
-    PttPak:string;
-    Direktor:string;
-    KomRukovac:string;
-    Blagajnik:string;
-    Pib:string;
-    MatBroj:string;
-    SifDelat:string;
-    PdvBroj:string;
-    Slika:string;
-    Sud:string;
-    UplRacPorJed:string;
-    NazPorJed:string;
+    Adresa: string;
+    Glavni: string;
+    Mesto: string;
+    PttReon: string;
+    PttPak: string;
+    Direktor: string;
+    KomRukovac: string;
+    Blagajnik: string;
+    Pib: string;
+    MatBroj: string;
+    SifDelat: string;
+    PdvBroj: string;
+    Slika: string;
+    Sud: string;
+    UplRacPorJed: string;
+    NazPorJed: string;
     Opis?: string;
     NameUser?: string;
-    created_at?:Date;
-    updatedAt?:Date;
+    created_at?: Date;
+    updatedAt?: Date;
 }

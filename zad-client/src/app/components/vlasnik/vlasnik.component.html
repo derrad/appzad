@@ -1,7 +1,3 @@
-<!-- <p>
-  vlasnik works!
-</p> -->
-
 <div *ngIf="vlasnL;else  waiting"  [@routerTransition]>
   
       <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
@@ -30,37 +26,29 @@
               <button type="button" pButton (click)="deleteVlasnik(vlasn)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>
       </p-column>
-       <!-- <p-footer *ngIf="vlasnL.length == 0">
-          <div class="ui-helper-clearfix" style="width:100%">
-              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="vlasnL()" label="Add"></button>
-            </div>
-        </p-footer> -->
-
-        <ng-template pTemplate="emptymessage">
+      <ng-template pTemplate="emptymessage">
           <!-- Custom content goes here -->
           <div class="row">
                <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                  <div class="hidden-xs dtempty_message_h1">
-                     Još niste kreirali podatak.
-                  </div>
+                <div class="hidden-xs dtempty_message_h1">
+                   Još niste kreirali podatak.
+        	    </div>
                   
-                  <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                  <br/>
-                  <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
-                 <h3 class=" hidden-xs dtempty_message" >
+                <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                <br/>
+                <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                <h3 class=" hidden-xs dtempty_message" >
                       Da biste ručno dodali podatak kliknite: 
                       <a  class="dtempty_message_text" (click)="addVlasnik()">
                            Kreiraj podatak
                       </a>
-                  </h3>
-
-                  <h5 class="visible-xs" >
-                     Da biste ručno dodali podatak kliknite : 
-                      <a   (click)="addVlasnik()">
-                          Kreiraj podatak
-                      </a>
-                  </h5>
-
+                </h3>
+                <h5 class="visible-xs" >
+                    Da biste ručno dodali podatak kliknite : 
+                    <a   (click)="addVlasnik()">
+                        Kreiraj podatak
+                    </a>
+                </h5>
               </div>
           </div>
         </ng-template>
@@ -95,42 +83,154 @@
                              {{vlasnShow.Ime}} 
                         </dd>
                         <dt>
-                          Adresa
+                          ADRESA
                         </dt>
                         <dd class="text-success">
                               {{vlasnShow.Adresa}}
                         </dd>
-                          
                         <dt>
-                          Mesto
-                          </dt>
-                          <dd class="text-success">
-                               {{vlasnShow.Mesto}} 
-                          </dd> 
-                     
+                         MESTO
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Mesto}} 
+                        </dd> 
                         <dt>
-                          PttReon
+                          Ptt REON
                         </dt>
                         <dd class="text-success">
                             {{vlasnShow.PttReon}}
-                            
                         </dd>
                         <dt>
-                          Direktor
-                           </dt>
-                           <dd class="text-success">
-                               {{vlasnShow.Direktor}}
-                               
-                           </dd>
-                      
+                            Ptt PAK
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.PttPak}}
+                        </dd>
                         <dt>
-                          Pib
-                           </dt>
-                           <dd class="text-success">
-                               {{vlasnShow.Pib}}
-                               
-                           </dd>
+                          DIREKTOR
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Direktor}}
+                        </dd>
+                        <dt>
+                        KOMERCIJALNI
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.KomRukovac}}
+                        </dd>
+                        <dt>
+                        BLAGAJNIK
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Blagajnik}}
+                        </dd>
+                        <dt>
+                          PIB
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Pib}}
+                        </dd>
+                        <dt>
+                        MATIČNI BROJ
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.MatBroj}}
+                        </dd>
+                        <dt>
+                        ŠIFRA DELATNOSTI
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.SifDelat}}
+                        </dd>
+                        <dt>
+                        PDV BROJ
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.PdvBroj}}
+                        </dd>
+                        <dt>
+    	                SLIKA
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Slika}}
+                        </dd>
+                        <dt>
+                        SUD
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.Sud}}
+                        </dd>
+                        <dt>
+                        RAČUN PORESKE JEDINICE
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.UplRacPorJed}}
+                        </dd>
+                        <dt>
+                        NAZIV PORESKE JEDINICE
+                        </dt>
+                        <dd class="text-success">
+                            {{vlasnShow.NazPorJed}}
+                        </dd>
+                        <dt>
+                        ŽIRO RAČUN
+                        </dt>
+                            <dd >
+                                <div>
+                                    <dl class="dl-horizontal">
+                                            <div *ngFor="let item of vlasnShow.ZiroVlasnik; let i = index" >
+                                                <dt>{{i+1}}.</dt>
+                                                <dd></dd>  
 
+                                                <dt>Opis</dt>
+                                                <dd class="text-success">{{item.Naziv}}</dd>
+
+                                                <dt>Broj računa</dt>
+                                                <dd class="text-success">{{item.Racun}}</dd>
+                                                
+                                                <dt>Primarni</dt>
+                                                <dd class="text-success">{{item.Glavni}}</dd>
+                                                
+                                                <dt>Napomena</dt>
+                                                <dd class="text-success">{{item.Opis}}</dd>
+                                            </div>
+                                    </dl>
+                                </div>
+
+                            <!-- <div>
+                                    <ul *ngFor="let item of vlasnShow.ZiroVlasnik; let i = index">
+                                        <li>{{item.Naziv}}:{{item.Racun}} {{item.Opis}} </li>
+                                    </ul>
+                                </div> -->
+                                <!-- {{vlasnShow.ZiroVlasnik}} -->
+                            </dd>
+                        <dt>
+                        TELEFON
+                        </dt>
+                        <dd>
+                            <div>
+                            <dl class="dl-horizontal">
+                                    <div *ngFor="let item of vlasnShow.TelefVlasnik; let i = index" >
+                                        <dt>{{i+1}}.</dt>
+                                        <dd></dd>  
+
+                                        <dt>Opis</dt>
+                                        <dd class="text-success">{{item.Naziv}}</dd>
+
+                                        <dt>Broj telefona</dt>
+                                        <dd class="text-success">{{item.Telefon}}</dd>
+                                        
+                                        <dt>Primarni</dt>
+                                        <dd class="text-success">{{item.Glavni}}</dd>
+                                        
+                                        <dt>Napomena</dt>
+                                        <dd class="text-success">{{item.Opis}}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                            <!-- {{vlasnShow.TelefVlasnik}} -->
+                        </dd>
+                                
                         <dt>
                         OPIS
                         </dt>

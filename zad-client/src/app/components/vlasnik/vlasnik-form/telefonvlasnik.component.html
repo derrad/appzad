@@ -2,19 +2,38 @@
         <div class="row">
             <div class="form-group col-md-2">
             </div>
-            <div class="form-group col-md-4">
-                <label>Naziv</label>
-                <input type="text" class="form-control input-sm" formControlName="Naziv" required>
-                 <small [hidden]="telefForm.controls.Naziv.valid" class="text-danger">
-                    Naziv je obavezan
-                </small> 
+            <div class="form-group col-md-5">
+                <label class="center-block">Naziv/Opis:
+                    <input type="text" class="form-control input-sm" formControlName="Naziv" required>
+                    <div *ngIf="telefForm.controls.Naziv.invalid && (telefForm.controls.Naziv.dirty || telefForm.controls.Naziv.touched)" class="alert alert-danger">
+                            <div *ngIf="telefForm.controls.Naziv.errors.required">
+                                <strong> Naziv/Opis je obavezan podatak !!!</strong>
+                            </div>
+                            <div *ngIf="telefForm.controls.Naziv.errors.minlength">
+                                <strong>Naziv/Opis mora biti minimalno 2 karaktera dužine !!!</strong>
+                              </div>
+                            <div *ngIf="telefForm.controls.Naziv.errors.maxlength">
+                                <strong>Predugačak podatak o Naziv/Opis !!!</strong>
+                           </div>
+                    </div>
+                    <!-- <small [hidden]="telefForm.controls.Naziv.valid" class="text-danger">
+                        Naziv je obavezan
+                    </small>  -->
+                </label>
             </div>
-            <div class="form-group col-md-4">
-                <label>Telefon</label>
+            <div class="form-group col-md-5">
+            <label class="center-block">Broj telefona:
                 <input type="text" class="form-control input-sm" formControlName="Telefon" required>
-                 <small [hidden]="telefForm.controls.Telefon.valid" class="text-danger">
+                <div *ngIf="telefForm.controls.Telefon.invalid && (telefForm.controls.Telefon.dirty || telefForm.controls.Telefon.touched)" class="alert alert-danger">
+                        <div *ngIf="telefForm.controls.Telefon.errors.required">
+                            <strong> Broj telefona je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+                <!-- <small [hidden]="telefForm.controls.Telefon.valid" class="text-danger">
                         Telefon je obavezan
-                </small>
+                </small> -->
+                
+            </label>
             </div>
         </div>
         <div class="row">
@@ -22,14 +41,14 @@
                 </div>
                 <div class="form-group col-md-2">
                     <div class="checkbox">
-                        <label >
-                            <input type="checkbox"  class="form-control input-sm" formControlName="Glavni" >
-                            Glavni
+                        <label class="center-block" >
+                            Glavni:
                         </label>
+                        <input type="checkbox"  class="form-control input-sm" formControlName="Glavni" >
                     </div>
                 </div>
                 <div class="form-group col-md-8">
-                    <label class="center-block">Opis:
+                    <label class="center-block">Napomena:
                         <textarea class="form-control input-sm" formControlName="Opis">
                     </textarea>
                     </label>

@@ -1,14 +1,14 @@
-import { Message } from 'primeng/components/common/api';
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location} from '@angular/common';
 import { routerTransition } from '../../../animation/router.animations';
 import { ZanimanjaModel } from './../zanimanja.model';
-import { ZanimanjaService} from './../zanimanja.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {StepenSS} from './../../../shared/EnumApp/StepenSS.enum';
+import { ZanimanjaService } from './../zanimanja.service';
+import { FlashMessagesService} from 'angular2-flash-messages';
+import { StepenSS } from './../../../shared/EnumApp/StepenSS.enum';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
+import { ResponeCustom} from './../../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-zanimanja-form',
@@ -28,13 +28,9 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
               private serValidate: ServiceValidateShared) {
       this.formZAN = formBuilder.group({
         _id: [],
-        Sifra: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), serValidate.validateRegExpSifru]],
-        Naziv: ['', [
-          Validators.required, Validators.maxLength(100)
-        ]],
-        StepenSS: ['', [
-          Validators.required
-        ]],
+        Sifra: ['', [ Validators.required, Validators.minLength(4), Validators.maxLength(4), serValidate.validateRegExpSifru]],
+        Naziv: ['', [ Validators.required, Validators.maxLength(100)]],
+        StepenSS: ['', [ Validators.required]],
         Opis: []
       });
   }
@@ -46,7 +42,6 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-
       this.title = id ? 'Ažuriranje zanimanja' : 'Novo zanimanje';
 
       if (!id) {
@@ -61,18 +56,16 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
               this.zanimN = pos.data[0];
             }else {
               this.flashMessage.show(pos.message, {
-                cssClass: 'alert-danger',
+                cssClass: 'btn-danger',
                 timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
-          error => {
-            this.flashMessage.show(error, {
-              cssClass: 'alert-danger',
+          (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
+              cssClass: 'btn  -danger',
               timeout: 9000});
-            // if (error == 404 || error.status == 400 ) {
-                this.router.navigate(['NotFound']);
-            // }
+              this.router.navigate(['NotFound']);
           });
     });
   }
@@ -101,9 +94,9 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
                this.router.navigate(['NotFound']);
              }
            } ,
-           error => {
-             this.flashMessage.show(error, {
-               cssClass: 'alert-danger',
+           (error: ResponeCustom) => {
+             this.flashMessage.show(error.message, {
+               cssClass: 'btn-danger',
                timeout: 9000});
            },
          );
@@ -115,16 +108,16 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
               this.clearTempData();
               this.saveTemp = false;
                this.flashMessage.show(pos.message, {
-                 cssClass: 'alert-success',
+                 cssClass: 'btn-success',
                  timeout: 5000});
                  this.router.navigate(['zanimanja']);
              }else {
                this.router.navigate(['NotFound']);
              }
            } ,
-           error => {
-             this.flashMessage.show(error, {
-               cssClass: 'alert-danger',
+           (error: ResponeCustom) => {
+             this.flashMessage.show(error.message, {
+               cssClass: 'btn-danger',
                timeout: 9000});
            },
          );

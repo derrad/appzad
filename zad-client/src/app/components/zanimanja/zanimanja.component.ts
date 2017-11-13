@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { ZanimanjaModel } from './zanimanja.model';
 import { ZanimanjaService } from './zanimanja.service';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
@@ -9,7 +9,7 @@ import { Footer } from 'primeng/primeng';
 import { ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
 import { DialogModule} from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { ResponeCustom } from './../../shared/models/ErrorRes';
 
 @Component({
@@ -42,7 +42,7 @@ export class ZanimanjaComponent implements OnInit {
       },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
-          cssClass: 'alert-danger',
+          cssClass: 'btn-danger',
           timeout: 9000});
       //  console.log(error.message);
         this.zanL = [];
@@ -86,7 +86,7 @@ cloneData(c: ZanimanjaModel): ZanimanjaModel {
           .subscribe((pos) => {
             if (pos.success) {
                this.flashMessage.show(pos.message , {
-                  cssClass: 'alert-success',
+                  cssClass: 'btn-success',
                   timeout: 1000});
             }else {
               this.router.navigate(['NotFound']);
@@ -94,7 +94,7 @@ cloneData(c: ZanimanjaModel): ZanimanjaModel {
             } ,
             (error: ResponeCustom)  => {
               this.flashMessage.show(error.message, {
-                cssClass: 'alert-danger',
+                cssClass: 'btn-danger',
                 timeout: 5000});
               // Revert the view back to its original state
               this.zanL.splice(index, 0, tzanim);
