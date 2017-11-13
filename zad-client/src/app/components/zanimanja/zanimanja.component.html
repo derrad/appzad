@@ -2,13 +2,13 @@
   zanimanja works!
 </p> -->
 
- <div *ngIf="zanimanja;else  waiting"  [@routerTransition]>
+ <div *ngIf="zanL;else  waiting"  [@routerTransition]>
   
      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i> 
           <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
-      <p-dataTable [value]="zanimanja"  [globalFilter]="gb"  [resizableColumns]="true" [rows]="10" [paginator]="true"
+      <p-dataTable [value]="zanL"  [globalFilter]="gb"  [resizableColumns]="true" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedZan" dataKey="_id"   
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false 
                 resizableColumns="true" columnResizeMode="expand">
