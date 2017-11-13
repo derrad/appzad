@@ -116,9 +116,9 @@ export class OpstineFormComponent implements OnInit {
     
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formOPST.reset({
       Naziv: "",
       RegOzn:"",

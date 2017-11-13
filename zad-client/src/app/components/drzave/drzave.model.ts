@@ -1,4 +1,4 @@
-import { IDrzave } from './drzave.model';
+// import { IDrzave } from './drzave.model';
 export interface IDrzave {
     KodDrzave: string;
     Naziv: string;

@@ -19,9 +19,9 @@ export class PosaoFormComponent implements OnInit , OnDestroy{
 
   formPOSAO: FormGroup;
   title: string;
-  posaoN : Posao = new Posao();
+  posaoN: Posao = new Posao();
   strSprema = StepenSS;
-  saveTemp:boolean = true;
+  saveTemp = true;
 
 
   constructor(private posService:PosaoService, private router:Router,private route: ActivatedRoute, 
@@ -168,9 +168,9 @@ export class PosaoFormComponent implements OnInit , OnDestroy{
  
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formPOSAO.reset({
       Naziv: "",
       Skola:"",

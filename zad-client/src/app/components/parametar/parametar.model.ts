@@ -1,4 +1,4 @@
-import { IParametar } from './parametar.model';
+// import { IParametar } from './parametar.model';
 
 export interface IParametar {
     Naziv: string;
@@ -7,7 +7,7 @@ export interface IParametar {
     VredNumeric: Number;
     Opis?: string;
     NameUser?: string;
-    created_at?:Date;
+    created_at?: Date;
 }
 
 export class Parametar implements IParametar {
@@ -17,5 +17,5 @@ export class Parametar implements IParametar {
     VredNumeric: Number;
     Opis?: string;
     NameUser?: string;
-    created_at?:Date;
+    created_at?: Date;
 }

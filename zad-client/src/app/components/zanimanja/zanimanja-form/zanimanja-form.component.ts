@@ -158,9 +158,9 @@ export class ZanimanjaFormComponent implements OnInit , OnDestroy {
      this.setTempData();
    }
 
-  revert() { this.clearData(); }
+  revert() { this.clearFormData(); }
 
-  clearData() {
+  clearFormData() {
     this.formZAN.reset({
       Sifra: '',
       Naziv: '',

@@ -307,9 +307,9 @@ backClicked(event: any) {
     this._location.back();
 }
 
-revert() { this.ClearData(); }
+revert() { this.clearFormData(); }
 
-ClearData() {
+clearFormData() {
     this.formPartn.reset({
       KyeSearch: '',
       Naziv: '',

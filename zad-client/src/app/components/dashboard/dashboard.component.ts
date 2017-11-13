@@ -12,6 +12,7 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   CposaoAll: number;
   CkupacAll: number;
+  CzadrAll: number;
   constructor(private dashService: DashboardService ) { }
 
   ngOnInit() {
@@ -35,6 +36,17 @@ export class DashboardComponent implements OnInit {
       err => {
         console.log(err);
         this.CkupacAll = 0;
+        return false;
+      });
+
+      this.dashService.getZadrugaiCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CzadrAll = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CzadrAll = 0;
         return false;
       });
 

@@ -1,12 +1,11 @@
-//import { Message } from 'primeng/components/common/api';
-import { Component, OnInit ,OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Parametar} from '../parametar.model';
 import {ParametarService} from '../parametar.service';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
-import {FlashMessagesService} from 'angular2-flash-messages'; 
+import {formsTransition} from '../../../animation/forms.animations';
+import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 
 @Component({
@@ -14,14 +13,13 @@ import { ServiceValidateShared } from './../../../services/service.validate.shar
   templateUrl: './parmetar-form.component.html',
   styleUrls: ['./parmetar-form.component.css'],
   animations: [formsTransition()]
-  
 })
 export class ParmetarFormComponent implements OnInit,OnDestroy {
 
   frParam: FormGroup;
   title: string;
   parametar: Parametar = new Parametar();
-  saveTemp:boolean = true;
+  saveTemp = true;
 
   constructor(private router:Router,private route: ActivatedRoute, 
               formBuilder: FormBuilder,private paramService:ParametarService,
@@ -168,9 +166,9 @@ export class ParmetarFormComponent implements OnInit,OnDestroy {
 
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.frParam.reset({
       Naziv: "",
       Koristi:0,

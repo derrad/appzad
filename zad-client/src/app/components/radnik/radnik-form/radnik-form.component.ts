@@ -3,7 +3,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
+import {formsTransition} from '../../../animation/forms.animations';
 import { Radnik } from '../radnik.model';
 import { RadnikService} from '../radnik.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -174,9 +174,9 @@ save() {
    
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formRAD.reset({
       SifraRad: "",
       Ime:"",
@@ -191,13 +191,4 @@ ngOnDestroy() {
   this.setTempData();
 }
 
-
-
 }
-
-
-  //   plloc.onPopState(() => {
-          
-      //             console.log('pressed back!');
-          
-      // });

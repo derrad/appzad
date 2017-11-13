@@ -1,14 +1,14 @@
 // import { Message } from 'primeng/components/common/api';
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component,OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
+import {formsTransition} from '../../../animation/forms.animations';
 import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { ResponeCustom}  from './../../../shared/models/ErrorRes';
+import { ResponeCustom} from './../../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-fond-sati-form',
@@ -180,9 +180,9 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
     
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formFSAT.reset({
       Mesec: "",
       Godina: "",

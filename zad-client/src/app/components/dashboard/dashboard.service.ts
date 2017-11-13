@@ -46,6 +46,17 @@ export class DashboardService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getZadrugaiCount() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/countzadrugarall') ;
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
+
 
   private handleError(error: Response) {
     const myerror = new ResponeCustom().fromJSON(error.json());

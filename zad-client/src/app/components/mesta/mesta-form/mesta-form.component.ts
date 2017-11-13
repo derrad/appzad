@@ -1,4 +1,3 @@
-//import { LoginComponent } from './../../login/login.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,7 +5,7 @@ import { Mesta } from './../mesta.model';
 import { MestaService } from './../mesta.service';
 import {Opstine} from '../../opstine/opstine.model';
 import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations'
+import {formsTransition} from '../../../animation/forms.animations';
 import { OpstineService} from './../../opstine/opstine.service';
 
 @Component({
@@ -111,9 +110,9 @@ export class MestaFormComponent implements OnInit {
     result.subscribe(data => this.router.navigate(['mesta']));
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formMEST.reset({
       Naziv: "",
       Ptt:"",

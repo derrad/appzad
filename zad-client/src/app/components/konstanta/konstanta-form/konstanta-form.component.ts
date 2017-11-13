@@ -214,9 +214,9 @@ export class KonstantaFormComponent implements OnInit {
      
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.clearFormData(); }
   
-  ngOnChanges() {
+  clearFormData() {
     this.formKonst.reset({
       Datum: "",
       UcPenz: 0,

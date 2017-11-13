@@ -203,9 +203,9 @@ removeTelVlas(i: number) {
      this._location.back();
   }
 
-  revert() { this.clearData(); }
+  revert() { this.clearFormData(); }
 
-  clearData() {
+  clearFormData() {
     this.formVlasn.reset({
       Ime:  '',
       Adresa: '',

@@ -113,17 +113,19 @@
                                     <div class="col-xs-3">
                                         <i class="fa fa-users fa-5x"></i>
                                     </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="badge">26</div>
-                                        <div>Unetih zadrugara</div>
+                                    <div class="form-group col-xs-9 text-right">
+                                        <div>Unetih zadrugara
+                                            <span class="badge">{{CzadrAll}}</span>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="badge">15</div>
-                                        <div>Aktivnih zadrugara</div>
+                                    <div class=" form-group col-xs-9 text-right">
+                                        <div>Aktivnih zadrugara
+                                            <span class="badge">15</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a [routerLink]="['/zadrugar']">
                                 <div class="panel-footer">
                                         <span class="pull-left">Pogledaj detaljnije</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x"></i></span>
