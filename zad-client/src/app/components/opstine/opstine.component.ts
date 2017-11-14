@@ -6,11 +6,10 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
+import {ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
 import {FlashMessagesService} from 'angular2-flash-messages';
-
-
+import { ResponeCustom } from './../../shared/models/ErrorRes';
 @Component({
   selector: 'app-opstine',
   templateUrl: './opstine.component.html',
@@ -26,100 +25,73 @@ export class OpstineComponent implements OnInit {
 
   constructor(private router: Router, private opstService: OpstineService,
               private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
-    this.Title = '"PREGLED OPŠTINA';
+    this.Title = 'PREGLED OPŠTINA';
 
   }
 
   ngOnInit() {
-
-  
     this.opstService.getOpstine().subscribe(profile => {
-      if (profile.success === true) { 
-          // console.log(profile);
-    //       console.log(" data je " + profile.data[0].Drzava.Naziv);
-          this.opstineL = profile.data;
+        if (profile.success === true) {
+            this.opstineL = profile.data;
+        }else {
+          this.flashMessage.show(profile.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000});
+          this.router.navigate(['NotFound']);
+       }
+      },
+      (error: ResponeCustom) => {
+        this.flashMessage.show(error.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000});
+          this.opstineL = [];
+        return false;
       }
-    },
-    err => {
-      console.log(err);
-      return false;
-    }
-    
-  );
- 
+    );
   }
 
-
-
-selectOpstina( opstina:Opstine) {
+selectOpstina( opstina: Opstine) {
     this.displayDetals = true;
     this.opstShow = this.cloneData(opstina);
 }
 
-cloneData(c: Opstine):Opstine {
-  let opstina = new Opstine();
-  for(let prop in c) {
+cloneData(c: Opstine): Opstine {
+  const opstina = new Opstine();
+  // tslint:disable-next-line:forin
+  for ( const prop in c) {
     opstina[prop] = c[prop];
   }
   return opstina;
 }
 
-addOpstine(){
-  this.router.navigate(['opstine/new'])
-
+addOpstine() {
+  this.router.navigate(['opstine/new']);
 }
 
 updateOpstinu(id) {
   this.router.navigate(['opstine/', id]);
 }
 
-
-//deleteOpstinu(topstina){
-  // console.log(tdrzava);
-
-  // this.confirmationService.confirm({
-  //   message: 'Are you sure that you want to perform this action?',
-  //     accept: () => {
-  //       //Actual logic to perform a confirmation
-  //       var index = this.opstine.indexOf(topstina);
-  //       console.log("index je " + index);
-  //       this.opstine.splice(index, 1);
-    
-  //       this.opstService.delOpstine(topstina._id)
-  //         .subscribe(null,
-  //           err => {
-  //             alert("Could not delete drzavu.");
-  //             // Revert the view back to its original state
-  //             this.opstine.splice(index, 0, topstina);
-  //           });
-  //     }
-  //   });
-
-
-
-deleteOpstinu(tOpstine){
+deleteOpstinu(tOpstine) {
     this.confirmationService.confirm({
         message: `Jeste li sigurni da želite uklonite izabranu opštinu ?   ` ,
         header: `${tOpstine.Naziv}`,
           accept: () => {
-            //Actual logic to perform a confirmation
-            var index = this.opstineL.indexOf(tOpstine);
-          // console.log("index je " + index);
+            // Actual logic to perform a confirmation
+            const index = this.opstineL.indexOf(tOpstine);
             this.opstineL.splice(index, 1);
-        
             this.opstService.delOpstine(tOpstine._id)
-              .subscribe((pos) =>{
-                if(pos.success){
+              .subscribe((pos) => {
+                if (pos.success) {
                   this.flashMessage.show(pos.message, {
                       cssClass: 'alert-success',
                       timeout: 1000});
-                }else{
+                }else {
                   this.router.navigate(['NotFound']);
                 }
                 } ,
-                err => {
-                  //alert("Could not delete radnik.");
-                  this.flashMessage.show('Could not delete opštinu !!!', {
+                (error: ResponeCustom) => {
+                  this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 5000});
                   // Revert the view back to its original state

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParmetarFormComponent } from './parmetar-form.component';
+import { ParametarFormComponent } from './parametar-form.component';
 
 describe('ParmetarFormComponent', () => {
-  let component: ParmetarFormComponent;
-  let fixture: ComponentFixture<ParmetarFormComponent>;
+  let component: ParametarFormComponent;
+  let fixture: ComponentFixture<ParametarFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParmetarFormComponent ]
+      declarations: [ ParametarFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ParmetarFormComponent);
+    fixture = TestBed.createComponent(ParametarFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

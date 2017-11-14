@@ -13,34 +13,49 @@
       <div class="panel-body">
           <form [formGroup]="formOPST" (ngSubmit)="save()" novalidate>
               <div class="form-group" >
-                  <!-- <label class="center-block">ID: -->
                     <input class="form-control" formControlName="_id"  [(ngModel)]="opstina._id"   type="hidden">
-                  <!-- <label> -->
-              </div>
+               </div>
               <div class="form-group">
                   <label class="center-block">Država:
                     <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" >
-                      <option *ngFor="let list of drzave" [value]="list._id"   >
+                      <option *ngFor="let list of drzave" [value]="list._id">
                         {{ list.Naziv }}
                       </option>
                     </select>
                   </label>
+                  <div *ngIf="Drzava.invalid && (Drzava.dirty || Drzava.touched)" class="alert alert-danger">
+                    <div *ngIf="Drzava.errors.required">
+                        <strong>Drzava je obavezan podatak !!!</strong>
+                    </div>
+                  </div>
               </div>
                 
                 <div class="form-group">
                     <label class="center-block">Kod opštine:
                       <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn" >
                     </label>
-                    <div class="text-danger" *ngIf="!formOPST.controls['RegOzn'].valid && formOPST.controls['RegOzn'].touched">{{ titleAlertRegOzn }}</div>
                     
-                  </div>
+                    <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger">
+                      <div *ngIf="RegOzn.errors.required">
+                          <strong>Oznaka je obavezan podatak !!!</strong>
+                      </div>
+                      <div *ngIf="RegOzn.errors.maxlength">
+                        <strong>Predugačka oznaka !!!</strong>
+                      </div>
+                     
+                    </div>
+                </div>
 
                 <div class="form-group">
                   <label class="center-block">Naziv opštine:
                     <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv" >
                   </label>
-                  <div class="text-danger" *ngIf="!formOPST.controls['Naziv'].valid && formOPST.controls['Naziv'].touched">{{ titleAlertNaziv }}</div>
                   
+                  <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                    <div *ngIf="Naziv.errors.required">
+                        <strong>Naziv je obavezan podatak !!!</strong>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="form-group">
@@ -72,7 +87,7 @@
                 <div class="form-group">
                         <div class="col-md-offset-5 col-md-12">
                             <button type="submit" [disabled]="!formOPST.valid"
-                                class="btn btn-default">
+                                class="btn btn-success">
                             <span class="glyphicon glyphicon-saved"></span>
                             Save
                             </button>
@@ -92,19 +107,14 @@
           </form>
       </div>
      
-      <div class="panel-footer">
-          <!-- <div class="col-md-offset-2 col-md-9"> -->
-              <button (click)="backClicked()"  class="btn btn-primary btn-block">
-                <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-                Back
-            </button>
-          <!-- </div> -->
-      </div>
-      
-    </div>
+  <div class="panel-footer">
+    <button (click)="backClicked()"  class="btn btn-primary btn-block">
+        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+        Back
+    </button>
+  </div>
+</div>
     
-    <!-- </div>   coll -->
- <!--   </div>  row -->
-
+    
     
 

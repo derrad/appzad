@@ -7,36 +7,37 @@ import {Location} from '@angular/common';
 import {formsTransition} from '../../../animation/forms.animations';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
+import { ResponeCustom } from '../../../shared/models/ErrorRes';
 
 @Component({
-  selector: 'app-parmetar-form',
-  templateUrl: './parmetar-form.component.html',
-  styleUrls: ['./parmetar-form.component.css'],
+  selector: 'app-parametar-form',
+  templateUrl: './parametar-form.component.html',
+  styleUrls: ['./parametar-form.component.css'],
   animations: [formsTransition()]
 })
-export class ParmetarFormComponent implements OnInit,OnDestroy {
+export class ParametarFormComponent implements OnInit, OnDestroy {
 
   frParam: FormGroup;
   title: string;
   parametar: Parametar = new Parametar();
   saveTemp = true;
 
-  constructor(private router:Router,private route: ActivatedRoute, 
-              formBuilder: FormBuilder,private paramService:ParametarService,
-              private _location: Location,private flashMessage:FlashMessagesService,
-              private serValidate:ServiceValidateShared) { 
+  constructor(private router: Router, private route: ActivatedRoute,
+              formBuilder: FormBuilder, private paramService: ParametarService,
+              private _location: Location, private flashMessage: FlashMessagesService,
+              private serValidate: ServiceValidateShared) {
 
     this.frParam = formBuilder.group({
-      _id:[],
+      _id: [],
       Naziv: ['', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(25),
         serValidate.validateRegExpSifru
       ]],
-      Koristi:[],
-      VredString:[],
-      VredNumeric:[],
+      Koristi: [],
+      VredString: [],
+      VredNumeric: [],
       Opis: []
     });
   }
@@ -44,11 +45,11 @@ export class ParmetarFormComponent implements OnInit,OnDestroy {
   get Naziv() { return this.frParam.get('Naziv'); }
 
   ngOnInit() {
-    var id = this.route.params.subscribe(params => {
-    var id = params['id'];
+    this.route.params.subscribe(params => {
+    const id = params['id'];
     this.title = id ? 'Ažuriranje Parametra' : 'Novi Parametar';
 
-    if (!id){
+    if (!id) {
       this.loadTempData();
       return;
     }
@@ -56,18 +57,18 @@ export class ParmetarFormComponent implements OnInit,OnDestroy {
       this.paramService.getParametar(id)
         .subscribe(
         (param) => {
-          if(param.success){
+          if (param.success ) {
             this.saveTemp = false;
             this.parametar = param.data[0];
-          }else{
+          }else {
             this.flashMessage.show(param.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-            this.router.navigate(['NotFound']);
+             this.router.navigate(['NotFound']);
           }
         },
-          error => {
-            this.flashMessage.show(error, {
+        (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
               this.router.navigate(['NotFound']);
@@ -76,115 +77,92 @@ export class ParmetarFormComponent implements OnInit,OnDestroy {
 
   }
 
-  loadTempData(){
+  loadTempData() {
     const par = JSON.parse(localStorage.getItem('data_param'));
-    if(par){
-      this.parametar =par;
+    if (par) {
+      this.parametar = par;
     }
-    
   }
 
-  setTempData(){
+  setTempData() {
     const  parValue = JSON.stringify(this.frParam.value);
-    if(parValue){
-      if(this.saveTemp){
-      localStorage.setItem('data_param',parValue);
-      }else{
+    if (parValue) {
+      if (this.saveTemp) {
+       localStorage.setItem('data_param', parValue);
+      }else {
         this.clearTempData();
       }
     }
-    
-   }
- 
- clearTempData(){
+  }
+
+ clearTempData() {
      localStorage.removeItem('data_param');
   }
 
   backClicked(event: any) {
     this.setTempData();
     this._location.back();
-    //event.stopPropagation();
-    
   }
 
- 
-
   save() {
-    var result,
-        paramValue = this.frParam.value;
-
-
-        if (paramValue._id){
+    const paramValue = this.frParam.value;
+    if (paramValue._id) {
           this.paramService.updateParametar(paramValue).subscribe(
-           (pos) =>{
-             if(pos.success){
+           (pos) => {
+             if (pos.success) {
                this.clearTempData();
-               this.saveTemp=false;
+               this.saveTemp = false;
                this.flashMessage.show(pos.message, {
                  cssClass: 'alert-success',
                  timeout: 5000});
-                 this.router.navigate(['parametar'])
-               
-             }else{
+                 this.router.navigate(['parametar']);
+             }else {
                this.router.navigate(['NotFound']);
              }
            } ,
-           error => {
-             this.flashMessage.show(error, {
+           (error: ResponeCustom) => {
+             this.flashMessage.show(error.message, {
                cssClass: 'alert-danger',
                timeout: 9000});
-            
            },
-           
          );
-   
        } else {
-   
-        this.paramService.addParametar(paramValue)
-         .subscribe(
-           (pos) =>{
-             if(pos.success){
+          this.paramService.addParametar(paramValue)
+          .subscribe(
+           (pos) => {
+             if (pos.success) {
                this.clearTempData();
-               this.saveTemp=false;
+               this.saveTemp = false;
                this.flashMessage.show(pos.message, {
                  cssClass: 'alert-success',
                  timeout: 5000});
-                 this.router.navigate(['parametar'])
-             }else{
+                 this.router.navigate(['parametar']);
+             }else {
                this.router.navigate(['NotFound']);
              }
            } ,
-           error => {
-             this.flashMessage.show(error, {
+           (error: ResponeCustom) => {
+             this.flashMessage.show(error.message, {
                cssClass: 'alert-danger',
                timeout: 9000});
-                     
            },
-           
          );
        }
-
   }
 
   revert() { this.clearFormData(); }
-  
+
   clearFormData() {
     this.frParam.reset({
-      Naziv: "",
-      Koristi:0,
-      VredString:"",
-      VredNumeric:0,
-      Opis:""
+      Naziv: '',
+      Koristi: '',
+      VredString: '',
+      VredNumeric: 0,
+      Opis: ''
     });
-
-    
   }
 
   ngOnDestroy() {
     this.setTempData();
   }
-  
-
-
-
 }

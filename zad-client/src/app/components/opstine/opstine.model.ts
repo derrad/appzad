@@ -1,4 +1,3 @@
-
 export interface IOpstine {
     _id: string;
     Drzava: Object;
@@ -26,5 +25,3 @@ export class Opstine implements IOpstine {
     created_at?: Date;
     updatedAt?: Date;
 }
-
-

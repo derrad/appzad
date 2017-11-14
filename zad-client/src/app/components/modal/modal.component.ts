@@ -27,29 +27,26 @@ import {Component} from '@angular/core';
   `]
 })
 export class ModalComponent {
-  
     public visible = false;
     private visibleAnimate = false;
-  
-    constructor(){}
-  
+
+    constructor() {}
+
     public show(): void {
-      console.log("Modal show");
+      // console.log("Modal show");
       this.visible = true;
       setTimeout(() => this.visibleAnimate = true, 100);
     }
-  
+
     public hide(): void {
-      console.log("Hide show");
+      // console.log("Hide show");
       this.visibleAnimate = false;
       setTimeout(() => this.visible = false, 300);
     }
-  
+
     public onContainerClicked(event: MouseEvent): void {
       if ((<HTMLElement>event.target).classList.contains('modal')) {
         this.hide();
       }
     }
-  
   }
-  

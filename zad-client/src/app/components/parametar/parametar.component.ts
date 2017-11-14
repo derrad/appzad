@@ -1,17 +1,17 @@
-import {Component, OnInit } from '@angular/core';
-import {ParametarService} from './parametar.service';
-import {Router} from '@angular/router';
-import {Parametar} from './parametar.model';
+import { Component, OnInit } from '@angular/core';
+import { ParametarService } from './parametar.service';
+import { Router } from '@angular/router';
+import { Parametar } from './parametar.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
-import {DialogModule} from 'primeng/primeng';
-import {routerTransition } from '../../animation/router.animations' 
-import { ResponeCustom}  from './../../shared/models/ErrorRes';
-//import * as $ from 'jquery';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { routerTransition } from '../../animation/router.animations';
+import { ResponeCustom } from './../../shared/models/ErrorRes';
+// import * as $ from 'jquery';
 
 
 @Component({
@@ -21,94 +21,80 @@ import { ResponeCustom}  from './../../shared/models/ErrorRes';
   animations: [routerTransition()]
 })
 export class ParametarComponent implements OnInit {
-  params:Array<Parametar>;
-  Title:string;
+  params: Array<Parametar>;
+  Title: string;
   selectedParam: Parametar;
-  displayDetals: boolean = false;
+  displayDetals = false;
   parShow: Parametar = new Parametar();
-  
-  
-  constructor(private paramService:ParametarService, private router:Router,
-    private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService ) {
-    this.Title="PREGLED PARAMETARA";
+  constructor(private paramService: ParametarService, private router: Router,
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    this.Title = 'PREGLED PARAMETARA';
    }
 
-  ngOnInit() {
-
-    this.paramService.getParametars()
-    .subscribe((profile) => {
-    if (profile.success === true) { 
-      this.params= profile.data;
+ngOnInit() {
+  this.paramService.getParametars()
+      .subscribe((profile) => {
+      if (profile.success === true) {
+        this.params = profile.data;
+       } else {
+          this.flashMessage.show(profile.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000});
+          this.router.navigate(['NotFound']);
+       }
+      },
+     (error: ResponeCustom) => {
+      this.flashMessage.show(error.message, {
+       cssClass: 'alert-danger',
+       timeout: 9000});
+       this.params = [];
+       return false;
     }
-    // }
-    },
-    (error:ResponeCustom) => {
-    this.flashMessage.show(error.message, {
-      cssClass: 'alert-danger',
-      timeout: 9000});
-  //  console.log(error.message);
-      this.params=[];
-
-      return false;
-    }
-    );
-
-  }
-
-
-onAddParam() {
-    //alert("Add param");
-    this.router.navigate(['parametar/new'])
+  );
+}
+AddParam() {
+    this.router.navigate(['parametar/new']);
 }
 updateParam(id) {
    this.router.navigate(['parametar/', id]);
 }
-
-
-deleteParam(tparam){
-  // console.log(tdrzava);
-
-  this.confirmationService.confirm({
-    message: `Jeste li sigurni da želite uklonite izabrani podatak ?   ` ,
+deleteParam(tparam) {
+   this.confirmationService.confirm({
+    message: `Jeste li sigurni da želite uklonite izabrani podatak ?` ,
     header: `${tparam.Naziv}`,
       accept: () => {
-        //Actual logic to perform a confirmation
-        var index = this.params.indexOf(tparam);
-       // console.log("index je " + index);
+        const index = this.params.indexOf(tparam);
         this.params.splice(index, 1);
-    
         this.paramService.delParametar(tparam._id)
-          .subscribe((pos) =>{
-            if(pos.success){
-               this.flashMessage.show(pos.message ,{
+          .subscribe((pos) => {
+            if (pos.success) {
+               this.flashMessage.show(pos.message , {
                   cssClass: 'alert-success',
                   timeout: 1000});
-            }else{
+            }else {
               this.router.navigate(['NotFound']);
             }
             } ,
-            (error:ResponeCustom)  => {
-              //alert("Could not delete radnik.");
+            (error: ResponeCustom)  => {
               this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
                 timeout: 5000});
               // Revert the view back to its original state
-              this.params.splice(index, 0, tparam);
+               this.params.splice(index, 0, tparam);
             });
       }
     });
-
 }
-
 
  selectParam( tprm: Parametar) {
   this.displayDetals = true;
-  this.parShow = this.cloneData(tprm); 
- } 
+  this.parShow = this.cloneData(tprm);
+ }
 
- cloneData(c: Parametar):Parametar {
-  let prmdata = new Parametar();
-  for(let prop in c) {
+ cloneData(c: Parametar): Parametar {
+  const prmdata = new Parametar();
+  // tslint:disable-next-line:forin
+  for (const prop in c) {
     prmdata[prop] = c[prop];
   }
   return prmdata;
