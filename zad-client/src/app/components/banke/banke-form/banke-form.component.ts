@@ -84,7 +84,7 @@ export class BankeFormComponent implements OnInit, OnDestroy {
           }
         } ,
         (error: ResponeCustom) => {
-          console.log('greska je');
+          // console.log('greska je');
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
            timeout: 9000});

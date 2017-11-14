@@ -35,19 +35,19 @@ export class BankeComponent implements OnInit {
 
     this.bankService.getBanke()
       .subscribe((profile) => {
-    if (profile.success === true) {
-        this.bankeL = profile.data;
-    }
-   // }
-  },
-  (error: ResponeCustom) => {
-    this.flashMessage.show(error.message, {
-      cssClass: 'alert-danger',
-      timeout: 9000});
-      this.bankeL = [];
+      if (profile.success === true) {
+          this.bankeL = profile.data;
+      }
+    // }
+      },
+      (error: ResponeCustom) => {
+        this.flashMessage.show(error.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000});
+          this.bankeL = [];
 
-    return false;
-  }
+        return false;
+      }
 );
 }
 

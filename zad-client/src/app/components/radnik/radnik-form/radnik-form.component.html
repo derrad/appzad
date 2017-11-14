@@ -14,7 +14,8 @@
       </div>
   </div>
   <div class="panel-body">
-      <form [formGroup]="formRAD" (ngSubmit)="save()" novalidate >
+ 
+    <form [formGroup]="formRAD" (ngSubmit)="save()" novalidate >
           <div class="form-group" >
                <input class="form-control" formControlName="_id"  [(ngModel)]="radnikN._id"   type="hidden">
           </div>
@@ -75,16 +76,22 @@
                 <label class="center-block">Jmbg:
                   <input class="form-control" formControlName="Jmbg"  [(ngModel)]="radnikN.Jmbg" >
                 </label>
+            </div>
+            
+            <div class="row">
+            
+              <div class="form-group col-md-2">
+                    <div class="checkbox">
+                      <label class="center-block">
+                        Aktivan
+                      </label>
+                      <input type="checkbox"  class="form-control input-sm" formControlName="Aktivan" [(ngModel)]="radnikN.Aktivan">
+                    </div>
               </div>
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="center-block">
-                    <input type="checkbox" formControlName="Aktivan" [(ngModel)]="radnikN.Aktivan"> Aktivan
-                  </label>
-                  
-                </div>
-              </div>
-              <div class="form-group">
+           </div>
+            
+
+            <div class="form-group">
                 <label class="center-block">Opis:
                   <textarea class="form-control" formControlName="Opis"  [(ngModel)]="radnikN.Opis">
                   </textarea>

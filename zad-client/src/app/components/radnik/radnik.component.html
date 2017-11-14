@@ -1,8 +1,3 @@
-<!-- <p>
-  videcemo radnik works!
-
-</p> -->
-
 <div *ngIf="radnici;else  waiting"  [@routerTransition]>
   
       <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
@@ -33,11 +28,42 @@
               <button type="button" pButton (click)="deleteRadnik(rad)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>
       </p-column>
-      <p-footer>
+      <p-footer *ngIf="radnici.length > 0">
           <div class="ui-helper-clearfix" style="width:100%">
               <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addRadnik()" label="Add"></button>
             </div>
         </p-footer>
+
+        <ng-template pTemplate="emptymessage">
+            <!-- Custom content goes here -->
+            <div class="row">
+                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                    <div class="hidden-xs dtempty_message_h1">
+                        Još niste kreirali podatak.
+                    </div>
+                    <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                    <br/>
+                    <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                    <h3 class=" hidden-xs dtempty_message" >
+                        <!-- To manually add new one click here: -->
+                        Da biste ručno dodali podatak kliknite: 
+                        <a  class="dtempty_message_text" (click)="addRadnik()">
+                             Kreiraj podatak
+                        </a>
+                    </h3>
+
+                    <h5 class="visible-xs" >
+                        <!-- To manually add new one click here: -->
+                        Da biste ručno dodali podatak kliknite : 
+                        <a   (click)="addRadnik()">
+                             Kreiraj podatak
+                        </a>
+                    </h5>
+
+                </div>
+            </div>
+        </ng-template>
+
       </p-dataTable>
     </div>
     
