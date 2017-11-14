@@ -1,7 +1,3 @@
-<!-- <p>
-  mesta-form works!
-</p>
-[@slideToRight] -->
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
       <div class="row">
@@ -14,14 +10,14 @@
      </div>
   </div>
   <div class="panel-body">
-      <form [formGroup]="formPOSAO" (ngSubmit)="save()" novalidate>
+    <form [formGroup]="formPOSAO" (ngSubmit)="save()" novalidate>
           <div class="form-group" >
                <input class="form-control" formControlName="_id"  [(ngModel)]="posaoN._id"   type="hidden">
           </div>
           <div class="form-group">
               <label class="center-block">Stručna sprema:
                 <select  formControlName="StepenSS" class="form-control"  [(ngModel)]="posaoN.StepenSS"  required>
-                  <option *ngFor="let list of strSprema" [value]="list"   >
+                  <option *ngFor="let list of strSprema" [value]="list">
                     {{ list }}
                   </option>
                 </select>
@@ -75,35 +71,24 @@
             </div>
           
             <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
-                        <button type="submit" [disabled]="!formPOSAO.valid"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
-
-                      <button type="reset" class="btn btn-danger"  [disabled]="formPOSAO.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Clear data
-                      </button>
-                      
-                    </div>
-              
-                    
-          </div>
-              
-
-
-      </form>
+                <div class="col-md-offset-5 col-md-12 col-xs-12">
+                    <button type="submit" [disabled]="!formPOSAO.valid"
+                        class="btn btn-success">
+                    <span class="glyphicon glyphicon-saved"></span>
+                      Save
+                    </button>
+                    <button type="reset" class="btn btn-danger"  [disabled]="formPOSAO.pristine"  (click)="revert()">
+                      <i class="fa fa-undo" aria-hidden="true"></i>
+                      Clear data
+                    </button>
+                </div>
+            </div>
+    </form>
   </div>
- 
   <div class="panel-footer">
-      
-          <button (click)="backClicked()"  class="btn btn-primary btn-block">
-            <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-            Back
-        </button>
- 
+      <button (click)="backClicked()"  class="btn btn-primary btn-block">
+        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+        Back
+    </button>
   </div>
-  
 </div>

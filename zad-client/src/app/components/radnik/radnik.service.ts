@@ -84,6 +84,6 @@ export class RadnikService {
     servererr.success = false;
     servererr.data = [];
     return Observable.throw(myerror || servererr);
-}
+  }
 
 }
