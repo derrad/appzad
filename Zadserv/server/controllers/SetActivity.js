@@ -14,7 +14,7 @@ module.exports.AddActivity = function (tActivnost,tTrans,tNumber,topis, tuser) {
            console.log("Error add aktivnost");
    
          } else {
-           console.log("add aktivnost successfully");
+           //console.log("add aktivnost successfully");
          }
       });
 
