@@ -1,8 +1,3 @@
-<!-- <p>
-  fond-sati works!
-</p> -->
-
-
 <div *ngIf="fnsati;else  waiting"  [@routerTransition]>
   
       <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
@@ -139,14 +134,14 @@
                          MINIMALNA OSNOVICA
                         </dt>
                         <dd class="text-success">
-                            {{fsatiShow.MinOsnov}}
+                            {{fsatiShow.MinOsnov | number:'1.2-6'}}
                             
                         </dd>
                         <dt>
                            MAKSIMALNA OSNOVICA
                            </dt>
                            <dd class="text-success">
-                               {{fsatiShow.MaxOsnov}}
+                               {{fsatiShow.MaxOsnov | number:'1.2-6'}}
                                
                            </dd>
                         

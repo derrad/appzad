@@ -6,8 +6,7 @@ export interface IDrzave {
     Opis?: string;
     NameUser?: string;
 }
-
-export class Drzave implements IDrzave{
+export class Drzave implements IDrzave {
     KodDrzave: string;
     Naziv: string;
     EuClan: boolean;

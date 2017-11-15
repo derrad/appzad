@@ -34,10 +34,9 @@ export class KonstantaComponent implements OnInit {
 
     this.konstService.getKonstante()
       .subscribe((profile) => {
-    if (profile.success === true) {
-        this.konstL = profile.data;
-    }
-   // }
+      if (profile.success === true) {
+          this.konstL = profile.data;
+      }
   },
   (error: ResponeCustom) => {
     this.flashMessage.show(error.message, {

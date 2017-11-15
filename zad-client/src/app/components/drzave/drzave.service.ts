@@ -3,105 +3,84 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw'; 
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-
+import { ResponeCustom} from './../../shared/models/ErrorRes';
 
 
 @Injectable()
 export class DrzaveService {
   authToken: any;
-  //drzave: any; 
-  isDev:boolean;
+  isDev: boolean;
 
-  constructor(private http:Http) {
-    this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
-
+  constructor(private http: Http) {
+    this.isDev = ServiceConfig.isDev;
    }
 
-
-  loadToken(){
+   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
-  getDrzave(){
-    let headers = new Headers();
+  getDrzave() {
+    const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-   // let ep = this.prepEndpoint('api/drzave'); 
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' ) ;
-   // console.log("getDrzave link", ep );
-    return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); ;
- 
-  }
-
-  getDrzava(id){
-    let headers = new Headers();
-    this.loadToken();
-    headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-    //let ep = this.prepEndpoint('api/drzave/'+id);
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + id) ;
-    return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); 
-
-  }
-  
-  addDrzava(drzava){
-    let headers = new Headers();
-    this.loadToken();
-    headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-   // let ep = this.prepEndpoint('api/drzave');
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' ) ;
-    return this.http.post(ep, JSON.stringify(drzava),{headers: headers})
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/drzave/' ) ;
+    return this.http.get(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
-   
   }
 
-updateDrzava(drzava){
-    let headers = new Headers();
+  getDrzava(id) {
+    const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-    //let ep = this.prepEndpoint('api/drzave/' + drzava._id);
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + drzava._id) ;
-    
-    return this.http.put(ep, JSON.stringify(drzava),{headers: headers})
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/drzave/' + id) ;
+    return this.http.get(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
-  
-   
   }
-
-  delDrzava(id){
-    let headers = new Headers();
+  addDrzava(drzava) {
+    const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-   // let ep = this.prepEndpoint('api/drzave/'+id);
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/drzave/' + id) ;
-    return this.http.delete(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); 
-    
-   
-   
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/drzave/' ) ;
+    return this.http.post(ep, JSON.stringify(drzava), {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
   }
 
+updateDrzava(drzava) {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/drzave/' + drzava._id);
+    return this.http.put(ep, JSON.stringify(drzava), {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
 
-  // prepEndpoint(ep){
-  // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-  //   return ServiceConfig.PrepareHost(this.isDev,ep);
- 
-  // }
+  delDrzava(id) {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/drzave/' + id) ;
+    return this.http.delete(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
 
   private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
-} 
+    const myerror = new ResponeCustom().fromJSON(error.json());
+    const servererr = new ResponeCustom();
+    servererr.message = 'Server error';
+    servererr.success = false;
+    servererr.data = [];
+    return Observable.throw(myerror || servererr);
+  }
 
 
 }

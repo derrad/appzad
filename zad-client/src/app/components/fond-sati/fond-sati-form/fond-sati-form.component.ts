@@ -1,5 +1,5 @@
 // import { Message } from 'primeng/components/common/api';
-import { Component,OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
@@ -19,33 +19,31 @@ import { ResponeCustom} from './../../../shared/models/ErrorRes';
 export class FondSatiFormComponent implements OnInit, OnDestroy {
   formFSAT: FormGroup;
   title: string;
-  fnsatN : FondSati = new FondSati();
-  saveTemp:boolean = true;
+  fnsatN: FondSati = new FondSati();
+  saveTemp = true;
 
-  constructor(private fnsatService:FondSatiService, private router:Router,private route: ActivatedRoute, 
-    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
-    private serValidate:ServiceValidateShared ) {
+  constructor(private fnsatService: FondSatiService, private router: Router, private route: ActivatedRoute,
+    formBuilder: FormBuilder , private _location: Location, private flashMessage: FlashMessagesService,
+    private serValidate: ServiceValidateShared ) {
 
       this.formFSAT = formBuilder.group({
-        _id:[],
-        Mesec:['',[Validators.required,serValidate.maxValue(12),serValidate.minValue(1)]],
+        _id: [],
+        Mesec: ['', [Validators.required, serValidate.maxValue(12), serValidate.minValue(1)]],
         Godina: ['', [
-          Validators.required,serValidate.maxValue(2040),serValidate.minValue(2000)
+          Validators.required, serValidate.maxValue(2040), serValidate.minValue(2000)
         ]],
         Sati: ['', [
-          Validators.required,serValidate.maxValue(248),serValidate.minValue(0)
+          Validators.required, serValidate.maxValue(248), serValidate.minValue(0)
         ]],
         MinOsnov: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         MaxOsnov: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         Opis: []
       });
-
-
-     }
+  }
 
 
   get Mesec() { return this.formFSAT.get('Mesec'); }
@@ -56,146 +54,128 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
      this.route.params.subscribe(params => {
-      let id = params['id'];
+      const id = params['id'];
 
       this.title = id ? 'Ažuriranje fonda sati' : 'Novi fond sati';
 
-      if (!id){
+      if (!id) {
         this.loadTempData();
         return;
       }
 
       this.fnsatService.getFondSati(id)
         .subscribe(
-          (pos) =>{
-            if(pos.success){
+          (pos) => {
+            if (pos.success) {
               this.saveTemp = false;
               this.fnsatN = pos.data[0];
-            }else{
+            }else {
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
-          (error:ResponeCustom) => {
+          (error: ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-            // if (error == 404 || error.status == 400 ) {
-                this.router.navigate(['NotFound']);
-            // }
-          });
+              this.router.navigate(['NotFound']);
+            });
     });
   }
 
 
   save() {
-    var FSValue = this.formFSAT.value;
-      
-    if (FSValue._id){
+    const FSValue = this.formFSAT.value;
+    if (FSValue._id) {
        this.fnsatService.updateFondSati(FSValue).subscribe(
-        (pos) =>{
-          if(pos.success){
+        (pos) => {
+          if (pos.success) {
             this.clearTempData();
-            this.saveTemp=false;
+            this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['fondsati'])
-          }else{
+              this.router.navigate(['fondsati']);
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-        
-         // console.log(" forma UPDATE  " + error);
-         
         },
-        
       );
 
     } else {
 
       this.fnsatService.addFondSati(FSValue)
       .subscribe(
-        (pos) =>{
-          if(pos.success){
+        (pos) => {
+          if (pos.success) {
             this.clearTempData();
-            this.saveTemp=false;
+            this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['fondsati'])
-          }else{
+              this.router.navigate(['fondsati']);
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-          //console.log(" forma INSERT "  + error.toString()  + " ima li jos nesto" + error);
-          
         },
-        
       );
     }
   }
 
-
-
-
-  loadTempData(){
+  loadTempData() {
     const wdata = JSON.parse(localStorage.getItem('data_fnsati'));
-    if(wdata){
-      this.fnsatN =wdata;
+    if (wdata) {
+      this.fnsatN = wdata;
     }
-    
   }
 
-  setTempData(){
+  setTempData() {
     const  fsValue = JSON.stringify(this.formFSAT.value);
-    if(fsValue){
-      if(this.saveTemp){
-        localStorage.setItem('data_fnsati',fsValue);
-      }else{
+    if (fsValue) {
+      if (this.saveTemp) {
+        localStorage.setItem('data_fnsati', fsValue);
+      }else {
         this.clearTempData();
       }
     }
-    
    }
- 
- clearTempData(){
+
+ clearTempData() {
      localStorage.removeItem('data_fnsati');
   }
 
   backClicked(event: any) {
     this.setTempData();
     this._location.back();
-    //event.stopPropagation();
-    
   }
 
   revert() { this.clearFormData(); }
-  
+
   clearFormData() {
     this.formFSAT.reset({
-      Mesec: "",
-      Godina: "",
-      Sati:"",
-      MinOsnov:0,
-      MaxOsnov:0,
-      Opis:""
+      Mesec: '',
+      Godina: '',
+      Sati: '',
+      MinOsnov: 0,
+      MaxOsnov: 0,
+      Opis: ''
     });
 }
 
 ngOnDestroy() {
   this.setTempData();
 }
-
 
 }
