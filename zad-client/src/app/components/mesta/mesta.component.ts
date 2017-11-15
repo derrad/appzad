@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MestaService } from './mesta.service';
-import {Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { Mesta } from './mesta.model';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import {ConfirmDialogModule,ConfirmationService} from 'primeng/primeng';
-import {DialogModule} from 'primeng/primeng';
-import { routerTransition } from '../../animation/router.animations' 
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { routerTransition } from '../../animation/router.animations';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ResponeCustom } from './../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-mesta',
@@ -18,109 +19,82 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   animations: [routerTransition()]
 })
 export class MestaComponent implements OnInit {
-  Title:string;
-  selectedMesto : Mesta;
+  Title: string;
+  selectedMesto: Mesta;
   loading: boolean;
-  mestaL:Array<Mesta>;
-  displayDetals: boolean = false;
+  mestaL: Array<Mesta>;
+  displayDetals = false;
   mesShow: Mesta = new Mesta();
 
-  constructor(private router:Router,private mestaService:MestaService,
-              private confirmationService: ConfirmationService,private flashMessage:FlashMessagesService  ) {
-    this.Title="PREGLED MESTA";
+  constructor(private router: Router, private mestaService: MestaService,
+              private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService  ) {
+    this.Title = 'PREGLED MESTA';
 
    }
 
   ngOnInit() {
-
     this.mestaService.getMesta().subscribe(profile => {
-      if (profile.success === true) { 
-         //console.log(profile.data);
-      //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
+     if (profile.success === true) {
         this.mestaL = profile.data;
-
-      }
+      }else {
+        this.flashMessage.show(profile.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000});
+        this.router.navigate(['NotFound']);
+     }
     },
-    err => {
-      console.log(err);
-      return false;
+    (error: ResponeCustom)  => {
+      this.flashMessage.show(error.message, {
+        cssClass: 'alert-danger',
+        timeout: 9000});
+        this.mestaL = [];
+        return false;
     }
-    
-  );
+    );
   }
 
-
-
-selectMesto( mesto:Mesta) {
+selectMesto( mesto: Mesta) {
      this.displayDetals = true;
      this.mesShow = this.cloneData(mesto);
 }
 
-cloneData(c: Mesta):Mesta {
- let mesto = new Mesta();
- for(let prop in c) {
+cloneData(c: Mesta): Mesta {
+ const mesto = new Mesta();
+ // tslint:disable-next-line:forin
+ for ( const prop in c) {
   mesto[prop] = c[prop];
  }
  return mesto;
 }
 
-addMesta(){
- this.router.navigate(['/mesta/new'])
-
+addMesta() {
+ this.router.navigate(['/mesta/new']);
 }
 
 updateMesta(id) {
  this.router.navigate(['/mesta/', id]);
 }
 
-
-// deleteMesto(tmesto){
-//   // console.log(tdrzava);
-
-//   this.confirmationService.confirm({
-//     message: 'Are you sure that you want to perform this action?',
-//       accept: () => {
-//         //Actual logic to perform a confirmation
-//         var index = this.mestaL.indexOf(tmesto);
-//        // console.log("index je " + index);
-//         this.mestaL.splice(index, 1);
-    
-//         this.mestaService.delMesto(tmesto._id)
-//           .subscribe(null,
-//             err => {
-//               alert("Could not delete mesto.");
-//               // Revert the view back to its original state
-//               this.mestaL.splice(index, 0, tmesto);
-//             });
-//       }
-//     });
-
-  
-// }
-
-deleteMesto(tmesto){
+deleteMesto(tmesto) {
   this.confirmationService.confirm({
-     message: `Jeste li sigurni da želite uklonite izabrano mesto ?   ` ,
+     message: `Jeste li sigurni da želite uklonite izabrano mesto ?`,
      header: `${tmesto.Naziv}`,
        accept: () => {
-         //Actual logic to perform a confirmation
-         var index = this.mestaL.indexOf(tmesto);
-        // console.log("index je " + index);
+         // Actual logic to perform a confirmation
+         const index = this.mestaL.indexOf(tmesto);
          this.mestaL.splice(index, 1);
-     
          this.mestaService.delMesto(tmesto._id)
-           .subscribe((pos) =>{
-             if(pos.success){
+           .subscribe((pos) => {
+             if (pos.success) {
                 this.flashMessage.show(pos.message, {
                    cssClass: 'alert-success',
                    timeout: 1000});
-             }else{
-               this.router.navigate(['NotFound']);
+             }else {
+                this.router.navigate(['NotFound']);
              }
              } ,
-             err => {
-               //alert("Could not delete radnik.");
-               this.flashMessage.show('Could not delete mesto !!!', {
+             (error: ResponeCustom)  => {
+               this.flashMessage.show(error.message, {
                  cssClass: 'alert-danger',
                  timeout: 5000});
                // Revert the view back to its original state

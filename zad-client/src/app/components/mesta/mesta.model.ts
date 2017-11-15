@@ -20,4 +20,3 @@ export class Mesta implements IMesta {
     updatedAt?: Date;
 }
 
-

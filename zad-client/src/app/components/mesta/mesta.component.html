@@ -22,8 +22,8 @@
             <button type="button" pButton (click)="deleteMesto(mes)" icon="fa fa-trash" title="Delete"></button>
         </ng-template>
     </p-column>
-    <p-footer>
-            <div class="ui-helper-clearfix" style="width:100%" *ngIf="mestaL.length > 0">
+    <p-footer *ngIf="mestaL.length > 0">
+            <div class="ui-helper-clearfix" style="width:100%" >
                 <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addMesta()" label="Add"></button>
             </div>
     </p-footer>

@@ -1,11 +1,10 @@
-var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
-var EnumSS = require('../enum/serverenum');
+const mongoose = require('mongoose');
+const EnumSS = require('../enum/serverenum');
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
+const Schema = mongoose.Schema;
+     
 
-var sfPosao = new Schema({
+const sfPosao = new Schema({
    Naziv : {  type:String,trim:true,required: [true, 'Naziv je obavezan !!!'],unique: true},
    StepenSS  :  {
                  type : String,
@@ -33,23 +32,10 @@ var sfPosao = new Schema({
 //    console.log("PRE SAVE POSAO");
 //   next();
 // });
+ 
 
- sfPosao.plugin(mongoosePaginate);
-//  var collectionName = 'sfPosao';
+ module.exports = mongoose.model('sfPosao', sfPosao,'sfPosao');
 
-module.exports = mongoose.model('sfPosao', sfPosao,'sfPosao');
-
-
-// Naziv : {  type:String,
-//   required: [true, 'Naziv je obavezan !!!'],
-//   unique: true,
-//   trim: true, 
-//   match : [
-//           new RegExp('^[a-z0-9_-]+$', 'i'),
-//           '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore.'
-//           ],
-//   minlength:[3,"Minimalna duzina 3 karaktera"],
-//   maxlength:[100,"Maksimalna duzina 100 karaktera"]},
 
 
 // <option value="1">Nekvalifikovan</option>  PosaoID: ID,

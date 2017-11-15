@@ -17,20 +17,29 @@
           <div class="form-group">
               <label class="center-block">Opština:
                 <select  formControlName="Opstina" class="form-control" 
-                    placeholder="Select Opštinu"  name="Select Opštinu" [(ngModel)]="mesto.Opstina" >
+                    placeholder="Select Opštinu"  name="Select Opštinu" [(ngModel)]="mesto.Opstina" required>
                   <option *ngFor="let list of opstine" [value]="list._id"   >
                     {{ list.Naziv }}
                   </option>
                 </select>
               </label>
+              <div *ngIf="Opstina.invalid && (Opstina.dirty || Opstina.touched)" class="alert alert-danger">
+                <div *ngIf="Opstina.errors.required">
+                    <strong>Opština je obavezan podatak !!!</strong>
+                </div>
+              </div>
           </div>
           
           <div class="form-group">
               <label class="center-block">Naziv mesta:
-                <input class="form-control" formControlName="Naziv"  [(ngModel)]="mesto.Naziv" >
+                <input class="form-control" formControlName="Naziv"  [(ngModel)]="mesto.Naziv" required>
               </label>
-               <div class="text-danger" *ngIf="!formMEST.controls['Naziv'].valid && formMEST.controls['Naziv'].touched">{{ titleAlertNaziv }}</div> 
-              
+               
+               <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                    <div *ngIf="Naziv.errors.required">
+                        <strong>Naziv je obavezan podatak !!!</strong>
+                    </div>
+                  </div>
             </div>
             
             <div class="form-group">
@@ -51,7 +60,7 @@
             <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formMEST.valid"
-                            class="btn btn-default">
+                            class="btn btn-success">
                         <span class="glyphicon glyphicon-saved"></span>
                         Save
                         </button>

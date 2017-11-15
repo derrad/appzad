@@ -5,9 +5,9 @@ const sfOpstine = require('../models/sfOpstine');
 const Schema = mongoose.Schema;
 
 const sfMesta = new Schema({
-   //Opstina: { type:Schema.ObjectId, ref:"Opstina", childPath:"child" },
-   Opstina: { type:Schema.ObjectId, ref:"sfOpstine",required:true },
-   Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] ,unique: true},
+   //Opstina: { type:Schema.ObjectId, ref:"Opstina", childPath:"child" } ,unique: true,
+   Opstina: { type:Schema.ObjectId, ref:"sfOpstine", required:true },
+   Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
    Ptt:{type:String,trim: true},
    Opis  :{ type: String,trim: true },
    NameUser: {type:String,trim: true}
@@ -20,6 +20,8 @@ const sfMesta = new Schema({
     retainKeyOrder: true 
 }
 );
+
+sfMesta.index({Opstina: 1, Naziv: 1}, {unique: true});
 
 //  sfMesta.virtual('nazivOpstine', {
 //      ref: 'sfOpstine', // The model to use

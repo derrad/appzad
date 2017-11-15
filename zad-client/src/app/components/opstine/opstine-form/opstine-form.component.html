@@ -17,7 +17,7 @@
                </div>
               <div class="form-group">
                   <label class="center-block">Država:
-                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" >
+                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" required>
                       <option *ngFor="let list of drzave" [value]="list._id">
                         {{ list.Naziv }}
                       </option>
@@ -32,7 +32,7 @@
                 
                 <div class="form-group">
                     <label class="center-block">Kod opštine:
-                      <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn" >
+                      <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn"  required>
                     </label>
                     
                     <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger">
@@ -48,7 +48,7 @@
 
                 <div class="form-group">
                   <label class="center-block">Naziv opštine:
-                    <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv" >
+                    <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv"  required>
                   </label>
                   
                   <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
