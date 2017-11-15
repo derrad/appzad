@@ -235,7 +235,7 @@ save() {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['partner'])
+              this.router.navigate(['partner']);
           }else {
             this.router.navigate(['NotFound']);
           }
@@ -262,7 +262,7 @@ save() {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['partner'])
+              this.router.navigate(['partner']);
           }else {
             this.router.navigate(['NotFound']);
           }
@@ -298,7 +298,7 @@ setTempData() {
 
 }
 
-clearTempData(){
+clearTempData() {
      localStorage.removeItem('data_kupac');
 }
 
