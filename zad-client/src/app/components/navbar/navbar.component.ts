@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
 
   getNotification(evt) {
     // Do something with the notification (evt) sent by the child!
-    console.log('"getNotification u  navbaru');
+   // console.log('"getNotification u  navbaru');
     this.visibleSidebar1 = false;
   }
 

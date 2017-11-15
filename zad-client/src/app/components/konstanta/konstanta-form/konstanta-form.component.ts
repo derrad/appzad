@@ -9,7 +9,6 @@ import { KonstantaModel } from '../konstanta-model';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom } from './../../../shared/models/ErrorRes';
-// import {MyDateInput} from '../../../shared/frmDatum/date.input';
 
 @Component({
   selector: 'app-konstanta-form',
@@ -20,65 +19,65 @@ import { ResponeCustom } from './../../../shared/models/ErrorRes';
 export class KonstantaFormComponent implements OnInit {
   formKonst: FormGroup;
   title: string;
-  konstN : KonstantaModel = new KonstantaModel();
+  konstN: KonstantaModel = new KonstantaModel();
 
-  constructor(private konstService:KonstantaService, private router:Router,private route: ActivatedRoute, 
-    formBuilder: FormBuilder ,private _location: Location,private flashMessage:FlashMessagesService,
-    private serValidate:ServiceValidateShared) { 
+  constructor(private konstService: KonstantaService, private router: Router, private route: ActivatedRoute,
+        formBuilder: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService,
+        private serValidate: ServiceValidateShared) {
 
       this.formKonst = formBuilder.group({
-        _id:[],
-        Datum:['',[Validators.required]],
+        _id: [],
+        Datum: ['', [Validators.required]],
         UcPenz: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         UcZdrav: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         UcNormTr: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         UcOlak: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         UcPorez: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         Pdv: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         Clanarin: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsPorez: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsUmanjen: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsPio1: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsPio2: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsZdrav1: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsZdrav2: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsNez1: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsNez2: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsMinOsDop: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         OsMaxOsDop: ['', [
-          Validators.required,serValidate.minValue(0)
+          Validators.required, serValidate.minValue(0)
         ]],
         Opis: []
       });
@@ -86,9 +85,6 @@ export class KonstantaFormComponent implements OnInit {
 
 
   get Datum() { return this.formKonst.get('Datum'); }
-  // set Datum(value:Date) { 
-  //     this.formKonst.setValue(value); 
-  // }
   get UcPenz() { return this.formKonst.get('UcPenz'); }
   get UcZdrav() { return this.formKonst.get('UcZdrav'); }
   get UcNormTr() { return this.formKonst.get('UcNormTr'); }
@@ -106,159 +102,141 @@ export class KonstantaFormComponent implements OnInit {
   get OsNez2() { return this.formKonst.get('OsNez2'); }
   get OsMinOsDop() { return this.formKonst.get('OsMinOsDop'); }
   get OsMaxOsDop() { return this.formKonst.get('OsMaxOsDop'); }
-  
 
   ngOnInit() {
 
-    var id = this.route.params.subscribe(params => {
-      var id = params['id'];
+    this.route.params.subscribe(params => {
+      const id = params['id'];
 
       this.title = id ? 'Ažuriranje Konstante' : 'Nova konstanta';
 
-      if (!id){
+      if (!id) {
          return;
       }
 
       this.konstService.getKonstanta(id)
         .subscribe(
           (pos) => {
-            if(pos.success){
+            if (pos.success) {
                this.konstN = pos.data[0];
-              
-            }else{
+            }else {
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000});
               this.router.navigate(['NotFound']);
             }
           } ,
-          (error:ResponeCustom) => {
+          (error: ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-            // if (error == 404 || error.status == 400 ) {
                 this.router.navigate(['NotFound']);
-            // }
           });
     });
 
   }
 
 
-  validateOnlyNumbers(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode( key );
-    var regex = /[0-9]|\./;
-    if( !regex.test(key) ) {
-      theEvent.returnValue = false;
-      if(theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
+  // validateOnlyNumbers(evt) {
+  //   var theEvent = evt || window.event;
+  //   var key = theEvent.keyCode || theEvent.which;
+  //   key = String.fromCharCode( key );
+  //   var regex = /[0-9]|\./;
+  //   if( !regex.test(key) ) {
+  //     theEvent.returnValue = false;
+  //     if(theEvent.preventDefault) theEvent.preventDefault();
+  //   }
+  // }
 
   save() {
-    var FormValue = this.formKonst.value;
-      
-    if (FormValue._id){
+    const FormValue = this.formKonst.value;
+
+    if (FormValue._id) {
        this.konstService.updateKonstanta(FormValue).subscribe(
-        (pos) =>{
-          if(pos.success){
-           
+        (pos) => {
+          if (pos.success) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['konstanta'])
-          }else{
+              this.router.navigate(['konstanta']);
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-         
         },
-        
       );
-
     } else {
-
       this.konstService.addKonstanta(FormValue)
       .subscribe(
-        (pos) =>{
-          if(pos.success){
-           
+        (pos) => {
+          if (pos.success) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['konstanta'])
-          }else{
+              this.router.navigate(['konstanta']);
+          }else {
             this.router.navigate(['NotFound']);
           }
         } ,
-        (error:ResponeCustom) => {
+        (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-                 
         },
-        
       );
     }
   }
 
-
-  
   backClicked(event: any) {
      this._location.back();
-     
   }
 
   revert() { this.clearFormData(); }
-  
+
   clearFormData() {
     this.formKonst.reset({
-      Datum: "",
+      Datum: '',
       UcPenz: 0,
-      UcZdrav:0,
-      UcNormTr:0,
-      UcOlak:0,
-      UcPorez:0,
-      Pdv:0,
-      Clanarin:0,
-      OsPorez:0,
-      OsUmanjen:0,
-      OsPio1:0,
-      OsPio2:0,
-      OsZdrav1:0,
-      OsZdrav2:0,
-      OsNez1:0,
-      OsNez2:0,
-      OsMinOsDop:0,
-      OsMaxOsDop:0,
-      Opis:""
+      UcZdrav: 0,
+      UcNormTr: 0,
+      UcOlak: 0,
+      UcPorez: 0,
+      Pdv: 0,
+      Clanarin: 0,
+      OsPorez: 0,
+      OsUmanjen: 0,
+      OsPio1: 0,
+      OsPio2: 0,
+      OsZdrav1: 0,
+      OsZdrav2: 0,
+      OsNez1: 0,
+      OsNez2: 0,
+      OsMinOsDop: 0,
+      OsMaxOsDop: 0,
+      Opis: ''
     });
 }
 
-getExcatDate(string){
-   //let year=new Date(this.konstN.Datum.toString()).getFullYear();
-  // let month=new Date(this.konstN.Datum.toString()).getMonth();
-   //let date=new Date(this.konstN.Datum.toString()).getDate();
-  //  let year= this.konstN.Datum.getFullYear();
-  //  let month= this.konstN.Datum.getMonth();
-   let date  = new Date().getDay() ;
-  // console.log(" datum iz konstante " + date);
-   let year=  new Date().getFullYear();//date.getFullYear();
-   let month= new Date().getMonth();
-   
-  let local= ( date.toString().length===1 ?  '0' + date : date) + '/' +
-              ( month.toString().length===1 ?  '0' +month : month) 
-               + '/' +  year.toString().substring(0);
-
-
-  console.log(" proba local "  + local);
-  this.konstN.Datum= new Date(local);
-  return local;
-}
+// getExcatDate(string){
+//    //let year=new Date(this.konstN.Datum.toString()).getFullYear();
+//   // let month=new Date(this.konstN.Datum.toString()).getMonth();
+//    //let date=new Date(this.konstN.Datum.toString()).getDate();
+//   //  let year= this.konstN.Datum.getFullYear();
+//   //  let month= this.konstN.Datum.getMonth();
+//    let date  = new Date().getDay() ;
+//   // console.log(" datum iz konstante " + date);
+//    let year=  new Date().getFullYear();//date.getFullYear();
+//    let month= new Date().getMonth();
+//   let local= ( date.toString().length===1 ?  '0' + date : date) + '/' +
+//               ( month.toString().length===1 ?  '0' +month : month)
+//                + '/' +  year.toString().substring(0);
+//   console.log(" proba local "  + local);
+//   this.konstN.Datum= new Date(local);
+//   return local;
+// }
 
 }

@@ -19,7 +19,7 @@ export interface IFondSati {
       MinOsnov: Number;
       MaxOsnov: Number;
       Opis?: string;
-     NameUser?: string;
-     created_at?: Date;
-     updatedAt?: Date;
+      NameUser?: string;
+      created_at?: Date;
+      updatedAt?: Date;
  }

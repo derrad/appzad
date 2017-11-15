@@ -22,10 +22,9 @@
             <label class="center-block">Važe od datuma:
                     <div class="input-group">
                         <div class="input-group">
-                            <input [ngModel]="konstN.Datum | date:'yyyy-MM-dd'"  type="date" formControlName="Datum" name="Datum" class="form-control" required>
-                         
+                            <input [ngModel]="konstN.Datum | date:'yyyy-MM-dd'"  type="date" 
+                                formControlName="Datum" name="Datum" class="form-control" required>
                         </div>
-                        <!-- [(ngModel)]="konstN.Datum"    | date:'yyyy-MM-dd'"   -->
                     </div>
             </label>
             <div *ngIf="Datum.invalid && (Datum.dirty || Datum.touched)" class="alert alert-danger">
@@ -43,7 +42,8 @@
                     <label class="center-block">Stopa poreza(Pdv):
                         <div class="input-group">   
                             <div class="input-group">
-                                <input class="form-control text-right" formControlName="Pdv"  [(ngModel)]="konstN.Pdv" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <input class="form-control text-right" formControlName="Pdv"  [(ngModel)]="konstN.Pdv" 
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">%</span>
                             </div>
                         </div>
@@ -62,7 +62,8 @@
                     <label class="center-block">Članarina(zadruzi):
                             <div class="input-group"> 
                                 <div class="input-group"> 
-                                    <input class="form-control text-right" formControlName="Clanarin"  [(ngModel)]="konstN.Clanarin"  (keypress)="serValidate.validateOnlyNumbers($event)"required>
+                                    <input class="form-control text-right" formControlName="Clanarin"  [(ngModel)]="konstN.Clanarin"  
+                                    (keypress)="serValidate.validateOnlyNumbers($event)"required>
                                     <span class="input-group-addon">RSD</span>
                                 </div>
                             </div>
@@ -94,7 +95,8 @@
                 <label class="center-block">Doprinosi penziono:
                     <div class="input-group">
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="UcPenz"  [(ngModel)]="konstN.UcPenz" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -113,7 +115,8 @@
                 <label class="center-block">Doprinosi za zdravstveno:
                     <div class="input-group"> 
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcZdrav"  [(ngModel)]="konstN.UcZdrav" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="UcZdrav"  [(ngModel)]="konstN.UcZdrav" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -132,7 +135,8 @@
                     <label class="center-block">Normirani troškovi:
                         <div class="input-group"> 
                             <div class="input-group">
-                                <input  class="form-control text-right" formControlName="UcNormTr"  [(ngModel)]="konstN.UcNormTr"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <input  class="form-control text-right" formControlName="UcNormTr"  [(ngModel)]="konstN.UcNormTr"  
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">%</span>
                             </div>
                         </div>
@@ -153,7 +157,8 @@
                 <label class="center-block">Stopa olakšice:
                     <div class="input-group">
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcOlak"  [(ngModel)]="konstN.UcOlak" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="UcOlak"  [(ngModel)]="konstN.UcOlak" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -172,7 +177,8 @@
                 <label class="center-block">Stopa poreza:
                     <div class="input-group">
                         <div class="input-group">
-                            <input class="form-control text-right" formControlName="UcPorez"  [(ngModel)]="konstN.UcPorez" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="UcPorez"  [(ngModel)]="konstN.UcPorez" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                         </div>
                     </div>
@@ -203,7 +209,8 @@
                         <label class="center-block">OsPorez:
                             <div class="input-group"> 
                                 <div class="input-group"> 
-                                <input class="form-control text-right" formControlName="OsPorez"  [(ngModel)]="konstN.OsPorez"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <input class="form-control text-right" formControlName="OsPorez"  [(ngModel)]="konstN.OsPorez"  
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">RSD</span>
                                 </div>
                             </div>
@@ -223,7 +230,8 @@
                     <label class="center-block">Umanjene poreske osnovice:
                         <div class="input-group"> 
                             <div class="input-group"> 
-                                <input class="form-control text-right" formControlName="OsUmanjen"  [(ngModel)]="konstN.OsUmanjen"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <input class="form-control text-right" formControlName="OsUmanjen"  [(ngModel)]="konstN.OsUmanjen"  
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">RSD</span>
                             </div>
                         </div>
@@ -243,7 +251,8 @@
                     <label class="center-block">Stopa pio(prema radniku):
                         <div class="input-group">
                             <div class="input-group">
-                                <input  class="form-control text-right"  formControlName="OsPio1"  [(ngModel)]="konstN.OsPio1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                <input  class="form-control text-right"  formControlName="OsPio1"  [(ngModel)]="konstN.OsPio1" 
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                 <span class="input-group-addon">%</span>
                             </div>
                         </div>
@@ -261,7 +270,8 @@
                     <label class="center-block">Stopa pio(prema poslodavcu):
                             <div class="input-group">
                                 <div class="input-group">
-                            <input class="form-control text-right" formControlName="OsPio2"  [(ngModel)]="konstN.OsPio2"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="OsPio2"  [(ngModel)]="konstN.OsPio2"  
+                                (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                                 </div>
                             </div>
@@ -281,7 +291,8 @@
                     <label class="center-block">Stopa zdravstveno(prema radniku):
                         <div class="input-group">
                                 <div class="input-group">
-                            <input class="form-control text-right" formControlName="OsZdrav1"  [(ngModel)]="konstN.OsZdrav1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="OsZdrav1"  [(ngModel)]="konstN.OsZdrav1" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                                 </div>
                         </div>
@@ -300,7 +311,8 @@
                     <label class="center-block">Stopa zdravstveno(prema poslodavcu):
                             <div class="input-group">
                                 <div class="input-group">
-                            <input class="form-control text-right" formControlName="OsZdrav2"  [(ngModel)]="konstN.OsZdrav2" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="OsZdrav2"  [(ngModel)]="konstN.OsZdrav2" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                                 </div>
                             </div>
@@ -321,7 +333,8 @@
                     <label class="center-block">Stopa nezaposlenost(prema radniku):
                         <div class="input-group">
                                 <div class="input-group">
-                            <input class="form-control text-right" formControlName="OsNez1"  [(ngModel)]="konstN.OsNez1" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                            <input class="form-control text-right" formControlName="OsNez1"  [(ngModel)]="konstN.OsNez1" 
+                            (keypress)="serValidate.validateOnlyNumbers($event)" required>
                             <span class="input-group-addon">%</span>
                                 </div>
                         </div>
@@ -340,7 +353,8 @@
                         <label class="center-block">Stopa nezaposlenost(prema poslodavcu):
                             <div class="input-group">
                                 <div class="input-group">
-                                    <input class="form-control text-right" formControlName="OsNez2"  [(ngModel)]="konstN.OsNez2" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                    <input class="form-control text-right" formControlName="OsNez2"  [(ngModel)]="konstN.OsNez2" 
+                                    (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                     <span class="input-group-addon">%</span>
                                 </div>
                             </div>
@@ -361,7 +375,8 @@
                     <label class="center-block">Minimalna osnovica doprinosa:
                             <div class="input-group">
                                 <div class="input-group">
-                                    <input class="form-control text-right" formControlName="OsMinOsDop"  [(ngModel)]="konstN.OsMinOsDop" (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                                    <input class="form-control text-right" formControlName="OsMinOsDop"  [(ngModel)]="konstN.OsMinOsDop" 
+                                    (keypress)="serValidate.validateOnlyNumbers($event)" required>
                                     <span class="input-group-addon">RSD</span>
                                 </div>
                             </div>
@@ -381,7 +396,8 @@
                     <label class="center-block">Maksimalna osnovica doprinosa:
                             <div class="input-group">
                                     <div class="input-group">
-                                        <input class="form-control text-right" formControlName="OsMaxOsDop"  [(ngModel)]="konstN.OsMaxOsDop" (keypress)="serValidate.validateOnlyNumbers($event)"  required>
+                                        <input class="form-control text-right" formControlName="OsMaxOsDop"  [(ngModel)]="konstN.OsMaxOsDop" 
+                                        (keypress)="serValidate.validateOnlyNumbers($event)"  required>
                                         <span class="input-group-addon">RSD</span>
 
                                     </div>

@@ -4,119 +4,86 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw'; 
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-import { ResponeCustom}  from './../../shared/models/ErrorRes';
+import { ResponeCustom} from './../../shared/models/ErrorRes';
 
 @Injectable()
 export class FondSatiService {
 
   authToken: any;
-  isDev:boolean;
+  isDev: boolean;
 
-  constructor(private http:Http) {
-    this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
+  constructor(private http: Http) {
+    this.isDev = ServiceConfig.isDev;
    }
 
-   loadToken(){
+   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
-  getFondSate(){
-    let headers = new Headers();
+  getFondSate() {
+    const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-    let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati') ; 
-    return this.http.get(ep,{headers: headers})
-    .map(res => res.json()).catch(this.handleError); 
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/fondsati');
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
   }
- 
- getFondSati(id){
-  let headers = new Headers();
+
+ getFondSati(id) {
+  const headers = new Headers();
   this.loadToken();
   headers.append('Authorization', this.authToken);
-  headers.append('Content-Type','application/json');
-  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + id) ;
-  return this.http.get(ep,{headers: headers})
-  .map(res => res.json()).catch(this.handleError); 
+  headers.append('Content-Type', 'application/json');
+  const ep = ServiceConfig.PrepareHost(this.isDev, 'api/fondsati/' + id) ;
+  return this.http.get(ep, {headers: headers})
+  .map(res => res.json()).catch(this.handleError);
 
 }
 
 
-addFondSati(fsati){
-  let headers = new Headers();
+addFondSati(fsati) {
+  const headers = new Headers();
   this.loadToken();
   headers.append('Authorization', this.authToken);
-  headers.append('Content-Type','application/json');
-  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/') ;
-  
-   return this.http.post(ep, JSON.stringify(fsati),{headers: headers})
+  headers.append('Content-Type', 'application/json');
+  const ep = ServiceConfig.PrepareHost(this.isDev, 'api/fondsati/');
+   return this.http.post(ep, JSON.stringify(fsati), {headers: headers})
    .map(res => res.json()).catch(this.handleError);
- 
 }
 
-updateFondSati(fsati){
-  let headers = new Headers();
+updateFondSati(fsati) {
+  const headers = new Headers();
   this.loadToken();
   headers.append('Authorization', this.authToken);
-  headers.append('Content-Type','application/json');
-  let ep =  ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + fsati._id) ;
-  
-  return this.http.put(ep, JSON.stringify(fsati),{headers: headers})
+  headers.append('Content-Type', 'application/json');
+  const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/fondsati/' + fsati._id) ;
+  return this.http.put(ep, JSON.stringify(fsati), {headers: headers})
   .map(res => res.json()).catch(this.handleError);
 }
 
 
-delFondSati(id){
-  let headers = new Headers();
+delFondSati(id) {
+  const headers = new Headers();
   this.loadToken();
   headers.append('Authorization', this.authToken);
-  headers.append('Content-Type','application/json');
-  let ep = ServiceConfig.PrepareHost(this.isDev,'api/fondsati/' + id) ;
-  return this.http.delete(ep,{headers: headers})
-  .map(res => res.json()).catch(this.handleError); 
+  headers.append('Content-Type', 'application/json');
+  const ep = ServiceConfig.PrepareHost(this.isDev, 'api/fondsati/' + id) ;
+  return this.http.delete(ep, {headers: headers})
+  .map(res => res.json()).catch(this.handleError);
 }
 
-
-//   prepEndpoint(ep){
-//      return ServiceConfig.PrepareHost(this.isDev,ep);
-//  }
-
-  private handleError(error: Response) {
-    //let greska =error.status + "  " + error.statusText;
-    //  let myerror = new Animal('Pera');
-    //  console.log(myerror.move(5));
-    
-     let myerror = new ResponeCustom().fromJSON(error.json());
-    //  console.log(myerror.getPorukaG());
-    //  console.log(myerror.getTextP());
-   //  console.log( "samo status text " + myerror.message);
-
-     
-     //console.log('error.json' + JSON.stringify(error.json()));
-
-     
-    //  myerror.fillFromJSON(JSON.parse(JSON.stringify(error)));
-
-    //console.log("Moj error " + myerror._body.message);
-    //   myerror=<IErrorReq> Response;
-    // if(myerror._body){
-    //   greska =error.status + "  " + error._body.message;
-    // }
-    // let texterror:string= JSON.stringify(error);
-    // console.log('moj text error' + texterror);
-    //console.log(JSON.parse(JSON.stringify(error)));
-
-    //return Observable.throw(error.statusText || 'Server error');
-    let servererr = new ResponeCustom();
-    servererr.message='Server error';
-    servererr.success=false;
-    servererr.data=[];
-
-    return Observable.throw(myerror || servererr);
-} 
+private handleError(error: Response) {
+  const myerror = new ResponeCustom().fromJSON(error.json());
+  const servererr = new ResponeCustom();
+  servererr.message = 'Server error';
+  servererr.success = false;
+  servererr.data = [];
+  return Observable.throw(myerror || servererr);
+}
 
 }
