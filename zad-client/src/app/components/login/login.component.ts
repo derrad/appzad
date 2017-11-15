@@ -10,22 +10,21 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: String;
-  password: String; 
-  
-  constructor(private authService:AuthService,private router:Router,private flashMessage:FlashMessagesService) { }
+  username: string;
+  password: string;
+  constructor(private authService: AuthService, private router: Router, private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
   }
 
-  onLoginSubmit(){
+  onLoginSubmit() {
      const user = {
         username: this.username,
         password: this.password
-      }
+     };
 
     this.authService.authenticateUser(user).subscribe(data => {
-      if(data.success){
+      if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         this.flashMessage.show('You are now logged in', {
           cssClass: 'alert-success',
@@ -37,6 +36,6 @@ export class LoginComponent implements OnInit {
           timeout: 5000});
          this.router.navigate(['login']);
       }
-    }); 
+    });
   }
 }
