@@ -224,18 +224,6 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
     });
 
   }
-  // ngAfterViewInit() {
-  //   this.route.params.subscribe(params => {
-  //     const id = params['id'];
-  //     if (!id) {
-  //        this.IDZadrugar.setValue(15);
-  //     }else {
-  //       return;
-  //      }
-
-  //   });
-
-  // }
 
   get IDZadrugar() { return this.formZadr.get('IDZadrugar'); }
   get Ime() { return this.formZadr.get('Ime'); }
