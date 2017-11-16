@@ -84,12 +84,17 @@ cloneData(c: ZanimanjaModel): ZanimanjaModel {
           this.zanL.splice(index, 1);
           this.zanService.delZanimanje(tzanim._id)
           .subscribe((pos) => {
+            // console.log(pos);
             if (pos.success) {
                this.flashMessage.show(pos.message , {
                   cssClass: 'btn-success',
                   timeout: 1000});
             }else {
-              this.router.navigate(['NotFound']);
+              this.flashMessage.show(pos.message , {
+                cssClass: 'btn-danger',
+                timeout: 5000});
+                this.zanL.splice(index, 0, tzanim);
+              // this.router.navigate(['NotFound']);
             }
             } ,
             (error: ResponeCustom)  => {

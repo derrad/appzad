@@ -158,17 +158,6 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             });
         });
 
-        // this.formZadr.get('validate').valueChanges.subscribe(
-        //   (validate) => {
-        //     if (validate === '1') {
-        //       this.formZadr.get('name').setValidators([Validators.required, Validators.minLength(3)]);
-        //     } else {
-        //       this.formZadr.get('name').setValidators(Validators.required);
-        //     }
-        //     this.formZadr.get('name').updateValueAndValidity();
-        //   }
-        // );
-
         this.VrstaIdentifikatoraPrimaoca.valueChanges.subscribe(
           (validate) => {
             if (validate === 'JMBG_EBS') {

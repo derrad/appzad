@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Zanimanja = require('../models/sfZanimanja');
+const Zadrugar = require('../models/sfZadrugar');
 const LogAct = require('../models/apActlog');
 const TypeA = require('../enum/serverenum');
+
 
 const TIP_TRANS_INSERT ="ADD ZANIMANJA";
 const TIP_TRANS_UPDATE ="CHANGES ZANIMANJA";
@@ -118,17 +120,37 @@ module.exports.getzanimanja = function (req, res,next) {
 
 module.exports.delezanimanja = function(req, res, next) {
  // console.log("delete  zanimanja parametar je : " + req.params.id);
-	Zanimanja.remove({_id: req.params.id}, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}); }
-        try{
-          AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Zanimanja" , req.user.email)
-          } catch(ex){}
-        return res.status(201).json({
-            success: true,
-            message: 'Zanimanje removed successfully',
-            data:[]
-          });
-  });
+
+    Zadrugar.count({ZanimanjaID: req.params.id}, function(err,count){
+      //console.log("DA VIDIM COUNT" +  count);
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+       console.log("Zadrugari koji imaju ovo zanimanje  : " + count);
+        if(count>0){
+            return res.status(200).json({
+              success: false,
+              message: 'Zanimanje not removed successfully, relation is used with this ID',
+              data:[]
+            });
+        }else{
+          Zanimanja.remove({_id: req.params.id}, function(err){
+            if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , data:[]}); }
+            try{
+              AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Zanimanja" , req.user.email)
+              } catch(ex){}
+            return res.status(201).json({
+                success: true,
+                message: 'Zanimanje removed successfully',
+                data:[]
+              });
+            });
+
+
+        }
+
+      
+    });
+
+
 }
 
 
