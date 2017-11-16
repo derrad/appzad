@@ -1,6 +1,6 @@
-<p>
+<!-- <p>
   zadrugar-form works!
-</p>
+</p> -->
 <div class="panel panel-primary"  [@formsTransition]>
     <div class="panel-heading">
         <div class="row">
@@ -15,128 +15,283 @@
     <div class="panel-body">
         <form [formGroup]="formZadr" (ngSubmit)="save()" novalidate>
             <div class="form-group" >
-                <!-- <label class="center-block">ID: -->
-                  <input class="form-control" formControlName="_id"  [(ngModel)]="zadrN._id"   type="hidden">
-                <!-- <label> -->
+                <input class="form-control" formControlName="_id"  [(ngModel)]="zadrN._id"   type="hidden">
             </div>
             <div class="form-group">
                 <label class="center-block">ID:
-                      <div class="input-group">
-                          <div class="input-group">
-                              <input class="form-control text-right" formControlName="IDZadrugar"  
-                              [(ngModel)]="zadrN.IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)" required>
-                             
-                          </div>
-                      </div>
-                </label>
-            </div>
-
-            <div class="form-group">
-                    <label class="center-block">Naziv:
-                      <input class="form-control" formControlName="Naziv"  [(ngModel)]="zadrN.Naziv"  required>
-                    </label>
-                    <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                        <div *ngIf="Naziv.errors.required">
-                            <strong>Naziv je obavezan podatak !!!</strong>
+                    <div class="input-group">
+                        <div class="input-group">
+                            <input class="form-control text-right" formControlName="IDZadrugar"  
+                            [(ngModel)]="zadrN.IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)" required>
                         </div>
-                        <div *ngIf="Naziv.errors.minlength">
-                            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
-                          </div>
-                        <div *ngIf="Naziv.errors.maxlength">
-                            <strong>Predugačak naziv !!!</strong>
-                       </div>
                     </div>
-            </div>
-
-            <div class="form-group col-md-8">
-                  <label class="center-block">Kod pretrage:
-                    <input class="form-control" formControlName="KyeSearch"  [(ngModel)]="zadrN.KyeSearch" required>
-                  </label>
-                  <div *ngIf="KyeSearch.invalid && (KyeSearch.dirty || KyeSearch.touched)" class="alert alert-danger">
-                      <div *ngIf="KyeSearch.errors.required">
-                          <strong>Kod je obavezan podatak !!!</strong>
-                      </div>
-                      <div *ngIf="KyeSearch.errors.minlength">
-                          <strong>Kod mora biti minimalno 2 karaktera dužine !!!</strong>
-                        </div>
-                      <div *ngIf="KyeSearch.errors.maxlength">
-                          <strong>Predugačak kod !!!</strong>
-                     </div>
-                  </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="center-block">Država:
-                <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  
-                    name="Select Državu" [(ngModel)]="zadrN.Drzava"  required>
-                    <option *ngFor="let list of drzave" [value]="list._id"   >
-                    {{ list.Naziv }}
-                    </option>
-                </select>
                 </label>
             </div>
 
-             
-              <div class="form-group">
-                  <div class="checkbox">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="center-block">Ime:
+                        <input class="form-control" formControlName="Ime"  [(ngModel)]="zadrN.Ime"  required>
+                    </label>
+                    <div *ngIf="Ime.invalid && (Ime.dirty || Ime.touched)" class="alert alert-danger">
+                        <div *ngIf="Ime.errors.required">
+                            <strong>Ime je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="Ime.errors.minlength">
+                            <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>
+                            </div>
+                        <div *ngIf="Ime.errors.maxlength">
+                            <strong>Predugačko Ime !!!</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="center-block">Prezime:
+                        <input class="form-control" formControlName="Prezime"  [(ngModel)]="zadrN.Prezime" required>
+                    </label>
+                    <div *ngIf="Prezime.invalid && y(Prezime.dirty || Prezime.touched)" class="alert alert-danger">
+                        <div *ngIf="Prezime.errors.required">
+                            <strong>Prezime je obavezan podatak !!!</strong>
+                        </div>
+                        <div *ngIf="Prezime.errors.minlength">
+                            <strong>Prezime mora biti minimalno 2 karaktera dužine !!!</strong>
+                            </div>
+                        <div *ngIf="Prezime.errors.maxlength">
+                            <strong>Predugačko prezime !!!</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="center-block">Ime Roditelja:
+                        <input class="form-control" formControlName="ImeRoditelja"  [(ngModel)]="zadrN.ImeRoditelja" >
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Datum rodjenja:
+                    <div class="input-group">
+                        <div class="input-group">
+                            <input [ngModel]="zadrN.DatRodjenja | date:'yyyy-MM-dd'"  type="date" 
+                                formControlName="DatRodjenja" name="DatRodjenja" class="form-control" required>
+                        </div>
+                    </div>
+                </label>
+                <div *ngIf="DatRodjenja.invalid && (DatRodjenja.dirty || DatRodjenja.touched)" class="alert alert-danger">
+                    <div *ngIf="DatRodjenja.errors.required">
+                        <strong>Datum je obavezan podatak !!!</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
                     <label class="center-block">
                         <input type="checkbox" formControlName="Aktivan" [(ngModel)]="zadrN.Aktivan">Aktivan
                     </label>
-                  </div>
                 </div>
-              
-                <div class="form-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Adresa:</strong></div>
-                        <div class="panel-body">
-                            <partadresa [groupadresa]="Adresa" ></partadresa>
-                        </div>
-                    </div> 
-                </div>
-                <div class="form-group">
-                    <label class="center-block">Email:
-                        <input class="form-control" formControlName="Email"  [(ngModel)]="zadrN.Email" >
-                    </label>
-                </div>
-     
+            </div>
+          
 
-                <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="center-block">Pib:
-                        <input class="form-control" formControlName="Pib"  [(ngModel)]="zadrN.Pib" >
-                    </label>
+            <div class="form-group">
+                <label class="center-block">Pol:
+                   <select  formControlName="Pol" class="form-control"  [(ngModel)]="zadrN.Pol"  required>
+                        <option *ngFor="let list of zadPolC" [value]="list">
+                            {{ list }}
+                        </option>
+                    </select>
+                 </label>
+                <div *ngIf="Pol.invalid && (Pol.dirty || Pol.touched)" class="alert btn-danger">
+                    <div *ngIf="Pol.errors.required">
+                        <strong>Pol je obavezan podatak !!!</strong>
+                    </div>
                 </div>
-                      
-                <div class="form-group col-md-6">
-                    <label class="center-block">Matični broj:
-                         <input class="form-control" formControlName="MatBroj"  [(ngModel)]="zadrN.MatBroj" >
-                    </label>
-                </div>
-                  
-            <div class="form-group col-md-6">
-                <label class="center-block">Šifra delatnosti:
-                <input class="form-control" formControlName="SifDelat"  [(ngModel)]="zadrN.SifDelat" >
-                </label>
             </div>
-            <div class="form-group col-md-6">
-                <label class="center-block">Pdv broj:
-                    <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="zadrN.PdvBroj" >
-                </label>
-            </div>
-        </div>
-              
+          
        
-            
+            <div class="form-group">
+                <label class="center-block">Opština rođenja:
+                    <input class="form-control" formControlName="OpstinaRodj"  [(ngModel)]="zadrN.OpstinaRodj" >
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Mesto rođenja:
+                    <input class="form-control" formControlName="MestoRodj"  [(ngModel)]="zadrN.MestoRodj" >
+                </label>
+            </div>
+
+            <div class="form-group">
+                    <label class="center-block">Vrsta idetifikatora primaoca:
+                        <select  formControlName="VrstaIdentifikatoraPrimaoca" 
+                          class="form-control"  [(ngModel)]="zadrN.VrstaIdentifikatoraPrimaoca"  required>
+                        <option *ngFor="let list of zadIdentC" [value]="list">
+                            {{ list }}
+                        </option>
+                        </select>
+                     </label>
+                    <div *ngIf="VrstaIdentifikatoraPrimaoca.invalid && (VrstaIdentifikatoraPrimaoca.dirty || VrstaIdentifikatoraPrimaoca.touched)" class="alert btn-danger">
+                        <div *ngIf="VrstaIdentifikatoraPrimaoca.errors.required">
+                            <strong>Idetifikator je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="center-block">Jmbg:
+                    <input class="form-control" formControlName="Jmbg"  [(ngModel)]="zadrN.Jmbg" >
+                </label>
+                <div *ngIf="Jmbg.invalid && (Jmbg.dirty || Jmbg.touched)" class="alert btn-danger">
+                        <div *ngIf="Jmbg.errors.required">
+                            <strong>Jmbg je obavezan podatak !!!</strong>
+                        </div>
+                </div>
+            </div>
+              
+            <div class="form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Adresa:</strong></div>
+                    <div class="panel-body">
+                        <app-zadrugar-adresa [groupAdresa]="Adresa" ></app-zadrugar-adresa>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="form-group">
+                <label class="center-block">Broj lične karte:
+                    <input class="form-control" formControlName="BrLK"  [(ngModel)]="zadrN.BrLK" >
+                </label>
+            </div>
+     
+            <div class="form-group">
+                <label class="center-block">Telefon:
+                    <input class="form-control" formControlName="Telefon"  [(ngModel)]="zadrN.Telefon" >
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="center-block">Email:
+                    <input class="form-control" formControlName="ZadEmail"  [(ngModel)]="zadrN.ZadEmail" >
+                </label>
+            </div>
+ 
+            <div class="form-group">
+                <label class="center-block">Mesto zadruga:
+                    <select  formControlName="MestaID" class="form-control" placeholder="Select mesto"  
+                        [(ngModel)]="zadrN.MestaID"  required>
+                        <option *ngFor="let list of mestaL" [value]="list._id"   >
+                        {{ list.Naziv }}
+                        </option>
+                    </select>
+                </label>
+                <div *ngIf="MestaID.invalid && (MestaID.dirty || MestaID.touched)" class="alert btn-danger">
+                        <div *ngIf="MestaID.errors.required">
+                            <strong>Mesto je obavezan podatak !!!</strong>
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="center-block">Zanimanje zadruga:
+                    <select  formControlName="ZanimanjaID" class="form-control" placeholder="Select zanimanje"  
+                        [(ngModel)]="zadrN.ZanimanjaID"  required>
+                        <option *ngFor="let list of zanimL" [value]="list._id"   >
+                        {{ list.Naziv }}
+                        </option>
+                    </select>
+                </label>
+                <div *ngIf="ZanimanjaID.invalid && (ZanimanjaID.dirty || ZanimanjaID.touched)" class="alert btn-danger">
+                        <div *ngIf="ZanimanjaID.errors.required">
+                            <strong>Zanimanje je obavezan podatak !!!</strong>
+                        </div>
+                </div>
+            </div>
+
+           
+            <div class="form-group">
+                    <label class="center-block">Tip zadrugara:
+                        <select  formControlName="TipZadrugar" class="form-control"  [(ngModel)]="zadrN.TipZadrugar"  required>
+                        <option *ngFor="let list of zadTipC" [value]="list">
+                            {{ list }}
+                        </option>
+                        </select>
+                     </label>
+                    <div *ngIf="TipZadrugar.invalid && (TipZadrugar.dirty || TipZadrugar.touched)" class="alert btn-danger">
+                        <div *ngIf="TipZadrugar.errors.required">
+                            <strong>Tip zadrugara je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="center-block">Broj indexa:
+                    <input class="form-control" formControlName="BrIndexa"  [(ngModel)]="zadrN.BrIndexa" >
+                </label>
+                <div *ngIf="BrIndexa.invalid && (BrIndexa.dirty || BrIndexa.touched)" class="alert btn-danger">
+                        <div *ngIf="BrIndexa.errors.required">
+                            <strong>Broj indexa je obavezan podatak !!!</strong>
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="center-block">Broj radne knjižice:
+                    <input class="form-control" formControlName="BrRadneKnjiz"  [(ngModel)]="zadrN.BrRadneKnjiz" >
+                </label>
+                <div *ngIf="BrRadneKnjiz.invalid && (BrRadneKnjiz.dirty || BrRadneKnjiz.touched)" class="alert btn-danger">
+                        <div *ngIf="BrRadneKnjiz.errors.required">
+                            <strong>Broj radne knjižice je obavezan podatak !!!</strong>
+                        </div>
+                </div>
+            </div>
       
+            <div class="form-group">
+                    <label class="center-block">Tip isplate:
+                        <select  formControlName="TipIsplate" class="form-control"  [(ngModel)]="zadrN.TipIsplate"  required>
+                        <option *ngFor="let list of zadIsplC" [value]="list">
+                            {{ list }}
+                        </option>
+                        </select>
+                     </label>
+                    <div *ngIf="TipIsplate.invalid && (TipIsplate.dirty || TipIsplate.touched)" class="alert btn-danger">
+                        <div *ngIf="TipZadrugar.errors.required">
+                            <strong>Tip isplate je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+            </div>
 
-                <div class="form-group">
-                  <label class="center-block">Opis:
-                    <textarea class="form-control" formControlName="Opis"  [(ngModel)]="zadrN.Opis">
+            <div class="form-group">
+                    <label class="center-block">Banka:
+                        <select  formControlName="BankaID" class="form-control" placeholder="Select mesto"  
+                            [(ngModel)]="zadrN.BankaID"  required>
+                            <option *ngFor="let list of bankeL" [value]="list._id"   >
+                            {{ list.Naziv }}
+                            </option>
+                        </select>
+                    </label>
+                    <div *ngIf="BankaID.invalid && (BankaID.dirty || BankaID.touched)" class="alert btn-danger">
+                        <div *ngIf="BankaID.errors.required">
+                            <strong>Banka je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+            </div>
+    
+            <div class="form-group">
+                    <label class="center-block">Broj računa:
+                        <input class="form-control" formControlName="BrojRacuna"  [(ngModel)]="zadrN.BrojRacuna" >
+                    </label>
+                    <div *ngIf="BrojRacuna.invalid && (BrojRacuna.dirty || BrojRacuna.touched)" class="alert btn-danger">
+                        <div *ngIf="BrojRacuna.errors.required">
+                            <strong>Broj računa je obavezan podatak !!!</strong>
+                        </div>
+                    </div>
+            </div>
 
-                    </textarea>
-                  </label>
-              </div>
-            
+
+            <div class="form-group">
+                <label class="center-block">Opis:
+                <textarea class="form-control" formControlName="Opis"  [(ngModel)]="zadrN.Opis">
+
+                </textarea>
+                </label>
+            </div>
+        
             <div class="form-group">
                     <div class="col-md-offset-5 col-md-12">
                         <button type="submit" [disabled]="!formZadr.valid"

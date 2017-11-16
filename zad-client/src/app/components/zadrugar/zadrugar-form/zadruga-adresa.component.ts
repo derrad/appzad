@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ZadrugarAdresaComponent {
     // we will pass in ziro from App component
-    @Input('Adresa')
+    // tslint:disable-next-line:no-input-rename
+    @Input('groupAdresa')
     public Adresa: FormGroup;
 }

@@ -8,8 +8,10 @@ import { ButtonModule, InputTextModule } from 'primeng/primeng';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ZadrugarComponent } from './zadrugar.component';
 import { ZadrugarFormComponent } from './zadrugar-form/zadrugar-form.component';
+import { ZadrugarAdresaComponent} from './zadrugar-form/zadruga-adresa.component';
 import { ZadrugarService } from './zadrugar.service';
 import { ZadrugarRoutingModule } from './zadrugar-routing.module';
+
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ import { ZadrugarRoutingModule } from './zadrugar-routing.module';
   ],
   declarations: [
     ZadrugarComponent,
-    ZadrugarFormComponent
+    ZadrugarFormComponent,
+    ZadrugarAdresaComponent
   ],
   providers: [ ZadrugarService, ConfirmationService ]
 })

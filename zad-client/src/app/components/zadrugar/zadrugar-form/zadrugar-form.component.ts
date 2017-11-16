@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
@@ -13,8 +13,9 @@ import { MestaService } from './../../mesta/mesta.service';
 import { BankeService } from './../../banke/banke.service';
 import { ZanimanjaModel } from './../../zanimanja/zanimanja.model';
 import { Mesta } from './../../mesta/mesta.model';
-import { TipIsplate, TipZadrugar, PolZadruga, IdentZadrugara } from './../../../shared/EnumApp/zadrugar.enum';
+import { IsplateTip, ZadrugarTip, PolZadruga, IdentZadrugara } from './../../../shared/EnumApp/zadrugar.enum';
 import { BankeModel } from './../../banke/banke-model';
+import { DashboardService } from './../../dashboard/dashboard.service';
 
 
 @Component({
@@ -32,10 +33,14 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   mestaL: Array<Mesta>;
   zanimL: Array<ZanimanjaModel>;
   bankeL: Array<BankeModel>;
+  zadPolC = PolZadruga;
+  zadIsplC = IsplateTip;
+  zadTipC = ZadrugarTip;
+  zadIdentC = IdentZadrugara;
   constructor(private zadrService: ZadrugarService, private router: Router, private route: ActivatedRoute,
     private _fb: FormBuilder , private _location: Location, private flashMessage: FlashMessagesService,
     private serValidate: ServiceValidateShared, private mestaService: MestaService, private zanService: ZanimanjaService,
-    private bankService: BankeService ) {
+    private bankService: BankeService, private dhServ: DashboardService ) {
 
       this.formZadr = this._fb.group({
         _id: [],
@@ -124,6 +129,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         this.title = id ? 'Ažuriranje zadrugara' : 'Novi zadrugar';
         if (!id) {
            this.loadTempData();
+           this.getNewIdNumber();
            return;
         }
 
@@ -191,6 +197,8 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             if (validate === 'Gotovina') {
               this.BankaID.setValidators(null);
               this.BrojRacuna.setValidators(null);
+              this.BrojRacuna.setValue(null);
+              this.BankaID.setValue(null);
             } else {
               this.BankaID.setValidators([Validators.required]);
               this.BrojRacuna.setValidators([Validators.required]);
@@ -201,6 +209,33 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         );
 
   }
+
+  private getNewIdNumber() {
+    this.dhServ.getZadrugaiCount().subscribe(profile => {
+      if (profile.success === true) {
+        const broj =  profile.number + 1;
+        this.IDZadrugar.setValue(broj);
+      }
+    },
+    err => {
+      console.log(err);
+      this.IDZadrugar.setValue(0);
+      return false;
+    });
+
+  }
+  // ngAfterViewInit() {
+  //   this.route.params.subscribe(params => {
+  //     const id = params['id'];
+  //     if (!id) {
+  //        this.IDZadrugar.setValue(15);
+  //     }else {
+  //       return;
+  //      }
+
+  //   });
+
+  // }
 
   get IDZadrugar() { return this.formZadr.get('IDZadrugar'); }
   get Ime() { return this.formZadr.get('Ime'); }
@@ -240,7 +275,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['partner']);
+              this.router.navigate(['zadrugar']);
           }else {
             this.router.navigate(['NotFound']);
           }
@@ -267,7 +302,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
               timeout: 5000});
-              this.router.navigate(['partner']);
+              this.router.navigate(['zadrugar']);
           }else {
             this.router.navigate(['NotFound']);
           }

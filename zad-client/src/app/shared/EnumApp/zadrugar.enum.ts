@@ -1,10 +1,10 @@
-export const TipIsplate = [
+export const IsplateTip = [
     'Gotovina',
     'Tekuci',
     'Stedna'
 ];
 
-export const TipZadrugar = [
+export const ZadrugarTip = [
     'Ucenik',
     'Osiguranik'
 ];
