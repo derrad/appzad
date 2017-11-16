@@ -15,21 +15,23 @@
     "node": "6.10.2"
   },
   "dependencies": {
+    "@reactivex/rxjs": "*",
+    "bcryptjs": "*",
     "body-parser": "*",
+    "compression": "^1.7.1",
+    "cors": "*",
     "debug": "*",
     "ejs": "*",
     "express": "*",
+    "helmet": "^3.9.0",
+    "jsonwebtoken": "*",
     "mongoose": "*",
     "mongoose-paginate": "*",
     "morgan": "*",
-    "rotating-file-stream": "*",
-    "@reactivex/rxjs": "*",
-    "bcryptjs": "*",
-    "cors": "*",
-    "jsonwebtoken": "*",
-    "serve-favicon": "*",
     "passport": "*",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "rotating-file-stream": "*",
+    "serve-favicon": "*"
   },
   "devDependencies": {
     "eslint": "^4.10.0",

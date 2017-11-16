@@ -11,6 +11,8 @@ const morgan = require('morgan');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 const fs = require('fs');
+const helmet = require('helmet');
+const compression = require('compression');
 
 // express initialize
 const app = express();
@@ -48,6 +50,8 @@ const accessLogStream = rfs('access.log', {
   path: logDirectory
 })
 // setup the logger // Standard Apache combined log output. or use common Standard Apache common log output. dev
+
+
 app.use(morgan('common', {stream: accessLogStream}))
 
 app.use(cors()); // CORS Middleware 
@@ -67,7 +71,9 @@ require('./server/config/passport')(passport);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+app.use(helmet());
+// compress all responses
+app.use(compression());
 //Route
 const users = require('./server/Route/users')
 const index = require('./server/Route/index')
