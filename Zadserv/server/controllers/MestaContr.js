@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Mesta = require('../models/sfMesta');
 const sfOpstina = require('../models/sfOpstine');
 const sfDrzava = require('../models/sfDrzave');
+const Zadrugar = require('../models/sfZadrugar');
 
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
@@ -19,17 +20,15 @@ module.exports.create = function (req, res,next) {
   const Ptt =req.body.Ptt;
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
-
-  //console.log("uid je :" + uid + " ovo je Opstina " + req.body.Opstina);
-
-  
-  if (!Opstina || !Naziv ) {
+ 
+if (!Opstina || !Naziv ) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
   } else {
+  // ovde proveri opstinu ako je nema odustanak
   
-if (uid) {
-  //Edit opstina
-  Mesta.findById(uid).exec(function(err, mesto){
+  if (uid) {
+  //Edit 
+   Mesta.findById(uid).exec(function(err, mesto){
     if(err){ 
       return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
     }
@@ -38,7 +37,7 @@ if (uid) {
       mesto.Naziv = Naziv;
       mesto.Ptt=Ptt;
       mesto.Opis = Opis ;
-      if(NameUser){mesto.NameUser = NameUser;}
+      mesto.NameUser = NameUser;
       
     }
     mesto.save(function(err,results) {
@@ -63,7 +62,8 @@ if (uid) {
  
   var slog = sfOpstina.findById(Opstina,(err, doc)=>{
     if(err){ 
-      return null;
+      return  res.status(400).json(
+        { success: false, message: 'Error processing request '+ err , data:[]});
      }
     // console.log(" vracam ovaj doc ali da vidim kako ide " + doc);
    //  return doc;
@@ -88,23 +88,16 @@ if (uid) {
       } catch(ex){}
 
       Mesta.find({}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
-        if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+        if(err){ 
+          return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
         }
-
-        
           return res.status(201).json({
           success: true,
           message:'Mesto saved successfully', 
           data: result
           });
-        });
-        
-    //  return res.status(201).json({
-    //     success: true,
-    //     message: 'Opstina saved successfully',
-    //     data: result
-  
-    //   });
+        });  
+    
     });
 
 
@@ -156,16 +149,32 @@ module.exports.getomesta = function (req, res,next) {
 module.exports.delemesta = function(req, res, next) {
  // console.log("delete Mesta parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
- Mesta.remove({_id: req.params.id }, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-        try{
-          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Mesto" , req.user.email)
-          } catch(ex){}
-       
-        return res.status(201).json({
-            success: true,
-            message: 'Mesta removed successfully',
-            data:[]
-          });
-  });
+ Zadrugar.count({MestaID: req.params.id}, function(err,count){
+  // console.log("mesta u zadrugarima DA VIDIM COUNT" +  count);
+   if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+   if(count>0){
+       return res.status(200).json({
+         success: false,
+         message: 'Mesto not removed successfully, relation is used with this ID',
+         data:[]
+       });
+   }else{
+    Mesta.remove({_id: req.params.id }, function(err){
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+      try{
+        SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Mesto" , req.user.email)
+        } catch(ex){}
+     
+      return res.status(201).json({
+          success: true,
+          message: 'Mesta removed successfully',
+          data:[]
+        });
+    });
+
+   }
+});
+
+
+ 
 }

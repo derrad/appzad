@@ -88,7 +88,11 @@ deleteDrzavu(tdrzava) {
                   cssClass: 'alert-success',
                   timeout: 1000});
             }else {
-              this.router.navigate(['NotFound']);
+              // this.router.navigate(['NotFound']);
+              this.flashMessage.show(pos.message , {
+                cssClass: 'btn-danger',
+                timeout: 5000});
+                this.drzave.splice(index, 0, tdrzava);
             }
             } ,
             (error: ResponeCustom)  => {

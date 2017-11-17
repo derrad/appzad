@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Banke = require('../models/sfBanke');
+const Zadrugar = require('../models/sfZadrugar');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -113,12 +114,28 @@ Banke.find({_id:req.params.id}).exec(function(err, result){
 module.exports.delbanka = function(req, res, next) {
  // console.log("delete drzava parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
- Banke.remove({_id: req.params.id }, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-        return res.status(201).json({
-            success: true,
-            message: 'Banke removed successfully',
-            data:[]
-          });
+
+ Zadrugar.count({BankaID: req.params.id}, function(err,count){
+  console.log("mesta u zadrugarima DA VIDIM COUNT" +  count);
+   if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+   if(count>0){
+       return res.status(200).json({
+         success: false,
+         message: 'Banka not removed successfully, relation is used with this ID',
+         data:[]
+       });
+   }else{
+    Banke.remove({_id: req.params.id }, function(err){
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+      return res.status(201).json({
+          success: true,
+          message: 'Banke removed successfully',
+          data:[]
+        });
+    });
+
+   }
   });
+
+
 }

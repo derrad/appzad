@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Opstina = require('../models/sfOpstine');
 const sfDrzava = require('../models/sfDrzave');
+const Mesta = require('../models/sfMesta');
+
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
@@ -27,7 +29,21 @@ module.exports.create = function (req, res,next) {
   if (!Drzava || !RegOzn || !Naziv ) {
       return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
   } else {
-  
+  // ovde treba proveriti pre save postoji li drzava - mozda je neko u medjuvremenu obrisao
+    sfDrzava.count({_id:Drzava}, function(err,count){
+      console.log("drzava " + count);
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+      if(count == 0){
+        console.log("drzava count je nula " + count);
+          return res.status(422).json({
+            success: false,
+            message: 'Država not exist. Posted data is not correct or incompleted.',
+            data:[]
+           }).end();
+          // return;
+      }
+    });
+
 if (uid) {
   //Edit opstina
   Opstina.findById(uid).exec(function(err, opstina){
@@ -64,7 +80,7 @@ if (uid) {
 }else{
   
   // Add new Opstina
-  //var Drz = new sfDrzava();
+ 
   var slog = sfDrzava.findById(Drzava,(err, doc)=>{
     if(err){ 
       return  res.status(400).json(
@@ -75,7 +91,7 @@ if (uid) {
 
      let oOpstina = new Opstina(
       { 
-      Drzava: doc._id ,
+      Drzava: Drzava ,
       RegOzn:RegOzn ,
       Naziv : Naziv,
       SifPorez:SifPorez,
@@ -104,13 +120,6 @@ if (uid) {
           data: result
           });
         });
-        
-    //  return res.status(201).json({
-    //     success: true,
-    //     message: 'Opstina saved successfully',
-    //     data: result
-  
-    //   });
     });
 
 
@@ -158,15 +167,32 @@ module.exports.getopstine = function (req, res,next) {
 module.exports.deleopstine = function(req, res, next) {
   //console.log("delete Opstina parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
- Opstina.remove({_id: req.params.id }, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-        try{
-          SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Opština" , req.user.email)
-          } catch(ex){}
-        return res.status(201).json({
-            success: true,
-            message: 'Opstina removed successfully',
-            data:[]
-          });
-  });
+
+ Mesta.count({Opstina: req.params.id}, function(err,count){
+  console.log("mesta u opstinama DA VIDIM COUNT" +  count);
+   if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+   if(count>0){
+       return res.status(200).json({
+         success: false,
+         message: 'Opština not removed successfully, relation is used with this ID',
+         data:[]
+       });
+   }else{
+    Opstina.remove({_id: req.params.id }, function(err){
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+      try{
+        SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Opština" , req.user.email)
+        } catch(ex){}
+      return res.status(201).json({
+          success: true,
+          message: 'Opstina removed successfully',
+          data:[]
+        });
+    });
+
+   }
+});
+
+
+ 
 }

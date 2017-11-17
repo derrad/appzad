@@ -85,7 +85,11 @@ cloneData(c: BankeModel): BankeModel {
                     cssClass: 'alert-success',
                     timeout: 1000});
               }else {
-                this.router.navigate(['NotFound']);
+             //   this.router.navigate(['NotFound']);
+                this.flashMessage.show(pos.message , {
+                  cssClass: 'btn-danger',
+                  timeout: 5000});
+                  this.bankeL.splice(index, 0, tbanka);
               }
               } ,
               (error: ResponeCustom)  => {

@@ -158,7 +158,9 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
                  timeout: 5000});
                  this.router.navigate(['opstine']);
              }else {
-               this.router.navigate(['NotFound']);
+               this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 5000});
              }
            } ,
            (error: ResponeCustom) => {

@@ -115,6 +115,17 @@ app.get('/', function(req, res) {
 
 
 //process.env.NODE_ENV = 'production';
+
+if(process.env.NODE_ENV !== 'production') {
+  process.once('uncaughtException', function(err) {
+    console.error('FATAL: Uncaught exception.');
+    console.error(err.stack||err);
+    setTimeout(function(){
+      process.exit(1);
+    }, 100);
+  });
+}
+
 //app.set('env','production');
 //console.log(app.get('env'));
 // catch 404 and forward to error handler
@@ -145,6 +156,7 @@ app.use(function (err, req, res, next) {
       error: {}
   });
 });
+
 
 
 //starter server

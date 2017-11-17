@@ -90,8 +90,11 @@ deleteMesto(tmesto) {
                    cssClass: 'alert-success',
                    timeout: 1000});
              }else {
-                this.router.navigate(['NotFound']);
-             }
+                this.flashMessage.show(pos.message , {
+                  cssClass: 'btn-danger',
+                  timeout: 5000});
+                  this.mestaL.splice(index, 0, tmesto);
+              }
              } ,
              (error: ResponeCustom)  => {
                this.flashMessage.show(error.message, {
