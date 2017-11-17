@@ -1,21 +1,20 @@
 
 <div *ngIf="bankeL;else  waiting"  [@routerTransition]>
-  
       <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
           <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
-      <p-dataTable [value]="bankeL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+      <p-dataTable [value]="bankeL"  [globalFilter]="gb" [rows]="10" [paginator]="true"
                 selectionMode="single" [(selection)]="selectedBank" dataKey="_id"   
-                styleClass="table table-striped" [responsive]="true"  [immutable]=false 
-                resizableColumns="true" columnResizeMode="expand">
+                styleClass="table table-striped" [responsive]="true"  [immutable]="false" 
+                resizableColumns="true" columnResizeMode="fit">
 
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Naziv" header="Naziv"></p-column>
-      <p-column field="Racun" header="Racun"></p-column> 
+      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
+      <p-column field="Racun" header="Racun" sortable="true"></p-column> 
       
-      <p-column field="Aktivan" header="Aktivan"   styleClass="text-center" >
+      <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" >
         <ng-template let-col let-bank="rowData" pTemplate="body">
                 <span [hidden]="bank[col.field]==false">DA</span> 
                 <span [hidden]="bank[col.field]==true">NE</span> 

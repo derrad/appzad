@@ -8,26 +8,26 @@
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
     </div>
-    <p-dataTable [value]="zadrL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+    <p-dataTable [value]="zadrL"  [globalFilter]="gb" [rows]="10" [paginator]="true"
               selectionMode="single" [(selection)]="selectedZadrugar" dataKey="_id"   
-              styleClass="table table-striped" [responsive]="true"  [immutable]=false 
-              resizableColumns="true" columnResizeMode="expand">
+              styleClass="table table-striped" [responsive]="true"  [immutable]="false" 
+              [resizableColumns]="true" columnResizeMode="expand" [reorderableColumns]="true" [sortMode]="multiple">
 
     <p-header><strong>{{Title}}</strong></p-header>       
     <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-    <p-column field="IDZadrugar" header="Šifra" ></p-column>
-    <p-column field="Ime" header="Ime"  ></p-column>
-    <p-column field="Prezime" header="Prezime"  ></p-column>
-    <p-column field="DatRodjenja" header="Datum rodj."   styleClass="text-right" >
+    <p-column field="IDZadrugar" header="Šifra" sortable="true"></p-column>
+    <p-column field="Ime" header="Ime"  sortable="true"></p-column>
+    <p-column field="Prezime" header="Prezime"  sortable="true"></p-column>
+    <p-column field="DatRodjenja" header="Datum rodj."   sortable="true" styleClass="text-right" >
           <ng-template let-col let-zadr="rowData" pTemplate="body">
                   <span>{{zadr[col.field] | date}}</span>
           </ng-template> 
     </p-column> 
-    <p-column field="TipZadrugar" header="Tip" ></p-column>
-    <p-column field="ZadEmail" header="ZadEmail" ></p-column>
-    <p-column field="Jmbg" header="Jmbg"  ></p-column>
+    <p-column field="TipZadrugar" header="Tip"  sortable="true"></p-column>
+    <p-column field="ZadEmail" header="ZadEmail" sortable="true"></p-column>
+    <p-column field="Jmbg" header="Jmbg"   sortable="true"></p-column>
     
-    <p-column field="Aktivan" header="Aktivan"   styleClass="text-center" >
+    <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" >
       <ng-template let-col let-partn="rowData" pTemplate="body">
               <span [hidden]="partn[col.field]==false">DA</span> 
               <span [hidden]="partn[col.field]==true">NE</span> 

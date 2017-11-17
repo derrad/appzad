@@ -7,7 +7,7 @@
                 selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false >
 
-    <p-header><strong>{{Title}}</strong></p-header>       
+      <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
                                                                                          
       <p-column field="KodDrzave" header="Kod" sortable="true"></p-column>                               
@@ -33,32 +33,34 @@
               <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addDrzave()" label="Add"></button>
             </div>
         </p-footer>
-        <ng-template pTemplate="emptymessage">
-            <!-- Custom content goes here -->
-            <div class="row">
-                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                    <div class="hidden-xs dtempty_message_h1">
-                        Još niste kreirali podatak.
-                    </div>
-                    <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                    <br/>
-                    <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
-                     <h3 class=" hidden-xs dtempty_message" >
-                         Da biste ručno dodali podatak kliknite: 
-                        <a  class="dtempty_message_text" (click)="addDrzave()">
-                                Kreiraj podatak
-                        </a>
-                    </h3>
-                    <h5 class="visible-xs" >
-                        Da biste ručno dodali podatak kliknite : 
-                        <a   (click)="addDrzave()">
-                                Kreiraj podatak
-                        </a>
-                    </h5>
+        <div *ngIf="drzave.length == 0">
+            <ng-template pTemplate="emptymessage">
+                <!-- Custom content goes here -->
+                <div class="row">
+                    <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                        <div class="hidden-xs dtempty_message_h1">
+                            Još niste kreirali podatak.
+                        </div>
+                        <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                        <br/>
+                        <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                        <h3 class=" hidden-xs dtempty_message" >
+                            Da biste ručno dodali podatak kliknite: 
+                            <a  class="dtempty_message_text" (click)="addDrzave()">
+                                    Kreiraj podatak
+                            </a>
+                        </h3>
+                        <h5 class="visible-xs" >
+                            Da biste ručno dodali podatak kliknite : 
+                            <a   (click)="addDrzave()">
+                                    Kreiraj podatak
+                            </a>
+                        </h5>
 
+                    </div>
                 </div>
-            </div>
-        </ng-template>
+            </ng-template>
+        </div>
 
       </p-dataTable>
     </div>
