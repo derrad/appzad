@@ -4,8 +4,8 @@ const sfZanimanja = require('../models/sfZanimanja');
 const sfBanke = require('../models/sfBanke');
 const EnumServ = require('../enum/serverenum');
 
-var Schema = mongoose.Schema,
-ID  = Schema.ObjectId;
+var Schema = mongoose.Schema;
+
 
 var sfZadrugar = new Schema({
     IDZadrugar:{ type: Number, required: [true, 'ID numericki je obavezan!!!'],default:0},
@@ -28,12 +28,12 @@ var sfZadrugar = new Schema({
     },
     Jmbg:{ type: String},
     Adresa:{ 
-        AdUlica: { type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
-        AdBroj: { type: String },
-        AdMesto: { type: String,required: [true,'Mesto je obavezan podatak !!!'] },
+        AdUlica:   { type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
+        AdBroj:    { type: String },
+        AdMesto:   { type: String },
         AdPttReon: { type: String },
-        AdPttPak: { type: String },
-        AdDrzava: { type: String }
+        AdPttPak:  { type: String },
+        AdDrzava:  { type: String }
         } ,
     BrLK:{ type: String},
     Telefon:{ type: String},

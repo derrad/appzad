@@ -164,6 +164,47 @@ module.exports.listavlasnik = function (req, res,next) {
     });
 
 }
+class RacVlasnik {
+  constructor (Naziv, Racun) {
+    this.Naziv = Naziv;
+    this.Racun = Racun;
+  }
+}
+
+function GetRacun(){
+
+  Vlasnik.find({},{ZiroVlasnik:1}).exec(function(err, vlasnik){
+    if(err){ console.log("Error" + err); 
+      }; 
+
+      
+      var ListaRacuni = [];
+
+      if (vlasnik.length === 1 ){
+        var NameArray = vlasnik[0];
+        console.log("Provera nije bilo greske ispisujem");
+      //  console.log(NameArray.ZiroVlasnik);
+
+         NameArray.ZiroVlasnik.forEach(element => {
+          ListaRacuni.push(new RacVlasnik(element.Naziv,element.Racun));
+         // console.log(element);
+       });
+       console.log("Lista racuna je velicine " + ListaRacuni.length);
+       ListaRacuni.forEach(item => {
+            console.log("Lista racuna Naziv - " + item.Naziv);
+            console.log("Lista racuna Racun - " +item.Racun);
+     });
+      }else{
+        console.log("vlasnik.count - " + vlasnik.count);
+      }
+      
+      // NameArray.ZiroVlasnik.forEach(element => {
+      //   console.log(element);
+      // });
+
+    });
+
+}
 
 module.exports.delevlasnik = function(req, res, next) {
   //console.log("parametar je : " + req.params.id);
@@ -179,4 +220,36 @@ module.exports.delevlasnik = function(req, res, next) {
              data:[]
           });
   });
+}
+
+
+module.exports.listaracvlasnik = function (req, res,next) {
+  Vlasnik.find({},{ZiroVlasnik:1}).exec(function(err, vlasnik){
+  if(err){ 
+     return res.status(400).json({ success: false, message:'Error processing request '+ err,  data: [] }); 
+  }
+    try {
+      const ListaRacuni = [];
+      if (vlasnik.length === 1 ){
+        const NameArray = vlasnik[0];
+        NameArray.ZiroVlasnik.forEach(element => {
+          ListaRacuni.push(new RacVlasnik(element.Naziv,element.Racun));
+        });
+      }
+      return res.status(200).json({
+        success: true, 
+        message:'Successfully request ',
+        data: ListaRacuni
+      });   
+      
+    } catch (error) {
+      return res.status(400).json(
+        { success: false, 
+          message:'Error processing request '+ error ,
+          data: []
+        }
+        );  
+    }
+  });
+
 }

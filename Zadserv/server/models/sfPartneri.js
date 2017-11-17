@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate');
 var sfDrzave = require('./sfDrzave');
 
  var Schema = mongoose.Schema;
@@ -10,12 +9,12 @@ var sfPartner = new Schema({
     UgovProc:{ type: Number,default:0,required:true},
     Drzava: { type:Schema.ObjectId, ref:'sfDrzave', required:true},        
     Aktivan:{type:Boolean,default:false},
-    Adresa:{  AdUlica:{ type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
-              AdBroj: { type: String },
-              AdMesto: { type: String,required: [true,'Mesto je obavezan podatak !!!'] },
+    Adresa:{  AdUlica:   { type: String, required: [true,'Ulica je obavezan podatak !!!'] }, 
+              AdBroj:    { type: String },
+              AdMesto:   { type: String },
               AdPttReon: { type: String },
-              AdPttPak: { type: String },
-              AdDrzava: { type: String }
+              AdPttPak:  { type: String },
+              AdDrzava:  { type: String }
             },  
     Email:{ type: String},
     Pib:{ type: String},
@@ -46,51 +45,5 @@ var sfPartner = new Schema({
 }
 
 );
-
-// var sfPartnerTelefon = new Schema({
-//      Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-//      Telefon: { type: String, required: [true, 'Telefon je obavezan !!!'] },
-//      Opis    : { type: String },
-//      NameUser: {type:String}
-// },
-// {
-//  timestamps: { createdAt: 'created_at' }
-// },{ 
-//     retainKeyOrder: true 
-// }
-// );
-
-// var sfPartnerKontakt = new Schema({
-//      Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-//    //nastavi
-   
-   
-//      Opis    : { type: String },
-//      NameUser: {type:String}
-// },
-// {
-//  timestamps: { createdAt: 'created_at' }
-// },{ 
-//     retainKeyOrder: true 
-// }
-// );
-
-
-// var sfPartner = new Schema({
-//     Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
-//     Ptt:{type:String},
-//     Opis  :{ type: String },
-//     NameUser: {type:String}
-
-// },
-// {
-//     timestamps: { createdAt: 'created_at' }
-// },
-// { 
-//     retainKeyOrder: true 
-// }
-// );
-
-sfPartner.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('sfPartner', sfPartner,'sfPartner');
