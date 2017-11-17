@@ -5,7 +5,7 @@ const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
 const TIP_TRANS_INSERT ="ADD UPUT";
-const TIP_TRANS_UPDATE ="CHANGES UPU";
+const TIP_TRANS_UPDATE ="CHANGES UPUT";
 const TIP_TRANS_DEL = "DELETE UPUT";
 
 module.exports.create = function (req, res,next) {

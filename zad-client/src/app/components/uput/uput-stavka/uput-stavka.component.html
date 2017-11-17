@@ -1,0 +1,48 @@
+<div [formGroup]="stavkeForm">
+  <div class="row">
+      <div class="form-group col-md-2">
+          <label class="center-block">Rbr
+              <input type="text" class="form-control input-sm" formControlName="Rbr">
+          </label>
+      </div>
+      <div class="form-group col-md-2">
+          <label class="center-block">ID zadrugar
+              <input type="text" class="form-control input-sm" formControlName="IDZadrugar">
+          </label>
+      </div>
+      <div class="form-group col-md-8">
+         
+              <label class="center-block">Zadrugar:
+                  <select  formControlName="ZadrugarID" class="form-control input-sm" placeholder="Select zadrugar"  
+                       required>
+                      <option *ngFor="let list of zadL" [value]="list._id"   >
+                      {{ list.Prezime }}  {{ list.Ime  }}
+                      </option>
+                  </select>
+              </label>
+              <div *ngIf="ZadrugarID.invalid && (ZadrugarID.dirty || ZadrugarID.touched)" class="alert btn-danger">
+                      <div *ngIf="ZadrugarID.errors.required">
+                          <strong>Zadrugar je obavezan podatak !!!</strong>
+                      </div>
+              </div>
+      </div>
+     
+  </div>
+  <div class="row">
+      <div class="form-group col-md-5">
+          <label class="center-block">Mesto zadruga:
+              <select  formControlName="PosloviID" class="form-control input-sm" placeholder="Select posao"  
+                   required>
+                  <option *ngFor="let list of poslL" [value]="list._id"   >
+                  {{ list.Naziv  }} 
+                  </option>
+              </select>
+          </label>
+          <div *ngIf="PosloviID.invalid && (PosloviID.dirty || PosloviID.touched)" class="alert btn-danger">
+                  <div *ngIf="PosloviID.errors.required">
+                      <strong>Posao je obavezan podatak !!!</strong>
+                  </div>
+          </div>
+      </div>
+  </div>
+</div>

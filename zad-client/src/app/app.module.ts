@@ -1,4 +1,5 @@
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -50,6 +51,7 @@ import { KonstantaModule } from './components/konstanta/konstanta.module';
 import { PartnerModule } from './components/partner/partner.module';
 import { BankeModule } from './components/banke/banke.module';
 import { ZadrugarModule } from './components/zadrugar/zadrugar.module';
+import { UputModule } from './components/uput/uput.module';
 
 
 
@@ -89,6 +91,7 @@ import { ZadrugarModule } from './components/zadrugar/zadrugar.module';
     PartnerModule,
     BankeModule,
     ZadrugarModule,
+    UputModule,
     AppRoutingModule
 
   ],

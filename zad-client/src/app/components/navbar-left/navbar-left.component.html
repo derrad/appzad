@@ -2,7 +2,30 @@
     
         <h2>TEST MENU</h2>
         <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
+              
+            <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
+                [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
+                <a [routerLink]="['/uput']">
+                <i class="menu-icon hidden-xs fa fa-file" aria-hidden="true" ></i>&nbsp;Uput</a>
+            </li>
+            <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
+                [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
+                <a [routerLink]="['/uput']">
+                <i class="menu-icon hidden-xs fa fa-book" aria-hidden="true" ></i>&nbsp;Faktura</a>
+            </li>
+
+            <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
+                [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
+                <a [routerLink]="['/uput']">
+                <i class="menu-icon hidden-xs fa fa-gg" aria-hidden="true" ></i>&nbsp;Uplata</a>
+            </li>
+            <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
+                [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
+                <a [routerLink]="['/uput']">
+                <i class="menu-icon hidden-xs fa fa-money" aria-hidden="true" ></i>&nbsp;Isplata</a>
+            </li>
+        
+            <li role="presentation"  *ngIf="authService.loggedIn()" (click)="OnClickMenu()" 
                         [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" >
                 <a [routerLink]="['/zadrugar']">
                     <i class="menu-icon hidden-xs fa fa-users" aria-hidden="true" ></i>&nbsp;Zadrugari</a>
