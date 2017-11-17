@@ -19,7 +19,7 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "compression": "^1.7.1",
-    "cors": "*",
+    "cors": "^2.8.4",
     "debug": "*",
     "ejs": "*",
     "express": "*",
