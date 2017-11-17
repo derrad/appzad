@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Drzava = require('../models/sfDrzave');
+const sfOpstina = require('../models/sfOpstine');
 
 module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
@@ -121,12 +122,27 @@ module.exports.getdrzava = function (req, res,next) {
 module.exports.deledrzava = function(req, res, next) {
  // console.log("delete drzava parametar je : " + req.params.id);
  // const uid = req.params.id || '1234';
- Drzava.remove({_id: req.params.id }, function(err){
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-        return res.status(201).json({
-            success: true,
-            message: 'Država removed successfully',
+  sfOpstina.count({Drzava: req.params.id}, function(err,count){
+     console.log("drzave u opstinama DA VIDIM COUNT" +  count);
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+      if(count>0){
+          return res.status(200).json({
+            success: false,
+            message: 'Države not removed successfully, relation is used with this ID',
             data:[]
           });
+      }else{
+        Drzava.remove({_id: req.params.id }, function(err){
+          if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
+          return res.status(201).json({
+              success: true,
+              message: 'Država removed successfully',
+              data:[]
+            });
+        });
+
+      }
   });
+
+
 }
