@@ -172,7 +172,8 @@ module.exports.create = function (req, res,next) {
 
 module.exports.listzadrugar = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  Zadrugar.find({}).sort({created_at:-1}).exec(function(err, result){
+  Zadrugar.find({}).sort({created_at:-1}).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
+  .populate('BankaID',['Naziv']).exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
@@ -188,7 +189,8 @@ module.exports.listzadrugar = function (req, res,next) {
 
 module.exports.getzadrugar = function (req, res,next) {
   // console.log("Usao u list Radnik - tu sam  " + req.params.id);
-  Zadrugar.find({_id : req.params.id }).exec(function(err, result){
+  Zadrugar.find({_id : req.params.id }).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
+      .populate('BankaID',['Naziv']).exec(function(err, result){
      if(err){ 
       // res.statusMessage = err;
        return res.status(404).json(

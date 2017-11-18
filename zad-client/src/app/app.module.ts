@@ -1,5 +1,3 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -36,6 +34,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Pipe
 import { KeysPipe } from './shared/pipeapp/keys.pipe';
+// import { PrettyPrintPipe } from './shared/pipeapp/PrettyPrintPipe';
 // Module
 import { AppRoutingModule } from './app-routing.module';
 import { ZanimanjaModule } from './components/zanimanja/zanimanja.module';
@@ -52,6 +51,7 @@ import { PartnerModule } from './components/partner/partner.module';
 import { BankeModule } from './components/banke/banke.module';
 import { ZadrugarModule } from './components/zadrugar/zadrugar.module';
 import { UputModule } from './components/uput/uput.module';
+// import { ApppipeModule } from './shared/PipeApp/apppipe/apppipe.module';
 
 
 

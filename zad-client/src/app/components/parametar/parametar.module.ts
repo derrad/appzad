@@ -10,6 +10,7 @@ import { ParametarService} from './parametar.service';
 import { ParametarComponent } from './parametar.component';
 import { ParametarFormComponent } from './parametar-form/parametar-form.component';
 import { ParametarRoutingModule} from './parametar-routing.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { ParametarRoutingModule} from './parametar-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     ParametarRoutingModule
   ],
   declarations: [

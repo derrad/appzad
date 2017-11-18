@@ -79,6 +79,19 @@
                          {{mesShow._id}}
                       </dd>
                       <dt>
+                        DRŽAVA/OPŠTINA
+                        </dt>
+                        <dd class="text-success">
+                              <div [innerHTML]="mesShow.Opstina | prettyprint"></div> 
+                        </dd>
+                      <dt>
+                      <!-- <dt>
+                        DRZAVA
+                        </dt>
+                        <dd class="text-success">
+                            <div [innerHTML]="mesShow.Opstina.Drzava | prettyprint"></div> 
+                        </dd> -->
+                        <dt> 
                       NAZIV MESTA
                       </dt>
                       <dd class="text-success">

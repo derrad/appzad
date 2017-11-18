@@ -9,6 +9,7 @@ import { RadnikComponent } from './radnik.component';
 import { RadnikFormComponent } from './radnik-form/radnik-form.component';
 import { RadnikService} from './radnik.service';
 import { RadnikRoutingModule } from './radnik-routing.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { RadnikRoutingModule } from './radnik-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     RadnikRoutingModule
   ],
   declarations: [

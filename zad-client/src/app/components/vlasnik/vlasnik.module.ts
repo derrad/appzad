@@ -11,6 +11,8 @@ import { VlasnikService } from './vlasnik.service';
 import { VlasnikRoutingModule } from './vlasnik-routing.module';
 import { ZiroVlasnikComponent } from './vlasnik-form/zirovlasnik.component';
 import { TelefonVlasnikComponent } from './vlasnik-form/telefonvlasnik.component';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { TelefonVlasnikComponent } from './vlasnik-form/telefonvlasnik.component
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     VlasnikRoutingModule
   ],
   declarations: [

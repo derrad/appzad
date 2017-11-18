@@ -11,7 +11,9 @@ import { ZadrugarFormComponent } from './zadrugar-form/zadrugar-form.component';
 import { ZadrugarAdresaComponent} from './zadrugar-form/zadruga-adresa.component';
 import { ZadrugarService } from './zadrugar.service';
 import { ZadrugarRoutingModule } from './zadrugar-routing.module';
-
+// import { PrettyPrintPipe } from './shared/pipeapp/PrettyPrintPipe';
+// import { PrettyPrintPipe } from './../../shared/PipeApp/PrettyPrintPipe';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 @NgModule({
   imports: [
@@ -24,13 +26,14 @@ import { ZadrugarRoutingModule } from './zadrugar-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
-    ZadrugarRoutingModule
+    ZadrugarRoutingModule,
+    ApppipeModule
   ],
   declarations: [
     ZadrugarComponent,
     ZadrugarFormComponent,
     ZadrugarAdresaComponent
-  ],
+   ],
   providers: [ ZadrugarService, ConfirmationService ]
 })
 export class ZadrugarModule { }

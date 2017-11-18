@@ -13,11 +13,13 @@ import { routerTransition } from '../../animation/router.animations';
 import { ResponeCustom } from './../../shared/models/ErrorRes';
 
 
+
 @Component({
   selector: 'app-zadrugar',
   templateUrl: './zadrugar.component.html',
   styleUrls: ['./zadrugar.component.css'],
   animations: [routerTransition()]
+
 })
 export class ZadrugarComponent implements OnInit {
 
@@ -56,6 +58,7 @@ export class ZadrugarComponent implements OnInit {
   selectItem( work: ZadrugarModel) {
      this.displayDetals = true;
      this.zadrShow = this.cloneData(work);
+     console.log('Ulica' + this.zadrShow .Adresa.AdUlica);
   }
   cloneData(c: ZadrugarModel): ZadrugarModel {
     const work = new ZadrugarModel();

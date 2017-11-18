@@ -9,6 +9,7 @@ import { MestaService } from './mesta.service';
 import { MestaComponent } from './mesta.component';
 import { MestaFormComponent } from './mesta-form/mesta-form.component';
 import { MestaRoutingModule } from './mesta-routing.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +21,7 @@ import { MestaRoutingModule } from './mesta-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     MestaRoutingModule
   ],
   declarations: [

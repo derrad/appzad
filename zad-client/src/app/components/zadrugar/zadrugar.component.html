@@ -120,7 +120,201 @@
                           {{zadrShow.Prezime}}
                       </dd>
                    
-                      <dt>
+                    <dt>
+                    IME RODITELJA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.ImeRoditelja}}
+                    </dd>
+
+                    <dt>
+                    DATUM ROĐENJA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.DatRodjenja}}
+                    </dd>
+                    <dt>
+                    AKTIVAN
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.Aktivan | prettyavtiveprint}}
+                    </dd>
+                    <dt>
+                    POL
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.Pol}}
+                    </dd>
+                    <dt>
+                    OPŠTINA ROĐENJA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.OpstinaRodj}}
+                    </dd>
+                    <dt>
+                    MESTO ROĐENJA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.MestoRodj}}
+                    </dd>                    
+                    <dt>
+                    IDENTIFIKATOR
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.VrstaIdentifikatoraPrimaoca}}
+                    </dd>     
+                    <dt>
+                    JMBG
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.Jmbg}}
+                    </dd>  
+                    <dt>
+                            ADRESA
+                            </dt>
+                            <dd class="text-success">
+                                   
+                                           
+                                    <div [innerHTML]="zadrShow.Adresa | prettyprint"></div> 
+                                            <!-- {{zadrShow.Adresa | json}} -->
+                                            
+                                 
+
+                                    <!-- <div *ngFor="let item of zadrShow.Adresa; let i = index" >
+                                            <dt>Opis</dt>
+                                            <dd class="text-success">{{item.AdUlica}}</dd>
+                                    </div> -->
+                                   
+                            </dd>    
+
+                    <!-- <dt>
+                    ADRESA
+                    </dt>
+                    <dd class="text-success">
+                            <dl class="dl-horizontal">
+                                    <dt>
+                                    ULICA
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdUlica}}
+                                    </dd> 
+                                    <dt>
+                                    BROJ
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdBroj}}
+                                    </dd> 
+                                    <dt>
+                                    MESTO
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdMesto}}
+                                    </dd> 
+                                    <dt>
+                                    PTT
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdPttReon}}
+                                    </dd> 
+                                    <dt>
+                                    PAK
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdPttPak}}
+                                    </dd> 
+                                    <dt>
+                                    DRŽAVA
+                                    </dt>
+                                    <dd class="text-success">
+                                            {{zadrShow.Adresa.AdDrzava}}
+                                    </dd> 
+                            </dl>
+                    </dd> 
+                     -->
+                    <dt>
+                    LIČNA KARTA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BrLK}}
+                        
+                    </dd>
+                    <dt>
+                    TELEFON
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.Telefon}}
+                        
+                    </dd>
+                    <dt>
+                        EMAIL
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.ZadEmail}}
+                    </dd>     
+                     <dt>
+                        MESTO
+                    </dt>
+                    <dd class="text-success">
+                        <!-- {{zadrShow.MestaID | json}} -->
+                        <div [innerHTML]="zadrShow.MestaID | prettyprint"></div>
+                    </dd>  
+                    <dt>
+                        ZANIMANJE
+                    </dt>
+                    <dd class="text-success">
+                        <!-- {{zadrShow.ZanimanjaID | json}} -->
+                        <div [innerHTML]="zadrShow.ZanimanjaID | prettyprint"></div>
+                    </dd> 
+                    <dt>
+                        TIP
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.TipZadrugar}}
+                    </dd>
+                    <dt>
+                    RADNA KNJIŽICA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BrRadneKnjiz}}
+                    </dd>
+                    <dt>
+                    ĐAČKA/INDEX
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BrIndexa}}
+                    </dd>
+                    <dt>
+                    ISPLATA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.TipIsplate}}
+                    </dd>
+                    <dt>
+                    BANKA
+                    </dt>
+                    <dd class="text-success">
+                         <!-- <pre>{{zadrShow.BankaID | prettyprint }}</pre> -->
+                         <div [innerHTML]="zadrShow.BankaID | prettyprint"></div>
+                    </dd>
+                    <dt>
+                    RAČUN
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BrojRacuna}}
+                    </dd>
+                    <dt>
+                    BELI BROJ
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BeliBroj}}
+                    </dd>
+                    <dt>
+                    DANA RADA
+                    </dt>
+                    <dd class="text-success">
+                        {{zadrShow.BrojDana}}
+                    </dd>
+                    <dt>
                       OPIS
                       </dt>
                       <dd class="text-success">

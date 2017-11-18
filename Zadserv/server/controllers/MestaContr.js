@@ -111,8 +111,10 @@ module.exports.listmesta = function (req, res,next) {
  // console.log("Usao u list Mesta");
   
   //Mesta.find({}).populate('Opstina',['RegOzn','Naziv','Drzava']).populate('Drzava').exec(function(err, result){
-    //.populate({path:'Opstina', populate:{path:'Drzava'}})
-  Mesta.find({}).sort({created_at:-1}).populate({path:'Opstina', populate:{path:'Drzava'}}).exec(function(err, result){
+    //.populate({path:'Opstina', populate:{path:'Drzava'}}) .populate('Opstina', ['Naziv', 'Drzava']).
+  Mesta.find({}).sort({created_at:-1})
+      .populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })
+      .exec(function(err, result){
     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
     }
 
@@ -131,7 +133,8 @@ module.exports.listmesta = function (req, res,next) {
 
 module.exports.getomesta = function (req, res,next) {
  // console.log("Usao u get mesta parametar je  " + req.params.id);
-  Mesta.find({_id:req.params.id}).exec(function(err, result){
+  Mesta.find({_id:req.params.id}).populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })
+    .exec(function(err, result){
     if(err){ 
       return res.status(400).json(
       { success: false, message:'Error processing request '+ err , data:null }

@@ -81,7 +81,14 @@
                     <dd class="text-success">
                        {{opstShow._id}}
                     </dd>
-                  
+                    
+                    <dt>
+                    DRŽAVA
+                    </dt>
+                    <dd class="text-success">
+                       
+                        <div [innerHTML]="opstShow.Drzava | prettyprint"></div> 
+                    </dd>
                     <dt>
                       KOD OPŠTINE
                     </dt>

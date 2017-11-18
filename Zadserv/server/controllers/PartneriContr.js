@@ -135,7 +135,7 @@ module.exports.create = function (req, res,next) {
 
 module.exports.listpartner = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  Partner.find({}).sort({created_at:-1}).exec(function(err, result){
+  Partner.find({}).sort({created_at:-1}).populate('Drzava',['Naziv']).exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
@@ -152,7 +152,7 @@ module.exports.listpartner = function (req, res,next) {
 
 module.exports.getpartner = function (req, res,next) {
  // console.log("Usao u list Radnik - tu sam  " + req.params.id);
- Partner.find({_id : req.params.id }).exec(function(err, result){
+ Partner.find({_id : req.params.id }).populate('Drzava',['Naziv']).exec(function(err, result){
     if(err){ 
      // res.statusMessage = err;
       return res.status(404).json(

@@ -9,6 +9,7 @@ import { BankeComponent } from './banke.component';
 import { BankeFormComponent } from './banke-form/banke-form.component';
 import { BankeService } from './banke.service';
 import { BankeRoutingModule } from './banke-routing.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { BankeRoutingModule } from './banke-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     BankeRoutingModule
   ],
   declarations: [

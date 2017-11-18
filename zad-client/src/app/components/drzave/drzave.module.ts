@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -10,6 +9,7 @@ import { DrzaveComponent } from './drzave.component';
 import { DrzaveFormComponent } from './drzave-form/drzave-form.component';
 import {DrzaveService} from './drzave.service';
 import { DrzaveRoutingModule } from './drzave-routing.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +21,7 @@ import { DrzaveRoutingModule } from './drzave-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    ApppipeModule,
     DrzaveRoutingModule
   ],
   declarations: [
