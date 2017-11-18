@@ -8,6 +8,7 @@ router.get('/api/partner/:id',passport.authenticate('jwt', {session:false}), Par
 router.post('/api/partner',passport.authenticate('jwt', {session:false}), PartnerController.create);
 router.put('/api/partner/:id',passport.authenticate('jwt', {session:false}), PartnerController.create);
 router.delete('/api/partner/:id',passport.authenticate('jwt', {session:false}), PartnerController.delepartner);
+router.get('/api/activpartner',passport.authenticate('jwt', {session:false}), PartnerController.listactivpartner);
 
 // router.get('/api/partner',(req,res)=>{
 //     res.send("GET partner");

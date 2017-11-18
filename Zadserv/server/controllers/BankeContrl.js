@@ -93,6 +93,19 @@ module.exports.listbanke = function (req, res,next) {
 
 }
 
+module.exports.listactivbanke = function (req, res,next) {
+  
+  Banke.find({Aktivan:true}).sort({Naziv:1}).exec(function(err, result){
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+    }
+      return res.status(200).json({
+      success: true,
+      message:'Successfully', 
+      data: result
+      });
+    });
+
+}
 
 module.exports.getbanka = function (req, res,next) {
 

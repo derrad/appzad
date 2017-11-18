@@ -10,5 +10,6 @@ router.get('/api/banke/:id',passport.authenticate('jwt', {session:false}), Banke
 router.post('/api/banke',passport.authenticate('jwt', {session:false}), BankeContrl.create);
 router.put('/api/banke/:id',passport.authenticate('jwt', {session:false}), BankeContrl.create);
 router.delete('/api/banke/:id', passport.authenticate('jwt', {session:false}),BankeContrl.delbanka);
+router.get('/api/activbanke', passport.authenticate('jwt', {session:false}),BankeContrl.listactivbanke);
 
 module.exports = router;
