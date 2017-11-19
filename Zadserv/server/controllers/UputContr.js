@@ -188,3 +188,35 @@ module.exports.countUput = function(req, res, next) {
           });
   });
 }
+
+
+module.exports.getUputBrojGod = function (req, res,next) {
+  //console.log(req.body.Datum );
+  let Datum = new Date();
+  const Datum1 = new Date(req.body.Datum);
+  
+  // if (req.body.Datum instanceof Date){
+  //   console.log("Datum je poslat");
+  //   Datum = req.body.Datum;
+  // }
+  if (Datum1 instanceof Date){
+    //console.log("Datum je pretvoren");
+    Datum = Datum1;
+  }
+  const Godina = Datum.getFullYear();
+
+  Uput.find({Godina : Godina }).exec(function(err, result){
+     if(err){ 
+      return res.status(404).json(
+         { success: false, message:'Error processing request ' , data:{broj:0,godina:0} }
+         ).end(); 
+     }
+      const Broj = result.length + 1;
+      return res.status(200).json({
+       success: true, 
+       message:'Uput get number successfully',
+       data: { broj:Broj, godina:Godina }
+       });
+     });
+ 
+ }

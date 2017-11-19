@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   CposaoAll: number;
   CkupacAll: number;
   CzadrAll: number;
+  CUpuAll: number;
   constructor(private dashService: DashboardService ) { }
 
   ngOnInit() {
@@ -50,6 +51,16 @@ export class DashboardComponent implements OnInit {
         return false;
       });
 
+      this.dashService.getUputCountAll().subscribe(profile => {
+        if (profile.success === true) {
+          this.CUpuAll = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CUpuAll = 0;
+        return false;
+      });
 
   }
 

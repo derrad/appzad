@@ -20,7 +20,7 @@ export class UputRacVlasnikModel {
 export class UputModel {
     _id: string;
     PartneriID: Object;
-    TipDok: string;
+    TipDok?: string;
     Datum: Date;
     Knjizeno: boolean;
     Storno: boolean;

@@ -9,7 +9,7 @@ router.get('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), Za
 router.post('/api/zadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.create);
 router.put('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), ZadrugarController.create);
 router.delete('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}), ZadrugarController.delezadrugar);
-
+router.get('/api/activzadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.listactivzadrugar);
 
 // router.get('/api/zadrugar',(req,res)=>{
 //     res.send("GET zadrugar");

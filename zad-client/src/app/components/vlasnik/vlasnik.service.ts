@@ -73,6 +73,15 @@ export class VlasnikService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getVlasnRacun() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/getvlasracun');
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
 
 
   private handleError(error: Response) {

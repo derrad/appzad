@@ -12,6 +12,10 @@ export class ZiroVlasnikModel {
     Opis?: string;
 }
 
+export class RacunVlasnikModel {
+    Naziv: string;
+    Racun: string;
+}
 
 export interface IVlasnikModel {
     _id: string;

@@ -281,11 +281,14 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
               timeout: 5000});
               this.router.navigate(['zadrugar']);
           }else {
-            this.router.navigate(['NotFound']);
+            this.flashMessage.show(pos.message, {
+              cssClass: 'alert-success',
+              timeout: 5000});
+           // this.router.navigate(['NotFound']);
           }
         } ,
         (error: ResponeCustom) => {
-          this.flashMessage.show(error.message, {
+          this.flashMessage.show('Error !!! ' + error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
          },
@@ -297,6 +300,17 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
     const wdata = JSON.parse(localStorage.getItem('data_zadrugar'));
     if (wdata) {
       this.zadrN = wdata;
+      if (this.zadrN.Adresa) {
+        const adresUpi = new ZDAdresaModel();
+        adresUpi.AdUlica = this.zadrN.Adresa.AdUlica || '';
+        adresUpi.AdBroj = this.zadrN.Adresa.AdBroj || '';
+        adresUpi.AdMesto = this.zadrN.Adresa.AdMesto || '';
+        adresUpi.AdPttReon = this.zadrN.Adresa.AdPttReon || '';
+        adresUpi.AdPttPak = this.zadrN.Adresa.AdPttPak || '';
+        adresUpi.AdDrzava = this.zadrN.Adresa.AdDrzava || '';
+        this.initAdresa(adresUpi);
+      }
+      console.log(this.zadrN.Adresa);
     }
   }
 

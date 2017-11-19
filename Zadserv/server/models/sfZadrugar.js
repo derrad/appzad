@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 
 var sfZadrugar = new Schema({
-    IDZadrugar:{ type: Number, required: [true, 'ID numericki je obavezan!!!'],default:0},
+    IDZadrugar:{ type: Number,unique: true, required: [true, 'ID numericki je obavezan!!!'],default:0},
     Ime:{type:String,required: [true, 'Ime je obavezno !!!']},
     Prezime : { type: String, required: [true, 'Prezime je obavezno !!!'] },
     ImeRoditelja : { type: String},
