@@ -80,7 +80,7 @@ module.exports.create = function (req, res,next) {
   });
 
 }else{
- // console.log("Usao u ADD");
+  //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
   // Add new Uput
   let oUput = new Uput({
     PartneriID: PartneriID ,
@@ -100,10 +100,10 @@ module.exports.create = function (req, res,next) {
 
   oUput.save(function(err,result) {
     if(err){ 
-      const emsg = " Error processing request";
-      console.log(JSON.stringify(err));
+      // const emsg = " Error processing request";
+      // console.log(JSON.stringify(err));
       return res.status(400).json(
-            { success: false, message:emsg, data:[] }).end();
+            { success: false, message:JSON.stringify(err), data:[] }).end();
     }
     try{
       SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, Broj,  Broj + '/' + Godina , NameUser)
@@ -123,7 +123,7 @@ module.exports.create = function (req, res,next) {
 
 module.exports.listUput = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  Uput.find({}).sort({created_at:-1}).exec(function(err, result){
+  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 

@@ -26,7 +26,8 @@ export class UputModel {
     Storno: boolean;
     Broj: Number;
     Godina: Number;
-    RacVlasnika: UputRacVlasnikModel;
+     RacVlasnika: UputRacVlasnikModel;
+    // RacVlasnika: Object;
     PosloviID: Object;
     Stavke: [UputStavModel];
     Opis?: string;

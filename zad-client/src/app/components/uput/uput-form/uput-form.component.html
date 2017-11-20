@@ -19,8 +19,99 @@
   <div class="panel-body">
       <form [formGroup]="formUput" (ngSubmit)="save()" novalidate>
           <!-- <div class="form-group" > -->
-          <input class="form-control" formControlName="_id"  [(ngModel)]="zadrN._id"   type="hidden">
+          <input class="form-control" formControlName="_id"  [(ngModel)]="uputN._id"   type="hidden">
           <!-- </div> -->
+          <div class="row">
+            
+            <div class="form-group col-md-2">
+                <label class="center-block">Broj
+                        <div class="input-group">   
+                            <div class="input-group">   
+                                <input class="form-control" formControlName="Broj"  [(ngModel)]="uputN.Broj" >
+                            </div>
+                        </div>
+                </label>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="center-block">Godina
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input class="form-control" formControlName="Godina"  [(ngModel)]="uputN.Godina">                  
+                            </div>   
+                        </div>
+                </label>
+            </div>
+
+
+            <div class="form-group col-md-2">
+                <label class="center-block">Datum:
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input [ngModel]="uputN.Datum | date:'yyyy-MM-dd'"  type="date" 
+                                    formControlName="Datum" name="Datum" class="form-control" required>
+                            </div>
+                        </div>
+                </label>
+                <div *ngIf="Datum.invalid && (Datum.dirty || Datum.touched)" class="alert alert-danger">
+                    <div *ngIf="Datum.errors.required">
+                        <strong>Datum je obavezan podatak !!!</strong>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-group col-md-6">
+                <label class="center-block">Racun za uplatu:
+                    <select  formControlName="RacVlasnika" class="form-control" placeholder="Select racun"  
+                        [(ngModel)]="uputN.RacVlasnika"  required>
+                        <option *ngFor="let list of racvlasnikL"   [ngValue]="list">
+                        {{ list.Naziv }} - {{list.Racun}}
+                        </option>
+                    </select>
+                </label>
+                <div *ngIf="RacVlasnika.invalid && (RacVlasnika.dirty || RacVlasnika.touched)" class="alert btn-danger">
+                    <div *ngIf="RacVlasnika.errors.required">
+                        <strong>Racun vlasnika je obavezan podatak !!!</strong>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+                <div class="form-group col-md-6">
+                        <label class="center-block">Kupac:
+                            <select  formControlName="PartneriID" class="form-control" placeholder="Select kupac"  
+                                [(ngModel)]="uputN.PartneriID"  required>
+                                <option *ngFor="let list of kupacL" [value]="list._id"   >
+                                {{ list.Naziv }} 
+                                </option>
+                            </select>
+                        </label>
+                        <div *ngIf="PartneriID.invalid && (PartneriID.dirty || PartneriID.touched)" class="alert btn-danger">
+                            <div *ngIf="PartneriID.errors.required">
+                                <strong>Kupac je obavezan podatak !!!</strong>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                        <label class="center-block">Posao:
+                            <select  formControlName="PosloviID" class="form-control" placeholder="Select kupac"  
+                                [(ngModel)]="uputN.PosloviID"  required>
+                                <option *ngFor="let list of poslL" [value]="list._id"   >
+                                {{ list.Naziv }} 
+                                </option>
+                            </select>
+                        </label>
+                        <div *ngIf="PosloviID.invalid && (PosloviID.dirty || PosloviID.touched)" class="alert btn-danger">
+                            <div *ngIf="PosloviID.errors.required">
+                                <strong>Poslovi su obavezan podatak !!!</strong>
+                            </div>
+                        </div>
+                </div>
+
+          </div>
                         
          
           
