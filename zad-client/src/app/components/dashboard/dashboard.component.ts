@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../animation/router.animations';
 import { DashboardService } from './dashboard.service';
 
+class AggCount  {
+  _id: string;
+  total: Number;
+}
+
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +15,9 @@ import { DashboardService } from './dashboard.service';
   animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
+  cPrimamAgr: Array<AggCount>;
   CposaoAll: number;
+  CposaoActiv: number;
   CkupacAll: number;
   CkupacActiv: number;
   CzadrAll: number;
@@ -27,6 +34,21 @@ export class DashboardComponent implements OnInit {
       err => {
         console.log(err);
         this.CposaoAll = 0;
+        return false;
+      });
+
+      this.dashService.getActivPosaoCount().subscribe(profile => {
+        if (profile.success === true) {
+         // console.log('Aktivnih poSlova  ' +  JSON.stringify(profile.data).length);
+          this.cPrimamAgr = profile.data;
+          this.CposaoActiv = this.cPrimamAgr.length;
+        }else {
+          this.CposaoActiv = [].length;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CposaoActiv = [].length;
         return false;
       });
 

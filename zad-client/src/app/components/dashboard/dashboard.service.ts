@@ -36,6 +36,18 @@ export class DashboardService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getActivPosaoCount() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/countActivposao' ) ;
+   // console.log("getDrzave link", ep );
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
+
   getKupciCount() {
     const headers = new Headers();
     this.loadToken();

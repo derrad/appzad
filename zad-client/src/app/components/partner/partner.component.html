@@ -25,7 +25,7 @@
       </p-column> 
       <p-column field="Email" header="Email" sortable="true"></p-column>
       <p-column field="Pib" header="Pib" sortable="true" ></p-column>
-      
+      <p-column field="Adresa.AdMesto" header="Mesto" sortable="true" ></p-column>
       <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" >
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span> 

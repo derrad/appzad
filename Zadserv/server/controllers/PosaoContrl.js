@@ -173,19 +173,19 @@ module.exports.countActivposao = function(req, res, next) {
 
     const aggregatorOpts = [{
       $group: {
-        _id: "$prUputDok.PosloviID",
+        _id: "$PosloviID",
         total: { $sum: 1 }
       }
     }];
 
-    Posao.aggregate(aggregatorOpts, function(err, logs){
+    Uput.aggregate(aggregatorOpts, function(err, logs){
       if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
   
-      console.log(logs);
+     // console.log(logs);
       return res.status(200).json({
         success: true,
         message: 'Successfully',
-        number:logs
+        data: logs
       });
     });
 
