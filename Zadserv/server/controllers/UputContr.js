@@ -191,7 +191,7 @@ module.exports.countUput = function(req, res, next) {
 
 
 module.exports.getUputBrojGod = function (req, res,next) {
-  //console.log(req.body.Datum );
+  //console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
   let Datum = new Date();
   let Datum1;
   try{

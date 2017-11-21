@@ -8,5 +8,7 @@ router.get('/api/posao/:id',passport.authenticate('jwt', {session:false}),  Posa
 router.post('/api/posao',passport.authenticate('jwt', {session:false}),  PosaoController.create);
 router.put('/api/posao/:id',passport.authenticate('jwt', {session:false}),  PosaoController.create);
 router.delete('/api/posao/:id',passport.authenticate('jwt', {session:false}),  PosaoController.deleposao);
+router.get('/api/countActivposao',passport.authenticate('jwt', {session:false}),  PosaoController.countActivposao);
+
 
 module.exports = router;

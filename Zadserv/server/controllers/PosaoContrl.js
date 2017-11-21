@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Posao = require('../models/sfPosao.js');
+const Uput = require('../models/prUputDok');
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
@@ -156,6 +157,49 @@ module.exports.countposao = function(req, res, next) {
             number:count
           });
   });
+}
+
+module.exports.countActivposao = function(req, res, next) {
+  // const aggregatorOpts = [{
+  //       $unwind: "$prUputDok"
+  //   },
+  //   {
+  //       $group: {
+  //         _id: "$prUputDok.PosloviID",
+  //         total: { $sum: 1 }
+  //       }
+  //   }
+  //   ];
+
+    const aggregatorOpts = [{
+      $group: {
+        _id: "$prUputDok.PosloviID",
+        total: { $sum: 1 }
+      }
+    }];
+
+    Posao.aggregate(aggregatorOpts, function(err, logs){
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+  
+      console.log(logs);
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully',
+        number:logs
+      });
+    });
+
+  //console.log("parametar je : " + req.params.id);
+	// Uput.count({Aktivan:true}, function(err,count){
+  //       //console.log("DA VIDIM COUNT" +  count);
+  //       if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+  //      // console.log("VRACAM BROJ KOJI JE  : " + count);
+  //        return res.status(200).json({
+  //           success: true,
+  //           message: 'Successfully',
+  //           number:count
+  //         });
+  // });
 }
 
 // function AddActivity(tActivnost,tTrans,tNumber,topis, tuser){

@@ -12,6 +12,7 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   CposaoAll: number;
   CkupacAll: number;
+  CkupacActiv: number;
   CzadrAll: number;
   CUpuAll: number;
   constructor(private dashService: DashboardService ) { }
@@ -37,6 +38,17 @@ export class DashboardComponent implements OnInit {
       err => {
         console.log(err);
         this.CkupacAll = 0;
+        return false;
+      });
+
+      this.dashService.getActivKupciCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CkupacActiv = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CkupacActiv = 0;
         return false;
       });
 

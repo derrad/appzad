@@ -36,6 +36,8 @@ export class UputFormComponent implements OnInit, OnDestroy {
   poslL: Array<Posao>;
   saveTemp = true;
   godbroj: UputBrojGodina = new UputBrojGodina();
+  displayKupac = false;
+  selectedKupac: PartnerModel;
 
   constructor(private partnService: PartnerService,  private posService: PosaoService,
               private vlasnService: VlasnikService, private zadrService: ZadrugarService,
@@ -56,6 +58,14 @@ export class UputFormComponent implements OnInit, OnDestroy {
             ])
       });
     }
+
+    get RacVlasnika() { return this.formUput.get('RacVlasnika'); }
+    get PosloviID() { return this.formUput.get('PosloviID'); }
+    get Datum() { return this.formUput.get('Datum'); }
+    get PartneriID() { return this.formUput.get('PartneriID'); }
+    get Stavke(): FormArray { return this.formUput.get('Stavke') as FormArray; }
+    get Broj() { return this.formUput.get('Broj'); }
+    get Godina() { return this.formUput.get('Godina'); }
 
   ngOnInit() {
 
@@ -142,10 +152,10 @@ export class UputFormComponent implements OnInit, OnDestroy {
     if (!id) {
        // this.initAdresa("","","","","","");
        this.loadTempData();
-       this.SetGodinaBroj();
+       this.InitGodinaBroj();
        return;
     }
-    this.SetGodinaBroj();
+    // this.InitGodinaBroj();
     this.uputService.getUput(id)
       .subscribe(
         (pos) => {
@@ -177,30 +187,34 @@ export class UputFormComponent implements OnInit, OnDestroy {
     });
 }
 
-  GetKupac() {
-    this.flashMessage.show('Tražimo kupca iz pick liste', {
-      cssClass: 'alert-danger',
-      timeout: 9000});
 
-  }
-
-private SetGodinaBroj() {
-    console.log('Usao u SetGodinaBroj');
+private SetGodinaBroj(tDatum: Date) {
+   // console.log('Usao u SetGodinaBroj ' + tDatum);
   //  this.Broj.setValue(1);
     // this.Godina.setValue(new Date().getFullYear());
-    this.Datum.setValue(new Date());
+   // this.uputN.Datum = new Date();
+    // this.Datum.setValue(new Date());
     // this.formUput.controls['Broj'].setValue(1);
     // const Datum = JSON.parse(this.Datum.value)
-    this.Broj.setValue(200);
-    this.Godina.setValue(new Date().getFullYear() - 5);
+     this.Broj.setValue(1);
+     this.Godina.setValue(new Date().getFullYear());
+     if (!tDatum) {
+      tDatum = new Date();
+     }
 
-    this.uputService.getUputBrojGod({Datum: this.Datum.value})
+    this.uputService.getUputBrojGod({Datum: tDatum})
     .subscribe(
       (pos) => {
         if (pos.success) {
-          console.log(' na dobrom mestu sam' + JSON.stringify(pos));
+          // console.log(' na dobrom mestu sam' + JSON.stringify(pos));
+          // console.log('Broj jurim' +  pos.data.broj);
           this.godbroj.broj = pos.data.broj;
           this.godbroj.godina = pos.data.godina;
+          this.Broj.setValue(pos.data.broj);
+          // console.log(' A upisao sam ga u mom objektu '  + this.godbroj.broj);
+          // console.log(' Godinu jurim' +  pos.data.godina);
+          this.Godina.setValue(pos.data.godina);
+          // console.log(' A upisao sam this.godbroj ga u mom objektu '  + this.godbroj.godina);
         }else {
           this.flashMessage.show(pos.message, {
             cssClass: 'alert-danger',
@@ -218,22 +232,48 @@ private SetGodinaBroj() {
          // console.log('Error servica');
 
       });
-      this.Godina.setValue(this.godbroj.godina );
-      this.Broj.setValue(this.godbroj.broj);
 
+      // console.log(' A Broj pre upisa u mom objektu '  + this.godbroj.broj);
+      // console.log(' A Godina pre upisa u mom objektu '  + this.godbroj.godina);
+
+      // // this.formUput.get('Broj').setValue(this.godbroj.broj);
+      // this.Godina.setValue(this.godbroj.godina );
+      // this.Broj.setValue(this.godbroj.broj);
 }
 
+onBlurDatum() {
+  let Datum = this.Datum.value;
+  if (!Datum) {
+    Datum = new Date();
+  }
+  this.SetGodinaBroj(Datum);
+  // this.flashMessage.show(`onBlurDatum ${this.uputN.Datum} a iz forme ${this.Datum.value}`, {
+  //   cssClass: 'alert-danger',
+  //   timeout: 9000});
+}
 
+InitGodinaBroj() {
+  this.uputN.Datum = new Date();
+  this.SetGodinaBroj(this.uputN.Datum);
+}
 
+GetKupac() {
+  // this.flashMessage.show('Tražimo kupca iz pick liste', {
+  //   cssClass: 'alert-danger',
+  //   timeout: 9000});
+    this.displayKupac = true;
+}
 
-  get RacVlasnika() { return this.formUput.get('RacVlasnika'); }
-  get PosloviID() { return this.formUput.get('PosloviID'); }
-  get Datum() { return this.formUput.get('Datum'); }
-  get PartneriID() { return this.formUput.get('PartneriID'); }
-  get Stavke(): FormArray { return this.formUput.get('Stavke') as FormArray; }
+PickKupac(event) {
+  this.displayKupac = false;
+ // console.log(JSON.stringify(this.selectedKupac));
+  if (this.selectedKupac) {
+    if (this.selectedKupac._id) {
+      this.PartneriID.setValue(this.selectedKupac._id);
+    }
+  }
+}
 
-  get Broj() { return this.formUput.get('Broj'); }
-  get Godina() { return this.formUput.get('Godina'); }
 
 
 

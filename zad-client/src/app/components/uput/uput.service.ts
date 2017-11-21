@@ -79,11 +79,12 @@ export class UputService {
 
 
   getUputBrojGod(tdatum) {
+   // console.log(' parametar je u servicu ' + JSON.stringify(tdatum));
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uputbroj/') ;
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uputbroj') ;
     return this.http.post(ep, JSON.stringify(tdatum), {headers: headers})
      .map(res => res.json())
      .catch(this.handleError);
