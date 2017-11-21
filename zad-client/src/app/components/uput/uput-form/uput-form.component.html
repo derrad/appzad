@@ -27,23 +27,24 @@
                 <label class="center-block">Broj
                         <div class="input-group">   
                             <div class="input-group">   
-                                <input class="form-control" formControlName="Broj"  [(ngModel)]="uputN.Broj" >
+                                <input class="form-control" formControlName="Broj"  readonly>
                             </div>
                         </div>
                 </label>
-            </div>
+            </div>  <!--[(ngModel)]="uputN.Broj" -->
             <div class="form-group col-md-2">
                 <label class="center-block">Godina
                         <div class="input-group">
                             <div class="input-group">
-                                <input class="form-control" formControlName="Godina"  [(ngModel)]="uputN.Godina">                  
+                                <input class="form-control" formControlName="Godina"  readonly >                  
                             </div>   
                         </div>
                 </label>
+                <!-- [(ngModel)]="uputN.Godina" -->
             </div>
 
 
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3 col-lg-2">
                 <label class="center-block">Datum:
                         <div class="input-group">
                             <div class="input-group">
@@ -60,12 +61,12 @@
             </div>
 
             
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5 col-lg-6">
                 <label class="center-block">Racun za uplatu:
                     <select  formControlName="RacVlasnika" class="form-control" placeholder="Select racun"  
                         [(ngModel)]="uputN.RacVlasnika"  required>
                         <option *ngFor="let list of racvlasnikL"   [ngValue]="list">
-                        {{ list.Naziv }} - {{list.Racun}}
+                           {{ list.Naziv }} - {{list.Racun}}
                         </option>
                     </select>
                 </label>
@@ -79,14 +80,25 @@
           </div>
 
           <div class="row">
+             
                 <div class="form-group col-md-6">
                         <label class="center-block">Kupac:
-                            <select  formControlName="PartneriID" class="form-control" placeholder="Select kupac"  
-                                [(ngModel)]="uputN.PartneriID"  required>
-                                <option *ngFor="let list of kupacL" [value]="list._id"   >
-                                {{ list.Naziv }} 
-                                </option>
-                            </select>
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-xs-10">
+                                <select  formControlName="PartneriID" class="form-control" placeholder="Select kupac"  
+                                    [(ngModel)]="uputN.PartneriID"  required>
+                                    <option *ngFor="let list of kupacL" [value]="list._id"   >
+                                    {{ list.Naziv }} 
+                                    </option>
+                                </select>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-xs-2">
+                                <button type="button" class="btn btn-info form-control" (click)="GetKupac()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    ...
+                                </button>
+                                </div>
+                            </div>
                         </label>
                         <div *ngIf="PartneriID.invalid && (PartneriID.dirty || PartneriID.touched)" class="alert btn-danger">
                             <div *ngIf="PartneriID.errors.required">

@@ -35,3 +35,9 @@ export class UputModel {
     created_at?: Date;
     updatedAt?: Date;
 }
+
+
+export class UputBrojGodina {
+    broj: Number;
+    godina: Number;
+}

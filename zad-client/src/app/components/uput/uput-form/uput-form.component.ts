@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location} from '@angular/common';
 import { formsTransition} from '../../../animation/forms.animations';
 import { UputService } from '../uput.service';
-import { UputModel, UputStavModel, UputRacVlasnikModel } from '../uput.model';
+import { UputModel, UputStavModel, UputRacVlasnikModel, UputBrojGodina } from '../uput.model';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
@@ -35,6 +35,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
   zadrL: Array<ZadrugarModel>;
   poslL: Array<Posao>;
   saveTemp = true;
+  godbroj: UputBrojGodina = new UputBrojGodina();
 
   constructor(private partnService: PartnerService,  private posService: PosaoService,
               private vlasnService: VlasnikService, private zadrService: ZadrugarService,
@@ -144,7 +145,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
        this.SetGodinaBroj();
        return;
     }
-
+    this.SetGodinaBroj();
     this.uputService.getUput(id)
       .subscribe(
         (pos) => {
@@ -174,17 +175,53 @@ export class UputFormComponent implements OnInit, OnDestroy {
           // }
         });
     });
+}
+
+  GetKupac() {
+    this.flashMessage.show('Tražimo kupca iz pick liste', {
+      cssClass: 'alert-danger',
+      timeout: 9000});
+
   }
 
-
-  private SetGodinaBroj() {
+private SetGodinaBroj() {
     console.log('Usao u SetGodinaBroj');
   //  this.Broj.setValue(1);
-    this.Godina.setValue(new Date().getFullYear());
+    // this.Godina.setValue(new Date().getFullYear());
     this.Datum.setValue(new Date());
-    this.formUput.controls['Broj'].setValue(1);
+    // this.formUput.controls['Broj'].setValue(1);
+    // const Datum = JSON.parse(this.Datum.value)
+    this.Broj.setValue(200);
+    this.Godina.setValue(new Date().getFullYear() - 5);
 
-  }
+    this.uputService.getUputBrojGod({Datum: this.Datum.value})
+    .subscribe(
+      (pos) => {
+        if (pos.success) {
+          console.log(' na dobrom mestu sam' + JSON.stringify(pos));
+          this.godbroj.broj = pos.data.broj;
+          this.godbroj.godina = pos.data.godina;
+        }else {
+          this.flashMessage.show(pos.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000});
+            this.godbroj.broj = 1;
+            this.godbroj.godina = new Date().getFullYear();
+        }
+      } ,
+      (error: ResponeCustom) => {
+        this.flashMessage.show(error.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000});
+          this.godbroj.broj = 1;
+          this.godbroj.godina = new Date().getFullYear();
+         // console.log('Error servica');
+
+      });
+      this.Godina.setValue(this.godbroj.godina );
+      this.Broj.setValue(this.godbroj.broj);
+
+}
 
 
 

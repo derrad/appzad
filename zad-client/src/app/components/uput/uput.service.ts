@@ -77,6 +77,19 @@ export class UputService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+
+  getUputBrojGod(tdatum) {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uputbroj/') ;
+    return this.http.post(ep, JSON.stringify(tdatum), {headers: headers})
+     .map(res => res.json())
+     .catch(this.handleError);
+  }
+
+
   private handleError(error: Response) {
     const myerror = new ResponeCustom().fromJSON(error.json());
     const servererr = new ResponeCustom();

@@ -193,15 +193,19 @@ module.exports.countUput = function(req, res, next) {
 module.exports.getUputBrojGod = function (req, res,next) {
   //console.log(req.body.Datum );
   let Datum = new Date();
-  const Datum1 = new Date(req.body.Datum);
+  let Datum1;
+  try{
+    Datum1 = new Date(req.body.Datum);
+  }catch(e) {
+    console.log("Greska u  datumu" + e.message);
+  }
   
   // if (req.body.Datum instanceof Date){
   //   console.log("Datum je poslat");
   //   Datum = req.body.Datum;
   // }
   if (Datum1 instanceof Date){
-    //console.log("Datum je pretvoren");
-    Datum = Datum1;
+     Datum = Datum1;
   }
   const Godina = Datum.getFullYear();
 
