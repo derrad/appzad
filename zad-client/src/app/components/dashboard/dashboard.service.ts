@@ -68,6 +68,15 @@ export class DashboardService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getUputKupciCount() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/countpartneruput') ;
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
 
   getZadrugaiCount() {
     const headers = new Headers();

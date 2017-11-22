@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   CposaoActiv: number;
   CkupacAll: number;
   CkupacActiv: number;
+  CkupacUput: number;
   CzadrAll: number;
   CUpuAll: number;
   constructor(private dashService: DashboardService ) { }
@@ -66,6 +67,8 @@ export class DashboardComponent implements OnInit {
       this.dashService.getActivKupciCount().subscribe(profile => {
         if (profile.success === true) {
           this.CkupacActiv = profile.number;
+        }else {
+          this.CkupacActiv = 0;
         }
       },
       err => {
@@ -73,6 +76,34 @@ export class DashboardComponent implements OnInit {
         this.CkupacActiv = 0;
         return false;
       });
+
+      this.dashService.getUputKupciCount().subscribe(profile => {
+        if (profile.success === true) {
+         // console.log('Aktivnih poSlova  ' +  JSON.stringify(profile.data).length);
+          this.cPrimamAgr = profile.data;
+          this.CkupacUput = this.cPrimamAgr.length;
+        }else {
+          this.CkupacUput = [].length;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CkupacUput = [].length;
+        return false;
+      });
+
+
+      this.dashService.getKupciCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CkupacAll = profile.number;
+        }
+      },
+      err => {
+        console.log(err);
+        this.CkupacAll = 0;
+        return false;
+      });
+
 
       this.dashService.getZadrugaiCount().subscribe(profile => {
         if (profile.success === true) {

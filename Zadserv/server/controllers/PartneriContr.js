@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Partner = require('../models/sfPartneri');
+const Uput = require('../models/prUputDok');
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
@@ -230,5 +231,25 @@ module.exports.countkupacActiv = function(req, res, next) {
             message: 'Successfully',
             number:count
           });
+  });
+}
+
+module.exports.countkupacUput = function(req, res, next) {
+  const aggregatorOpts = [{
+    $group: {
+      _id: "$PartneriID",
+      total: { $sum: 1 }
+    }
+  }];
+
+  Uput.aggregate(aggregatorOpts, function(err, logs){
+    if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+
+   // console.log(logs);
+    return res.status(200).json({
+      success: true,
+      message: 'Successfully',
+      data: logs
+    });
   });
 }
