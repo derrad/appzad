@@ -20,7 +20,7 @@ var prUputDok = new Schema({
     Stavke:[{
         IDZadrugar:{ type: Number,default:0,required:true},
         Rbr:{ type: Number,default:1,required:true},
-        ZadrugarID: {type:Schema.ObjectId, ref:"sfZadrugar",required:true},
+        ZadrugarID: {type:Schema.ObjectId, ref:"sfZadrugar",required:true,unique: true},
         TipZadrugar:{type : String,default : 'Ucenik',enum : EnumServ.TipZadrugar},
         PosloviID:{type:String,required:true },
         OdDatuma:{type:Date},

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Zadrugar = require('../models/sfZadrugar');
+const Uput = require('../models/prUputDok');
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
@@ -256,4 +257,40 @@ module.exports.countzadrugar = function(req, res, next) {
             number:count
           });
   });
+}
+
+
+module.exports.countUputZadrugar = function(req, res, next) {
+   const aggOpts = [{
+         $unwind: "$Stavke"
+     }
+     
+   ];
+
+    // const aggregatorOpts = [{
+    //   $group: {
+    //     _id: "$PosloviID",
+    //     total: { $sum: 1 }
+    //   }
+    // }];
+
+  //   {
+  //     $group: {
+  //       _id: "$ZadrugarID",
+  //       total: { $sum: 1 }
+  //     }
+  // }
+  //Uput.aggregate(aggOpts, function(err, logs){
+
+    Uput.find({}).sort({Godina:1,Broj:1}).populate('Stavke.ZadrugarID').exec(function(err, logs){
+      if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+  
+     // console.log(logs);
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully',
+        data: logs
+      });
+    });
+
 }
