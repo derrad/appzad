@@ -105,7 +105,7 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
                // console.log(JSON.stringify(this.vlasnN ));
                this.initDataZiro();
                this.initDataTelefon();
-               this.initDataKomtakt();
+               this.initDataKontakt();
 
             }else {
               this.flashMessage.show(pos.message, {
@@ -199,7 +199,7 @@ removeTelefon(i: number) {
 }
 
 // Kontakt
-initDataKomtakt() {
+initDataKontakt() {
   for ( const item of this.partnN.Kontakt) {
         const control = <FormArray>this.formPartn.controls['Kontakt'];
         control.push(this.initKontakt(item.KoNaziv, item.KoFunkcija, item.KoEmail, item.KoTelef, item.KoMobilni, item.KoOpis));

@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, OnDestroy } from '@angular/core';
+import { Component, OnInit, Directive, OnDestroy, EventEmitter, Input, Output} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { VlasnikService } from './../../vlasnik/vlasnik.service';
 import { RacunVlasnikModel } from './../../vlasnik/vlasnik-model';
 import { PosaoService } from './../../posao/posao.service';
 import { Posao } from './../../posao/posao.model';
-
+import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
 
 
 @Component({
@@ -38,6 +38,8 @@ export class UputFormComponent implements OnInit, OnDestroy {
   godbroj: UputBrojGodina = new UputBrojGodina();
   displayKupac = false;
   selectedKupac: PartnerModel;
+  @Output() addZadlist = new EventEmitter<Array<ZadrugarModel>>();
+  @Output() addPoslist = new EventEmitter<Array<Posao>>();
 
   constructor(private partnService: PartnerService,  private posService: PosaoService,
               private vlasnService: VlasnikService, private zadrService: ZadrugarService,
@@ -96,6 +98,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.racvlasnikL = [];
+
       }
   },
   (error: ResponeCustom) => {
@@ -110,11 +113,13 @@ export class UputFormComponent implements OnInit, OnDestroy {
   this.zadrService.getActivZadrugar().subscribe(profile => {
     if (profile.success === true) {
         this.zadrL = profile.data;
+        this.addZadlist.emit(this.zadrL);
       }else {
       this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.zadrL = [];
+        this.addZadlist.emit(this.zadrL);
       }
   },
   (error: ResponeCustom) => {
@@ -123,17 +128,20 @@ export class UputFormComponent implements OnInit, OnDestroy {
           cssClass: 'alert-danger',
           timeout: 9000});
       this.zadrL = [];
+      this.addZadlist.emit(this.zadrL);
       return false;
   });
 
   this.posService.getPoslovi().subscribe(profile => {
     if (profile.success === true) {
         this.poslL = profile.data;
+        this.addPoslist.emit(this.poslL);
       }else {
       this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.poslL = [];
+        this.addPoslist.emit(this.poslL);
       }
   },
   (error: ResponeCustom) => {
@@ -142,6 +150,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
           cssClass: 'alert-danger',
           timeout: 9000});
       this.poslL = [];
+      this.addPoslist.emit(this.poslL);
       return false;
   });
 
@@ -165,7 +174,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
             // this.partAdresa = pos.data[0].Adresa;
             // this.initAdresa(this.partAdresa);
              // console.log(JSON.stringify(this.vlasnN ));
-             // this.initDataZiro();
+              this.initDataStavke();
             // this.initDataTelefon();
             // this.initDataKomtakt();
 
@@ -275,12 +284,44 @@ PickKupac(event) {
 }
 
 
-
+// Stavke
+initDataStavke() {
+  for ( const item of this.uputN.Stavke) {
+        const control = <FormArray>this.formUput.controls['Stavke'];
+        control.push(this.initStavke(item.IDZadrugar, item.Rbr, item.ZadrugarID, item.PosloviID));
+  }
+ }
+initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: Object ) {
+    return this._fb.group({
+      IDZadrugar: [tIDZadrugar, Validators.required],
+      Rbr: [tRbr, Validators.required],
+      ZadrugarID: [tZadrugarID, Validators.required],
+      PosloviID: [tPosloviID, Validators.required]
+   });
+}
+addStavke() {
+    const control = <FormArray>this.formUput.controls['Stavke'];
+    control.push(this.initStavke(null, null, null, null));
+    // this.addZadlist.emit(this.zadrL);
+}
+removeStavke(i: number) {
+    const control = <FormArray>this.formUput.controls['Stavke'];
+    control.removeAt(i);
+}
 
 
 
   save() {
     const FPValue = this.formUput.value;
+    if (this.Stavke.length === 0) {
+      this.flashMessage.show('Nema stavki uputa', {
+        cssClass: 'alert-danger',
+        timeout: 2000});
+      return;
+    }
+    // if (FPValue.Stavke.lenght === 0) {
+    // }
+
     // console.log('Ovo je save - objekat iz forme');
     // console.log(JSON.stringify(FPValue));
 

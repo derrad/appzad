@@ -126,9 +126,35 @@
           </div>
                         
          
+          <div class="form-group">
+            <div formArrayName="Stavke">
+                <div *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index" class="panel panel-info"> 
+                    <div class="panel-heading">
+                        <span><strong>Stavka {{i + 1}} </strong></span>
+                        <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span>
+                    </div>
+
+                    <div [formGroupName]="i" class="panel-body" > 
+                        <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" ></app-uput-stavka>
+                    </div>
+                </div>
           
-      
-        
+                <div class="margin-20">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      </div>
+                      <div class=" col-xs-10 ">
+                          <button type="button" class="btn btn-info btn-block"   (click)="addStavke()" title=" Add stavku">
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                              Dodaj staku
+                          </button>
+                         
+                    </div>
+                  </div>
+                </div>
+              
+            </div>
+        </div> 
           
       
           <div class="form-group">
