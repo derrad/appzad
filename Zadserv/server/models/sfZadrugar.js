@@ -6,7 +6,7 @@ const EnumServ = require('../enum/serverenum');
 
 var Schema = mongoose.Schema;
 
-
+//unique: true,
 var sfZadrugar = new Schema({
     IDZadrugar:{ type: Number,unique: true, required: [true, 'ID numericki je obavezan!!!'],default:0},
     Ime:{type:String,required: [true, 'Ime je obavezno !!!']},

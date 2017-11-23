@@ -301,7 +301,8 @@ initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: O
 }
 addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
-    control.push(this.initStavke(null, null, null, null));
+    const broj = control.controls.length + 1;
+    control.push(this.initStavke(null, broj, null, null));
     // this.addZadlist.emit(this.zadrL);
 }
 removeStavke(i: number) {
@@ -322,8 +323,8 @@ removeStavke(i: number) {
     // if (FPValue.Stavke.lenght === 0) {
     // }
 
-    // console.log('Ovo je save - objekat iz forme');
-    // console.log(JSON.stringify(FPValue));
+    //  console.log('Ovo je save - objekat iz forme');
+    //  console.log(JSON.stringify(FPValue));
 
     // return;
     if (FPValue._id) {
@@ -371,7 +372,7 @@ removeStavke(i: number) {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-          // console.log(" forma INSERT "  + error.toString()  + " ima li jos nesto" + error);
+           console.log( ' forma INSERT '  + JSON.stringify(error)  + ' ima li jos nesto' + error);
          },
        );
     }

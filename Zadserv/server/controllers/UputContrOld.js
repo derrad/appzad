@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const Zadrugar = require('../models/sfZadrugar');
 const Uput = require('../models/prUputDok');
@@ -9,7 +8,7 @@ const TIP_TRANS_INSERT ="ADD UPUT";
 const TIP_TRANS_UPDATE ="CHANGES UPUT";
 const TIP_TRANS_DEL = "DELETE UPUT";
 
-module.exports.create = async function (req, res,next) {
+module.exports.create = function (req, res,next) {
   const uid = req.params.id ;
 
   const PartneriID = req.body.PartneriID ; 
@@ -64,7 +63,7 @@ module.exports.create = async function (req, res,next) {
         //console.log("GRESKA UPDATE -" + err);
         //res.statusMessage = err;
         return res.status(400).
-        json({ success: false, message: 'Error processing request ', data:[] }).end(); 
+        json({ success: false, message: 'Error processing request ' + err, data:[] }).end(); 
       }
 
         try{
@@ -82,24 +81,10 @@ module.exports.create = async function (req, res,next) {
 
 }else{
   //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
+   //let NoveStavke = GetSredStavke(Stavke);
+   console.log("stavke save " + JSON.stringify(Stavke));
+ 
   // Add new Uput
-  const newStav = [];
-  await Stavke.forEach( async function(item){
-      console.log('Vrtenje');
-      // let result = await ZadRefPop(item.ZadrugarID)
-      // item.ZadRef = result;
-      // console.log('result' + JSON.stringify(result));
-      // newStav.push(item);
-      PopulZadRef(item.ZadrugarID, function (objZad) {
-        //do whatever
-        item.ZadRef = objZad;
-        newStav.push(item);
-        console.log('Posle posziva fukciju za populate zadrugara' + JSON.stringify(objZad));
-      })
-      
-  });
-  console.log('posle funkcije newStav ' + JSON.stringify(newStav));
-  console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
   let oUput = new Uput({
     PartneriID: PartneriID ,
     TipDok: TipDok ,
@@ -110,16 +95,16 @@ module.exports.create = async function (req, res,next) {
     Godina: Godina ,
     RacVlasnika:  RacVlasnika ,
     PosloviID :  PosloviID ,
-    Stavke :  newStav ,
+    Stavke : Stavke,
     Opis : Opis,
     NameUser : NameUser
 
   });
-  console.log("Pre save funkcije");
+
   oUput.save(function(err,result) {
     if(err){ 
       // const emsg = " Error processing request";
-      // console.log(JSON.stringify(err));
+      console.log(" Novi uput save " + JSON.stringify(err));
       return res.status(400).json(
             { success: false, message:JSON.stringify(err), data:[] }).end();
     }
@@ -138,47 +123,137 @@ module.exports.create = async function (req, res,next) {
   }
 }
 
-function PopulZadRef(keyZad, callback)  { 
-  Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-         if(err){ 
-            console.log('error u findOne');
-            callback(err);
-  //         // return err;
-         }else{
-           console.log('Nema greska');
-         //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-           callback(result);
-  //         //return result;
-  //       //  item.ZadRef = result;
-  //       //  item.TipZadrugar = result.TipZadrugar;
-         }
-     });
+function GetSredStavke(tStavke){
+  const newStav = [];
+  if(tStavke){
+    console.log(" Dobio sam na obradu" + JSON.stringify(tStavke));
+  }else{
+    console.log('Nema stavki');
+  }
+  tStavke.forEach(function(item){
+    const zadId = item.ZadrugarID;
+    try{
+      // getItemFormID(zadId).then(obj=>{
+      //       console.log('THEN IMAM' + obj);
+      //       item.ZadRef  = obj;
+      //     }
+      // ).catch(err=>{console.log(err)});
+      //  const objZad = doSomething(zadId);
+      //  item.ZadRef = objZad;
+      //console.log('Zovem fukciju za populate zadrugara');
+       PopulZadRef(zadId, function (objZad) {
+              //do whatever
+              item.ZadRef = objZad;
+              console.log('Zovem fukciju za populate zadrugara' + JSON.stringify(objZad));
+         });
+    // const cursor = Zadrugar.findOne({_id : zadId }).cursor();
+    // let doc = await cursor.next();
 
+      // Zadrugar.findOne({_id : zadId }).exec().then(respone=>{
+      //       console.log(" resone" + respone);
+      //       item.ZadRef = respone;
+
+      //   }).catch(err=>console.log(err))
+    // let r = Zadrugar.findOne({_id : zadId }).exec(function(err, result){
+    //     if(err){ 
+    //        console.log('error u findOne');
+    //       // callback(err);
+    //       // return err;
+    //     }else{
+    //       console.log('Nema greska');
+    //       item.ZadRef = result;
+    //     // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+    //     //  callback(result);
+    //       //return result;
+    //     //  item.ZadRef = result;
+    //     //  item.TipZadrugar = result.TipZadrugar;
+    //     }
+    //  });
+   //   let upit = Zadrugar.findOne({_id : zadId });
+      //console.log(!(upit instanceof require('mpromise')));
+     //const result = await upit.exec();
+      // upit.then(function (doc) {
+      //   console.log("Usao u upit then");
+      //   if (doc.TipZadrugar){
+      //     item.ZadRef = doc;
+      //   }
+      // });
+
+      // let upit = Zadrugar.find({_id : zadId }).sort({created_at:-1}).limit(1);
+      // let stream = upit.tailable({ "awaitdata": true}).stream();
+      // console.log("Pre strema on");
+      // stream.on("data",function(data) {
+      //   console.log(data);
+      //   item.ZadRef = data;
+      // });
+      // let retValue = getZadr(zadId, function(returnValue){return returnValue;});
+      // console.log("sta li sam dobio " + JSON.stringify(retValue));
+      // if (retValue.TipZadrugar){
+      //   item.ZadRef = retValue;
+      //   item.TipZadrugar = retValue.TipZadrugar;
+      // }
+
+    }catch(err){ console.log("Error" + err);}
+    
+
+    newStav.push(item);
+  });    
+  console.log("Vracam se " + JSON.stringify(newStav));
+  return newStav
 }
 
-async function ZadRefPop(keyZad)  { 
-  Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-         if(err){ 
-            console.log('error u findOne');
-           // callback(err);
-  //         // return err;
-         }else{
-           console.log('Nema greska');
-         //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-           //callback(result);
-           return result;
-  //       // item.ZadRef = result;
-  //       //  item.TipZadrugar = result.TipZadrugar;
-         }
-     });
+// async function doSomething(zadId){
 
-}
+//    //tStavke.forEach(function(item){
+//     //const zadId = item.ZadrugarID;
+//      let items= await Zadrugar.findOne({_id : zadId });
+//      console.log(items);
+//      return items;
+//    //});
+  
+//   //return tStavke;
+  
+//   // Other code with variable items here ...
+// }
+
+// async function getItemFormID(zadId) {
+//   var obj = await new Promise(function(resolve, reject) {
+//       let items= Zadrugar.findOne({_id : zadId });
+//       resolve(items);
+    
+//   });
+//   return obj;
+// }
+
+// myFunction(query, function(returnValue) {
+//   // use the return value here instead of like a regular (non-evented) return value
+// });
+ 
+
+//  async function getZadr(zadId, callback){
+//    await  Zadrugar.findOne({_id : zadId }).exec(function(err, result){
+//       if(err){ 
+//          console.log('error u findOne');
+//          callback(err);
+//         // return err;
+//       }else{
+//         console.log('Nema greska');
+//       // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+//         callback(result);
+//         //return result;
+//       //  item.ZadRef = result;
+//       //  item.TipZadrugar = result.TipZadrugar;
+//       }
+//    });
+// }
+
+
+
 
 
 module.exports.listUput = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID')
-  .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID',['Naziv','Skola','StepenSS']).exec(function(err, result){
+  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').populate('Stavke.ZadrugarID').exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
@@ -194,8 +269,7 @@ module.exports.listUput = function (req, res,next) {
 
 module.exports.getUput = function (req, res,next) {
   
-  Uput.find({_id : req.params.id }).populate('PartneriID').populate('PosloviID')
-  .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID').exec(function(err, result){
+  Uput.find({_id : req.params.id }).exec(function(err, result){
      if(err){ 
       return res.status(404).json(
          { success: false, message:'Error processing request ' , data:[] }
@@ -279,4 +353,56 @@ module.exports.getUputBrojGod = function (req, res,next) {
        });
      });
  
+ }
+
+
+ 
+// down vote
+// accepted
+// You need a callback function since this is an async request:
+
+// function authenticate(accesskey, callback)  {
+//     var auth = null;
+
+//     userModel.findOne({'uid': accesskey}, function(err, user) {
+//         console.log("TRY AUTHENTICATE");
+
+//         if (err) {
+//             console.error("Can't Find.!! Error");
+//         }
+
+//         //None Found
+//         if (user === null) {
+//             console.error("ACCESS ERROR : %s  Doesn't Exist", accesskey);
+//             auth = false;
+//         } else {
+//             console.log(user);
+//             auth = true;
+//         }
+
+//         callback(auth);
+//     });
+// }
+// And call this function like :
+
+// authenticate("key", function (authResult) {
+//     //do whatever
+// });
+
+ function PopulZadRef(keyZad, callback)  { 
+    Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
+           if(err){ 
+              console.log('error u findOne');
+              callback(err);
+    //         // return err;
+           }else{
+             console.log('Nema greska');
+           //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+             callback(result);
+    //         //return result;
+    //       //  item.ZadRef = result;
+    //       //  item.TipZadrugar = result.TipZadrugar;
+           }
+       });
+
  }

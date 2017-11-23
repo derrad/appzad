@@ -36,6 +36,7 @@ export class BankeComponent implements OnInit {
     this.bankService.getBanke()
       .subscribe((profile) => {
       if (profile.success === true) {
+       // console.log(JSON.stringify(profile.data));
           this.bankeL = profile.data;
       }
     // }
