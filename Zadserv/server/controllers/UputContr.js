@@ -81,6 +81,7 @@ module.exports.create = function (req, res,next) {
 
 }else{
   //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
+  //GetSredStavke(Stavke);
   // Add new Uput
   let oUput = new Uput({
     PartneriID: PartneriID ,
@@ -92,7 +93,8 @@ module.exports.create = function (req, res,next) {
     Godina: Godina ,
     RacVlasnika:  RacVlasnika ,
     PosloviID :  PosloviID ,
-    Stavke :  Stavke ,
+    ZadRef: null,
+    Stavke :  GetSredStavke(Stavke) ,
     Opis : Opis,
     NameUser : NameUser
 
@@ -111,7 +113,7 @@ module.exports.create = function (req, res,next) {
 
    return res.status(201).json({
       success: true,
-      message: 'Zadrugar saved successfully',
+      message: 'Uput saved successfully',
       data: result
     });
   });
@@ -120,10 +122,80 @@ module.exports.create = function (req, res,next) {
   }
 }
 
+function GetSredStavke(tStavke){
+  const newStav = [];
+  if(tStavke){
+    console.log(" Dobio sam na obradu" + JSON.stringify(tStavke));
+  }else{
+    console.log('Nema stavki');
+  }
+  tStavke.forEach(function(item){
+    const zadId = item.ZadrugarID;
+    try{
+
+      let upit = Zadrugar.findOne({_id : zadId });
+      //console.log(!(upit instanceof require('mpromise')));
+    //  const result = await upit.exec();
+      // upit.then(function (doc) {
+      //   console.log("Usao u upit then");
+      //   if (doc.TipZadrugar){
+      //     item.ZadRef = doc;
+      //   }
+      // });
+
+      // let upit = Zadrugar.find({_id : zadId }).sort({created_at:-1}).limit(1);
+      // let stream = upit.tailable({ "awaitdata": true}).stream();
+      // console.log("Pre strema on");
+      // stream.on("data",function(data) {
+      //   console.log(data);
+      //   item.ZadRef = data;
+      // });
+      // let retValue = getZadr(zadId, function(returnValue){return returnValue;});
+      // console.log("sta li sam dobio " + JSON.stringify(retValue));
+      // if (retValue.TipZadrugar){
+      //   item.ZadRef = retValue;
+      //   item.TipZadrugar = retValue.TipZadrugar;
+      // }
+
+    }catch(err){ console.log("Error" + err);}
+    
+
+    newStav.push(item);
+  });    
+  console.log("Vracam se " + JSON.stringify(newStav));
+  return newStav
+}
+
+// myFunction(query, function(returnValue) {
+//   // use the return value here instead of like a regular (non-evented) return value
+// });
+ 
+
+ function getZadr(zadId, callback){
+    Zadrugar.findOne({_id : zadId }).exec(function(err, result){
+      if(err){ 
+         console.log('error u findOne');
+         callback(err);
+        // return err;
+      }else{
+        console.log('Nema greska');
+      // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+        callback(result);
+        //return result;
+      //  item.ZadRef = result;
+      //  item.TipZadrugar = result.TipZadrugar;
+      }
+   });
+}
+
+
+
+
 
 module.exports.listUput = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').populate('Stavke.ZadrugarID').exec(function(err, result){
+  //Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').populate('Stavke.ZadrugarID').exec(function(err, result){
+  Uput.find({}).sort({created_at:-1}).exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
