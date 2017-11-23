@@ -18,7 +18,7 @@ const compression = require('compression');
 const app = express();
 
 //use configure app
-mongoose.Promise = global.Promise;
+mongoose.Promise = require('bluebird');// global.Promise;
 //mongoose.connect('mongodb://localhost:27017/zadruga'); 'ovo sam dodao jer je bilo upozorenje i nasao na kako se ispravlja
 mongoose.connect(config.database,{ useMongoClient: true });
 //mongoose.connect('mongodb://pera:171296@ds153637.mlab.com:53637/omzadruga',{ useMongoClient: true }); 

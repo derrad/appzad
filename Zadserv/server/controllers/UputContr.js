@@ -81,7 +81,9 @@ module.exports.create = function (req, res,next) {
 
 }else{
   //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
-  //GetSredStavke(Stavke);
+  let NoveStavke = GetSredStavke(Stavke);
+  console.log("Nove stavke " + JSON.stringify(NoveStavke));
+ 
   // Add new Uput
   let oUput = new Uput({
     PartneriID: PartneriID ,
@@ -93,8 +95,7 @@ module.exports.create = function (req, res,next) {
     Godina: Godina ,
     RacVlasnika:  RacVlasnika ,
     PosloviID :  PosloviID ,
-    ZadRef: null,
-    Stavke :  GetSredStavke(Stavke) ,
+    Stavke : NoveStavke,
     Opis : Opis,
     NameUser : NameUser
 
@@ -132,10 +133,39 @@ function GetSredStavke(tStavke){
   tStavke.forEach(function(item){
     const zadId = item.ZadrugarID;
     try{
+      // getItemFormID(zadId).then(obj=>{
+      //       console.log('THEN IMAM' + obj);
+      //       item.ZadRef  = obj;
+      //     }
+      // ).catch(err=>{console.log(err)});
+       const objZad = doSomething(zadId);
+       item.ZadRef = objZad;
+    // const cursor = Zadrugar.findOne({_id : zadId }).cursor();
+    // let doc = await cursor.next();
 
-      let upit = Zadrugar.findOne({_id : zadId });
+      // Zadrugar.findOne({_id : zadId }).exec().then(respone=>{
+      //       console.log(" resone" + respone);
+      //       item.ZadRef = respone;
+
+      //   }).catch(err=>console.log(err))
+    // let r = Zadrugar.findOne({_id : zadId }).exec(function(err, result){
+    //     if(err){ 
+    //        console.log('error u findOne');
+    //       // callback(err);
+    //       // return err;
+    //     }else{
+    //       console.log('Nema greska');
+    //       item.ZadRef = result;
+    //     // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+    //     //  callback(result);
+    //       //return result;
+    //     //  item.ZadRef = result;
+    //     //  item.TipZadrugar = result.TipZadrugar;
+    //     }
+    //  });
+   //   let upit = Zadrugar.findOne({_id : zadId });
       //console.log(!(upit instanceof require('mpromise')));
-    //  const result = await upit.exec();
+     //const result = await upit.exec();
       // upit.then(function (doc) {
       //   console.log("Usao u upit then");
       //   if (doc.TipZadrugar){
@@ -166,27 +196,50 @@ function GetSredStavke(tStavke){
   return newStav
 }
 
+async function doSomething(zadId){
+
+   //tStavke.forEach(function(item){
+    //const zadId = item.ZadrugarID;
+     let items= await Zadrugar.findOne({_id : zadId });
+     console.log(items);
+     return items;
+   //});
+  
+  //return tStavke;
+  
+  // Other code with variable items here ...
+}
+
+async function getItemFormID(zadId) {
+  var obj = await new Promise(function(resolve, reject) {
+      let items= Zadrugar.findOne({_id : zadId });
+      resolve(items);
+    
+  });
+  return obj;
+}
+
 // myFunction(query, function(returnValue) {
 //   // use the return value here instead of like a regular (non-evented) return value
 // });
  
 
- function getZadr(zadId, callback){
-    Zadrugar.findOne({_id : zadId }).exec(function(err, result){
-      if(err){ 
-         console.log('error u findOne');
-         callback(err);
-        // return err;
-      }else{
-        console.log('Nema greska');
-      // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-        callback(result);
-        //return result;
-      //  item.ZadRef = result;
-      //  item.TipZadrugar = result.TipZadrugar;
-      }
-   });
-}
+//  async function getZadr(zadId, callback){
+//    await  Zadrugar.findOne({_id : zadId }).exec(function(err, result){
+//       if(err){ 
+//          console.log('error u findOne');
+//          callback(err);
+//         // return err;
+//       }else{
+//         console.log('Nema greska');
+//       // console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+//         callback(result);
+//         //return result;
+//       //  item.ZadRef = result;
+//       //  item.TipZadrugar = result.TipZadrugar;
+//       }
+//    });
+// }
 
 
 
@@ -194,8 +247,7 @@ function GetSredStavke(tStavke){
 
 module.exports.listUput = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
-  //Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').populate('Stavke.ZadrugarID').exec(function(err, result){
-  Uput.find({}).sort({created_at:-1}).exec(function(err, result){
+  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID').populate('Stavke.ZadrugarID').exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
@@ -296,3 +348,37 @@ module.exports.getUputBrojGod = function (req, res,next) {
      });
  
  }
+
+
+ 
+// down vote
+// accepted
+// You need a callback function since this is an async request:
+
+// function authenticate(accesskey, callback)  {
+//     var auth = null;
+
+//     userModel.findOne({'uid': accesskey}, function(err, user) {
+//         console.log("TRY AUTHENTICATE");
+
+//         if (err) {
+//             console.error("Can't Find.!! Error");
+//         }
+
+//         //None Found
+//         if (user === null) {
+//             console.error("ACCESS ERROR : %s  Doesn't Exist", accesskey);
+//             auth = false;
+//         } else {
+//             console.log(user);
+//             auth = true;
+//         }
+
+//         callback(auth);
+//     });
+// }
+// And call this function like :
+
+// authenticate("key", function (authResult) {
+//     //do whatever
+// });

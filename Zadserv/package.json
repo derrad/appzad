@@ -12,7 +12,7 @@
   "author": "derrad",
   "license": "ISC",
   "engines": {
-    "node": "6.10.2"
+    "node": "8.9.1"
   },
   "dependencies": {
     "@reactivex/rxjs": "*",
