@@ -125,35 +125,57 @@
 
           </div>
                         
-         
+          <!-- class="panel-body"  class="panel panel-info"-->
           <div class="form-group">
-            <div formArrayName="Stavke">
-                <div *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index" class="panel panel-info"> 
-                    <div class="panel-heading">
-                        <span><strong>Stavka {{i + 1}} </strong></span>
-                        <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span>
-                    </div>
+            <!-- <div formArrayName="Stavke"> -->
+                <table class="table  table-striped table-bordered table-condensed" formArrayName="Stavke">
+                    <thead>
+                        
+                            <div class="row" >
+                                
+                                <div class="col-md-1  text-left"><strong>Rbr</strong></div>
+                                <div class="col-md-2  text-center">ZadId</div>
+                                <div class="col-md-1  text-center">...</div>
+                                <div class="col-md-3  text-center">Zadrugar</div>
+                                <div class="col-md-3  text-center">Posao</div>
+                                <div class="col-md-1  text-center" ></div>
+                            
+                            </div>
+                            <hr>
+                        
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index"  > 
+                            <!-- <div class="panel-heading">
+                                <span><strong>Stavka {{i + 1}} </strong></span>
+                                <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span>
+                            </div> -->
+                            
+                            <div [formGroupName]="i"   > 
+                                <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" ></app-uput-stavka>
+                            </div>
 
-                    <div [formGroupName]="i" class="panel-body" > 
-                        <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" ></app-uput-stavka>
-                    </div>
-                </div>
-          
+                        </tr>
+                    </tbody>
+                   
+                </table>
+
                 <div class="margin-20">
                   <div class="row">
                     <div class="col-xs-2">
+                            <button type="button" class="btn btn-info btn-block"   (click)="addStavke()" title=" Add stavku">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Dodaj stavku
+                                </button>
                       </div>
                       <div class=" col-xs-10 ">
-                          <button type="button" class="btn btn-info btn-block"   (click)="addStavke()" title=" Add stavku">
-                              <i class="fa fa-plus" aria-hidden="true"></i>
-                              Dodaj staku
-                          </button>
+                          
                          
                     </div>
                   </div>
                 </div>
               
-            </div>
+            <!-- </div> -->
         </div> 
           
       

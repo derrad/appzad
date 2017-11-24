@@ -1,5 +1,39 @@
-<div [formGroup]="Stavke">
-  <div class="row">
+<div [formGroup]="Stavke" class="row">
+    
+        <!-- <tbody> -->
+            <!-- <tr> -->
+                    <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr"></td>
+                    <td class="col-md-2"><input type="text" class="form-control input-sm" formControlName="IDZadrugar"></td>
+                    <td class="col-md-1"> 
+                        <button type="button" class="btn btn-sm btn-info">
+                            <span class="glyphicon glyphicon-search"></span>
+                            ...
+                        </button>
+                    </td>
+                    <td class="col-md-3"><select  formControlName="ZadrugarID" class="form-control input-sm" required>
+                            <option *ngFor="let list of zadrugarL"  [value]="list._id" >
+                                {{list.Prezime}} {{list.Ime}}
+                            </option>
+                        </select>
+                    </td>
+                    <td class="col-md-3"><select  formControlName="PosloviID" class="form-control input-sm" placeholder="Select posao" required>
+                            <option *ngFor="let list of poslL" [value]="list._id"   >
+                            {{list.Naziv}} 
+                            </option>
+                        </select>
+                    </td>
+                    <td class="col-md-1">
+                        <button type="button" class="btn btn-sm btn-danger" >
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+            <!-- </tr>     -->
+        <!-- </tbody> -->
+       
+ 
+
+
+  <!-- <div class="row">
       <div class="form-group col-md-2">
           <label class="center-block">Rbr
               <input type="text" class="form-control input-sm" formControlName="Rbr">
@@ -14,19 +48,16 @@
          
               <label class="center-block">Zadrugar:
                   <select  formControlName="ZadrugarID" class="form-control input-sm" required>
-                      <option *ngFor="let list of zadrugarL"  [value]="list._id"   >
-                            {{list.Prezime}}-{{list.Ime}}
+                      <option *ngFor="let list of zadrugarL"  [value]="list._id" >
+                            {{list.Prezime}} {{list.Ime}}
                       </option>
                   </select>
               </label>
-              <small [hidden]="Stavke.controls.ZadrugarID.valid" class="text-danger">
-                Zadrugar je obavezan
-             </small>
-              <!-- <div *ngIf="Stavke.controls.ZadrugarID.invalid && (Stavke.controls.ZadrugarID.dirty || Stavke.controls.ZadrugarID.touched)" class="alert btn-danger">
+               <div *ngIf="Stavke.controls.ZadrugarID.invalid && (Stavke.controls.ZadrugarID.dirty || Stavke.controls.ZadrugarID.touched)" class="alert btn-danger">
                       <div *ngIf="Stavke.controls.ZadrugarID.errors.required">
                           <strong>Zadrugar je obavezan podatak !!!</strong>
                       </div>
-              </div> -->
+              </div>
       </div>
       <div class="form-group col-md-4">
           <label class="center-block">Posao:
@@ -36,11 +67,12 @@
                   </option>
               </select>
           </label>
-          <!-- <div *ngIf="Stavke.controls.PosloviID.invalid && (Stavke.controls.PosloviID.dirty || Stavke.controls.PosloviID.touched)" class="alert btn-danger">
+          <div *ngIf="Stavke.controls.PosloviID.invalid && (Stavke.controls.PosloviID.dirty || Stavke.controls.PosloviID.touched)" class="alert btn-danger">
                   <div *ngIf="Stavke.controls.PosloviID.errors.required">
                       <strong>Posao je obavezan podatak !!!</strong>
                   </div>
-          </div> -->
+          </div>
       </div>
-  </div>
+  </div> -->
+
 </div>
