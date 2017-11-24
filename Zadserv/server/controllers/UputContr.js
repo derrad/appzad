@@ -98,8 +98,8 @@ module.exports.create = async function (req, res,next) {
       })
       
   });
-  console.log('posle funkcije newStav ' + JSON.stringify(newStav));
-  console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
+  // console.log('posle funkcije newStav ' + JSON.stringify(newStav));
+  // console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
   let oUput = new Uput({
     PartneriID: PartneriID ,
     TipDok: TipDok ,
@@ -110,7 +110,7 @@ module.exports.create = async function (req, res,next) {
     Godina: Godina ,
     RacVlasnika:  RacVlasnika ,
     PosloviID :  PosloviID ,
-    Stavke :  newStav ,
+    Stavke :  Stavke ,
     Opis : Opis,
     NameUser : NameUser
 
@@ -194,8 +194,11 @@ module.exports.listUput = function (req, res,next) {
 
 module.exports.getUput = function (req, res,next) {
   
-  Uput.find({_id : req.params.id }).populate('PartneriID').populate('PosloviID')
-  .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID').exec(function(err, result){
+  //Uput.find({_id : req.params.id }).populate('PartneriID').populate('PosloviID')
+
+  // Uput.findById(req.params.id).populate('PartneriID').populate('PosloviID')
+  // .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID').exec(function(err, result){
+    Uput.findById(req.params.id).exec(function(err, result){
      if(err){ 
       return res.status(404).json(
          { success: false, message:'Error processing request ' , data:[] }

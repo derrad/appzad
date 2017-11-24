@@ -207,7 +207,8 @@ module.exports.listactivzadrugar = function (req, res,next) {
 
 module.exports.getzadrugar = function (req, res,next) {
   // console.log("Usao u list Radnik - tu sam  " + req.params.id);
-  Zadrugar.find({_id : req.params.id }).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
+  // Zadrugar.find({_id : req.params.id }).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
+  Zadrugar.findById(req.params.id).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
       .populate('BankaID',['Naziv']).exec(function(err, result){
      if(err){ 
       // res.statusMessage = err;
@@ -216,6 +217,8 @@ module.exports.getzadrugar = function (req, res,next) {
          ).end(); 
      }
      
+     // console.log(JSON.stringify(result));
+    // console.log(" FullName" +  result[0].fullName);
       return res.status(200).json({
        success: true, 
        message:'Zadrugar find successfully',

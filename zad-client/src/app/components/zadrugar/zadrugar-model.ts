@@ -13,6 +13,7 @@ export class ZadrugarModel {
     IDZadrugar: Number;
     Ime: string;
     Prezime: string;
+    fullName: string;
     ImeRoditelja: string;
     DatRodjenja: Date;
     Aktivan: boolean;

@@ -12,7 +12,8 @@
                     </td>
                     <td class="col-md-3"><select  formControlName="ZadrugarID" class="form-control input-sm" required>
                             <option *ngFor="let list of zadrugarL"  [value]="list._id" >
-                                {{list.Prezime}} {{list.Ime}}
+                                <!-- {{list.Prezime}} {{list.Ime}} -->
+                                {{list.fullName}}
                             </option>
                         </select>
                     </td>

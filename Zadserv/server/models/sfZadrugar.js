@@ -77,8 +77,16 @@ var sfZadrugar = new Schema({
 //   });
 
 
+sfZadrugar.virtual('fullName').
+  get(function() { return this.Ime + ' ' + this.Prezime; }).
+  set(function(v) {
+    this.Ime = v.substr(0, v.indexOf(' '));
+    this.Prezime = v.substr(v.indexOf(' ') + 1);
+  });
 
-const collectionName = 'sfZadrugar';
+  sfZadrugar.set('toJSON', { virtuals: true })
+
+
 
 module.exports = mongoose.model('sfZadrugar', sfZadrugar,'sfZadrugar'); 
 

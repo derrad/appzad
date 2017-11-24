@@ -138,14 +138,15 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             (pos) => {
               if (pos.success) {
                 this.saveTemp = false;
-                 this.zadrN = pos.data[0];
-                 this.zadrAdresa = pos.data[0].Adresa;
+                 // this.zadrN = pos.data[0];
+                 this.zadrN = pos.data;
+                 this.zadrAdresa = pos.data.Adresa;
                  this.initAdresa(this.zadrAdresa);
               }else {
                 this.flashMessage.show(pos.message, {
                   cssClass: 'alert-danger',
                   timeout: 9000});
-                this.router.navigate(['NotFound']);
+                  this.router.navigate(['NotFound']);
               }
             } ,
             (error: ResponeCustom) => {

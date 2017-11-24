@@ -170,10 +170,11 @@ export class UputFormComponent implements OnInit, OnDestroy {
         (pos) => {
           if (pos.success) {
             this.saveTemp = false;
-             this.uputN = pos.data[0];
+             this.uputN = pos.data;
             // this.partAdresa = pos.data[0].Adresa;
             // this.initAdresa(this.partAdresa);
              // console.log(JSON.stringify(this.vlasnN ));
+             this.InitDokZag();
               this.initDataStavke();
             // this.initDataTelefon();
             // this.initDataKomtakt();
@@ -283,6 +284,18 @@ PickKupac(event) {
   }
 }
 
+// Init zaglavlja
+InitDokZag() {
+
+ this.Broj.setValue(this.uputN.Broj);
+ this.Godina.setValue(this.uputN.Godina);
+
+
+ this.PartneriID.setValue(this.uputN.PartneriID);
+ this.RacVlasnika.setValue(this.uputN.RacVlasnika);
+ this.Datum.setValue(this.uputN.Datum);
+ this.PosloviID.setValue(this.uputN.PosloviID);
+}
 
 // Stavke
 initDataStavke() {
