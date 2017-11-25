@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate');
+//const mongoosePaginate = require('mongoose-paginate');
 
  const Schema = mongoose.Schema ; 
  //,//  ID  = Schema.ObjectId;
@@ -33,5 +33,6 @@ const apParametar = new Schema({
  );
 
 
-apParametar.plugin(mongoosePaginate);
+// apParametar.plugin(mongoosePaginate);
+
 module.exports = mongoose.model('apParametar', apParametar,'apParametar');

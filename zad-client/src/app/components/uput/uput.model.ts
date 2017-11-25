@@ -3,6 +3,8 @@ export class UputStavModel {
     IDZadrugar: Number;
     Rbr: Number;
     ZadrugarID: Object;
+    ZadRef: Object;
+    PosloviRef: Object;
     TipZadrugar: string;
     PosloviID: string;
     OdDatuma: Date;
@@ -40,4 +42,9 @@ export class UputModel {
 export class UputBrojGodina {
     broj: Number;
     godina: Number;
+}
+
+export class PosaoNG {
+    id: string;
+    text: string;
 }

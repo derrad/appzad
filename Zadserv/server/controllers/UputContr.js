@@ -24,7 +24,8 @@ module.exports.create = async function (req, res,next) {
   const Stavke =  req.body.Stavke ;
   const Opis = req.body.Opis ;
   const NameUser = req.user.email || "System";
-
+  // const PosloviRef = req.body.PosloviRef || {_id : null, name : null, stepenss: null} ;;
+  // const ZadRef = req.body.ZadRef || { _id : null, name: null,tipzadrugar : null,idzadrugar : null} ;
 
 
   if (!PartneriID || !TipDok || !Datum || !Broj || !PosloviID || !Stavke) {
@@ -57,6 +58,7 @@ module.exports.create = async function (req, res,next) {
       uput.Stavke =  Stavke ;
       uput.Opis = Opis;
       uput.NameUser = NameUser;
+    
      
     }
     uput.save(function(err,result) {
@@ -83,23 +85,23 @@ module.exports.create = async function (req, res,next) {
 }else{
   //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
   // Add new Uput
-  const newStav = [];
-  await Stavke.forEach( async function(item){
-      console.log('Vrtenje');
-      // let result = await ZadRefPop(item.ZadrugarID)
-      // item.ZadRef = result;
-      // console.log('result' + JSON.stringify(result));
-      // newStav.push(item);
-      PopulZadRef(item.ZadrugarID, function (objZad) {
-        //do whatever
-        item.ZadRef = objZad;
-        newStav.push(item);
-        console.log('Posle posziva fukciju za populate zadrugara' + JSON.stringify(objZad));
-      })
+  // const newStav = [];
+  // await Stavke.forEach( async function(item){
+  //     console.log('Vrtenje');
+  //     // let result = await ZadRefPop(item.ZadrugarID)
+  //     // item.ZadRef = result;
+  //     // console.log('result' + JSON.stringify(result));
+  //     // newStav.push(item);
+  //     PopulZadRef(item.ZadrugarID, function (objZad) {
+  //       //do whatever
+  //       item.ZadRef = objZad;
+  //       newStav.push(item);
+  //     //  console.log('Posle posziva fukciju za populate zadrugara' + JSON.stringify(objZad));
+  //     })
       
-  });
+  // });
   // console.log('posle funkcije newStav ' + JSON.stringify(newStav));
-  // console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
+   console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
   let oUput = new Uput({
     PartneriID: PartneriID ,
     TipDok: TipDok ,

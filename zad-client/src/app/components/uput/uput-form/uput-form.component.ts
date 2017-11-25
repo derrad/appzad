@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location} from '@angular/common';
 import { formsTransition} from '../../../animation/forms.animations';
 import { UputService } from '../uput.service';
-import { UputModel, UputStavModel, UputRacVlasnikModel, UputBrojGodina } from '../uput.model';
+import { UputModel, UputStavModel, UputRacVlasnikModel, UputBrojGodina, PosaoNG } from '../uput.model';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
@@ -34,6 +34,8 @@ export class UputFormComponent implements OnInit, OnDestroy {
   kupacL: Array<PartnerModel>;
   zadrL: Array<ZadrugarModel>;
   poslL: Array<Posao>;
+  // NGposaoL: Array<PosaoNG>;
+  PosaoSel: Posao;
   saveTemp = true;
   godbroj: UputBrojGodina = new UputBrojGodina();
   displayKupac = false;
@@ -70,7 +72,6 @@ export class UputFormComponent implements OnInit, OnDestroy {
     get Godina() { return this.formUput.get('Godina'); }
 
   ngOnInit() {
-
     this.partnService.getActivPartner().subscribe(profile => {
       if (profile.success === true) {
           this.kupacL = profile.data;
@@ -135,13 +136,18 @@ export class UputFormComponent implements OnInit, OnDestroy {
   this.posService.getPoslovi().subscribe(profile => {
     if (profile.success === true) {
         this.poslL = profile.data;
-        this.addPoslist.emit(this.poslL);
+      //  this.addPoslist.emit(this.poslL);
+        // this.NGposaoL = new Array<PosaoNG>();
+        // for ( const posao of this.poslL) {
+        //   this.NGposaoL.push({id: posao._id, text: posao.Naziv});
+        // }
+
       }else {
       this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.poslL = [];
-        this.addPoslist.emit(this.poslL);
+      //  this.addPoslist.emit(this.poslL);
       }
   },
   (error: ResponeCustom) => {
@@ -160,8 +166,15 @@ export class UputFormComponent implements OnInit, OnDestroy {
     this.title = id ? 'Ažuriranje uputa' : 'Novi uput';
     if (!id) {
        // this.initAdresa("","","","","","");
+      // this.uputN.PosloviID = '';
+      //  this.PartneriID.setValue(null);
+      //  this.RacVlasnika.setValue(null);
+      //  this.PosloviID.setValue('');
        this.loadTempData();
        this.InitGodinaBroj();
+       if (this.Stavke.controls.length  === 0 ) {
+         this.addStavke();
+       }
        return;
     }
     // this.InitGodinaBroj();
@@ -265,6 +278,8 @@ onBlurDatum() {
 InitGodinaBroj() {
   this.uputN.Datum = new Date();
   this.SetGodinaBroj(this.uputN.Datum);
+  console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
+
 }
 
 GetKupac() {
@@ -289,8 +304,6 @@ InitDokZag() {
 
  this.Broj.setValue(this.uputN.Broj);
  this.Godina.setValue(this.uputN.Godina);
-
-
  this.PartneriID.setValue(this.uputN.PartneriID);
  this.RacVlasnika.setValue(this.uputN.RacVlasnika);
  this.Datum.setValue(this.uputN.Datum);
@@ -316,11 +329,13 @@ addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
     const broj = control.controls.length + 1;
     control.push(this.initStavke(null, broj, null, null));
-    // this.addZadlist.emit(this.zadrL);
 }
 removeStavke(i: number) {
-    const control = <FormArray>this.formUput.controls['Stavke'];
-    control.removeAt(i);
+    if (i >= 0) {
+     const control = <FormArray>this.formUput.controls['Stavke'];
+     control.removeAt(i);
+    }
+    console.log('ovo sam dobio iz stavki' + i);
 }
 
 
@@ -333,6 +348,7 @@ removeStavke(i: number) {
         timeout: 2000});
       return;
     }
+    this.prepareStavke(FPValue);
     // if (FPValue.Stavke.lenght === 0) {
     // }
 
@@ -429,16 +445,67 @@ clearFormData() {
       Datum: '',
       RacVlasnika: null,
       PosloviID: null,
-      PartneriID: null,
-      Stavke: null
-    });
+      PartneriID: null
+     });
 }
 
 ngOnDestroy() {
   this.setTempData();
 }
 
+compareVlasRacun(c1: UputRacVlasnikModel, c2: UputRacVlasnikModel): boolean {
+  return c1 && c2 ? c1.Naziv === c2.Naziv : c1 === c2;
+}
+
+private prepareStavke(tuputN: UputModel) {
+  let rbr = 0;
+  for ( const item of tuputN.Stavke) {
+    const idZad = item.ZadrugarID;
+    const idPosao = item.PosloviID;
+    rbr = rbr + 1;
+    item.Rbr = rbr;
+    for ( const zadrugar of this.zadrL) {
+       if (zadrugar._id === idZad) {
+        item.ZadRef = {
+          _id : zadrugar._id,
+           name: zadrugar.fullName,
+           tipzadrugar : zadrugar.TipZadrugar,
+           idzadrugar : zadrugar.IDZadrugar,
+           jmbg : zadrugar.Jmbg
+        };
+        item.IDZadrugar = zadrugar.IDZadrugar;
+       }
 
 
+    }
+
+    for ( const posao of this.poslL) {
+      if (posao._id === idPosao) {
+        item.PosloviRef = {
+          _id : posao._id,
+          name: posao.Naziv,
+          stepenss : posao.StepenSS
+        };
+       }
+
+    }
+  }
+}
+
+// // https://valor-software.com/ng2-select/
+
+// removedPosaoDok(value: any): void {
+//     console.log('Removed value is: ', value);
+// }
+// public selectedPosaoDok(value: any): void {
+//   console.log('Selected value is: ', value);
+//   this.PosloviID.setValue(value.id);
+// }
+// <ng-select  formControlName="PosloviID"  [allowClear]="true" required 
+// [items]="NGposaoL"
+// (removed)="removedPosaoDok($event)"
+// (selected)="selectedPosaoDok($event)"
+// placeholder="--Select posao--">
+// </ng-select>
 
 }

@@ -11,6 +11,7 @@ import { UputComponent } from './uput.component';
 import { UputService } from './uput.service';
 import { UputRoutingModule } from './uput-routing.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
