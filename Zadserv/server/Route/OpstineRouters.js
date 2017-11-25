@@ -9,5 +9,4 @@ router.post('/api/opstine',passport.authenticate('jwt', {session:false}), Opstin
 router.put('/api/opstine/:id',passport.authenticate('jwt', {session:false}), OpstineController.create);
 router.delete('/api/opstine/:id',passport.authenticate('jwt', {session:false}), OpstineController.deleopstine);
 
-
-module.exports = router
+module.exports = router;

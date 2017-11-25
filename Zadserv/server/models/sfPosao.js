@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const EnumSS = require('../enum/serverenum');
 
 const Schema = mongoose.Schema;
-     
 
 const sfPosao = new Schema({
    Naziv : {  type:String,trim:true,required: [true, 'Naziv je obavezan !!!'],unique: true},

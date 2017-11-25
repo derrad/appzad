@@ -41,7 +41,6 @@ var apVlasnik = new Schema({
 //     console.log("PRE SAVE VLASNIK");
 //     next();
 //   });
-//apVlasnik.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('apVlasnik', apVlasnik,"apVlasnik");
 

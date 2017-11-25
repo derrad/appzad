@@ -1,7 +1,5 @@
-var express = require('express')
-var router = express.Router()
-//var KorisnikController = require('../controllers/KorisnikContrl');
-
+const express = require('express');
+const router = express.Router();
 
 router.get('/api/korisnik',(req,res)=>{
     res.send("GET Korisnik");
@@ -20,4 +18,4 @@ router.delete('/api/korisnik', (req,res)=>{
 });
 
 
-module.exports = router
+module.exports = router;

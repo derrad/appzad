@@ -5,13 +5,11 @@ const sfOpstine = require('../models/sfOpstine');
 const Schema = mongoose.Schema;
 
 const sfMesta = new Schema({
-   //Opstina: { type:Schema.ObjectId, ref:"Opstina", childPath:"child" } ,unique: true,
    Opstina: { type:Schema.ObjectId, ref:"sfOpstine", required:true },
-   Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'] },
+   Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'], trim: true },
    Ptt:{type:String,trim: true},
    Opis  :{ type: String,trim: true },
    NameUser: {type:String,trim: true}
-
 },
 {
  timestamps: { createdAt: 'created_at' }

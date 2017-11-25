@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
-//const mongoosePaginate = require('mongoose-paginate');
-
- const Schema = mongoose.Schema ; 
- //,//  ID  = Schema.ObjectId;
-
+const Schema = mongoose.Schema ; 
 
 const apParametar = new Schema({
    Naziv : { type: String, 
@@ -31,8 +27,5 @@ const apParametar = new Schema({
     retainKeyOrder: true 
  }
  );
-
-
-// apParametar.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('apParametar', apParametar,'apParametar');

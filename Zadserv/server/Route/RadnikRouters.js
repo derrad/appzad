@@ -9,6 +9,4 @@ router.post('/api/radnik',passport.authenticate('jwt', {session:false}), RadnikC
 router.put('/api/radnik/:id',passport.authenticate('jwt', {session:false}), RadnikController.create);
 router.delete('/api/radnik/:id',passport.authenticate('jwt', {session:false}), RadnikController.deleradnik);
 
-
-
-module.exports = router
+module.exports = router;

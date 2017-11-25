@@ -6,7 +6,8 @@ class AggCount  {
   _id: string;
   total: Number;
 }
-
+// Prvo ovo prouci pa napravi ovu komponentu
+// https://www.metaltoad.com/blog/angular-2-http-observables-and-concurrent-data-loading
 
 @Component({
   selector: 'app-dashboard',

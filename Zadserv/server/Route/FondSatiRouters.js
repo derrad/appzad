@@ -9,4 +9,4 @@ router.post('/api/fondsati', passport.authenticate('jwt', {session:false}),FondS
 router.put('/api/fondsati/:id',passport.authenticate('jwt', {session:false}), FondSatiController.create);
 router.delete('/api/fondsati/:id',passport.authenticate('jwt', {session:false}), FondSatiController.delefondsati);
 
-module.exports = router
+module.exports = router;

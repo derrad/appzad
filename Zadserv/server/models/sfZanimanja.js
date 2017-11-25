@@ -1,12 +1,10 @@
-var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
-var EnumSS = require('../enum/serverenum');
+const mongoose = require('mongoose');
+const EnumSS = require('../enum/serverenum');
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
+const Schema = mongoose.Schema;
 
-var sfZanimanja = new Schema({
-   IDZanimanjaID:{type:Schema.Types.Mixed},
+const sfZanimanja = new Schema({
+    IDZanimanjaID:{type:Schema.Types.Mixed},
     Sifra  :{ type: String , unique: true,
     trim: true, 
     match : [
@@ -32,7 +30,5 @@ var sfZanimanja = new Schema({
 }
  );
 
- var collectionName = 'sfZanimanja';
- sfZanimanja.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('sfZanimanja', sfZanimanja,collectionName);
+module.exports = mongoose.model('sfZanimanja', sfZanimanja,'sfZanimanja');

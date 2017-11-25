@@ -9,7 +9,4 @@ router.post('/api/mesta',passport.authenticate('jwt', {session:false}), MestaCon
 router.put('/api/mesta/:id',passport.authenticate('jwt', {session:false}), MestaController.create);
 router.delete('/api/mesta/:id',passport.authenticate('jwt', {session:false}), MestaController.delemesta);
 
-
-
-
-module.exports = router
+module.exports = router;

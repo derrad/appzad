@@ -10,5 +10,4 @@ router.put('/api/posao/:id',passport.authenticate('jwt', {session:false}),  Posa
 router.delete('/api/posao/:id',passport.authenticate('jwt', {session:false}),  PosaoController.deleposao);
 router.get('/api/countActivposao',passport.authenticate('jwt', {session:false}),  PosaoController.countActivposao);
 
-
 module.exports = router;

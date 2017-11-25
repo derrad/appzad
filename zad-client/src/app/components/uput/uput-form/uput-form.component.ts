@@ -501,7 +501,7 @@ private prepareStavke(tuputN: UputModel) {
 //   console.log('Selected value is: ', value);
 //   this.PosloviID.setValue(value.id);
 // }
-// <ng-select  formControlName="PosloviID"  [allowClear]="true" required 
+// <ng-select  formControlName="PosloviID"  [allowClear]="true" required
 // [items]="NGposaoL"
 // (removed)="removedPosaoDok($event)"
 // (selected)="selectedPosaoDok($event)"
