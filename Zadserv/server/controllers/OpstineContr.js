@@ -149,7 +149,8 @@ module.exports.listopstine = function (req, res,next) {
 
 module.exports.getopstine = function (req, res,next) {
 //  console.log("Usao u get Opstina parametar je  " + req.params.id);
-  Opstina.find({_id:req.params.id}).populate('Drzava',['KodDrzave','Naziv']).exec(function(err, result){
+// populate('Drzava',['KodDrzave','Naziv'])
+  Opstina.find({_id:req.params.id}).exec(function(err, result){
     if(err){ 
       return res.status(400).json(
       { success: false, message:'Error processing request '+ err , data:null }

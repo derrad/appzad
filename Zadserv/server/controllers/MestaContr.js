@@ -133,7 +133,8 @@ module.exports.listmesta = function (req, res,next) {
 
 module.exports.getomesta = function (req, res,next) {
  // console.log("Usao u get mesta parametar je  " + req.params.id);
-  Mesta.find({_id:req.params.id}).populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })
+ // .populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })
+  Mesta.find({_id:req.params.id})
     .exec(function(err, result){
     if(err){ 
       return res.status(400).json(

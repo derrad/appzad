@@ -4,28 +4,37 @@ var mongoose = require('mongoose');
      ID  = Schema.ObjectId;
 
 var apVlasnik = new Schema({ 
-    ZiroVlasnik:  [{Naziv:{type:String,required: [true, 'Naziv je obavezan !!!']},Racun:{type:String,required: [true, 'Racun je obavezan !!!']},Glavni:{type:Boolean, default:false},Opis:String}] ,
-    TelefVlasnik: [{Naziv:{type:String,required: [true, 'Naziv je obavezan !!!']},Telefon:{type:String,required: [true, 'Telefon je obavezan !!!']},Glavni:{type:Boolean, default:false},Opis:String}] ,
+    ZiroVlasnik:  [
+        {Naziv:{type:String,required: [true, 'Naziv je obavezan !!!'], trim:true},
+         Racun:{type:String,required: [true, 'Racun je obavezan !!!'], trim:true},
+         Glavni:{type:Boolean, default:false},
+         Opis: {type:String,trim:true }}
+    ] ,
+    TelefVlasnik: [
+        { Naziv:{type:String,required: [true, 'Naziv je obavezan !!!']},
+         Telefon:{type:String,required: [true, 'Telefon je obavezan !!!']},
+         Glavni:{type:Boolean, default:false},
+         Opis: {type:String,trim:true } 
+        }] ,
     Ime: { type: String, required: [true, 'Ime vlasnika je obavezno !!!'] },
-    Adresa:{ type: String, required: [true, 'Adresa vlasnika je obavezna !!!'] },
+    Adresa:{ type: String,required: [true, 'Adresa vlasnika je obavezna !!!'], trim:true },
     Glavni  : {type:Boolean, default:false},
-    Mesto:{ type: String, required: [true, 'Mesto vlasnika je obavezno !!!'] },
-    PttReon:{ type: String},
-    PttPak:{ type: String},
-    Direktor:{ type: String},
-    KomRukovac:{ type: String},
-    Blagajnik:{ type: String},
-    Pib:{ type: String},
-    MatBroj:{ type: String},
-    SifDelat:{ type: String},
-    PdvBroj:{ type: String},
-    Slika:{ type: String},//{type:Schema.Types.Mixed},
-    Sud:{ type: String},
-    UplRacPorJed:{ type: String},
-    NazPorJed:{ type: String},
-    Opis  :{ type: String },
-    NameUser: {type:String}
-    
+    Mesto:{ type: String, required: [true, 'Mesto vlasnika je obavezno !!!'], trim:true },
+    PttReon:{ type: String, trim:true},
+    PttPak:{ type: String, trim:true},
+    Direktor:{ type: String, trim:true },
+    KomRukovac:{ type: String, trim:true},
+    Blagajnik:{ type: String, trim:true},
+    Pib:{ type: String, trim:true},
+    MatBroj:{ type: String, trim:true },
+    SifDelat:{ type: String, trim:true},
+    PdvBroj:{ type: String, trim:true},
+    Slika:{ type: String, trim:true},//{type:Schema.Types.Mixed},
+    Sud:{ type: String, trim:true},
+    UplRacPorJed:{ type: String, trim:true },
+    NazPorJed:{ type: String, trim:true},
+    Opis  :{ type: String,trim:true },
+    NameUser: {type:String, trim:true}
 },
 {
  timestamps: { createdAt: 'created_at' }

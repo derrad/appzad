@@ -1,15 +1,8 @@
-var mongoose = require('mongoose');
-//var mongoosePaginate = require('mongoose-paginate');
-var Opstine = require('../models/sfOpstine');
-// match : [
-//     new RegExp('^[a-z0-9_.-]+$', 'i'),
-//     '{PATH} \'{VALUE}\' is not valid. Use only letters, numbers, underscore or dot.'
-// ],
+const mongoose = require('mongoose');
 
- var Schema = mongoose.Schema,
-     ID  = Schema.ObjectId;
+const Schema = mongoose.Schema;
 
-var sfDrzave = new Schema({
+const sfDrzave = new Schema({
    KodDrzave:{
         type:String,
         required: [true, 'Kod je obavezan !!!'],
@@ -26,10 +19,8 @@ var sfDrzave = new Schema({
   // Contry :{ type: String, required: [true, 'Naziv je obavezan !!!'],unique: true,trim: true, minlength:1 },
   // State :{ type: String, required: [true, 'Naziv je obavezan !!!'],unique: true,trim: true, minlength:1 },
    EuClan: {type:Boolean, default:false},
-   Opis  :{ type: String },
-   NameUser: {type:String},
-   opstine:[{ type:Schema.ObjectId, ref:"Opstine" }]
-   //children:[{ type:Schema.ObjectId, ref:"Child" }]
+   Opis  :{ type: String,trim:true },
+   NameUser: {type:String,trim:true},
 },
 {
  timestamps: { createdAt: 'created_at' }
@@ -40,6 +31,7 @@ var sfDrzave = new Schema({
 
 );
 
+module.exports =  mongoose.model('sfDrzave', sfDrzave, 'sfDrzave'); //mongoose.model('sfDrzave', sfDrzave)
 
 // sfDrzave.pre("save", function(next) {
 //     var self = this;
@@ -101,4 +93,4 @@ var sfDrzave = new Schema({
 //var collectionName = 'sfDrzave';
 //sfDrzave.plugin(mongoosePaginate);
 
-module.exports =  mongoose.model('sfDrzave', sfDrzave, 'sfDrzave'); //mongoose.model('sfDrzave', sfDrzave)
+

@@ -9,5 +9,4 @@ router.post('/api/drzave',passport.authenticate('jwt', {session:false}), DrzavaC
 router.put('/api/drzave/:id',passport.authenticate('jwt', {session:false}), DrzavaController.create);
 router.delete('/api/drzave/:id', passport.authenticate('jwt', {session:false}),DrzavaController.deledrzava);
 
-
 module.exports = router;

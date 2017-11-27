@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
-const sfOpstine = require('../models/sfOpstine');
+const Opstine = require('./sfOpstine');
+const Drzave = require('./sfDrzave');
 
 const Schema = mongoose.Schema;
 
 const sfMesta = new Schema({
    Opstina: { type:Schema.ObjectId, ref:"sfOpstine", required:true },
+   OpstinaRef: {type:Object},
+   DrzavaRef: {type:Object},
    Naziv : { type: String, required: [true, 'Naziv je obavezan !!!'], trim: true },
    Ptt:{type:String,trim: true},
    Opis  :{ type: String,trim: true },
@@ -21,17 +24,40 @@ const sfMesta = new Schema({
 
 sfMesta.index({Opstina: 1, Naziv: 1}, {unique: true});
 
-//  sfMesta.virtual('nazivOpstine', {
-//      ref: 'sfOpstine', // The model to use
-//      localField: 'Opstina.Naziv', // Find people where `localField`
-//      foreignField: 'Naziv', // is equal to `foreignField`
-//      // If `justOne` is true, 'members' will be a single doc as opposed to
-//      // an array. `justOne` is false by default.
-//      justOne: true
-//    });
 
-//sfMesta.plugin(relationship, { relationshipPathName:'Opstina' });
-//var child = new sfMesta({Opstina:Opstina._id});
+sfMesta.pre('save', function(next) {
+    // do stuff
+    self = this;
+    Opstine.findById(this.Opstina).exec(function(err, opstina){
+        if(err){ 
+            self.OpstinaRef ={_id : null, name : null}
+        }
+       
+        if (opstina){
+            self.OpstinaRef = {_id : opstina._id, name : opstina.Naziv}
+            // console.log(" - pre save"  + opstina._id );
+        }else{
+            self.OpstinaRef ={_id : null, name : null}
+        }
+
+        Drzave.findById(opstina.Drzava).exec(function(err, drzava){
+            if(err){ 
+                self.DrzavaRef ={_id : null, name : null}
+            }
+            if (drzava){
+                self.DrzavaRef = {_id : drzava._id, name : drzava.Naziv}
+            }else{
+                self.DrzavaRef ={_id : null, name : null}
+            }
+            next();
+        });
+
+
+        //next();
+    });
+
+//    console.log("sfOpstine PRE SAVE");
+});
 
 
 module.exports = mongoose.model('sfMesta', sfMesta, 'sfMesta');

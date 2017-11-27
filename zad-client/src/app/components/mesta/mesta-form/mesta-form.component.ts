@@ -56,7 +56,7 @@ export class MestaFormComponent implements OnInit, OnDestroy  {
 
       this.route.params.subscribe(params => {
         const id = params['id'];
-        this.title = id ? 'Ažuriranje opštine' : 'Nova opština';
+        this.title = id ? 'Ažuriranje mesta' : 'Novo mesto';
         if (!id) {
           this.loadTempData();
           return;

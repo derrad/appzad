@@ -101,7 +101,7 @@ module.exports.create = async function (req, res,next) {
       
   // });
   // console.log('posle funkcije newStav ' + JSON.stringify(newStav));
-   console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
+  // console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
   let oUput = new Uput({
     PartneriID: PartneriID ,
     TipDok: TipDok ,

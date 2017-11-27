@@ -14,9 +14,10 @@
           <div class="form-group" >
                <input class="form-control" formControlName="_id"  [(ngModel)]="fnsatN._id"   type="hidden">
           </div>
-          <div class="form-group">
+          <div class="row">
+          <div class="form-group col-md-6">
             <label class="center-block">Godina:
-              <input class="form-control" formControlName="Godina"  [(ngModel)]="fnsatN.Godina"  (keypress)="serValidate.validateOnlyDigit($event)" required>
+              <input class="form-control text-right" formControlName="Godina"  [(ngModel)]="fnsatN.Godina"  (keypress)="serValidate.validateOnlyDigit($event)" required>
             </label>
             <div *ngIf="Godina.invalid && (Godina.dirty || Godina.touched)" class="alert alert-danger">
                 <div *ngIf="Godina.errors.required">
@@ -31,9 +32,9 @@
             </div>
             
           </div>
-          <div class="form-group">
+          <div class="form-group col-md-6">
               <label class="center-block">Mesec:
-                <input class="form-control" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec"  (keypress)="serValidate.validateOnlyDigit($event)" required>
+                <input class="form-control text-right" formControlName="Mesec"  [(ngModel)]="fnsatN.Mesec"  (keypress)="serValidate.validateOnlyDigit($event)" required>
               </label>
               <div *ngIf="Mesec.invalid && (Mesec.dirty || Mesec.touched)" class="alert alert-danger">
                   <div *ngIf="Mesec.errors.required">
@@ -48,6 +49,8 @@
               </div>
               
             </div>
+          </div>
+
             <div class="form-group">
               <label class="center-block">Sati:
                 <input class="form-control" formControlName="Sati"  [(ngModel)]="fnsatN.Sati"  (keypress)="serValidate.validateOnlyDigit($event)" required>
@@ -64,10 +67,16 @@
                     </div>
               </div>
             </div>
-            
-            <div class="form-group">
+
+            <div class="row">
+            <div class="form-group  col-md-6">
                 <label class="center-block">Minimalna osnovica:
-                  <input  class="form-control" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input  class="form-control text-right" formControlName="MinOsnov"  [(ngModel)]="fnsatN.MinOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                          <span class="input-group-addon">RSD</span>
+                        </div>
+                    </div>
                 </label>
                 <div *ngIf="MinOsnov.invalid && (MinOsnov.dirty || MinOsnov.touched)" class="alert alert-danger">
                     <div *ngIf="MinOsnov.errors.required">
@@ -79,9 +88,14 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group  col-md-6">
                 <label class="center-block">Maksimalna osnovica:
-                  <input class="form-control" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                    <div class="input-group">
+                        <div class="input-group">
+                          <input class="form-control text-right" formControlName="MaxOsnov"  [(ngModel)]="fnsatN.MaxOsnov"  (keypress)="serValidate.validateOnlyNumbers($event)" required>
+                          <span class="input-group-addon">RSD</span>
+                        </div>
+                    </div>
                 </label>
                 
                 <div *ngIf="MaxOsnov.invalid && (MaxOsnov.dirty || MaxOsnov.touched)" class="alert alert-danger">
@@ -93,6 +107,7 @@
                       </div>
                 </div>
               </div>
+            </div>
 
               
 

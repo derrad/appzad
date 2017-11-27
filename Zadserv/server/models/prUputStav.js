@@ -21,10 +21,10 @@ var prUputStav = new Schema({
     OdDatuma:{type:Date, default: Date.now},
     DoDatuma:{type:Date, default: Date.now},
     Kolicina:{ type: Number,default:1},
-    JedMer:{ type: String},
+    JedMer:{ type: String,trim:true},
     Cena:{ type: Number,default:0},
-    Opis:{ type: String },
-    NameUser: {type:String}
+    Opis:{ type: String ,trim:true},
+    NameUser: {type:String,trim:true}
     },
     {
     timestamps: { createdAt: 'created_at' }

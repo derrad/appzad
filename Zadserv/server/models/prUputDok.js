@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const prUputDok = new Schema({
     PartneriID:{type:Schema.ObjectId, ref:"sfPartner", required:true },
     PartnerRef : {type:Object, default:null},
-    TipDok:{ type: String, default:"UPUT", required:true},
+    TipDok:{ type: String, default:"UPUT", required:true,trim:true },
     Datum:{type:Date, default: Date.now ,required:true},
     Knjizeno:{type:Boolean,default:false},
     Storno:{type:Boolean,default:false},
@@ -30,12 +30,12 @@ const prUputDok = new Schema({
         OdDatuma:{type:Date},
         DoDatuma:{type:Date},
         Kolicina:{ type: Number,default:1},
-        JedMer:{ type: String},
+        JedMer:{ type: String, trim:true },
         Cena:{ type: Number,default:0},
-        Opis:{ type: String }
+        Opis:{ type: String, trim:true }
      } ] ,
-     Opis:{ type: String },
-    NameUser: {type:String}
+    Opis:{ type: String, trim:true },
+    NameUser: {type:String, trim:true}
     },
     {
     timestamps: { createdAt: 'created_at' }
@@ -68,17 +68,21 @@ prUputDok.pre('save', function(next) {
         if(err){ 
             self.PartnerRef ={_id : null, name : null,adresa:null}
         }
-       
-        self.PartnerRef = {_id : partner._id, name : partner.Naziv,adresa: partner.Adresa}
-        //console.log("PartnerRef - pre save"  + JSON.stringify(this.PartnerRef));
+        if(partner){
+            self.PartnerRef = {_id : partner._id, name : partner.Naziv,adresa: partner.Adresa}
+        } else{
+            self.PartnerRef ={_id : null, name : null,adresa:null}
+        }
 
         Poslovi.findById(self.PosloviID).exec(function(err, posao){
-
             if(err){ 
                 self.PosloviRef ={_id : null, name : null, stepenss:null}
             }
-            
-            self.PosloviRef = {_id : posao._id, name : posao.Naziv, stepenss: posao.StepenSS}
+            if (posao){
+                self.PosloviRef = {_id : posao._id, name : posao.Naziv, stepenss: posao.StepenSS}
+            } else{
+                self.PosloviRef ={_id : null, name : null, stepenss:null}
+            }
             next();
         });
 

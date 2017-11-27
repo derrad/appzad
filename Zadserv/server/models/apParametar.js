@@ -15,10 +15,10 @@ const apParametar = new Schema({
                 maxlength:[25,"Maksimalna duzina 25 karaktera"]
    },
    Koristi: {type:Boolean, default:false},
-   VredString: {type: String },
+   VredString: {type: String,trim:true },
    VredNumeric:{type:Number,default:0},
-   Opis  :{ type: String },
-   NameUser: {type:String}
+   Opis  :{ type: String,trim:true },
+   NameUser: {type:String, trim:true}
 },
 {
  timestamps: { createdAt: 'created_at' }

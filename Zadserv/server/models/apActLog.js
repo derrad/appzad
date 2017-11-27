@@ -4,15 +4,15 @@ const TypeA = require('../enum/serverenum');
          
 var apActLog = new Schema({
    Datum:{type:Date, default: Date.now}, // datum kada se aktivnost dogodila
-   NameUser: {type:String}, // ime usera upisivacemo email
+   NameUser: {type:String,trim:true}, // ime usera upisivacemo email
    TypeAct  :  {
     type : String,
     default : 'Start',
     enum : TypeA.Activities
    }, // tip aktivnosti
-   Transact:{type:String,default:"SYSTEM ERROR"}, // dokument tip
-   TransactNumber:{type:String}, // broj dokumenta
-   Opis  :{ type: String },
+   Transact:{type:String,default:"SYSTEM ERROR",trim:true}, // dokument tip
+   TransactNumber:{type:String, trim:true}, // broj dokumenta
+   Opis  :{ type: String,trim:true },
    
 },
 {

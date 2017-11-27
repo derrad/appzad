@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var sfDrzave = require('../models/sfDrzave');
+const mongoose = require('mongoose');
+const Drzave = require('./sfDrzave');
 
-var Schema = mongoose.Schema ;//,
+const Schema = mongoose.Schema ;
 
-var sfOpstine = new Schema({
+const sfOpstine = new Schema({
    Drzava: {type:Schema.ObjectId, ref:'sfDrzave', required:true},
    DrzavaRef: {type:Object},
    RegOzn: {type:String,required: [true, 'Oznaka je obavezna !!!'],trim: true},
@@ -22,17 +22,27 @@ var sfOpstine = new Schema({
     retainKeyOrder: true 
 }
 );
-//sfOpstine.plugin(relationship, { relationshipPathName:'Drzava' });
 
-// sfOpstine.pre('save', function(next) {
-//     // do stuff
-//     console.log("sfOpstine PRE SAVE");
-//     next();
-// });
 
-//var Child = new sfOpstine({Drzava:Drzava._id});
+sfOpstine.pre('save', function(next) {
+    // do stuff
+    self = this;
+    Drzave.findById(this.Drzava).exec(function(err, drzava){
+        if(err){ 
+            self.DrzavaRef ={_id : null, name : null}
+        }
+        //console.log("PartnerRef - pre save"  + JSON.stringify(this.PartnerRef));
+        if(drzava)
+        {
+            self.DrzavaRef = {_id : drzava._id, name : drzava.Naziv}
+        }else{
+            self.DrzavaRef ={_id : null, name : null}
+        }
+        next();
+    });
 
-//sfOpstine.plugin(mongoosePaginate);
+//    console.log("sfOpstine PRE SAVE");
+});
 
-var collectionName = 'sfOpstine';
-module.exports = mongoose.model('sfOpstine', sfOpstine,collectionName);
+
+module.exports = mongoose.model('sfOpstine', sfOpstine,'sfOpstine');
