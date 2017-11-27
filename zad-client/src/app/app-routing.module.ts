@@ -12,14 +12,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 const appRoutes: Routes =  [
-    {path:'', component: HomeComponent},
-    {path:'register', component: RegisterComponent,canActivate:[AuthGuardGlavni]},
-    {path:'login', component: LoginComponent},
-    {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-    {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+    {path: '', component: HomeComponent},
+    {path: 'register', component: RegisterComponent, canActivate: [AuthGuardGlavni]},
+    {path: 'login', component: LoginComponent},
+    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'not-found', component: NotFoundComponent },
     { path: '**', redirectTo: 'not-found' }
-   
     // {
     //     path: '',
     //     loadChildren: './layout/layout.module#LayoutModule',

@@ -4,6 +4,7 @@ export class ResponeCustom extends  Serializable {
     success: boolean;
     message: string;
     data: Array<Object>;
+    status: Number;
 }
 
 export class ErrorRespone  extends  Serializable {

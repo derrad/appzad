@@ -41,11 +41,15 @@ export class FondSatiComponent implements OnInit {
       }
     },
     (error: ResponeCustom) => {
+
       this.flashMessage.show(error.message, {
         cssClass: 'alert-danger',
         timeout: 9000});
         console.log(error.message);
         this.fnsati = [];
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
     }
   );

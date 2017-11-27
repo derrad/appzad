@@ -78,6 +78,17 @@ delFondSati(id) {
 }
 
 private handleError(error: Response) {
+  console.log('fond-sati status ' + error.statusText + ' kod je' + error.status);
+  if (error.status === 401) {
+     console.log(' status ' + error.statusText);
+     const servererr = new ResponeCustom();
+     servererr.message = error.statusText;
+     servererr.success = false;
+     servererr.status = error.status;
+     servererr.data = [];
+     return Observable.throw(servererr);
+
+  }
   const myerror = new ResponeCustom().fromJSON(error.json());
   const servererr = new ResponeCustom();
   servererr.message = 'Server error';
