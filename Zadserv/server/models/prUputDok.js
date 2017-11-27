@@ -45,6 +45,8 @@ const prUputDok = new Schema({
     }
 );
 
+prUputDok.index({Broj: 1, Godina: 1}, {unique: true});
+
 prUputDok.path('Stavke').validate(function(v) {
     if(!v){return false}
     else if(v.length === 0){return false}
@@ -57,8 +59,6 @@ prUputDok.path('Stavke').validate(function(v) {
 //     else if(features.length === 0){return false}
 //     return true;
 // }, 'Car needs to have at least one feature');
-
-
 
 prUputDok.pre('save', function(next) {
     self = this;
