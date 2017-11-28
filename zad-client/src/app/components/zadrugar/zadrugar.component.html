@@ -11,19 +11,23 @@
 
     <p-header><strong>{{Title}}</strong></p-header>       
     <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-    <p-column field="IDZadrugar" header="Šifra" sortable="true"></p-column>
-    <p-column field="Ime" header="Ime"  sortable="true"></p-column>
-    <p-column field="Prezime" header="Prezime"  sortable="true"></p-column>
-    <p-column field="DatRodjenja" header="Datum rodj."   sortable="true" styleClass="text-right" >
+    <p-column field="IDZadrugar" header="Šifra" sortable="true" [style]="{'width':'10%'}"></p-column>
+    <!-- <p-column field="Ime" header="Ime"  sortable="true"></p-column>
+    <p-column field="Prezime" header="Prezime"  sortable="true"></p-column> -->
+
+    <p-column field="fullName" header="Zadrugar"  sortable="true" [style]="{'width':'30%'}"></p-column>
+    
+
+    <p-column field="DatRodjenja" header="Datum rodj."   sortable="true" styleClass="text-right" [style]="{'width':'10%'}" >
           <ng-template let-col let-zadr="rowData" pTemplate="body">
                   <span>{{zadr[col.field] | date}}</span>
           </ng-template> 
     </p-column> 
-    <p-column field="TipZadrugar" header="Tip"  sortable="true"></p-column>
-    <p-column field="ZadEmail" header="ZadEmail" sortable="true"></p-column>
-    <p-column field="Jmbg" header="Jmbg"   sortable="true"></p-column>
+    <p-column field="TipZadrugar" header="Tip"  sortable="true" [style]="{'width':'10%'}"></p-column>
+    <p-column field="ZadEmail" header="ZadEmail" sortable="true" [style]="{'width':'15%'}"></p-column>
+    <p-column field="Jmbg" header="Jmbg"   sortable="true" [style]="{'width':'10%'}"></p-column>
     
-    <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" >
+    <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center"  [style]="{'width':'5%'}">
       <ng-template let-col let-partn="rowData" pTemplate="body">
               <span [hidden]="partn[col.field]==false">DA</span> 
               <span [hidden]="partn[col.field]==true">NE</span> 
@@ -31,7 +35,7 @@
       </ng-template> 
     </p-column>
     
-    <p-column  styleClass="col-button text-center" heder="ACTION">
+    <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'10%'}">
      
         <ng-template let-zadr="rowData" let-i="rowIndex" pTemplate="body" >
 

@@ -9,26 +9,26 @@
                 styleClass="table table-striped" [responsive]="true"  [immutable]="false" 
                 [resizableColumns]="true" columnResizeMode="expand" [reorderableColumns]="true" [sortMode]="multiple">
   
-      <p-header><strong>{{Title}}</strong></p-header>       
+      <p-header><h4><strong>{{Title}}</strong></h4></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Broj" header="Broj" sortable="true"></p-column>
-      <p-column field="Godina" header="Godina"  sortable="true"></p-column>
-      <p-column field="Datum" header="Datum"   sortable="true" styleClass="text-right" >
+      <p-column field="Broj" header="Broj" sortable="true" styleClass="text-center" [style]="{'width':'5%'}"></p-column>
+      <p-column field="Godina" header="Godina"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}"></p-column>
+      <p-column field="Datum" header="Datum"   sortable="true" styleClass="text-center" [style]="{'width':'10%'}" >
             <ng-template let-col let-uput="rowData" pTemplate="body">
                     <span>{{uput[col.field] | date}}</span>
             </ng-template> 
       </p-column> 
-      <p-column field="PartneriID.Naziv" header="Kupac"  sortable="true"></p-column>
-      <p-column field="PosloviID.Naziv" header="Posao"  sortable="true"></p-column>
+      <p-column field="PartneriID.Naziv" header="Kupac"  sortable="true" [style]="{'width':'40%'}" ></p-column>
+      <p-column field="PosloviID.Naziv" header="Posao"  sortable="true"  [style]="{'width':'20%'}"></p-column>
            
-      <p-column field="Knjizeno" header="Knjizen"  sortable="true" styleClass="text-center" >
+      <p-column field="Knjizeno" header="Knjizen"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}">
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span> 
                 <span [hidden]="partn[col.field]==true">NE</span> 
                 
         </ng-template> 
       </p-column>
-      <p-column field="Storno" header="Storno"  sortable="true" styleClass="text-center" >
+      <p-column field="Storno" header="Storno"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}" >
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span> 
                 <span [hidden]="partn[col.field]==true">NE</span> 
@@ -37,7 +37,7 @@
       </p-column>
       
       
-      <p-column  styleClass="col-button text-center" heder="ACTION">
+      <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'10%'}">
        
           <ng-template let-uput="rowData" let-i="rowIndex" pTemplate="body" >
   

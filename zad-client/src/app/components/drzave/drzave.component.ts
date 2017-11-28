@@ -43,6 +43,12 @@ export class DrzaveComponent implements OnInit {
       cssClass: 'alert-danger',
       timeout: 9000});
       this.drzave = [];
+      if (error.status === 404 ) {
+        this.router.navigate(['NotFound']);
+      }
+      if (error.status === 401) {
+         this.router.navigate(['login']);
+      }
       return false;
     }
     );
@@ -101,6 +107,12 @@ deleteDrzavu(tdrzava) {
                 timeout: 5000});
               // Revert the view back to its original state
               this.drzave.splice(index, 0, tdrzava);
+              if (error.status === 404 ) {
+                this.router.navigate(['NotFound']);
+              }
+              if (error.status === 401) {
+                 this.router.navigate(['login']);
+              }
             });
       }
     });

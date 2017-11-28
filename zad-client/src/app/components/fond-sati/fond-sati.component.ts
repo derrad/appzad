@@ -47,8 +47,11 @@ export class FondSatiComponent implements OnInit {
         timeout: 9000});
         console.log(error.message);
         this.fnsati = [];
+        if (error.status === 404 ) {
+          this.router.navigate(['NotFound']);
+        }
         if (error.status === 401) {
-          this.router.navigate(['login']);
+           this.router.navigate(['login']);
         }
         return false;
     }
@@ -103,6 +106,12 @@ export class FondSatiComponent implements OnInit {
                     timeout: 5000});
                   // Revert the view back to its original state
                   this.fnsati.splice(index, 0, tfnsati);
+                  if (error.status === 404 ) {
+                    this.router.navigate(['NotFound']);
+                  }
+                  if (error.status === 401) {
+                     this.router.navigate(['login']);
+                  }
                 });
           }
         });

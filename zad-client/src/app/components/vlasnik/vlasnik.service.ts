@@ -6,21 +6,23 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-import { ResponeCustom } from './../../shared/models/ErrorRes';
+// import { ResponeCustom } from './../../shared/models/ErrorRes';
+import { BaseService } from './../../services/base.service';
 
 @Injectable()
-export class VlasnikService {
-  authToken: any;
-  isDev: boolean;
-  data: any;
+export class VlasnikService extends BaseService {
+  // authToken: any;
+  // isDev: boolean;
+  // data: any;
   constructor(private http: Http) {
-    this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
+     // this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
+     super();
    }
 
-   loadToken() {
-    const token = localStorage.getItem('id_token');
-    this.authToken = token;
-  }
+  //  loadToken() {
+  //   const token = localStorage.getItem('id_token');
+  //   this.authToken = token;
+  // }
 
   getVlasn() {
     const headers = new Headers();
@@ -84,13 +86,13 @@ export class VlasnikService {
   }
 
 
-  private handleError(error: Response) {
-    const myerror = new ResponeCustom().fromJSON(error.json());
-    const servererr = new ResponeCustom();
-    servererr.message = 'Server error';
-    servererr.success = false;
-    servererr.data = [];
-    return Observable.throw(myerror || servererr);
-  }
+  // private handleError(error: Response) {
+  //   const myerror = new ResponeCustom().fromJSON(error.json());
+  //   const servererr = new ResponeCustom();
+  //   servererr.message = 'Server error';
+  //   servererr.success = false;
+  //   servererr.data = [];
+  //   return Observable.throw(myerror || servererr);
+  // }
 
 }

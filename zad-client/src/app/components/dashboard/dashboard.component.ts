@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { routerTransition } from '../../animation/router.animations';
 import { DashboardService } from './dashboard.service';
+import { ResponeCustom } from './../../shared/models/ErrorRes';
 
 class AggCount  {
   _id: string;
@@ -17,14 +19,18 @@ class AggCount  {
 })
 export class DashboardComponent implements OnInit {
   cPrimamAgr: Array<AggCount>;
-  CposaoAll: number;
-  CposaoActiv: number;
-  CkupacAll: number;
-  CkupacActiv: number;
-  CkupacUput: number;
-  CzadrAll: number;
-  CUpuAll: number;
-  constructor(private dashService: DashboardService ) { }
+  CposaoAll  = 0;
+  CposaoActiv  = 0;
+  CkupacAll  = 0;
+  CkupacActiv  = 0;
+  CkupacUput = 0;
+  CzadrAll = 0;
+  CzadrActiv  = 0;
+  CUpuAll = 0;
+  constructor(private dashService: DashboardService, private router: Router ) {
+
+
+   }
 
   ngOnInit() {
 
@@ -33,9 +39,12 @@ export class DashboardComponent implements OnInit {
           this.CposaoAll = profile.number;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+       // console.log(err);
         this.CposaoAll = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
@@ -48,9 +57,12 @@ export class DashboardComponent implements OnInit {
           this.CposaoActiv = [].length;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+       // console.log(err);
         this.CposaoActiv = [].length;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
@@ -59,9 +71,12 @@ export class DashboardComponent implements OnInit {
           this.CkupacAll = profile.number;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CkupacAll = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
@@ -72,9 +87,12 @@ export class DashboardComponent implements OnInit {
           this.CkupacActiv = 0;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CkupacActiv = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
@@ -87,9 +105,12 @@ export class DashboardComponent implements OnInit {
           this.CkupacUput = [].length;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CkupacUput = [].length;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
@@ -99,32 +120,56 @@ export class DashboardComponent implements OnInit {
           this.CkupacAll = profile.number;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CkupacAll = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 
 
-      this.dashService.getZadrugaiCount().subscribe(profile => {
+      this.dashService.getZadrugariCount().subscribe(profile => {
         if (profile.success === true) {
           this.CzadrAll = profile.number;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CzadrAll = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
+
+      this.dashService.getActivZadCount().subscribe(profile => {
+        if (profile.success === true) {
+          this.CzadrActiv = profile.number;
+        }
+      },
+      (error: ResponeCustom) => {
+        // console.log(err);
+        this.CzadrActiv = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
+        return false;
+      });
+
 
       this.dashService.getUputCountAll().subscribe(profile => {
         if (profile.success === true) {
           this.CUpuAll = profile.number;
         }
       },
-      err => {
-        console.log(err);
+      (error: ResponeCustom) => {
+        // console.log(err);
         this.CUpuAll = 0;
+        if (error.status === 401) {
+          this.router.navigate(['login']);
+        }
         return false;
       });
 

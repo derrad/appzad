@@ -262,6 +262,19 @@ module.exports.countzadrugar = function(req, res, next) {
   });
 }
 
+module.exports.countactivzadrugar = function(req, res, next) {
+  //console.log("parametar je : " + req.params.id);
+	Zadrugar.count({Aktivan:true}, function(err,count){
+        //console.log("DA VIDIM COUNT" +  count);
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+       // console.log("VRACAM BROJ KOJI JE  : " + count);
+         return res.status(200).json({
+            success: true,
+            message: 'Successfully',
+            number:count
+          });
+  });
+}
 
 module.exports.countUputZadrugar = function(req, res, next) {
    const aggOpts = [{

@@ -73,14 +73,18 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000});
-              this.router.navigate(['NotFound']);
+              // this.router.navigate(['NotFound']);
+
             }
           } ,
           (error: ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-              this.router.navigate(['NotFound']);
+              // this.router.navigate(['NotFound']);
+              if (error.status === 401) {
+                this.router.navigate(['login']);
+              }
             });
     });
   }
@@ -99,13 +103,22 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
               timeout: 5000});
               this.router.navigate(['fondsati']);
           }else {
-            this.router.navigate(['NotFound']);
+            // this.router.navigate(['NotFound']);
+            this.flashMessage.show(pos.message, {
+              cssClass: 'alert-success',
+              timeout: 5000});
           }
         } ,
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
+            if (error.status === 404 ) {
+              this.router.navigate(['NotFound']);
+            }
+            if (error.status === 401) {
+               this.router.navigate(['login']);
+            }
         },
       );
 
@@ -122,13 +135,22 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
               timeout: 5000});
               this.router.navigate(['fondsati']);
           }else {
-            this.router.navigate(['NotFound']);
+            // this.router.navigate(['NotFound']);
+            this.flashMessage.show(pos.message, {
+              cssClass: 'alert-success',
+              timeout: 5000});
           }
         } ,
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
+            if (error.status === 404 ) {
+              this.router.navigate(['NotFound']);
+            }
+            if (error.status === 401) {
+               this.router.navigate(['login']);
+            }
         },
       );
     }

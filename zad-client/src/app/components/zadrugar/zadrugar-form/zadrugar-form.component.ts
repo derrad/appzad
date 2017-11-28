@@ -201,7 +201,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   }
 
   private getNewIdNumber() {
-    this.dhServ.getZadrugaiCount().subscribe(profile => {
+    this.dhServ.getZadrugariCount().subscribe(profile => {
       if (profile.success === true) {
         const broj =  profile.number + 1;
         this.IDZadrugar.setValue(broj);
@@ -311,7 +311,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         adresUpi.AdDrzava = this.zadrN.Adresa.AdDrzava || '';
         this.initAdresa(adresUpi);
       }
-      console.log(this.zadrN.Adresa);
+     // console.log(this.zadrN.Adresa);
     }
   }
 
