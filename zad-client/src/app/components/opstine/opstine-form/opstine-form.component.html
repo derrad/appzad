@@ -15,7 +15,8 @@
               <div class="form-group" >
                     <input class="form-control" formControlName="_id"  [(ngModel)]="opstina._id"   type="hidden">
                </div>
-              <div class="form-group">
+        <div class="row">    
+              <div class="form-group col-md-8">
                   <label class="center-block">Država:
                     <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" required>
                       <option *ngFor="let list of drzave" [value]="list._id">
@@ -23,19 +24,30 @@
                       </option>
                     </select>
                   </label>
-                  <div *ngIf="Drzava.invalid && (Drzava.dirty || Drzava.touched)" class="alert alert-danger">
+                  <div *ngIf="Drzava.invalid && (Drzava.dirty || Drzava.touched)" class="alert alert-danger" role="alert">
                     <div *ngIf="Drzava.errors.required">
-                        <strong>Drzava je obavezan podatak !!!</strong>
+                        <strong>Država je obavezan podatak !!!</strong>
                     </div>
                   </div>
               </div>
-                
-                <div class="form-group">
+              <div class="form-group col-md-4">
+                  <label class="center-block">&nbsp;&nbsp;&nbsp;
+                  <button type="button" class="btn btn-info form-control" (click)="GetPickDrzava()" >
+                      <span class="glyphicon glyphicon-search"></span>
+                      <!-- ... -->
+                      ...
+                  </button>
+                  </label>
+              </div>
+        </div>
+
+          <div class="row">
+              <div class="form-group col-md-4">
                     <label class="center-block">Kod opštine:
                       <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn"  required>
                     </label>
                     
-                    <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger">
+                    <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger" role="alert">
                       <div *ngIf="RegOzn.errors.required">
                           <strong>Oznaka je obavezan podatak !!!</strong>
                       </div>
@@ -44,38 +56,41 @@
                       </div>
                      
                     </div>
-                </div>
+              </div>
 
-                <div class="form-group">
+              <div class="form-group col-md-8">
                   <label class="center-block">Naziv opštine:
                     <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv"  required>
                   </label>
                   
-                  <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+                  <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger" role="alert">
                     <div *ngIf="Naziv.errors.required">
                         <strong>Naziv je obavezan podatak !!!</strong>
                     </div>
                   </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="center-block">Šifra poreza opštine:
-                      <input class="form-control" formControlName="SifPorez"  [(ngModel)]="opstina.SifPorez" >
-                    </label>
-                  </div>
+              </div>
+          </div>  
+
+          
+          <div class="row">      
+              <div class="form-group col-md-4">
+                  <label class="center-block">Šifra poreza opštine:
+                    <input class="form-control" formControlName="SifPorez"  [(ngModel)]="opstina.SifPorez" >
+                  </label>
+              </div>
                   
-                  <div class="form-group">
-                      <label class="center-block">Kontrolni broj opštine:
-                        <input class="form-control" formControlName="KontBr"  [(ngModel)]="opstina.KontBr" >
-                      </label>
-                    </div>
+              <div class="form-group col-md-4">
+                  <label class="center-block">Kontrolni broj opštine:
+                    <input class="form-control" formControlName="KontBr"  [(ngModel)]="opstina.KontBr" >
+                  </label>
+              </div>
 
-                    <div class="form-group">
-                        <label class="center-block">Poziv na broj opštine:
-                          <input class="form-control" formControlName="PozivNaBr"  [(ngModel)]="opstina.PozivNaBr" >
-                        </label>
-                      </div>
-
+              <div class="form-group col-md-4">
+                <label class="center-block">Poziv na broj opštine:
+                  <input class="form-control" formControlName="PozivNaBr"  [(ngModel)]="opstina.PozivNaBr" >
+                </label>
+              </div>
+          </div>
                   <div class="form-group">
                     <label class="center-block">Opis:
                       <textarea class="form-control" formControlName="Opis"  [(ngModel)]="opstina.Opis">
@@ -116,5 +131,12 @@
 </div>
     
     
+<p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="auto" [height]="auto" >
+
+
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="PickDrzava()" label="OK"></button>
+  </p-footer>
+</p-dialog>
     
 

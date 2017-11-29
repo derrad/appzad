@@ -101,6 +101,20 @@ module.exports.listdrzave = function (req, res,next) {
 
 }
 
+module.exports.pickdrzave = function (req, res,next) {
+ 
+  Drzava.find({}).sort({Naziv:1}).select('Naziv KodDrzave').exec(function(err, result){
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+    }
+   
+      return res.status(200).json({
+      success: true,
+      message:'Successfully', 
+      data: result
+      });
+    });
+
+}
 
 module.exports.getdrzava = function (req, res,next) {
 //  console.log("Usao u get drzava parametar je  " + req.params.id);

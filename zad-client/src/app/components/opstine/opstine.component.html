@@ -10,13 +10,13 @@
 
                 <p-header><strong>{{Title}}</strong></p-header>         
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
-      <p-column field="DrzavaRef.name" header="Drzava" sortable="true"></p-column>  
-      <p-column field="RegOzn" header="Oznaka" sortable="true"></p-column>                               
-      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="SifPorez" header="SifPorez" sortable="true"></p-column>
+      <p-column field="RegOzn" header="Oznaka" sortable="true" [style]="{'width':'10%'}"></p-column>                               
+      <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
+      <p-column field="DrzavaRef.name" header="Država" sortable="true" [style]="{'width':'30%'}"></p-column>  
+      <p-column field="SifPorez" header="SifPorez" sortable="true"[style]="{'width':'10%'}"></p-column>
      
 
-      <p-column styleClass="col-button text-center" heder="Opcije">
+      <p-column styleClass="col-button text-center" [style]="{'width':'10%'}">
           <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
               <button type="button" pButton (click)="selectOpstina(opst)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateOpstinu(opst._id)" icon="fa fa-pencil" title="Update"></button>

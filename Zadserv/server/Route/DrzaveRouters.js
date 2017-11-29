@@ -8,5 +8,6 @@ router.get('/api/drzave/:id',passport.authenticate('jwt', {session:false}), Drza
 router.post('/api/drzave',passport.authenticate('jwt', {session:false}), DrzavaController.create);
 router.put('/api/drzave/:id',passport.authenticate('jwt', {session:false}), DrzavaController.create);
 router.delete('/api/drzave/:id', passport.authenticate('jwt', {session:false}),DrzavaController.deledrzava);
+router.get('/api/pickdrzave',passport.authenticate('jwt', {session:false}), DrzavaController.pickdrzave);
 
 module.exports = router;

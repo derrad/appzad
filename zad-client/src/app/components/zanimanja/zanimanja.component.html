@@ -15,11 +15,11 @@
 
               <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Sifra" header="Šifra" sortable="true"></p-column> 
-      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="StepenSS" header="StepenSS" sortable="true"></p-column>   
+      <p-column field="Sifra" header="Šifra" sortable="true" [style]="{'width':'20%'}" ></p-column> 
+      <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}" ></p-column>
+      <p-column field="StepenSS" header="StepenSS" sortable="true" [style]="{'width':'25%'}"></p-column>   
         
-      <p-column  styleClass="col-button text-center" heder="ACTION">
+      <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'15%'}">
           <ng-template let-zan="rowData" let-i="rowIndex" pTemplate="body">
               <button type="button" pButton (click)="selectPosao(zan)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateZanimanja(zan._id)" icon="fa fa-pencil" title="Update"></button>

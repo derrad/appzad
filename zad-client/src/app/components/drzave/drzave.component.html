@@ -10,18 +10,18 @@
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
                                                                                          
-      <p-column field="KodDrzave" header="Kod" sortable="true"></p-column>                               
-      <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-      <p-column field="EuClan" header="EuClan" sortable="true" styleClass="text-center">
+      <p-column field="KodDrzave" header="Kod" sortable="true" [style]="{'width':'10%'}"></p-column>                               
+      <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
+      <p-column field="EuClan" header="EuClan" sortable="true" styleClass="text-center" [style]="{'width':'10%'}">
             <ng-template let-col let-drz="rowData" pTemplate="body">
                     <span [hidden]="drz[col.field]==false"> DA</span> 
                     <span [hidden]="drz[col.field]==true"> NE</span> 
             </ng-template> 
 
       </p-column>
-      <p-column field="Opis" header="Opis" sortable="true"></p-column>
+      <p-column field="Opis" header="Opis" sortable="true" [style]="{'width':'30%'}"></p-column>
            
-      <p-column styleClass="col-button text-center" heder="Opcije">
+      <p-column styleClass="col-button text-center" [style]="{'width':'10%'}">
           <ng-template let-drz="rowData" let-i="rowIndex" pTemplate="body"  > 
               <button type="button" pButton (click)="selectDrzavu(drz)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateDrzavu(drz._id)" icon="fa fa-pencil" title="Update"></button>

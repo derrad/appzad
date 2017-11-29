@@ -35,6 +35,16 @@ export class DrzaveService  extends BaseService  {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getPickDrzave() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/pickdrzave/' ) ;
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
   getDrzava(id) {
     const headers = new Headers();
     this.loadToken();

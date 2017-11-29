@@ -236,35 +236,35 @@
                           <p-column field="Pib" header="Pib" sortable="true" ></p-column>
 
 
-                            <ng-template pTemplate="emptymessage">
-                                <!-- Custom content goes here -->
-                                <div class="row">
-                                    <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                                        <div class="hidden-xs dtempty_message_h1">
-                                            Još niste kreirali podatak.
-                                        </div>
-                                        <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                                        <br/>
-                                        <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i>
-                                        <h3 class="hidden-xs dtempty_message" (click)="displayKupac=false">
-                                            <!-- To manually add new one click here: -->
-                                            Da biste ručno dodali podatak kliknite:
-                                             <a class="dtempty_message_text" [routerLink]="['/partner/new']" >
-                                                Kreiraj podatak
-                                            </a>
-                                        </h3>
-
-                                        <h5 class="visible-xs"  (click)="displayKupac=false">
-                                            <!-- To manually add new one click here: -->
-                                            Da biste ručno dodali podatak kliknite :
-                                            <a class="dtempty_message_text" [routerLink]="['/partner/new']" >
-                                                Kreiraj podatak
-                                            </a>
-                                        </h5>
-
+                        <ng-template pTemplate="emptymessage">
+                            <!-- Custom content goes here -->
+                            <div class="row">
+                                <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                                    <div class="hidden-xs dtempty_message_h1">
+                                        Još niste kreirali podatak.
                                     </div>
+                                    <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                                    <br/>
+                                    <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i>
+                                    <h3 class="hidden-xs dtempty_message" (click)="displayKupac=false">
+                                        <!-- To manually add new one click here: -->
+                                        Da biste ručno dodali podatak kliknite:
+                                            <a class="dtempty_message_text" [routerLink]="['/partner/new']" >
+                                            Kreiraj podatak
+                                        </a>
+                                    </h3>
+
+                                    <h5 class="visible-xs"  (click)="displayKupac=false">
+                                        <!-- To manually add new one click here: -->
+                                        Da biste ručno dodali podatak kliknite :
+                                        <a class="dtempty_message_text" [routerLink]="['/partner/new']" >
+                                            Kreiraj podatak
+                                        </a>
+                                    </h5>
+
                                 </div>
-                            </ng-template>
+                            </div>
+                        </ng-template>
 
 
                 </p-dataTable>

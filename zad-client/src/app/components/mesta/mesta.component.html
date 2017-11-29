@@ -10,12 +10,12 @@
               <p-header><strong>{{Title}}</strong></p-header>   
         
     <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-    <p-column field="Opstina.Drzava.Naziv" header="Država" sortable="true"></p-column>   
-     <p-column field="Opstina.Naziv" header="Opština" sortable="true"></p-column> 
-    <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-    <p-column field="Ptt" header="Ptt" sortable="true" styleClass="text-center"></p-column>
-
-    <p-column styleClass="col-button text-center" heder="Opcije">
+    <p-column field="Ptt" header="Ptt" sortable="true" styleClass="text-center" [style]="{'width':'15%'}"></p-column>
+    <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'35%'}"></p-column>
+    <p-column field="Opstina.Naziv" header="Opština" sortable="true" [style]="{'width':'20%'}"></p-column> 
+    <p-column field="Opstina.Drzava.Naziv" header="Država" sortable="true" [style]="{'width':'20%'}"></p-column>  
+  
+    <p-column styleClass="col-button text-center" [style]="{'width':'10%'}">
         <ng-template let-mes="rowData" let-i="rowIndex" pTemplate="body">
             <button type="button" pButton (click)="selectMesto(mes)" icon="fa fa-info" title="Info"></button>
             <button type="button" pButton (click)="updateMesta(mes._id)" icon="fa fa-pencil" title="Update"></button>

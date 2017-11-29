@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Drzave } from '../../drzave/drzave.model';
+import { PickDrzave } from '../../drzave/drzave.model';
 import { DrzaveService } from '../../drzave/drzave.service';
 import { OpstineService } from '../opstine.service';
 import { Opstine } from '../opstine.model';
@@ -22,8 +22,10 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
   formOPST: FormGroup;
   title: string;
   opstina: Opstine = new Opstine();
-  drzave: Array<Drzave>;
+  drzave: Array<PickDrzave>;
   saveTemp = true;
+  displayPick = false;
+  selectedPickDrzavu: PickDrzave;
 
   constructor(private opstService: OpstineService,
               private drzaveService: DrzaveService, private router: Router, private route: ActivatedRoute,
@@ -46,19 +48,38 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
         });
   }
 
+  GetPickDrzava() {
+    // this.flashMessage.show('Tražimo kupca iz pick liste', {
+    //   cssClass: 'alert-danger',
+    //   timeout: 9000});
+      this.displayPick = true;
+  }
+  PickDrzava(event) {
+    this.displayPick = false;
+   // console.log(JSON.stringify(this.selectedKupac));
+    if (this.selectedPickDrzavu) {
+      if (this.selectedPickDrzavu._id) {
+    //    this.Drzava.setValue(this.selectedPickDrzavu._id);
+      }
+    }
+  }
+
 
   get RegOzn() { return this.formOPST.get('RegOzn'); }
   get Naziv() { return this.formOPST.get('Naziv'); }
   get Drzava() { return this.formOPST.get('Drzava'); }
 
   ngOnInit() {
-    this.drzaveService.getDrzave().subscribe(profile => {
+    this.drzaveService.getPickDrzave().subscribe(profile => {
       if (profile.success === true) {
-        this.drzave = profile.data;
-       }
+         this.drzave = profile.data;
+      }
     },
     (error: ResponeCustom) => {
       this.drzave = [];
+      if (error.status === 401) {
+        this.router.navigate(['login']);
+      }
       return false;
     });
 
@@ -80,15 +101,20 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
           }else {
             this.flashMessage.show(result.message, {
               cssClass: 'alert-danger',
-              timeout: 9000});
-             this.router.navigate(['NotFound']);
+              timeout: 5000});
+             // this.router.navigate(['NotFound']);
           }
         },
         (error: ResponeCustom) => {
             this.flashMessage.show(error.message, {
               cssClass: 'alert-danger',
               timeout: 9000});
-              this.router.navigate(['NotFound']);
+              if (error.status === 404 ) {
+                this.router.navigate(['NotFound']);
+              }
+              if (error.status === 401) {
+                this.router.navigate(['login']);
+              }
           });
     });
 
@@ -137,13 +163,22 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
                  timeout: 5000});
                  this.router.navigate(['opstine']);
              }else {
-               this.router.navigate(['NotFound']);
+             //  this.router.navigate(['NotFound']);
+               this.flashMessage.show(pos.message, {
+                cssClass: 'alert-danger',
+                timeout: 5000});
              }
            } ,
            (error: ResponeCustom) => {
              this.flashMessage.show(error.message, {
                cssClass: 'alert-danger',
                timeout: 9000});
+              if (error.status === 404 ) {
+              this.router.navigate(['NotFound']);
+              }
+              if (error.status === 401) {
+              this.router.navigate(['login']);
+              }
            },
          );
        } else {
@@ -167,6 +202,12 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
              this.flashMessage.show(error.message, {
                cssClass: 'alert-danger',
                timeout: 9000});
+              if (error.status === 404 ) {
+                this.router.navigate(['NotFound']);
+              }
+              if (error.status === 401) {
+                this.router.navigate(['login']);
+              }
            },
          );
        }

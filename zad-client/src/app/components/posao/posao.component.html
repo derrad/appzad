@@ -11,16 +11,60 @@
 
                 <p-header><strong>{{Title}}</strong></p-header>       
         <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-        <p-column field="Naziv" header="Naziv" sortable="true"></p-column>
-        <p-column field="StepenSS" header="Sprema" sortable="true"></p-column>   
-        <p-column field="Skola" header="Škola" sortable="true"></p-column> 
-        <p-column field="Sifra" header="Šifra" sortable="true"></p-column>
+        <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
+        <p-column field="StepenSS" header="Sprema" sortable="true" [style]="{'width':'15%'}"></p-column>   
+        <p-column field="Skola" header="Škola" sortable="true" [style]="{'width':'15%'}"></p-column> 
+        <p-column field="Sifra" header="Šifra" sortable="true" [style]="{'width':'15%'}"></p-column>
     
-        <p-column  styleClass="col-button text-center" heder="ACTION">
+        <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'15%'}">
             <ng-template let-pos="rowData" let-i="rowIndex" pTemplate="body">
-                <button type="button" pButton (click)="selectPosao(pos)" icon="fa fa-info" title="Info"></button>
+                <!-- <button type="button" pButton (click)="selectPosao(pos)" icon="fa fa-info" title="Info"></button>
                 <button type="button" pButton (click)="updatePosao(pos._id)" icon="fa fa-pencil" title="Update"></button>
-                <button type="button" pButton (click)="deletePosao(pos)" icon="fa fa-trash" title="Delete"></button>
+                <button type="button" pButton (click)="deletePosao(pos)" icon="fa fa-trash" title="Delete"></button> -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Action</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" style="position: relative;z-index: 10000;">
+                        <li>
+                            <a (click)="selectPosao(pos)" >
+                                <!-- <i class="fa fa-info" aria-hidden="true"></i> position: relative; -->
+                                <strong>Info</strong>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a (click)="updatePosao(pos._id)">
+                                <!-- <i class="fa fa-pencil" aria-hidden="true"></i> -->
+                                <strong>Update</strong>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a (click)="deletePosao(pos)">
+                                <!-- <i class="fa fa-trash" aria-hidden="true"></i>     -->
+                                <strong>Delete</strong>
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+
+                <!-- <div class="btn-group"  >
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" style="position: relative;z-index: 10000;">
+                      <li><a (click)="selectPosao(pos)" >Info</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a (click)="updatePosao(pos._id)">Update</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a (click)="deletePosao(pos)">Delete</a></li>
+                    </ul>
+                  </div> -->
+
             </ng-template>
         </p-column>
         <p-footer *ngIf="poslovi.length > 0" >

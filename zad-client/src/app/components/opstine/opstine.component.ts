@@ -45,6 +45,12 @@ export class OpstineComponent implements OnInit {
           cssClass: 'alert-danger',
           timeout: 9000});
           this.opstineL = [];
+          if (error.status === 404 ) {
+            this.router.navigate(['NotFound']);
+          }
+          if (error.status === 401) {
+             this.router.navigate(['login']);
+          }
         return false;
       }
     );
@@ -98,6 +104,12 @@ deleteOpstinu(tOpstine) {
                   this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 5000});
+                    if (error.status === 404 ) {
+                      this.router.navigate(['NotFound']);
+                    }
+                    if (error.status === 401) {
+                       this.router.navigate(['login']);
+                    }
                   // Revert the view back to its original state
                   this.opstineL.splice(index, 0, tOpstine);
                 });
