@@ -132,11 +132,15 @@
     
     
 <p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="auto" [height]="auto" >
+    
+   <app-pick-drzava [drzL]="drzave" 
+      (pickRow)="PickDrzava($event)" (pickNothing)="displayPick=false">
+    </app-pick-drzava>
 
 
-  <p-footer>
+  <!-- <p-footer>
     <button type="button" pButton icon="fa-check" (click)="PickDrzava()" label="OK"></button>
-  </p-footer>
+  </p-footer> -->
 </p-dialog>
     
 

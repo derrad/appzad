@@ -56,10 +56,13 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
   }
   PickDrzava(event) {
     this.displayPick = false;
+    console.log('Ovo parametar koji sam dobio' + JSON.stringify(event));
+    this.selectedPickDrzavu = event;
    // console.log(JSON.stringify(this.selectedKupac));
     if (this.selectedPickDrzavu) {
       if (this.selectedPickDrzavu._id) {
-    //    this.Drzava.setValue(this.selectedPickDrzavu._id);
+        this.Drzava.setValue(this.selectedPickDrzavu._id);
+    // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
       }
     }
   }
@@ -121,7 +124,10 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
   }
 
 
+  // GetPickWidth(): number {
 
+  //   return 500;
+  // }
   loadTempData() {
     const opst = JSON.parse(localStorage.getItem('data_opstina'));
     if (opst) {
