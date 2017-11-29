@@ -8,6 +8,9 @@ import { formsTransition } from '../../../animation/forms.animations';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
 import { FlashMessagesService} from 'angular2-flash-messages';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/filter';
+import 'rxjs/Rx';
 
 
 
@@ -34,16 +37,48 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
         _id: [],
         KodDrzave: ['', [Validators.required, Validators.minLength(2),
                         Validators.maxLength(3), serValidate.validateRegExpSifru]],
-        EuClan: [],
+        EuClan: [false],
         Naziv: ['', [
-          Validators.required, Validators.maxLength(100)
-        ]],
+          Validators.required, Validators.maxLength(100)]],
         Opis: []
       });
+      this.formDR.valueChanges
+      .filter(data => this.formDR.valid)
+      .map((data: Drzave) => {
+              // data.Opis = data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+              // data.Opis = data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+              // data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+              // Naziv: ['', [
+              //   Validators.required, Validators.maxLength(100)
+              let strOpis = data.Opis;
+              if (strOpis) {
+                strOpis = strOpis.replace(/<(?:.|\n)*?>/gm, '');
+               // console.log('Opis u if ' + strOpis);
+                data.Opis = strOpis;
+              }
+              let strNaziv = data.Naziv;
+              if (strOpis) {
+                strNaziv = strNaziv.replace(/<(?:.|\n)*?>/gm, '');
+                data.Naziv = strNaziv;
+              }
+              // let strKodDrzave = data.KodDrzave;
+              // if (strKodDrzave) {
+              //   strKodDrzave = strKodDrzave.replace(/<(?:.|\n)*?>/gm, '');
+              //   data.KodDrzave = strKodDrzave;
+              // }
+              return data;
+             })
+      .subscribe( data => {
+                           // console.log(JSON.stringify(data))
+                          //  this.drzavaN = data;
+                          //  this.updateForm();
+                          });
   }
 
   get KodDrzave() { return this.formDR.get('KodDrzave'); }
   get Naziv() { return this.formDR.get('Naziv'); }
+  get EuClan() { return this.formDR.get('EuClan'); }
+  get Opis() { return this.formDR.get('Opis'); }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -62,6 +97,7 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
             if (pos.success) {
               this.saveTemp = false;
               this.drzavaN = pos.data[0];
+              this.updateForm();
             }else {
               this.flashMessage.show(pos.message, {
                 cssClass: 'alert-danger',
@@ -134,10 +170,17 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
   }
 
 
+  updateForm() {
+    this.KodDrzave.setValue(this.drzavaN.KodDrzave);
+    this.Naziv.setValue(this.drzavaN.Naziv);
+    this.EuClan.setValue(this.drzavaN.EuClan);
+    this.Opis.setValue(this.drzavaN.Opis);
+  }
  loadTempData() {
     const valuetemp = JSON.parse(localStorage.getItem('data_drzava'));
     if (valuetemp) {
       this.drzavaN = valuetemp;
+      this.updateForm();
     }
   }
 
@@ -167,7 +210,7 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
     this.formDR.reset({
       KodDrzave: '',
       Naziv: '',
-      EuClan: 0,
+      EuClan: false,
       Opis: ''
     });
   }
