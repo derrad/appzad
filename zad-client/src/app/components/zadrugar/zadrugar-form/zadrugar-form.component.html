@@ -267,7 +267,7 @@
 
                 <div class="form-group col-md-4">
                         <label class="center-block">Banka:
-                            <select  formControlName="BankaID" class="form-control" placeholder="Select mesto"  
+                            <select  formControlName="BankaID" class="form-control" 
                                 [(ngModel)]="zadrN.BankaID"  required>
                                 <option *ngFor="let list of bankeL" [value]="list._id"   >
                                 {{ list.Naziv }}

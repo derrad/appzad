@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
     private router: Router, private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
-    // console.log("pozvao sam fukciju za meni");
+    // tslint:disable-next-line:max-line-length
+    // console.log("pozvao sam fukciju za meni");   "../node_modules/popper.js/dist/popper.min.js", "popper.js": "^1.12.9", "bootstrap": "^4.0.0-beta.2",
     // Configure tooltips for collapsed side navigation
     //  $('.navbar-sidenav [data-toggle="tooltip"]').tooltip({
     // tslint:disable-next-line:max-line-length
