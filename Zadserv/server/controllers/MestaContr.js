@@ -131,6 +131,21 @@ module.exports.listmesta = function (req, res,next) {
 }
 
 
+module.exports.pickmesta = function (req, res,next) {
+  
+   Mesta.find({}).sort({Naziv:1}).select('Naziv OpstinaRef DrzavaRef').exec(function(err, result){
+     if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+     }
+ 
+       return res.status(200).json({
+        success: true,
+        message:'Successfully', 
+        data: result
+        }); 
+     });
+ 
+ }
+
 module.exports.getomesta = function (req, res,next) {
  // console.log("Usao u get mesta parametar je  " + req.params.id);
  // .populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })

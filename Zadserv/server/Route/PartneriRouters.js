@@ -12,4 +12,5 @@ router.get('/api/activpartner',passport.authenticate('jwt', {session:false}), Pa
 router.get('/api/countactivpartner',passport.authenticate('jwt', {session:false}), PartnerController.countkupacActiv);
 router.get('/api/countpartneruput',passport.authenticate('jwt', {session:false}), PartnerController.countkupacUput);
 
+router.get('/api/pickpartner',passport.authenticate('jwt', {session:false}), PartnerController.pickactivpartner);
 module.exports = router;

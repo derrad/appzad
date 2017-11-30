@@ -12,7 +12,7 @@ import { ZanimanjaService } from './../../zanimanja/zanimanja.service';
 import { MestaService } from './../../mesta/mesta.service';
 import { BankeService } from './../../banke/banke.service';
 import { ZanimanjaModel } from './../../zanimanja/zanimanja.model';
-import { Mesta } from './../../mesta/mesta.model';
+import { PickMesta } from './../../mesta/mesta.model';
 import { IsplateTip, ZadrugarTip, PolZadruga, IdentZadrugara } from './../../../shared/EnumApp/zadrugar.enum';
 import { BankeModel } from './../../banke/banke-model';
 import { DashboardService } from './../../dashboard/dashboard.service';
@@ -30,7 +30,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   zadrN: ZadrugarModel = new ZadrugarModel();
   zadrAdresa: ZDAdresaModel;
   saveTemp = true;
-  mestaL: Array<Mesta>;
+  mestaL: Array<PickMesta>;
   zanimL: Array<ZanimanjaModel>;
   bankeL: Array<BankeModel>;
   zadPolC = PolZadruga;
@@ -111,7 +111,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
           this.zanimL = [];
       }
       );
-      this.mestaService.getMesta().subscribe(profile => {
+      this.mestaService.getPickMesta().subscribe(profile => {
         if (profile.success === true) {
            this.mestaL = profile.data;
          }
@@ -171,10 +171,12 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         );
         this.TipZadrugar.valueChanges.subscribe(
           (validate) => {
+            this.BrIndexa.setValidators(null);
+            this.BrRadneKnjiz.setValidators(null);
             if (validate === 'Ucenik') {
               this.BrIndexa.setValidators([Validators.required]);
               this.BrRadneKnjiz.setValidators(null);
-            } else {
+            } else if (validate === 'Osiguranik') {
               this.BrIndexa.setValidators(null);
               this.BrRadneKnjiz.setValidators([Validators.required]);
             }
@@ -184,6 +186,11 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         );
         this.TipIsplate.valueChanges.subscribe(
           (validate) => {
+            this.BankaID.setValidators(null);
+            this.BrojRacuna.setValidators(null);
+            this.BrojRacuna.setValue(null);
+            this.BankaID.setValue(null);
+
             if (validate === 'Gotovina') {
               this.BankaID.setValidators(null);
               this.BrojRacuna.setValidators(null);

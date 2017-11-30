@@ -10,7 +10,8 @@ import { MestaComponent } from './mesta.component';
 import { MestaFormComponent } from './mesta-form/mesta-form.component';
 import { MestaRoutingModule } from './mesta-routing.module';
 import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
-import { PickOpstinaComponent } from './../../shared/pickup/pick-opstina/pick-opstina.component';
+// import { PickOpstinaComponent } from './../../shared/pickup/pick-opstina/pick-opstina.component';
+import {PickupModule} from './../../shared/pickup/pickup.module';
 
 @NgModule({
   imports: [
@@ -24,12 +25,13 @@ import { PickOpstinaComponent } from './../../shared/pickup/pick-opstina/pick-op
     SharedModule,
     InputTextModule,
     ApppipeModule,
+    PickupModule,
     MestaRoutingModule
   ],
   declarations: [
     MestaComponent,
-    MestaFormComponent,
-    PickOpstinaComponent
+    MestaFormComponent
+  //  PickOpstinaComponent
   ],
   providers: [ MestaService, ConfirmationService ]
 })

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const sfDrzave = require('./sfDrzave');
+const Drzave = require('./sfDrzave');
 const Schema = mongoose.Schema;
 
 const sfPartner = new Schema({ 
@@ -45,5 +45,25 @@ const sfPartner = new Schema({
 }
 
 );
+
+
+
+sfPartner.pre('save', function(next) {
+    // do stuff
+    self = this;
+    Drzave.findById(opstina.Drzava).exec(function(err, drzava){
+        if(err){ 
+            self.DrzavaRef ={_id : null, name : null}
+        }
+        if (drzava){
+            self.DrzavaRef = {_id : drzava._id, name : drzava.Naziv}
+        }else{
+            self.DrzavaRef ={_id : null, name : null}
+        }
+        next();
+    });
+
+});
+
 
 module.exports = mongoose.model('sfPartner', sfPartner,'sfPartner');

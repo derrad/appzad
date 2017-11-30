@@ -11,5 +11,6 @@ router.delete('/api/zadrugar/:id',passport.authenticate('jwt', {session:false}),
 router.get('/api/activzadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.listactivzadrugar);
 router.get('/api/uputzadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.countUputZadrugar);
 router.get('/api/countactivzadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.countactivzadrugar);
+router.get('/api/pickzadrugar',passport.authenticate('jwt', {session:false}), ZadrugarController.pickzadrugar);
 
 module.exports = router;

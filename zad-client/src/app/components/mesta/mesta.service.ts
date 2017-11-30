@@ -33,6 +33,18 @@ export class MestaService extends BaseService {
       .catch(this.handleError);
   }
 
+  getPickMesta() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/pickmesta/') ;
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+
   getMesto(id) {
     const headers = new Headers();
     this.loadToken();

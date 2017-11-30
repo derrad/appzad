@@ -90,6 +90,15 @@ export class PartnerService extends BaseService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getPickPartner() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/pickpartner');
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
   // private handleError(error: Response) {
   //   if (error.status === 401) {
   //     console.log(' status ' + error.statusText);

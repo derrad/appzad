@@ -166,6 +166,21 @@ module.exports.listactivpartner = function (req, res,next) {
 
 }
 
+module.exports.pickactivpartner = function (req, res,next) {
+  //console.log("Usao u list Radnik - tu sam");
+  Partner.find({Aktivan:true}).sort({Naziv:1}).select('Naziv DrzavaRef Adresa.AdMesto Pib').exec(function(err, result){
+    if(err){ 
+      res.statusMessage = err;
+      return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
+    }
+      return res.status(200).json({
+        message:'Successfully', 
+      success: true, 
+      data: result
+      });
+    });
+
+}
 
 module.exports.getpartner = function (req, res,next) {
  // console.log("Usao u list Radnik - tu sam  " + req.params.id);

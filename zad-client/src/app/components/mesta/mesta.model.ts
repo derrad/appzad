@@ -1,6 +1,8 @@
 export interface IMesta {
     _id: string;
     Opstina: Object;
+    OpstinaRef: Object;
+    DrzavaRef: Object;
     Naziv: string;
     Ptt: string;
     Opis?: string;
@@ -12,6 +14,8 @@ export interface IMesta {
 export class Mesta implements IMesta {
     _id: string;
     Opstina: Object;
+    OpstinaRef: Object;
+    DrzavaRef: Object;
     Naziv: string;
     Ptt: string;
     Opis?: string;
@@ -20,3 +24,9 @@ export class Mesta implements IMesta {
     updatedAt?: Date;
 }
 
+export class PickMesta {
+    _id: string;
+    OpstinaRef: Object;
+    DrzavaRef: Object;
+    Naziv: string;
+}

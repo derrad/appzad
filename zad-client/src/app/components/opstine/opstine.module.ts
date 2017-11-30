@@ -10,8 +10,8 @@ import { OpstineFormComponent } from './opstine-form/opstine-form.component';
 import {OpstineService} from './opstine.service';
 import { OpstineRoutingModule } from './opstine-routing.module';
 import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
-// import { PickupModule } from './../../shared/pickup/pickup.module';
-import { PickDrzavaComponent } from './../../shared/pickup/pick-drzava/pick-drzava.component';
+ import { PickupModule } from './../../shared/pickup/pickup.module';
+ // import { PickDrzavaComponent } from './../../shared/pickup/pick-drzava/pick-drzava.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,12 +24,13 @@ import { PickDrzavaComponent } from './../../shared/pickup/pick-drzava/pick-drza
     SharedModule,
     InputTextModule,
     ApppipeModule,
+    PickupModule,
     OpstineRoutingModule
   ],
   declarations: [
     OpstineComponent,
-    OpstineFormComponent,
-    PickDrzavaComponent
+    OpstineFormComponent
+    // PickDrzavaComponent
   ],
   providers: [ OpstineService, ConfirmationService ]
 })

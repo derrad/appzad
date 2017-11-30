@@ -59,5 +59,6 @@ sfMesta.pre('save', function(next) {
 //    console.log("sfOpstine PRE SAVE");
 });
 
+sfMesta.set('toJSON', { virtuals: true })
 
 module.exports = mongoose.model('sfMesta', sfMesta, 'sfMesta');

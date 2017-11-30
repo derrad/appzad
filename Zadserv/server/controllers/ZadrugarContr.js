@@ -151,7 +151,7 @@ module.exports.create = function (req, res,next) {
   oZadrugar.save(function(err,result) {
     if(err){ 
       // const emsg = " Error processing request";
-      // console.log(JSON.stringify(err));
+      console.log(JSON.stringify(err));
       return res.status(400).json(
             { success: false, message:JSON.stringify(err), data:[] }).end();
     }
@@ -192,6 +192,24 @@ module.exports.listactivzadrugar = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
   Zadrugar.find({Aktivan:true}).sort({Ime:1,Prezime:1}).populate('MestaID',['Naziv']).populate('ZanimanjaID',['Naziv'])
   .populate('BankaID',['Naziv']).exec(function(err, result){
+    if(err){ 
+      res.statusMessage = err;
+      return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
+    }
+      return res.status(200).json({
+        message:'Successfully', 
+        success: true, 
+        data: result
+      });
+    });
+
+}
+
+module.exports.pickzadrugar = function (req, res,next) {
+  //console.log("Usao u list Radnik - tu sam");
+  Zadrugar.find({Aktivan:true}).sort({Ime:1,Prezime:1})
+              .select('IDZadrugar Ime Prezime DatRodjenja TipZadrugar MestaRef ZanimanjaRef')
+              .exec(function(err, result){
     if(err){ 
       res.statusMessage = err;
       return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 

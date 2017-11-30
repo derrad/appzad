@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const sfMesta = require('../models/sfMesta');
-const sfZanimanja = require('../models/sfZanimanja');
-const sfBanke = require('../models/sfBanke');
+const Mesta = require('./sfMesta');
+const Zanimanja = require('./sfZanimanja');
 const EnumServ = require('../enum/serverenum');
 
 var Schema = mongoose.Schema;
@@ -39,7 +38,9 @@ var sfZadrugar = new Schema({
     Telefon:{ type: String},
     ZadEmail:{ type: String},
     MestaID:{type:Schema.ObjectId, ref:"sfMesta", required:true},
+    MestaRef:{type:Object},
     ZanimanjaID:{type:Schema.ObjectId, ref:"sfZanimanja", required:true },
+    ZanimanjaRef:{type:Object},
     TipZadrugar:{    
         type : String,
         default : 'Ucenik',
@@ -84,8 +85,41 @@ sfZadrugar.virtual('fullName').
     this.Prezime = v.substr(v.indexOf(' ') + 1);
   });
 
-  sfZadrugar.set('toJSON', { virtuals: true })
+sfZadrugar.set('toJSON', { virtuals: true })
 
+
+sfZadrugar.pre('save', function(next) {
+    // do stuff
+    self = this;
+    Mesta.findById(this.MestaID).exec(function(err, mesta){
+        if(err){ 
+           self.MestaRef ={_id : null, name : null}
+        }
+        if (mesta){
+            self.MestaRef = {_id : mesta._id, name : mesta.Naziv}
+            // console.log(" - pre save"  + opstina._id );
+        }else{
+            self.MestaRef ={_id : null, name : null}
+        }
+
+        Zanimanja.findById(self.ZanimanjaID).exec(function(err, zanim){
+            if(err){ 
+                self.ZanimanjaRef ={_id : null, name : null}
+            }
+            if (zanim){
+                self.ZanimanjaRef = {_id : zanim._id, name : zanim.Naziv}
+            }else{
+                self.ZanimanjaRef ={_id : null, name : null}
+            }
+            next();
+        });
+
+
+        //next();
+    });
+
+//    console.log("sfOpstine PRE SAVE");
+});
 
 
 module.exports = mongoose.model('sfZadrugar', sfZadrugar,'sfZadrugar'); 
