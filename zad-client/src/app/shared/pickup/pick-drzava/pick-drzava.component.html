@@ -2,12 +2,12 @@
   pick-drzava works!
 </p> -->
 
-<div>
+<!-- <div> -->
     <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-           <input #gb type="text" pInputText size="50" placeholder="Global Filter" focus>
+           <input #gb type="text" pInputText size="50" placeholder="Global Filter" autofocus >
    </div>
-       <p-dataTable [value]="drzL"  [globalFilter]="gb"
+    <p-dataTable [value]="drzL"  [globalFilter]="gb"
                [(selection)]="selectedDrzava" (onRowSelect)="PickDrzava($event)"
                selectionMode="single"  dataKey="_id"
                styleClass="table table-striped" [responsive]="false">
@@ -52,7 +52,7 @@
 
    </p-dataTable>
 
-</div>
+<!-- </div> -->
 
 <p-footer>
     <button type="button" pButton icon="fa-check" (click)="PickDrzava()" label="OK"></button>

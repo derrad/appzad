@@ -35,6 +35,18 @@ export class OpstineService extends BaseService {
       .catch(this.handleError);
   }
 
+  getPickOpstine() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/pickopstine/');
+
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   getOpstina(id) {
     const headers = new Headers();
     this.loadToken();

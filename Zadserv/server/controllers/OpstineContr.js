@@ -146,6 +146,22 @@ module.exports.listopstine = function (req, res,next) {
 
 }
 
+module.exports.pickopstine = function (req, res,next) {
+  //console.log("Usao u list Opstina");
+  
+  Opstina.find({}).sort({Naziv:1}).select('RegOzn Naziv DrzavaRef').exec(function(err, result){
+    if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+    }
+   // console.log( "Hvatam ga " +  result.Drzava.Naziv);
+      return res.status(200).json({
+      success: true,
+      message:'Successfully', 
+      data: result
+      });
+    });
+
+}
+
 
 module.exports.getopstine = function (req, res,next) {
 //  console.log("Usao u get Opstina parametar je  " + req.params.id);

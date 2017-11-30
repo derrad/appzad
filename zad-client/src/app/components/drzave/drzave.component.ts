@@ -12,8 +12,6 @@ import { routerTransition } from '../../animation/router.animations';
 import { ResponeCustom} from './../../shared/models/ErrorRes';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-
-
 @Component({
   selector: 'app-drzave',
   templateUrl: './drzave.component.html',

@@ -1,6 +1,7 @@
 export interface IOpstine {
     _id: string;
     Drzava: Object;
+    DrzavaRef: Object;
     RegOzn: string;
     Naziv: string;
     SifPorez: string;
@@ -15,6 +16,7 @@ export interface IOpstine {
 export class Opstine implements IOpstine {
     _id: string;
     Drzava: Object;
+    DrzavaRef: Object;
     RegOzn: string;
     Naziv: string;
     SifPorez: string;
@@ -24,4 +26,11 @@ export class Opstine implements IOpstine {
     NameUser?: string;
     created_at?: Date;
     updatedAt?: Date;
+}
+
+export class PickOpstine {
+    _id: string;
+    DrzavaRef: Object;
+    RegOzn: string;
+    Naziv: string;
 }

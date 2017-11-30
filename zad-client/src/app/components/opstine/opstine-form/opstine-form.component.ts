@@ -26,6 +26,11 @@ export class OpstineFormComponent implements OnInit, OnDestroy {
   saveTemp = true;
   displayPick = false;
   selectedPickDrzavu: PickDrzave;
+  // pickHeight = (window.screen.height) * 0.8;
+  // pickWidth = (window.screen.width) * 0.8;
+
+  pickHeight = (window.innerHeight) * 0.8;
+  pickWidth = (window.innerWidth) * 0.8;
 
   constructor(private opstService: OpstineService,
               private drzaveService: DrzaveService, private router: Router, private route: ActivatedRoute,

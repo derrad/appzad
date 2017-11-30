@@ -8,5 +8,6 @@ router.get('/api/opstine/:id',passport.authenticate('jwt', {session:false}), Ops
 router.post('/api/opstine',passport.authenticate('jwt', {session:false}), OpstineController.create);
 router.put('/api/opstine/:id',passport.authenticate('jwt', {session:false}), OpstineController.create);
 router.delete('/api/opstine/:id',passport.authenticate('jwt', {session:false}), OpstineController.deleopstine);
+router.get('/api/pickopstine',passport.authenticate('jwt', {session:false}), OpstineController.pickopstine);
 
 module.exports = router;

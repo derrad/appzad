@@ -131,7 +131,7 @@
 </div>
     
     
-<p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="auto" [height]="auto" >
+<p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
     
    <app-pick-drzava [drzL]="drzave" 
       (pickRow)="PickDrzava($event)" (pickNothing)="displayPick=false">
