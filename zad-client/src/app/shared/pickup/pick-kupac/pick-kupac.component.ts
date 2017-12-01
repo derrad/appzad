@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { PickPartnerModel } from './../../../components/partner/partner-model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pick-kupac',

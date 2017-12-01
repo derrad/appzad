@@ -56,10 +56,10 @@
         </div>
     </ng-template>
     </p-dataTable>
-  </div>
+</div>
   
   
-  <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
     <p-footer>
         <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
         <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
@@ -68,84 +68,84 @@
   
   
   
-  <p-dialog header="MESTO" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
+<p-dialog header="MESTO" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
+
+        <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                    ID
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow._id}}
+                    </dd>
+                    <dt>
+                    DRŽAVA/OPŠTINA
+                    </dt>
+                    <dd class="text-success">
+                            <div [innerHTML]="mesShow.Opstina | prettyprint"></div> 
+                    </dd>
+                    <dt>
+                    <!-- <dt>
+                    DRZAVA
+                    </dt>
+                    <dd class="text-success">
+                        <div [innerHTML]="mesShow.Opstina.Drzava | prettyprint"></div> 
+                    </dd> -->
+                    <dt> 
+                    NAZIV MESTA
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.Naziv}}
+                    </dd>
+                    <dt>
+                    PTT
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.Ptt}}
+                        
+                    </dd>
+                    
+                    <dt>
+                    OPIS
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.Opis}}
+                        
+                    </dd>
+                    <dt>
+                    DATUM UNOSA
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.created_at}}
+                        
+                    </dd>
+                    <dt>
+                    DATUM AŽURIRANJA
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.updatedAt}}
+                        
+                    </dd>
+                    <dt>
+                    KORISNIK
+                    </dt>
+                    <dd class="text-success">
+                        {{mesShow.NameUser}}
+                        
+                    </dd>
+            
+                </dl>                        
+        </div>
+        <p-footer>
+                <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+        </p-footer>
+</p-dialog>
   
-          <div>
-                  <dl class="dl-horizontal">
-                      <dt>
-                       ID
-                      </dt>
-                      <dd class="text-success">
-                         {{mesShow._id}}
-                      </dd>
-                      <dt>
-                        DRŽAVA/OPŠTINA
-                        </dt>
-                        <dd class="text-success">
-                              <div [innerHTML]="mesShow.Opstina | prettyprint"></div> 
-                        </dd>
-                      <dt>
-                      <!-- <dt>
-                        DRZAVA
-                        </dt>
-                        <dd class="text-success">
-                            <div [innerHTML]="mesShow.Opstina.Drzava | prettyprint"></div> 
-                        </dd> -->
-                        <dt> 
-                      NAZIV MESTA
-                      </dt>
-                      <dd class="text-success">
-                           {{mesShow.Naziv}}
-                      </dd>
-                      <dt>
-                       PTT
-                      </dt>
-                      <dd class="text-success">
-                          {{mesShow.Ptt}}
-                          
-                      </dd>
-                      
-                      <dt>
-                      OPIS
-                      </dt>
-                      <dd class="text-success">
-                          {{mesShow.Opis}}
-                          
-                      </dd>
-                      <dt>
-                      DATUM UNOSA
-                      </dt>
-                      <dd class="text-success">
-                          {{mesShow.created_at}}
-                          
-                      </dd>
-                      <dt>
-                      DATUM AŽURIRANJA
-                      </dt>
-                      <dd class="text-success">
-                          {{mesShow.updatedAt}}
-                          
-                      </dd>
-                      <dt>
-                      KORISNIK
-                      </dt>
-                      <dd class="text-success">
-                          {{mesShow.NameUser}}
-                          
-                      </dd>
-              
-                  </dl>                        
-          </div>
-          <p-footer>
-                  <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
-         </p-footer>
-  </p-dialog>
   
-  
-  <ng-template #waiting  >
+<ng-template #waiting  >
     <div class="centerWait">
-    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-    Loading...
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        Loading...
     </div>
 </ng-template>
   

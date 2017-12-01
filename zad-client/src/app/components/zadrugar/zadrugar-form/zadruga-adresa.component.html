@@ -24,8 +24,19 @@
         </div>
         <div class="form-group col-md-5">
             <label class="center-block">Mesto:
-                <input type="text" class="form-control input-sm" formControlName="AdMesto" >
+                <input type="text" class="form-control input-sm" formControlName="AdMesto" required >
             </label>
+            <div *ngIf="Adresa.controls.AdMesto.invalid && (Adresa.controls.AdMesto.dirty || Adresa.controls.AdMesto.touched)" class="alert alert-danger">
+                    <div *ngIf="Adresa.controls.AdMesto.errors.required">
+                        <strong> Mesto je obavezan podatak !!!</strong>
+                    </div>
+                    <div *ngIf="Adresa.controls.AdMesto.errors.minlength">
+                        <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>
+                      </div>
+                    <div *ngIf="Adresa.controls.AdMesto.errors.maxlength">
+                        <strong>Predugačak podatak o mestu !!!</strong>
+                   </div>
+            </div>
         </div>
        
     </div>

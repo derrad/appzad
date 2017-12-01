@@ -54,3 +54,9 @@ export class PartnerModel {
 
 }
 
+export class PickPartnerModel {
+    _id: string;
+    KyeSearch: string;
+    Naziv: string;
+    Pib: string;
+}

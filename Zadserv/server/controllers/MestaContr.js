@@ -36,24 +36,25 @@ if (!Opstina || !Naziv ) {
     if(mesto) {
       mesto.Naziv = Naziv;
       mesto.Ptt=Ptt;
+      mesto.Opstina= Opstina ,
       mesto.Opis = Opis ;
       mesto.NameUser = NameUser;
-      
-    }
-    mesto.save(function(err,results) {
-      if(err){ 
-        return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
-      }
-      try{
-        SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
-      } catch(ex){}      
-
-      return res.status(201).json({
-        success: true,
-        message: 'Mesto updated successfully',
-        data:results
+    
+      mesto.save(function(err,results) {
+        if(err){ 
+          return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
+        }
+        try{
+          SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, Naziv , NameUser)
+        } catch(ex){}      
+  
+        return res.status(201).json({
+          success: true,
+          message: 'Mesto updated successfully',
+          data:results
+        });
       });
-    });
+    }
   });
 
 }else{
@@ -146,7 +147,7 @@ module.exports.pickmesta = function (req, res,next) {
  
  }
 
-module.exports.getomesta = function (req, res,next) {
+module.exports.getmesta = function (req, res,next) {
  // console.log("Usao u get mesta parametar je  " + req.params.id);
  // .populate({ path: 'Opstina', select:['RegOzn','Naziv','Drzava'], populate: { path: 'Drzava', select: 'Naziv' } })
   Mesta.find({_id:req.params.id})

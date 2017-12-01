@@ -12,7 +12,7 @@ import { ZadrugarAdresaComponent} from './zadrugar-form/zadruga-adresa.component
 import { ZadrugarService } from './zadrugar.service';
 import { ZadrugarRoutingModule } from './zadrugar-routing.module';
 // import { PrettyPrintPipe } from './shared/pipeapp/PrettyPrintPipe';
-// import { PrettyPrintPipe } from './../../shared/PipeApp/PrettyPrintPipe';
+import { PickupModule } from './../../shared/pickup/pickup.module';
 import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 @NgModule({
@@ -26,6 +26,7 @@ import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    PickupModule,
     ZadrugarRoutingModule,
     ApppipeModule
   ],

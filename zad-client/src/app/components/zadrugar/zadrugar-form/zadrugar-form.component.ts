@@ -37,6 +37,11 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   zadIsplC = IsplateTip;
   zadTipC = ZadrugarTip;
   zadIdentC = IdentZadrugara;
+  displayPickMesto = false;
+  selectedPickMesto: PickMesta;
+  pickHeight = (window.innerHeight) * 0.8;
+  pickWidth = (window.innerWidth) * 0.8;
+
   constructor(private zadrService: ZadrugarService, private router: Router, private route: ActivatedRoute,
     private _fb: FormBuilder , private _location: Location, private flashMessage: FlashMessagesService,
     private serValidate: ServiceValidateShared, private mestaService: MestaService, private zanService: ZanimanjaService,
@@ -49,7 +54,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         Prezime: ['', [ Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
         ImeRoditelja: [''],
         DatRodjenja: ['', [Validators.required]],
-        Aktivan: [''],
+        Aktivan: [false],
         Pol: ['', [Validators.required]],
         OpstinaRodj: [''],
         MestoRodj: [''],
@@ -58,7 +63,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
         Adresa : this._fb.group({
           AdUlica: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
           AdBroj: [''],
-          AdMesto: [''],
+          AdMesto: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
           AdPttReon: [''],
           AdPttPak: [''],
           AdDrzava: ['']
@@ -111,7 +116,8 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
           this.zanimL = [];
       }
       );
-      this.mestaService.getPickMesta().subscribe(profile => {
+
+    this.mestaService.getPickMesta().subscribe(profile => {
         if (profile.success === true) {
            this.mestaL = profile.data;
          }
@@ -122,9 +128,9 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
            timeout: 9000});
            this.mestaL = [];
         }
-       );
+    );
 
-       this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
         const id = params['id'];
         this.title = id ? 'Ažuriranje zadrugara' : 'Novi zadrugar';
         if (!id) {
@@ -157,9 +163,9 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
                   this.router.navigate(['NotFound']);
               // }
             });
-        });
+    });
 
-        this.VrstaIdentifikatoraPrimaoca.valueChanges.subscribe(
+    this.VrstaIdentifikatoraPrimaoca.valueChanges.subscribe(
           (validate) => {
             if (validate === 'JMBG_EBS') {
               this.Jmbg.setValidators([Validators.required, Validators.minLength(13), Validators.maxLength(13)]);
@@ -168,8 +174,8 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             }
             this.Jmbg.updateValueAndValidity();
           }
-        );
-        this.TipZadrugar.valueChanges.subscribe(
+    );
+    this.TipZadrugar.valueChanges.subscribe(
           (validate) => {
             this.BrIndexa.setValidators(null);
             this.BrRadneKnjiz.setValidators(null);
@@ -183,27 +189,28 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
             this.BrIndexa.updateValueAndValidity();
             this.BrRadneKnjiz.updateValueAndValidity();
           }
-        );
-        this.TipIsplate.valueChanges.subscribe(
+    );
+
+    this.TipIsplate.valueChanges.subscribe(
           (validate) => {
             this.BankaID.setValidators(null);
             this.BrojRacuna.setValidators(null);
-            this.BrojRacuna.setValue(null);
-            this.BankaID.setValue(null);
+            // this.BrojRacuna.setValue(null);
+            // this.BankaID.setValue(null);
 
-            if (validate === 'Gotovina') {
+          if (validate === 'Gotovina') {
               this.BankaID.setValidators(null);
               this.BrojRacuna.setValidators(null);
-              this.BrojRacuna.setValue(null);
-              this.BankaID.setValue(null);
-            } else {
+              // this.BrojRacuna.setValue(null);
+              // this.BankaID.setValue(null);
+          } else if (validate === 'Tekuci' || validate === 'Stedna') {
               this.BankaID.setValidators([Validators.required]);
               this.BrojRacuna.setValidators([Validators.required]);
-            }
-            this.BankaID.updateValueAndValidity();
-            this.BrojRacuna.updateValueAndValidity();
           }
-        );
+          this.BankaID.updateValueAndValidity();
+          this.BrojRacuna.updateValueAndValidity();
+          }
+     );
 
   }
 
@@ -239,6 +246,25 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   get BrojRacuna() { return this.formZadr.get('BrojRacuna'); }
   get Adresa(): FormGroup { return this.formZadr.get('Adresa') as FormGroup; }
 
+  GetPickMesto() {
+    this.displayPickMesto = true;
+  }
+
+  PickMesto(event) {
+    this.displayPickMesto = false;
+    console.log('Ovo parametar koji sam dobio PickMesto' + JSON.stringify(event));
+    this.selectedPickMesto = event;
+   // console.log(JSON.stringify(this.selectedKupac));
+    if (this.selectedPickMesto) {
+      if (this.selectedPickMesto._id) {
+        this.MestaID.setValue(this.selectedPickMesto._id);
+    // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
+      }
+    }
+  }
+
+
+
   initAdresa(tAdresa: ZDAdresaModel) {
     this.Adresa.setValue({
       AdUlica: tAdresa.AdUlica,
@@ -269,11 +295,7 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
-
-         // console.log(" forma UPDATE  " + error);
-
         },
-
       );
 
     } else {

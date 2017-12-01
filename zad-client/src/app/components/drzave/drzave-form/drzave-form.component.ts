@@ -25,8 +25,6 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
   formDR: FormGroup;
   title: string;
   drzavaN: Drzave = new Drzave();
-  titleAlertNaziv = 'This field is required !!!';
-  titleAlertKod = 'KOD-ima jos, This field is required !!!';
   private saveTemp = true;
 
 

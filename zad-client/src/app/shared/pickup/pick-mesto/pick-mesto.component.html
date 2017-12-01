@@ -1,3 +1,44 @@
-<p>
-  pick-mesto works!
-</p>
+<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+    <input #gb type="text" pInputText size="50" placeholder="Global Filter" autofocus>
+</div>
+  <p-dataTable [value]="mestaL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+            selectionMode="single" [(selection)]="selectedMesto" dataKey="_id"  
+            styleClass="table table-striped" [responsive]="true"  (onRowSelect)="PickMesto($event)">
+            <p-header><strong>{{Title}}</strong></p-header>   
+      
+  <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
+  <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
+  <p-column field="OpstinaRef.name" header="Opština" sortable="true" [style]="{'width':'30%'}"></p-column> 
+  <p-column field="DrzavaRef.name" header="Država" sortable="true" [style]="{'width':'30%'}"></p-column>  
+ 
+  <ng-template pTemplate="emptymessage">
+          <!-- Custom content goes here -->
+      <div class="row">
+                <div class="text-center col-lg-12 col-md-12 col-xs-12">
+                  <div class="hidden-xs dtempty_message_h1">
+                      Još niste kreirali podatak.
+                  </div>
+                  
+                  <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+                  <br/>
+                  <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
+                  <h3 class=" hidden-xs dtempty_message" >
+                      Da biste ručno dodali podatak kliknite: 
+                      <a  class="dtempty_message_text" (click)="addMesta()">
+                            Kreiraj podatak
+                      </a>
+                  </h3>
+
+                  <h5 class="visible-xs" >
+                      Da biste ručno dodali podatak kliknite : 
+                      <a   (click)="addMesta()">
+                          Kreiraj podatak
+                      </a>
+                  </h5>
+
+              </div>
+      </div>
+  </ng-template>
+  </p-dataTable>
+    

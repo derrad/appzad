@@ -46,6 +46,28 @@ export class MestaFormComponent implements OnInit, OnDestroy  {
         Ptt: [],
         Opis: []
       });
+
+      this.formMEST.valueChanges
+      .filter(data => this.formMEST.valid)
+      .map((data: Mesta) => {
+              let strOpis = data.Opis;
+              if (strOpis) {
+                strOpis = strOpis.replace(/<(?:.|\n)*?>/gm, '');
+               // console.log('Opis u if ' + strOpis);
+                data.Opis = strOpis;
+              }
+              let strNaziv = data.Naziv;
+              if (strOpis) {
+                strNaziv = strNaziv.replace(/<(?:.|\n)*?>/gm, '');
+                data.Naziv = strNaziv;
+              }
+              return data;
+             })
+             .subscribe( data => {
+                // console.log(JSON.stringify(data));
+                           //  this.updateForm();
+             });
+
     }
 
   get Naziv() { return this.formMEST.get('Naziv'); }
@@ -106,6 +128,7 @@ export class MestaFormComponent implements OnInit, OnDestroy  {
               if (result.success ) {
                 this.saveTemp = false;
                 this.mesto = result.data[0];
+                this.updateForm();
               }else {
                 this.flashMessage.show(result.message, {
                   cssClass: 'alert-danger',
@@ -125,10 +148,19 @@ export class MestaFormComponent implements OnInit, OnDestroy  {
         });
   }
 
+
+  updateForm() {
+    this.Opstina.setValue(this.mesto.Opstina);
+    this.Naziv.setValue(this.mesto.Naziv);
+    this.Ptt.setValue(this.mesto.Ptt);
+    this.Opis.setValue(this.mesto.Opis);
+  }
+
   loadTempData() {
     const mest = JSON.parse(localStorage.getItem('data_mesto'));
     if (mest) {
       this.mesto = mest;
+      this.updateForm();
     }
   }
 
@@ -156,8 +188,9 @@ export class MestaFormComponent implements OnInit, OnDestroy  {
 
   save() {
     const  mestaValue = this.formMEST.value;
+   // console.log('Ovo za memo ' + JSON.stringify(mestaValue));
     if (mestaValue._id) {
-      console.log('Ovo za memo ' + JSON.stringify(mestaValue));
+    //  console.log('Ovo za memo ' + JSON.stringify(mestaValue));
       this.mestaService.updateMesto(mestaValue).subscribe(
        (pos) => {
          if (pos.success) {
