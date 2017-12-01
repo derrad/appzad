@@ -58,5 +58,6 @@ export class PickPartnerModel {
     _id: string;
     KyeSearch: string;
     Naziv: string;
+    Adresa: Object;
     Pib: string;
 }

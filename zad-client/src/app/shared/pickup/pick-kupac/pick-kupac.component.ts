@@ -9,9 +9,32 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PickKupacComponent implements OnInit {
 
-  constructor() { }
+
+  @Input('kupacL') public kupacL: Array<PickPartnerModel> ;
+  Title = 'ODABIR KUPCA';
+  selectedKupac: PickPartnerModel;
+  @Output() pickRow = new EventEmitter<PickPartnerModel>();
+  @Output() pickNothing = new EventEmitter<any>();
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  addPartner() {
+    this.router.navigate(['/partner/new']);
+  }
+
+  PickKupac() {
+      console.log('Pick iz PickKupac' + JSON.stringify(this.selectedKupac));
+     if (this.selectedKupac) {
+       if (this.selectedKupac._id) {
+         this.pickRow.emit(this.selectedKupac);
+       }
+     }else {
+      // console.log('saljem nista');
+       this.pickNothing.emit(null);
+     }
+
+  }
 }

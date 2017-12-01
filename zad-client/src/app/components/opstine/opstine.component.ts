@@ -22,11 +22,9 @@ export class OpstineComponent implements OnInit {
   displayDetals = false;
   opstShow: Opstine = new Opstine();
 
-
   constructor(private router: Router, private opstService: OpstineService,
               private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED OPŠTINA';
-
   }
 
   ngOnInit() {

@@ -12,7 +12,7 @@ import { ResponeCustom} from './../../../shared/models/ErrorRes';
 import { ZadrugarModel} from './../../zadrugar/zadrugar-model';
 import { ZadrugarService } from './../../zadrugar/zadrugar.service';
 import { PartnerService } from './../../partner/partner.service';
-import { PartnerModel } from './../../partner/partner-model';
+import { PickPartnerModel } from './../../partner/partner-model';
 import { VlasnikService } from './../../vlasnik/vlasnik.service';
 import { RacunVlasnikModel } from './../../vlasnik/vlasnik-model';
 import { PosaoService } from './../../posao/posao.service';
@@ -31,7 +31,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
   title: string;
   uputN: UputModel = new UputModel();
   racvlasnikL: Array<RacunVlasnikModel>;
-  kupacL: Array<PartnerModel>;
+  kupacL: Array<PickPartnerModel>;
   zadrL: Array<ZadrugarModel>;
   poslL: Array<Posao>;
   // NGposaoL: Array<PosaoNG>;
@@ -39,7 +39,10 @@ export class UputFormComponent implements OnInit, OnDestroy {
   saveTemp = true;
   godbroj: UputBrojGodina = new UputBrojGodina();
   displayKupac = false;
-  selectedKupac: PartnerModel;
+  selectedKupac: PickPartnerModel;
+  pickHeight = (window.innerHeight) * 0.8;
+  pickWidth = (window.innerWidth) * 0.8;
+
   @Output() addZadlist = new EventEmitter<Array<ZadrugarModel>>();
   @Output() addPoslist = new EventEmitter<Array<Posao>>();
 
@@ -72,7 +75,8 @@ export class UputFormComponent implements OnInit, OnDestroy {
     get Godina() { return this.formUput.get('Godina'); }
 
   ngOnInit() {
-    this.partnService.getActivPartner().subscribe(profile => {
+
+    this.partnService.getPickPartner().subscribe(profile => {
       if (profile.success === true) {
           this.kupacL = profile.data;
         }else {
@@ -291,7 +295,8 @@ GetKupac() {
 
 PickKupac(event) {
   this.displayKupac = false;
- // console.log(JSON.stringify(this.selectedKupac));
+  // console.log(" " + JSON.stringify(this.selectedKupac));
+  this.selectedKupac = event;
   if (this.selectedKupac) {
     if (this.selectedKupac._id) {
       this.PartneriID.setValue(this.selectedKupac._id);

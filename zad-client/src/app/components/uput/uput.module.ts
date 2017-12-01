@@ -10,6 +10,8 @@ import { UputStavkaComponent } from './uput-stavka/uput-stavka.component';
 import { UputComponent } from './uput.component';
 import { UputService } from './uput.service';
 import { UputRoutingModule } from './uput-routing.module';
+import { PickupModule } from './../../shared/pickup/pickup.module';
+import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { UputRoutingModule } from './uput-routing.module';
     DataTableModule,
     SharedModule,
     InputTextModule,
+    PickupModule,
+    ApppipeModule,
     UputRoutingModule
   ],
   declarations: [UputComponent, UputFormComponent, UputStavkaComponent],

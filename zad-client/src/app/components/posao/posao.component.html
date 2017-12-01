@@ -16,9 +16,9 @@
         <p-column field="Skola" header="Škola" sortable="true" [style]="{'width':'15%'}"></p-column> 
         <p-column field="Sifra" header="Šifra" sortable="true" [style]="{'width':'15%'}"></p-column>
     
-        <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'15%'}">
-            <ng-template let-pos="rowData" let-i="rowIndex" pTemplate="body">
-                <!-- <button type="button" pButton (click)="selectPosao(pos)" icon="fa fa-info" title="Info"></button>
+        <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'overflow':'visible', 'width':'15%' }">
+            <ng-template let-col let-pos="rowData" let-i="rowIndex" pTemplate="body" >
+                <!-- <button type="button" pButton (click)="selectPosao(pos)"  'width':'15%';  icon="fa fa-info" title="Info"></button>
                 <button type="button" pButton (click)="updatePosao(pos._id)" icon="fa fa-pencil" title="Update"></button>
                 <button type="button" pButton (click)="deletePosao(pos)" icon="fa fa-trash" title="Delete"></button> -->
                 <div class="btn-group">

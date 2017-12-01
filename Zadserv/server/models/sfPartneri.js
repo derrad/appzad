@@ -51,7 +51,7 @@ const sfPartner = new Schema({
 sfPartner.pre('save', function(next) {
     // do stuff
     self = this;
-    Drzave.findById(opstina.Drzava).exec(function(err, drzava){
+    Drzave.findById(self.Drzava).exec(function(err, drzava){
         if(err){ 
             self.DrzavaRef ={_id : null, name : null}
         }

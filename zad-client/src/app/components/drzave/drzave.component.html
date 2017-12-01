@@ -4,8 +4,9 @@
         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
     </div>
       <p-dataTable [value]="drzave"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+                 [rowsPerPageOptions]="[5,10,20]" 
                 selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  
-                styleClass="table table-striped" [responsive]="true"  [immutable]=false >
+                styleClass="table table-striped" [responsive]="true"  [immutable]=false  >
 
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
@@ -28,6 +29,8 @@
               <button type="button" pButton (click)="deleteDrzavu(drz)" icon="fa fa-trash" title="Delete"></button>
           </ng-template>
      </p-column>
+
+
       <p-footer  *ngIf="drzave.length > 0">
             <div class="ui-helper-clearfix" style="width:100%">
               <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addDrzave()" label="Add"></button>
@@ -62,6 +65,8 @@
             </ng-template>
         </div>
 
+     
+
       </p-dataTable>
     </div>
 
@@ -73,7 +78,12 @@
      </p-footer>
 </p-confirmDialog>
 
-
+<!-- <ng-template pTemplate="paginatorLeft">
+        <button type="button" pButton icon="fa-refresh"></button>
+</ng-template>
+<ng-template pTemplate="paginatorRight">
+    <button type="button" pButton icon="fa-cloud-upload"></button>
+</ng-template> -->
 
 <p-dialog header="DRŽAVA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
 

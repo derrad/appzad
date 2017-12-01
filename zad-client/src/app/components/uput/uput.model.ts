@@ -22,6 +22,7 @@ export class UputRacVlasnikModel {
 export class UputModel {
     _id: string;
     PartneriID: Object;
+    PartnerRef: Object;
     TipDok?: string;
     Datum: Date;
     Knjizeno: boolean;
@@ -31,6 +32,7 @@ export class UputModel {
     RacVlasnika: UputRacVlasnikModel;
     // RacVlasnika: Object;
     PosloviID: Object;
+    PosloviRef: Object;
     Stavke: [UputStavModel];
     Opis?: string;
     NameUser?: string;
