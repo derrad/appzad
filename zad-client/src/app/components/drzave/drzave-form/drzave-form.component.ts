@@ -202,7 +202,10 @@ export class DrzaveFormComponent implements OnInit, OnDestroy {
     this._location.back();
   }
 
-  revert() { this.clearFormData(); }
+  revert() {
+    // this.clearFormData();
+    this.formDR.reset();
+  }
 
   clearFormData() {
     this.formDR.reset({

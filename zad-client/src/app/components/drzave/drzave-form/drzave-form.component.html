@@ -15,10 +15,10 @@
                 <input class="form-control" formControlName="_id"  [(ngModel)]="drzavaN._id"  type="hidden">
           </div>
           <!-- [(ngModel)]="drzavaN.KodDrzave"   -->
-            <div class="form-group">
+            <div class="form-group"  [ngClass]="{'has-danger': KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched), 
+                                                'has-success':  KodDrzave.valid && ( KodDrzave.dirty || KodDrzave.touched) }">
               <label class="center-block">Kod:
-                <input class="form-control " formControlName="KodDrzave"   
-               required>
+                <input class="form-control " formControlName="KodDrzave"  required  >
               </label>
               <div *ngIf="KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)" class="alert alert-danger">
 

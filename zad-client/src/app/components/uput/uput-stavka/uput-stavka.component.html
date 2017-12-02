@@ -3,14 +3,18 @@
         <!-- <tbody> -->
             <!-- <tr> -->
                     <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr" readonly></td>
-                    <td class="col-md-2"><input type="text" class="form-control input-sm" formControlName="IDZadrugar"></td>
+                    <td class="col-md-2"><input type="text" class="form-control input-sm" 
+                        formControlName="IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)">
+                        
+                    </td>
                     <td class="col-md-1"> 
                         <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()">
                             <span class="glyphicon glyphicon-search"></span>
                             ...
                         </button>
                     </td>
-                    <td class="col-md-3"><select  formControlName="ZadrugarID" class="form-control input-sm" required>
+                    <td class="col-md-3">
+                        <select  formControlName="ZadrugarID" class="form-control input-sm" (change)="onChangeZadr($event.target.value)" required>
                             <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                             <option *ngFor="let list of zadrugarL"  [value]="list._id" >
                                 <!-- {{list.Prezime}} {{list.Ime}} -->
@@ -19,6 +23,7 @@
                         </select>
                     </td>
                     <td class="col-md-3"><select  formControlName="PosloviID" class="form-control input-sm" placeholder="Select posao" required>
+                            <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                             <option *ngFor="let list of poslL" [value]="list._id"   >
                             {{list.Naziv}} 
                             </option>

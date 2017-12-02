@@ -111,6 +111,25 @@ export class DashboardService  extends BaseService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getUputCountFakt() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/countuputfakt') ;
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
+  getUputCountStorn() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/countuputstorn') ;
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
 
   // private handleError(error: Response) {
   //   if (error.status === 401) {

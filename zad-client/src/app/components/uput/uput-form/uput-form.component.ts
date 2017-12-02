@@ -1,4 +1,5 @@
-import { Component, OnInit, Directive, OnDestroy, EventEmitter, Input, Output} from '@angular/core';
+import { Component, OnInit, Directive, OnDestroy, EventEmitter, Input, Output, AfterViewInit, AfterViewChecked} from '@angular/core';
+import {AfterContentInit} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -20,13 +21,14 @@ import { Posao } from './../../posao/posao.model';
 import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
 
 
+
 @Component({
   selector: 'app-uput-form',
   templateUrl: './uput-form.component.html',
   styleUrls: ['./uput-form.component.css'],
   animations: [formsTransition()]
 })
-export class UputFormComponent implements OnInit, OnDestroy {
+export class UputFormComponent implements OnInit, AfterViewInit, AfterViewChecked, AfterContentInit, OnDestroy {
   formUput: FormGroup;
   title: string;
   uputN: UputModel = new UputModel();
@@ -47,7 +49,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
               private uputService: UputService,
               private router: Router, private route: ActivatedRoute, private _fb: FormBuilder,
               private _location: Location, private flashMessage: FlashMessagesService,
-              private serValidate: ServiceValidateShared, ) {
+              private serValidate: ServiceValidateShared) {
 
       this.formUput = this._fb.group({
         _id: [],
@@ -165,9 +167,9 @@ export class UputFormComponent implements OnInit, OnDestroy {
       //  this.PosloviID.setValue('');
        this.loadTempData();
        this.InitGodinaBroj();
-       if (this.Stavke.controls.length  === 0 ) {
-         this.addStavke();
-       }
+      //  if (this.Stavke.controls.length  === 0 ) {
+      //    this.addStavke();
+      //  }
        return;
     }
     // this.InitGodinaBroj();
@@ -203,6 +205,25 @@ export class UputFormComponent implements OnInit, OnDestroy {
     });
 }
 
+ngAfterViewInit() {
+  // if (this.Stavke.controls.length  === 0 ) {
+  //   this.addStavke();
+  // }
+console.log('ngAfterViewInit');
+}
+
+ngAfterViewChecked() {
+  if (this.Stavke.controls.length  === 0 ) {
+   console.log('OVO - ngAfterViewChecked');
+  }
+}
+
+ngAfterContentInit() {
+  if (this.Stavke.controls.length  === 0 ) {
+  console.log('ngAfterContentInit');
+  }
+}
+
 private SetDatumForm() {
   const dp = new DatePipe(navigator.language);
   const p = 'y-MM-dd'; // YYYY-MM-DD
@@ -210,6 +231,7 @@ private SetDatumForm() {
   this.Datum.setValue({effectiveEndDate: dtr});
  // this.transitionForm.setValue({effectiveEndDate: dtr});
 }
+
 
 private SetGodinaBroj(tDatum: Date) {
    // console.log('Usao u SetGodinaBroj ' + tDatum);
@@ -278,7 +300,7 @@ onBlurDatum() {
 
 InitGodinaBroj() {
   this.uputN.Datum = new Date();
-  // this.Datum.setValue(this.uputN.Datum);
+  this.Datum.setValue(this.uputN.Datum);
   this.SetDatumForm();
   this.SetGodinaBroj(this.uputN.Datum);
   console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
@@ -312,9 +334,11 @@ InitDokZag() {
 
 // Stavke
 initDataStavke() {
+  let rbr = 0;
   for ( const item of this.uputN.Stavke) {
+        rbr = rbr + 1;
         const control = <FormArray>this.formUput.controls['Stavke'];
-        control.push(this.initStavke(item.IDZadrugar, item.Rbr, item.ZadrugarID, item.PosloviID));
+        control.push(this.initStavke(item.IDZadrugar, rbr, item.ZadrugarID, item.PosloviID));
   }
  }
 initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: Object ) {
@@ -328,7 +352,8 @@ initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: O
 addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
     const broj = control.controls.length + 1;
-    control.push(this.initStavke(null, broj, null, null));
+    control.push(this.initStavke(0, broj, '', ''));
+  //  this.reorderStav();
 }
 removeStavke(i: number) {
     if (i >= 0) {
@@ -336,20 +361,21 @@ removeStavke(i: number) {
      control.removeAt(i);
     }
   //  console.log('ovo sam dobio iz stavki' + i);
+   this.reorderStav();
 }
 
-// PickZadrugar(event) {
-//    console.log('Dobio u glavnoj formi' + JSON.stringify(event));
-//   this.selectedZadr = event;
-//   if (this.selectedZadr) {
-//     if (this.selectedZadr._id) {
-//      // this.PartneriID.setValue(this.selectedZadr._id);
-//   //   this.PartneriID.setValue(this.selectedKupac._id);
-//      //const control = <FormArray>this.formUput.controls['Stavke'];
-//      //control[0].setValue();
-//     }
-//   }
-// }
+reorderStav() {
+  let rbr = 0;
+  const controls = <FormArray>this.formUput.controls['Stavke'];
+  for ( const item of this.Stavke.controls) {
+    rbr = rbr + 1;
+    const Idzadr = item.get('IDZadrugar').value;
+    const id = item.get('ZadrugarID').value;
+    const idpos = item.get('PosloviID').value;
+    item.setValue({'Rbr': rbr , 'IDZadrugar': Idzadr, 'ZadrugarID': id, 'PosloviID': idpos });
+  }
+
+}
 
 
   save() {
@@ -448,7 +474,10 @@ backClicked(event: any) {
     this._location.back();
 }
 
-revert() { this.clearFormData(); }
+revert() {
+  this.formUput.reset();
+ // this.clearFormData();
+}
 
 clearFormData() {
     this.formUput.reset({

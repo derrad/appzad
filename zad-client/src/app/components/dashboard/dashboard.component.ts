@@ -27,6 +27,8 @@ export class DashboardComponent implements OnInit {
   CzadrAll = 0;
   CzadrActiv  = 0;
   CUpuAll = 0;
+  CUputFakt = 0;
+  CUputStorn = 0;
   constructor(private dashService: DashboardService, private router: Router ) {
 
 
@@ -159,20 +161,56 @@ export class DashboardComponent implements OnInit {
       });
 
 
-      this.dashService.getUputCountAll().subscribe(profile => {
-        if (profile.success === true) {
-          this.CUpuAll = profile.number;
-        }
-      },
-      (error: ResponeCustom) => {
-        // console.log(err);
-        this.CUpuAll = 0;
-        if (error.status === 401) {
-          this.router.navigate(['login']);
-        }
-        return false;
-      });
+      this.UputiCount();
 
   }
+
+
+private UputiCount() {
+
+  this.dashService.getUputCountAll().subscribe(profile => {
+    if (profile.success === true) {
+      this.CUpuAll = profile.number;
+    }
+  },
+  (error: ResponeCustom) => {
+    // console.log(err);
+    this.CUpuAll = 0;
+    if (error.status === 401) {
+      this.router.navigate(['login']);
+    }
+    return false;
+  });
+
+  this.dashService.getUputCountFakt().subscribe(profile => {
+    if (profile.success === true) {
+      this.CUputFakt = profile.number;
+    }
+  },
+  (error: ResponeCustom) => {
+    // console.log(err);
+    this.CUputFakt = 0;
+    if (error.status === 401) {
+      this.router.navigate(['login']);
+    }
+    return false;
+  });
+
+  this.dashService.getUputCountStorn().subscribe(profile => {
+    if (profile.success === true) {
+      this.CUputStorn = profile.number;
+    }
+  },
+  (error: ResponeCustom) => {
+    // console.log(err);
+    this.CUputStorn = 0;
+    if (error.status === 401) {
+      this.router.navigate(['login']);
+    }
+    return false;
+  });
+
+
+}
 
 }

@@ -117,7 +117,7 @@ module.exports.create = async function (req, res,next) {
     NameUser : NameUser
 
   });
-  console.log("Pre save funkcije");
+  // console.log("Pre save funkcije");
   oUput.save(function(err,result) {
     if(err){ 
       // const emsg = " Error processing request";
@@ -140,41 +140,41 @@ module.exports.create = async function (req, res,next) {
   }
 }
 
-function PopulZadRef(keyZad, callback)  { 
-  Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-         if(err){ 
-            console.log('error u findOne');
-            callback(err);
-  //         // return err;
-         }else{
-           console.log('Nema greska');
-         //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-           callback(result);
-  //         //return result;
-  //       //  item.ZadRef = result;
-  //       //  item.TipZadrugar = result.TipZadrugar;
-         }
-     });
+// function PopulZadRef(keyZad, callback)  { 
+//   Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
+//          if(err){ 
+//             console.log('error u findOne');
+//             callback(err);
+//   //         // return err;
+//          }else{
+//            console.log('Nema greska');
+//          //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+//            callback(result);
+//   //         //return result;
+//   //       //  item.ZadRef = result;
+//   //       //  item.TipZadrugar = result.TipZadrugar;
+//          }
+//      });
 
-}
+// }
 
-async function ZadRefPop(keyZad)  { 
-  Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-         if(err){ 
-            console.log('error u findOne');
-           // callback(err);
-  //         // return err;
-         }else{
-           console.log('Nema greska');
-         //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-           //callback(result);
-           return result;
-  //       // item.ZadRef = result;
-  //       //  item.TipZadrugar = result.TipZadrugar;
-         }
-     });
+// async function ZadRefPop(keyZad)  { 
+//   Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
+//          if(err){ 
+//             console.log('error u findOne');
+//            // callback(err);
+//   //         // return err;
+//          }else{
+//            console.log('Nema greska');
+//          //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
+//            //callback(result);
+//            return result;
+//   //       // item.ZadRef = result;
+//   //       //  item.TipZadrugar = result.TipZadrugar;
+//          }
+//      });
 
-}
+// }
 
 
 module.exports.listUput = function (req, res,next) {
@@ -250,6 +250,33 @@ module.exports.countUput = function(req, res, next) {
   });
 }
 
+module.exports.countUputFakt = function(req, res, next) {
+  //console.log("parametar je : " + req.params.id);
+	Uput.count({Knjizeno:true}, function(err,count){
+        //console.log("DA VIDIM COUNT" +  count);
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+       // console.log("VRACAM BROJ KOJI JE  : " + count);
+         return res.status(200).json({
+            success: true,
+            message: 'Successfully',
+            number:count
+          });
+  });
+}
+
+module.exports.countUputStorn = function(req, res, next) {
+  //console.log("parametar je : " + req.params.id);
+	Uput.count({Storno:true}, function(err,count){
+        //console.log("DA VIDIM COUNT" +  count);
+        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
+       // console.log("VRACAM BROJ KOJI JE  : " + count);
+         return res.status(200).json({
+            success: true,
+            message: 'Successfully',
+            number:count
+          });
+  });
+}
 
 module.exports.getUputBrojGod = function (req, res,next) {
   //console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
@@ -277,6 +304,42 @@ module.exports.getUputBrojGod = function (req, res,next) {
          ).end(); 
      }
       const Broj = result.length + 1;
+      return res.status(200).json({
+       success: true, 
+       message:'Uput get number successfully',
+       data: { broj:Broj, godina:Godina }
+       });
+     });
+ 
+}
+
+
+module.exports.getUputBrojGodMax = function (req, res,next) {
+  //console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
+  let Datum = new Date();
+  let Datum1;
+  try{
+    Datum1 = new Date(req.body.Datum);
+  }catch(e) {
+    console.log("Greska u  datumu" + e.message);
+  }
+
+  if (Datum1 instanceof Date){
+     Datum = Datum1;
+  }
+  const Godina = Datum.getFullYear();
+
+  Uput.findOne({Godina : Godina }).sort('-Broj').exec(function(err, result){
+     if(err){ 
+      return res.status(404).json(
+         { success: false, message:'Error processing request ' , data:{broj:0,godina:0} }
+         ).end(); 
+     }
+     // console.log('Dobio sam ' + JSON.stringify(result));
+      let Broj = 1;
+      if(result.Broj){
+        Broj= result.Broj + 1;
+      }
       return res.status(200).json({
        success: true, 
        message:'Uput get number successfully',

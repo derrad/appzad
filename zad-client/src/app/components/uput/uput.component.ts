@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
-import { Header } from 'primeng/primeng';
-import { Footer } from 'primeng/primeng';
+import { Header, Footer } from 'primeng/primeng';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -65,14 +64,13 @@ cloneData(c: UputModel): UputModel {
   }
   return uput;
 }
-
-
- addUput() {
+addUput() {
    this.router.navigate(['/uput/new']);
  }
  updateUput(id) {
    this.router.navigate(['/uput/', id]);
  }
+
  deleteUput(tUput) {
   this.confirmationService.confirm({
       message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,

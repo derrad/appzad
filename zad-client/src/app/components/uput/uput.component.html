@@ -13,14 +13,14 @@
       <p-header><h4><strong>{{Title}}</strong></h4></p-header>
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>
       <p-column expander="true" styleClass="col-icon" [style]="{'width':'5%'}"></p-column>
-      <p-column field="Broj" header="Broj" sortable="true" styleClass="text-center" [style]="{'width':'5%'}"></p-column>
-      <p-column field="Godina" header="Godina"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}"></p-column>
+      <p-column field="Broj" header="Broj" sortable="true" styleClass="text-center" [style]="{'width':'7%'}"></p-column>
+      <p-column field="Godina" header="Godina"  sortable="true" styleClass="text-center" [style]="{'width':'7%'}"></p-column>
       <p-column field="Datum" header="Datum"   sortable="true" styleClass="text-center" [style]="{'width':'10%'}" >
             <ng-template let-col let-uput="rowData" pTemplate="body">
                     <span>{{uput[col.field] | date}}</span>
             </ng-template>
       </p-column>
-      <p-column field="PartneriID.Naziv" header="Kupac"  sortable="true" [style]="{'width':'35%'}" ></p-column>
+      <p-column field="PartneriID.Naziv" header="Kupac"  sortable="true" [style]="{'width':'31%'}" ></p-column>
       <p-column field="PosloviID.Naziv" header="Posao"  sortable="true"  [style]="{'width':'20%'}"></p-column>
 
       <p-column field="Knjizeno" header="Knjizen"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}">
