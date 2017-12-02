@@ -35,6 +35,16 @@ export class ZadrugarService extends BaseService {
     .map(res => res.json()).catch(this.handleError);
   }
 
+  getPickZadrugari() {
+    const headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/pickzadrugar');
+    return this.http.get(ep, {headers: headers})
+    .map(res => res.json()).catch(this.handleError);
+  }
+
   getZadrugar(id) {
     const headers = new Headers();
     this.loadToken();

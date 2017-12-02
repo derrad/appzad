@@ -18,6 +18,7 @@
               <div class="form-group col-md-8">
                   <label class="center-block">Opština:
                     <select  formControlName="Opstina" class="form-control"  required>
+                      <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                       <option *ngFor="let list of opstL" [value]="list._id" >
                         {{ list.Naziv }}
                       </option>

@@ -9,7 +9,7 @@ import { UputModel, UputStavModel, UputRacVlasnikModel, UputBrojGodina, PosaoNG 
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom} from './../../../shared/models/ErrorRes';
-import { ZadrugarModel} from './../../zadrugar/zadrugar-model';
+import { PickZadrugarModel} from './../../zadrugar/zadrugar-model';
 import { ZadrugarService } from './../../zadrugar/zadrugar.service';
 import { PartnerService } from './../../partner/partner.service';
 import { PickPartnerModel } from './../../partner/partner-model';
@@ -32,9 +32,8 @@ export class UputFormComponent implements OnInit, OnDestroy {
   uputN: UputModel = new UputModel();
   racvlasnikL: Array<RacunVlasnikModel>;
   kupacL: Array<PickPartnerModel>;
-  zadrL: Array<ZadrugarModel>;
+  zadrL: Array<PickZadrugarModel>;
   poslL: Array<Posao>;
-  // NGposaoL: Array<PosaoNG>;
   PosaoSel: Posao;
   saveTemp = true;
   godbroj: UputBrojGodina = new UputBrojGodina();
@@ -42,9 +41,6 @@ export class UputFormComponent implements OnInit, OnDestroy {
   selectedKupac: PickPartnerModel;
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
-
-  @Output() addZadlist = new EventEmitter<Array<ZadrugarModel>>();
-  @Output() addPoslist = new EventEmitter<Array<Posao>>();
 
   constructor(private partnService: PartnerService,  private posService: PosaoService,
               private vlasnService: VlasnikService, private zadrService: ZadrugarService,
@@ -61,6 +57,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
         RacVlasnika: ['', [ Validators.required]],
         PosloviID: ['', [ Validators.required]],
         PartneriID: ['', [ Validators.required]],
+        Opis: [''],
         Stavke: this._fb.array([
             ])
       });
@@ -115,16 +112,16 @@ export class UputFormComponent implements OnInit, OnDestroy {
       return false;
   });
 
-  this.zadrService.getActivZadrugar().subscribe(profile => {
+  this.zadrService.getPickZadrugari().subscribe(profile => {
     if (profile.success === true) {
         this.zadrL = profile.data;
-        this.addZadlist.emit(this.zadrL);
+        // this.addZadlist.emit(this.zadrL);
       }else {
       this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.zadrL = [];
-        this.addZadlist.emit(this.zadrL);
+       //  this.addZadlist.emit(this.zadrL);
       }
   },
   (error: ResponeCustom) => {
@@ -133,26 +130,19 @@ export class UputFormComponent implements OnInit, OnDestroy {
           cssClass: 'alert-danger',
           timeout: 9000});
       this.zadrL = [];
-      this.addZadlist.emit(this.zadrL);
+      // this.addZadlist.emit(this.zadrL);
       return false;
   });
 
   this.posService.getPoslovi().subscribe(profile => {
     if (profile.success === true) {
         this.poslL = profile.data;
-      //  this.addPoslist.emit(this.poslL);
-        // this.NGposaoL = new Array<PosaoNG>();
-        // for ( const posao of this.poslL) {
-        //   this.NGposaoL.push({id: posao._id, text: posao.Naziv});
-        // }
-
-      }else {
+    }else {
       this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
             timeout: 9000});
         this.poslL = [];
-      //  this.addPoslist.emit(this.poslL);
-      }
+    }
   },
   (error: ResponeCustom) => {
     console.log(error);
@@ -160,7 +150,6 @@ export class UputFormComponent implements OnInit, OnDestroy {
           cssClass: 'alert-danger',
           timeout: 9000});
       this.poslL = [];
-      this.addPoslist.emit(this.poslL);
       return false;
   });
 
@@ -214,6 +203,13 @@ export class UputFormComponent implements OnInit, OnDestroy {
     });
 }
 
+private SetDatumForm() {
+  const dp = new DatePipe(navigator.language);
+  const p = 'y-MM-dd'; // YYYY-MM-DD
+  const dtr = dp.transform(new Date(), p);
+  this.Datum.setValue({effectiveEndDate: dtr});
+ // this.transitionForm.setValue({effectiveEndDate: dtr});
+}
 
 private SetGodinaBroj(tDatum: Date) {
    // console.log('Usao u SetGodinaBroj ' + tDatum);
@@ -270,6 +266,7 @@ private SetGodinaBroj(tDatum: Date) {
 
 onBlurDatum() {
   let Datum = this.Datum.value;
+  console.log('Datum u on blur' + Datum);
   if (!Datum) {
     Datum = new Date();
   }
@@ -281,21 +278,19 @@ onBlurDatum() {
 
 InitGodinaBroj() {
   this.uputN.Datum = new Date();
+  // this.Datum.setValue(this.uputN.Datum);
+  this.SetDatumForm();
   this.SetGodinaBroj(this.uputN.Datum);
   console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
 
 }
 
 GetKupac() {
-  // this.flashMessage.show('Tražimo kupca iz pick liste', {
-  //   cssClass: 'alert-danger',
-  //   timeout: 9000});
-    this.displayKupac = true;
+   this.displayKupac = true;
 }
 
 PickKupac(event) {
   this.displayKupac = false;
-  // console.log(" " + JSON.stringify(this.selectedKupac));
   this.selectedKupac = event;
   if (this.selectedKupac) {
     if (this.selectedKupac._id) {
@@ -340,9 +335,21 @@ removeStavke(i: number) {
      const control = <FormArray>this.formUput.controls['Stavke'];
      control.removeAt(i);
     }
-    console.log('ovo sam dobio iz stavki' + i);
+  //  console.log('ovo sam dobio iz stavki' + i);
 }
 
+// PickZadrugar(event) {
+//    console.log('Dobio u glavnoj formi' + JSON.stringify(event));
+//   this.selectedZadr = event;
+//   if (this.selectedZadr) {
+//     if (this.selectedZadr._id) {
+//      // this.PartneriID.setValue(this.selectedZadr._id);
+//   //   this.PartneriID.setValue(this.selectedKupac._id);
+//      //const control = <FormArray>this.formUput.controls['Stavke'];
+//      //control[0].setValue();
+//     }
+//   }
+// }
 
 
   save() {

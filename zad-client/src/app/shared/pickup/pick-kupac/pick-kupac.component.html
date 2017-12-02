@@ -5,8 +5,7 @@
 <p-dataTable [value]="kupacL"  [globalFilter]="gb"
             [(selection)]="selectedKupac" (onRowSelect)="PickKupac($event)"
             selectionMode="single"  dataKey="_id"
-            styleClass="table table-striped" [responsive]="true"
-            >
+            styleClass="table table-striped" [responsive]="true" >
 
           <p-header><strong>{{Title}}</strong></p-header>
           <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>

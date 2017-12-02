@@ -43,13 +43,12 @@
                 <!-- [(ngModel)]="uputN.Godina" -->
             </div>
 
-            <!-- [ngModel]="uputN.Datum | date:'yyyy-MM-dd'" -->
+            <!-- [ngModel]="uputN.Datum | date:'yyyy-MM-dd'"  [ngModel]="uputN.Datum | date:'yyyy-MM-dd'" -->
             <div class="form-group col-md-3 col-lg-2">
                 <label class="center-block">Datum:
                         <div class="input-group">
                             <div class="input-group">
-                                <input   type="date" [ngModel]="uputN.Datum | date:'yyyy-MM-dd'"
-                                    formControlName="Datum" name="Datum" class="form-control" (blur)="onBlurDatum()" required>
+                                <input type="date" formControlName="Datum" name="Datum" class="form-control" (blur)="onBlurDatum()" required>
                             </div>
                         </div>
                 </label>
@@ -60,11 +59,12 @@
                 </div>
             </div>
 
-
+            <!-- [(ngModel)]="uputN.RacVlasnika" -->
             <div class="form-group col-md-5 col-lg-6">
                 <label class="center-block">Racun za uplatu:
-                    <select  formControlName="RacVlasnika" class="form-control" placeholder="Select racun"
-                        [(ngModel)]="uputN.RacVlasnika"  [compareWith]="compareVlasRacun" required>
+                    <select  formControlName="RacVlasnika" class="form-control" 
+                        [compareWith]="compareVlasRacun" required>
+
                         <option *ngFor="let list of racvlasnikL"   [ngValue]="list">
                            {{ list.Naziv }} - {{list.Racun}}
                         </option>
@@ -80,13 +80,13 @@
           </div>
 
           <div class="row">
-
+                <!-- [(ngModel)]="uputN.PartneriID"  -->
                 <div class="form-group col-md-6">
                         <label class="center-block">Kupac:
                             <div class="row">
                                 <div class="col-lg-10 col-md-10 col-xs-10">
-                                <select  formControlName="PartneriID" class="form-control" placeholder="Select kupac"
-                                    [(ngModel)]="uputN.PartneriID"  required>
+                                <select  formControlName="PartneriID" class="form-control"  required>
+                                    <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                                     <option *ngFor="let list of kupacL" [value]="list._id"   >
                                     {{ list.Naziv }}
                                     </option>
@@ -106,11 +106,11 @@
                             </div>
                         </div>
                 </div>
-
+                <!-- [(ngModel)]="uputN.PosloviID"  -->
                 <div class="form-group col-md-6">
                         <label class="center-block">Posao:
                             <select  formControlName="PosloviID" class="form-control" 
-                                [(ngModel)]="uputN.PosloviID"  required >
+                                required >
                                 <!--  <option [value]="null">Please Select</option> -->
                                 <!-- <option [disabled]="true" [selected]="true">Select Option</option> -->
                                 <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
@@ -153,12 +153,12 @@
                         <tr *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index"  >
                             <!-- <div class="panel-heading">
                                 <span><strong>Stavka {{i + 1}} </strong></span>
-                                <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span>
+                                <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span> (OdbirZadStavke)="PickZadrugar(i)"
                             </div> -->
 
                             <div [formGroupName]="i"   >
                                 <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" 
-                                (removeStavke)="removeStavke(i)" ></app-uput-stavka>
+                                (removeStavke)="removeStavke(i)"  ></app-uput-stavka>
                             </div>
 
                         </tr>

@@ -208,7 +208,7 @@ module.exports.listactivzadrugar = function (req, res,next) {
 module.exports.pickzadrugar = function (req, res,next) {
   //console.log("Usao u list Radnik - tu sam");
   Zadrugar.find({Aktivan:true}).sort({Ime:1,Prezime:1})
-              .select('IDZadrugar Ime Prezime DatRodjenja TipZadrugar MestaRef ZanimanjaRef')
+              .select('IDZadrugar Ime Prezime DatRodjenja TipZadrugar MestaRef ZanimanjaRef  Jmbg')
               .exec(function(err, result){
     if(err){ 
       res.statusMessage = err;

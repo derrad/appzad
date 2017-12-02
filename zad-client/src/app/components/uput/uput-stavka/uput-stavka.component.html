@@ -5,12 +5,13 @@
                     <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr" readonly></td>
                     <td class="col-md-2"><input type="text" class="form-control input-sm" formControlName="IDZadrugar"></td>
                     <td class="col-md-1"> 
-                        <button type="button" class="btn btn-sm btn-info">
+                        <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()">
                             <span class="glyphicon glyphicon-search"></span>
                             ...
                         </button>
                     </td>
                     <td class="col-md-3"><select  formControlName="ZadrugarID" class="form-control input-sm" required>
+                            <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                             <option *ngFor="let list of zadrugarL"  [value]="list._id" >
                                 <!-- {{list.Prezime}} {{list.Ime}} -->
                                 {{list.fullName}}
@@ -77,3 +78,10 @@
   </div> -->
 
 </div>
+
+
+<p-dialog header="ODABIR ZADRUGARA" [(visible)]="displayZadrugar" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
+    <app-pick-zadrugar [zadrL]="zadrugarL" 
+       (pickRow)="PickZadrugar($event)" (pickNothing)="displayZadrugar=false">
+     </app-pick-zadrugar>
+</p-dialog>

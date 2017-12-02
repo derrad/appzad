@@ -18,7 +18,8 @@
         <div class="row">    
               <div class="form-group col-md-8">
                   <label class="center-block">Država:
-                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu" [(ngModel)]="opstina.Drzava" required>
+                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu"  required>
+                      <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
                       <option *ngFor="let list of drzave" [value]="list._id">
                         {{ list.Naziv }}
                       </option>
@@ -41,10 +42,11 @@
               </div>
         </div>
 
+        <!-- [(ngModel)]="opstina.RegOzn" -->
           <div class="row">
               <div class="form-group col-md-4">
                     <label class="center-block">Kod opštine:
-                      <input  class="form-control" formControlName="RegOzn"  [(ngModel)]="opstina.RegOzn"  required>
+                      <input  class="form-control" formControlName="RegOzn"    required>
                     </label>
                     
                     <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger" role="alert">
@@ -57,10 +59,10 @@
                      
                     </div>
               </div>
-
+              <!-- [(ngModel)]="opstina.Naziv"  -->
               <div class="form-group col-md-8">
                   <label class="center-block">Naziv opštine:
-                    <input class="form-control" formControlName="Naziv"  [(ngModel)]="opstina.Naziv"  required>
+                    <input class="form-control" formControlName="Naziv"   required>
                   </label>
                   
                   <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger" role="alert">
@@ -71,33 +73,35 @@
               </div>
           </div>  
 
-          
+          <!-- [(ngModel)]="opstina.SifPorez" -->
           <div class="row">      
               <div class="form-group col-md-4">
                   <label class="center-block">Šifra poreza opštine:
-                    <input class="form-control" formControlName="SifPorez"  [(ngModel)]="opstina.SifPorez" >
-                  </label>
-              </div>
-                  
-              <div class="form-group col-md-4">
-                  <label class="center-block">Kontrolni broj opštine:
-                    <input class="form-control" formControlName="KontBr"  [(ngModel)]="opstina.KontBr" >
+                    <input class="form-control" formControlName="SifPorez"  >
                   </label>
               </div>
 
+              <!-- [(ngModel)]="opstina.KontBr" -->
+              <div class="form-group col-md-4">
+                  <label class="center-block">Kontrolni broj opštine:
+                    <input class="form-control" formControlName="KontBr"  >
+                  </label>
+              </div>
+              <!-- [(ngModel)]="opstina.PozivNaBr"  -->
               <div class="form-group col-md-4">
                 <label class="center-block">Poziv na broj opštine:
-                  <input class="form-control" formControlName="PozivNaBr"  [(ngModel)]="opstina.PozivNaBr" >
+                  <input class="form-control" formControlName="PozivNaBr" >
                 </label>
               </div>
           </div>
-                  <div class="form-group">
-                    <label class="center-block">Opis:
-                      <textarea class="form-control" formControlName="Opis"  [(ngModel)]="opstina.Opis">
+          <!-- [(ngModel)]="opstina.Opis" -->
+          <div class="form-group">
+            <label class="center-block">Opis:
+              <textarea class="form-control" formControlName="Opis" >
 
-                      </textarea>
-                    </label>
-                </div>
+              </textarea>
+            </label>
+        </div>
               
                 <div class="form-group">
                         <div class="col-md-offset-5 col-md-12">

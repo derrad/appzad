@@ -26,7 +26,7 @@ export class PickKupacComponent implements OnInit {
   }
 
   PickKupac() {
-      console.log('Pick iz PickKupac' + JSON.stringify(this.selectedKupac));
+     // console.log('Pick iz PickKupac' + JSON.stringify(this.selectedKupac));
      if (this.selectedKupac) {
        if (this.selectedKupac._id) {
          this.pickRow.emit(this.selectedKupac);

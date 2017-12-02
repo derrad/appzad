@@ -27,7 +27,9 @@ export class ZadrugarModel {
     Telefon: string;
     ZadEmail: string;
     MestaID: Object;
+    MestaRef: Object;
     ZanimanjaID: Object;
+    ZanimanjaRef: Object;
     TipZadrugar: string;
     BrRadneKnjiz: string;
     BrIndexa: string;
@@ -42,4 +44,17 @@ export class ZadrugarModel {
     created_at?: Date;
     updatedAt?: Date;
 
+}
+
+export class PickZadrugarModel {
+    _id: string;
+    IDZadrugar: Number;
+    Ime: string;
+    Prezime: string;
+    fullName: string;
+    DatRodjenja: Date;
+    MestaRef: Object;
+    ZanimanjaRef: Object;
+    TipZadrugar: string;
+    Jmbg: string;
 }
