@@ -1,4 +1,4 @@
-import { Component,  EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component,  EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Posao } from './../../posao/posao.model';
 import { PickZadrugarModel} from './../../zadrugar/zadrugar-model';
@@ -9,7 +9,7 @@ import { ServiceValidateShared } from './../../../services/service.validate.shar
   templateUrl: './uput-stavka.component.html',
   styleUrls: ['./uput-stavka.component.css']
 })
-export class UputStavkaComponent implements OnInit {
+export class UputStavkaComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line:no-input-rename
   @Input()
   public Stavke: FormGroup;
@@ -34,10 +34,13 @@ export class UputStavkaComponent implements OnInit {
     this.Stavke.controls.IDZadrugar.valueChanges
           .debounceTime(400)
           .distinctUntilChanged()
-          .subscribe((sifra: Number) => {
+          .subscribe((sifra) => {
             const zadrOdab = this.zadrugarL.find(x => x.IDZadrugar == sifra);
             if (zadrOdab) {
               this.InputZadrugar(zadrOdab);
+            }else {
+              this.Stavke.controls.ZadrugarID.setValue('');
+
             }
             //  // console.log('Usao sam gde treba ' + term);
             // for ( const zadrugar of this.zadrugarL) {
@@ -53,7 +56,15 @@ export class UputStavkaComponent implements OnInit {
 
   }
 
- onClickRemove(tStav) {
+  ngAfterViewInit() {
+   console.log('UputStavkaComponent + ngAfterViewInit');
+   console.log('Stavke u uput-stav ngAfterViewInit' + (this.Stavke.controls.PosloviID.value));
+   if (this.onChangePosao(this.Stavke.controls.PosloviID.value)){
+     this.onChangePosao(this.Stavke.controls.PosloviID.value);
+   }
+  }
+
+  onClickRemove(tStav) {
     // console.log('Klik u stavkama' + tStav);
     this.removeStavke.emit(tStav);
  }
@@ -78,8 +89,9 @@ InputZadrugar(tzadr: PickZadrugarModel) {
   //   this.OdbirZadStavke.emit(this.selectedZadr);
     // this.Stavke[0]['ZadrugarID'].setValue(this.selectedZadr._id);
     this.Stavke.controls.ZadrugarID.setValue(tzadr._id);
+    // this.Stavke.controls.PosaoID.setValue(1);
     // this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
-    console.log('Stavke u uput-stav' + (this.Stavke.controls.ZadrugarID));
+    console.log('Stavke u InputZadrugar' + (this.Stavke.controls.ZadrugarID.value));
     }
   }
 }
@@ -96,7 +108,7 @@ InputZadrugar(tzadr: PickZadrugarModel) {
       // this.Stavke[0]['ZadrugarID'].setValue(this.selectedZadr._id);
       this.Stavke.controls.ZadrugarID.setValue(this.selectedZadr._id);
       this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
-      console.log('Stavke u uput-stav' + (this.Stavke.controls.ZadrugarID));
+      console.log('Stavke u uput-stav PickZadrugar' + (this.Stavke.controls.ZadrugarID.value));
       }
     }
   }
@@ -107,6 +119,18 @@ InputZadrugar(tzadr: PickZadrugarModel) {
       const zadrOdab = this.zadrugarL.find(x => x._id === event);
       if (zadrOdab) {
         this.Stavke.controls.IDZadrugar.setValue(zadrOdab.IDZadrugar);
+      }
+
+    }
+  }
+
+  onChangePosao(event) {
+    if (event) {
+      const PosaoOdab = this.poslL.find(x => x._id === event);
+      if (PosaoOdab) {
+       // this.Stavke.controls.IDZadrugar.setValue(PosaoOdab.IDZadrugar);
+       // console.log('Posao u onChangePosaoevent ' + this.Stavke.controls.PosloviID.value);
+       this.Stavke.controls.PosloviID.setValue(PosaoOdab._id);
       }
 
     }

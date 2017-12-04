@@ -20,7 +20,7 @@ import { PosaoService } from './../../posao/posao.service';
 import { Posao } from './../../posao/posao.model';
 import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
 
-
+// AfterViewInit, AfterViewChecked, AfterContentInit,
 
 @Component({
   selector: 'app-uput-form',
@@ -28,7 +28,7 @@ import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
   styleUrls: ['./uput-form.component.css'],
   animations: [formsTransition()]
 })
-export class UputFormComponent implements OnInit, AfterViewInit, AfterViewChecked, AfterContentInit, OnDestroy {
+export class UputFormComponent implements OnInit,  OnDestroy {
   formUput: FormGroup;
   title: string;
   uputN: UputModel = new UputModel();
@@ -205,24 +205,24 @@ export class UputFormComponent implements OnInit, AfterViewInit, AfterViewChecke
     });
 }
 
-ngAfterViewInit() {
-  // if (this.Stavke.controls.length  === 0 ) {
-  //   this.addStavke();
-  // }
-console.log('ngAfterViewInit');
-}
+// ngAfterViewInit() {
+//   // if (this.Stavke.controls.length  === 0 ) {
+//   //   this.addStavke();
+//   // }
+// console.log('ngAfterViewInit');
+// }
 
-ngAfterViewChecked() {
-  if (this.Stavke.controls.length  === 0 ) {
-   console.log('OVO - ngAfterViewChecked');
-  }
-}
+// ngAfterViewChecked() {
+//   if (this.Stavke.controls.length  === 0 ) {
+//    console.log('OVO - ngAfterViewChecked');
+//   }
+// }
 
-ngAfterContentInit() {
-  if (this.Stavke.controls.length  === 0 ) {
-  console.log('ngAfterContentInit');
-  }
-}
+// ngAfterContentInit() {
+//   if (this.Stavke.controls.length  === 0 ) {
+//   console.log('ngAfterContentInit');
+//   }
+// }
 
 private SetDatumForm() {
   const dp = new DatePipe(navigator.language);
@@ -352,7 +352,13 @@ initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: O
 addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
     const broj = control.controls.length + 1;
-    control.push(this.initStavke(0, broj, '', ''));
+    const posao = this.PosloviID.value;
+    console.log('Poslovi su : ' + posao);
+    if (posao) {
+      control.push(this.initStavke(0, broj, '', posao));
+    }else {
+      control.push(this.initStavke(0, broj, '', ''));
+    }
   //  this.reorderStav();
 }
 removeStavke(i: number) {
