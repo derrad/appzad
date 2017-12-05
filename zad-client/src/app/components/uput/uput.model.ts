@@ -14,6 +14,35 @@ export class UputStavModel {
     Cena: Number;
     Opis?: string;
 }
+class ZadRefModel {
+    _id: string ;
+    name: string;
+    tipzadrugar: string;
+    idzadrugar: Number;
+}
+class PosloviRef {
+    _id:  string;
+    name:  string;
+    stepenss:  string;
+}
+
+export class UputStavNew {
+    _id: string;
+    IDZadrugar: Number;
+    Rbr: Number;
+    ZadrugarID: Object;
+    ZadRef: ZadRefModel;
+    PosloviRef: PosloviRef;
+    TipZadrugar: string;
+    PosloviID: string;
+    OdDatuma: Date;
+    DoDatuma: Date;
+    Kolicina: Number;
+    JedMer: string;
+    Cena: Number;
+    Opis?: string;
+}
+
 export class UputRacVlasnikModel {
     Naziv: string;
     Racun: string;

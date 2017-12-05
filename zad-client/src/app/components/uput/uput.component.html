@@ -55,7 +55,7 @@
                     <div class="ui-grid-col-12">
                             <div class="ui-grid-row" >
                              
-                                <p-dataTable [value]="uput.Stavke" 
+                                <!-- <p-dataTable [value]="uput.Stavke" 
                                         styleClass="table table-bordered  table-hover table-striped table-condensed" >
                                         <p-header><strong>Pregled stavki</strong></p-header>
                                         <p-column field="Rbr" header="Rbr" [style]="{'width':'10%'}"></p-column>
@@ -63,7 +63,9 @@
                                         <p-column field="ZadRef.name" header="Zadrugar"   [style]="{'width':'35%'}"></p-column>
                                         <p-column field="ZadRef.tipzadrugar" header="TipZad"   styleClass="text-center" [style]="{'width':'10%'}"></p-column>
                                         <p-column field="PosloviRef.name"  header="Posao"  [style]="{'width':'35%'}"></p-column>
-                                </p-dataTable>
+                                </p-dataTable> -->
+
+                                <div [innerHTML]="uput.Stavke| prettyuputstav"></div> 
 <!-- 
                                     <div class="ui-grid-col-2 label">Rbr: </div>
                                     <div class="ui-grid-col-10">{{item.Rbr}}</div> -->
