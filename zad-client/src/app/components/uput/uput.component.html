@@ -4,7 +4,7 @@
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
           <input #gb type="text" pInputText size="50" placeholder="Global Filter" autofocus>
       </div>
-      <p-dataTable [value]="uputL"  [globalFilter]="gb" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5,10,20]"
+      <p-dataTable [value]="uputL"  [globalFilter]="gb" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5,10,20]"
                 selectionMode="single" [(selection)]="selectedZadrugar" dataKey="_id"
                 styleClass="table table-striped" [responsive]="true"  [immutable]="false"
                 [resizableColumns]="true" columnResizeMode="expand" [reorderableColumns]="true" 
