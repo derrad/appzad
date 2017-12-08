@@ -30,5 +30,5 @@ const sfZanimanja = new Schema({
 }
  );
 
- sfZadrugar.set('toJSON', { virtuals: true })
+sfZanimanja.set('toJSON', { virtuals: true })
 module.exports = mongoose.model('sfZanimanja', sfZanimanja,'sfZanimanja');
