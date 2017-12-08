@@ -57,11 +57,11 @@ export class UputStavkaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   console.log('UputStavkaComponent + ngAfterViewInit');
-   console.log('Stavke u uput-stav ngAfterViewInit' + (this.Stavke.controls.PosloviID.value));
-   if (this.onChangePosao(this.Stavke.controls.PosloviID.value)){
-     this.onChangePosao(this.Stavke.controls.PosloviID.value);
-   }
+  //  console.log('UputStavkaComponent + ngAfterViewInit');
+  //  console.log('Stavke u uput-stav ngAfterViewInit' + (this.Stavke.controls.PosloviID.value));
+  //  if (this.onChangePosao(this.Stavke.controls.PosloviID.value)) {
+  //    this.onChangePosao(this.Stavke.controls.PosloviID.value);
+  //  }
   }
 
   onClickRemove(tStav) {

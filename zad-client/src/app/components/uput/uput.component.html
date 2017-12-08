@@ -23,14 +23,14 @@
       <p-column field="PartneriID.Naziv" header="Kupac"  sortable="true" [style]="{'width':'31%'}" ></p-column>
       <p-column field="PosloviID.Naziv" header="Posao"  sortable="true"  [style]="{'width':'20%'}"></p-column>
 
-      <p-column field="Knjizeno" header="Knjizen"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}">
+      <p-column field="Knjizeno" header="Knjizen"  sortable="true" styleClass="text-center" [style]="{'width':'8%'}">
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span>
                 <span [hidden]="partn[col.field]==true">NE</span>
 
         </ng-template>
       </p-column>
-      <p-column field="Storno" header="Storno"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}" >
+      <p-column field="Storno" header="Storno"  sortable="true" styleClass="text-center" [style]="{'width':'7%'}" >
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span>
                 <span [hidden]="partn[col.field]==true">NE</span>
@@ -39,13 +39,49 @@
       </p-column>
 
 
-      <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'width':'10%'}">
+      <p-column  styleClass="col-button text-center" heder="ACTION" [style]="{'overflow':'visible', 'width':'10%' }">
 
           <ng-template let-uput="rowData" let-i="rowIndex" pTemplate="body" >
-
-              <button type="button" pButton (click)="selectItem(uput)" icon="fa fa-info" title="Info"></button>
+              <!-- <button type="button" pButton (click)="selectItem(uput)" icon="fa fa-info" title="Info"></button>
               <button type="button" pButton (click)="updateUput(uput._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="deleteUput(uput)" icon="fa fa-trash" title="Delete"></button>
+              <button type="button" pButton (click)="deleteUput(uput)" icon="fa fa-trash" title="Delete"></button> -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary">Action</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" style="position: relative;z-index: 10000;">
+                    <li>
+                        <a (click)="selectItem(uput)" >
+                            <!-- <i class="fa fa-info" aria-hidden="true"></i> position: relative; -->
+                            <strong><i class="fa fa-info" aria-hidden="true">&nbsp;&nbsp;</i>Info</strong>
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a (click)="updateUput(uput._id)">
+                            <!--  -->
+                            <strong><i class="fa fa-pencil" aria-hidden="true">&nbsp;&nbsp;</i>Update</strong>
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a (click)="deleteUput(uput)">
+                            <!-- <i class="fa fa-trash" aria-hidden="true"></i>     -->
+                            <strong><i class="fa fa-trash" aria-hidden="true">&nbsp;&nbsp;</i>Delete</strong>
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a (click)="faktUput(uput._id)">
+                            <!-- <i class="fa fa-trash" aria-hidden="true"></i>     -->
+                            <strong><i class="fa fa-eur" aria-hidden="true">&nbsp;&nbsp;</i>Fakturiši</strong>
+                        </a>
+                    </li>
+                </ul>
+              </div>
+
           </ng-template>
       </p-column>
       <!-- *ngFor="let item of uput.Stavke; let i = index" -->

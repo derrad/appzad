@@ -23,7 +23,7 @@
                         </select>
                     </td>
                     <td class="col-md-3"><select  formControlName="PosloviID" class="form-control input-sm" (change)="onChangePosao($event.target.value)" required>
-                            <option [value]=""  disabled="true" [selected]="!poslL._id" > --Please select-- </option>
+                            <option [value]=""  disabled="true" > --Please select-- </option>
                             <option *ngFor="let list of poslL" [value]="list._id"   >
                             {{list.Naziv}} 
                             </option>

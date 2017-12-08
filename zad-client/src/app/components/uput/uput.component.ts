@@ -27,6 +27,7 @@ export class UputComponent implements OnInit {
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
 
+
   constructor(private router: Router, private uputService: UputService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
     this.Title = 'PREGLED UPUTA';
@@ -69,6 +70,13 @@ addUput() {
  }
  updateUput(id) {
    this.router.navigate(['/uput/', id]);
+ }
+
+ faktUput(id) {
+  this.flashMessage.show('Fakturisanje uputa ' + id, {
+    cssClass: 'alert-danger',
+    timeout: 5000});
+
  }
 
  deleteUput(tUput) {
