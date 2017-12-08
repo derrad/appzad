@@ -6,6 +6,9 @@ export interface IDrzave {
     EuClan: boolean;
     Opis?: string;
     NameUser?: string;
+       created_at?: Date;
+    updatedAt?: Date;
+
 }
 export class Drzave implements IDrzave {
     _id: string;
@@ -14,6 +17,9 @@ export class Drzave implements IDrzave {
     EuClan: boolean;
     Opis?: string;
     NameUser?: string;
+    created_at?: Date;
+    updatedAt?: Date;
+
 }
 
 export class PickDrzave  {

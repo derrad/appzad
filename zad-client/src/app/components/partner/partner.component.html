@@ -9,7 +9,7 @@
           <input #gb type="text" pInputText size="50" placeholder="Global Filter">
       </div>
       <p-dataTable [value]="partnerL"  [globalFilter]="gb" 
-                [rows]="10" [paginator]="true" [(selection)]="selectedPartner"
+                [rows]="5" [rowsPerPageOptions]="[5,10,20]" [paginator]="true" [(selection)]="selectedPartner"
                 selectionMode="single"  dataKey="_id"   
                 styleClass="table table-striped" [responsive]="true"  [immutable]="false" 
                 columnResizeMode="fit" resizableColumns="true">

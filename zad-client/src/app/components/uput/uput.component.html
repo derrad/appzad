@@ -5,7 +5,7 @@
           <input #gb type="text" pInputText size="50" placeholder="Global Filter" autofocus>
       </div>
       <p-dataTable [value]="uputL"  [globalFilter]="gb" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5,10,20]"
-                selectionMode="single" [(selection)]="selectedZadrugar" dataKey="_id"
+                selectionMode="single" [(selection)]="selectedUput" dataKey="_id"
                 styleClass="table table-striped" [responsive]="true"  [immutable]="false"
                 [resizableColumns]="true" columnResizeMode="expand" [reorderableColumns]="true" 
                 [sortMode]="multiple" expandableRows="true">
@@ -65,7 +65,8 @@
                                         <p-column field="PosloviRef.name"  header="Posao"  [style]="{'width':'35%'}"></p-column>
                                 </p-dataTable> -->
 
-                                <div [innerHTML]="uput.Stavke| prettyuputstav"></div> 
+                                <div [innerHTML]="uput.Stavke| prettyuputstav">
+                                </div> 
 <!-- 
                                     <div class="ui-grid-col-2 label">Rbr: </div>
                                     <div class="ui-grid-col-10">{{item.Rbr}}</div> -->

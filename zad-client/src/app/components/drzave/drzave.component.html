@@ -3,7 +3,7 @@
        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
     </div>
-      <p-dataTable [value]="drzave"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
+      <p-dataTable [value]="drzave"  [globalFilter]="gb" [resizableColumns]="true" [rows]="5" [paginator]="true"
                  [rowsPerPageOptions]="[5,10,20]" 
                 selectionMode="single" [(selection)]="selectedDrzave" dataKey="_id"  
                 styleClass="table table-striped" [responsive]="true"  [immutable]=false  >
