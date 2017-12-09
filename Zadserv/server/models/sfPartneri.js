@@ -50,6 +50,7 @@ const sfPartner = new Schema({
 
 sfPartner.pre('save', function(next) {
     // do stuff
+   // console.log('u partnerima sam');
     self = this;
     Drzave.findById(self.Drzava).exec(function(err, drzava){
         if(err){ 
@@ -65,5 +66,14 @@ sfPartner.pre('save', function(next) {
 
 });
 
+
+// sfPartner.pre('update', function(next) {
+//     // do stuff
+//     console.log('u partnerima sam update');
+//     // self = this;
+//     console.log(this.Naziv);
+//     next();
+
+// });
 
 module.exports = mongoose.model('sfPartner', sfPartner,'sfPartner');

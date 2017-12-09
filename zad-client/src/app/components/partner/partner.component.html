@@ -17,7 +17,7 @@
       <p-header><strong>{{Title}}</strong></p-header>       
       <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
       <!-- <p-column field="KyeSearch" header="Ključ"  sortable="true"></p-column> resizableColumns="true" columnResizeMode="expand" -->
-      <p-column field="Naziv" header="Naziv"  sortable="true" [style]="{'width':'35%'}"></p-column>
+      <p-column field="Naziv" header="Naziv"  sortable="true" [style]="{'width':'33%'}"></p-column>
       <p-column field="UgovProc" header="Ugovoreni %"  sortable="true" styleClass="text-right" [style]="{'width':'10%'}" >
             <ng-template let-col let-partn="rowData" pTemplate="body">
                     <span>{{partn[col.field] | number:'1.2-2'}}</span>
@@ -26,7 +26,7 @@
       <p-column field="Email" header="Email" sortable="true" [style]="{'width':'15%'}"></p-column>
       <p-column field="Pib" header="Pib" sortable="true" [style]="{'width':'10%'}"></p-column>
       <p-column field="Adresa.AdMesto" header="Mesto" sortable="true" [style]="{'width':'15%'}"></p-column>
-      <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" [style]="{'width':'5%'}">
+      <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center" [style]="{'width':'7%'}">
         <ng-template let-col let-partn="rowData" pTemplate="body">
                 <span [hidden]="partn[col.field]==false">DA</span> 
                 <span [hidden]="partn[col.field]==true">NE</span> 

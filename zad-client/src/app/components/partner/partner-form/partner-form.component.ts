@@ -137,14 +137,14 @@ export class PartnerFormComponent implements OnInit, OnDestroy {
 
 initAdresa(tAdresa: PAdresaModel) {
   // Adresa.
-  // console.log("Dobio sam adresu " + JSON.stringify(tAdresa));
+   console.log( 'Dobio sam adresu ' + JSON.stringify(tAdresa));
   this.Adresa.setValue({
-    AdUlica: tAdresa.AdUlica,
-    AdBroj: tAdresa.AdBroj,
-    AdMesto: tAdresa.AdMesto,
-    AdPttReon: tAdresa.AdPttReon,
-    AdPttPak: tAdresa.AdPttPak,
-    AdDrzava: tAdresa.AdDrzava
+    AdUlica: tAdresa.AdUlica || '',
+    AdBroj: tAdresa.AdBroj  || '',
+    AdMesto: tAdresa.AdMesto || '' ,
+    AdPttReon: tAdresa.AdPttReon || '',
+    AdPttPak: tAdresa.AdPttPak || '',
+    AdDrzava: tAdresa.AdDrzava || ''
   });
 
 }

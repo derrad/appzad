@@ -183,8 +183,8 @@ module.exports.pickactivpartner = function (req, res,next) {
 }
 
 module.exports.getpartner = function (req, res,next) {
- // console.log("Usao u list Radnik - tu sam  " + req.params.id);
- Partner.find({_id : req.params.id }).populate('Drzava',['Naziv']).exec(function(err, result){
+ // console.log("Usao u list Radnik - tu sam  " + req.params.id); .populate('Drzava',['Naziv'])
+ Partner.find({_id : req.params.id }).exec(function(err, result){
     if(err){ 
      // res.statusMessage = err;
       return res.status(404).json(
@@ -200,6 +200,26 @@ module.exports.getpartner = function (req, res,next) {
     });
 
 }
+
+module.exports.updatepartner = function (req, res,next) {
+  // console.log("Usao u list Radnik - tu sam  " + req.params.id); .populate('Drzava',['Naziv'])
+// Device.update({},{cid: ''},{multi: true});
+  Partner.update({},{Aktivan:true},{multi: true},function(err, result){
+     if(err){ 
+      // res.statusMessage = err;
+       return res.status(404).json(
+         { success: false, message:'Error processing request ' + err , data:[] }
+         ).end(); 
+     }
+     
+      return res.status(200).json({
+       success: true, 
+       message:'Update all to Aktivan successfully',
+       data: result
+       });
+     });
+ 
+ }
 
 module.exports.delepartner = function(req, res, next) {
  	Partner.remove({_id: req.params.id}, function(err){
