@@ -1,15 +1,19 @@
-import { Component,  EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/fromEvent';
+// import { Subscription } from 'rxjs/Subscription';
+import { Component,  EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Posao } from './../../posao/posao.model';
 import { PickZadrugarModel} from './../../zadrugar/zadrugar-model';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
+
 
 @Component({
   selector: 'app-uput-stavka',
   templateUrl: './uput-stavka.component.html',
   styleUrls: ['./uput-stavka.component.css']
 })
-export class UputStavkaComponent implements OnInit, AfterViewInit {
+export class UputStavkaComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input()
   public Stavke: FormGroup;
@@ -20,11 +24,13 @@ export class UputStavkaComponent implements OnInit, AfterViewInit {
   @Input('poslL')
   public poslL: Array<Posao>;
   @Output() removeStavke = new EventEmitter<any>();
+  @Output() addStavke = new EventEmitter<any>();
   // @Output() OdbirZadStavke = new EventEmitter<any>();
   selectedZadr: PickZadrugarModel;
   displayZadrugar = false;
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
+  // subscription: Subscription;
 
   constructor(private serValidate: ServiceValidateShared) {}
 
@@ -53,21 +59,68 @@ export class UputStavkaComponent implements OnInit, AfterViewInit {
             //     }
             //   }
           });
+          // const keyUpsStream = Observable.fromEvent(document, 'keyup');
+          // const cursorMoveStream = keyUpsStream.filter(x =>  x > 36 && x < 41).map(x => {
+          //   let direction;
+          //   switch ( x ) {
+          //     case 37 :
+          //     direction = 'left';
+          //     break;
+          //     case 38 :
+          //     direction = 'up';
+          //     break;
+          //     case 39 :
+          //     direction = 'right';
+          //     break;
+          //     default :
+          //     direction = 'down';
+          //   }
+          //   console.log('stream ' + direction );
+          //   return direction;
+          // });
 
-  }
+          // this.subscription = Observable.fromEvent(document, 'keyup')
+          //     .map( (x: KeyboardEvent) => x.which )
+          //     .filter((x) => {
+          //      console.log('filter Observable' + x );
+          //       return x > 36 && x < 41;
+          //     })
+          //     .map(x => {
+          //       console.log('map u Observable ' + x );
+          //       let direction;
+          //       switch ( x ) {
+          //         case 37 :
+          //         direction = 'left';
+          //         break;
+          //         case 38 :
+          //         direction = 'up';
+          //         break;
+          //         case 39 :
+          //         direction = 'right';
+          //         break;
+          //         default :
+          //         direction = 'down';
+          //       }
+          //     console.log('map ' + direction );
+          //     return direction;
+          //   }).subscribe(x => console.log('samo keyup - stavke ' + x));
+          // this.subscription = cursorMoveStream.subscribe(x => console.log('samo keyup - stavke ' + x));
+          // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
+          //   console.log(' stavka ' + e);
+          // });
 
-  ngAfterViewInit() {
-  //  console.log('UputStavkaComponent + ngAfterViewInit');
-  //  console.log('Stavke u uput-stav ngAfterViewInit' + (this.Stavke.controls.PosloviID.value));
-  //  if (this.onChangePosao(this.Stavke.controls.PosloviID.value)) {
-  //    this.onChangePosao(this.Stavke.controls.PosloviID.value);
-  //  }
+          // this.subscription = Observable.fromEvent(document, 'keyup').subscribe(e => {
+          //   console.log(' stavka keyup' + e);
+          // });
+
   }
 
   onClickRemove(tStav) {
     // console.log('Klik u stavkama' + tStav);
     this.removeStavke.emit(tStav);
  }
+
+
  GetZadrugar() {
  //  console.log('Klik GetZadrugar UputStavkaComponent');
    if (this.zadrugarL.length === 0 ) {
@@ -91,7 +144,7 @@ InputZadrugar(tzadr: PickZadrugarModel) {
     this.Stavke.controls.ZadrugarID.setValue(tzadr._id);
     // this.Stavke.controls.PosaoID.setValue(1);
     // this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
-    console.log('Stavke u InputZadrugar' + (this.Stavke.controls.ZadrugarID.value));
+    // console.log('Stavke u InputZadrugar' + (this.Stavke.controls.ZadrugarID.value));
     }
   }
 }
@@ -108,7 +161,7 @@ InputZadrugar(tzadr: PickZadrugarModel) {
       // this.Stavke[0]['ZadrugarID'].setValue(this.selectedZadr._id);
       this.Stavke.controls.ZadrugarID.setValue(this.selectedZadr._id);
       this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
-      console.log('Stavke u uput-stav PickZadrugar' + (this.Stavke.controls.ZadrugarID.value));
+      // console.log('Stavke u uput-stav PickZadrugar' + (this.Stavke.controls.ZadrugarID.value));
       }
     }
   }
@@ -134,6 +187,14 @@ InputZadrugar(tzadr: PickZadrugarModel) {
       }
 
     }
+  }
+
+  onPressDown(event) {
+    console.log('onPressDown ' + event );
+    this.addStavke.emit(event);
+  }
+  ngOnDestroy() {
+    // this.subscription.unsubscribe();
   }
 
 }

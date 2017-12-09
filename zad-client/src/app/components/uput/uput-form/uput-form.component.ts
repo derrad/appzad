@@ -19,6 +19,9 @@ import { RacunVlasnikModel } from './../../vlasnik/vlasnik-model';
 import { PosaoService } from './../../posao/posao.service';
 import { Posao } from './../../posao/posao.model';
 import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/fromEvent';
+// import { Subscription } from 'rxjs/Subscription';
 
 // AfterViewInit, AfterViewChecked, AfterContentInit,
 
@@ -43,6 +46,7 @@ export class UputFormComponent implements OnInit,  OnDestroy {
   selectedKupac: PickPartnerModel;
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
+  // subscription: Subscription;
 
   constructor(private partnService: PartnerService,  private posService: PosaoService,
               private vlasnService: VlasnikService, private zadrService: ZadrugarService,
@@ -74,6 +78,9 @@ export class UputFormComponent implements OnInit,  OnDestroy {
     get Godina() { return this.formUput.get('Godina'); }
 
   ngOnInit() {
+    // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
+    //   console.log('glavna forma keapress' + e);
+    // });
 
     this.partnService.getPickPartner().subscribe(profile => {
       if (profile.success === true) {
@@ -353,7 +360,7 @@ addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
     const broj = control.controls.length + 1;
     const posao = this.PosloviID.value;
-    console.log('Poslovi su : ' + posao);
+   // console.log('Poslovi su : ' + posao);
     if (posao) {
       control.push(this.initStavke(0, broj, '', posao));
     }else {
@@ -392,7 +399,17 @@ reorderStav() {
         timeout: 2000});
       return;
     }
-    this.prepareStavke(FPValue);
+
+   const NovUput =  this.clearZadrugar(FPValue);
+
+    if (NovUput.Stavke.length === 0) {
+      this.flashMessage.show('Nema stavki uputa', {
+        cssClass: 'alert-danger',
+        timeout: 2000});
+      return;
+    }
+    this.prepareStavke(NovUput);
+
     // if (FPValue.Stavke.lenght === 0) {
     // }
 
@@ -498,10 +515,34 @@ clearFormData() {
 
 ngOnDestroy() {
   this.setTempData();
+  // this.subscription.unsubscribe();
 }
 
 compareVlasRacun(c1: UputRacVlasnikModel, c2: UputRacVlasnikModel): boolean {
   return c1 && c2 ? c1.Naziv === c2.Naziv : c1 === c2;
+}
+
+private clearZadrugar(tuputN: UputModel ): UputModel {
+
+  const stavSet = new Set();
+  for ( const item of tuputN.Stavke) {
+    stavSet.add(item.IDZadrugar);
+  }
+  const myArrStav = Array.from(stavSet);
+  const newStavke = new Array<UputStavModel>();
+  for (const item of myArrStav) {
+    console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip '  +  typeof Number(item) );
+    const idzad = Number(item);
+    // newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar ===  Number(item) ));
+    newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar == idzad ));
+  }
+ // tuputN.Stavke = stavSet;
+ tuputN.Stavke.splice(0, tuputN.Stavke.length);
+ for (const item of newStavke) {
+   console.log('Nove stavke ' + item);
+   tuputN.Stavke.push(item);
+ }
+  return tuputN;
 }
 
 private prepareStavke(tuputN: UputModel) {

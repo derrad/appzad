@@ -1,6 +1,6 @@
 export class UputStavModel {
     _id: string;
-    IDZadrugar: Number;
+    IDZadrugar: number;
     Rbr: Number;
     ZadrugarID: Object;
     ZadRef: Object;
@@ -18,7 +18,7 @@ class ZadRefModel {
     _id: string ;
     name: string;
     tipzadrugar: string;
-    idzadrugar: Number;
+    idzadrugar: number;
 }
 class PosloviRef {
     _id:  string;
@@ -28,7 +28,7 @@ class PosloviRef {
 
 export class UputStavNew {
     _id: string;
-    IDZadrugar: Number;
+    IDZadrugar: number;
     Rbr: Number;
     ZadrugarID: Object;
     ZadRef: ZadRefModel;

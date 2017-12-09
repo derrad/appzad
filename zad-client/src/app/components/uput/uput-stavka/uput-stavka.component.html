@@ -1,14 +1,17 @@
-<div [formGroup]="Stavke" class="row">
+<div [formGroup]="Stavke" class="row" (keydown.shift.arrowdown)="onPressDown($event)">
     
         <!-- <tbody> -->
             <!-- <tr> -->
-                    <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr" readonly></td>
-                    <td class="col-md-2"><input type="text" class="form-control input-sm" 
+                    <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr" readonly
+                        
+                        ></td>
+                    <td class="col-md-2">
+                        <input type="text" class="form-control input-sm" 
                         formControlName="IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)">
                         
                     </td>
                     <td class="col-md-1"> 
-                        <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()">
+                        <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()" >
                             <span class="glyphicon glyphicon-search"></span>
                             ...
                         </button>
@@ -90,3 +93,19 @@
        (pickRow)="PickZadrugar($event)" (pickNothing)="displayZadrugar=false">
      </app-pick-zadrugar>
 </p-dialog>
+
+<!--  tastatura dogadjaji
+<input (keydown.enter)="...">
+<input (keydown.a)="...">
+<input (keydown.esc)="...">
+<input (keydown.shift.esc)="...">
+<input (keydown.control)="...">
+<input (keydown.alt)="...">
+<input (keydown.meta)="...">
+<input (keydown.9)="...">
+<input (keydown.tab)="...">
+<input (keydown.backspace)="...">
+<input (keydown.arrowup)="...">
+<input (keydown.shift.arrowdown)="...">
+<input (keydown.shift.control.z)="...">
+<input (keydown.f4)="..."> -->

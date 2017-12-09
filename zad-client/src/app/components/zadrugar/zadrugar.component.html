@@ -11,7 +11,7 @@
 
     <p-header><strong>{{Title}}</strong></p-header>       
     <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-    <p-column field="IDZadrugar" header="Šifra" sortable="true" [style]="{'width':'10%'}"></p-column>
+    <p-column field="IDZadrugar" header="Šifra" sortable="true" [style]="{'width':'8%'}"></p-column>
     <!-- <p-column field="Ime" header="Ime"  sortable="true"></p-column>
     <p-column field="Prezime" header="Prezime"  sortable="true"></p-column> -->
 
@@ -27,7 +27,7 @@
     <p-column field="ZadEmail" header="ZadEmail" sortable="true" [style]="{'width':'15%'}"></p-column>
     <p-column field="Jmbg" header="Jmbg"   sortable="true" [style]="{'width':'10%'}"></p-column>
     
-    <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center"  [style]="{'width':'5%'}">
+    <p-column field="Aktivan" header="Aktivan"  sortable="true" styleClass="text-center"  [style]="{'width':'7%'}">
       <ng-template let-col let-partn="rowData" pTemplate="body">
               <span [hidden]="partn[col.field]==false">DA</span> 
               <span [hidden]="partn[col.field]==true">NE</span> 

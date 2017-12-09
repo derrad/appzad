@@ -158,7 +158,7 @@
 
                             <div [formGroupName]="i"   >
                                 <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" 
-                                (removeStavke)="removeStavke(i)"  ></app-uput-stavka>
+                                (removeStavke)="removeStavke(i)"  (addStavke)="addStavke(i)" ></app-uput-stavka>
                             </div>
 
                         </tr>
