@@ -1,29 +1,47 @@
 const mongoose = require('mongoose');
 const EnumSS = require('../enum/serverenum');
-
 const Schema = mongoose.Schema;
 
 const sfPosao = new Schema({
-   Naziv : {  type:String,trim:true,required: [true, 'Naziv je obavezan !!!'],unique: true},
-   StepenSS  :  {
-                 type : String,
-                 required: [true, 'StepenSS je obavezan !!!'],
-                 default : 'Nekvalifikovan',
-                 enum : EnumSS.StepenSS //['Nekvalifikovan', 'Polukvalifikovan', 'Kvalifikovan','Srednja Strucna Sprema','VKV','Visa skola','Fakultet','Magistar','Doktor Nauka']
-                },
-   Skola  :{ type: String,trim: true  },
-   Sifra   :{ type: String,trim: true  },
-   Sifra1   :{ type: String,trim: true },
-   Opis  :{ type: String,trim: true },
-   NameUser: {type:String,trim: true}
- },
- {
- timestamps: { createdAt: 'created_at' }
- },
- { 
-     retainKeyOrder: true 
- }
- );
+	Naziv: {
+		type: String,
+		trim: true,
+		required: [true, 'Naziv je obavezan !!!'],
+		unique: true
+	},
+	StepenSS: {
+		type: String,
+		required: [true, 'StepenSS je obavezan !!!'],
+		default: 'Nekvalifikovan',
+		enum: EnumSS.StepenSS //['Nekvalifikovan', 'Polukvalifikovan', 'Kvalifikovan','Srednja Strucna Sprema','VKV','Visa skola','Fakultet','Magistar','Doktor Nauka']
+	},
+	Skola: {
+		type: String,
+		trim: true
+	},
+	Sifra: {
+		type: String,
+		trim: true
+	},
+	Sifra1: {
+		type: String,
+		trim: true
+	},
+	Opis: {
+		type: String,
+		trim: true
+	},
+	NameUser: {
+		type: String,
+		trim: true
+	}
+}, {
+	timestamps: {
+		createdAt: 'created_at'
+	}
+}, {
+	retainKeyOrder: true
+});
 
 
 //  sfPosao.pre('save', function(next) {
@@ -31,9 +49,12 @@ const sfPosao = new Schema({
 //    console.log("PRE SAVE POSAO");
 //   next();
 // });
- 
 
- module.exports = mongoose.model('sfPosao', sfPosao,'sfPosao');
+sfPosao.set('toJSON', {
+	virtuals: true
+});
+
+module.exports = mongoose.model('sfPosao', sfPosao, 'sfPosao');
 
 
 

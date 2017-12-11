@@ -23,7 +23,7 @@
                   <input class="form-control" formControlName="Ime"  [(ngModel)]="vlasnN.Ime" required >
                 </label>
                 <div *ngIf="Ime.invalid && (Ime.dirty || Ime.touched)" class="alert alert-danger">
-                  <div *ngIf="formVlasn.controls.Ime.errors.required">
+                  <div *ngIf="Ime.errors.required">
                       <strong>Ime je obavezan podatak !!!</strong>
                   </div>
                   <div *ngIf="Ime.errors.minlength">
