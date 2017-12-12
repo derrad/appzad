@@ -9,9 +9,9 @@ export interface IRadnikModel {
     NameUser?: string;
     created_at?: Date;
     updatedAt?: Date;
- }
+}
 
-export class Radnik  implements IRadnikModel {
+export class Radnik implements IRadnikModel {
     _id: string;
     SifraRad: string;
     Ime: string;
