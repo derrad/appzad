@@ -2,11 +2,11 @@ import { Component, OnInit, Directive } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations';
+import { Location } from '@angular/common';
+import { formsTransition } from '../../../animation/forms.animations';
 import { KonstantaService } from '../konstanta.service';
 import { KonstantaModel } from '../konstanta-model';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
 import { ResponeCustom } from './../../../shared/models/ErrorRes';
 
@@ -22,65 +22,65 @@ export class KonstantaFormComponent implements OnInit {
   konstN: KonstantaModel = new KonstantaModel();
 
   constructor(private konstService: KonstantaService, private router: Router, private route: ActivatedRoute,
-        formBuilder: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService,
-        private serValidate: ServiceValidateShared) {
+    formBuilder: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService,
+    private serValidate: ServiceValidateShared) {
 
-      this.formKonst = formBuilder.group({
-        _id: [],
-        Datum: ['', [Validators.required]],
-        UcPenz: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        UcZdrav: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        UcNormTr: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        UcOlak: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        UcPorez: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        Pdv: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        Clanarin: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsPorez: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsUmanjen: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsPio1: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsPio2: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsZdrav1: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsZdrav2: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsNez1: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsNez2: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsMinOsDop: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        OsMaxOsDop: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        Opis: []
-      });
+    this.formKonst = formBuilder.group({
+      _id: [],
+      Datum: ['', [Validators.required]],
+      UcPenz: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      UcZdrav: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      UcNormTr: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      UcOlak: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      UcPorez: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      Pdv: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      Clanarin: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsPorez: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsUmanjen: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsPio1: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsPio2: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsZdrav1: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsZdrav2: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsNez1: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsNez2: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsMinOsDop: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      OsMaxOsDop: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      Opis: []
+    });
   }
 
 
@@ -111,27 +111,29 @@ export class KonstantaFormComponent implements OnInit {
       this.title = id ? 'Ažuriranje Konstante' : 'Nova konstanta';
 
       if (!id) {
-         return;
+        return;
       }
 
       this.konstService.getKonstanta(id)
         .subscribe(
-          (pos) => {
-            if (pos.success) {
-               this.konstN = pos.data[0];
-            }else {
-              this.flashMessage.show(pos.message, {
-                cssClass: 'alert-danger',
-                timeout: 9000});
-              this.router.navigate(['NotFound']);
-            }
-          } ,
-          (error: ResponeCustom) => {
-            this.flashMessage.show(error.message, {
+        (pos) => {
+          if (pos.success) {
+            this.konstN = pos.data[0];
+          } else {
+            this.flashMessage.show(pos.message, {
               cssClass: 'alert-danger',
-              timeout: 9000});
-                this.router.navigate(['NotFound']);
+              timeout: 9000
+            });
+            this.router.navigate(['NotFound']);
+          }
+        },
+        (error: ResponeCustom) => {
+          this.flashMessage.show(error.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000
           });
+          this.router.navigate(['NotFound']);
+        });
     });
 
   }
@@ -139,47 +141,51 @@ export class KonstantaFormComponent implements OnInit {
     const FormValue = this.formKonst.value;
 
     if (FormValue._id) {
-       this.konstService.updateKonstanta(FormValue).subscribe(
+      this.konstService.updateKonstanta(FormValue).subscribe(
         (pos) => {
           if (pos.success) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['konstanta']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['konstanta']);
+          } else {
             this.router.navigate(['NotFound']);
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
+            timeout: 9000
+          });
         },
       );
     } else {
       this.konstService.addKonstanta(FormValue)
-      .subscribe(
+        .subscribe(
         (pos) => {
           if (pos.success) {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['konstanta']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['konstanta']);
+          } else {
             this.router.navigate(['NotFound']);
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
+            timeout: 9000
+          });
         },
       );
     }
   }
 
   backClicked(event: any) {
-     this._location.back();
+    this._location.back();
   }
 
   revert() { this.clearFormData(); }
@@ -206,24 +212,24 @@ export class KonstantaFormComponent implements OnInit {
       OsMaxOsDop: 0,
       Opis: ''
     });
-}
+  }
 
-// getExcatDate(string){
-//    //let year=new Date(this.konstN.Datum.toString()).getFullYear();
-//   // let month=new Date(this.konstN.Datum.toString()).getMonth();
-//    //let date=new Date(this.konstN.Datum.toString()).getDate();
-//   //  let year= this.konstN.Datum.getFullYear();
-//   //  let month= this.konstN.Datum.getMonth();
-//    let date  = new Date().getDay() ;
-//   // console.log(" datum iz konstante " + date);
-//    let year=  new Date().getFullYear();//date.getFullYear();
-//    let month= new Date().getMonth();
-//   let local= ( date.toString().length===1 ?  '0' + date : date) + '/' +
-//               ( month.toString().length===1 ?  '0' +month : month)
-//                + '/' +  year.toString().substring(0);
-//   console.log(" proba local "  + local);
-//   this.konstN.Datum= new Date(local);
-//   return local;
-// }
+  // getExcatDate(string){
+  //    //let year=new Date(this.konstN.Datum.toString()).getFullYear();
+  //   // let month=new Date(this.konstN.Datum.toString()).getMonth();
+  //    //let date=new Date(this.konstN.Datum.toString()).getDate();
+  //   //  let year= this.konstN.Datum.getFullYear();
+  //   //  let month= this.konstN.Datum.getMonth();
+  //    let date  = new Date().getDay() ;
+  //   // console.log(" datum iz konstante " + date);
+  //    let year=  new Date().getFullYear();//date.getFullYear();
+  //    let month= new Date().getMonth();
+  //   let local= ( date.toString().length===1 ?  '0' + date : date) + '/' +
+  //               ( month.toString().length===1 ?  '0' +month : month)
+  //                + '/' +  year.toString().substring(0);
+  //   console.log(" proba local "  + local);
+  //   this.konstN.Datum= new Date(local);
+  //   return local;
+  // }
 
 }

@@ -6,9 +6,9 @@ import { FondSatiFormComponent } from './fond-sati-form/fond-sati-form.component
 
 
 const fondsatiRoutes: Routes = [
-  {path: 'fondsati', component: FondSatiComponent, canActivate: [AuthGuard]},
-  {path: 'fondsati/new', component: FondSatiFormComponent, canActivate: [AuthGuard]},
-  {path: 'fondsati/:id', component: FondSatiFormComponent, canActivate: [AuthGuard]},
+  { path: 'fondsati', component: FondSatiComponent, canActivate: [AuthGuard] },
+  { path: 'fondsati/new', component: FondSatiFormComponent, canActivate: [AuthGuard] },
+  { path: 'fondsati/:id', component: FondSatiFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

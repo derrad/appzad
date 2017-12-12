@@ -2,13 +2,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
-import {formsTransition} from '../../../animation/forms.animations';
+import { Location } from '@angular/common';
+import { formsTransition } from '../../../animation/forms.animations';
 import { FondSatiService } from '../fond-sati.service';
 import { FondSati } from '../fondsati.model';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { ResponeCustom} from './../../../shared/models/ErrorRes';
+import { ResponeCustom } from './../../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-fond-sati-form',
@@ -23,26 +23,26 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
   saveTemp = true;
 
   constructor(private fnsatService: FondSatiService, private router: Router, private route: ActivatedRoute,
-    formBuilder: FormBuilder , private _location: Location, private flashMessage: FlashMessagesService,
-    private serValidate: ServiceValidateShared ) {
+    formBuilder: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService,
+    private serValidate: ServiceValidateShared) {
 
-      this.formFSAT = formBuilder.group({
-        _id: [],
-        Mesec: ['', [Validators.required, serValidate.maxValue(12), serValidate.minValue(1)]],
-        Godina: ['', [
-          Validators.required, serValidate.maxValue(2040), serValidate.minValue(2000)
-        ]],
-        Sati: ['', [
-          Validators.required, serValidate.maxValue(248), serValidate.minValue(0)
-        ]],
-        MinOsnov: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        MaxOsnov: ['', [
-          Validators.required, serValidate.minValue(0)
-        ]],
-        Opis: []
-      });
+    this.formFSAT = formBuilder.group({
+      _id: [],
+      Mesec: ['', [Validators.required, serValidate.maxValue(12), serValidate.minValue(1)]],
+      Godina: ['', [
+        Validators.required, serValidate.maxValue(2040), serValidate.minValue(2000)
+      ]],
+      Sati: ['', [
+        Validators.required, serValidate.maxValue(248), serValidate.minValue(0)
+      ]],
+      MinOsnov: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      MaxOsnov: ['', [
+        Validators.required, serValidate.minValue(0)
+      ]],
+      Opis: []
+    });
   }
 
 
@@ -53,7 +53,7 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
   get MaxOsnov() { return this.formFSAT.get('MaxOsnov'); }
 
   ngOnInit() {
-     this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       const id = params['id'];
 
       this.title = id ? 'Ažuriranje fonda sati' : 'Novi fond sati';
@@ -65,27 +65,29 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
 
       this.fnsatService.getFondSati(id)
         .subscribe(
-          (pos) => {
-            if (pos.success) {
-              this.saveTemp = false;
-              this.fnsatN = pos.data[0];
-            }else {
-              this.flashMessage.show(pos.message, {
-                cssClass: 'alert-danger',
-                timeout: 9000});
-              // this.router.navigate(['NotFound']);
-
-            }
-          } ,
-          (error: ResponeCustom) => {
-            this.flashMessage.show(error.message, {
+        (pos) => {
+          if (pos.success) {
+            this.saveTemp = false;
+            this.fnsatN = pos.data[0];
+          } else {
+            this.flashMessage.show(pos.message, {
               cssClass: 'alert-danger',
-              timeout: 9000});
-              // this.router.navigate(['NotFound']);
-              if (error.status === 401) {
-                this.router.navigate(['login']);
-              }
+              timeout: 9000
             });
+            // this.router.navigate(['NotFound']);
+
+          }
+        },
+        (error: ResponeCustom) => {
+          this.flashMessage.show(error.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000
+          });
+          // this.router.navigate(['NotFound']);
+          if (error.status === 401) {
+            this.router.navigate(['login']);
+          }
+        });
     });
   }
 
@@ -93,64 +95,70 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
   save() {
     const FSValue = this.formFSAT.value;
     if (FSValue._id) {
-       this.fnsatService.updateFondSati(FSValue).subscribe(
+      this.fnsatService.updateFondSati(FSValue).subscribe(
         (pos) => {
           if (pos.success) {
             this.clearTempData();
             this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['fondsati']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['fondsati']);
+          } else {
             // this.router.navigate(['NotFound']);
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
+              timeout: 5000
+            });
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
-            if (error.status === 404 ) {
-              this.router.navigate(['NotFound']);
-            }
-            if (error.status === 401) {
-               this.router.navigate(['login']);
-            }
+            timeout: 9000
+          });
+          if (error.status === 404) {
+            this.router.navigate(['NotFound']);
+          }
+          if (error.status === 401) {
+            this.router.navigate(['login']);
+          }
         },
       );
 
     } else {
 
       this.fnsatService.addFondSati(FSValue)
-      .subscribe(
+        .subscribe(
         (pos) => {
           if (pos.success) {
             this.clearTempData();
             this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['fondsati']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['fondsati']);
+          } else {
             // this.router.navigate(['NotFound']);
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
+              timeout: 5000
+            });
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
-            if (error.status === 404 ) {
-              this.router.navigate(['NotFound']);
-            }
-            if (error.status === 401) {
-               this.router.navigate(['login']);
-            }
+            timeout: 9000
+          });
+          if (error.status === 404) {
+            this.router.navigate(['NotFound']);
+          }
+          if (error.status === 401) {
+            this.router.navigate(['login']);
+          }
         },
       );
     }
@@ -164,18 +172,18 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
   }
 
   setTempData() {
-    const  fsValue = JSON.stringify(this.formFSAT.value);
+    const fsValue = JSON.stringify(this.formFSAT.value);
     if (fsValue) {
       if (this.saveTemp) {
         localStorage.setItem('data_fnsati', fsValue);
-      }else {
+      } else {
         this.clearTempData();
       }
     }
-   }
+  }
 
- clearTempData() {
-     localStorage.removeItem('data_fnsati');
+  clearTempData() {
+    localStorage.removeItem('data_fnsati');
   }
 
   backClicked(event: any) {
@@ -183,7 +191,10 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
     this._location.back();
   }
 
-  revert() { this.clearFormData(); }
+  revert() {
+   // this.clearFormData();
+    this.formFSAT.reset();
+  }
 
   clearFormData() {
     this.formFSAT.reset({
@@ -194,10 +205,10 @@ export class FondSatiFormComponent implements OnInit, OnDestroy {
       MaxOsnov: 0,
       Opis: ''
     });
-}
+  }
 
-ngOnDestroy() {
-  this.setTempData();
-}
+  ngOnDestroy() {
+    this.setTempData();
+  }
 
 }

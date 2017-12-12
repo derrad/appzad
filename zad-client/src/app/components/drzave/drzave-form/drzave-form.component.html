@@ -1,94 +1,92 @@
- <div class="panel panel-primary" [@formsTransition]>
-    <div class="panel-heading">
-      <div class="row">
-        <div class="text-left col-lg-9 col-md-9 col-xs-9">
-          <h5>{{title}}</h5> 
-        </div>
-        <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-          <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-        </div>
+<div class="panel panel-primary" [@formsTransition]>
+  <div class="panel-heading">
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
     </div>
   </div>
   <div class="panel-body">
-        <form [formGroup]="formDR" (ngSubmit)="save()">
-          <div class="form-group" >
-                <input class="form-control" formControlName="_id"  [(ngModel)]="drzavaN._id"  type="hidden">
-          </div>
-          <!-- [(ngModel)]="drzavaN.KodDrzave"   -->
-            <div class="form-group"  [ngClass]="{'has-danger': KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched), 
+    <form [formGroup]="formDR" (ngSubmit)="save()">
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="drzavaN._id" type="hidden">
+      </div>
+      <!-- [(ngModel)]="drzavaN.KodDrzave"   -->
+      <div class="form-group" [ngClass]="{'has-danger': KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched), 
                                                 'has-success':  KodDrzave.valid && ( KodDrzave.dirty || KodDrzave.touched) }">
-              <label class="center-block">Kod:
-                <input class="form-control " formControlName="KodDrzave"  required  >
-              </label>
-              <div *ngIf="KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)" class="alert alert-danger">
+        <label class="center-block">Kod:
+          <input class="form-control " formControlName="KodDrzave" required>
+        </label>
+        <div *ngIf="KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)" class="alert alert-danger">
 
-                <div *ngIf="KodDrzave.errors.required">
-                    <strong>Kod drzave je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="KodDrzave.errors.minlength">
-                  <strong>Kod drzave mora biti minimalno 2 karaktera dužine !!!</strong>
-                </div>
-                <div *ngIf="KodDrzave.errors.maxlength">
-                  <strong>Predugački kod drzave (max 3) !!!</strong>
-                </div>
-                <div *ngIf="KodDrzave.errors.validateSifru">
-                  <strong>Kod drzave nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
-                </div>
-              </div>
-            </div>
-            <!-- [(ngModel)]="drzavaN.Naziv" -->
-            <div class="form-group">
-                <label class="center-block">Naziv:
-                  <input class="form-control" formControlName="Naziv"     required  >
-                </label>
-                <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                  <div *ngIf="Naziv.errors.required">
-                      <strong>Naziv je obavezan podatak !!!</strong>
-                  </div>
-                  <div *ngIf="Naziv.errors.maxlength">
-                    <strong>Predugački naziv !!!</strong>
-                  </div>
-                 </div>
-            </div>
-            <!-- [(ngModel)]="drzavaN.EuClan" -->
-            <div class="form-group">
-              <div class="checkbox">
-                <label class="center-block">
-                    <input type="checkbox" formControlName="EuClan"   value="1">EuClan
-                </label>
-              </div>
-            </div>
-            <!-- [(ngModel)]="drzavaN.Opis" -->
+          <div *ngIf="KodDrzave.errors.required">
+            <strong>Kod drzave je obavezan podatak !!!</strong>
+          </div>
+          <div *ngIf="KodDrzave.errors.minlength">
+            <strong>Kod drzave mora biti minimalno 2 karaktera dužine !!!</strong>
+          </div>
+          <div *ngIf="KodDrzave.errors.maxlength">
+            <strong>Predugački kod drzave (max 3) !!!</strong>
+          </div>
+          <div *ngIf="KodDrzave.errors.validateSifru">
+            <strong>Kod drzave nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
+          </div>
+        </div>
+      </div>
+      <!-- [(ngModel)]="drzavaN.Naziv" -->
+      <div class="form-group">
+        <label class="center-block">Naziv:
+          <input class="form-control" formControlName="Naziv" required>
+        </label>
+        <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+          <div *ngIf="Naziv.errors.required">
+            <strong>Naziv je obavezan podatak !!!</strong>
+          </div>
+          <div *ngIf="Naziv.errors.maxlength">
+            <strong>Predugački naziv !!!</strong>
+          </div>
+        </div>
+      </div>
+      <!-- [(ngModel)]="drzavaN.EuClan" -->
+      <div class="form-group">
+        <div class="checkbox">
+          <label class="center-block">
+            <input type="checkbox" formControlName="EuClan" value="1">EuClan
+          </label>
+        </div>
+      </div>
+      <!-- [(ngModel)]="drzavaN.Opis" -->
 
-              <div class="form-group">
-                <label class="center-block">Opis:
-                  <textarea class="form-control" formControlName="Opis"  >
-                  </textarea>
-                </label>
-              </div>
-            
-              <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
-                        <button type="submit" [disabled]="!formDR.valid"
-                            class="btn btn-success">
-                            <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis">
+          </textarea>
+        </label>
+      </div>
 
-                      <button type="reset" class="btn btn-danger"  [disabled]="formDR.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Clear data
-                      </button>
-                    </div>
-            </div>
-        </form>
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formDR.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formDR.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="panel-footer">
-      <button (click)="backClicked()"  class="btn btn-primary btn-block">
-          <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-          Back
-      </button>
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
   </div>
-    
+
 </div>
-       

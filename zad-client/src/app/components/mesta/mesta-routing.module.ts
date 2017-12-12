@@ -6,9 +6,9 @@ import { MestaFormComponent } from './mesta-form/mesta-form.component';
 
 
 const drzaveRoutes: Routes = [
-  {path: 'mesta', component: MestaComponent, canActivate: [AuthGuard]},
-  {path: 'mesta/new', component: MestaFormComponent, canActivate: [AuthGuard]},
-  {path: 'mesta/:id', component: MestaFormComponent, canActivate: [AuthGuard]},
+  { path: 'mesta', component: MestaComponent, canActivate: [AuthGuard] },
+  { path: 'mesta/new', component: MestaFormComponent, canActivate: [AuthGuard] },
+  { path: 'mesta/:id', component: MestaFormComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [

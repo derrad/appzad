@@ -6,24 +6,15 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-// import { ResponeCustom} from './../../shared/models/ErrorRes';
 import { BaseService } from './../../services/base.service';
 
 
 @Injectable()
 export class DrzaveService  extends BaseService  {
-  // authToken: any;
-  // isDev: boolean;
 
   constructor(private http: Http) {
-    // this.isDev = ServiceConfig.isDev;
     super();
    }
-
-  //  loadToken() {
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
 
   getDrzave() {
     const headers = new Headers();
@@ -83,25 +74,4 @@ updateDrzava(drzava) {
     return this.http.delete(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
   }
-
-
-  // private handleError(error: Response) {
-  //   if (error.status === 401) {
-  //     console.log(' status ' + error.statusText);
-  //     const servererr = new ResponeCustom();
-  //     servererr.message = error.statusText;
-  //     servererr.success = false;
-  //     servererr.status = error.status;
-  //     servererr.data = [];
-  //     return Observable.throw(servererr);
-  //  }
-  //   const myerror = new ResponeCustom().fromJSON(error.json());
-  //   const servererr = new ResponeCustom();
-  //   servererr.message = 'Server error-' + error.statusText;
-  //   servererr.success = false;
-  //   servererr.data = [];
-  //   return Observable.throw(myerror || servererr);
-  // }
-
-
 }

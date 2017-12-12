@@ -6,9 +6,9 @@ import { BankeFormComponent } from './banke-form/banke-form.component';
 
 
 const bankeRoutes: Routes = [
-  {path: 'banke', component: BankeComponent, canActivate: [AuthGuard]},
-  {path: 'banke/new', component: BankeFormComponent, canActivate: [AuthGuard]},
-  {path: 'banke/:id', component: BankeFormComponent, canActivate: [AuthGuard]}
+  { path: 'banke', component: BankeComponent, canActivate: [AuthGuard] },
+  { path: 'banke/new', component: BankeFormComponent, canActivate: [AuthGuard] },
+  { path: 'banke/:id', component: BankeFormComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

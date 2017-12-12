@@ -25,6 +25,7 @@ export class BankeComponent implements OnInit {
   bankeL: Array<BankeModel>;
   displayDetals = false;
   bankaShow: BankeModel = new BankeModel();
+  auto = 'auto';
 
   constructor(private router: Router, private bankService: BankeService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
