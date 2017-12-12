@@ -11,7 +11,6 @@ module.exports.create = function (req, res) {
 			console.log(err); 
 			res.json(err); 
 		}
-		// console.log( " ovo saljem nazad" + result.toString());
 		res.json(result);
 	});
 };

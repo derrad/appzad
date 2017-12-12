@@ -1,350 +1,348 @@
-
 const mongoose = require('mongoose');
 const Zadrugar = require('../models/sfZadrugar');
 const Uput = require('../models/prUputDok');
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
 
-const TIP_TRANS_INSERT ="ADD UPUT";
-const TIP_TRANS_UPDATE ="CHANGES UPUT";
-const TIP_TRANS_DEL = "DELETE UPUT";
+const TIP_TRANS_INSERT = 'ADD UPUT';
+const TIP_TRANS_UPDATE = 'CHANGES UPUT';
+const TIP_TRANS_DEL = 'DELETE UPUT';
 
-module.exports.create = async function (req, res,next) {
-  const uid = req.params.id ;
+// async 
+module.exports.create = function (req, res, next) {
+	const uid = req.params.id;
+	const PartneriID = req.body.PartneriID;
+	const TipDok = req.body.TipDok || 'UPUT';
+	const Datum = req.body.Datum || new Date();
+	const Knjizeno = req.body.Knjizeno || false;
+	const Storno = req.body.Storno || false;
+	const Broj = req.body.Broj;
+	const Godina = req.body.Godina;
+	const RacVlasnika = req.body.RacVlasnika;
+	const PosloviID = req.body.PosloviID;
+	const Stavke = req.body.Stavke;
+	const Opis = req.body.Opis;
+	const NameUser = req.user.email || 'System';
 
-  const PartneriID = req.body.PartneriID ; 
-  const TipDok = req.body.TipDok || 'UPUT' ;
-  const Datum = req.body.Datum || new Date();
-  const Knjizeno =  req.body.Knjizeno || false ;
-  const Storno = req.body.Storno || false ;
-  const Broj = req.body.Broj ;
-  const Godina = req.body.Godina ;
-  const RacVlasnika =  req.body.RacVlasnika ;
-  const PosloviID =  req.body.PosloviID ;
-  const Stavke =  req.body.Stavke ;
-  const Opis = req.body.Opis ;
-  const NameUser = req.user.email || "System";
-  // const PosloviRef = req.body.PosloviRef || {_id : null, name : null, stepenss: null} ;;
-  // const ZadRef = req.body.ZadRef || { _id : null, name: null,tipzadrugar : null,idzadrugar : null} ;
+	if (!PartneriID || !TipDok || !Datum || !Broj || !PosloviID || !Stavke) {
+		return res.status(422).send({
+			success: false,
+			message: 'Posted data is not correct or incompleted.',
+			data: []
+		}).end();
+	} else {
 
+		if (uid) {
+			//Edit partner
+			Uput.findById(uid).exec(function (err, uput) {
+				if (err) {
+					// console.log("nema nema !!!");
+					// res.statusMessage = err;
+					return res.status(400).json({
+						success: false,
+						message: 'Error processing request ',
+						data: []
+					}).end();
+				}
+				// res.statusMessage = "RALE - Current password does not match";
+				//return res.status(400).json({ success: false, message: 'RALE - Hocu ovu gresku', data:[] }); 
 
-  if (!PartneriID || !TipDok || !Datum || !Broj || !PosloviID || !Stavke) {
-     // res.statusMessage='Posted data is not correct or incompleted.';
-      return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] }).end();
-  } else {
-  
-  if (uid) {
-    //Edit partner
-    Uput.findById(uid).exec(function(err, uput){
-    if(err){ 
-      // console.log("nema nema !!!");
-    // res.statusMessage = err;
-      return res.status(400).json({ success: false, message: 'Error processing request ', data:[] }).end(); 
-    }
-    // res.statusMessage = "RALE - Current password does not match";
-     //return res.status(400).json({ success: false, message: 'RALE - Hocu ovu gresku', data:[] }); 
-   
-    if(uput) {
-         
-      uput.PartneriID = PartneriID ; 
-      uput.TipDok = TipDok ;
-      uput.Datum = Datum ;
-      uput.Knjizeno =  Knjizeno ;
-      uput.Storno = Storno ;
-      uput.Broj = Broj ;
-      uput.Godina = Godina ;
-      uput.RacVlasnika =  RacVlasnika ;
-      uput.PosloviID =  PosloviID ;
-      uput.Stavke =  Stavke ;
-      uput.Opis = Opis;
-      uput.NameUser = NameUser;
-    
-     
-    }
-    uput.save(function(err,result) {
-      if(err){ 
-        //console.log("GRESKA UPDATE -" + err);
-        //res.statusMessage = err;
-        return res.status(400).
-        json({ success: false, message: 'Error processing request ', data:[] }).end(); 
-      }
+				if (uput) {
 
-        try{
-          SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, Broj, Broj + '/' + Godina , NameUser)
-        } catch(ex){}
-      
-
-      return res.status(201).json({
-        success: true,
-        message: 'Uput updated successfully', 
-        data:result
-      });
-    });
-  });
-
-}else{
-  //console.log("Usao u ADD" + " racun vlasnika " + RacVlasnika +  " Tip dokumenta je " + TipDok  ); 
-  // Add new Uput
-  // const newStav = [];
-  // await Stavke.forEach( async function(item){
-  //     console.log('Vrtenje');
-  //     // let result = await ZadRefPop(item.ZadrugarID)
-  //     // item.ZadRef = result;
-  //     // console.log('result' + JSON.stringify(result));
-  //     // newStav.push(item);
-  //     PopulZadRef(item.ZadrugarID, function (objZad) {
-  //       //do whatever
-  //       item.ZadRef = objZad;
-  //       newStav.push(item);
-  //     //  console.log('Posle posziva fukciju za populate zadrugara' + JSON.stringify(objZad));
-  //     })
-      
-  // });
-  // console.log('posle funkcije newStav ' + JSON.stringify(newStav));
-  // console.log('posle funkcije Stavke ' + JSON.stringify(Stavke));
-  let oUput = new Uput({
-    PartneriID: PartneriID ,
-    TipDok: TipDok ,
-    Datum: Datum ,
-    Knjizeno:  Knjizeno ,
-    Storno: Storno ,
-    Broj: Broj ,
-    Godina: Godina ,
-    RacVlasnika:  RacVlasnika ,
-    PosloviID :  PosloviID ,
-    Stavke :  Stavke ,
-    Opis : Opis,
-    NameUser : NameUser
-
-  });
-  // console.log("Pre save funkcije");
-  oUput.save(function(err,result) {
-    if(err){ 
-      // const emsg = " Error processing request";
-      // console.log(JSON.stringify(err));
-      return res.status(400).json(
-            { success: false, message:JSON.stringify(err), data:[] }).end();
-    }
-    try{
-      SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, Broj,  Broj + '/' + Godina , NameUser)
-    } catch(ex){}
-
-   return res.status(201).json({
-      success: true,
-      message: 'Uput saved successfully',
-      data: result
-    });
-  });
-
-}
-  }
-}
-
-// function PopulZadRef(keyZad, callback)  { 
-//   Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-//          if(err){ 
-//             console.log('error u findOne');
-//             callback(err);
-//   //         // return err;
-//          }else{
-//            console.log('Nema greska');
-//          //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-//            callback(result);
-//   //         //return result;
-//   //       //  item.ZadRef = result;
-//   //       //  item.TipZadrugar = result.TipZadrugar;
-//          }
-//      });
-
-// }
-
-// async function ZadRefPop(keyZad)  { 
-//   Zadrugar.findOne({ _id : keyZad }).exec(function(err, result){
-//          if(err){ 
-//             console.log('error u findOne');
-//            // callback(err);
-//   //         // return err;
-//          }else{
-//            console.log('Nema greska');
-//          //  console.log('Upisujem referencu a funkcija je nasla ' +  JSON.stringify(result));
-//            //callback(result);
-//            return result;
-//   //       // item.ZadRef = result;
-//   //       //  item.TipZadrugar = result.TipZadrugar;
-//          }
-//      });
-
-// }
+					uput.PartneriID = PartneriID;
+					uput.TipDok = TipDok;
+					uput.Datum = Datum;
+					uput.Knjizeno = Knjizeno;
+					uput.Storno = Storno;
+					uput.Broj = Broj;
+					uput.Godina = Godina;
+					uput.RacVlasnika = RacVlasnika;
+					uput.PosloviID = PosloviID;
+					uput.Stavke = Stavke;
+					uput.Opis = Opis;
+					uput.NameUser = NameUser;
 
 
-module.exports.listUput = function (req, res,next) {
-  //console.log("Usao u list Radnik - tu sam");
-  Uput.find({}).sort({created_at:-1}).populate('PartneriID').populate('PosloviID')
-  .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID',['Naziv','Skola','StepenSS']).exec(function(err, result){
-    if(err){ 
-      res.statusMessage = err;
-      return res.status(400).json({ success: false, message:'Error processing request ' , data:[]}).end(); 
-    }
-      return res.status(200).json({
-        message:'Successfully', 
-        success: true, 
-        data: result
-      });
-    });
+				}
+				uput.save(function (err, result) {
+					if (err) {
+						//console.log("GRESKA UPDATE -" + err);
+						//res.statusMessage = err;
+						return res.status(400).
+							json({
+								success: false,
+								message: 'Error processing request ',
+								data: []
+							}).end();
+					}
 
-}
-
-module.exports.getUput = function (req, res,next) {
-  
-  //Uput.find({_id : req.params.id }).populate('PartneriID').populate('PosloviID')
-
-  // Uput.findById(req.params.id).populate('PartneriID').populate('PosloviID')
-  // .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID').exec(function(err, result){
-    Uput.findById(req.params.id).exec(function(err, result){
-     if(err){ 
-      return res.status(404).json(
-         { success: false, message:'Error processing request ' , data:[] }
-         ).end(); 
-     }
-     
-      return res.status(200).json({
-       success: true, 
-       message:'Uput find successfully',
-       data: result
-       });
-     });
- 
- }
-
- module.exports.deleUput = function(req, res, next) {
-  Uput.remove({_id: req.params.id}, function(err){
-       if(err){ 
-         //res.statusMessage = err;
-         const emsg = "Error processing request";
-         // if(err.errmsg){emsg = err.errmsg; }else{emsg = err; }
-         return res.status(400).json({ success: false, message: emsg , data:[]}).end(); 
-       }
-       try{
-         SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + " Uput" , req.user.email)
-         } catch(ex){}
-       return res.status(201).json({
-           success: true,
-           message: 'Uput removed successfully', 
-           data:[]
-       });
- });
-}
+					try {
+						SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, Broj, Broj + '/' + Godina, NameUser);
+					} catch (ex) {}
 
 
-module.exports.countUput = function(req, res, next) {
-  //console.log("parametar je : " + req.params.id);
-	Uput.count({}, function(err,count){
-        //console.log("DA VIDIM COUNT" +  count);
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
-       // console.log("VRACAM BROJ KOJI JE  : " + count);
-         return res.status(200).json({
-            success: true,
-            message: 'Successfully',
-            number:count
-          });
-  });
-}
+					return res.status(201).json({
+						success: true,
+						message: 'Uput updated successfully',
+						data: result
+					});
+				});
+			});
 
-module.exports.countUputFakt = function(req, res, next) {
-  //console.log("parametar je : " + req.params.id);
-	Uput.count({Knjizeno:true}, function(err,count){
-        //console.log("DA VIDIM COUNT" +  count);
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
-       // console.log("VRACAM BROJ KOJI JE  : " + count);
-         return res.status(200).json({
-            success: true,
-            message: 'Successfully',
-            number:count
-          });
-  });
-}
+		} else {
+			let oUput = new Uput({
+				PartneriID: PartneriID,
+				TipDok: TipDok,
+				Datum: Datum,
+				Knjizeno: Knjizeno,
+				Storno: Storno,
+				Broj: Broj,
+				Godina: Godina,
+				RacVlasnika: RacVlasnika,
+				PosloviID: PosloviID,
+				Stavke: Stavke,
+				Opis: Opis,
+				NameUser: NameUser
 
-module.exports.countUputStorn = function(req, res, next) {
-  //console.log("parametar je : " + req.params.id);
-	Uput.count({Storno:true}, function(err,count){
-        //console.log("DA VIDIM COUNT" +  count);
-        if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err , number:0}); }
-       // console.log("VRACAM BROJ KOJI JE  : " + count);
-         return res.status(200).json({
-            success: true,
-            message: 'Successfully',
-            number:count
-          });
-  });
-}
+			});
+		
+			oUput.save(function (err, result) {
+				if (err) {
+					return res.status(400).json({
+						success: false,
+						message: JSON.stringify(err),
+						data: []
+					}).end();
+				}
+				try {
+					SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, Broj, Broj + '/' + Godina, NameUser);
+				} catch (ex) {}
 
-module.exports.getUputBrojGod = function (req, res,next) {
-  //console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
-  let Datum = new Date();
-  let Datum1;
-  try{
-    Datum1 = new Date(req.body.Datum);
-  }catch(e) {
-    console.log("Greska u  datumu" + e.message);
-  }
-  
-  // if (req.body.Datum instanceof Date){
-  //   console.log("Datum je poslat");
-  //   Datum = req.body.Datum;
-  // }
-  if (Datum1 instanceof Date){
-     Datum = Datum1;
-  }
-  const Godina = Datum.getFullYear();
+				return res.status(201).json({
+					success: true,
+					message: 'Uput saved successfully',
+					data: result
+				});
+			});
 
-  Uput.find({Godina : Godina }).exec(function(err, result){
-     if(err){ 
-      return res.status(404).json(
-         { success: false, message:'Error processing request ' , data:{broj:0,godina:0} }
-         ).end(); 
-     }
-      const Broj = result.length + 1;
-      return res.status(200).json({
-       success: true, 
-       message:'Uput get number successfully',
-       data: { broj:Broj, godina:Godina }
-       });
-     });
- 
-}
+		}
+	}
+};
+
+module.exports.listUput = function (req, res, next) {
+	//console.log("Usao u list Radnik - tu sam");
+	Uput.find({}).sort({
+		created_at: -1
+	}).populate('PartneriID').populate('PosloviID')
+		.populate('Stavke.ZadrugarID').populate('Stavke.PosloviID', ['Naziv', 'Skola', 'StepenSS']).exec(function (err, result) {
+			if (err) {
+				res.statusMessage = err;
+				return res.status(400).json({
+					success: false,
+					message: 'Error processing request ',
+					data: []
+				}).end();
+			}
+			return res.status(200).json({
+				message: 'Successfully',
+				success: true,
+				data: result
+			});
+		});
+
+};
+
+module.exports.getUput = function (req, res, next) {
+	//Uput.find({_id : req.params.id }).populate('PartneriID').populate('PosloviID')
+	// Uput.findById(req.params.id).populate('PartneriID').populate('PosloviID')
+	// .populate('Stavke.ZadrugarID').populate('Stavke.PosloviID').exec(function(err, result){
+	Uput.findById(req.params.id).exec(function (err, result) {
+		if (err) {
+			return res.status(404).json({
+				success: false,
+				message: 'Error processing request ',
+				data: []
+			}).end();
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: 'Uput find successfully',
+			data: result
+		});
+	});
+
+};
+
+module.exports.deleUput = function (req, res, next) {
+	Uput.remove({
+		_id: req.params.id
+	}, function (err) {
+		if (err) {
+			const emsg = 'Error processing request';
+			return res.status(400).json({
+				success: false,
+				message: emsg,
+				data: []
+			}).end();
+		}
+		try {
+			SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + ' Uput', req.user.email);
+		} catch (ex) {}
+		return res.status(201).json({
+			success: true,
+			message: 'Uput removed successfully',
+			data: []
+		});
+	});
+};
 
 
-module.exports.getUputBrojGodMax = function (req, res,next) {
-  //console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
-  let Datum = new Date();
-  let Datum1;
-  try{
-    Datum1 = new Date(req.body.Datum);
-  }catch(e) {
-    console.log("Greska u  datumu" + e.message);
-  }
+module.exports.countUput = function (req, res, next) {
+	//console.log("parametar je : " + req.params.id);
+	Uput.count({}, function (err, count) {
+		//console.log("DA VIDIM COUNT" +  count);
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				number: 0
+			});
+		}
+		// console.log("VRACAM BROJ KOJI JE  : " + count);
+		return res.status(200).json({
+			success: true,
+			message: 'Successfully',
+			number: count
+		});
+	});
+};
 
-  if (Datum1 instanceof Date){
-     Datum = Datum1;
-  }
-  const Godina = Datum.getFullYear();
+module.exports.countUputFakt = function (req, res, next) {
+	//console.log("parametar je : " + req.params.id);
+	Uput.count({
+		Knjizeno: true
+	}, function (err, count) {
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				number: 0
+			});
+		}
+		// console.log("VRACAM BROJ KOJI JE  : " + count);
+		return res.status(200).json({
+			success: true,
+			message: 'Successfully',
+			number: count
+		});
+	});
+};
 
-  Uput.findOne({Godina : Godina }).sort('-Broj').exec(function(err, result){
-     if(err){ 
-      return res.status(404).json(
-         { success: false, message:'Error processing request ' , data:{broj:0,godina:0} }
-         ).end(); 
-     }
-     // console.log('Dobio sam ' + JSON.stringify(result));
-      let Broj = 1;
-      if(result.Broj){
-        Broj= result.Broj + 1;
-      }
-      return res.status(200).json({
-       success: true, 
-       message:'Uput get number successfully',
-       data: { broj:Broj, godina:Godina }
-       });
-     });
- 
- }
+module.exports.countUputStorn = function (req, res, next) {
+	//console.log("parametar je : " + req.params.id);
+	Uput.count({
+		Storno: true
+	}, function (err, count) {
+		//console.log("DA VIDIM COUNT" +  count);
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				number: 0
+			});
+		}
+		// console.log("VRACAM BROJ KOJI JE  : " + count);
+		return res.status(200).json({
+			success: true,
+			message: 'Successfully',
+			number: count
+		});
+	});
+};
+
+module.exports.getUputBrojGod = function (req, res, next) {
+	//console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
+	let Datum = new Date();
+	let Datum1;
+	try {
+		Datum1 = new Date(req.body.Datum);
+	} catch (e) {
+		console.log('Greska u  datumu' + e.message);
+	}
+	if (Datum1 instanceof Date) {
+		Datum = Datum1;
+	}
+	const Godina = Datum.getFullYear();
+
+	Uput.find({
+		Godina: Godina
+	}).exec(function (err, result) {
+		if (err) {
+			return res.status(404).json({
+				success: false,
+				message: 'Error processing request ',
+				data: {
+					broj: 0,
+					godina: 0
+				}
+			}).end();
+		}
+		const Broj = result.length + 1;
+		return res.status(200).json({
+			success: true,
+			message: 'Uput get number successfully',
+			data: {
+				broj: Broj,
+				godina: Godina
+			}
+		});
+	});
+
+};
+
+
+module.exports.getUputBrojGodMax = function (req, res, next) {
+	//console.log(" pozivam getUputBrojGod " + req.body.Datum  + " a dobijam zahtev od " + req.user.email );
+	let Datum = new Date();
+	let Datum1;
+	try {
+		Datum1 = new Date(req.body.Datum);
+	} catch (e) {
+		console.log('Greska u  datumu' + e.message);
+	}
+
+	if (Datum1 instanceof Date) {
+		Datum = Datum1;
+	}
+	const Godina = Datum.getFullYear();
+
+	Uput.findOne({
+		Godina: Godina
+	}).sort('-Broj').exec(function (err, result) {
+		if (err) {
+			return res.status(404).json({
+				success: false,
+				message: 'Error processing request ',
+				data: {
+					broj: 0,
+					godina: 0
+				}
+			}).end();
+		}
+		// console.log('Dobio sam ' + JSON.stringify(result));
+		let Broj = 1;
+		if (result.Broj) {
+			Broj = result.Broj + 1;
+		}
+		return res.status(200).json({
+			success: true,
+			message: 'Uput get number successfully',
+			data: {
+				broj: Broj,
+				godina: Godina
+			}
+		});
+	});
+
+};

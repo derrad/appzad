@@ -2,120 +2,135 @@ const mongoose = require('mongoose');
 const Konst = require('../models/sfKonstanta');
 const TypeA = require('../enum/serverenum');
 const SetActivity = require('./SetActivity');
-const TIP_TRANS_INSERT ='ADD KONSTANTA';
-const TIP_TRANS_UPDATE ='CHANGES KONSTANTA';
+const TIP_TRANS_INSERT = 'ADD KONSTANTA';
+const TIP_TRANS_UPDATE = 'CHANGES KONSTANTA';
 const TIP_TRANS_DEL = 'DELETE KONSTANTA';
 
-module.exports.create = function (req, res,next) {
-	const uid = req.params.id ;
+module.exports.create = function (req, res, next) {
+	const uid = req.params.id;
 	const Datum = req.body.Datum || new Date();
-	const UcPenz = req.body.UcPenz ;
-	const UcZdrav = req.body.UcZdrav ;
-	const UcNormTr = req.body.UcNormTr ;
-	const UcOlak = req.body.UcOlak  ;
-	const UcPorez = req.body.UcPorez  ;
-	const Pdv = req.body.Pdv  ;
-	const Clanarin = req.body.Clanarin  ;
-	const OsPorez = req.body.OsPorez  ;
-	const OsUmanjen = req.body.OsUmanjen  ;
-	const OsPio1 = req.body.OsPio1  ;
-	const OsPio2 = req.body.OsPio2  ;
-	const OsZdrav1 = req.body.OsZdrav1  ;
-	const OsZdrav2 = req.body.OsZdrav2  ;
-	const OsNez1 = req.body.OsNez1  ;
-	const OsNez2 = req.body.OsNez2  ;
-	const OsMinOsDop = req.body.OsMinOsDop  ;
-	const OsMaxOsDop = req.body.OsMaxOsDop  ;
-	const Opis = req.body.Opis ;
+	const UcPenz = req.body.UcPenz;
+	const UcZdrav = req.body.UcZdrav;
+	const UcNormTr = req.body.UcNormTr;
+	const UcOlak = req.body.UcOlak;
+	const UcPorez = req.body.UcPorez;
+	const Pdv = req.body.Pdv;
+	const Clanarin = req.body.Clanarin;
+	const OsPorez = req.body.OsPorez;
+	const OsUmanjen = req.body.OsUmanjen;
+	const OsPio1 = req.body.OsPio1;
+	const OsPio2 = req.body.OsPio2;
+	const OsZdrav1 = req.body.OsZdrav1;
+	const OsZdrav2 = req.body.OsZdrav2;
+	const OsNez1 = req.body.OsNez1;
+	const OsNez2 = req.body.OsNez2;
+	const OsMinOsDop = req.body.OsMinOsDop;
+	const OsMaxOsDop = req.body.OsMaxOsDop;
+	const Opis = req.body.Opis;
 	const NameUser = req.user.email || 'System';
 	// console.log("uid je :" + uid + " ovo je datum " + req.body.Datum);
 
-	if (!Datum  ) {
-		return res.status(422).send({ success: false, message: 'Posted data is not correct or incompleted.', data:[] });
+	if (!Datum) {
+		return res.status(422).send({
+			success: false,
+			message: 'Posted data is not correct or incompleted.',
+			data: []
+		});
 	} else {
-  
+
 		if (uid) {
 			//Edit radnik
-			Konst.findById(uid).exec(function(err, konst){
-				if(err){ 
-					return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
+			Konst.findById(uid).exec(function (err, konst) {
+				if (err) {
+					return res.status(400).json({
+						success: false,
+						message: 'Error processing request ' + err,
+						data: []
+					});
 				}
-      
-				if(konst) {
-					konst.Datum = Datum ;
-					konst.UcPenz = UcPenz ;
+
+				if (konst) {
+					konst.Datum = Datum;
+					konst.UcPenz = UcPenz;
 					konst.UcZdrav = UcZdrav;
-					konst.UcNormTr = UcNormTr ;
-					konst.UcOlak = UcOlak  ;
-					konst.UcPorez = UcPorez  ;
-					konst.Pdv = Pdv  ;
-					konst.Clanarin = Clanarin  ;
-					konst.OsPorez = OsPorez  ;
-					konst.OsUmanjen = OsUmanjen  ;
-					konst.OsPio1 = OsPio1  ;
-					konst.OsPio2 = OsPio2  ;
-					konst.OsZdrav1 = OsZdrav1  ;
-					konst.OsZdrav2 = OsZdrav2  ;
-					konst.OsNez1 = OsNez1  ;
-					konst.OsNez2 = OsNez2  ;
-					konst.OsMinOsDop = OsMinOsDop  ;
-					konst.OsMaxOsDop = OsMaxOsDop  ;
-					konst.Opis = Opis ;
+					konst.UcNormTr = UcNormTr;
+					konst.UcOlak = UcOlak;
+					konst.UcPorez = UcPorez;
+					konst.Pdv = Pdv;
+					konst.Clanarin = Clanarin;
+					konst.OsPorez = OsPorez;
+					konst.OsUmanjen = OsUmanjen;
+					konst.OsPio1 = OsPio1;
+					konst.OsPio2 = OsPio2;
+					konst.OsZdrav1 = OsZdrav1;
+					konst.OsZdrav2 = OsZdrav2;
+					konst.OsNez1 = OsNez1;
+					konst.OsNez2 = OsNez2;
+					konst.OsMinOsDop = OsMinOsDop;
+					konst.OsMaxOsDop = OsMaxOsDop;
+					konst.Opis = Opis;
 					konst.NameUser = NameUser;
-     
+
 				}
-				konst.save(function(err,results) {
-					if(err){ 
-						return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); 
+				konst.save(function (err, results) {
+					if (err) {
+						return res.status(400).json({
+							success: false,
+							message: 'Error processing request ' + err,
+							data: []
+						});
 					}
 
-					try{
-						SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, 'Update konstanta' , NameUser);
-					} catch(ex){}    
+					try {
+						SetActivity.AddActivity(TypeA.Activities[1], TIP_TRANS_UPDATE, uid, 'Update konstanta', NameUser);
+					} catch (ex) {}
 
 					return res.status(201).json({
 						success: true,
 						message: 'Konstante updated successfully',
-						data:results
+						data: results
 					});
 				});
 			});
 
-		}else{
-  
+		} else {
+
 			// Add new posao
 			let oKonst = new Konst({
-				Datum : Datum ,
-				UcPenz : UcPenz ,
-				UcZdrav : UcZdrav,
-				UcNormTr : UcNormTr ,
-				UcOlak : UcOlak  ,
-				UcPorez : UcPorez  ,
-				Pdv : Pdv  ,
-				Clanarin : Clanarin  ,
-				OsPorez : OsPorez  ,
-				OsUmanjen : OsUmanjen  ,
-				OsPio1 : OsPio1  ,
-				OsPio2 : OsPio2  ,
-				OsZdrav1 : OsZdrav1  ,
-				OsZdrav2 : OsZdrav2  ,
-				OsNez1 : OsNez1  ,
-				OsNez2 : OsNez2  ,
-				OsMinOsDop : OsMinOsDop  ,
-				OsMaxOsDop : OsMaxOsDop  ,
-				Opis : Opis ,
-				NameUser : NameUser
+				Datum: Datum,
+				UcPenz: UcPenz,
+				UcZdrav: UcZdrav,
+				UcNormTr: UcNormTr,
+				UcOlak: UcOlak,
+				UcPorez: UcPorez,
+				Pdv: Pdv,
+				Clanarin: Clanarin,
+				OsPorez: OsPorez,
+				OsUmanjen: OsUmanjen,
+				OsPio1: OsPio1,
+				OsPio2: OsPio2,
+				OsZdrav1: OsZdrav1,
+				OsZdrav2: OsZdrav2,
+				OsNez1: OsNez1,
+				OsNez2: OsNez2,
+				OsMinOsDop: OsMinOsDop,
+				OsMaxOsDop: OsMaxOsDop,
+				Opis: Opis,
+				NameUser: NameUser
 			});
 
-			oKonst.save(function(err,result) {
-				if(err){ 
-					return  res.status(400).json(
-						{ success: false, message: 'Error processing request '+ err , data:[]});
+			oKonst.save(function (err, result) {
+				if (err) {
+					return res.status(400).json({
+						success: false,
+						message: 'Error processing request ' + err,
+						data: []
+					});
 				}
-    
-				try{
-					SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, 'Konstanta insert' , NameUser);
-				} catch(ex){}
+
+				try {
+					SetActivity.AddActivity(TypeA.Activities[3], TIP_TRANS_INSERT, result._id, 'Konstanta insert', NameUser);
+				} catch (ex) {}
 
 				return res.status(201).json({
 					success: true,
@@ -131,15 +146,22 @@ module.exports.create = function (req, res,next) {
 
 
 
-module.exports.listkonst = function (req, res,next) {
+module.exports.listkonst = function (req, res, next) {
 	// console.log("Usao u list konstante");
-  
-	Konst.find({}).sort({created_at:-1}).exec(function(err, result){
-		if(err){ return res.status(400).json({ success: false, message:'Error processing request '+ err, data:[] }); 
+
+	Konst.find({}).sort({
+		created_at: -1
+	}).exec(function (err, result) {
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				data: []
+			});
 		}
 		return res.status(200).json({
 			success: true,
-			message:'Successfully', 
+			message: 'Successfully',
 			data: result
 		});
 	});
@@ -147,35 +169,47 @@ module.exports.listkonst = function (req, res,next) {
 };
 
 
-module.exports.getkonst = function (req, res,next) {
+module.exports.getkonst = function (req, res, next) {
 	// console.log("Usao u get konstante parametar je  " + req.params.id);
-	Konst.find({_id:req.params.id}).exec(function(err, result){
-		if(err){ 
-			return res.status(400).json(
-				{ success: false, message:'Error processing request '+ err , data:[] }
-			); 
+	Konst.find({
+		_id: req.params.id
+	}).exec(function (err, result) {
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				data: []
+			});
 		}
 		return res.status(200).json({
-			success: true, 
-			message:'Successfully',
+			success: true,
+			message: 'Successfully',
 			data: result
 		});
 	});
 };
 
-module.exports.delekonst = function(req, res, next) {
-//  console.log("delete konstante parametar je : " + req.params.id);
+module.exports.delekonst = function (req, res, next) {
+	//  console.log("delete konstante parametar je : " + req.params.id);
 	// const uid = req.params.id || '1234';
-	Konst.remove({_id: req.params.id }, function(err){
-		if(err){ return res.status(400).json({ success: false, message: 'Error processing request '+ err, data:[] }); }
-		try{
-			SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + ' Konstanta' , req.user.email);
-		} catch(ex){}
+	Konst.remove({
+		_id: req.params.id
+	}, function (err) {
+		if (err) {
+			return res.status(400).json({
+				success: false,
+				message: 'Error processing request ' + err,
+				data: []
+			});
+		}
+		try {
+			SetActivity.AddActivity(TypeA.Activities[5], TIP_TRANS_DEL, req.params.id, TypeA.Activities[5] + ' Konstanta', req.user.email);
+		} catch (ex) {}
 
 		return res.status(201).json({
 			success: true,
 			message: 'Konstante removed successfully',
-			data:null
+			data: null
 		});
 	});
 };
