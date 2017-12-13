@@ -1,283 +1,238 @@
-<!-- <p>
-  vlasnik-form works!
-</p> -->
-
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-              <h5>{{title}}</h5> 
-            </div>
-            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-            </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
       </div>
-  </div>
-  <div class="panel-body">
-      <form [formGroup]="formVlasn" (ngSubmit)="save()" novalidate >
-          <div class="form-group" >
-               <input class="form-control" formControlName="_id"  [(ngModel)]="vlasnN._id"   type="hidden">
-          </div>
-          <div class="form-group">
-              <label class="center-block">Ime vlasnika:
-                  <input class="form-control" formControlName="Ime"  [(ngModel)]="vlasnN.Ime" required >
-                </label>
-                <div *ngIf="Ime.invalid && (Ime.dirty || Ime.touched)" class="alert alert-danger">
-                  <div *ngIf="Ime.errors.required">
-                      <strong>Ime je obavezan podatak !!!</strong>
-                  </div>
-                  <div *ngIf="Ime.errors.minlength">
-                    <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>
-                  </div>
-                </div>
-          </div>
-
-          <div class="row">
-          <div class="form-group col-md-6">
-              <label class="center-block">Adresa:
-                <input class="form-control" formControlName="Adresa"  [(ngModel)]="vlasnN.Adresa" required>
-              </label>
-              <div *ngIf="Adresa.invalid && (Adresa.dirty || Adresa.touched)" class="alert alert-danger">
-                  <div *ngIf="Adresa.errors.required">
-                    <strong>Adresa je obavezan podatak !!!</strong>
-                  </div>
-                  <div *ngIf="Adresa.errors.minlength">
-                    <strong>Adresa mora biti minimalno 2 karaktera dužine !!!</strong>
-                  </div>
-                  <div *ngIf="Adresa.errors.maxlength">
-                    <strong>Predugačka Adresa !!!</strong>
-                </div>
-              </div>
-          </div>
-
-          <div class="form-group col-md-6">
-              <label class="center-block">Mesto:
-                <input class="form-control" formControlName="Mesto"  [(ngModel)]="vlasnN.Mesto" required>
-              </label>
-                <div *ngIf="Mesto.invalid && (Mesto.dirty || Mesto.touched)" class="alert alert-danger">
-                  <div *ngIf="Mesto.errors.required">
-                    <strong>Mesto  je obavezan podatak !!!</strong>
-                  </div>
-                  <div *ngIf="Mesto.errors.minlength">
-                    <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>
-                  </div>
-              </div>
-          </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-                <label class="center-block">Ptt:
-                  <input class="form-control" formControlName="PttReon"  [(ngModel)]="vlasnN.PttReon" >
-                </label>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label class="center-block">Ptt reon:
-                  <input class="form-control" formControlName="PttPak"  [(ngModel)]="vlasnN.PttPak" >
-                </label>
-            </div>
-          
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-4">
-                <label class="center-block">Direktor:
-                  <input class="form-control" formControlName="Direktor"  [(ngModel)]="vlasnN.Direktor" >
-                </label>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label class="center-block">Komercijalni rukovodioc:
-                  <input class="form-control" formControlName="KomRukovac"  [(ngModel)]="vlasnN.KomRukovac" >
-                </label>
-            </div>
-            <div class="form-group col-md-4">
-                <label class="center-block">Blagajnik:
-                  <input class="form-control" formControlName="Blagajnik"  [(ngModel)]="vlasnN.Blagajnik" >
-                </label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-3">
-                <label class="center-block">Pib:
-                  <input class="form-control" formControlName="Pib"  [(ngModel)]="vlasnN.Pib" >
-                </label>
-            </div>
-            <div class="form-group col-md-3">
-                <label class="center-block">Matični broj:
-                  <input class="form-control" formControlName="MatBroj"  [(ngModel)]="vlasnN.MatBroj" >
-                </label>
-            </div>
-          
-            <div class="form-group col-md-3">
-                <label class="center-block">Šifra delatnosti:
-                  <input class="form-control" formControlName="SifDelat"  [(ngModel)]="vlasnN.SifDelat" >
-                </label>
-            </div>
-            
-            <div class="form-group col-md-3">
-                <label class="center-block">Pdv broj:
-                  <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="vlasnN.PdvBroj" >
-                </label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-4">
-                <label class="center-block">Sud:
-                  <input class="form-control" formControlName="Sud"  [(ngModel)]="vlasnN.Sud" >
-                </label>
-            </div>
-            <div class="form-group col-md-4">
-                <label class="center-block">Uplatni račun poreske jedinice:
-                  <input class="form-control" formControlName="UplRacPorJed"  [(ngModel)]="vlasnN.UplRacPorJed" >
-                </label>
-            </div>
-            <div class="form-group col-md-4">
-                <label class="center-block">Naziv poreske jedinice:
-                  <input class="form-control" formControlName="NazPorJed"  [(ngModel)]="vlasnN.NazPorJed" >
-                </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div formArrayName="ZiroVlasnik">
-                <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index" class="panel panel-info"> 
-                    <div class="panel-heading">
-                        <span><strong>Ziro racun {{i + 1}} </strong></span>
-                        <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiroVlas(i)"></span>
-                    </div>
-
-                    <div [formGroupName]="i" class="panel-body" > 
-                        <app-ziro-vlasnik [groupziro]="formVlasn.controls.ZiroVlasnik.controls[i]"></app-ziro-vlasnik>
-                    </div>
-                </div>
-          
-                <div class="margin-20" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length < 6">
-                  <div class="row">
-                    <div class="col-xs-2">
-                      </div>
-                      <div class=" col-xs-10 ">
-                          <button type="button" class="btn btn-info btn-block"   (click)="addZiroVlas()" title=" Add Žiro račun">
-                              <i class="fa fa-plus" aria-hidden="true"></i>
-                              Dodaj žiro račun
-                          </button>
-                         
-                    </div>
-                  </div>
-                </div>
-              
-            </div>
-          </div> 
-           
-          <div class="form-group">
-              <div formArrayName="TelefVlasnik">
-                  <div *ngFor="let TelefVlasnik of formVlasn.controls.TelefVlasnik.controls; let j=index" class="panel panel-info"> 
-                      <div class="panel-heading">
-                          <span><strong>Telefon {{j + 1}} </strong></span>
-                          <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelVlas(j)"></span>
-                      </div>
-                        <div [formGroupName]="j" class="panel-body" > 
-                           <app-telefon-vlasnik  [group]="formVlasn.controls.TelefVlasnik.controls[j]"></app-telefon-vlasnik>
-                      </div>
-                  </div>
-            
-                  <div class="margin-20" *ngIf="formVlasn.controls.TelefVlasnik.controls.length < 10">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        </div>
-                        <div class=" col-xs-10 ">
-                           <button type="button" class="btn btn-info btn-block"   (click)="addATelVlas()" title=" Add Phone">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  Dodaj telefon
-                              </button>
-                          
-                      </div>
-                    </div>
-                  </div>
-                
-              </div>
-          </div>
-
-          <div class="form-group">
-              <label class="center-block">Opis/Napomena:
-                <textarea class="form-control" formControlName="Opis"  [(ngModel)]="vlasnN.Opis">
-                </textarea>
-              </label>
-            </div>
-
-          <div class="clearfix"></div> 
-         
-            <div class="form-group">
-                <div class="col-md-offset-5 col-md-12">
-                    <button type="submit" [disabled]="!formVlasn.valid"
-                        class="btn btn-success">
-                    <span class="glyphicon glyphicon-saved"></span>
-                    Save
-                    </button>
-
-                  <button type="reset" class="btn btn-danger"  [disabled]="formVlasn.pristine"  (click)="revert()">
-                      <i class="fa fa-undo" aria-hidden="true"></i>
-                      Clear data
-                  </button>
-                  
-                </div>
-          </div>
-      </form>
-  </div>
- 
-  <div class="panel-footer">
-
-      <button (click)="backClicked()"  class="btn btn-primary btn-block">
-        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-        Back
-    </button>
-
-  </div>
-  
-</div>
-
-
-
-<!-- <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" class="form-control" formControlName="name">
-    <small *ngIf="!myForm.controls.name.valid" class="text-danger">
-        Name is required (minimum 5 characters).
-      </small>
-  </div> -->
-  <!--addresses-->
-  <!-- <div formArrayName="addresses">
-    <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
-      <div class="panel-heading">
-        <span>Address {{i + 1}}</span>
-        <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
-      </div>
-      <div class="panel-body" [formGroupName]="i">
-        <div class="form-group col-xs-6">
-          <label>street</label>
-          <input type="text" class="form-control" formControlName="street">
-          <small [hidden]="myForm.controls.addresses.controls[i].controls.street.valid" class="text-danger">
-              Street is required
-          </small>
-        </div>
-        <div class="form-group col-xs-6">
-          <label>postcode</label>
-          <input type="text" class="form-control" formControlName="postcode">
-        </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
       </div>
     </div>
   </div>
+  <div class="panel-body">
+    <form [formGroup]="formVlasn" (ngSubmit)="save()" novalidate>
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="vlasnN._id" type="hidden">
+      </div>
+      <div class="form-group">
+        <label class="center-block">Ime vlasnika:
+          <input class="form-control" formControlName="Ime" [(ngModel)]="vlasnN.Ime" required>
+        </label>
+        <div *ngIf="Ime.invalid && (Ime.dirty || Ime.touched)" class="alert alert-danger">
+          <div *ngIf="Ime.errors.required">
+            <strong>Ime je obavezan podatak !!!</strong>
+          </div>
+          <div *ngIf="Ime.errors.minlength">
+            <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>
+          </div>
+        </div>
+      </div>
 
-  <div class="margin-20">
-    <a (click)="addAddress()" style="cursor: default">
-      Add another address +
-    </a>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="center-block">Adresa:
+            <input class="form-control" formControlName="Adresa" [(ngModel)]="vlasnN.Adresa" required>
+          </label>
+          <div *ngIf="Adresa.invalid && (Adresa.dirty || Adresa.touched)" class="alert alert-danger">
+            <div *ngIf="Adresa.errors.required">
+              <strong>Adresa je obavezan podatak !!!</strong>
+            </div>
+            <div *ngIf="Adresa.errors.minlength">
+              <strong>Adresa mora biti minimalno 2 karaktera dužine !!!</strong>
+            </div>
+            <div *ngIf="Adresa.errors.maxlength">
+              <strong>Predugačka Adresa !!!</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="center-block">Mesto:
+            <input class="form-control" formControlName="Mesto" [(ngModel)]="vlasnN.Mesto" required>
+          </label>
+          <div *ngIf="Mesto.invalid && (Mesto.dirty || Mesto.touched)" class="alert alert-danger">
+            <div *ngIf="Mesto.errors.required">
+              <strong>Mesto je obavezan podatak !!!</strong>
+            </div>
+            <div *ngIf="Mesto.errors.minlength">
+              <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="center-block">Ptt:
+            <input class="form-control" formControlName="PttReon" [(ngModel)]="vlasnN.PttReon">
+          </label>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="center-block">Ptt reon:
+            <input class="form-control" formControlName="PttPak" [(ngModel)]="vlasnN.PttPak">
+          </label>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="center-block">Direktor:
+            <input class="form-control" formControlName="Direktor" [(ngModel)]="vlasnN.Direktor">
+          </label>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label class="center-block">Komercijalni rukovodioc:
+            <input class="form-control" formControlName="KomRukovac" [(ngModel)]="vlasnN.KomRukovac">
+          </label>
+        </div>
+        <div class="form-group col-md-4">
+          <label class="center-block">Blagajnik:
+            <input class="form-control" formControlName="Blagajnik" [(ngModel)]="vlasnN.Blagajnik">
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label class="center-block">Pib:
+            <input class="form-control" formControlName="Pib" [(ngModel)]="vlasnN.Pib">
+          </label>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="center-block">Matični broj:
+            <input class="form-control" formControlName="MatBroj" [(ngModel)]="vlasnN.MatBroj">
+          </label>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label class="center-block">Šifra delatnosti:
+            <input class="form-control" formControlName="SifDelat" [(ngModel)]="vlasnN.SifDelat">
+          </label>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label class="center-block">Pdv broj:
+            <input class="form-control" formControlName="PdvBroj" [(ngModel)]="vlasnN.PdvBroj">
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="center-block">Sud:
+            <input class="form-control" formControlName="Sud" [(ngModel)]="vlasnN.Sud">
+          </label>
+        </div>
+        <div class="form-group col-md-4">
+          <label class="center-block">Uplatni račun poreske jedinice:
+            <input class="form-control" formControlName="UplRacPorJed" [(ngModel)]="vlasnN.UplRacPorJed">
+          </label>
+        </div>
+        <div class="form-group col-md-4">
+          <label class="center-block">Naziv poreske jedinice:
+            <input class="form-control" formControlName="NazPorJed" [(ngModel)]="vlasnN.NazPorJed">
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div formArrayName="ZiroVlasnik">
+          <div *ngFor="let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index" class="panel panel-info">
+            <div class="panel-heading">
+              <span>
+                <strong>Ziro racun {{i + 1}} </strong>
+              </span>
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiroVlas(i)"></span>
+            </div>
+
+            <div [formGroupName]="i" class="panel-body">
+              <app-ziro-vlasnik [groupziro]="formVlasn.controls.ZiroVlasnik.controls[i]"></app-ziro-vlasnik>
+            </div>
+          </div>
+
+          <div class="margin-20" *ngIf="formVlasn.controls.ZiroVlasnik.controls.length < 6">
+            <div class="row">
+              <div class="col-xs-2">
+              </div>
+              <div class=" col-xs-10 ">
+                <button type="button" class="btn btn-info btn-block" (click)="addZiroVlas()" title=" Add Žiro račun">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Dodaj žiro račun
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div formArrayName="TelefVlasnik">
+          <div *ngFor="let TelefVlasnik of formVlasn.controls.TelefVlasnik.controls; let j=index" class="panel panel-info">
+            <div class="panel-heading">
+              <span>
+                <strong>Telefon {{j + 1}} </strong>
+              </span>
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelVlas(j)"></span>
+            </div>
+            <div [formGroupName]="j" class="panel-body">
+              <app-telefon-vlasnik [group]="formVlasn.controls.TelefVlasnik.controls[j]"></app-telefon-vlasnik>
+            </div>
+          </div>
+
+          <div class="margin-20" *ngIf="formVlasn.controls.TelefVlasnik.controls.length < 10">
+            <div class="row">
+              <div class="col-xs-2">
+              </div>
+              <div class=" col-xs-10 ">
+                <button type="button" class="btn btn-info btn-block" (click)="addATelVlas()" title=" Add Phone">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Dodaj telefon
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Opis/Napomena:
+          <textarea class="form-control" formControlName="Opis" [(ngModel)]="vlasnN.Opis">
+          </textarea>
+        </label>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formVlasn.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formVlasn.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+      </div>
+    </form>
   </div>
 
-  <div class="margin-20">
-    <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+  <div class="panel-footer">
+
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+
   </div>
-  <div class="clearfix"></div> -->
+
+</div>

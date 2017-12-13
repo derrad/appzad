@@ -5,6 +5,7 @@ export interface IRadnikModel {
     Prezime: string;
     Jmbg: string;
     Aktivan: boolean;
+    fullName: string;
     Opis?: string;
     NameUser?: string;
     created_at?: Date;
@@ -18,6 +19,7 @@ export class Radnik implements IRadnikModel {
     Prezime: string;
     Jmbg: string;
     Aktivan: boolean;
+    fullName: string;
     Opis?: string;
     NameUser?: string;
     created_at?: Date;

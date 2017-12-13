@@ -1,7 +1,7 @@
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { formsTransition } from '../../../animation/forms.animations';
 import { Posao } from './../posao.model';
 import { PosaoService } from './../posao.service';
@@ -15,7 +15,7 @@ import { ResponeCustom } from './../../../shared/models/ErrorRes';
   styleUrls: ['./posao-form.component.css'],
   animations: [formsTransition()]
 })
-export class PosaoFormComponent implements OnInit , OnDestroy {
+export class PosaoFormComponent implements OnInit, OnDestroy {
 
   formPOSAO: FormGroup;
   title: string;
@@ -27,18 +27,18 @@ export class PosaoFormComponent implements OnInit , OnDestroy {
   constructor(private posService: PosaoService, private router: Router, private route: ActivatedRoute,
     formBuilder: FormBuilder, private _location: Location, private flashMessage: FlashMessagesService) {
 
-      this.formPOSAO = formBuilder.group({
-        _id: [],
-        StepenSS: ['', [Validators.required]],
-        Naziv: ['', [
-          Validators.required
-        ]],
-        Skola: [],
-        Sifra: [],
-        Sifra1: [],
-        Opis: []
-      });
-    }
+    this.formPOSAO = formBuilder.group({
+      _id: [],
+      StepenSS: ['', [Validators.required]],
+      Naziv: ['', [
+        Validators.required
+      ]],
+      Skola: [],
+      Sifra: [],
+      Sifra1: [],
+      Opis: []
+    });
+  }
 
   get Naziv() { return this.formPOSAO.get('Naziv'); }
   get StepenSS() { return this.formPOSAO.get('StepenSS'); }
@@ -54,25 +54,27 @@ export class PosaoFormComponent implements OnInit , OnDestroy {
 
       this.posService.getPosao(id)
         .subscribe(
-          (pos) => {
-            if (pos.success) {
-              this.saveTemp = false;
-              this.posaoN = pos.data[0];
-            }else {
-              this.flashMessage.show(pos.message, {
-                cssClass: 'alert-danger',
-                timeout: 9000});
-              this.router.navigate(['NotFound']);
-            }
-          } ,
-          (error: ResponeCustom) => {
-            this.flashMessage.show(error.message, {
+        (pos) => {
+          if (pos.success) {
+            this.saveTemp = false;
+            this.posaoN = pos.data[0];
+          } else {
+            this.flashMessage.show(pos.message, {
               cssClass: 'alert-danger',
-              timeout: 9000});
-          //  if (error.status == 404) {
-              this.router.navigate(['NotFound']);
-         //   }
+              timeout: 9000
+            });
+            this.router.navigate(['NotFound']);
+          }
+        },
+        (error: ResponeCustom) => {
+          this.flashMessage.show(error.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000
           });
+          //  if (error.status == 404) {
+          this.router.navigate(['NotFound']);
+          //   }
+        });
     });
   }
 
@@ -85,18 +87,18 @@ export class PosaoFormComponent implements OnInit , OnDestroy {
   }
 
   setTempData() {
-    const  posValue = JSON.stringify(this.formPOSAO.value);
+    const posValue = JSON.stringify(this.formPOSAO.value);
     if (posValue) {
       if (this.saveTemp) {
         localStorage.setItem('data_posao', posValue);
-      }else {
+      } else {
         this.clearTempData();
       }
     }
-   }
+  }
 
- clearTempData() {
-     localStorage.removeItem('data_posao');
+  clearTempData() {
+    localStorage.removeItem('data_posao');
   }
 
   backClicked(event: any) {
@@ -106,65 +108,72 @@ export class PosaoFormComponent implements OnInit , OnDestroy {
 
   save() {
     const posValue = this.formPOSAO.value;
-        if (posValue._id) {
-          this.posService.updatePosao(posValue).subscribe(
-           (pos) => {
-             if (pos.success) {
-               this.clearTempData();
-               this.saveTemp = false;
-               this.flashMessage.show(pos.message, {
-                 cssClass: 'alert-success',
-                 timeout: 5000});
-                 this.router.navigate(['posao']);
-             }else {
-               this.router.navigate(['NotFound']);
-             }
-           } ,
-           (error: ResponeCustom) => {
-             this.flashMessage.show(error.message, {
-               cssClass: 'alert-danger',
-               timeout: 9000});
-           },
-         );
-       } else {
-        this.posService.addPosao(posValue)
-         .subscribe(
-           (pos) => {
-             if (pos.success) {
-               this.clearTempData();
-               this.saveTemp = false;
-               this.flashMessage.show(pos.message, {
-                 cssClass: 'alert-success',
-                 timeout: 5000});
-                 this.router.navigate(['posao']);
-             }else {
-               this.router.navigate(['NotFound']);
-             }
-           } ,
-           (error: ResponeCustom) => {
-             this.flashMessage.show(error.message, {
-               cssClass: 'alert-danger',
-               timeout: 9000});
-           },
-         );
-       }
+    if (posValue._id) {
+      this.posService.updatePosao(posValue).subscribe(
+        (pos) => {
+          if (pos.success) {
+            this.clearTempData();
+            this.saveTemp = false;
+            this.flashMessage.show(pos.message, {
+              cssClass: 'alert-success',
+              timeout: 5000
+            });
+            this.router.navigate(['posao']);
+          } else {
+            this.router.navigate(['NotFound']);
+          }
+        },
+        (error: ResponeCustom) => {
+          this.flashMessage.show(error.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000
+          });
+        },
+      );
+    } else {
+      this.posService.addPosao(posValue)
+        .subscribe(
+        (pos) => {
+          if (pos.success) {
+            this.clearTempData();
+            this.saveTemp = false;
+            this.flashMessage.show(pos.message, {
+              cssClass: 'alert-success',
+              timeout: 5000
+            });
+            this.router.navigate(['posao']);
+          } else {
+            this.router.navigate(['NotFound']);
+          }
+        },
+        (error: ResponeCustom) => {
+          this.flashMessage.show(error.message, {
+            cssClass: 'alert-danger',
+            timeout: 9000
+          });
+        },
+      );
+    }
   }
 
-  revert() { this.clearFormData(); }
-
-  clearFormData() {
-    this.formPOSAO.reset({
-      Naziv: '',
-      Skola: '',
-      Sifra: '',
-      Sifra1: '',
-      Opis: ''
-    });
+  revert() {
+    // this.clearFormData();
+    this.formPOSAO.reset();
   }
 
-ngOnDestroy() {
-  this.setTempData();
-}
+  // clearFormData() {
+  //   this.formPOSAO.reset({
+  //     Naziv: '',
+  //     Skola: '',
+  //     Sifra: '',
+  //     Sifra1: '',
+  //     Opis: ''
+  //   });
+  // }
+
+  ngOnDestroy() {
+    this.setTempData();
+  }
 
 
 

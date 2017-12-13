@@ -1,16 +1,16 @@
-import { Component, OnInit, Directive, OnDestroy, EventEmitter, Input, Output, AfterViewInit, AfterViewChecked} from '@angular/core';
-import {AfterContentInit} from '@angular/core';
+import { Component, OnInit, Directive, OnDestroy, EventEmitter, Input, Output, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { AfterContentInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Location} from '@angular/common';
-import { formsTransition} from '../../../animation/forms.animations';
+import { Location } from '@angular/common';
+import { formsTransition } from '../../../animation/forms.animations';
 import { UputService } from '../uput.service';
 import { UputModel, UputStavModel, UputRacVlasnikModel, UputBrojGodina, PosaoNG } from '../uput.model';
-import { FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { ServiceValidateShared } from './../../../services/service.validate.shared';
-import { ResponeCustom} from './../../../shared/models/ErrorRes';
-import { PickZadrugarModel} from './../../zadrugar/zadrugar-model';
+import { ResponeCustom } from './../../../shared/models/ErrorRes';
+import { PickZadrugarModel } from './../../zadrugar/zadrugar-model';
 import { ZadrugarService } from './../../zadrugar/zadrugar.service';
 import { PartnerService } from './../../partner/partner.service';
 import { PickPartnerModel } from './../../partner/partner-model';
@@ -31,7 +31,7 @@ import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
   styleUrls: ['./uput-form.component.css'],
   animations: [formsTransition()]
 })
-export class UputFormComponent implements OnInit,  OnDestroy {
+export class UputFormComponent implements OnInit, OnDestroy {
   formUput: FormGroup;
   title: string;
   uputN: UputModel = new UputModel();
@@ -46,36 +46,37 @@ export class UputFormComponent implements OnInit,  OnDestroy {
   selectedKupac: PickPartnerModel;
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
+  auto = 'auto';
   // subscription: Subscription;
 
-  constructor(private partnService: PartnerService,  private posService: PosaoService,
-              private vlasnService: VlasnikService, private zadrService: ZadrugarService,
-              private uputService: UputService,
-              private router: Router, private route: ActivatedRoute, private _fb: FormBuilder,
-              private _location: Location, private flashMessage: FlashMessagesService,
-              private serValidate: ServiceValidateShared) {
+  constructor(private partnService: PartnerService, private posService: PosaoService,
+    private vlasnService: VlasnikService, private zadrService: ZadrugarService,
+    private uputService: UputService,
+    private router: Router, private route: ActivatedRoute, private _fb: FormBuilder,
+    private _location: Location, private flashMessage: FlashMessagesService,
+    private serValidate: ServiceValidateShared) {
 
-      this.formUput = this._fb.group({
-        _id: [],
-        Broj: ['', [Validators.required]],
-        Godina: ['', [ Validators.required]],
-        Datum: ['', [ Validators.required]],
-        RacVlasnika: ['', [ Validators.required]],
-        PosloviID: ['', [ Validators.required]],
-        PartneriID: ['', [ Validators.required]],
-        Opis: [''],
-        Stavke: this._fb.array([
-            ])
-      });
-    }
+    this.formUput = this._fb.group({
+      _id: [],
+      Broj: ['', [Validators.required]],
+      Godina: ['', [Validators.required]],
+      Datum: ['', [Validators.required]],
+      RacVlasnika: ['', [Validators.required]],
+      PosloviID: ['', [Validators.required]],
+      PartneriID: ['', [Validators.required]],
+      Opis: [''],
+      Stavke: this._fb.array([
+      ])
+    });
+  }
 
-    get RacVlasnika() { return this.formUput.get('RacVlasnika'); }
-    get PosloviID() { return this.formUput.get('PosloviID'); }
-    get Datum() { return this.formUput.get('Datum'); }
-    get PartneriID() { return this.formUput.get('PartneriID'); }
-    get Stavke(): FormArray { return this.formUput.get('Stavke') as FormArray; }
-    get Broj() { return this.formUput.get('Broj'); }
-    get Godina() { return this.formUput.get('Godina'); }
+  get RacVlasnika() { return this.formUput.get('RacVlasnika'); }
+  get PosloviID() { return this.formUput.get('PosloviID'); }
+  get Datum() { return this.formUput.get('Datum'); }
+  get PartneriID() { return this.formUput.get('PartneriID'); }
+  get Stavke(): FormArray { return this.formUput.get('Stavke') as FormArray; }
+  get Broj() { return this.formUput.get('Broj'); }
+  get Godina() { return this.formUput.get('Godina'); }
 
   ngOnInit() {
     // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
@@ -84,178 +85,188 @@ export class UputFormComponent implements OnInit,  OnDestroy {
 
     this.partnService.getPickPartner().subscribe(profile => {
       if (profile.success === true) {
-          this.kupacL = profile.data;
-        }else {
+        this.kupacL = profile.data;
+      } else {
         this.flashMessage.show(profile.message, {
-              cssClass: 'alert-danger',
-              timeout: 9000});
-          this.kupacL = [];
-        }
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
+        this.kupacL = [];
+      }
     },
-    (error: ResponeCustom) => {
-      console.log(error);
+      (error: ResponeCustom) => {
+        console.log(error);
         this.flashMessage.show(error.message, {
-            cssClass: 'alert-danger',
-            timeout: 9000});
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
         this.kupacL = [];
         return false;
-    });
+      });
 
-  this.vlasnService.getVlasnRacun().subscribe(profile => {
-    if (profile.success === true) {
+    this.vlasnService.getVlasnRacun().subscribe(profile => {
+      if (profile.success === true) {
         this.racvlasnikL = profile.data;
-      }else {
-      this.flashMessage.show(profile.message, {
-            cssClass: 'alert-danger',
-            timeout: 9000});
+      } else {
+        this.flashMessage.show(profile.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
         this.racvlasnikL = [];
 
       }
-  },
-  (error: ResponeCustom) => {
-    console.log(error);
-      this.flashMessage.show(error.message, {
+    },
+      (error: ResponeCustom) => {
+        console.log(error);
+        this.flashMessage.show(error.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-      this.racvlasnikL = [];
-      return false;
-  });
+          timeout: 9000
+        });
+        this.racvlasnikL = [];
+        return false;
+      });
 
-  this.zadrService.getPickZadrugari().subscribe(profile => {
-    if (profile.success === true) {
+    this.zadrService.getPickZadrugari().subscribe(profile => {
+      if (profile.success === true) {
         this.zadrL = profile.data;
         // this.addZadlist.emit(this.zadrL);
-      }else {
-      this.flashMessage.show(profile.message, {
-            cssClass: 'alert-danger',
-            timeout: 9000});
+      } else {
+        this.flashMessage.show(profile.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
         this.zadrL = [];
-       //  this.addZadlist.emit(this.zadrL);
+        //  this.addZadlist.emit(this.zadrL);
       }
-  },
-  (error: ResponeCustom) => {
-    console.log(error);
-      this.flashMessage.show(error.message, {
+    },
+      (error: ResponeCustom) => {
+        console.log(error);
+        this.flashMessage.show(error.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-      this.zadrL = [];
-      // this.addZadlist.emit(this.zadrL);
-      return false;
-  });
+          timeout: 9000
+        });
+        this.zadrL = [];
+        // this.addZadlist.emit(this.zadrL);
+        return false;
+      });
 
-  this.posService.getPoslovi().subscribe(profile => {
-    if (profile.success === true) {
+    this.posService.getPoslovi().subscribe(profile => {
+      if (profile.success === true) {
         this.poslL = profile.data;
-    }else {
-      this.flashMessage.show(profile.message, {
-            cssClass: 'alert-danger',
-            timeout: 9000});
-        this.poslL = [];
-    }
-  },
-  (error: ResponeCustom) => {
-    console.log(error);
-      this.flashMessage.show(error.message, {
+      } else {
+        this.flashMessage.show(profile.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-      this.poslL = [];
-      return false;
-  });
+          timeout: 9000
+        });
+        this.poslL = [];
+      }
+    },
+      (error: ResponeCustom) => {
+        console.log(error);
+        this.flashMessage.show(error.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
+        this.poslL = [];
+        return false;
+      });
 
 
-  this.route.params.subscribe(params => {
-    const id = params['id'];
-    this.title = id ? 'Ažuriranje uputa' : 'Novi uput';
-    if (!id) {
-       // this.initAdresa("","","","","","");
-      // this.uputN.PosloviID = '';
-      //  this.PartneriID.setValue(null);
-      //  this.RacVlasnika.setValue(null);
-      //  this.PosloviID.setValue('');
-       this.loadTempData();
-       this.InitGodinaBroj();
-      //  if (this.Stavke.controls.length  === 0 ) {
-      //    this.addStavke();
-      //  }
-       return;
-    }
-    // this.InitGodinaBroj();
-    this.uputService.getUput(id)
-      .subscribe(
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.title = id ? 'Ažuriranje uputa' : 'Novi uput';
+      if (!id) {
+        // this.initAdresa("","","","","","");
+        // this.uputN.PosloviID = '';
+        //  this.PartneriID.setValue(null);
+        //  this.RacVlasnika.setValue(null);
+        //  this.PosloviID.setValue('');
+        this.loadTempData();
+        this.InitGodinaBroj();
+        //  if (this.Stavke.controls.length  === 0 ) {
+        //    this.addStavke();
+        //  }
+        return;
+      }
+      // this.InitGodinaBroj();
+      this.uputService.getUput(id)
+        .subscribe(
         (pos) => {
           if (pos.success) {
             this.saveTemp = false;
-             this.uputN = pos.data;
+            this.uputN = pos.data;
             // this.partAdresa = pos.data[0].Adresa;
             // this.initAdresa(this.partAdresa);
-             // console.log(JSON.stringify(this.vlasnN ));
-             this.InitDokZag();
-              this.initDataStavke();
+            // console.log(JSON.stringify(this.vlasnN ));
+            this.InitDokZag();
+            this.initDataStavke();
             // this.initDataTelefon();
             // this.initDataKomtakt();
 
-          }else {
+          } else {
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-danger',
-              timeout: 9000});
+              timeout: 9000
+            });
             this.router.navigate(['NotFound']);
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
+            timeout: 9000
+          });
           // if (error == 404 || error.status == 400 ) {
-              this.router.navigate(['NotFound']);
+          this.router.navigate(['NotFound']);
           // }
         });
     });
-}
+  }
 
-// ngAfterViewInit() {
-//   // if (this.Stavke.controls.length  === 0 ) {
-//   //   this.addStavke();
-//   // }
-// console.log('ngAfterViewInit');
-// }
+  // ngAfterViewInit() {
+  //   // if (this.Stavke.controls.length  === 0 ) {
+  //   //   this.addStavke();
+  //   // }
+  // console.log('ngAfterViewInit');
+  // }
 
-// ngAfterViewChecked() {
-//   if (this.Stavke.controls.length  === 0 ) {
-//    console.log('OVO - ngAfterViewChecked');
-//   }
-// }
+  // ngAfterViewChecked() {
+  //   if (this.Stavke.controls.length  === 0 ) {
+  //    console.log('OVO - ngAfterViewChecked');
+  //   }
+  // }
 
-// ngAfterContentInit() {
-//   if (this.Stavke.controls.length  === 0 ) {
-//   console.log('ngAfterContentInit');
-//   }
-// }
+  // ngAfterContentInit() {
+  //   if (this.Stavke.controls.length  === 0 ) {
+  //   console.log('ngAfterContentInit');
+  //   }
+  // }
 
-private SetDatumForm() {
-  const dp = new DatePipe(navigator.language);
-  const p = 'y-MM-dd'; // YYYY-MM-DD
-  const dtr = dp.transform(new Date(), p);
-  this.Datum.setValue({effectiveEndDate: dtr});
- // this.transitionForm.setValue({effectiveEndDate: dtr});
-}
+  private SetDatumForm() {
+    const dp = new DatePipe(navigator.language);
+    const p = 'y-MM-dd'; // YYYY-MM-DD
+    const dtr = dp.transform(new Date(), p);
+    this.Datum.setValue({ effectiveEndDate: dtr });
+    // this.transitionForm.setValue({effectiveEndDate: dtr});
+  }
 
 
-private SetGodinaBroj(tDatum: Date) {
-   // console.log('Usao u SetGodinaBroj ' + tDatum);
-  //  this.Broj.setValue(1);
+  private SetGodinaBroj(tDatum: Date) {
+    // console.log('Usao u SetGodinaBroj ' + tDatum);
+    //  this.Broj.setValue(1);
     // this.Godina.setValue(new Date().getFullYear());
-   // this.uputN.Datum = new Date();
+    // this.uputN.Datum = new Date();
     // this.Datum.setValue(new Date());
     // this.formUput.controls['Broj'].setValue(1);
     // const Datum = JSON.parse(this.Datum.value)
-     this.Broj.setValue(1);
-     this.Godina.setValue(new Date().getFullYear());
-     if (!tDatum) {
+    this.Broj.setValue(1);
+    this.Godina.setValue(new Date().getFullYear());
+    if (!tDatum) {
       tDatum = new Date();
-     }
+    }
 
-    this.uputService.getUputBrojGod({Datum: tDatum})
-    .subscribe(
+    this.uputService.getUputBrojGod({ Datum: tDatum })
+      .subscribe(
       (pos) => {
         if (pos.success) {
           // console.log(' na dobrom mestu sam' + JSON.stringify(pos));
@@ -267,128 +278,130 @@ private SetGodinaBroj(tDatum: Date) {
           // console.log(' Godinu jurim' +  pos.data.godina);
           this.Godina.setValue(pos.data.godina);
           // console.log(' A upisao sam this.godbroj ga u mom objektu '  + this.godbroj.godina);
-        }else {
+        } else {
           this.flashMessage.show(pos.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
-            this.godbroj.broj = 1;
-            this.godbroj.godina = new Date().getFullYear();
+            timeout: 9000
+          });
+          this.godbroj.broj = 1;
+          this.godbroj.godina = new Date().getFullYear();
         }
-      } ,
+      },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-          this.godbroj.broj = 1;
-          this.godbroj.godina = new Date().getFullYear();
-         // console.log('Error servica');
+          timeout: 9000
+        });
+        this.godbroj.broj = 1;
+        this.godbroj.godina = new Date().getFullYear();
+        // console.log('Error servica');
 
       });
 
-      // console.log(' A Broj pre upisa u mom objektu '  + this.godbroj.broj);
-      // console.log(' A Godina pre upisa u mom objektu '  + this.godbroj.godina);
+    // console.log(' A Broj pre upisa u mom objektu '  + this.godbroj.broj);
+    // console.log(' A Godina pre upisa u mom objektu '  + this.godbroj.godina);
 
-      // // this.formUput.get('Broj').setValue(this.godbroj.broj);
-      // this.Godina.setValue(this.godbroj.godina );
-      // this.Broj.setValue(this.godbroj.broj);
-}
-
-onBlurDatum() {
-  let Datum = this.Datum.value;
-  console.log('Datum u on blur' + Datum);
-  if (!Datum) {
-    Datum = new Date();
+    // // this.formUput.get('Broj').setValue(this.godbroj.broj);
+    // this.Godina.setValue(this.godbroj.godina );
+    // this.Broj.setValue(this.godbroj.broj);
   }
-  this.SetGodinaBroj(Datum);
-  // this.flashMessage.show(`onBlurDatum ${this.uputN.Datum} a iz forme ${this.Datum.value}`, {
-  //   cssClass: 'alert-danger',
-  //   timeout: 9000});
-}
 
-InitGodinaBroj() {
-  this.uputN.Datum = new Date();
-  this.Datum.setValue(this.uputN.Datum);
-  this.SetDatumForm();
-  this.SetGodinaBroj(this.uputN.Datum);
-  console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
+  onBlurDatum() {
+    let Datum = this.Datum.value;
+    console.log('Datum u on blur' + Datum);
+    if (!Datum) {
+      Datum = new Date();
+    }
+    this.SetGodinaBroj(Datum);
+    // this.flashMessage.show(`onBlurDatum ${this.uputN.Datum} a iz forme ${this.Datum.value}`, {
+    //   cssClass: 'alert-danger',
+    //   timeout: 9000});
+  }
 
-}
+  InitGodinaBroj() {
+    this.uputN.Datum = new Date();
+    this.Datum.setValue(this.uputN.Datum);
+    this.SetDatumForm();
+    this.SetGodinaBroj(this.uputN.Datum);
+    console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
 
-GetKupac() {
-   this.displayKupac = true;
-}
+  }
 
-PickKupac(event) {
-  this.displayKupac = false;
-  this.selectedKupac = event;
-  if (this.selectedKupac) {
-    if (this.selectedKupac._id) {
-      this.PartneriID.setValue(this.selectedKupac._id);
+  GetKupac() {
+    this.displayKupac = true;
+  }
+
+  PickKupac(event) {
+    this.displayKupac = false;
+    this.selectedKupac = event;
+    if (this.selectedKupac) {
+      if (this.selectedKupac._id) {
+        this.PartneriID.setValue(this.selectedKupac._id);
+      }
     }
   }
-}
 
-// Init zaglavlja
-InitDokZag() {
+  // Init zaglavlja
+  InitDokZag() {
 
- this.Broj.setValue(this.uputN.Broj);
- this.Godina.setValue(this.uputN.Godina);
- this.PartneriID.setValue(this.uputN.PartneriID);
- this.RacVlasnika.setValue(this.uputN.RacVlasnika);
- this.Datum.setValue(this.uputN.Datum);
- this.PosloviID.setValue(this.uputN.PosloviID);
-}
-
-// Stavke
-initDataStavke() {
-  let rbr = 0;
-  for ( const item of this.uputN.Stavke) {
-        rbr = rbr + 1;
-        const control = <FormArray>this.formUput.controls['Stavke'];
-        control.push(this.initStavke(item.IDZadrugar, rbr, item.ZadrugarID, item.PosloviID));
+    this.Broj.setValue(this.uputN.Broj);
+    this.Godina.setValue(this.uputN.Godina);
+    this.PartneriID.setValue(this.uputN.PartneriID);
+    this.RacVlasnika.setValue(this.uputN.RacVlasnika);
+    this.Datum.setValue(this.uputN.Datum);
+    this.PosloviID.setValue(this.uputN.PosloviID);
   }
- }
-initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: Object ) {
+
+  // Stavke
+  initDataStavke() {
+    let rbr = 0;
+    for (const item of this.uputN.Stavke) {
+      rbr = rbr + 1;
+      const control = <FormArray>this.formUput.controls['Stavke'];
+      control.push(this.initStavke(item.IDZadrugar, rbr, item.ZadrugarID, item.PosloviID));
+    }
+  }
+  initStavke(tIDZadrugar: Number, tRbr: Number, tZadrugarID: Object, tPosloviID: Object) {
     return this._fb.group({
       IDZadrugar: [tIDZadrugar, Validators.required],
       Rbr: [tRbr, Validators.required],
       ZadrugarID: [tZadrugarID, Validators.required],
       PosloviID: [tPosloviID, Validators.required]
-   });
-}
-addStavke() {
+    });
+  }
+  addStavke() {
     const control = <FormArray>this.formUput.controls['Stavke'];
     const broj = control.controls.length + 1;
     const posao = this.PosloviID.value;
-   // console.log('Poslovi su : ' + posao);
+    // console.log('Poslovi su : ' + posao);
     if (posao) {
       control.push(this.initStavke(0, broj, '', posao));
-    }else {
+    } else {
       control.push(this.initStavke(0, broj, '', ''));
     }
-  //  this.reorderStav();
-}
-removeStavke(i: number) {
+    //  this.reorderStav();
+  }
+  removeStavke(i: number) {
     if (i >= 0) {
-     const control = <FormArray>this.formUput.controls['Stavke'];
-     control.removeAt(i);
+      const control = <FormArray>this.formUput.controls['Stavke'];
+      control.removeAt(i);
     }
-  //  console.log('ovo sam dobio iz stavki' + i);
-   this.reorderStav();
-}
-
-reorderStav() {
-  let rbr = 0;
-  const controls = <FormArray>this.formUput.controls['Stavke'];
-  for ( const item of this.Stavke.controls) {
-    rbr = rbr + 1;
-    const Idzadr = item.get('IDZadrugar').value;
-    const id = item.get('ZadrugarID').value;
-    const idpos = item.get('PosloviID').value;
-    item.setValue({'Rbr': rbr , 'IDZadrugar': Idzadr, 'ZadrugarID': id, 'PosloviID': idpos });
+    //  console.log('ovo sam dobio iz stavki' + i);
+    this.reorderStav();
   }
 
-}
+  reorderStav() {
+    let rbr = 0;
+    const controls = <FormArray>this.formUput.controls['Stavke'];
+    for (const item of this.Stavke.controls) {
+      rbr = rbr + 1;
+      const Idzadr = item.get('IDZadrugar').value;
+      const id = item.get('ZadrugarID').value;
+      const idpos = item.get('PosloviID').value;
+      item.setValue({ 'Rbr': rbr, 'IDZadrugar': Idzadr, 'ZadrugarID': id, 'PosloviID': idpos });
+    }
+
+  }
 
 
   save() {
@@ -396,16 +409,18 @@ reorderStav() {
     if (this.Stavke.length === 0) {
       this.flashMessage.show('Nema stavki uputa', {
         cssClass: 'alert-danger',
-        timeout: 2000});
+        timeout: 2000
+      });
       return;
     }
 
-   const NovUput =  this.clearZadrugar(FPValue);
+    const NovUput = this.clearZadrugar(FPValue);
 
     if (NovUput.Stavke.length === 0) {
       this.flashMessage.show('Nema stavki uputa', {
         cssClass: 'alert-danger',
-        timeout: 2000});
+        timeout: 2000
+      });
       return;
     }
     this.prepareStavke(NovUput);
@@ -418,25 +433,27 @@ reorderStav() {
 
     // return;
     if (FPValue._id) {
-       this.uputService.updateUput(FPValue).subscribe(
+      this.uputService.updateUput(FPValue).subscribe(
         (pos) => {
-          if ( pos.success) {
+          if (pos.success) {
             this.clearTempData();
             this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['uput']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['uput']);
+          } else {
             this.router.navigate(['NotFound']);
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
+            timeout: 9000
+          });
 
-         // console.log(" forma UPDATE  " + error);
+          // console.log(" forma UPDATE  " + error);
 
         },
 
@@ -445,26 +462,28 @@ reorderStav() {
     } else {
 
       this.uputService.addUput(FPValue)
-      .subscribe(
+        .subscribe(
         (pos) => {
           if (pos.success) {
             this.clearTempData();
             this.saveTemp = false;
             this.flashMessage.show(pos.message, {
               cssClass: 'alert-success',
-              timeout: 5000});
-              this.router.navigate(['uput']);
-          }else {
+              timeout: 5000
+            });
+            this.router.navigate(['uput']);
+          } else {
             this.router.navigate(['NotFound']);
           }
-        } ,
+        },
         (error: ResponeCustom) => {
           this.flashMessage.show(error.message, {
             cssClass: 'alert-danger',
-            timeout: 9000});
-           console.log( ' forma INSERT '  + JSON.stringify(error)  + ' ima li jos nesto' + error);
-         },
-       );
+            timeout: 9000
+          });
+          console.log(' forma INSERT ' + JSON.stringify(error) + ' ima li jos nesto' + error);
+        },
+      );
     }
   }
 
@@ -476,33 +495,33 @@ reorderStav() {
     }
   }
 
-setTempData() {
-    const  fsValue = JSON.stringify(this.formUput.value);
+  setTempData() {
+    const fsValue = JSON.stringify(this.formUput.value);
     if (fsValue) {
       if (this.saveTemp) {
         localStorage.setItem('data_uput', fsValue);
-      }else {
+      } else {
         this.clearTempData();
       }
     }
 
-}
+  }
 
-clearTempData() {
-     localStorage.removeItem('data_uput');
-}
+  clearTempData() {
+    localStorage.removeItem('data_uput');
+  }
 
-backClicked(event: any) {
+  backClicked(event: any) {
     this.setTempData();
     this._location.back();
-}
+  }
 
-revert() {
-  this.formUput.reset();
- // this.clearFormData();
-}
+  revert() {
+    this.formUput.reset();
+    // this.clearFormData();
+  }
 
-clearFormData() {
+  clearFormData() {
     this.formUput.reset({
       Broj: '',
       Godina: '',
@@ -510,90 +529,90 @@ clearFormData() {
       RacVlasnika: null,
       PosloviID: null,
       PartneriID: null
-     });
-}
-
-ngOnDestroy() {
-  this.setTempData();
-  // this.subscription.unsubscribe();
-}
-
-compareVlasRacun(c1: UputRacVlasnikModel, c2: UputRacVlasnikModel): boolean {
-  return c1 && c2 ? c1.Naziv === c2.Naziv : c1 === c2;
-}
-
-private clearZadrugar(tuputN: UputModel ): UputModel {
-
-  const stavSet = new Set();
-  for ( const item of tuputN.Stavke) {
-    stavSet.add(item.IDZadrugar);
+    });
   }
-  const myArrStav = Array.from(stavSet);
-  const newStavke = new Array<UputStavModel>();
-  for (const item of myArrStav) {
-    console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip '  +  typeof Number(item) );
-    const idzad = Number(item);
-    // newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar ===  Number(item) ));
-    newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar == idzad ));
+
+  ngOnDestroy() {
+    this.setTempData();
+    // this.subscription.unsubscribe();
   }
- // tuputN.Stavke = stavSet;
- tuputN.Stavke.splice(0, tuputN.Stavke.length);
- for (const item of newStavke) {
-   console.log('Nove stavke ' + item);
-   tuputN.Stavke.push(item);
- }
-  return tuputN;
-}
 
-private prepareStavke(tuputN: UputModel) {
-  let rbr = 0;
-  for ( const item of tuputN.Stavke) {
-    const idZad = item.ZadrugarID;
-    const idPosao = item.PosloviID;
-    rbr = rbr + 1;
-    item.Rbr = rbr;
-    for ( const zadrugar of this.zadrL) {
-       if (zadrugar._id === idZad) {
-        item.ZadRef = {
-          _id : zadrugar._id,
-           name: zadrugar.fullName,
-           tipzadrugar : zadrugar.TipZadrugar,
-           idzadrugar : zadrugar.IDZadrugar,
-           jmbg : zadrugar.Jmbg
-        };
-        item.IDZadrugar = zadrugar.IDZadrugar;
-       }
+  compareVlasRacun(c1: UputRacVlasnikModel, c2: UputRacVlasnikModel): boolean {
+    return c1 && c2 ? c1.Naziv === c2.Naziv : c1 === c2;
+  }
 
+  private clearZadrugar(tuputN: UputModel): UputModel {
 
+    const stavSet = new Set();
+    for (const item of tuputN.Stavke) {
+      stavSet.add(item.IDZadrugar);
     }
+    const myArrStav = Array.from(stavSet);
+    const newStavke = new Array<UputStavModel>();
+    for (const item of myArrStav) {
+      console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip ' + typeof Number(item));
+      const idzad = Number(item);
+      // newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar ===  Number(item) ));
+      newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar == idzad));
+    }
+    // tuputN.Stavke = stavSet;
+    tuputN.Stavke.splice(0, tuputN.Stavke.length);
+    for (const item of newStavke) {
+      console.log('Nove stavke ' + item);
+      tuputN.Stavke.push(item);
+    }
+    return tuputN;
+  }
 
-    for ( const posao of this.poslL) {
-      if (posao._id === idPosao) {
-        item.PosloviRef = {
-          _id : posao._id,
-          name: posao.Naziv,
-          stepenss : posao.StepenSS
-        };
-       }
+  private prepareStavke(tuputN: UputModel) {
+    let rbr = 0;
+    for (const item of tuputN.Stavke) {
+      const idZad = item.ZadrugarID;
+      const idPosao = item.PosloviID;
+      rbr = rbr + 1;
+      item.Rbr = rbr;
+      for (const zadrugar of this.zadrL) {
+        if (zadrugar._id === idZad) {
+          item.ZadRef = {
+            _id: zadrugar._id,
+            name: zadrugar.fullName,
+            tipzadrugar: zadrugar.TipZadrugar,
+            idzadrugar: zadrugar.IDZadrugar,
+            jmbg: zadrugar.Jmbg
+          };
+          item.IDZadrugar = zadrugar.IDZadrugar;
+        }
 
+
+      }
+
+      for (const posao of this.poslL) {
+        if (posao._id === idPosao) {
+          item.PosloviRef = {
+            _id: posao._id,
+            name: posao.Naziv,
+            stepenss: posao.StepenSS
+          };
+        }
+
+      }
     }
   }
-}
 
-// // https://valor-software.com/ng2-select/
+  // // https://valor-software.com/ng2-select/
 
-// removedPosaoDok(value: any): void {
-//     console.log('Removed value is: ', value);
-// }
-// public selectedPosaoDok(value: any): void {
-//   console.log('Selected value is: ', value);
-//   this.PosloviID.setValue(value.id);
-// }
-// <ng-select  formControlName="PosloviID"  [allowClear]="true" required
-// [items]="NGposaoL"
-// (removed)="removedPosaoDok($event)"
-// (selected)="selectedPosaoDok($event)"
-// placeholder="--Select posao--">
-// </ng-select>
+  // removedPosaoDok(value: any): void {
+  //     console.log('Removed value is: ', value);
+  // }
+  // public selectedPosaoDok(value: any): void {
+  //   console.log('Selected value is: ', value);
+  //   this.PosloviID.setValue(value.id);
+  // }
+  // <ng-select  formControlName="PosloviID"  [allowClear]="true" required
+  // [items]="NGposaoL"
+  // (removed)="removedPosaoDok($event)"
+  // (selected)="selectedPosaoDok($event)"
+  // placeholder="--Select posao--">
+  // </ng-select>
 
 }

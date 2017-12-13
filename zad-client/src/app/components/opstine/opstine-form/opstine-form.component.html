@@ -1,150 +1,139 @@
-
-    <div class="panel panel-primary"  [@formsTransition]>
-      <div class="panel-heading">
-          <div class="row">
-              <div class="text-left col-lg-9 col-md-9 col-xs-9">
-                  <h5>{{title}}</h5> 
-                </div>
-                <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-                  <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-                </div>
-         </div>
+<div class="panel panel-primary" [@formsTransition]>
+  <div class="panel-heading">
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
       </div>
-      <div class="panel-body">
-          <form [formGroup]="formOPST" (ngSubmit)="save()" novalidate>
-              <div class="form-group" >
-                    <input class="form-control" formControlName="_id"  [(ngModel)]="opstina._id"   type="hidden">
-               </div>
-        <div class="row">    
-              <div class="form-group col-md-8">
-                  <label class="center-block">Država:
-                    <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  name="Select Državu"  required>
-                      <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
-                      <option *ngFor="let list of drzave" [value]="list._id">
-                        {{ list.Naziv }}
-                      </option>
-                    </select>
-                  </label>
-                  <div *ngIf="Drzava.invalid && (Drzava.dirty || Drzava.touched)" class="alert alert-danger" role="alert">
-                    <div *ngIf="Drzava.errors.required">
-                        <strong>Država je obavezan podatak !!!</strong>
-                    </div>
-                  </div>
-              </div>
-              <div class="form-group col-md-4">
-                  <label class="center-block">&nbsp;&nbsp;&nbsp;
-                  <button type="button" class="btn btn-info form-control" (click)="GetPickDrzava()" >
-                      <span class="glyphicon glyphicon-search"></span>
-                      <!-- ... -->
-                      ...
-                  </button>
-                  </label>
-              </div>
-        </div>
-
-        <!-- [(ngModel)]="opstina.RegOzn" -->
-          <div class="row">
-              <div class="form-group col-md-4">
-                    <label class="center-block">Kod opštine:
-                      <input  class="form-control" formControlName="RegOzn"    required>
-                    </label>
-                    
-                    <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger" role="alert">
-                      <div *ngIf="RegOzn.errors.required">
-                          <strong>Oznaka je obavezan podatak !!!</strong>
-                      </div>
-                      <div *ngIf="RegOzn.errors.maxlength">
-                        <strong>Predugačka oznaka !!!</strong>
-                      </div>
-                     
-                    </div>
-              </div>
-              <!-- [(ngModel)]="opstina.Naziv"  -->
-              <div class="form-group col-md-8">
-                  <label class="center-block">Naziv opštine:
-                    <input class="form-control" formControlName="Naziv"   required>
-                  </label>
-                  
-                  <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger" role="alert">
-                    <div *ngIf="Naziv.errors.required">
-                        <strong>Naziv je obavezan podatak !!!</strong>
-                    </div>
-                  </div>
-              </div>
-          </div>  
-
-          <!-- [(ngModel)]="opstina.SifPorez" -->
-          <div class="row">      
-              <div class="form-group col-md-4">
-                  <label class="center-block">Šifra poreza opštine:
-                    <input class="form-control" formControlName="SifPorez"  >
-                  </label>
-              </div>
-
-              <!-- [(ngModel)]="opstina.KontBr" -->
-              <div class="form-group col-md-4">
-                  <label class="center-block">Kontrolni broj opštine:
-                    <input class="form-control" formControlName="KontBr"  >
-                  </label>
-              </div>
-              <!-- [(ngModel)]="opstina.PozivNaBr"  -->
-              <div class="form-group col-md-4">
-                <label class="center-block">Poziv na broj opštine:
-                  <input class="form-control" formControlName="PozivNaBr" >
-                </label>
-              </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="formOPST" (ngSubmit)="save()" novalidate>
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="opstina._id" type="hidden">
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8">
+          <label class="center-block">Država:
+            <select formControlName="Drzava" class="form-control" placeholder="Select Državu" name="Select Državu" required>
+              <option [value]="" disabled="true" [selected]="true"> --Please select-- </option>
+              <option *ngFor="let list of drzave" [value]="list._id">
+                {{ list.Naziv }}
+              </option>
+            </select>
+          </label>
+          <div *ngIf="Drzava.invalid && (Drzava.dirty || Drzava.touched)" class="alert alert-danger" role="alert">
+            <div *ngIf="Drzava.errors.required">
+              <strong>Država je obavezan podatak !!!</strong>
+            </div>
           </div>
-          <!-- [(ngModel)]="opstina.Opis" -->
-          <div class="form-group">
-            <label class="center-block">Opis:
-              <textarea class="form-control" formControlName="Opis" >
-
-              </textarea>
-            </label>
         </div>
-              
-                <div class="form-group">
-                        <div class="col-md-offset-5 col-md-12">
-                            <button type="submit" [disabled]="!formOPST.valid"
-                                class="btn btn-success">
-                            <span class="glyphicon glyphicon-saved"></span>
-                            Save
-                            </button>
-
-                          <button type="reset" class="btn btn-danger"  [disabled]="formOPST.pristine"  (click)="revert()">
-                              <i class="fa fa-undo" aria-hidden="true"></i>
-                              Clear data
-                          </button>
-                          
-                        </div>
-                  
-                        
-              </div>
-                  
-
-
-          </form>
+        <div class="form-group col-md-4">
+          <label class="center-block">&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-info form-control" (click)="GetPickDrzava()">
+              <span class="glyphicon glyphicon-search"></span>
+              <!-- ... -->
+              ...
+            </button>
+          </label>
+        </div>
       </div>
-     
+
+      <!-- [(ngModel)]="opstina.RegOzn" -->
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="center-block">Kod opštine:
+            <input class="form-control" formControlName="RegOzn" required>
+          </label>
+
+          <div *ngIf="RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)" class="alert alert-danger" role="alert">
+            <div *ngIf="RegOzn.errors.required">
+              <strong>Oznaka je obavezan podatak !!!</strong>
+            </div>
+            <div *ngIf="RegOzn.errors.maxlength">
+              <strong>Predugačka oznaka !!!</strong>
+            </div>
+
+          </div>
+        </div>
+        <!-- [(ngModel)]="opstina.Naziv"  -->
+        <div class="form-group col-md-8">
+          <label class="center-block">Naziv opštine:
+            <input class="form-control" formControlName="Naziv" required>
+          </label>
+
+          <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger" role="alert">
+            <div *ngIf="Naziv.errors.required">
+              <strong>Naziv je obavezan podatak !!!</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [(ngModel)]="opstina.SifPorez" -->
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="center-block">Šifra poreza opštine:
+            <input class="form-control" formControlName="SifPorez">
+          </label>
+        </div>
+
+        <!-- [(ngModel)]="opstina.KontBr" -->
+        <div class="form-group col-md-4">
+          <label class="center-block">Kontrolni broj opštine:
+            <input class="form-control" formControlName="KontBr">
+          </label>
+        </div>
+        <!-- [(ngModel)]="opstina.PozivNaBr"  -->
+        <div class="form-group col-md-4">
+          <label class="center-block">Poziv na broj opštine:
+            <input class="form-control" formControlName="PozivNaBr">
+          </label>
+        </div>
+      </div>
+      <!-- [(ngModel)]="opstina.Opis" -->
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis">
+
+          </textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formOPST.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formOPST.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+    </form>
+  </div>
+
   <div class="panel-footer">
-    <button (click)="backClicked()"  class="btn btn-primary btn-block">
-        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-        Back
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
     </button>
   </div>
 </div>
-    
-    
-<p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
-    
-   <app-pick-drzava [drzL]="drzave" 
-      (pickRow)="PickDrzava($event)" (pickNothing)="displayPick=false">
-    </app-pick-drzava>
 
 
-  <!-- <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="PickDrzava()" label="OK"></button>
-  </p-footer> -->
+<p-dialog header="ODABIR DRŽAVE" [(visible)]="displayPick" modal="modal" [responsive]="true" [width]="pickWidth" [height]="auto">
+  <app-pick-drzava [drzL]="drzave" (pickRow)="PickDrzava($event)" (pickNothing)="displayPick=false">
+  </app-pick-drzava>
 </p-dialog>
-    
-

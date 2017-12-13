@@ -6,9 +6,9 @@ import { PosaoFormComponent } from './posao-form/posao-form.component';
 
 
 const posaoRoutes: Routes = [
-  {path: 'posao', component: PosaoComponent, canActivate: [AuthGuard]},
-  {path: 'posao/new', component: PosaoFormComponent, canActivate: [AuthGuard]},
-  {path: 'posao/:id', component: PosaoFormComponent, canActivate: [AuthGuard]},
+  { path: 'posao', component: PosaoComponent, canActivate: [AuthGuard] },
+  { path: 'posao/new', component: PosaoFormComponent, canActivate: [AuthGuard] },
+  { path: 'posao/:id', component: PosaoFormComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [

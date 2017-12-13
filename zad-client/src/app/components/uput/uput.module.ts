@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { ButtonModule, InputTextModule } from 'primeng/primeng';
@@ -30,6 +30,6 @@ import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
     UputRoutingModule
   ],
   declarations: [UputComponent, UputFormComponent, UputStavkaComponent],
-  providers: [ UputService, ConfirmationService ]
+  providers: [UputService, ConfirmationService]
 })
 export class UputModule { }

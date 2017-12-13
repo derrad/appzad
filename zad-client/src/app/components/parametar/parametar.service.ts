@@ -1,38 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-// import { ResponeCustom } from './../../shared/models/ErrorRes';
 import { BaseService } from './../../services/base.service';
 
 @Injectable()
 export class ParametarService extends BaseService {
 
-  // authToken: any;
-  // isDev: boolean;
-
   constructor(private http: Http) {
-//    this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
-    super();
-   }
 
-  //  loadToken() {
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
+    super();
+  }
 
   getParametars() {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/') ;
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/');
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   getParametar(id) {
@@ -41,8 +32,8 @@ export class ParametarService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/' + id);
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   addParametar(param) {
@@ -50,9 +41,9 @@ export class ParametarService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/') ;
-    return this.http.post(ep, JSON.stringify(param), {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/');
+    return this.http.post(ep, JSON.stringify(param), { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   updateParametar(param) {
@@ -60,9 +51,9 @@ export class ParametarService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/' + param._id) ;
-    return this.http.put(ep, JSON.stringify(param), {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/' + param._id);
+    return this.http.put(ep, JSON.stringify(param), { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   delParametar(id) {
@@ -70,18 +61,8 @@ export class ParametarService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/' + id) ;
-    return this.http.delete(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/parametar/' + id);
+    return this.http.delete(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
-
-  // private handleError(error: Response) {
-  //   const myerror = new ResponeCustom().fromJSON(error.json());
-  //   const servererr = new ResponeCustom();
-  //   servererr.message = 'Server error';
-  //   servererr.success = false;
-  //   servererr.data = [];
-  //   return Observable.throw(myerror || servererr);
-  // }
-
 }

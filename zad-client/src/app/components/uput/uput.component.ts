@@ -26,87 +26,91 @@ export class UputComponent implements OnInit {
   uputShow: UputModel = new UputModel();
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
-
+  auto = 'auto';
 
   constructor(private router: Router, private uputService: UputService,
-    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED UPUTA';
   }
 
   ngOnInit() {
     this.uputService.getUputi()
-    .subscribe((profile) => {
-    if (profile.success === true) {
-      this.uputL = profile.data;
-    }
-    // }
-    },
-    (error: ResponeCustom) => {
-      this.flashMessage.show(error.message, {
-        cssClass: 'alert-danger',
-        timeout: 9000});
+      .subscribe((profile) => {
+        if (profile.success === true) {
+          this.uputL = profile.data;
+        }
+        // }
+      },
+      (error: ResponeCustom) => {
+        this.flashMessage.show(error.message, {
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
         this.uputL = [];
         return false;
+      }
+      );
+  }
+
+
+  selectItem(work: UputModel) {
+    this.displayDetals = true;
+    this.uputShow = this.cloneData(work);
+  }
+
+  cloneData(c: UputModel): UputModel {
+    const uput = new UputModel();
+    // tslint:disable-next-line:forin
+    for (const prop in c) {
+      uput[prop] = c[prop];
     }
-    );
+    return uput;
+  }
+  addUput() {
+    this.router.navigate(['/uput/new']);
+  }
+  updateUput(id) {
+    this.router.navigate(['/uput/', id]);
   }
 
+  faktUput(id) {
+    this.flashMessage.show('Fakturisanje uputa ' + id, {
+      cssClass: 'alert-danger',
+      timeout: 5000
+    });
 
-selectItem( work: UputModel) {
-  this.displayDetals = true;
-  this.uputShow = this.cloneData(work);
-}
-
-cloneData(c: UputModel): UputModel {
-  const uput = new UputModel();
-  // tslint:disable-next-line:forin
-  for ( const prop in c) {
-    uput[prop] = c[prop];
   }
-  return uput;
-}
-addUput() {
-   this.router.navigate(['/uput/new']);
- }
- updateUput(id) {
-   this.router.navigate(['/uput/', id]);
- }
 
- faktUput(id) {
-  this.flashMessage.show('Fakturisanje uputa ' + id, {
-    cssClass: 'alert-danger',
-    timeout: 5000});
-
- }
-
- deleteUput(tUput) {
-  this.confirmationService.confirm({
-      message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
+  deleteUput(tUput) {
+    this.confirmationService.confirm({
+      message: `Jeste li sigurni da želite uklonite izabrani podatak ? `,
       header: `${tUput.Broj} / ${tUput.Godina}`,
-        accept: () => {
-          const index = this.uputL.indexOf(tUput);
-         // console.log("index je " + index);
-          this.uputL.splice(index, 1);
+      accept: () => {
+        const index = this.uputL.indexOf(tUput);
+        // console.log("index je " + index);
+        this.uputL.splice(index, 1);
 
-          this.uputService.delUput(tUput._id)
-            .subscribe((pos) => {
-              if (pos.success) {
-                 this.flashMessage.show(pos.message , {
-                    cssClass: 'alert-success',
-                    timeout: 1000});
-              }else {
-                this.router.navigate(['NotFound']);
-              }
-              } ,
-              (error: ResponeCustom)  => {
-                this.flashMessage.show(error.message, {
-                  cssClass: 'alert-danger',
-                  timeout: 5000});
-                // Revert the view back to its original state
-                this.uputL.splice(index, 0, tUput);
+        this.uputService.delUput(tUput._id)
+          .subscribe((pos) => {
+            if (pos.success) {
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-success',
+                timeout: 1000
               });
-        }
-      });
+            } else {
+              this.router.navigate(['NotFound']);
+            }
+          },
+          (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
+              cssClass: 'alert-danger',
+              timeout: 5000
+            });
+            // Revert the view back to its original state
+            this.uputL.splice(index, 0, tUput);
+          });
+      }
+    });
   }
 
 

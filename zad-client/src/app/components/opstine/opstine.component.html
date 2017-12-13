@@ -1,170 +1,171 @@
-<div *ngIf="opstineL;else  waiting" >
-      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
-        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-         <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+<div *ngIf="opstineL;else  waiting">
+  <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+  </div>
+  <p-dataTable [value]="opstineL" [globalFilter]="gb" [resizableColumns]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]"
+    [paginator]="true" selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id" styleClass="table table-striped"
+    [responsive]="true" [immutable]=false resizableColumns="true" columnResizeMode="expand">
+
+    <p-header>
+      <strong>{{Title}}</strong>
+    </p-header>
+    <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>
+    <p-column field="RegOzn" header="Oznaka" sortable="true" [style]="{'width':'10%'}"></p-column>
+    <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
+    <p-column field="DrzavaRef.name" header="Država" sortable="true" [style]="{'width':'30%'}"></p-column>
+    <p-column field="SifPorez" header="SifPorez" sortable="true" [style]="{'width':'10%'}"></p-column>
+
+
+    <p-column styleClass="col-button text-center" [style]="{'width':'10%'}">
+      <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
+        <button type="button" pButton (click)="selectOpstina(opst)" icon="fa fa-info" title="Info"></button>
+        <button type="button" pButton (click)="updateOpstinu(opst._id)" icon="fa fa-pencil" title="Update"></button>
+        <button type="button" pButton (click)="deleteOpstinu(opst)" icon="fa fa-trash" title="Delete"></button>
+      </ng-template>
+    </p-column>
+    <p-footer *ngIf="opstineL.length > 0">
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addOpstine()" label="Add"></button>
       </div>
-      <p-dataTable [value]="opstineL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedOpstina" dataKey="_id" 
-                styleClass="table table-striped" [responsive]="true"  
-                [immutable]=false resizableColumns="true" columnResizeMode="expand">
+    </p-footer>
+    <ng-template pTemplate="emptymessage">
+      <!-- Custom content goes here -->
+      <div class="row">
+        <div class="text-center col-lg-12 col-md-12 col-xs-12">
+          <div class="hidden-xs dtempty_message_h1">
+            Još niste kreirali podatak.
+          </div>
+          <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+          <br/>
+          <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i>
+          <h3 class=" hidden-xs dtempty_message">
+            <!-- To manually add new one click here: -->
+            Da biste ručno dodali podatak kliknite:
+            <a class="dtempty_message_text" (click)="addOpstine()">
+              Kreiraj podatak
+            </a>
+          </h3>
 
-                <p-header><strong>{{Title}}</strong></p-header>         
-      <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>    
-      <p-column field="RegOzn" header="Oznaka" sortable="true" [style]="{'width':'10%'}"></p-column>                               
-      <p-column field="Naziv" header="Naziv" sortable="true" [style]="{'width':'40%'}"></p-column>
-      <p-column field="DrzavaRef.name" header="Država" sortable="true" [style]="{'width':'30%'}"></p-column>  
-      <p-column field="SifPorez" header="SifPorez" sortable="true"[style]="{'width':'10%'}"></p-column>
-     
+          <h5 class="visible-xs">
+            <!-- To manually add new one click here: -->
+            Da biste ručno dodali podatak kliknite :
+            <a (click)="addOpstine()">
+              Kreiraj podatak
+            </a>
+          </h5>
 
-      <p-column styleClass="col-button text-center" [style]="{'width':'10%'}">
-          <ng-template let-opst="rowData" let-i="rowIndex" pTemplate="body">
-              <button type="button" pButton (click)="selectOpstina(opst)" icon="fa fa-info" title="Info"></button>
-              <button type="button" pButton (click)="updateOpstinu(opst._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="deleteOpstinu(opst)" icon="fa fa-trash" title="Delete"></button>
-          </ng-template>
-     </p-column>
-      <p-footer *ngIf="opstineL.length > 0">
-          <div class="ui-helper-clearfix" style="width:100%">
-              <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addOpstine()" label="Add"></button>
-            </div>
-        </p-footer>
-        <ng-template pTemplate="emptymessage">
-            <!-- Custom content goes here -->
-            <div class="row">
-                 <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                    <div class="hidden-xs dtempty_message_h1">
-                        Još niste kreirali podatak.
-                    </div>
-                    <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                    <br/>
-                    <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
-                    <h3 class=" hidden-xs dtempty_message" >
-                        <!-- To manually add new one click here: -->
-                        Da biste ručno dodali podatak kliknite: 
-                        <a  class="dtempty_message_text" (click)="addOpstine()">
-                             Kreiraj podatak
-                        </a>
-                    </h3>
+        </div>
+      </div>
+    </ng-template>
 
-                    <h5 class="visible-xs" >
-                        <!-- To manually add new one click here: -->
-                        Da biste ručno dodali podatak kliknite : 
-                        <a   (click)="addOpstine()">
-                             Kreiraj podatak
-                        </a>
-                    </h5>
-
-                </div>
-            </div>
-        </ng-template>
-
-      </p-dataTable>
+  </p-dataTable>
 </div>
 
 <!-- </div> -->
 
 
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
-    <p-footer>
-        <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
-     </p-footer>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+  </p-footer>
 </p-confirmDialog>
 
-<p-dialog header="OPŠTINA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
+<p-dialog header="OPŠTINA" [(visible)]="displayDetals" modal="modal" [responsive]="true" [width]="auto" [height]="auto">
 
-        <div>
-                <dl class="dl-horizontal">
-                    <dt>
-                     ID
-                    </dt>
-                    <dd class="text-success">
-                       {{opstShow._id}}
-                    </dd>
-                    
-                    <dt>
-                    DRŽAVA
-                    </dt>
-                    <dd class="text-success">
-                       
-                        <div [innerHTML]="opstShow.Drzava | prettyprint"></div> 
-                    </dd>
-                    <dt>
-                      KOD OPŠTINE
-                    </dt>
-                    <dd class="text-success">
-                         {{opstShow.RegOzn}} 
-                    </dd>
-                    <dt>
-                    NAZIV OPŠTINE
-                    </dt>
-                    <dd class="text-success">
-                         {{opstShow.Naziv}}
-                    </dd>
-                    <dt>
-                     ŠIFRA POREZA OPŠTINE
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.SifPorez}}
-                        
-                    </dd>
-                    <dt>
-                    KONTROLNI BROJ OPŠTINE
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.KontBr}}
-                        
-                    </dd>
-                    <dt>
-                    POZIV NA BROJ OPŠTINE
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.PozivNaBr}}
-                        
-                    </dd>
-                    <dt>
-                    OPIS
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.Opis}}
-                        
-                    </dd>
-                    <dt>
-                    DATUM UNOSA
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.created_at}}
-                        
-                    </dd>
-                    <dt>
-                    DATUM AŽURIRANJA
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.updatedAt}}
-                        
-                    </dd>
-                    <dt>
-                    KORISNIK
-                    </dt>
-                    <dd class="text-success">
-                        {{opstShow.NameUser}}
-                        
-                    </dd>
-            
-                </dl>                        
-        </div>
-                        
+  <div>
+    <dl class="dl-horizontal">
+      <dt>
+        ID
+      </dt>
+      <dd class="text-success">
+        {{opstShow._id}}
+      </dd>
 
-        <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->
-            <p-footer>
-                 <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
-            </p-footer>
+      <dt>
+        DRŽAVA
+      </dt>
+      <dd class="text-success">
+
+        <div [innerHTML]="opstShow.Drzava | prettyprint"></div>
+      </dd>
+      <dt>
+        KOD OPŠTINE
+      </dt>
+      <dd class="text-success">
+        {{opstShow.RegOzn}}
+      </dd>
+      <dt>
+        NAZIV OPŠTINE
+      </dt>
+      <dd class="text-success">
+        {{opstShow.Naziv}}
+      </dd>
+      <dt>
+        ŠIFRA POREZA OPŠTINE
+      </dt>
+      <dd class="text-success">
+        {{opstShow.SifPorez}}
+
+      </dd>
+      <dt>
+        KONTROLNI BROJ OPŠTINE
+      </dt>
+      <dd class="text-success">
+        {{opstShow.KontBr}}
+
+      </dd>
+      <dt>
+        POZIV NA BROJ OPŠTINE
+      </dt>
+      <dd class="text-success">
+        {{opstShow.PozivNaBr}}
+
+      </dd>
+      <dt>
+        OPIS
+      </dt>
+      <dd class="text-success">
+        {{opstShow.Opis}}
+
+      </dd>
+      <dt>
+        DATUM UNOSA
+      </dt>
+      <dd class="text-success">
+        {{opstShow.created_at}}
+
+      </dd>
+      <dt>
+        DATUM AŽURIRANJA
+      </dt>
+      <dd class="text-success">
+        {{opstShow.updatedAt}}
+
+      </dd>
+      <dt>
+        KORISNIK
+      </dt>
+      <dd class="text-success">
+        {{opstShow.NameUser}}
+
+      </dd>
+
+    </dl>
+  </div>
+
+
+  <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->
+  <p-footer>
+    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+  </p-footer>
 </p-dialog>
 
 
-<ng-template #waiting  >
-    <div class="centerWait">
+<ng-template #waiting>
+  <div class="centerWait">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     Loading...
-    </div>
+  </div>
 </ng-template>

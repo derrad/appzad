@@ -31,8 +31,8 @@
             <input class="form-control" formControlName="Ime" [(ngModel)]="zadrN.Ime" required>
           </label>
           <div *ngIf="Ime.invalid && (Ime.dirty || Ime.touched)" class="alert alert-danger">
-             <div *ngIf="Ime.errors.required">
-              <strong  >Ime je obavezan podatak !!!</strong>
+            <div *ngIf="Ime.errors.required">
+              <strong>Ime je obavezan podatak !!!</strong>
             </div>
             <div *ngIf="Ime.errors.minlength">
               <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>

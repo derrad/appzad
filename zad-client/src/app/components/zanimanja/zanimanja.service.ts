@@ -7,19 +7,21 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
 import { ResponeCustom} from './../../shared/models/ErrorRes';
+import { BaseService } from './../../services/base.service';
 
 @Injectable()
-export class ZanimanjaService {
-  authToken: any;
-  isDev: boolean;
+export class ZanimanjaService extends BaseService {
+  // authToken: any;
+  // isDev: boolean;
   constructor(private http: Http) {
-    this.isDev = ServiceConfig.isDev;
+    super();
+    // this.isDev = ServiceConfig.isDev;
    }
 
-  loadToken() {
-    const token = localStorage.getItem('id_token');
-    this.authToken = token;
-  }
+  // loadToken() {
+  //   const token = localStorage.getItem('id_token');
+  //   this.authToken = token;
+  // }
 
   getZanimanja() {
     const headers = new Headers();
@@ -73,15 +75,6 @@ export class ZanimanjaService {
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/zanimanja/' + id);
     return this.http.delete(ep, {headers: headers})
     .map(res => res.json()).catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    const myerror = new ResponeCustom().fromJSON(error.json());
-    const servererr = new ResponeCustom();
-    servererr.message = 'Server error';
-    servererr.success = false;
-    servererr.data = [];
-    return Observable.throw(myerror || servererr);
   }
 
 }
