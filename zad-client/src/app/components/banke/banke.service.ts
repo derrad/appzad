@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -10,42 +10,34 @@ import { ServiceConfig } from './../../services/service.config';
 import { BaseService } from './../../services/base.service';
 
 @Injectable()
-export class BankeService  extends BaseService {
+export class BankeService extends BaseService {
 
-  // authToken: any;
-  // isDev: boolean;
-  // data: any;
   constructor(private http: Http) {
-    // this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
     super();
-   }
+  }
 
-  // loadToken() {
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
 
-getBanke() {
+  getBanke() {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke');
 
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
-}
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
+  }
 
-getBanka(id) {
+  getBanka(id) {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke/' + id) ;
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke/' + id);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
 
-}
+  }
 
   addBanke(tbanke) {
     const headers = new Headers();
@@ -54,9 +46,9 @@ getBanka(id) {
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke/');
 
-    return this.http.post(ep, JSON.stringify(tbanke), {headers: headers})
-     .map(res => res.json())
-     .catch(this.handleError);
+    return this.http.post(ep, JSON.stringify(tbanke), { headers: headers })
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   updateBanka(tbanke) {
@@ -64,10 +56,10 @@ getBanka(id) {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/banke/' + tbanke._id) ;
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke/' + tbanke._id);
 
-    return this.http.put(ep, JSON.stringify(tbanke), {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.put(ep, JSON.stringify(tbanke), { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   delBanka(id) {
@@ -76,28 +68,7 @@ getBanka(id) {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/banke/' + id);
-    return this.http.delete(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.delete(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
-
-
-
-  // private handleError(error: Response) {
-  //   if (error.status === 401) {
-  //     console.log(' status ' + error.statusText);
-  //     const servererr = new ResponeCustom();
-  //     servererr.message = error.statusText;
-  //     servererr.success = false;
-  //     servererr.status = error.status;
-  //     servererr.data = [];
-  //     return Observable.throw(servererr);
-  //  }
-  //   const myerror = new ResponeCustom().fromJSON(error.json());
-  //   const servererr = new ResponeCustom();
-  //   servererr.message = 'Server error' + error.statusText;
-  //   servererr.success = false;
-  //   servererr.data = [];
-  //   return Observable.throw(myerror || servererr);
-  // }
-
 }

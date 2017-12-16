@@ -1,295 +1,290 @@
-<!-- <p>
-  konstanta works!
-</p> -->
+<div *ngIf="konstL;else  waiting" [@routerTransition]>
+
+  <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+  </div>
+  <p-dataTable [value]="konstL" [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true" selectionMode="single"
+    [(selection)]="selectedKonst" dataKey="_id" styleClass="table table-striped" [responsive]="true" [immutable]=false resizableColumns="true"
+    columnResizeMode="expand">
+
+    <p-header>
+      <strong>{{Title}}</strong>
+    </p-header>
+    <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>
+    <p-column field="Datum" header="Datum" styleClass="text-center">
+      <ng-template let-col let-konst="rowData" pTemplate="body">
+        <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>
+      </ng-template>
+
+    </p-column>
+    <p-column field="UcPenz" header="Porez Učenici" styleClass="text-right">
+      <ng-template let-col let-konst="rowData" pTemplate="body">
+        <span>{{konst[col.field] | number:'1.2-2'}}</span>
+      </ng-template>
+    </p-column>
+
+    <p-column field="OsPorez" header="Porez osiguranici" styleClass="text-right">
+      <ng-template let-col let-konst="rowData" pTemplate="body">
+        <span>{{konst[col.field] | number:'1.2-2'}}</span>
+      </ng-template>
+    </p-column>
+    <p-column field="Clanarin" header="Članarina" styleClass="text-right">
+      <ng-template let-col let-konst="rowData" pTemplate="body">
+        <span>{{konst[col.field] | number:'1.2-2'}}</span>
+      </ng-template>
+
+    </p-column>
+    <p-column field="Pdv" header="Pdv" styleClass="text-right">
+      <ng-template let-col let-konst="rowData" pTemplate="body">
+        <span>{{konst[col.field] | number:'1.2-4'}}</span>
+      </ng-template>
 
 
-<div *ngIf="konstL;else  waiting"  [@routerTransition]>
-  
-      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
-        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
-      </div>
-      <p-dataTable [value]="konstL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedKonst" dataKey="_id"   
-                styleClass="table table-striped" [responsive]="true"  [immutable]=false 
-                resizableColumns="true" columnResizeMode="expand">
+    </p-column>
 
-      <p-header><strong>{{Title}}</strong></p-header>       
-      <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Datum" header="Datum"  styleClass="text-center">
-            <ng-template let-col let-konst="rowData" pTemplate="body">
-                <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>
-            </ng-template>
-        
-      </p-column>
-      <p-column field="UcPenz" header="Porez Učenici"   styleClass="text-right" >
-            <ng-template let-col let-konst="rowData" pTemplate="body">
-                    <span>{{konst[col.field] | number:'1.2-2'}}</span>
-            </ng-template> 
-      </p-column> 
+    <p-column styleClass="col-button text-center" heder="ACTION">
 
-      <p-column field="OsPorez" header="Porez osiguranici"  styleClass="text-right">
-            <ng-template let-col let-konst="rowData" pTemplate="body">
-                    <span>{{konst[col.field] | number:'1.2-2'}}</span>
-            </ng-template>
-      </p-column>   
-      <p-column field="Clanarin" header="Članarina"  styleClass="text-right" >
-        <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.2-2'}}</span>
-        </ng-template>
+      <ng-template let-konst="rowData" let-i="rowIndex" pTemplate="body">
 
-      </p-column>
-      <p-column field="Pdv" header="Pdv" styleClass="text-right">
-        <ng-template let-col let-konst="rowData" pTemplate="body">
-            <span>{{konst[col.field] | number:'1.2-4'}}</span>
-        </ng-template>
-
-
-      </p-column>
-      
-      <p-column  styleClass="col-button text-center" heder="ACTION">
-       
-          <ng-template let-konst="rowData" let-i="rowIndex" pTemplate="body" >
-
-              <button type="button" pButton (click)="selectItem(konst)" icon="fa fa-info" title="Info"></button>
-              <button type="button" pButton (click)="updateKonst(konst._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="deleteKonst(konst)" icon="fa fa-trash" title="Delete"></button>
-          </ng-template>
-      </p-column>
-       <!-- <p-footer *ngIf="konstL.length == 0">
+        <button type="button" pButton (click)="selectItem(konst)" icon="fa fa-info" title="Info"></button>
+        <button type="button" pButton (click)="updateKonst(konst._id)" icon="fa fa-pencil" title="Update"></button>
+        <button type="button" pButton (click)="deleteKonst(konst)" icon="fa fa-trash" title="Delete"></button>
+      </ng-template>
+    </p-column>
+    <!-- <p-footer *ngIf="konstL.length == 0">
           <div class="ui-helper-clearfix" style="width:100%">
               <button type="button" pButton icon="fa fa-plus" style="float:left" (click)="addKonst()" label="Add"></button>
             </div>
         </p-footer> -->
-        <div *ngIf="konstL.length == 0">
-            <ng-template pTemplate="emptymessage">
-                <!-- Custom content goes here -->
-                <div class="row">
-                    <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                        <div class="hidden-xs dtempty_message_h1">
-                            <!-- You Haven't Created A Konstant Yet. -->
-                            Još niste kreirali podatak.
-                        </div>
-                        
-                        <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                        <br/>
-                        <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
-                        <!-- <div >
+    <div *ngIf="konstL.length == 0">
+      <ng-template pTemplate="emptymessage">
+        <!-- Custom content goes here -->
+        <div class="row">
+          <div class="text-center col-lg-12 col-md-12 col-xs-12">
+            <div class="hidden-xs dtempty_message_h1">
+              <!-- You Haven't Created A Konstant Yet. -->
+              Još niste kreirali podatak.
+            </div>
+
+            <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+            <br/>
+            <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i>
+            <!-- <div >
                             <img src="./assets/images/wrench.svg" alt="Malo malo" class="center_pic"/> 
                         </div> -->
-                        <h3 class=" hidden-xs dtempty_message" >
-                            <!-- To manually add new one click here: -->
-                            Da biste ručno dodali podatak kliknite: 
-                            <a  class="dtempty_message_text" (click)="addKonst()">
-                                    <!-- Create konstant       -->
-                                    <!--  konstantu -->
-                                    Kreiraj podatak
-                            </a>
-                        </h3>
+            <h3 class=" hidden-xs dtempty_message">
+              <!-- To manually add new one click here: -->
+              Da biste ručno dodali podatak kliknite:
+              <a class="dtempty_message_text" (click)="addKonst()">
+                <!-- Create konstant       -->
+                <!--  konstantu -->
+                Kreiraj podatak
+              </a>
+            </h3>
 
-                        <h5 class="visible-xs" >
-                            <!-- To manually add new one click here: -->
-                            Da biste ručno dodali podatak kliknite : 
-                            <a   (click)="addKonst()">
-                                    <!-- Create konstant       -->
-                                    Kreiraj podatak
-                            </a>
-                        </h5>
+            <h5 class="visible-xs">
+              <!-- To manually add new one click here: -->
+              Da biste ručno dodali podatak kliknite :
+              <a (click)="addKonst()">
+                <!-- Create konstant       -->
+                Kreiraj podatak
+              </a>
+            </h5>
 
-                    </div>
-                </div>
-            </ng-template>
+          </div>
         </div>
-      </p-dataTable>
+      </ng-template>
     </div>
-    
-    
-    
-    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
-        <p-footer>
-            <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
-            <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
-         </p-footer>
-    </p-confirmDialog>
-    
-    
-    <p-dialog header="KONSTANTA" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto" >
-    
-            <div>
-                    <dl class="dl-horizontal">
-                        <dt>
-                          ID
-                        </dt>
-                        <dd class="text-success">
-                           {{konstShow._id}}
-                        </dd>
-                        <dt>
-                        VAŽE OD DATUMA
-                        </dt>
-                        <dd class="text-success">
-                        {{konstShow.Datum | date}} 
-                        </dd>
-                        <hr id="zadzad">
-                        <dt>
-                        STOPA POREZA(Pdv)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.Pdv |  number:'1.2-2'}}
-                        </dd>
-                        <dt>
-                        ČLANARINA(zadruzi)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.Clanarin |  number:'1.2-4'}}
-                        </dd>
-                        <hr>
-                        <dt>
-                            Doprinosi penziono
-                        </dt>
-                        <dd class="text-success">
-                              {{konstShow.UcPenz |  number:'1.2-2'}}
-                        </dd>
-                        
-                        <dt>
-                          Doprinosi za zdravstveno
-                          </dt>
-                          <dd class="text-success">
-                            {{konstShow.UcZdrav |  number:'1.2-2' }} 
-                          </dd> 
-                     
-                        <dt>
-                         Normirani troškovi
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.UcNormTr |  number:'1.2-2' }}
-                            
-                        </dd>
-                        <dt>
-                        Stopa olakšice
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.UcOlak |  number:'1.2-2'}}
-                            
-                        </dd>
-                    
-                        <dt>
-                          Stopa poreza
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.UcPorez |  number:'1.2-2'}}
-                            
-                        </dd>
-                        <hr>
-                        <dt>
-                            OsPorez-ovo treba pogledati
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsPorez |  number:'1.2-4'}}
-                            
-                        </dd>
-      
-                        <dt>
-                        Umanjene poreske osnovice
-                        </dt>
-                        <dd class="text-success">
-                           {{konstShow.OsUmanjen |  number:'1.2-4'}}
-                        </dd>
+  </p-dataTable>
+</div>
 
-                        <dt>
-                         Stopa pio(prema radniku)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsPio1 |  number:'1.2-2'}}
-                        </dd>
-                          
-                        <dt>
-                         Stopa pio(prema poslodavcu)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsPio2 |  number:'1.2-2'}}
-                        </dd>
-                        <dt>
-                        Stopa zdravstveno(prema radniku)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsZdrav1 |  number:'1.2-2'}}
-                        </dd>
-                        <dt>
-                        Stopa zdravstveno(prema poslodavcu)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsZdrav2 |  number:'1.2-2'}}
-                        </dd>      
-                        <dt>
-                        Stopa nezaposlenost(prema radniku)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsNez1 |  number:'1.2-2'}}
-                        </dd>      
-                        <dt>
-                        Stopa nezaposlenost(prema poslodavcu)
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsNez2 |  number:'1.2-2'}}
-                        </dd>   
 
-                        <dt>
-                        Minimalna osnovica doprinosa
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsMinOsDop |  number:'1.2-4'}}
-                        </dd>
-                        <dt>
-                        Maksimalna osnovica doprinosa
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.OsMaxOsDop |  number:'1.2-4'}}
-                        </dd>
-                        <hr>
-                        <dt>
-                        OPIS
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.Opis}}
-                            
-                        </dd>
-                        <dt>
-                        DATUM UNOSA
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.created_at}}
-                            
-                        </dd>
-                        <dt>
-                        DATUM AŽURIRANJA
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.updatedAt}}
-                            
-                        </dd>
-                        <dt>
-                        KORISNIK
-                        </dt>
-                        <dd class="text-success">
-                            {{konstShow.NameUser}}
-                            
-                        </dd>
-                
-                    </dl>                        
-            </div>
-            <p-footer> 
-             
-            <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
-            
-           </p-footer>
-    </p-dialog>
-    
-    
- 
-<ng-template #waiting  >
-    <div class="centerWait">
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+
+<p-dialog header="KONSTANTA" [(visible)]="displayDetals" modal="modal" [responsive]="true" [width]="auto" [height]="auto">
+
+  <div>
+    <dl class="dl-horizontal">
+      <dt>
+        ID
+      </dt>
+      <dd class="text-success">
+        {{konstShow._id}}
+      </dd>
+      <dt>
+        VAŽE OD DATUMA
+      </dt>
+      <dd class="text-success">
+        {{konstShow.Datum | date}}
+      </dd>
+      <hr id="zadzad">
+      <dt>
+        STOPA POREZA(Pdv)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.Pdv | number:'1.2-2'}}
+      </dd>
+      <dt>
+        ČLANARINA(zadruzi)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.Clanarin | number:'1.2-4'}}
+      </dd>
+      <hr>
+      <dt>
+        Doprinosi penziono
+      </dt>
+      <dd class="text-success">
+        {{konstShow.UcPenz | number:'1.2-2'}}
+      </dd>
+
+      <dt>
+        Doprinosi za zdravstveno
+      </dt>
+      <dd class="text-success">
+        {{konstShow.UcZdrav | number:'1.2-2' }}
+      </dd>
+
+      <dt>
+        Normirani troškovi
+      </dt>
+      <dd class="text-success">
+        {{konstShow.UcNormTr | number:'1.2-2' }}
+
+      </dd>
+      <dt>
+        Stopa olakšice
+      </dt>
+      <dd class="text-success">
+        {{konstShow.UcOlak | number:'1.2-2'}}
+
+      </dd>
+
+      <dt>
+        Stopa poreza
+      </dt>
+      <dd class="text-success">
+        {{konstShow.UcPorez | number:'1.2-2'}}
+
+      </dd>
+      <hr>
+      <dt>
+        OsPorez-ovo treba pogledati
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsPorez | number:'1.2-4'}}
+
+      </dd>
+
+      <dt>
+        Umanjene poreske osnovice
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsUmanjen | number:'1.2-4'}}
+      </dd>
+
+      <dt>
+        Stopa pio(prema radniku)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsPio1 | number:'1.2-2'}}
+      </dd>
+
+      <dt>
+        Stopa pio(prema poslodavcu)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsPio2 | number:'1.2-2'}}
+      </dd>
+      <dt>
+        Stopa zdravstveno(prema radniku)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsZdrav1 | number:'1.2-2'}}
+      </dd>
+      <dt>
+        Stopa zdravstveno(prema poslodavcu)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsZdrav2 | number:'1.2-2'}}
+      </dd>
+      <dt>
+        Stopa nezaposlenost(prema radniku)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsNez1 | number:'1.2-2'}}
+      </dd>
+      <dt>
+        Stopa nezaposlenost(prema poslodavcu)
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsNez2 | number:'1.2-2'}}
+      </dd>
+
+      <dt>
+        Minimalna osnovica doprinosa
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsMinOsDop | number:'1.2-4'}}
+      </dd>
+      <dt>
+        Maksimalna osnovica doprinosa
+      </dt>
+      <dd class="text-success">
+        {{konstShow.OsMaxOsDop | number:'1.2-4'}}
+      </dd>
+      <hr>
+      <dt>
+        OPIS
+      </dt>
+      <dd class="text-success">
+        {{konstShow.Opis}}
+
+      </dd>
+      <dt>
+        DATUM UNOSA
+      </dt>
+      <dd class="text-success">
+        {{konstShow.created_at}}
+
+      </dd>
+      <dt>
+        DATUM AŽURIRANJA
+      </dt>
+      <dd class="text-success">
+        {{konstShow.updatedAt}}
+
+      </dd>
+      <dt>
+        KORISNIK
+      </dt>
+      <dd class="text-success">
+        {{konstShow.NameUser}}
+
+      </dd>
+
+    </dl>
+  </div>
+  <p-footer>
+
+    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+
+  </p-footer>
+</p-dialog>
+
+
+
+<ng-template #waiting>
+  <div class="centerWait">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     Loading...
-    </div>
+  </div>
 </ng-template>
-    

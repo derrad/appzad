@@ -6,9 +6,9 @@ import { ZadrugarFormComponent } from './zadrugar-form/zadrugar-form.component';
 
 
 const zadrRoutes: Routes = [
-     {path: 'zadrugar', component: ZadrugarComponent, canActivate: [AuthGuard]},
-     {path: 'zadrugar/new', component: ZadrugarFormComponent, canActivate: [AuthGuard]},
-     {path: 'zadrugar/:id', component: ZadrugarFormComponent, canActivate: [AuthGuard]},
+  { path: 'zadrugar', component: ZadrugarComponent, canActivate: [AuthGuard] },
+  { path: 'zadrugar/new', component: ZadrugarFormComponent, canActivate: [AuthGuard] },
+  { path: 'zadrugar/:id', component: ZadrugarFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

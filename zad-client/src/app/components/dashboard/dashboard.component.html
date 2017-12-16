@@ -1,215 +1,229 @@
-<div  [@routerTransition]>
-      
-        <div class="row">
+<div [@routerTransition]>
 
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                        <div class="panel panel-info">
-                                <div class="panel-heading">
-                                        <div class="row">
-                                                <div class="col-xs-12 text-center">
-                                                    <h3>UPUTI</h3>
-                                                </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 text-left">
-                                                <h4 >
-                                                   <span class="badge">{{CUpuAll}}</span>
-                                                </h4>
-                                                <div>Ukupno</div>
-                                            </div>
-                                            <div class="col-xs-12 text-center">
-                                                    <h4 class="badge" >{{CUputFakt}}</h4>
-                                                <div><strong>Fakturisanih</strong></div>
-                                            </div>
-                                            <div class="col-xs-12 text-right">
-                                                    <h4>
-                                                       <span class="badge">{{CUputStorn}}</span>
-                                                    </h4>
-                                                <div >Stornirani</div>
-                                            </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                        <div class="panel panel-warning">
-                                <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-xs-12 text-center">
-                                                <h3>FAKTURE</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 text-left">
-                                                    <h4>26</h4>
-                                                <div>Faktura</div>
-                                            </div>
-                                            <div class="col-xs-12 text-center">
-                                                <h4>15</h4>
-                                                <div><strong>Uplaćenih</strong></div>
-                                            </div>
-                                            <div class="col-xs-12 text-right">
-                                                    <h4>12</h4>
-                                                <div>Isplaćenih</div>
-                                            </div>
-                                        </div>
-                                </div>
-                        </div>
+  <div class="row">
 
-                </div>
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="panel panel-success">
-                            <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-12 text-center">
-                                            <h3>UPLATE</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 text-left">
-                                                <h4>26</h4>
-                                            <div>Ukupno</div>
-                                        </div>
-                                        <div class="col-xs-12 text-center">
-                                            <h4>15</h4>
-                                            <div><strong>U celosti</strong></div>
-                                        </div>
-                                        <div class="col-xs-12 text-right">
-                                                <h4>12</h4>
-                                            <div>Deo uplaćen</div>
-                                        </div>
-                                    </div>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                        <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-xs-12 text-center">
-                                                <h3>ISPLATE</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 text-left">
-                                                    <h4>26</h4>
-                                                <div>Ukupno</div>
-                                            </div>
-                                            <div class="col-xs-12 text-center">
-                                                <h4>15</h4>
-                                                <div><strong>Samo po uplatama</strong></div>
-                                            </div>
-                                            <div class="col-xs-12 text-right">
-                                                    <h4>12</h4>
-                                                <div>Samo po Fakturama</div>
-                                            </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h3>UPUTI</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-left">
+              <h4>
+                <span class="badge">{{CUpuAll}}</span>
+              </h4>
+              <div>Ukupno</div>
+            </div>
+            <div class="col-xs-12 text-center">
+              <h4 class="badge">{{CUputFakt}}</h4>
+              <div>
+                <strong>Fakturisanih</strong>
+              </div>
+            </div>
+            <div class="col-xs-12 text-right">
+              <h4>
+                <span class="badge">{{CUputStorn}}</span>
+              </h4>
+              <div>Stornirani</div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-users fa-5x"></i>
-                                    </div>
-                                    <div class="form-group col-xs-9 text-right">
-                                        <div>Unetih zadrugara
-                                            <span class="badge">{{CzadrAll}}</span>
-                                        </div>
-                                    </div>
-                                    <div class=" form-group col-xs-9 text-right">
-                                        <div>Aktivnih zadrugara
-                                            <span class="badge">{{CzadrActiv}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a [routerLink]="['/zadrugar']">
-                                <div class="panel-footer">
-                                        <span class="pull-left">Pogledaj detaljnije</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                    </div>
-
-
-
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                        <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-address-card fa-5x"></i>
-                                        </div>
-                                        
-                                        <div class="form-group col-xs-9 text-right">
-                                                <div>Kupaca ukupno
-                                                    <span class="badge">{{CkupacAll}}</span>
-                                                </div>
-                                        </div>
-                                        
-                                        <div class="form-group col-xs-9 text-right">
-                                            <div>Aktivnih kupaca
-                                                <span class="badge">{{CkupacActiv}}</span>
-                                            </div>
-                                        </div>
-
-                                        
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-xs-12 text-right">
-                                            <div>Kupaca sa uputom
-                                                <span class="badge">{{CkupacUput}}</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <a [routerLink]="['/partner']">
-                                    <div class="panel-footer">
-                                            <span class="pull-left">Pogledaj detaljnije</span>
-                                            <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                        </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                        <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-list-alt fa-5x"></i>
-                                        </div>
-                                        <div class="form-group col-xs-9 text-right">
-                                                <div>Poslova ukupno
-                                                    <span class="badge">{{CposaoAll}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-xs-9 text-right">
-                                                 <div>Poslova u uputima
-                                                    <span class="badge">{{CposaoActiv}}</span>
-                                                 </div>
-                                            </div>
-                                    </div>
-                                </div>
-                                <a [routerLink]="['/posao']">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Pogledaj detaljnije</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                        </div>
-                </div>
-                    
-               
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h3>FAKTURE</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-left">
+              <h4>26</h4>
+              <div>Faktura</div>
+            </div>
+            <div class="col-xs-12 text-center">
+              <h4>15</h4>
+              <div>
+                <strong>Uplaćenih</strong>
+              </div>
+            </div>
+            <div class="col-xs-12 text-right">
+              <h4>12</h4>
+              <div>Isplaćenih</div>
+            </div>
+          </div>
         </div>
+      </div>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h3>UPLATE</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-left">
+              <h4>26</h4>
+              <div>Ukupno</div>
+            </div>
+            <div class="col-xs-12 text-center">
+              <h4>15</h4>
+              <div>
+                <strong>U celosti</strong>
+              </div>
+            </div>
+            <div class="col-xs-12 text-right">
+              <h4>12</h4>
+              <div>Deo uplaćen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h3>ISPLATE</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-left">
+              <h4>26</h4>
+              <div>Ukupno</div>
+            </div>
+            <div class="col-xs-12 text-center">
+              <h4>15</h4>
+              <div>
+                <strong>Samo po uplatama</strong>
+              </div>
+            </div>
+            <div class="col-xs-12 text-right">
+              <h4>12</h4>
+              <div>Samo po Fakturama</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-users fa-5x"></i>
+            </div>
+            <div class="form-group col-xs-9 text-right">
+              <div>Unetih zadrugara
+                <span class="badge">{{CzadrAll}}</span>
+              </div>
+            </div>
+            <div class=" form-group col-xs-9 text-right">
+              <div>Aktivnih zadrugara
+                <span class="badge">{{CzadrActiv}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a [routerLink]="['/zadrugar']">
+          <div class="panel-footer">
+            <span class="pull-left">Pogledaj detaljnije</span>
+            <span class="pull-right">
+              <i class="fa fa-arrow-circle-right fa-2x"></i>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+
+
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-address-card fa-5x"></i>
+            </div>
+
+            <div class="form-group col-xs-9 text-right">
+              <div>Kupaca ukupno
+                <span class="badge">{{CkupacAll}}</span>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-9 text-right">
+              <div>Aktivnih kupaca
+                <span class="badge">{{CkupacActiv}}</span>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12 text-right">
+              <div>Kupaca sa uputom
+                <span class="badge">{{CkupacUput}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <a [routerLink]="['/partner']">
+          <div class="panel-footer">
+            <span class="pull-left">Pogledaj detaljnije</span>
+            <span class="pull-right">
+              <i class="fa fa-arrow-circle-right fa-2x"></i>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-list-alt fa-5x"></i>
+            </div>
+            <div class="form-group col-xs-9 text-right">
+              <div>Poslova ukupno
+                <span class="badge">{{CposaoAll}}</span>
+              </div>
+            </div>
+            <div class="form-group col-xs-9 text-right">
+              <div>Poslova u uputima
+                <span class="badge">{{CposaoActiv}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a [routerLink]="['/posao']">
+          <div class="panel-footer">
+            <span class="pull-left">Pogledaj detaljnije</span>
+            <span class="pull-right">
+              <i class="fa fa-arrow-circle-right fa-2x"></i>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+
+  </div>
 </div>

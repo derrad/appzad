@@ -1,28 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { ServiceConfig } from './../../services/service.config';
-// import { ResponeCustom} from './../../shared/models/ErrorRes';
 import { BaseService } from './../../services/base.service';
 
 @Injectable()
 export class UputService extends BaseService {
 
-  // authToken: any;
-  // isDev: boolean;
-  // data: any;
   constructor(private http: Http) {
-    // this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
-    super();
-   }
 
-  // loadToken() {
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
+    super();
+  }
 
   getUputi() {
     const headers = new Headers();
@@ -30,8 +21,8 @@ export class UputService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput');
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
 
@@ -40,9 +31,9 @@ export class UputService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + id) ;
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + id);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
 
   }
 
@@ -51,10 +42,10 @@ export class UputService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/') ;
-    return this.http.post(ep, JSON.stringify(tuput), {headers: headers})
-     .map(res => res.json())
-     .catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/');
+    return this.http.post(ep, JSON.stringify(tuput), { headers: headers })
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   updateUput(tuput) {
@@ -62,10 +53,10 @@ export class UputService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + tuput._id) ;
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + tuput._id);
 
-    return this.http.put(ep, JSON.stringify(tuput), {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.put(ep, JSON.stringify(tuput), { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
 
   }
 
@@ -74,32 +65,22 @@ export class UputService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + id) ;
-    return this.http.delete(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/uput/' + id);
+    return this.http.delete(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
 
   getUputBrojGod(tdatum) {
-   // console.log(' parametar je u servicu ' + JSON.stringify(tdatum));
+    // console.log(' parametar je u servicu ' + JSON.stringify(tdatum));
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/maxbroj') ;
-    return this.http.post(ep, JSON.stringify(tdatum), {headers: headers})
-     .map(res => res.json())
-     .catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/maxbroj');
+    return this.http.post(ep, JSON.stringify(tdatum), { headers: headers })
+      .map(res => res.json())
+      .catch(this.handleError);
   }
-
-
-//   private handleError(error: Response) {
-//     const myerror = new ResponeCustom().fromJSON(error.json());
-//     const servererr = new ResponeCustom();
-//     servererr.message = 'Server error';
-//     servererr.success = false;
-//     servererr.data = [];
-//     return Observable.throw(myerror || servererr);
-// }
 
 }

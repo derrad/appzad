@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 import { Header } from 'primeng/primeng';
 import { Footer } from 'primeng/primeng';
-import { ConfirmDialogModule, ConfirmationService} from 'primeng/primeng';
-import { DialogModule} from 'primeng/primeng';
+import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
 import { routerTransition } from '../../animation/router.animations';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { VlasnikService } from './vlasnik.service';
 import { VlasnikModel } from './vlasnik-model';
-import { ResponeCustom} from './../../shared/models/ErrorRes';
+import { ResponeCustom } from './../../shared/models/ErrorRes';
 
 @Component({
   selector: 'app-vlasnik',
@@ -24,9 +24,10 @@ export class VlasnikComponent implements OnInit {
   vlasnL: Array<VlasnikModel>;
   displayDetals = false;
   vlasnShow: VlasnikModel = new VlasnikModel();
+  auto = 'auto';
 
   constructor(private router: Router, private vlasnService: VlasnikService,
-    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED VLASNIKA';
   }
 
@@ -39,14 +40,15 @@ export class VlasnikComponent implements OnInit {
       },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
-        cssClass: 'alert-danger',
-        timeout: 9000});
+          cssClass: 'alert-danger',
+          timeout: 9000
+        });
         this.vlasnL = [];
         return false;
       }
-    );
+      );
   }
-  selectItem( work: VlasnikModel) {
+  selectItem(work: VlasnikModel) {
     this.displayDetals = true;
     this.vlasnShow = this.cloneData(work);
   }
@@ -64,32 +66,34 @@ export class VlasnikComponent implements OnInit {
   updateVasnik(id) {
     this.router.navigate(['/vlasnik/', id]);
   }
- deleteVlasnik(tvlasn) {
+  deleteVlasnik(tvlasn) {
     this.confirmationService.confirm({
-        message: `Jeste li sigurni da želite uklonite izabrani podatak ?   ` ,
-        header: `${tvlasn.Ime}`,
-          accept: () => {
-            const index = this.vlasnL.indexOf(tvlasn);
-           // console.log("index je " + index);
-            this.vlasnL.splice(index, 1);
-            this.vlasnService.delVlasnik(tvlasn._id)
-              .subscribe((pos) => {
-                if (pos.success) {
-                   this.flashMessage.show(pos.message , {
-                      cssClass: 'alert-success',
-                      timeout: 1000});
-                }else {
-                  this.router.navigate(['NotFound']);
-                }
-                } ,
-                (error: ResponeCustom)  => {
-                  this.flashMessage.show(error.message, {
-                    cssClass: 'alert-danger',
-                    timeout: 5000});
-                  // Revert the view back to its original state
-                  this.vlasnL.splice(index, 0, tvlasn);
-                });
-          }
-      });
-    }
+      message: `Jeste li sigurni da želite uklonite izabrani podatak ?   `,
+      header: `${tvlasn.Ime}`,
+      accept: () => {
+        const index = this.vlasnL.indexOf(tvlasn);
+        // console.log("index je " + index);
+        this.vlasnL.splice(index, 1);
+        this.vlasnService.delVlasnik(tvlasn._id)
+          .subscribe((pos) => {
+            if (pos.success) {
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-success',
+                timeout: 1000
+              });
+            } else {
+              this.router.navigate(['NotFound']);
+            }
+          },
+          (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
+              cssClass: 'alert-danger',
+              timeout: 5000
+            });
+            // Revert the view back to its original state
+            this.vlasnL.splice(index, 0, tvlasn);
+          });
+      }
+    });
+  }
 }

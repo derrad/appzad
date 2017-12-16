@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { ButtonModule, InputTextModule } from 'primeng/primeng';
@@ -10,8 +10,7 @@ import { MestaComponent } from './mesta.component';
 import { MestaFormComponent } from './mesta-form/mesta-form.component';
 import { MestaRoutingModule } from './mesta-routing.module';
 import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
-// import { PickOpstinaComponent } from './../../shared/pickup/pick-opstina/pick-opstina.component';
-import {PickupModule} from './../../shared/pickup/pickup.module';
+import { PickupModule } from './../../shared/pickup/pickup.module';
 
 @NgModule({
   imports: [
@@ -31,8 +30,8 @@ import {PickupModule} from './../../shared/pickup/pickup.module';
   declarations: [
     MestaComponent,
     MestaFormComponent
-  //  PickOpstinaComponent
+    //  PickOpstinaComponent
   ],
-  providers: [ MestaService, ConfirmationService ]
+  providers: [MestaService, ConfirmationService]
 })
-export class MestaModule {}
+export class MestaModule { }

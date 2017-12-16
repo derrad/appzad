@@ -28,26 +28,28 @@ export class ZadrugarComponent implements OnInit {
   zadrL: Array<ZadrugarModel>;
   displayDetals = false;
   zadrShow: ZadrugarModel = new ZadrugarModel();
+  auto = 'auto';
 
   constructor(private router: Router, private zadrService: ZadrugarService,
-    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED ZADRUGARA';
   }
 
   ngOnInit() {
 
-      this.zadrService.getZadrugari()
+    this.zadrService.getZadrugari()
       .subscribe((profile) => {
-      if (profile.success === true) {
-        this.zadrL = profile.data;
-      }
-      // }
+        if (profile.success === true) {
+          this.zadrL = profile.data;
+        }
+        // }
       },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-      //  console.log(error.message);
+          timeout: 9000
+        });
+        //  console.log(error.message);
         this.zadrL = [];
         return false;
       }
@@ -55,10 +57,10 @@ export class ZadrugarComponent implements OnInit {
 
   }
 
-  selectItem( work: ZadrugarModel) {
-     this.displayDetals = true;
-     this.zadrShow = this.cloneData(work);
-     console.log('Ulica' + this.zadrShow .Adresa.AdUlica);
+  selectItem(work: ZadrugarModel) {
+    this.displayDetals = true;
+    this.zadrShow = this.cloneData(work);
+    console.log('Ulica' + this.zadrShow.Adresa.AdUlica);
   }
   cloneData(c: ZadrugarModel): ZadrugarModel {
     const work = new ZadrugarModel();
@@ -67,7 +69,7 @@ export class ZadrugarComponent implements OnInit {
       work[prop] = c[prop];
     }
     return work;
-   }
+  }
 
   addZadrugar() {
     this.router.navigate(['/zadrugar/new']);
@@ -79,32 +81,34 @@ export class ZadrugarComponent implements OnInit {
 
   deleteZadrugar(tzadrugar) {
     this.confirmationService.confirm({
-        message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
-        header: `${tzadrugar.Ime}  ${tzadrugar.Prezime}`,
-          accept: () => {
-            const index = this.zadrL.indexOf(tzadrugar);
-           // console.log("index je " + index);
-            this.zadrL.splice(index, 1);
+      message: `Jeste li sigurni da želite uklonite izabrani podatak ? `,
+      header: `${tzadrugar.Ime}  ${tzadrugar.Prezime}`,
+      accept: () => {
+        const index = this.zadrL.indexOf(tzadrugar);
+        // console.log("index je " + index);
+        this.zadrL.splice(index, 1);
 
-            this.zadrService.delZadrugar(tzadrugar._id)
-              .subscribe((pos) => {
-                if (pos.success) {
-                   this.flashMessage.show(pos.message , {
-                      cssClass: 'alert-success',
-                      timeout: 1000});
-                }else {
-                  this.router.navigate(['NotFound']);
-                }
-                } ,
-                (error: ResponeCustom)  => {
-                  this.flashMessage.show(error.message, {
-                    cssClass: 'alert-danger',
-                    timeout: 5000});
-                  // Revert the view back to its original state
-                  this.zadrL.splice(index, 0, tzadrugar);
-                });
-          }
-        });
-    }
+        this.zadrService.delZadrugar(tzadrugar._id)
+          .subscribe((pos) => {
+            if (pos.success) {
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-success',
+                timeout: 1000
+              });
+            } else {
+              this.router.navigate(['NotFound']);
+            }
+          },
+          (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
+              cssClass: 'alert-danger',
+              timeout: 5000
+            });
+            // Revert the view back to its original state
+            this.zadrL.splice(index, 0, tzadrugar);
+          });
+      }
+    });
+  }
 
 }

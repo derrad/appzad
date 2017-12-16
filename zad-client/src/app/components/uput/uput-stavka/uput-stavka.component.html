@@ -1,43 +1,46 @@
-<div [formGroup]="Stavke" class="row">
-    
-        <!-- <tbody> -->
-            <!-- <tr> -->
-                    <td class="col-md-1"><input type="text" class="form-control input-sm" formControlName="Rbr" readonly></td>
-                    <td class="col-md-2"><input type="text" class="form-control input-sm" 
-                        formControlName="IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)">
-                        
-                    </td>
-                    <td class="col-md-1"> 
-                        <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()">
-                            <span class="glyphicon glyphicon-search"></span>
-                            ...
-                        </button>
-                    </td>
-                    <td class="col-md-3">
-                        <select  formControlName="ZadrugarID" class="form-control input-sm" (change)="onChangeZadr($event.target.value)" required>
-                            <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
-                            <option *ngFor="let list of zadrugarL"  [value]="list._id" >
-                                <!-- {{list.Prezime}} {{list.Ime}}   [selected]="true"-->
-                                {{list.fullName}}
-                            </option>
-                        </select>
-                    </td>
-                    <td class="col-md-3"><select  formControlName="PosloviID" class="form-control input-sm" (change)="onChangePosao($event.target.value)" required>
-                            <option [value]=""  disabled="true" [selected]="!poslL._id" > --Please select-- </option>
-                            <option *ngFor="let list of poslL" [value]="list._id"   >
-                            {{list.Naziv}} 
-                            </option>
-                        </select>
-                    </td>
-                    <td class="col-md-1">
-                        <button type="button" class="btn btn-sm btn-danger"  (click)="onClickRemove($event)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </td>
-            <!-- </tr>     -->
-        <!-- </tbody> -->
-       
- 
+<div [formGroup]="Stavke" class="row" (keydown.shift.arrowdown)="onPressDown($event)">
+
+  <!-- <tbody> -->
+  <!-- <tr> -->
+  <td class="col-md-1">
+    <input type="text" class="form-control input-sm" formControlName="Rbr" readonly>
+  </td>
+  <td class="col-md-2">
+    <input type="text" class="form-control input-sm" formControlName="IDZadrugar" (keypress)="serValidate.validateOnlyDigit($event)">
+
+  </td>
+  <td class="col-md-1">
+    <button type="button" class="btn btn-sm btn-info" (click)="GetZadrugar()">
+      <span class="glyphicon glyphicon-search"></span>
+      ...
+    </button>
+  </td>
+  <td class="col-md-3">
+    <select formControlName="ZadrugarID" class="form-control input-sm" (change)="onChangeZadr($event.target.value)" required>
+      <option [value]="" disabled="true" [selected]="true"> --Please select-- </option>
+      <option *ngFor="let list of zadrugarL" [value]="list._id">
+        <!-- {{list.Prezime}} {{list.Ime}}   [selected]="true"-->
+        {{list.fullName}}
+      </option>
+    </select>
+  </td>
+  <td class="col-md-3">
+    <select formControlName="PosloviID" class="form-control input-sm" (change)="onChangePosao($event.target.value)" required>
+      <option [value]="" disabled="true"> --Please select-- </option>
+      <option *ngFor="let list of poslL" [value]="list._id">
+        {{list.Naziv}}
+      </option>
+    </select>
+  </td>
+  <td class="col-md-1">
+    <button type="button" class="btn btn-sm btn-danger" (click)="onClickRemove($event)">
+      <span class="glyphicon glyphicon-remove"></span>
+    </button>
+  </td>
+  <!-- </tr>     -->
+  <!-- </tbody> -->
+
+
 
 
   <!-- <div class="row">
@@ -85,8 +88,23 @@
 </div>
 
 
-<p-dialog header="ODABIR ZADRUGARA" [(visible)]="displayZadrugar" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
-    <app-pick-zadrugar [zadrL]="zadrugarL" 
-       (pickRow)="PickZadrugar($event)" (pickNothing)="displayZadrugar=false">
-     </app-pick-zadrugar>
+<p-dialog header="ODABIR ZADRUGARA" [(visible)]="displayZadrugar" modal="modal" [responsive]="true" [width]="pickWidth" [height]="auto">
+  <app-pick-zadrugar [zadrL]="zadrugarL" (pickRow)="PickZadrugar($event)" (pickNothing)="displayZadrugar=false">
+  </app-pick-zadrugar>
 </p-dialog>
+
+<!--  tastatura dogadjaji
+<input (keydown.enter)="...">
+<input (keydown.a)="...">
+<input (keydown.esc)="...">
+<input (keydown.shift.esc)="...">
+<input (keydown.control)="...">
+<input (keydown.alt)="...">
+<input (keydown.meta)="...">
+<input (keydown.9)="...">
+<input (keydown.tab)="...">
+<input (keydown.backspace)="...">
+<input (keydown.arrowup)="...">
+<input (keydown.shift.arrowdown)="...">
+<input (keydown.shift.control.z)="...">
+<input (keydown.f4)="..."> -->

@@ -6,9 +6,9 @@ import { UputFormComponent } from './uput-form/uput-form.component';
 
 
 const uputRoutes: Routes = [
-     {path: 'uput', component: UputComponent, canActivate: [AuthGuard]},
-     {path: 'uput/new', component: UputFormComponent, canActivate: [AuthGuard]},
-     {path: 'uput/:id', component: UputFormComponent, canActivate: [AuthGuard]},
+  { path: 'uput', component: UputComponent, canActivate: [AuthGuard] },
+  { path: 'uput/new', component: UputFormComponent, canActivate: [AuthGuard] },
+  { path: 'uput/:id', component: UputFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -1,115 +1,113 @@
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-              <h5>{{title}}</h5> 
-            </div>
-            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-              <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-            </div>
-     </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
+    </div>
   </div>
   <div class="panel-body">
-      <form [formGroup]="formMEST" (ngSubmit)="save()" novalidate>
-          <div class="form-group" >
-               <input class="form-control" formControlName="_id"  [(ngModel)]="mesto._id"   type="hidden">
+    <form [formGroup]="formMEST" (ngSubmit)="save()" novalidate>
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="mesto._id" type="hidden">
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8">
+          <label class="center-block">Opština:
+            <select formControlName="Opstina" class="form-control" required>
+              <option [value]="" disabled="true" [selected]="true"> --Please select-- </option>
+              <option *ngFor="let list of opstL" [value]="list._id">
+                {{ list.Naziv }}
+              </option>
+            </select>
+          </label>
+          <!-- [(ngModel)]="mesto.Opstina" -->
+          <div *ngIf="Opstina.invalid && (Opstina.dirty || Opstina.touched)" class="alert alert-danger">
+            <div *ngIf="Opstina.errors.required">
+              <strong>Opština je obavezan podatak !!!</strong>
+            </div>
           </div>
-          <div class="row">
-              <div class="form-group col-md-8">
-                  <label class="center-block">Opština:
-                    <select  formControlName="Opstina" class="form-control"  required>
-                      <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
-                      <option *ngFor="let list of opstL" [value]="list._id" >
-                        {{ list.Naziv }}
-                      </option>
-                    </select>
-                  </label>
-                  <!-- [(ngModel)]="mesto.Opstina" -->
-                  <div *ngIf="Opstina.invalid && (Opstina.dirty || Opstina.touched)" class="alert alert-danger">
-                    <div *ngIf="Opstina.errors.required">
-                        <strong>Opština je obavezan podatak !!!</strong>
-                    </div>
-                  </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="center-block">&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-info form-control" (click)="GetPickOpstina()" >
-                    <span class="glyphicon glyphicon-search"></span>
-                    <!-- ... -->
-                    ...
-                </button>
-                </label>
-              </div>
         </div>
-        <!-- [(ngModel)]="mesto.Naziv" -->
-          <div class="form-group">
-              <label class="center-block">Naziv mesta:
-                <input class="form-control" formControlName="Naziv"   required>
-              </label>
-               
-               <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                    <div *ngIf="Naziv.errors.required">
-                        <strong>Naziv je obavezan podatak !!!</strong>
-                    </div>
-                  </div>
-            </div>
-            
-            <!-- [(ngModel)]="mesto.Ptt" -->
-             <div class="form-group">
-                <label class="center-block">Ptt:
-                  <input class="form-control" formControlName="Ptt"   >
-                </label>
-              </div>
-              
-             
-              <!-- [(ngModel)]="mesto.Opis" -->
-            <div class="form-group">
-                <label class="center-block">Opis:
-                  <textarea class="form-control" formControlName="Opis"  >
-                  </textarea>
-                </label>
-            </div>
-          
-            <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
-                        <button type="submit" [disabled]="!formMEST.valid"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
+        <div class="form-group col-md-4">
+          <label class="center-block">&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-info form-control" (click)="GetPickOpstina()">
+              <span class="glyphicon glyphicon-search"></span>
+              <!-- ... -->
+              ...
+            </button>
+          </label>
+        </div>
+      </div>
+      <!-- [(ngModel)]="mesto.Naziv" -->
+      <div class="form-group">
+        <label class="center-block">Naziv mesta:
+          <input class="form-control" formControlName="Naziv" required>
+        </label>
 
-                      <button type="reset" class="btn btn-danger"  [disabled]="formMEST.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Clear Data
-                      </button>
-                      
-                    </div>
-              
-                    
+        <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+          <div *ngIf="Naziv.errors.required">
+            <strong>Naziv je obavezan podatak !!!</strong>
           </div>
-              
+        </div>
+      </div>
+
+      <!-- [(ngModel)]="mesto.Ptt" -->
+      <div class="form-group">
+        <label class="center-block">Ptt:
+          <input class="form-control" formControlName="Ptt">
+        </label>
+      </div>
 
 
-      </form>
+      <!-- [(ngModel)]="mesto.Opis" -->
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis">
+          </textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formMEST.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formMEST.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear Data
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+    </form>
   </div>
- 
+
   <div class="panel-footer">
-      
-          <button (click)="backClicked()"  class="btn btn-primary btn-block">
-            <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-            Back
-        </button>
- 
+
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+
   </div>
-  
+
 </div>
 
 
-    
-<p-dialog header="ODABIR OPŠTINE" [(visible)]="displayPick" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
-  
- <app-pick-opstina [opstL]="opstL" 
-    (pickRow)="PickOpstina($event)" (pickNothing)="displayPick=false">
+
+<p-dialog header="ODABIR OPŠTINE" [(visible)]="displayPick" modal="modal" [responsive]="true" [width]="pickWidth" [height]="auto">
+
+  <app-pick-opstina [opstL]="opstL" (pickRow)="PickOpstina($event)" (pickNothing)="displayPick=false">
   </app-pick-opstina>
 
 </p-dialog>

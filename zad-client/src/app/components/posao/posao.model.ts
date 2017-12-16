@@ -9,9 +9,9 @@ export interface IPosaoModel {
     NameUser?: string;
     created_at?: Date;
     updatedAt?: Date;
- }
+}
 
- export class Posao  implements IPosaoModel {
+export class Posao implements IPosaoModel {
     _id: string;
     StepenSS: string;
     Naziv: string;

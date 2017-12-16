@@ -1,94 +1,93 @@
-<div class="panel panel-primary" >
-    <div class="panel-heading">
-       
-        <div class="row">
-            <div class="text-left col-lg-9 col-md-9 col-xs-9">
-                <h5>{{title}}</h5> 
-              </div>
-              <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-              </div>
-        </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
     </div>
-    <div class="panel-body">
-        <form [formGroup]="formReg" (ngSubmit)="onRegisterSubmit()" novalidate>
-            <div class="form-group" >
-                 <input class="form-control" formControlName="_id"  [(ngModel)]="userN._id"   type="hidden">
-            </div>
-            
-            <div class="form-group">
-                <label class="center-block">Ime i prezime:
-                  <input class="form-control" formControlName="name"  [(ngModel)]="userN.name" >
-                </label>
-                 <div class="text-danger" *ngIf="!formReg.controls['name'].valid && formReg.controls['name'].touched">Ime nije uneto</div> 
-                
-              </div>
-              <div class="form-group">
-                <label class="center-block">Korisničko ime:
-                  <input class="form-control" formControlName="username"  [(ngModel)]="userN.username" >
-                </label>
-                 <div class="text-danger" *ngIf="!formReg.controls['username'].valid && formReg.controls['username'].touched">Korisničko ime nije uneto</div> 
-                
-              </div>
-              <div class="form-group">
-                <label class="center-block">Email:
-                  <input class="form-control" formControlName="email"  [(ngModel)]="userN.email" >
-                </label>
-                 <div class="text-danger" *ngIf="!formReg.controls['email'].valid && formReg.controls['email'].touched">Email nije unet</div> 
-              </div>
-              
-              <div class="form-group">
-                  <label class="center-block">Lozinka:
-                    <input type="password" class="form-control" formControlName="password"  [(ngModel)]="userN.password" >
-                  </label>
-                   <div class="text-danger" *ngIf="!formReg.controls['password'].valid && formReg.controls['password'].touched">Lozinka nije uneta</div> 
-                </div>
-                
-                
-                <div class="form-group">
-                  <label class="center-block">Opis:
-                    <textarea class="form-control" formControlName="Opis"  [(ngModel)]="userN.Opis">
-                    </textarea>
-                  </label>
-              </div>
-            
-              <div class="form-group">
-                      <div class="col-md-offset-5 col-md-12">
-                          <button type="submit" [disabled]="!formReg.valid"
-                              class="btn btn-default">
-                          <span class="glyphicon glyphicon-saved"></span>
-                          Save
-                          </button>
-  
-                        <button type="reset" class="btn btn-danger"  [disabled]="formReg.pristine"  (click)="revert()">
-                            <i class="fa fa-undo" aria-hidden="true"></i>
-                            Clear data
-                        </button>
-                        
-                      </div>
-                
-                      
-            </div>
-                
-  
-  
-        </form>
-    </div>
-   
-    <div class="panel-footer">
-        
-            <button (click)="backClicked()"  class="btn btn-primary btn-block">
-              <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-              Back
-          </button>
-   
-    </div>
-    
   </div>
-  
-  
-  
-  
+  <div class="panel-body">
+    <form [formGroup]="formReg" (ngSubmit)="onRegisterSubmit()" novalidate>
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="userN._id" type="hidden">
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Ime i prezime:
+          <input class="form-control" formControlName="name" [(ngModel)]="userN.name">
+        </label>
+        <div class="text-danger" *ngIf="!formReg.controls['name'].valid && formReg.controls['name'].touched">Ime nije uneto</div>
+
+      </div>
+      <div class="form-group">
+        <label class="center-block">Korisničko ime:
+          <input class="form-control" formControlName="username" [(ngModel)]="userN.username">
+        </label>
+        <div class="text-danger" *ngIf="!formReg.controls['username'].valid && formReg.controls['username'].touched">Korisničko ime nije uneto</div>
+
+      </div>
+      <div class="form-group">
+        <label class="center-block">Email:
+          <input class="form-control" formControlName="email" [(ngModel)]="userN.email">
+        </label>
+        <div class="text-danger" *ngIf="!formReg.controls['email'].valid && formReg.controls['email'].touched">Email nije unet</div>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Lozinka:
+          <input type="password" class="form-control" formControlName="password" [(ngModel)]="userN.password">
+        </label>
+        <div class="text-danger" *ngIf="!formReg.controls['password'].valid && formReg.controls['password'].touched">Lozinka nije uneta</div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis" [(ngModel)]="userN.Opis">
+          </textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formReg.valid" class="btn btn-default">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formReg.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+
+    </form>
+  </div>
+
+  <div class="panel-footer">
+
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
 
 
 <!-- <div class="panel panel-info ">
@@ -131,5 +130,3 @@
 </div>
 
  -->
-
-

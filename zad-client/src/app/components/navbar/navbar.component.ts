@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {Router} from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
 // import * as $ from 'jquery';
-import {SidebarModule} from 'primeng/primeng';
+import { SidebarModule } from 'primeng/primeng';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ import {SidebarModule} from 'primeng/primeng';
 export class NavbarComponent implements OnInit {
   @Input()
   public visibleSidebar1;
-  constructor( private authService: AuthService,
+  constructor(private authService: AuthService,
     private router: Router, private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit {
     //   }
     // });
     // // Configure tooltips globally
-//    $('[data-toggle="tooltip"]').tooltip();
+    //    $('[data-toggle="tooltip"]').tooltip();
     // Smooth scrolling using jQuery easing
     // $(document).on('click', 'a.scroll-to-top', function(event) {
     //   var $anchor = $(this);
@@ -69,23 +69,23 @@ export class NavbarComponent implements OnInit {
 
   getNotification(evt) {
     // Do something with the notification (evt) sent by the child!
-   // console.log('"getNotification u  navbaru');
+    // console.log('"getNotification u  navbaru');
     this.visibleSidebar1 = false;
   }
 
   onLogoutClick() {
     this.authService.logout();
     this.flashMessage.show('You are logged out', {
-       cssClass: 'alert-success',
-       timeout: 3000
-     });
+      cssClass: 'alert-success',
+      timeout: 3000
+    });
 
     this.router.navigate(['/login']);
     return false;
   }
 
   onClickHelp() {
-  // alert("Provera help-a");
+    // alert("Provera help-a");
     this.flashMessage.show('Trebalo bi help da prikazemo', {
       cssClass: 'alert-success',
       timeout: 3000
@@ -96,12 +96,12 @@ export class NavbarComponent implements OnInit {
 
   onClickQuickMenu() {
     // alert("Provera help-a");
-      this.flashMessage.show('Trebalo quick menu da prikazemo', {
-        cssClass: 'alert-success',
-        timeout: 3000
-      });
-      // this.messageService.add({severity:'info', summary:'Help info', detail:'Trebalo bi help da prikazemo'});
-      return false;
-    }
+    this.flashMessage.show('Trebalo quick menu da prikazemo', {
+      cssClass: 'alert-success',
+      timeout: 3000
+    });
+    // this.messageService.add({severity:'info', summary:'Help info', detail:'Trebalo bi help da prikazemo'});
+    return false;
+  }
 
 }

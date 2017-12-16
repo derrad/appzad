@@ -9,4 +9,4 @@ router.post('/api/zanimanja',passport.authenticate('jwt', {session:false}),  Zan
 router.put('/api/zanimanja/:id',passport.authenticate('jwt', {session:false}),  ZanimanjaController.create);
 router.delete('/api/zanimanja/:id',passport.authenticate('jwt', {session:false}),  ZanimanjaController.delezanimanja);
 
-module.exports = router
+module.exports = router;

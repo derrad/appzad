@@ -6,9 +6,9 @@ import { VlasnikFormComponent } from './vlasnik-form/vlasnik-form.component';
 
 
 const vlasnikRoutes: Routes = [
-  {path: 'vlasnik', component: VlasnikComponent, canActivate: [AuthGuard]},
-  {path: 'vlasnik/new', component: VlasnikFormComponent, canActivate: [AuthGuard]},
-  {path: 'vlasnik/:id', component: VlasnikFormComponent, canActivate: [AuthGuard]}
+  { path: 'vlasnik', component: VlasnikComponent, canActivate: [AuthGuard] },
+  { path: 'vlasnik/new', component: VlasnikFormComponent, canActivate: [AuthGuard] },
+  { path: 'vlasnik/:id', component: VlasnikFormComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

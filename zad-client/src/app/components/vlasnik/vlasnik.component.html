@@ -1,278 +1,278 @@
-<div *ngIf="vlasnL;else  waiting"  [@routerTransition]>
-  
-      <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
-        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-          <input #gb type="text" pInputText size="50" placeholder="Global Filter">
-      </div>
-      <p-dataTable [value]="vlasnL"  [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true"
-                selectionMode="single" [(selection)]="selectedVlasn" dataKey="_id"   
-                styleClass="table table-striped" [responsive]="true"  [immutable]=false 
-                resizableColumns="true" columnResizeMode="expand">
+<div *ngIf="vlasnL;else  waiting" [@routerTransition]>
 
-      <p-header><strong>{{Title}}</strong></p-header>       
-      <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column> 
-      <p-column field="Ime" header="Ime"  ></p-column>
-      <p-column field="Adresa" header="Adresa"    ></p-column> 
-      <p-column field="Mesto" header="Mesto"  ></p-column>   
-      <p-column field="Direktor" header="Direktor"   ></p-column>
-      <p-column field="Pib" header="Pib"  ></p-column>
-      
-      <p-column  styleClass="col-button text-center" heder="ACTION">
-       
-          <ng-template let-vlasn="rowData" let-i="rowIndex" pTemplate="body" >
+  <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+  </div>
+  <p-dataTable [value]="vlasnL" [globalFilter]="gb" [resizableColumns]="true" [rows]="10" [paginator]="true" selectionMode="single"
+    [(selection)]="selectedVlasn" dataKey="_id" styleClass="table table-striped" [responsive]="true" [immutable]=false resizableColumns="true"
+    columnResizeMode="expand">
 
-              <button type="button" pButton (click)="selectItem(vlasn)" icon="fa fa-info" title="Info"></button>
-              <button type="button" pButton (click)="updateVasnik(vlasn._id)" icon="fa fa-pencil" title="Update"></button>
-              <button type="button" pButton (click)="deleteVlasnik(vlasn)" icon="fa fa-trash" title="Delete"></button>
-          </ng-template>
-      </p-column>
-      <ng-template pTemplate="emptymessage">
-          <!-- Custom content goes here -->
-          <div class="row">
-               <div class="text-center col-lg-12 col-md-12 col-xs-12">
-                <div class="hidden-xs dtempty_message_h1">
-                   Još niste kreirali podatak.
-        	    </div>
-                  
-                <h4 class="visible-xs">Još niste kreirali podatak.</h4>
-                <br/>
-                <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i> 
-                <h3 class=" hidden-xs dtempty_message" >
-                      Da biste ručno dodali podatak kliknite: 
-                      <a  class="dtempty_message_text" (click)="addVlasnik()">
-                           Kreiraj podatak
-                      </a>
-                </h3>
-                <h5 class="visible-xs" >
-                    Da biste ručno dodali podatak kliknite : 
-                    <a   (click)="addVlasnik()">
-                        Kreiraj podatak
-                    </a>
-                </h5>
-              </div>
+    <p-header>
+      <strong>{{Title}}</strong>
+    </p-header>
+    <p-column field="_id" header="ID" sortable="true" hidden="false"></p-column>
+    <p-column field="Ime" header="Ime"></p-column>
+    <p-column field="Adresa" header="Adresa"></p-column>
+    <p-column field="Mesto" header="Mesto"></p-column>
+    <p-column field="Direktor" header="Direktor"></p-column>
+    <p-column field="Pib" header="Pib"></p-column>
+
+    <p-column styleClass="col-button text-center" heder="ACTION">
+
+      <ng-template let-vlasn="rowData" let-i="rowIndex" pTemplate="body">
+
+        <button type="button" pButton (click)="selectItem(vlasn)" icon="fa fa-info" title="Info"></button>
+        <button type="button" pButton (click)="updateVasnik(vlasn._id)" icon="fa fa-pencil" title="Update"></button>
+        <button type="button" pButton (click)="deleteVlasnik(vlasn)" icon="fa fa-trash" title="Delete"></button>
+      </ng-template>
+    </p-column>
+    <ng-template pTemplate="emptymessage">
+      <!-- Custom content goes here -->
+      <div class="row">
+        <div class="text-center col-lg-12 col-md-12 col-xs-12">
+          <div class="hidden-xs dtempty_message_h1">
+            Još niste kreirali podatak.
           </div>
-        </ng-template>
 
-      </p-dataTable>
-    </div>
-    
-    
-    
-    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
-        <p-footer>
-            <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
-            <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
-         </p-footer>
-    </p-confirmDialog>
-    
-    
-    <p-dialog header="VLASNIK" [(visible)]="displayDetals" modal="modal" [responsive]="true"  [width]="auto" [height]="auto">
-    
-            <div>
-                    <dl class="dl-horizontal">
-                        <dt>
-                         ID
-                        </dt>
-                        <dd class="text-success">
-                           {{vlasnShow._id}}
-                        </dd>
-                        <dt>
-                          IME
-                        </dt>
-                        <dd class="text-success">
-                             {{vlasnShow.Ime}} 
-                        </dd>
-                        <dt>
-                          ADRESA
-                        </dt>
-                        <dd class="text-success">
-                              {{vlasnShow.Adresa}}
-                        </dd>
-                        <dt>
-                         MESTO
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Mesto}} 
-                        </dd> 
-                        <dt>
-                          Ptt REON
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.PttReon}}
-                        </dd>
-                        <dt>
-                            Ptt PAK
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.PttPak}}
-                        </dd>
-                        <dt>
-                          DIREKTOR
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Direktor}}
-                        </dd>
-                        <dt>
-                        KOMERCIJALNI
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.KomRukovac}}
-                        </dd>
-                        <dt>
-                        BLAGAJNIK
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Blagajnik}}
-                        </dd>
-                        <dt>
-                          PIB
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Pib}}
-                        </dd>
-                        <dt>
-                        MATIČNI BROJ
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.MatBroj}}
-                        </dd>
-                        <dt>
-                        ŠIFRA DELATNOSTI
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.SifDelat}}
-                        </dd>
-                        <dt>
-                        PDV BROJ
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.PdvBroj}}
-                        </dd>
-                        <dt>
-    	                SLIKA
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Slika}}
-                        </dd>
-                        <dt>
-                        SUD
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Sud}}
-                        </dd>
-                        <dt>
-                        RAČUN PORESKE JEDINICE
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.UplRacPorJed}}
-                        </dd>
-                        <dt>
-                        NAZIV PORESKE JEDINICE
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.NazPorJed}}
-                        </dd>
-                        <dt>
-                        ŽIRO RAČUN
-                        </dt>
-                            <dd >
-                                <div>
-                                    <dl class="dl-horizontal">
-                                            <div *ngFor="let item of vlasnShow.ZiroVlasnik; let i = index" >
-                                                <dt>{{i+1}}.</dt>
-                                                <dd></dd>  
+          <h4 class="visible-xs">Još niste kreirali podatak.</h4>
+          <br/>
+          <i class="fa fa-info fa-5x cursorpointer" aria-hidden="true"></i>
+          <h3 class=" hidden-xs dtempty_message">
+            Da biste ručno dodali podatak kliknite:
+            <a class="dtempty_message_text" (click)="addVlasnik()">
+              Kreiraj podatak
+            </a>
+          </h3>
+          <h5 class="visible-xs">
+            Da biste ručno dodali podatak kliknite :
+            <a (click)="addVlasnik()">
+              Kreiraj podatak
+            </a>
+          </h5>
+        </div>
+      </div>
+    </ng-template>
 
-                                                <dt>Opis</dt>
-                                                <dd class="text-success">{{item.Naziv}}</dd>
+  </p-dataTable>
+</div>
 
-                                                <dt>Broj računa</dt>
-                                                <dd class="text-success">{{item.Racun}}</dd>
-                                                
-                                                <dt>Primarni</dt>
-                                                <dd class="text-success">{{item.Glavni}}</dd>
-                                                
-                                                <dt>Napomena</dt>
-                                                <dd class="text-success">{{item.Opis}}</dd>
-                                            </div>
-                                    </dl>
-                                </div>
 
-                            <!-- <div>
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" [width]="auto" [responsive]="true" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Ne" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Da" class="ui-button-danger" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+
+<p-dialog header="VLASNIK" [(visible)]="displayDetals" modal="modal" [responsive]="true" [width]="auto" [height]="auto">
+
+  <div>
+    <dl class="dl-horizontal">
+      <dt>
+        ID
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow._id}}
+      </dd>
+      <dt>
+        IME
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Ime}}
+      </dd>
+      <dt>
+        ADRESA
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Adresa}}
+      </dd>
+      <dt>
+        MESTO
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Mesto}}
+      </dd>
+      <dt>
+        Ptt REON
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.PttReon}}
+      </dd>
+      <dt>
+        Ptt PAK
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.PttPak}}
+      </dd>
+      <dt>
+        DIREKTOR
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Direktor}}
+      </dd>
+      <dt>
+        KOMERCIJALNI
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.KomRukovac}}
+      </dd>
+      <dt>
+        BLAGAJNIK
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Blagajnik}}
+      </dd>
+      <dt>
+        PIB
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Pib}}
+      </dd>
+      <dt>
+        MATIČNI BROJ
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.MatBroj}}
+      </dd>
+      <dt>
+        ŠIFRA DELATNOSTI
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.SifDelat}}
+      </dd>
+      <dt>
+        PDV BROJ
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.PdvBroj}}
+      </dd>
+      <dt>
+        SLIKA
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Slika}}
+      </dd>
+      <dt>
+        SUD
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Sud}}
+      </dd>
+      <dt>
+        RAČUN PORESKE JEDINICE
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.UplRacPorJed}}
+      </dd>
+      <dt>
+        NAZIV PORESKE JEDINICE
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.NazPorJed}}
+      </dd>
+      <dt>
+        ŽIRO RAČUN
+      </dt>
+      <dd>
+        <div>
+          <dl class="dl-horizontal">
+            <div *ngFor="let item of vlasnShow.ZiroVlasnik; let i = index">
+              <dt>{{i+1}}.</dt>
+              <dd></dd>
+
+              <dt>Opis</dt>
+              <dd class="text-success">{{item.Naziv}}</dd>
+
+              <dt>Broj računa</dt>
+              <dd class="text-success">{{item.Racun}}</dd>
+
+              <dt>Primarni</dt>
+              <dd class="text-success">{{item.Glavni}}</dd>
+
+              <dt>Napomena</dt>
+              <dd class="text-success">{{item.Opis}}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- <div>
                                     <ul *ngFor="let item of vlasnShow.ZiroVlasnik; let i = index">
                                         <li>{{item.Naziv}}:{{item.Racun}} {{item.Opis}} </li>
                                     </ul>
                                 </div> -->
-                                <!-- {{vlasnShow.ZiroVlasnik}} -->
-                            </dd>
-                        <dt>
-                        TELEFON
-                        </dt>
-                        <dd>
-                            <div>
-                            <dl class="dl-horizontal">
-                                    <div *ngFor="let item of vlasnShow.TelefVlasnik; let i = index" >
-                                        <dt>{{i+1}}.</dt>
-                                        <dd></dd>  
+        <!-- {{vlasnShow.ZiroVlasnik}} -->
+      </dd>
+      <dt>
+        TELEFON
+      </dt>
+      <dd>
+        <div>
+          <dl class="dl-horizontal">
+            <div *ngFor="let item of vlasnShow.TelefVlasnik; let i = index">
+              <dt>{{i+1}}.</dt>
+              <dd></dd>
 
-                                        <dt>Opis</dt>
-                                        <dd class="text-success">{{item.Naziv}}</dd>
+              <dt>Opis</dt>
+              <dd class="text-success">{{item.Naziv}}</dd>
 
-                                        <dt>Broj telefona</dt>
-                                        <dd class="text-success">{{item.Telefon}}</dd>
-                                        
-                                        <dt>Primarni</dt>
-                                        <dd class="text-success">{{item.Glavni}}</dd>
-                                        
-                                        <dt>Napomena</dt>
-                                        <dd class="text-success">{{item.Opis}}</dd>
-                                    </div>
-                                </dl>
-                            </div>
-                            <!-- {{vlasnShow.TelefVlasnik}} -->
-                        </dd>
-                                
-                        <dt>
-                        OPIS
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.Opis}}
-                            
-                        </dd>
-                        <dt>
-                        DATUM UNOSA
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.created_at}}
-                            
-                        </dd>
-                        <dt>
-                        DATUM AŽURIRANJA
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.updatedAt}}
-                            
-                        </dd>
-                        <dt>
-                        KORISNIK
-                        </dt>
-                        <dd class="text-success">
-                            {{vlasnShow.NameUser}}
-                            
-                        </dd>
-                
-                    </dl>                        
+              <dt>Broj telefona</dt>
+              <dd class="text-success">{{item.Telefon}}</dd>
+
+              <dt>Primarni</dt>
+              <dd class="text-success">{{item.Glavni}}</dd>
+
+              <dt>Napomena</dt>
+              <dd class="text-success">{{item.Opis}}</dd>
             </div>
-            <p-footer>
-                    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
-           </p-footer>
-    </p-dialog>
-    
-    
- 
-<ng-template #waiting  >
-    <div class="centerWait">
+          </dl>
+        </div>
+        <!-- {{vlasnShow.TelefVlasnik}} -->
+      </dd>
+
+      <dt>
+        OPIS
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.Opis}}
+
+      </dd>
+      <dt>
+        DATUM UNOSA
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.created_at}}
+
+      </dd>
+      <dt>
+        DATUM AŽURIRANJA
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.updatedAt}}
+
+      </dd>
+      <dt>
+        KORISNIK
+      </dt>
+      <dd class="text-success">
+        {{vlasnShow.NameUser}}
+
+      </dd>
+
+    </dl>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" (click)="displayDetals=false" label="Close"></button>
+  </p-footer>
+</p-dialog>
+
+
+
+<ng-template #waiting>
+  <div class="centerWait">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     Loading...
-    </div>
+  </div>
 </ng-template>
-    

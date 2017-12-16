@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -11,27 +11,20 @@ import { BaseService } from './../../services/base.service';
 
 @Injectable()
 export class VlasnikService extends BaseService {
-  // authToken: any;
-  // isDev: boolean;
-  // data: any;
+
   constructor(private http: Http) {
-     // this.isDev = ServiceConfig.isDev; // Change to false before deployment  sredi ovo
-     super();
-   }
 
-  //  loadToken() {
-  //   const token = localStorage.getItem('id_token');
-  //   this.authToken = token;
-  // }
+    super();
+  }
 
-  getVlasn() {
+getVlasn() {
     const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik');
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   getVlasnik(id) {
@@ -40,8 +33,8 @@ export class VlasnikService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik/' + id);
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   addVlasnik(vlasn) {
@@ -50,9 +43,9 @@ export class VlasnikService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik/');
-     return this.http.post(ep, JSON.stringify(vlasn), {headers: headers})
-     .map(res => res.json())
-     .catch(this.handleError);
+    return this.http.post(ep, JSON.stringify(vlasn), { headers: headers })
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   updateVlasnik(vlasn) {
@@ -60,9 +53,9 @@ export class VlasnikService extends BaseService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    const ep =  ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik/' + vlasn._id);
-    return this.http.put(ep, JSON.stringify(vlasn), {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    const ep = ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik/' + vlasn._id);
+    return this.http.put(ep, JSON.stringify(vlasn), { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   delVlasnik(id) {
@@ -71,8 +64,8 @@ export class VlasnikService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/vlasnik/' + id);
-    return this.http.delete(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.delete(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
 
   getVlasnRacun() {
@@ -81,18 +74,7 @@ export class VlasnikService extends BaseService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     const ep = ServiceConfig.PrepareHost(this.isDev, 'api/getvlasracun');
-    return this.http.get(ep, {headers: headers})
-    .map(res => res.json()).catch(this.handleError);
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json()).catch(this.handleError);
   }
-
-
-  // private handleError(error: Response) {
-  //   const myerror = new ResponeCustom().fromJSON(error.json());
-  //   const servererr = new ResponeCustom();
-  //   servererr.message = 'Server error';
-  //   servererr.success = false;
-  //   servererr.data = [];
-  //   return Observable.throw(myerror || servererr);
-  // }
-
 }

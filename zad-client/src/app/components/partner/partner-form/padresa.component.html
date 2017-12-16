@@ -1,52 +1,52 @@
 <div class="form-group" [formGroup]="Adresa">
-    <div class="row">
-        <div class="form-group col-md-5">
-            <label class="center-block">Ulica:
-              <input type="text" class="form-control input-sm" formControlName="AdUlica" required>
-            </label>
-            <!-- <small [hidden]="Adresa.controls.AdUlica.valid" class="text-danger">
+  <div class="row">
+    <div class="form-group col-md-5">
+      <label class="center-block">Ulica:
+        <input type="text" class="form-control input-sm" formControlName="AdUlica" required>
+      </label>
+      <!-- <small [hidden]="Adresa.controls.AdUlica.valid" class="text-danger">
                 Ulica je obavezna
             </small> -->
-            <div *ngIf="Adresa.controls.AdUlica.invalid && (Adresa.controls.AdUlica.dirty || Adresa.controls.AdUlica.touched)" class="alert alert-danger">
-                    <div *ngIf="Adresa.controls.AdUlica.errors.required">
-                        <strong> Ulica je obavezan podatak !!!</strong>
-                    </div>
-                    <div *ngIf="Adresa.controls.AdUlica.errors.minlength">
-                        <strong>Ulica mora biti minimalno 2 karaktera dužine !!!</strong>
-                      </div>
-                    <div *ngIf="Adresa.controls.AdUlica.errors.maxlength">
-                        <strong>Predugačak podatak o ulici !!!</strong>
-                   </div>
-            </div>
+      <div *ngIf="Adresa.controls.AdUlica.invalid && (Adresa.controls.AdUlica.dirty || Adresa.controls.AdUlica.touched)" class="alert alert-danger">
+        <div *ngIf="Adresa.controls.AdUlica.errors.required">
+          <strong> Ulica je obavezan podatak !!!</strong>
+        </div>
+        <div *ngIf="Adresa.controls.AdUlica.errors.minlength">
+          <strong>Ulica mora biti minimalno 2 karaktera dužine !!!</strong>
+        </div>
+        <div *ngIf="Adresa.controls.AdUlica.errors.maxlength">
+          <strong>Predugačak podatak o ulici !!!</strong>
+        </div>
+      </div>
 
-        </div>
-        <div class="form-group col-md-2">
-                <label>Broj:
-                    <input type="text" class="form-control input-sm" formControlName="AdBroj">
-                </label>
-        </div>
-        <div class="form-group col-md-5">
-            <label class="center-block">Mesto:
-                <input type="text" class="form-control input-sm" formControlName="AdMesto" >
-            </label>
-        </div>
-       
     </div>
-    <div class="row">
-            <div class="form-group col-md-3">
-                    <label class="center-block">Ptt:
-                        <input type="text" class="form-control input-sm" formControlName="AdPttReon" >
-                    </label>
-            </div>
-            <div class="form-group col-md-3">
-                 <label class="center-block">Ptt pak:
-                    <input type="text" class="form-control input-sm" formControlName="AdPttPak" >
-                </label>
-            </div>
-            <div class="form-group col-md-6">
-                 <label class="center-block">Zemlja:
-                    <input type="text" class="form-control input-sm" formControlName="AdDrzava" >
-                </label>
-            </div>
+    <div class="form-group col-md-2">
+      <label>Broj:
+        <input type="text" class="form-control input-sm" formControlName="AdBroj">
+      </label>
     </div>
+    <div class="form-group col-md-5">
+      <label class="center-block">Mesto:
+        <input type="text" class="form-control input-sm" formControlName="AdMesto">
+      </label>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="form-group col-md-3">
+      <label class="center-block">Ptt:
+        <input type="text" class="form-control input-sm" formControlName="AdPttReon">
+      </label>
+    </div>
+    <div class="form-group col-md-3">
+      <label class="center-block">Ptt pak:
+        <input type="text" class="form-control input-sm" formControlName="AdPttPak">
+      </label>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="center-block">Zemlja:
+        <input type="text" class="form-control input-sm" formControlName="AdDrzava">
+      </label>
+    </div>
+  </div>
 </div>

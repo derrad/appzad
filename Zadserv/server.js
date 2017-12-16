@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./server/config/database')
+const config = require('./server/config/database');
 const favicon  = require('serve-favicon');
 const morgan = require('morgan');
 const path = require('path');
@@ -28,8 +28,8 @@ mongoose.connect(config.database,{ useMongoClient: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  // we're connected!
-  console.log("conect to mongose");
+	// we're connected!
+	console.log('conect to mongose');
 });
 
 
@@ -41,23 +41,23 @@ app.engine('html', require('ejs').renderFile);
 //use midleware
 
 //Morgan i web logovi
-const logDirectory = path.join(__dirname, 'log')
+const logDirectory = path.join(__dirname, 'log');
 // ensure log directory exists
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 // create a rotating write stream
 const accessLogStream = rfs('access.log', {
-  interval: '1d', // rotate daily
-  path: logDirectory
-})
+	interval: '1d', // rotate daily
+	path: logDirectory
+});
 // setup the logger // Standard Apache combined log output. or use common Standard Apache common log output. dev
 
 
-app.use(morgan('common', {stream: accessLogStream}))
+app.use(morgan('common', {stream: accessLogStream}));
 
 app.use(cors()); // CORS Middleware 
 // uncomment after placing your favicon in /public
 
-app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 // Passport Middleware
@@ -75,11 +75,11 @@ app.use(helmet());
 // compress all responses
 app.use(compression());
 //Route
-const users = require('./server/Route/users')
-const index = require('./server/Route/index')
+const users = require('./server/Route/users');
+const index = require('./server/Route/index');
 
-const DrzaveRoute = require('./server/Route/DrzaveRouters')
-const PosaoRoute = require('./server/Route/PosaoRouters')
+const DrzaveRoute = require('./server/Route/DrzaveRouters');
+const PosaoRoute = require('./server/Route/PosaoRouters');
 const ParamRoute = require('./server/Route/ParamRouters');
 const VlasnikRoute = require('./server/Route/VlasnikRouters');
 const ZadrugarRouter = require('./server/Route/ZadrugarRouters');
@@ -91,25 +91,22 @@ const KonstantaRouter = require('./server/Route/KonstantaRouters');
 const FondSatiRouter = require('./server/Route/FondSatiRouters');
 const KorisnikRouter = require('./server/Route/KorisnikRouters');
 const MestaRouter = require('./server/Route/MestaRouters');
-const VezbeRouter = require('./server/Route/VezbaRouters');
 const ActLogRouter = require('./server/Route/ActLogRouters');
 const BankeRouter = require('./server/Route/BankeRouters');
 const CountRotes = require('./server/Route/CountRouters');
 const UputRotes = require('./server/Route/UputRouters');
 
-
-
 app.use('/users', users); 
 
 app.use('/', [index,DrzaveRoute,PosaoRoute,ParamRoute,VlasnikRoute,ZadrugarRouter,
-              ZanimanjaRouter,RadnikRouter,PartneriRouter,OpstineRouter,MestaRouter,
-              KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,VezbeRouter,
-              ActLogRouter,BankeRouter,CountRotes,UputRotes])
+	ZanimanjaRouter,RadnikRouter,PartneriRouter,OpstineRouter,MestaRouter,
+	KonstantaRouter,FondSatiRouter,KorisnikRouter,MestaRouter,
+	ActLogRouter,BankeRouter,CountRotes,UputRotes]);
 
 
 //Route in app
 app.get('/', function(req, res) {
-  res.render('pages/index');
+	res.render('pages/index');
 });
 
 
@@ -119,50 +116,50 @@ app.get('/', function(req, res) {
 //process.env.NODE_ENV = 'production';
 
 if(process.env.NODE_ENV !== 'production') {
-  process.once('uncaughtException', function(err) {
-    console.error('FATAL: Uncaught exception.');
-    console.error(err.stack||err);
-    setTimeout(function(){
-      process.exit(1);
-    }, 100);
-  });
+	process.once('uncaughtException', function(err) {
+		console.log('FATAL: Uncaught exception.');
+		console.log(err.stack||err);
+		setTimeout(function(){
+			process.exit(1);
+		}, 100);
+	});
 }
 
 //app.set('env','production');
 //console.log(app.get('env'));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function (err, req, res, next) {
-      res.status(err.status || 500);
-      res.render('error', {
-          message: err.message,
-          error: err
-      });
-  });
+	app.use(function (err, req, res, next) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-      message: err.message,
-      error: {}
-  });
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 
 
 //starter server
 var SERVER_PORT = process.env.PORT || 3000;
- app.listen(SERVER_PORT, function() {
-   console.log('listening on ' + SERVER_PORT);
-})
+app.listen(SERVER_PORT, function() {
+	console.log('listening on ' + SERVER_PORT);
+});

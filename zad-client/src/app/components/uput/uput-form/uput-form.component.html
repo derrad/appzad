@@ -1,223 +1,221 @@
-<p>
-  uput-form works!
-</p>
-
-<!-- <p>
-  zadrugar-form works!
-</p> -->
-<div class="panel panel-primary"  [@formsTransition]>
+<div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-              <h5>{{title}}</h5>
-            </div>
-            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-              <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-            </div>
-     </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
+    </div>
   </div>
   <div class="panel-body">
-      <form [formGroup]="formUput" (ngSubmit)="save()" novalidate>
-          <!-- <div class="form-group" > -->
-          <input class="form-control" formControlName="_id"  [(ngModel)]="uputN._id"   type="hidden">
-          <!-- </div> -->
-          <div class="row">
+    <form [formGroup]="formUput" (ngSubmit)="save()" novalidate>
+      <!-- <div class="form-group" > -->
+      <input class="form-control" formControlName="_id" [(ngModel)]="uputN._id" type="hidden">
+      <!-- </div> -->
+      <div class="row">
 
-            <div class="form-group col-md-2">
-                <label class="center-block">Broj
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input class="form-control" formControlName="Broj"  readonly>
-                            </div>
-                        </div>
-                </label>
-            </div>  <!--[(ngModel)]="uputN.Broj" -->
-            <div class="form-group col-md-2">
-                <label class="center-block">Godina
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input class="form-control" formControlName="Godina"  readonly >
-                            </div>
-                        </div>
-                </label>
-                <!-- [(ngModel)]="uputN.Godina" -->
+        <div class="form-group col-md-2">
+          <label class="center-block">Broj
+            <div class="input-group">
+              <div class="input-group">
+                <input class="form-control" formControlName="Broj" readonly>
+              </div>
             </div>
-
-            <!-- [ngModel]="uputN.Datum | date:'yyyy-MM-dd'"  [ngModel]="uputN.Datum | date:'yyyy-MM-dd'" -->
-            <div class="form-group col-md-3 col-lg-2">
-                <label class="center-block">Datum:
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input type="date" formControlName="Datum" name="Datum" class="form-control" (blur)="onBlurDatum()" required>
-                            </div>
-                        </div>
-                </label>
-                <div *ngIf="Datum.invalid && (Datum.dirty || Datum.touched)" class="alert alert-danger">
-                    <div *ngIf="Datum.errors.required">
-                        <strong>Datum je obavezan podatak !!!</strong>
-                    </div>
-                </div>
+          </label>
+        </div>
+        <!--[(ngModel)]="uputN.Broj" -->
+        <div class="form-group col-md-2">
+          <label class="center-block">Godina
+            <div class="input-group">
+              <div class="input-group">
+                <input class="form-control" formControlName="Godina" readonly>
+              </div>
             </div>
+          </label>
+          <!-- [(ngModel)]="uputN.Godina" -->
+        </div>
 
-            <!-- [(ngModel)]="uputN.RacVlasnika" -->
-            <div class="form-group col-md-5 col-lg-6">
-                <label class="center-block">Racun za uplatu:
-                    <select  formControlName="RacVlasnika" class="form-control" 
-                        [compareWith]="compareVlasRacun" required>
-
-                        <option *ngFor="let list of racvlasnikL"   [ngValue]="list">
-                           {{ list.Naziv }} - {{list.Racun}}
-                        </option>
-                    </select>
-                </label>
-                <div *ngIf="RacVlasnika.invalid && (RacVlasnika.dirty || RacVlasnika.touched)" class="alert btn-danger">
-                    <div *ngIf="RacVlasnika.errors.required">
-                        <strong>Racun vlasnika je obavezan podatak !!!</strong>
-                    </div>
-                </div>
+        <!-- [ngModel]="uputN.Datum | date:'yyyy-MM-dd'"  [ngModel]="uputN.Datum | date:'yyyy-MM-dd'" -->
+        <div class="form-group col-md-3 col-lg-2">
+          <label class="center-block">Datum:
+            <div class="input-group">
+              <div class="input-group">
+                <input type="date" formControlName="Datum" name="Datum" class="form-control" (blur)="onBlurDatum()" required>
+              </div>
             </div>
-
+          </label>
+          <div *ngIf="Datum.invalid && (Datum.dirty || Datum.touched)" class="alert alert-danger">
+            <div *ngIf="Datum.errors.required">
+              <strong>Datum je obavezan podatak !!!</strong>
+            </div>
           </div>
+        </div>
 
-          <div class="row">
-                <!-- [(ngModel)]="uputN.PartneriID"  -->
-                <div class="form-group col-md-6">
-                        <label class="center-block">Kupac:
-                            <div class="row">
-                                <div class="col-lg-10 col-md-10 col-xs-10">
-                                <select  formControlName="PartneriID" class="form-control"  required>
-                                    <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
-                                    <option *ngFor="let list of kupacL" [value]="list._id"   >
-                                    {{ list.Naziv }}
-                                    </option>
-                                </select>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-xs-2">
-                                <button type="button" class="btn btn-info form-control" (click)="GetKupac()">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    ...
-                                </button>
-                                </div>
-                            </div>
-                        </label>
-                        <div *ngIf="PartneriID.invalid && (PartneriID.dirty || PartneriID.touched)" class="alert btn-danger">
-                            <div *ngIf="PartneriID.errors.required">
-                                <strong>Kupac je obavezan podatak !!!</strong>
-                            </div>
-                        </div>
-                </div>
-                <!-- [(ngModel)]="uputN.PosloviID"  -->
-                <div class="form-group col-md-6">
-                        <label class="center-block">Posao:
-                            <select  formControlName="PosloviID" class="form-control" 
-                                required >
-                                <!--  <option [value]="null">Please Select</option> -->
-                                <!-- <option [disabled]="true" [selected]="true">Select Option</option> -->
-                                <option [value]=""  disabled="true"  [selected]="true"> --Please select-- </option>
-                                <option *ngFor="let list of poslL" [value]="list._id" >
-                                    {{ list.Naziv }}
-                                </option>
-                               
-                            </select>
-                          
-                        </label>
-                        <div *ngIf="PosloviID.invalid && (PosloviID.dirty || PosloviID.touched)" class="alert btn-danger">
-                            <div *ngIf="PosloviID.errors.required">
-                                <strong>Poslovi su obavezan podatak !!!</strong>
-                            </div>
-                        </div>
-                </div>
+        <!-- [(ngModel)]="uputN.RacVlasnika" -->
+        <div class="form-group col-md-5 col-lg-6">
+          <label class="center-block">Racun za uplatu:
+            <select formControlName="RacVlasnika" class="form-control" [compareWith]="compareVlasRacun" required>
 
+              <option *ngFor="let list of racvlasnikL" [ngValue]="list">
+                {{ list.Naziv }} - {{list.Racun}}
+              </option>
+            </select>
+          </label>
+          <div *ngIf="RacVlasnika.invalid && (RacVlasnika.dirty || RacVlasnika.touched)" class="alert btn-danger">
+            <div *ngIf="RacVlasnika.errors.required">
+              <strong>Racun vlasnika je obavezan podatak !!!</strong>
+            </div>
           </div>
+        </div>
 
-          <!-- class="panel-body"  class="panel panel-info"-->
-          <div class="form-group">
-            <!-- <div formArrayName="Stavke"> -->
-                <table class="table  table-striped table-bordered table-condensed" formArrayName="Stavke">
-                    <thead>
+      </div>
 
-                            <div class="row" >
+      <div class="row">
+        <!-- [(ngModel)]="uputN.PartneriID"  -->
+        <div class="form-group col-md-6">
+          <label class="center-block">Kupac:
+            <div class="row">
+              <div class="col-lg-10 col-md-10 col-xs-10">
+                <select formControlName="PartneriID" class="form-control" required>
+                  <option [value]="" disabled="true" [selected]="true"> --Please select-- </option>
+                  <option *ngFor="let list of kupacL" [value]="list._id">
+                    {{ list.Naziv }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-2 col-xs-2">
+                <button type="button" class="btn btn-info form-control" (click)="GetKupac()">
+                  <span class="glyphicon glyphicon-search"></span>
+                  ...
+                </button>
+              </div>
+            </div>
+          </label>
+          <div *ngIf="PartneriID.invalid && (PartneriID.dirty || PartneriID.touched)" class="alert btn-danger">
+            <div *ngIf="PartneriID.errors.required">
+              <strong>Kupac je obavezan podatak !!!</strong>
+            </div>
+          </div>
+        </div>
+        <!-- [(ngModel)]="uputN.PosloviID"  -->
+        <div class="form-group col-md-6">
+          <label class="center-block">Posao:
+            <select formControlName="PosloviID" class="form-control" required>
+              <!--  <option [value]="null">Please Select</option> -->
+              <!-- <option [disabled]="true" [selected]="true">Select Option</option> -->
+              <option [value]="" disabled="true" [selected]="true"> --Please select-- </option>
+              <option *ngFor="let list of poslL" [value]="list._id">
+                {{ list.Naziv }}
+              </option>
 
-                                <div class="col-md-1  text-left"><strong>Rbr</strong></div>
-                                <div class="col-md-2  text-center"><strong>ZadId</strong></div>
-                                <div class="col-md-1  text-center">...</div>
-                                <div class="col-md-3  text-center"><strong>Zadrugar</strong></div>
-                                <div class="col-md-3  text-center"><strong>Posao</strong></div>
-                                <div class="col-md-1  text-center" ></div>
+            </select>
 
-                            </div>
-                            <hr>
+          </label>
+          <div *ngIf="PosloviID.invalid && (PosloviID.dirty || PosloviID.touched)" class="alert btn-danger">
+            <div *ngIf="PosloviID.errors.required">
+              <strong>Poslovi su obavezan podatak !!!</strong>
+            </div>
+          </div>
+        </div>
 
-                    </thead>
-                    <tbody >
-                        <tr *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index"  >
-                            <!-- <div class="panel-heading">
+      </div>
+
+      <!-- class="panel-body"  class="panel panel-info"-->
+      <div class="form-group">
+        <!-- <div formArrayName="Stavke"> -->
+        <table class="table  table-striped table-bordered table-condensed" formArrayName="Stavke">
+          <thead>
+
+            <div class="row">
+
+              <div class="col-md-1  text-left">
+                <strong>Rbr</strong>
+              </div>
+              <div class="col-md-2  text-center">
+                <strong>ZadId</strong>
+              </div>
+              <div class="col-md-1  text-center">...</div>
+              <div class="col-md-3  text-center">
+                <strong>Zadrugar</strong>
+              </div>
+              <div class="col-md-3  text-center">
+                <strong>Posao</strong>
+              </div>
+              <div class="col-md-1  text-center"></div>
+
+            </div>
+            <hr>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let stavke of formUput.controls.Stavke.controls; let i=index">
+              <!-- <div class="panel-heading">
                                 <span><strong>Stavka {{i + 1}} </strong></span>
                                 <span class="glyphicon glyphicon-remove pull-right" (click)="removeStavke(i)"></span> (OdbirZadStavke)="PickZadrugar(i)"
                             </div> -->
 
-                            <div [formGroupName]="i"   >
-                                <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" 
-                                (removeStavke)="removeStavke(i)"  ></app-uput-stavka>
-                            </div>
+              <div [formGroupName]="i">
+                <app-uput-stavka [Stavke]="formUput.controls.Stavke.controls[i]" [zadrugarL]="zadrL" [poslL]="poslL" (removeStavke)="removeStavke(i)"
+                  (addStavke)="addStavke(i)"></app-uput-stavka>
+              </div>
 
-                        </tr>
-                    </tbody>
+            </tr>
+          </tbody>
 
-                </table>
+        </table>
 
-                <div class="margin-20">
-                  <div class="row">
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info"   (click)="addStavke()" title=" Add stavku">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Dodaj stavku
-                        </button>
-                      </div>
-                      <div class=" col-xs-10 ">
+        <div class="margin-20">
+          <div class="row">
+            <div class="col-xs-2">
+              <button type="button" class="btn btn-info" (click)="addStavke()" title=" Add stavku">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Dodaj stavku
+              </button>
+            </div>
+            <div class=" col-xs-10 ">
 
 
-                    </div>
-                  </div>
-                </div>
-
-            <!-- </div> -->
+            </div>
+          </div>
         </div>
 
+        <!-- </div> -->
+      </div>
 
-          <div class="form-group">
-                  <div class="col-md-offset-5 col-md-12">
-                      <button type="submit" [disabled]="!formUput.valid"
-                          class="btn btn-success">
-                      <span class="glyphicon glyphicon-saved"></span>
-                      Save
-                      </button>
 
-                      <button type="reset" class="btn btn-danger"  [disabled]="formUput.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Clear data
-                      </button>
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formUput.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
 
-                  </div>
-          </div>
-      </form>
+          <button type="reset" class="btn btn-danger" [disabled]="formUput.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+      </div>
+    </form>
   </div>
 
   <div class="panel-footer">
-      <!-- <div class="col-md-offset-2 col-md-9"> -->
-          <button (click)="backClicked()"  class="btn btn-primary btn-block">
-            <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-            Back
-        </button>
-      <!-- </div> -->
+    <!-- <div class="col-md-offset-2 col-md-9"> -->
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+    <!-- </div> -->
   </div>
 
 </div>
 
 
 
-<p-dialog header="ODABIR KUPCA" [(visible)]="displayKupac" modal="modal" [responsive]="true"  [width]="pickWidth" [height]="auto" >
-       <app-pick-kupac [kupacL]="kupacL" 
-          (pickRow)="PickKupac($event)" (pickNothing)="displayKupac=false">
-        </app-pick-kupac>
+<p-dialog header="ODABIR KUPCA" [(visible)]="displayKupac" modal="modal" [responsive]="true" [width]="pickWidth" [height]="auto">
+  <app-pick-kupac [kupacL]="kupacL" (pickRow)="PickKupac($event)" (pickNothing)="displayKupac=false">
+  </app-pick-kupac>
 </p-dialog>

@@ -1,11 +1,11 @@
 import { UserModel } from './user.model';
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ValidateService} from '../../services/auth/validate.service';
-import {AuthService} from '../../services/auth/auth.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { ValidateService } from '../../services/auth/validate.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -23,50 +23,50 @@ export class RegisterComponent implements OnInit {
 
   constructor(private validateService: ValidateService,
     private authService: AuthService,
-    private router: Router ,
+    private router: Router,
     private flashMessage: FlashMessagesService,
     formBuilder: FormBuilder, private _location: Location) {
 
 
-      this.formReg = formBuilder.group({
-        _id: [],
-        name: ['', [Validators.required]],
-        email: ['', [
-          Validators.required
-        ]],
-        username: ['', [
-          Validators.required
-        ]],
-        password: [],
-        Opis: []
-      });
-     }
+    this.formReg = formBuilder.group({
+      _id: [],
+      name: ['', [Validators.required]],
+      email: ['', [
+        Validators.required
+      ]],
+      username: ['', [
+        Validators.required
+      ]],
+      password: [],
+      Opis: []
+    });
+  }
 
   ngOnInit() {
-    this.title = 'Register' ;
+    this.title = 'Register';
   }
 
   onRegisterSubmit() {
     const user = this.formReg.value;
-      // Required Fields
+    // Required Fields
     if (!this.validateService.validateRegister(user)) {
-      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessage.show('Please fill in all fields', { cssClass: 'alert-danger', timeout: 3000 });
       return false;
     }
 
     // Validate Email
     if (!this.validateService.validateEmail(user.email)) {
-      this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
-       return false;
+      this.flashMessage.show('Please use a valid email', { cssClass: 'alert-danger', timeout: 3000 });
+      return false;
     }
 
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 3000});
-         this.router.navigate(['/login']);
+        this.flashMessage.show('You are now registered and can log in', { cssClass: 'alert-success', timeout: 3000 });
+        this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessage.show('Something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
         this.router.navigate(['/register']);
       }
     });
@@ -75,5 +75,7 @@ export class RegisterComponent implements OnInit {
   backClicked(event: any) {
     this._location.back();
   }
-
+  revert() {
+    this.formReg.reset();
+  }
 }

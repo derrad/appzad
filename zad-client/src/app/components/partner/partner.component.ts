@@ -24,26 +24,28 @@ export class PartnerComponent implements OnInit {
   partnerL: Array<PartnerModel>;
   displayDetals = false;
   partnerShow: PartnerModel = new PartnerModel();
+  auto = 'auto';
 
   constructor(private router: Router, private partService: PartnerService,
-    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
+    private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED KUPACA';
   }
 
   ngOnInit() {
 
-      this.partService.getPartneri()
+    this.partService.getPartneri()
       .subscribe((profile) => {
-      if (profile.success === true) {
-        this.partnerL = profile.data;
-      }
-      // }
+        if (profile.success === true) {
+          this.partnerL = profile.data;
+        }
+        // }
       },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
           cssClass: 'alert-danger',
-          timeout: 9000});
-      //  console.log(error.message);
+          timeout: 9000
+        });
+        //  console.log(error.message);
         this.partnerL = [];
         return false;
       }
@@ -51,9 +53,9 @@ export class PartnerComponent implements OnInit {
 
   }
 
-  selectItem( work: PartnerModel) {
-     this.displayDetals = true;
-     this.partnerShow = this.cloneData(work);
+  selectItem(work: PartnerModel) {
+    this.displayDetals = true;
+    this.partnerShow = this.cloneData(work);
   }
   cloneData(c: PartnerModel): PartnerModel {
     const work = new PartnerModel();
@@ -62,7 +64,7 @@ export class PartnerComponent implements OnInit {
       work[prop] = c[prop];
     }
     return work;
-   }
+  }
 
   addPartner() {
     this.router.navigate(['/partner/new']);
@@ -74,33 +76,35 @@ export class PartnerComponent implements OnInit {
 
   deletePartner(tpartner) {
     this.confirmationService.confirm({
-        message: `Jeste li sigurni da želite uklonite izabrani podatak ? ` ,
-        header: `${tpartner.Naziv}`,
-          accept: () => {
-            const index = this.partnerL.indexOf(tpartner);
-           // console.log("index je " + index);
-            this.partnerL.splice(index, 1);
+      message: `Jeste li sigurni da želite uklonite izabrani podatak ? `,
+      header: `${tpartner.Naziv}`,
+      accept: () => {
+        const index = this.partnerL.indexOf(tpartner);
+        // console.log("index je " + index);
+        this.partnerL.splice(index, 1);
 
-            this.partService.delPartner(tpartner._id)
-              .subscribe((pos) => {
-                if (pos.success) {
-                   this.flashMessage.show(pos.message , {
-                      cssClass: 'alert-success',
-                      timeout: 1000});
-                }else {
-                  this.router.navigate(['NotFound']);
-                }
-                } ,
-                (error: ResponeCustom)  => {
-                  this.flashMessage.show(error.message, {
-                    cssClass: 'alert-danger',
-                    timeout: 5000});
-                  // Revert the view back to its original state
-                  this.partnerL.splice(index, 0, tpartner);
-                });
-          }
-        });
-    }
+        this.partService.delPartner(tpartner._id)
+          .subscribe((pos) => {
+            if (pos.success) {
+              this.flashMessage.show(pos.message, {
+                cssClass: 'alert-success',
+                timeout: 1000
+              });
+            } else {
+              this.router.navigate(['NotFound']);
+            }
+          },
+          (error: ResponeCustom) => {
+            this.flashMessage.show(error.message, {
+              cssClass: 'alert-danger',
+              timeout: 5000
+            });
+            // Revert the view back to its original state
+            this.partnerL.splice(index, 0, tpartner);
+          });
+      }
+    });
+  }
 
 
 }

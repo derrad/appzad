@@ -6,9 +6,9 @@ import { KonstantaFormComponent } from './konstanta-form/konstanta-form.componen
 
 
 const konstantaRoutes: Routes = [
-  {path: 'konstanta', component: KonstantaComponent, canActivate: [AuthGuard]},
-  {path: 'konstanta/new', component: KonstantaFormComponent, canActivate: [AuthGuard]},
-  {path: 'konstanta/:id', component: KonstantaFormComponent, canActivate: [AuthGuard]}
+  { path: 'konstanta', component: KonstantaComponent, canActivate: [AuthGuard] },
+  { path: 'konstanta/new', component: KonstantaFormComponent, canActivate: [AuthGuard] },
+  { path: 'konstanta/:id', component: KonstantaFormComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

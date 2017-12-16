@@ -1,94 +1,93 @@
 <div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-              <h4>{{title}}</h4> 
-            </div>
-            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-              <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-            </div>
-     </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h4>{{title}}</h4>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
+    </div>
   </div>
   <div class="panel-body">
     <form [formGroup]="formPOSAO" (ngSubmit)="save()" novalidate>
-          <div class="form-group" >
-               <input class="form-control" formControlName="_id"  [(ngModel)]="posaoN._id"   type="hidden">
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="posaoN._id" type="hidden">
+      </div>
+      <div class="form-group">
+        <label class="center-block">Stručna sprema:
+          <select formControlName="StepenSS" class="form-control" [(ngModel)]="posaoN.StepenSS" required>
+            <option *ngFor="let list of strSprema" [value]="list">
+              {{ list }}
+            </option>
+          </select>
+        </label>
+        <div *ngIf="StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)" class="alert alert-danger">
+          <div *ngIf="StepenSS.errors.required">
+            <strong>Stepen stručne spreme je obavezan podatak !!!</strong>
           </div>
-          <div class="form-group">
-              <label class="center-block">Stručna sprema:
-                <select  formControlName="StepenSS" class="form-control"  [(ngModel)]="posaoN.StepenSS"  required>
-                  <option *ngFor="let list of strSprema" [value]="list">
-                    {{ list }}
-                  </option>
-                </select>
-              </label>
-              <div *ngIf="StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)" class="alert alert-danger">
-                <div *ngIf="StepenSS.errors.required">
-                    <strong>Stepen stručne spreme je obavezan podatak !!!</strong>
-                </div>
-                
-               </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Naziv posla:
+          <input class="form-control" formControlName="Naziv" [(ngModel)]="posaoN.Naziv" required>
+        </label>
+        <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+          <div *ngIf="Naziv.errors.required">
+            <strong>Naziv je obavezan podatak !!!</strong>
           </div>
-          
-          <div class="form-group">
-              <label class="center-block">Naziv posla:
-                <input class="form-control" formControlName="Naziv"  [(ngModel)]="posaoN.Naziv"  required>
-              </label>
-              <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                <div *ngIf="Naziv.errors.required">
-                    <strong>Naziv je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="Naziv.errors.maxlength">
-                  <strong>Predugački naziv !!!</strong>
-                </div>
-               </div>
-              
-            </div>
-            
-            <div class="form-group">
-                <label class="center-block">Škola:
-                  <input class="form-control" formControlName="Skola"  [(ngModel)]="posaoN.Skola" >
-                </label>
-              </div>
-              
-              <div class="form-group">
-                <label class="center-block">Šifra:
-                  <input class="form-control" formControlName="Sifra"  [(ngModel)]="posaoN.Sifra" >
-                </label>
-              </div>
+          <div *ngIf="Naziv.errors.maxlength">
+            <strong>Predugački naziv !!!</strong>
+          </div>
+        </div>
 
-              <div class="form-group">
-                <label class="center-block">Šifra1:
-                  <input class="form-control" formControlName="Sifra1"  [(ngModel)]="posaoN.Sifra1" >
-                </label>
-              </div>
+      </div>
 
-              <div class="form-group">
-                <label class="center-block">Opis:
-                  <textarea class="form-control" formControlName="Opis"  [(ngModel)]="posaoN.Opis">
-                  </textarea>
-                </label>
-            </div>
-          
-            <div class="form-group">
-                <div class="col-md-offset-5 col-md-12 col-xs-12">
-                    <button type="submit" [disabled]="!formPOSAO.valid"
-                        class="btn btn-success">
-                    <span class="glyphicon glyphicon-saved"></span>
-                      Save
-                    </button>
-                    <button type="reset" class="btn btn-danger"  [disabled]="formPOSAO.pristine"  (click)="revert()">
-                      <i class="fa fa-undo" aria-hidden="true"></i>
-                      Clear data
-                    </button>
-                </div>
-            </div>
+      <div class="form-group">
+        <label class="center-block">Škola:
+          <input class="form-control" formControlName="Skola" [(ngModel)]="posaoN.Skola">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Šifra:
+          <input class="form-control" formControlName="Sifra" [(ngModel)]="posaoN.Sifra">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Šifra1:
+          <input class="form-control" formControlName="Sifra1" [(ngModel)]="posaoN.Sifra1">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis" [(ngModel)]="posaoN.Opis">
+          </textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12 col-xs-12">
+          <button type="submit" [disabled]="!formPOSAO.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+          <button type="reset" class="btn btn-danger" [disabled]="formPOSAO.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+        </div>
+      </div>
     </form>
   </div>
   <div class="panel-footer">
-      <button (click)="backClicked()"  class="btn btn-primary btn-block">
-        <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-        Back
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
     </button>
   </div>
 </div>

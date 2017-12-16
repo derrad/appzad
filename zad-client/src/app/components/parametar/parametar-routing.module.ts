@@ -5,9 +5,9 @@ import { ParametarComponent } from './parametar.component';
 import { ParametarFormComponent } from './parametar-form/parametar-form.component';
 
 const parametarRoutes: Routes = [
-     {path: 'parametar', component: ParametarComponent, canActivate: [AuthGuard]},
-     {path: 'parametar/new', component: ParametarFormComponent, canActivate: [AuthGuard]},
-     {path: 'parametar/:id', component: ParametarFormComponent, canActivate: [AuthGuard]},
+  { path: 'parametar', component: ParametarComponent, canActivate: [AuthGuard] },
+  { path: 'parametar/new', component: ParametarFormComponent, canActivate: [AuthGuard] },
+  { path: 'parametar/:id', component: ParametarFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

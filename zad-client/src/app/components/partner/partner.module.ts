@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { ButtonModule, InputTextModule } from 'primeng/primeng';
@@ -12,7 +12,7 @@ import { PadresaComponent } from './partner-form/padresa.component';
 import { ZiroPartnerComponent } from './partner-form/ziropartner.component';
 import { TelefonPartnerComponent } from './partner-form/telefonpartner.component';
 import { KontaktPartnerComponent } from './partner-form/kontaktpartner.component';
-import {PartnerService} from './partner.service';
+import { PartnerService } from './partner.service';
 import { PartnerRoutingModule } from './partner-routing.module';
 import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
 
@@ -38,6 +38,6 @@ import { ApppipeModule } from './../../shared/PipeApp/apppipe/apppipe.module';
     TelefonPartnerComponent,
     KontaktPartnerComponent
   ],
-  providers: [ PartnerService, ConfirmationService ]
+  providers: [PartnerService, ConfirmationService]
 })
 export class PartnerModule { }

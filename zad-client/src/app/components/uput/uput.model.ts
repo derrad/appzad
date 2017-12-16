@@ -1,7 +1,7 @@
 export class UputStavModel {
     _id: string;
-    IDZadrugar: Number;
-    Rbr: Number;
+    IDZadrugar: number;
+    Rbr: number;
     ZadrugarID: Object;
     ZadRef: Object;
     PosloviRef: Object;
@@ -9,27 +9,27 @@ export class UputStavModel {
     PosloviID: string;
     OdDatuma: Date;
     DoDatuma: Date;
-    Kolicina: Number;
+    Kolicina: number;
     JedMer: string;
-    Cena: Number;
+    Cena: number;
     Opis?: string;
 }
 class ZadRefModel {
-    _id: string ;
+    _id: string;
     name: string;
     tipzadrugar: string;
-    idzadrugar: Number;
+    idzadrugar: number;
 }
 class PosloviRef {
-    _id:  string;
-    name:  string;
-    stepenss:  string;
+    _id: string;
+    name: string;
+    stepenss: string;
 }
 
 export class UputStavNew {
     _id: string;
-    IDZadrugar: Number;
-    Rbr: Number;
+    IDZadrugar: number;
+    Rbr: number;
     ZadrugarID: Object;
     ZadRef: ZadRefModel;
     PosloviRef: PosloviRef;
@@ -37,9 +37,9 @@ export class UputStavNew {
     PosloviID: string;
     OdDatuma: Date;
     DoDatuma: Date;
-    Kolicina: Number;
+    Kolicina: number;
     JedMer: string;
-    Cena: Number;
+    Cena: number;
     Opis?: string;
 }
 
@@ -56,8 +56,8 @@ export class UputModel {
     Datum: Date;
     Knjizeno: boolean;
     Storno: boolean;
-    Broj: Number;
-    Godina: Number;
+    Broj: number;
+    Godina: number;
     RacVlasnika: UputRacVlasnikModel;
     // RacVlasnika: Object;
     PosloviID: Object;
@@ -71,8 +71,8 @@ export class UputModel {
 
 
 export class UputBrojGodina {
-    broj: Number;
-    godina: Number;
+    broj: number;
+    godina: number;
 }
 
 export class PosaoNG {

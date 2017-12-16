@@ -10,4 +10,4 @@ router.put('/api/vlasnik/:id',passport.authenticate('jwt', {session:false}), Vla
 router.delete('/api/vlasnik/:id',passport.authenticate('jwt', {session:false}),  VlasnikController.delevlasnik);
 router.get('/api/getvlasracun/',passport.authenticate('jwt', {session:false}),  VlasnikController.listaracvlasnik);
 
-module.exports = router
+module.exports = router;

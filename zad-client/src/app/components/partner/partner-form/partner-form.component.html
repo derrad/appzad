@@ -1,254 +1,257 @@
-<!-- <p>
-  partner-form works!
-</p> -->
-
-<div class="panel panel-primary"  [@formsTransition]>
-    <div class="panel-heading">
-        <div class="row">
-            <div class="text-left col-lg-9 col-md-9 col-xs-9">
-                <h5>{{title}}</h5> 
-              </div>
-              <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-              </div>
-       </div>
+<div class="panel panel-primary" [@formsTransition]>
+  <div class="panel-heading">
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
     </div>
-    <div class="panel-body">
-        <form [formGroup]="formPartn" (ngSubmit)="save()" novalidate>
-            <div class="form-group" >
-                <!-- <label class="center-block">ID: -->
-                  <input class="form-control" formControlName="_id"  [(ngModel)]="partnN._id"   type="hidden">
-                <!-- <label> -->
-            </div>
-            <div class="form-group">
-                    <label class="center-block">Naziv:
-                      <input class="form-control" formControlName="Naziv"  [(ngModel)]="partnN.Naziv"  required>
-                    </label>
-                    <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                        <div *ngIf="Naziv.errors.required">
-                            <strong>Naziv je obavezan podatak !!!</strong>
-                        </div>
-                        <div *ngIf="Naziv.errors.minlength">
-                            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
-                          </div>
-                        <div *ngIf="Naziv.errors.maxlength">
-                            <strong>Predugačak naziv !!!</strong>
-                       </div>
-                    </div>
-            </div>
-
-            <div class="form-group col-md-8">
-                  <label class="center-block">Kod pretrage:
-                    <input class="form-control" formControlName="KyeSearch"  [(ngModel)]="partnN.KyeSearch" required>
-                  </label>
-                  <div *ngIf="KyeSearch.invalid && (KyeSearch.dirty || KyeSearch.touched)" class="alert alert-danger">
-                      <div *ngIf="KyeSearch.errors.required">
-                          <strong>Kod je obavezan podatak !!!</strong>
-                      </div>
-                      <div *ngIf="KyeSearch.errors.minlength">
-                          <strong>Kod mora biti minimalno 2 karaktera dužine !!!</strong>
-                        </div>
-                      <div *ngIf="KyeSearch.errors.maxlength">
-                          <strong>Predugačak kod !!!</strong>
-                     </div>
-                  </div>
-            </div>
-            <div class="form-group col-md-4">
-            <label class="center-block">Ugovoreni procenat:
-                  <div class="input-group">
-                      <div class="input-group">
-                          <input class="form-control text-right" formControlName="UgovProc"  
-                          [(ngModel)]="partnN.UgovProc" (keypress)="serValidate.validateOnlyNumbers($event)" required>
-                          <span class="input-group-addon">%</span>
-                      </div>
-                  </div>
-            </label>
-            </div>
-            <div class="form-group">
-                <label class="center-block">Država:
-                <select  formControlName="Drzava" class="form-control" placeholder="Select Državu"  
-                    name="Select Državu" [(ngModel)]="partnN.Drzava"  required>
-                    <option *ngFor="let list of drzave" [value]="list._id"   >
-                    {{ list.Naziv }}
-                    </option>
-                </select>
-                </label>
-            </div>
-
-             
-              <div class="form-group">
-                  <div class="checkbox">
-                    <label class="center-block">
-                        <input type="checkbox" formControlName="Aktivan" [(ngModel)]="partnN.Aktivan">Aktivan
-                    </label>
-                  </div>
-                </div>
-              
-                <div class="form-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Adresa:</strong></div>
-                        <div class="panel-body">
-                            <partadresa [groupadresa]="Adresa" ></partadresa>
-                        </div>
-                    </div> 
-                </div>
-                <div class="form-group">
-                    <label class="center-block">Email:
-                        <input class="form-control" formControlName="Email"  [(ngModel)]="partnN.Email" >
-                    </label>
-                </div>
-                <div class="form-group">
-                        <div formArrayName="Telefon">
-                            <div *ngFor="let Telefon of formPartn.controls.Telefon.controls; let i=index" class="panel panel-info"> 
-                                <div class="panel-heading">
-                                    <span><strong>Telefon {{i + 1}} </strong></span>
-                                    <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelefon(i)"></span>
-                                </div>
-            
-                                <div [formGroupName]="i" class="panel-body" > 
-                                    <telefonpartner [grouptel]="formPartn.controls.Telefon.controls[i]"></telefonpartner>
-                                </div>
-                            </div>
-                      
-                            <div class="margin-20" *ngIf="formPartn.controls.Telefon.controls.length < 6">
-                              <div class="row">
-                                <div class="col-xs-2">
-                                  </div>
-                                  <div class=" col-xs-10 ">
-                                      <button type="button" class="btn btn-info btn-block"   (click)="addTelefon()" title=" Add telefon">
-                                          <i class="fa fa-plus" aria-hidden="true"></i>
-                                          Dodaj telefon
-                                      </button>
-                                      
-                                </div>
-                              </div>
-                            </div>
-                          
-                        </div>
-                  </div> 
-      
-
-                <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="center-block">Pib:
-                        <input class="form-control" formControlName="Pib"  [(ngModel)]="partnN.Pib" >
-                    </label>
-                </div>
-                      
-                <div class="form-group col-md-6">
-                    <label class="center-block">Matični broj:
-                         <input class="form-control" formControlName="MatBroj"  [(ngModel)]="partnN.MatBroj" >
-                    </label>
-                </div>
-                  
-            <div class="form-group col-md-6">
-                <label class="center-block">Šifra delatnosti:
-                <input class="form-control" formControlName="SifDelat"  [(ngModel)]="partnN.SifDelat" >
-                </label>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="center-block">Pdv broj:
-                    <input class="form-control" formControlName="PdvBroj"  [(ngModel)]="partnN.PdvBroj" >
-                </label>
-            </div>
-        </div>
-              
-       
-            
-
-                <div class="form-group">
-                    <div formArrayName="Ziro">
-                        <div *ngFor="let Ziro of formPartn.controls.Ziro.controls; let i=index" class="panel panel-info"> 
-                            <div class="panel-heading">
-                                <span><strong>Ziro racun {{i + 1}} </strong></span>
-                                <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiro(i)"></span>
-                            </div>
-        
-                            <div [formGroupName]="i" class="panel-body" > 
-                                <ziropartner [groupziro]="formPartn.controls.Ziro.controls[i]"></ziropartner>
-                            </div>
-                        </div>
-                  
-                        <div class="margin-20" *ngIf="formPartn.controls.Ziro.controls.length < 6">
-                          <div class="row">
-                            <div class="col-xs-2">
-                              </div>
-                              <div class=" col-xs-10 ">
-                                  <button type="button" class="btn btn-info btn-block"   (click)="addZiro()" title=" Add Žiro račun">
-                                      <i class="fa fa-plus" aria-hidden="true"></i>
-                                      Dodaj žiro račun
-                                  </button>
-                                 
-                            </div>
-                          </div>
-                        </div>
-                      
-                    </div>
-                </div> 
-
-                <div class="form-group">
-                        <div formArrayName="Kontakt">
-                            <div *ngFor="let kontak of formPartn.controls.Kontakt.controls; let i=index" class="panel panel-info"> 
-                                <div class="panel-heading">
-                                    <span><strong>Kontakt {{i + 1}} </strong></span>
-                                    <span class="glyphicon glyphicon-remove pull-right" (click)="removeKontakt(i)"></span>
-                                </div>
-            
-                                <div [formGroupName]="i" class="panel-body" > 
-                                    <kontaktpartner [groupkontakt]="formPartn.controls.Kontakt.controls[i]"></kontaktpartner>
-                                </div>
-                            </div>
-                      
-                            <div class="margin-20" *ngIf="formPartn.controls.Kontakt.controls.length < 6">
-                              <div class="row">
-                                <div class="col-xs-2">
-                                  </div>
-                                  <div class=" col-xs-10 ">
-                                      <button type="button" class="btn btn-info btn-block"   (click)="addKontakt()" title=" Add kontakt">
-                                          <i class="fa fa-plus" aria-hidden="true"></i>
-                                          Dodaj kontakt
-                                      </button>
-                                     
-                                </div>
-                              </div>
-                            </div>
-                          
-                        </div>
-                </div> 
-
-                <div class="form-group">
-                  <label class="center-block">Opis:
-                    <textarea class="form-control" formControlName="Opis"  [(ngModel)]="partnN.Opis">
-
-                    </textarea>
-                  </label>
-              </div>
-            
-            <div class="form-group">
-                    <div class="col-md-offset-5 col-md-12">
-                        <button type="submit" [disabled]="!formPartn.valid"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
-
-                        <button type="reset" class="btn btn-danger"  [disabled]="formPartn.pristine"  (click)="revert()">
-                            <i class="fa fa-undo" aria-hidden="true"></i>
-                            Clear data
-                        </button>
-                    
-                    </div>
-            </div>
-        </form>
-    </div>
-   
-    <div class="panel-footer">
-        <!-- <div class="col-md-offset-2 col-md-9"> -->
-            <button (click)="backClicked()"  class="btn btn-primary btn-block">
-              <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-              Back
-          </button>
-        <!-- </div> -->
-    </div>
-    
   </div>
+  <div class="panel-body">
+    <form [formGroup]="formPartn" (ngSubmit)="save()" novalidate>
+      <div class="form-group">
+        <!-- <label class="center-block">ID: -->
+        <input class="form-control" formControlName="_id" [(ngModel)]="partnN._id" type="hidden">
+        <!-- <label> -->
+      </div>
+      <div class="form-group">
+        <label class="center-block">Naziv:
+          <input class="form-control" formControlName="Naziv" [(ngModel)]="partnN.Naziv" required>
+        </label>
+        <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+          <div *ngIf="Naziv.errors.required">
+            <strong>Naziv je obavezan podatak !!!</strong>
+          </div>
+          <div *ngIf="Naziv.errors.minlength">
+            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>
+          </div>
+          <div *ngIf="Naziv.errors.maxlength">
+            <strong>Predugačak naziv !!!</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label class="center-block">Kod pretrage:
+          <input class="form-control" formControlName="KyeSearch" [(ngModel)]="partnN.KyeSearch" required>
+        </label>
+        <div *ngIf="KyeSearch.invalid && (KyeSearch.dirty || KyeSearch.touched)" class="alert alert-danger">
+          <div *ngIf="KyeSearch.errors.required">
+            <strong>Kod je obavezan podatak !!!</strong>
+          </div>
+          <div *ngIf="KyeSearch.errors.minlength">
+            <strong>Kod mora biti minimalno 2 karaktera dužine !!!</strong>
+          </div>
+          <div *ngIf="KyeSearch.errors.maxlength">
+            <strong>Predugačak kod !!!</strong>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="center-block">Ugovoreni procenat:
+          <div class="input-group">
+            <div class="input-group">
+              <input class="form-control text-right" formControlName="UgovProc" [(ngModel)]="partnN.UgovProc" (keypress)="serValidate.validateOnlyNumbers($event)"
+                required>
+              <span class="input-group-addon">%</span>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Država:
+          <select formControlName="Drzava" class="form-control" placeholder="Select Državu" name="Select Državu" [(ngModel)]="partnN.Drzava"
+            required>
+            <option *ngFor="let list of drzave" [value]="list._id">
+              {{ list.Naziv }}
+            </option>
+          </select>
+        </label>
+      </div>
+
+
+      <div class="form-group">
+        <div class="checkbox">
+          <label class="center-block">
+            <input type="checkbox" formControlName="Aktivan" [(ngModel)]="partnN.Aktivan">Aktivan
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>Adresa:</strong>
+          </div>
+          <div class="panel-body">
+            <partadresa [groupadresa]="Adresa"></partadresa>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Email:
+          <input class="form-control" formControlName="Email" [(ngModel)]="partnN.Email">
+        </label>
+      </div>
+      <div class="form-group">
+        <div formArrayName="Telefon">
+          <div *ngFor="let Telefon of formPartn.controls.Telefon.controls; let i=index" class="panel panel-info">
+            <div class="panel-heading">
+              <span>
+                <strong>Telefon {{i + 1}} </strong>
+              </span>
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeTelefon(i)"></span>
+            </div>
+
+            <div [formGroupName]="i" class="panel-body">
+              <telefonpartner [grouptel]="formPartn.controls.Telefon.controls[i]"></telefonpartner>
+            </div>
+          </div>
+
+          <div class="margin-20" *ngIf="formPartn.controls.Telefon.controls.length < 6">
+            <div class="row">
+              <div class="col-xs-2">
+              </div>
+              <div class=" col-xs-10 ">
+                <button type="button" class="btn btn-info btn-block" (click)="addTelefon()" title=" Add telefon">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Dodaj telefon
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="center-block">Pib:
+            <input class="form-control" formControlName="Pib" [(ngModel)]="partnN.Pib">
+          </label>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="center-block">Matični broj:
+            <input class="form-control" formControlName="MatBroj" [(ngModel)]="partnN.MatBroj">
+          </label>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="center-block">Šifra delatnosti:
+            <input class="form-control" formControlName="SifDelat" [(ngModel)]="partnN.SifDelat">
+          </label>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="center-block">Pdv broj:
+            <input class="form-control" formControlName="PdvBroj" [(ngModel)]="partnN.PdvBroj">
+          </label>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group">
+        <div formArrayName="Ziro">
+          <div *ngFor="let Ziro of formPartn.controls.Ziro.controls; let i=index" class="panel panel-info">
+            <div class="panel-heading">
+              <span>
+                <strong>Ziro racun {{i + 1}} </strong>
+              </span>
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeZiro(i)"></span>
+            </div>
+
+            <div [formGroupName]="i" class="panel-body">
+              <ziropartner [groupziro]="formPartn.controls.Ziro.controls[i]"></ziropartner>
+            </div>
+          </div>
+
+          <div class="margin-20" *ngIf="formPartn.controls.Ziro.controls.length < 6">
+            <div class="row">
+              <div class="col-xs-2">
+              </div>
+              <div class=" col-xs-10 ">
+                <button type="button" class="btn btn-info btn-block" (click)="addZiro()" title=" Add Žiro račun">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Dodaj žiro račun
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div formArrayName="Kontakt">
+          <div *ngFor="let kontak of formPartn.controls.Kontakt.controls; let i=index" class="panel panel-info">
+            <div class="panel-heading">
+              <span>
+                <strong>Kontakt {{i + 1}} </strong>
+              </span>
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeKontakt(i)"></span>
+            </div>
+
+            <div [formGroupName]="i" class="panel-body">
+              <kontaktpartner [groupkontakt]="formPartn.controls.Kontakt.controls[i]"></kontaktpartner>
+            </div>
+          </div>
+
+          <div class="margin-20" *ngIf="formPartn.controls.Kontakt.controls.length < 6">
+            <div class="row">
+              <div class="col-xs-2">
+              </div>
+              <div class=" col-xs-10 ">
+                <button type="button" class="btn btn-info btn-block" (click)="addKontakt()" title=" Add kontakt">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Dodaj kontakt
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis" [(ngModel)]="partnN.Opis">
+
+          </textarea>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-12">
+          <button type="submit" [disabled]="!formPartn.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
+          </button>
+
+          <button type="reset" class="btn btn-danger" [disabled]="formPartn.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="panel-footer">
+    <!-- <div class="col-md-offset-2 col-md-9"> -->
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+    <!-- </div> -->
+  </div>
+
+</div>

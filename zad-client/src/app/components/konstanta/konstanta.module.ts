@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { ButtonModule, InputTextModule } from 'primeng/primeng';
@@ -27,7 +27,7 @@ import { KonstantaRoutingModule } from './konstanta-routing.module';
     KonstantaComponent,
     KonstantaFormComponent
   ],
-  providers: [ KonstantaService, ConfirmationService ]
+  providers: [KonstantaService, ConfirmationService]
 })
 
 

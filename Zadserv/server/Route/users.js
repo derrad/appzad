@@ -7,72 +7,72 @@ const User = require('../models/user');
 
 // Register
 router.post('/register', (req, res, next) => {
-  let newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password
-  });
+	let newUser = new User({
+		name: req.body.name,
+		email: req.body.email,
+		username: req.body.username,
+		password: req.body.password
+	});
 
-  User.addUser(newUser, (err, user) => {
-    if(err){
-      res.json({success: false, msg:'Failed to register user'});
-    } else {
-      res.json({success: true, msg:'User registered'});
-    }
-  });
+	User.addUser(newUser, (err, user) => {
+		if(err){
+			res.json({success: false, msg:'Failed to register user'});
+		} else {
+			res.json({success: true, msg:'User registered', data:user});
+		}
+	});
 });
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+	const username = req.body.username;
+	const password = req.body.password;
 
-  User.getUserByUsername(username, (err, user) => {
-    if(err) throw err;
-    if(!user){
-      return res.json({success: false, msg: 'User not found'});
-    }
+	User.getUserByUsername(username, (err, user) => {
+		if(err) throw err;
+		if(!user){
+			return res.json({success: false, msg: 'User not found'});
+		}
 
-    User.comparePassword(password, user.password, (err, isMatch) => {
-      if(err) throw err;
-      if(isMatch){
-      //  console.log("pre pravljena jwt.sign");
-        const token = jwt.sign({
-          exp: Math.floor(Date.now() / 1000) + ((60 * 60) * 180),
-          data: user
-        }, config.secret);
+		User.comparePassword(password, user.password, (err, isMatch) => {
+			if(err) throw err;
+			if(isMatch){
+				//  console.log("pre pravljena jwt.sign");
+				const token = jwt.sign({
+					exp: Math.floor(Date.now() / 1000) + ((60 * 60) * 180),
+					data: user
+				}, config.secret);
 
-        // const token = jwt.sign({
-        //   exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        //   data: user
-        // }, config.secret);
+				// const token = jwt.sign({
+				//   exp: Math.floor(Date.now() / 1000) + (60 * 60),
+				//   data: user
+				// }, config.secret);
 
-        // const token = jwt.sign(user, config.secret, {
-        //   expiresIn: 604800 // 1 week
-        // });
+				// const token = jwt.sign(user, config.secret, {
+				//   expiresIn: 604800 // 1 week
+				// });
 
-     //   console.log("posle pravljena jwt.sign");
-        res.json({
-          success: true,
-          token: 'JWT '+ token, 
-          user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
-          }
-        });
-      } else {
-        return res.json({success: false, msg: 'Wrong password'});
-      }
-    });
-  });
+				//   console.log("posle pravljena jwt.sign");
+				res.json({
+					success: true,
+					token: 'JWT '+ token, 
+					user: {
+						id: user._id,
+						name: user.name,
+						username: user.username,
+						email: user.email
+					}
+				});
+			} else {
+				return res.json({success: false, msg: 'Wrong password'});
+			}
+		});
+	});
 });
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
+	res.json({user: req.user});
 });
 
 module.exports = router; 

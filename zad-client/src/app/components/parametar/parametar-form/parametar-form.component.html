@@ -1,119 +1,93 @@
-<div class="panel panel-primary"  [@formsTransition] >
+<div class="panel panel-primary" [@formsTransition]>
   <div class="panel-heading">
-      <div class="row">
-          <div class="text-left col-lg-9 col-md-9 col-xs-9">
-              <h5>{{title}}</h5> 
-            </div>
-            <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
-                <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
-            </div>
+    <div class="row">
+      <div class="text-left col-lg-9 col-md-9 col-xs-9">
+        <h5>{{title}}</h5>
+      </div>
+      <div class="text-right col-lg-3 col-md-3 col-xs-3 ">
+        <i class="fa fa-times cursorpointer pull-right" aria-hidden="true" (click)="backClicked()"></i>
+      </div>
     </div>
   </div>
-<div class="panel-body ">
-      <form [formGroup]="frParam" (ngSubmit)="save()">
-          <div class="form-group" >
-                  <input class="form-control" formControlName="_id"  [(ngModel)]="parametar._id"   type="hidden">
+  <div class="panel-body ">
+    <form [formGroup]="frParam" (ngSubmit)="save()">
+      <div class="form-group">
+        <input class="form-control" formControlName="_id" [(ngModel)]="parametar._id" type="hidden">
+      </div>
+      <div class="form-group">
+        <label class="center-block">Naziv:
+          <input class="form-control" formControlName="Naziv" [(ngModel)]="parametar.Naziv" required>
+        </label>
+        <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
+          <div *ngIf="Naziv.errors.required">
+            <strong>Naziv je obavezan podatak !!!</strong>
           </div>
-          <div class="form-group">
-              <label class="center-block">Naziv:
-                <input class="form-control" formControlName="Naziv"  [(ngModel)]="parametar.Naziv" required >
-              </label>
-              <div *ngIf="Naziv.invalid && (Naziv.dirty || Naziv.touched)" class="alert alert-danger">
-                <div *ngIf="Naziv.errors.required">
-                    <strong>Naziv je obavezan podatak !!!</strong>
-                </div>
-                <div *ngIf="Naziv.errors.minlength">
-                  <strong>Naziv mora biti minimalno 3 karaktera dužine !!!</strong>
-                </div>
-                <div *ngIf="Naziv.errors.maxlength">
-                  <strong>Predugački naziv !!!</strong>
-                </div>
-                <div *ngIf="Naziv.errors.validateSifru">
-                  <strong>Naziv nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
-                </div>
-              </div>
-            </div>
-            <div class="form-group"> <!-- class="pull-left" -->
-              <div class="row">
-                  <div class="col-md-2">
-                  <label class="center-block text-center" >Koristi</label>
-                  <label class="center-block" >
-                    <div class="checkbox">
-                      <label class="left-block" >
-                       <input type="checkbox" class="form-control input-sm" formControlName="Koristi" [(ngModel)]="parametar.Koristi">
-                    </label>
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-                <label class="center-block">Text vrednost:
-                  <input class="form-control" formControlName="VredString"  [(ngModel)]="parametar.VredString" >
-                </label>
-            </div>
-            <div class="form-group">
-                <label class="center-block">Brojčana vrednost:
-                  <input class="form-control" formControlName="VredNumeric"  [(ngModel)]="parametar.VredNumeric" >
-                </label>
-            </div>
-            <div class="form-group">
-                <label class="center-block">Opis:
-                       <textarea class="form-control" formControlName="Opis"  [(ngModel)]="parametar.Opis">
-                  </textarea>
-                </label>
-            </div>
-            <div class="form-group">
-                    <div class="col-md-offset-4 col-md-12">
-                        <button type="submit" [disabled]="!frParam.valid"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-saved"></span>
-                        Save
-                        </button>
-
-                      <button type="reset" class="btn btn-danger"  [disabled]="frParam.pristine"  (click)="revert()">
-                          <i class="fa fa-undo" aria-hidden="true"></i>
-                          Clear data
-                      </button>
-                      
-                   </div>
-              
-                      <!-- <div class="col-md-offset-2 col-md-6">
-                              <button type="submit" [disabled]="!frParam.valid"
-                                class="btn btn-default">
-                               <span class="glyphicon glyphicon-saved"></span>
-                              Save
-                              </button>
-              
-                      </div> -->
+          <div *ngIf="Naziv.errors.minlength">
+            <strong>Naziv mora biti minimalno 3 karaktera dužine !!!</strong>
           </div>
-              
-
-
-      </form>
-      
-    </div>
-
-    <div class="panel-footer">
-        <!-- <div class="col-md-offset-2 col-md-9"> -->
-            <button (click)="backClicked()"  class="btn btn-primary btn-block">
-              <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-              Back
+          <div *ngIf="Naziv.errors.maxlength">
+            <strong>Predugački naziv !!!</strong>
+          </div>
+          <div *ngIf="Naziv.errors.validateSifru">
+            <strong>Naziv nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- class="pull-left" -->
+        <div class="row">
+          <div class="col-md-2">
+            <label class="center-block text-center">Koristi</label>
+            <label class="center-block">
+              <div class="checkbox">
+                <label class="left-block">
+                  <input type="checkbox" class="form-control input-sm" formControlName="Koristi" [(ngModel)]="parametar.Koristi">
+                </label>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Text vrednost:
+          <input class="form-control" formControlName="VredString" [(ngModel)]="parametar.VredString">
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Brojčana vrednost:
+          <input class="form-control" formControlName="VredNumeric" [(ngModel)]="parametar.VredNumeric">
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Opis:
+          <textarea class="form-control" formControlName="Opis" [(ngModel)]="parametar.Opis">
+          </textarea>
+        </label>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-12">
+          <button type="submit" [disabled]="!frParam.valid" class="btn btn-success">
+            <span class="glyphicon glyphicon-saved"></span>
+            Save
           </button>
-        <!-- </div> -->
-    </div>
+
+          <button type="reset" class="btn btn-danger" [disabled]="frParam.pristine" (click)="revert()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Clear data
+          </button>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div class="panel-footer">
+    <button (click)="backClicked()" class="btn btn-primary btn-block">
+      <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+      Back
+    </button>
+
+  </div>
 
 </div>
-    
-<!-- <div class="col-md-offset-2 col-md-9">
-    <button (click)="backClicked()"  class="btn btn-default btn-block">
-    <i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
-    Back
-  </button>
-</div> -->
-
-
-<!-- </div>   coll
-</div>  row -->
-
-    

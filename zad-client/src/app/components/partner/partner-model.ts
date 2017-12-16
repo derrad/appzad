@@ -35,7 +35,7 @@ export class PartnerModel {
     _id: string;
     KyeSearch: string;
     Naziv: string;
-    UgovProc: Number;
+    UgovProc: number;
     Drzava: Object;
     Aktivan: boolean;
     Adresa: PAdresaModel;
@@ -44,9 +44,9 @@ export class PartnerModel {
     MatBroj: string;
     SifDelat: string;
     PdvBroj: string;
-    Ziro:  PAZiroModel[];
-    Telefon:  PATelefonModel[];
-    Kontakt:  PAKontaktModel[];
+    Ziro: PAZiroModel[];
+    Telefon: PATelefonModel[];
+    Kontakt: PAKontaktModel[];
     Opis?: string;
     NameUser?: string;
     created_at?: Date;

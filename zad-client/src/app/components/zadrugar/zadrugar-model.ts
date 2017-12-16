@@ -10,7 +10,7 @@ export class ZDAdresaModel {
 
 export class ZadrugarModel {
     _id: string;
-    IDZadrugar: Number;
+    IDZadrugar: number;
     Ime: string;
     Prezime: string;
     fullName: string;
@@ -48,7 +48,7 @@ export class ZadrugarModel {
 
 export class PickZadrugarModel {
     _id: string;
-    IDZadrugar: Number;
+    IDZadrugar: number;
     Ime: string;
     Prezime: string;
     fullName: string;
