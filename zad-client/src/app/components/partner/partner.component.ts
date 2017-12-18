@@ -25,6 +25,7 @@ export class PartnerComponent implements OnInit {
   displayDetals = false;
   partnerShow: PartnerModel = new PartnerModel();
   auto = 'auto';
+  brojpartnera = 0;
 
   constructor(private router: Router, private partService: PartnerService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -37,6 +38,7 @@ export class PartnerComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.partnerL = profile.data;
+          this.brojpartnera = this.partnerL.length;
         }
         // }
       },

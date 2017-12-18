@@ -332,9 +332,14 @@ module.exports.getUputBrojGodMax = function (req, res, next) {
 		}
 		// console.log('Dobio sam ' + JSON.stringify(result));
 		let Broj = 1;
-		if (result.Broj) {
-			Broj = result.Broj + 1;
+		try {
+			if (result.Broj) {
+				Broj = result.Broj + 1;
+			}
+		} catch (error) {
+			
 		}
+	
 		return res.status(200).json({
 			success: true,
 			message: 'Uput get number successfully',

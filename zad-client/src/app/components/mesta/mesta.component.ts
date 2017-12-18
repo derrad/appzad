@@ -26,6 +26,7 @@ export class MestaComponent implements OnInit {
   displayDetals = false;
   mesShow: Mesta = new Mesta();
   auto = 'auto';
+  brojmesta = 0;
   constructor(private router: Router, private mestaService: MestaService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED MESTA';
@@ -36,6 +37,7 @@ export class MestaComponent implements OnInit {
     this.mestaService.getMesta().subscribe(profile => {
       if (profile.success === true) {
         this.mestaL = profile.data;
+        this.brojmesta = this.mestaL.length;
       } else {
         this.flashMessage.show(profile.message, {
           cssClass: 'alert-danger',

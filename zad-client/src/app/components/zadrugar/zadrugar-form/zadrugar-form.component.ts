@@ -267,12 +267,12 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
 
   initAdresa(tAdresa: ZDAdresaModel) {
     this.Adresa.setValue({
-      AdUlica: tAdresa.AdUlica,
-      AdBroj: tAdresa.AdBroj,
-      AdMesto: tAdresa.AdMesto,
-      AdPttReon: tAdresa.AdPttReon,
-      AdPttPak: tAdresa.AdPttPak,
-      AdDrzava: tAdresa.AdDrzava
+      AdUlica: tAdresa.AdUlica || '',
+      AdBroj: tAdresa.AdBroj || '',
+      AdMesto: tAdresa.AdMesto || '',
+      AdPttReon: tAdresa.AdPttReon || '',
+      AdPttPak: tAdresa.AdPttPak || '',
+      AdDrzava: tAdresa.AdDrzava || ''
     });
   }
   save() {

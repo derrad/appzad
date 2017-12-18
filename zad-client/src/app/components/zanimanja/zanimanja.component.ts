@@ -25,6 +25,7 @@ export class ZanimanjaComponent implements OnInit {
   zanL: Array<ZanimanjaModel>;
   displayDetals = false;
   zanShow: ZanimanjaModel = new ZanimanjaModel();
+  brojzanim = 0;
 
   constructor(private router: Router, private zanService: ZanimanjaService,
               private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService ) {
@@ -37,6 +38,7 @@ export class ZanimanjaComponent implements OnInit {
     .subscribe((profile) => {
       if (profile.success === true) {
         this.zanL = profile.data;
+        this.brojzanim = this.zanL.length;
       }
       // }
       },

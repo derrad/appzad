@@ -26,6 +26,7 @@ export class PosaoComponent implements OnInit {
   displayDetals = false;
   posShow: Posao = new Posao();
   auto = 'auto';
+  brojposao = 0;
 
   constructor(private router: Router, private posService: PosaoService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -38,6 +39,7 @@ export class PosaoComponent implements OnInit {
       .subscribe(profile => {
         if (profile.success === true) {
           this.poslovi = profile.data;
+          this.brojposao = this.poslovi.length;
         }
       },
       (error: ResponeCustom) => {

@@ -29,6 +29,7 @@ export class ZadrugarComponent implements OnInit {
   displayDetals = false;
   zadrShow: ZadrugarModel = new ZadrugarModel();
   auto = 'auto';
+  brojslogova = 0;
 
   constructor(private router: Router, private zadrService: ZadrugarService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -41,6 +42,8 @@ export class ZadrugarComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.zadrL = profile.data;
+          this.brojslogova = this.zadrL.length ;
+         // console.log('Broj slogova - ' + this.brojslogova);
         }
         // }
       },
@@ -60,7 +63,7 @@ export class ZadrugarComponent implements OnInit {
   selectItem(work: ZadrugarModel) {
     this.displayDetals = true;
     this.zadrShow = this.cloneData(work);
-    console.log('Ulica' + this.zadrShow.Adresa.AdUlica);
+    // console.log('Ulica' + this.zadrShow.Adresa.AdUlica);
   }
   cloneData(c: ZadrugarModel): ZadrugarModel {
     const work = new ZadrugarModel();
