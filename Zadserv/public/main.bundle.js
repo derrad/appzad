@@ -339,6 +339,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_partner_partner_module__ = __webpack_require__("../../../../../src/app/components/partner/partner.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_banke_banke_module__ = __webpack_require__("../../../../../src/app/components/banke/banke.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_zadrugar_zadrugar_module__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_uput_uput_module__ = __webpack_require__("../../../../../src/app/components/uput/uput.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -375,6 +376,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // Pipe
 
+// import { PrettyPrintPipe } from './shared/pipeapp/PrettyPrintPipe';
 // Module
 
 
@@ -390,6 +392,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+// import { ApppipeModule } from './shared/PipeApp/apppipe/apppipe.module';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -432,6 +436,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_36__components_partner_partner_module__["a" /* PartnerModule */],
             __WEBPACK_IMPORTED_MODULE_37__components_banke_banke_module__["a" /* BankeModule */],
             __WEBPACK_IMPORTED_MODULE_38__components_zadrugar_zadrugar_module__["a" /* ZadrugarModule */],
+            __WEBPACK_IMPORTED_MODULE_39__components_uput_uput_module__["a" /* UputModule */],
             __WEBPACK_IMPORTED_MODULE_25__app_routing_module__["a" /* AppRoutingModule */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_17__services_auth_validate_service__["a" /* ValidateService */], __WEBPACK_IMPORTED_MODULE_16__services_auth_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_19__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard_glavni__["a" /* AuthGuardGlavni */], __WEBPACK_IMPORTED_MODULE_18__services_service_validate_shared__["a" /* ServiceValidateShared */], __WEBPACK_IMPORTED_MODULE_21__components_dashboard_dashboard_service__["a" /* DashboardService */]],
@@ -501,7 +506,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import * as $ from 'jquery';
 var BankeFormComponent = (function () {
     function BankeFormComponent(bankeService, router, route, formBuilder, _location, serValidate, flashMessage) {
         this.bankeService = bankeService;
@@ -557,23 +561,13 @@ var BankeFormComponent = (function () {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
                 _this.router.navigate(['NotFound']);
-                // }
             });
         });
     };
     BankeFormComponent.prototype.save = function () {
         var _this = this;
-        //  this.sizeTheOverlays();
-        // $('#mainpanel').addClass('overlay');
-        // $('.panel').addClass('overlay');
-        //  let i: number;
-        //  for (i = 0; i < 10000 ; i++) {
-        //    console.log(i);
-        //  }
         var frmValue = this.frmBank.value;
-        // frmValue.Naziv = null;
         if (frmValue._id) {
             this.bankeService.updateBanka(frmValue).subscribe(function (pos) {
                 if (pos.success) {
@@ -589,7 +583,7 @@ var BankeFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                console.log('greska je');
+                // console.log('greska je');
                 _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
@@ -618,18 +612,7 @@ var BankeFormComponent = (function () {
                 });
             });
         }
-        // $('#mainpanel').removeClass('overlay');
-        // $('.panel').removeClass('overlay');
     };
-    // sizeTheOverlays() {
-    // $('#mainpanel').addClass('overlay');
-    // $('.overlay').resize().each(function() {
-    //   const h: any = $(this).parent().outerHeight();
-    //   const w: any = $(this).parent().outerWidth();
-    //   $(this).css('height', h);
-    //   $(this).css('width', w);
-    // });
-    // }
     BankeFormComponent.prototype.loadTempData = function () {
         var valuetemp = JSON.parse(localStorage.getItem('data_banka'));
         if (valuetemp) {
@@ -765,7 +748,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/banke/banke.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div *ngIf=\"bankeL;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"bankeL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedBank\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Naziv\" header=\"Naziv\"></p-column>\r\n      <p-column field=\"Racun\" header=\"Racun\"></p-column> \r\n      \r\n      <p-column field=\"Aktivan\" header=\"Aktivan\"   styleClass=\"text-center\" >\r\n        <ng-template let-col let-bank=\"rowData\" pTemplate=\"body\">\r\n                <span [hidden]=\"bank[col.field]==false\">DA</span> \r\n                <span [hidden]=\"bank[col.field]==true\">NE</span> \r\n                \r\n        </ng-template> \r\n      </p-column>\r\n      \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n       \r\n          <ng-template let-bank=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\" >\r\n\r\n              <button type=\"button\" pButton (click)=\"selectItem(bank)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateBanke(bank._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteBank(bank)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n       <p-footer *ngIf=\"bankeL.length > 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addBanke()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n            <div class=\"row\">\r\n                 <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                    <div class=\"hidden-xs dtempty_message_h1\">\r\n                        Još niste kreirali podatak.\r\n                    </div>\r\n                    <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                    <br/>\r\n                    <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                    <h3 class=\" hidden-xs dtempty_message\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite: \r\n                        <a  class=\"dtempty_message_text\" (click)=\"addBanke()\">\r\n                             Kreiraj podatak\r\n                        </a>\r\n                    </h3>\r\n\r\n                    <h5 class=\"visible-xs\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite : \r\n                        <a   (click)=\"addBanke()\">\r\n                             Kreiraj podatak\r\n                        </a>\r\n                    </h5>\r\n\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"BANKA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\" >\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                          ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{bankaShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                        NAZIV\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                        {{bankaShow.Naziv}} \r\n                        </dd>\r\n                        <dt>\r\n                        RAČUN\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.Racun}}\r\n                        </dd>\r\n                        <dt>\r\n                          AKTIVAN\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.Aktivan}}\r\n                        </dd>\r\n                       <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{bankaShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer> \r\n             \r\n            <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n            \r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n \r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n"
+module.exports = "<div *ngIf=\"bankeL;else  waiting\" [@routerTransition]>\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"bankeL\" [globalFilter]=\"gb\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedBank\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=\"false\" resizableColumns=\"true\"\r\n    columnResizeMode=\"fit\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\r\n    <p-column field=\"Racun\" header=\"Racun\" sortable=\"true\" [style]=\"{'width':'35%'}\"></p-column>\r\n\r\n    <p-column field=\"Aktivan\" header=\"Aktivan\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-col let-bank=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"bank[col.field]==false\">DA</span>\r\n        <span [hidden]=\"bank[col.field]==true\">NE</span>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'width':'15%'}\">\r\n\r\n      <ng-template let-bank=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n\r\n        <button type=\"button\" pButton (click)=\"selectItem(bank)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateBanke(bank._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteBank(bank)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"bankeL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addBanke()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <div *ngIf=\"bankeL.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              Još niste kreirali podatak.\r\n            </div>\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addBanke()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n\r\n            <h5 class=\"visible-xs\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addBanke()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"BANKA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow._id}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        RAČUN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.Racun}}\r\n      </dd>\r\n      <dt>\r\n        AKTIVAN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.Aktivan | prettyavtiveprint}}\r\n      </dd>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{bankaShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -807,6 +790,7 @@ var BankeComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.bankaShow = new __WEBPACK_IMPORTED_MODULE_6__banke_model__["a" /* BankeModel */]();
+        this.auto = 'auto';
         this.Title = 'PREGLED BANAKA';
     }
     BankeComponent.prototype.ngOnInit = function () {
@@ -814,6 +798,7 @@ var BankeComponent = (function () {
         this.bankService.getBanke()
             .subscribe(function (profile) {
             if (profile.success === true) {
+                // console.log(JSON.stringify(profile.data));
                 _this.bankeL = profile.data;
             }
             // }
@@ -861,7 +846,12 @@ var BankeComponent = (function () {
                         });
                     }
                     else {
-                        _this.router.navigate(['NotFound']);
+                        //   this.router.navigate(['NotFound']);
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-danger',
+                            timeout: 5000
+                        });
+                        _this.bankeL.splice(index, 0, tbanka);
                     }
                 }, function (error) {
                     _this.flashMessage.show(error.message, {
@@ -904,12 +894,14 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__banke_form_banke_form_component__ = __webpack_require__("../../../../../src/app/components/banke/banke-form/banke-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__banke_service__ = __webpack_require__("../../../../../src/app/components/banke/banke.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__banke_routing_module__ = __webpack_require__("../../../../../src/app/components/banke/banke-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -938,6 +930,7 @@ BankeModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_7__banke_routing_module__["a" /* BankeRoutingModule */]
         ],
         declarations: [
@@ -967,10 +960,18 @@ BankeModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -987,23 +988,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { ResponeCustom } from './../../shared/models/ErrorRes';
 
-
-var BankeService = (function () {
+var BankeService = (function (_super) {
+    __extends(BankeService, _super);
     function BankeService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    BankeService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     BankeService.prototype.getBanke = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1012,7 +1011,7 @@ var BankeService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1021,7 +1020,7 @@ var BankeService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/');
         return this.http.post(ep, JSON.stringify(tbanke), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -1031,7 +1030,7 @@ var BankeService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + tbanke._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + tbanke._id);
         return this.http.put(ep, JSON.stringify(tbanke), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1040,20 +1039,12 @@ var BankeService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/banke/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    BankeService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
-    };
     return BankeService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 BankeService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -1085,7 +1076,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div  [@routerTransition]>\r\n      \r\n        <div class=\"row\">\r\n\r\n                <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n                        <div class=\"panel panel-info\">\r\n                                <div class=\"panel-heading\">\r\n                                        <div class=\"row\">\r\n                                                <div class=\"col-xs-12 text-center\">\r\n                                                    <h3>UPUTI</h3>\r\n                                                </div>\r\n                                        </div>\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xs-12 text-left\">\r\n                                                <h4 >26</h4>\r\n                                                <div>Ukupno</div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-center\">\r\n                                                    <h4>15</h4>\r\n                                                <div><strong>Fakturisanih</strong></div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-right\">\r\n                                                    <h4>0</h4>\r\n                                                <div>Stornirani</div>\r\n                                            </div>\r\n                                        </div>\r\n                                </div>\r\n                        </div>\r\n                </div>\r\n                <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n                        <div class=\"panel panel-warning\">\r\n                                <div class=\"panel-heading\">\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xs-12 text-center\">\r\n                                                <h3>FAKTURE</h3>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xs-12 text-left\">\r\n                                                    <h4>26</h4>\r\n                                                <div>Faktura</div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-center\">\r\n                                                <h4>15</h4>\r\n                                                <div><strong>Uplaćenih</strong></div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-right\">\r\n                                                    <h4>12</h4>\r\n                                                <div>Isplaćenih</div>\r\n                                            </div>\r\n                                        </div>\r\n                                </div>\r\n                        </div>\r\n\r\n                </div>\r\n                <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n                    <div class=\"panel panel-success\">\r\n                            <div class=\"panel-heading\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xs-12 text-center\">\r\n                                            <h3>UPLATE</h3>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xs-12 text-left\">\r\n                                                <h4>26</h4>\r\n                                            <div>Ukupno</div>\r\n                                        </div>\r\n                                        <div class=\"col-xs-12 text-center\">\r\n                                            <h4>15</h4>\r\n                                            <div><strong>U celosti</strong></div>\r\n                                        </div>\r\n                                        <div class=\"col-xs-12 text-right\">\r\n                                                <h4>12</h4>\r\n                                            <div>Deo uplaćen</div>\r\n                                        </div>\r\n                                    </div>\r\n                            </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n                        <div class=\"panel panel-danger\">\r\n                                <div class=\"panel-heading\">\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xs-12 text-center\">\r\n                                                <h3>ISPLATE</h3>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xs-12 text-left\">\r\n                                                    <h4>26</h4>\r\n                                                <div>Ukupno</div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-center\">\r\n                                                <h4>15</h4>\r\n                                                <div><strong>Samo po uplatama</strong></div>\r\n                                            </div>\r\n                                            <div class=\"col-xs-12 text-right\">\r\n                                                    <h4>12</h4>\r\n                                                <div>Samo po Fakturama</div>\r\n                                            </div>\r\n                                        </div>\r\n                                </div>\r\n                        </div>\r\n                </div>\r\n\r\n        </div>\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n                    <div class=\"panel panel-primary\">\r\n                            <div class=\"panel-heading\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-xs-3\">\r\n                                        <i class=\"fa fa-users fa-5x\"></i>\r\n                                    </div>\r\n                                    <div class=\"col-xs-9 text-right\">\r\n                                        <div class=\"badge\">26</div>\r\n                                        <div>Unetih zadrugara</div>\r\n                                    </div>\r\n                                    <div class=\"col-xs-9 text-right\">\r\n                                        <div class=\"badge\">15</div>\r\n                                        <div>Aktivnih zadrugara</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <a href=\"#\">\r\n                                <div class=\"panel-footer\">\r\n                                        <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n                                        <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right fa-2x\"></i></span>\r\n                                    <div class=\"clearfix\"></div>\r\n                                </div>\r\n                            </a>\r\n                    </div>\r\n\r\n\r\n\r\n                </div>\r\n                <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n                        <div class=\"panel panel-primary\">\r\n                                <div class=\"panel-heading\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xs-3\">\r\n                                            <i class=\"fa fa-address-card fa-5x\"></i>\r\n                                        </div>\r\n                                        \r\n                                        <div class=\"form-group col-xs-9 text-right\">\r\n                                                <div>Kupaca ukupno\r\n                                                    <span class=\"badge\">{{CkupacAll}}</span>\r\n                                                </div>\r\n                                        </div>\r\n                                        \r\n                                        <div class=\"form-group col-xs-9 text-right\">\r\n                                            <div>Aktivnih kupaca\r\n                                                <span class=\"badge\">15</span>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <a [routerLink]=\"['/partner']\">\r\n                                    <div class=\"panel-footer\">\r\n                                            <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n                                            <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right fa-2x\"></i></span>\r\n                                        <div class=\"clearfix\"></div>\r\n                                    </div>\r\n                                </a>\r\n                        </div>\r\n                </div>\r\n                <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n                        <div class=\"panel panel-primary\">\r\n                                <div class=\"panel-heading\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xs-3\">\r\n                                            <i class=\"fa fa-list-alt fa-5x\"></i>\r\n                                        </div>\r\n                                        <div class=\"form-group col-xs-9 text-right\">\r\n                                                <div>Poslova ukupno\r\n                                                    <span class=\"badge\">{{CposaoAll}}</span>\r\n                                                </div>\r\n                                            </div>\r\n                                            <div class=\"form-group col-xs-9 text-right\">\r\n                                                 <div>Aktivnih poslova\r\n                                                    <span class=\"badge\">15</span>\r\n                                                 </div>\r\n                                            </div>\r\n                                    </div>\r\n                                </div>\r\n                                <a [routerLink]=\"['/posao']\">\r\n                                    <div class=\"panel-footer\">\r\n                                        <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n                                        <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right fa-2x\"></i></span>\r\n                                        <div class=\"clearfix\"></div>\r\n                                    </div>\r\n                                </a>\r\n                        </div>\r\n                </div>\r\n                    \r\n               \r\n        </div>\r\n</div>"
+module.exports = "<div [@routerTransition]>\r\n\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n      <div class=\"panel panel-info\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h3>UPUTI</h3>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-left\">\r\n              <h4>\r\n                <span class=\"badge\">{{CUpuAll}}</span>\r\n              </h4>\r\n              <div>Ukupno</div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h4 class=\"badge\">{{CUputFakt}}</h4>\r\n              <div>\r\n                <strong>Fakturisanih</strong>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-right\">\r\n              <h4>\r\n                <span class=\"badge\">{{CUputStorn}}</span>\r\n              </h4>\r\n              <div>Stornirani</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n      <div class=\"panel panel-warning\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h3>FAKTURE</h3>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-left\">\r\n              <h4>26</h4>\r\n              <div>Faktura</div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h4>15</h4>\r\n              <div>\r\n                <strong>Uplaćenih</strong>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-right\">\r\n              <h4>12</h4>\r\n              <div>Isplaćenih</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n      <div class=\"panel panel-success\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h3>UPLATE</h3>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-left\">\r\n              <h4>26</h4>\r\n              <div>Ukupno</div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h4>15</h4>\r\n              <div>\r\n                <strong>U celosti</strong>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-right\">\r\n              <h4>12</h4>\r\n              <div>Deo uplaćen</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3 col-md-3 col-xs-12\">\r\n      <div class=\"panel panel-danger\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h3>ISPLATE</h3>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-12 text-left\">\r\n              <h4>26</h4>\r\n              <div>Ukupno</div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-center\">\r\n              <h4>15</h4>\r\n              <div>\r\n                <strong>Samo po uplatama</strong>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xs-12 text-right\">\r\n              <h4>12</h4>\r\n              <div>Samo po Fakturama</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n      <div class=\"panel panel-primary\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-3\">\r\n              <i class=\"fa fa-users fa-5x\"></i>\r\n            </div>\r\n            <div class=\"form-group col-xs-9 text-right\">\r\n              <div>Unetih zadrugara\r\n                <span class=\"badge\">{{CzadrAll}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\" form-group col-xs-9 text-right\">\r\n              <div>Aktivnih zadrugara\r\n                <span class=\"badge\">{{CzadrActiv}}</span>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <a [routerLink]=\"['/zadrugar']\">\r\n          <div class=\"panel-footer\">\r\n            <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n            <span class=\"pull-right\">\r\n              <i class=\"fa fa-arrow-circle-right fa-2x\"></i>\r\n            </span>\r\n            <div class=\"clearfix\"></div>\r\n          </div>\r\n        </a>\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n    <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n      <div class=\"panel panel-primary\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-3\">\r\n              <i class=\"fa fa-address-card fa-5x\"></i>\r\n            </div>\r\n\r\n            <div class=\"form-group col-xs-9 text-right\">\r\n              <div>Kupaca ukupno\r\n                <span class=\"badge\">{{CkupacAll}}</span>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-xs-9 text-right\">\r\n              <div>Aktivnih kupaca\r\n                <span class=\"badge\">{{CkupacActiv}}</span>\r\n              </div>\r\n            </div>\r\n\r\n\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-xs-12 text-right\">\r\n              <div>Kupaca sa uputom\r\n                <span class=\"badge\">{{CkupacUput}}</span>\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n        <a [routerLink]=\"['/partner']\">\r\n          <div class=\"panel-footer\">\r\n            <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n            <span class=\"pull-right\">\r\n              <i class=\"fa fa-arrow-circle-right fa-2x\"></i>\r\n            </span>\r\n            <div class=\"clearfix\"></div>\r\n          </div>\r\n        </a>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-4 col-md-4 col-xs-12\">\r\n      <div class=\"panel panel-primary\">\r\n        <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-3\">\r\n              <i class=\"fa fa-list-alt fa-5x\"></i>\r\n            </div>\r\n            <div class=\"form-group col-xs-9 text-right\">\r\n              <div>Poslova ukupno\r\n                <span class=\"badge\">{{CposaoAll}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group col-xs-9 text-right\">\r\n              <div>Poslova u uputima\r\n                <span class=\"badge\">{{CposaoActiv}}</span>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <a [routerLink]=\"['/posao']\">\r\n          <div class=\"panel-footer\">\r\n            <span class=\"pull-left\">Pogledaj detaljnije</span>\r\n            <span class=\"pull-right\">\r\n              <i class=\"fa fa-arrow-circle-right fa-2x\"></i>\r\n            </span>\r\n            <div class=\"clearfix\"></div>\r\n          </div>\r\n        </a>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1095,8 +1086,9 @@ module.exports = "<div  [@routerTransition]>\r\n      \r\n        <div class=\"r
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__animation_router_animations__ = __webpack_require__("../../../../../src/app/animation/router.animations.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_service__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__animation_router_animations__ = __webpack_require__("../../../../../src/app/animation/router.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_service__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1109,9 +1101,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+var AggCount = (function () {
+    function AggCount() {
+    }
+    return AggCount;
+}());
+// Prvo ovo prouci pa napravi ovu komponentu
+// https://www.metaltoad.com/blog/angular-2-http-observables-and-concurrent-data-loading
 var DashboardComponent = (function () {
-    function DashboardComponent(dashService) {
+    function DashboardComponent(dashService, router) {
         this.dashService = dashService;
+        this.router = router;
+        this.CposaoAll = 0;
+        this.CposaoActiv = 0;
+        this.CkupacAll = 0;
+        this.CkupacActiv = 0;
+        this.CkupacUput = 0;
+        this.CzadrAll = 0;
+        this.CzadrActiv = 0;
+        this.CUpuAll = 0;
+        this.CUputFakt = 0;
+        this.CUputStorn = 0;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1119,18 +1130,149 @@ var DashboardComponent = (function () {
             if (profile.success === true) {
                 _this.CposaoAll = profile.number;
             }
-        }, function (err) {
-            console.log(err);
+        }, function (error) {
+            // console.log(err);
             _this.CposaoAll = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getActivPosaoCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                // console.log('Aktivnih poSlova  ' +  JSON.stringify(profile.data).length);
+                _this.cPrimamAgr = profile.data;
+                _this.CposaoActiv = _this.cPrimamAgr.length;
+            }
+            else {
+                _this.CposaoActiv = [].length;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CposaoActiv = [].length;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
         this.dashService.getKupciCount().subscribe(function (profile) {
             if (profile.success === true) {
                 _this.CkupacAll = profile.number;
             }
-        }, function (err) {
-            console.log(err);
+        }, function (error) {
+            // console.log(err);
             _this.CkupacAll = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getActivKupciCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CkupacActiv = profile.number;
+            }
+            else {
+                _this.CkupacActiv = 0;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CkupacActiv = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getUputKupciCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                // console.log('Aktivnih poSlova  ' +  JSON.stringify(profile.data).length);
+                _this.cPrimamAgr = profile.data;
+                _this.CkupacUput = _this.cPrimamAgr.length;
+            }
+            else {
+                _this.CkupacUput = [].length;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CkupacUput = [].length;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getKupciCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CkupacAll = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CkupacAll = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getZadrugariCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CzadrAll = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CzadrAll = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getActivZadCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CzadrActiv = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CzadrActiv = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.UputiCount();
+    };
+    DashboardComponent.prototype.UputiCount = function () {
+        var _this = this;
+        this.dashService.getUputCountAll().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CUpuAll = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CUpuAll = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getUputCountFakt().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CUputFakt = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CUputFakt = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            return false;
+        });
+        this.dashService.getUputCountStorn().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.CUputStorn = profile.number;
+            }
+        }, function (error) {
+            // console.log(err);
+            _this.CUputStorn = 0;
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
     };
@@ -1141,12 +1283,12 @@ DashboardComponent = __decorate([
         selector: 'app-dashboard',
         template: __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.css")],
-        animations: [Object(__WEBPACK_IMPORTED_MODULE_1__animation_router_animations__["a" /* routerTransition */])()]
+        animations: [Object(__WEBPACK_IMPORTED_MODULE_2__animation_router_animations__["a" /* routerTransition */])()]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _b || Object])
 ], DashboardComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=dashboard.component.js.map
 
 /***/ }),
@@ -1166,10 +1308,18 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1187,23 +1337,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var DashboardService = (function () {
+var DashboardService = (function (_super) {
+    __extends(DashboardService, _super);
     function DashboardService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    DashboardService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     DashboardService.prototype.getPosaoCount = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countposaoall');
-        // console.log("getDrzave link", ep );
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countposaoall');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getActivPosaoCount = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countActivposao');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1212,20 +1367,75 @@ var DashboardService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countkupciall');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countkupciall');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    DashboardService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
+    DashboardService.prototype.getActivKupciCount = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countactivpartner');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getUputKupciCount = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countpartneruput');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getZadrugariCount = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countzadrugarall');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getActivZadCount = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countactivzadrugar');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getUputCountAll = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countuputall');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getUputCountFakt = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countuputfakt');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    DashboardService.prototype.getUputCountStorn = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/countuputstorn');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     return DashboardService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 DashboardService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -1257,7 +1467,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/drzave/drzave-form/drzave-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = " <div class=\"panel panel-primary\" [@formsTransition]>\r\n    <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n        <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n          <h5>{{title}}</h5> \r\n        </div>\r\n        <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n          <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n        </div>\r\n    </div>\r\n  </div>\r\n  <!-- fa-2x -->\r\n  <div class=\"panel-body\">\r\n        <form [formGroup]=\"formDR\" (ngSubmit)=\"save()\">\r\n          <div class=\"form-group\" >\r\n                <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"drzavaN._id\"  type=\"hidden\">\r\n          </div>\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Kod:\r\n                <input class=\"form-control \" formControlName=\"KodDrzave\"  [(ngModel)]=\"drzavaN.KodDrzave\"   \r\n               required>\r\n              </label>\r\n              <div *ngIf=\"KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)\" class=\"alert alert-danger\">\r\n\r\n                <div *ngIf=\"KodDrzave.errors.required\">\r\n                    <strong>Kod drzave je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"KodDrzave.errors.minlength\">\r\n                  <strong>Kod drzave mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"KodDrzave.errors.maxlength\">\r\n                  <strong>Predugački kod drzave (max 3) !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"KodDrzave.errors.validateSifru\">\r\n                  <strong>Kod drzave nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Naziv:\r\n                  <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"drzavaN.Naziv\"   required  >\r\n                </label>\r\n                <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"Naziv.errors.required\">\r\n                      <strong>Naziv je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Naziv.errors.maxlength\">\r\n                    <strong>Predugački naziv !!!</strong>\r\n                  </div>\r\n                 </div>\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n              <div class=\"checkbox\">\r\n                <label class=\"center-block\">\r\n                    <input type=\"checkbox\" formControlName=\"EuClan\" [(ngModel)]=\"drzavaN.EuClan\"  value=\"1\">EuClan\r\n                </label>\r\n              </div>\r\n            </div>\r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"drzavaN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n              </div>\r\n            \r\n              <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formDR.valid\"\r\n                            class=\"btn btn-success\">\r\n                            <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formDR.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n            </div>\r\n        </form>\r\n  </div>\r\n  <div class=\"panel-footer\">\r\n      <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n          <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n          Back\r\n      </button>\r\n  </div>\r\n    \r\n</div>\r\n       \r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formDR\" (ngSubmit)=\"save()\">\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"drzavaN._id\" type=\"hidden\">\r\n      </div>\r\n      <!-- [(ngModel)]=\"drzavaN.KodDrzave\"   -->\r\n      <div class=\"form-group\" [ngClass]=\"{'has-danger': KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched), \r\n                                                'has-success':  KodDrzave.valid && ( KodDrzave.dirty || KodDrzave.touched) }\">\r\n        <label class=\"center-block\">Kod:\r\n          <input class=\"form-control \" formControlName=\"KodDrzave\" required>\r\n        </label>\r\n        <div *ngIf=\"KodDrzave.invalid && (KodDrzave.dirty || KodDrzave.touched)\" class=\"alert alert-danger\">\r\n\r\n          <div *ngIf=\"KodDrzave.errors.required\">\r\n            <strong>Kod drzave je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"KodDrzave.errors.minlength\">\r\n            <strong>Kod drzave mora biti minimalno 2 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"KodDrzave.errors.maxlength\">\r\n            <strong>Predugački kod drzave (max 3) !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"KodDrzave.errors.validateSifru\">\r\n            <strong>Kod drzave nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <!-- [(ngModel)]=\"drzavaN.Naziv\" -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Naziv:\r\n          <input class=\"form-control\" formControlName=\"Naziv\" required>\r\n        </label>\r\n        <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Naziv.errors.required\">\r\n            <strong>Naziv je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.maxlength\">\r\n            <strong>Predugački naziv !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <!-- [(ngModel)]=\"drzavaN.EuClan\" -->\r\n      <div class=\"form-group\">\r\n        <div class=\"checkbox\">\r\n          <label class=\"center-block\">\r\n            <input type=\"checkbox\" formControlName=\"EuClan\" value=\"1\">EuClan\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <!-- [(ngModel)]=\"drzavaN.Opis\" -->\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formDR.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formDR.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"panel-footer\">\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1276,6 +1486,8 @@ module.exports = " <div class=\"panel panel-primary\" [@formsTransition]>\r\n   
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1294,8 +1506,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/filter';
+
 var DrzaveFormComponent = (function () {
     function DrzaveFormComponent(drzaveService, router, route, formBuilder, _location, serValidate, flashMessage) {
+        var _this = this;
         this.drzaveService = drzaveService;
         this.router = router;
         this.route = route;
@@ -1303,18 +1519,47 @@ var DrzaveFormComponent = (function () {
         this.serValidate = serValidate;
         this.flashMessage = flashMessage;
         this.drzavaN = new __WEBPACK_IMPORTED_MODULE_3__drzave_model__["a" /* Drzave */]();
-        this.titleAlertNaziv = 'This field is required !!!';
-        this.titleAlertKod = 'KOD-ima jos, This field is required !!!';
         this.saveTemp = true;
         this.formDR = formBuilder.group({
             _id: [],
             KodDrzave: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2),
                     __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(3), serValidate.validateRegExpSifru]],
-            EuClan: [],
+            EuClan: [false],
             Naziv: ['', [
                     __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)
                 ]],
             Opis: []
+        });
+        this.formDR.valueChanges
+            .filter(function (data) { return _this.formDR.valid; })
+            .map(function (data) {
+            // data.Opis = data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+            // data.Opis = data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+            // data.Opis.replace(/<(?:.|\n)*?>/gm, '');
+            // Naziv: ['', [
+            //   Validators.required, Validators.maxLength(100)
+            var strOpis = data.Opis;
+            if (strOpis) {
+                strOpis = strOpis.replace(/<(?:.|\n)*?>/gm, '');
+                // console.log('Opis u if ' + strOpis);
+                data.Opis = strOpis;
+            }
+            var strNaziv = data.Naziv;
+            if (strOpis) {
+                strNaziv = strNaziv.replace(/<(?:.|\n)*?>/gm, '');
+                data.Naziv = strNaziv;
+            }
+            // let strKodDrzave = data.KodDrzave;
+            // if (strKodDrzave) {
+            //   strKodDrzave = strKodDrzave.replace(/<(?:.|\n)*?>/gm, '');
+            //   data.KodDrzave = strKodDrzave;
+            // }
+            return data;
+        })
+            .subscribe(function (data) {
+            // console.log(JSON.stringify(data))
+            //  this.drzavaN = data;
+            //  this.updateForm();
         });
     }
     Object.defineProperty(DrzaveFormComponent.prototype, "KodDrzave", {
@@ -1324,6 +1569,16 @@ var DrzaveFormComponent = (function () {
     });
     Object.defineProperty(DrzaveFormComponent.prototype, "Naziv", {
         get: function () { return this.formDR.get('Naziv'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DrzaveFormComponent.prototype, "EuClan", {
+        get: function () { return this.formDR.get('EuClan'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DrzaveFormComponent.prototype, "Opis", {
+        get: function () { return this.formDR.get('Opis'); },
         enumerable: true,
         configurable: true
     });
@@ -1341,22 +1596,26 @@ var DrzaveFormComponent = (function () {
                 if (pos.success) {
                     _this.saveTemp = false;
                     _this.drzavaN = pos.data[0];
+                    _this.updateForm();
                 }
                 else {
                     _this.flashMessage.show(pos.message, {
                         cssClass: 'alert-danger',
                         timeout: 9000
                     });
-                    _this.router.navigate(['NotFound']);
+                    // this.router.navigate(['NotFound']);
                 }
             }, function (error) {
                 _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
-                _this.router.navigate(['NotFound']);
-                // }
+                if (error.status === 404) {
+                    _this.router.navigate(['NotFound']);
+                }
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
             });
         });
     };
@@ -1407,10 +1666,17 @@ var DrzaveFormComponent = (function () {
             });
         }
     };
+    DrzaveFormComponent.prototype.updateForm = function () {
+        this.KodDrzave.setValue(this.drzavaN.KodDrzave);
+        this.Naziv.setValue(this.drzavaN.Naziv);
+        this.EuClan.setValue(this.drzavaN.EuClan);
+        this.Opis.setValue(this.drzavaN.Opis);
+    };
     DrzaveFormComponent.prototype.loadTempData = function () {
         var valuetemp = JSON.parse(localStorage.getItem('data_drzava'));
         if (valuetemp) {
             this.drzavaN = valuetemp;
+            this.updateForm();
         }
     };
     DrzaveFormComponent.prototype.setTempData = function () {
@@ -1431,12 +1697,15 @@ var DrzaveFormComponent = (function () {
         this.setTempData();
         this._location.back();
     };
-    DrzaveFormComponent.prototype.revert = function () { this.clearFormData(); };
+    DrzaveFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formDR.reset();
+    };
     DrzaveFormComponent.prototype.clearFormData = function () {
         this.formDR.reset({
             KodDrzave: '',
             Naziv: '',
-            EuClan: 0,
+            EuClan: false,
             Opis: ''
         });
     };
@@ -1527,7 +1796,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/drzave/drzave.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"row\"> -->\r\n    <div *ngIf=\"drzave; else  waiting\" [@routerTransition]>\r\n      <!-- <h3 class=\"first\">TABELA DRZAVA</h3> class=\"col-lg-9 col-md-9 col-xs-10\"\r\n      <input #gb type=\"text\" placeholder=\"Global search\" pInputText focus>\r\n      <p></p> -->\r\n\r\n    <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n       <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n        <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n    </div>\r\n      <p-dataTable [value]=\"drzave\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedDrzave\" dataKey=\"_id\"  \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false >\r\n\r\n    <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>    \r\n                                                                                         \r\n      <p-column field=\"KodDrzave\" header=\"Kod\" sortable=\"true\"></p-column>                               \r\n      <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n      <p-column field=\"EuClan\" header=\"EuClan\" sortable=\"true\" styleClass=\"text-center\">\r\n            <ng-template let-col let-drz=\"rowData\" pTemplate=\"body\">\r\n                    <span [hidden]=\"drz[col.field]==false\"> DA</span> \r\n                    <span [hidden]=\"drz[col.field]==true\"> NE</span> \r\n            </ng-template> \r\n\r\n      </p-column>\r\n      <p-column field=\"Opis\" header=\"Opis\" sortable=\"true\"></p-column>\r\n      <!-- <p-column field=\"NameUser\" header=\"User\" sortable=\"true\"></p-column> -->\r\n      \r\n      <p-column styleClass=\"col-button text-center\" heder=\"Opcije\">\r\n          <ng-template let-drz=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\"  > \r\n              <button type=\"button\" pButton (click)=\"selectDrzavu(drz)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateDrzavu(drz._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteDrzavu(drz)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n     </p-column>\r\n      <p-footer>\r\n            <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addDrzave()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n<!-- </div> -->\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n    <p-footer>\r\n        <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n        <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n     </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n\r\n<p-dialog header=\"DRŽAVA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n\r\n    <div>\r\n            <dl class=\"dl-horizontal\">\r\n                <dt>\r\n                 ID\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                   {{drzShow._id}}\r\n                </dd>\r\n              \r\n                <dt>\r\n                  KOD DRŽAVE\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                     {{drzShow.KodDrzave}} \r\n                </dd>\r\n                <dt>\r\n                NAZIV DRŽAVE\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                     {{drzShow.Naziv}}\r\n                </dd>\r\n                <dt>\r\n                 EU CLAN\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{drzShow.EuClan}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                OPIS\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{drzShow.Opis}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                DATUM UNOSA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{drzShow.created_at}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                DATUM AŽURIRANJA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{drzShow.updatedAt}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                KORISNIK\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{drzShow.NameUser}}\r\n                    \r\n                </dd>\r\n        \r\n            </dl>                        \r\n    </div>\r\n                    \r\n\r\n    <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n        <p-footer>\r\n             <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n        </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>"
+module.exports = "<div *ngIf=\"drzave; else  waiting\" [@routerTransition]>\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"drzave\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"5\" [paginator]=\"true\" [rowsPerPageOptions]=\"[5,10,20]\"\r\n    selectionMode=\"single\" [(selection)]=\"selectedDrzave\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\"\r\n    [immutable]=false>\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n\r\n    <p-column field=\"KodDrzave\" header=\"Kod\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\r\n    <p-column field=\"EuClan\" header=\"EuClan\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-col let-drz=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"drz[col.field]==false\"> DA</span>\r\n        <span [hidden]=\"drz[col.field]==true\"> NE</span>\r\n      </ng-template>\r\n\r\n    </p-column>\r\n    <p-column field=\"Opis\" header=\"Opis\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-drz=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectDrzavu(drz)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateDrzavu(drz._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteDrzavu(drz)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n\r\n\r\n    <p-footer *ngIf=\"drzave.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addDrzave()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <div *ngIf=\"drzave.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              Još niste kreirali podatak.\r\n            </div>\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addDrzave()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n            <h5 class=\"visible-xs\">\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addDrzave()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n\r\n\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n<!-- <ng-template pTemplate=\"paginatorLeft\">\r\n        <button type=\"button\" pButton icon=\"fa-refresh\"></button>\r\n</ng-template>\r\n<ng-template pTemplate=\"paginatorRight\">\r\n    <button type=\"button\" pButton icon=\"fa-cloud-upload\"></button>\r\n</ng-template> -->\r\n\r\n<p-dialog header=\"DRŽAVA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow._id}}\r\n      </dd>\r\n\r\n      <dt>\r\n        KOD DRŽAVE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.KodDrzave}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV DRŽAVE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        EU CLAN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.EuClan | prettyavtiveprint}}\r\n\r\n      </dd>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{drzShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n\r\n\r\n  <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -1569,7 +1838,8 @@ var DrzaveComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.drzShow = new __WEBPACK_IMPORTED_MODULE_3__drzave_model__["a" /* Drzave */]();
-        this.Title = "PREGLED DRŽAVA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED DRŽAVA';
     }
     DrzaveComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1578,14 +1848,18 @@ var DrzaveComponent = (function () {
             if (profile.success === true) {
                 _this.drzave = profile.data;
             }
-            // }
         }, function (error) {
             _this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000
             });
-            //  console.log(error.message);
             _this.drzave = [];
+            if (error.status === 404) {
+                _this.router.navigate(['NotFound']);
+            }
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
     };
@@ -1595,6 +1869,7 @@ var DrzaveComponent = (function () {
     };
     DrzaveComponent.prototype.cloneData = function (c) {
         var drzava = new __WEBPACK_IMPORTED_MODULE_3__drzave_model__["a" /* Drzave */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             drzava[prop] = c[prop];
         }
@@ -1613,9 +1888,7 @@ var DrzaveComponent = (function () {
             message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ? ",
             header: "" + tdrzava.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.drzave.indexOf(tdrzava);
-                // console.log("index je " + index);
                 _this.drzave.splice(index, 1);
                 _this.drzaveService.delDrzava(tdrzava._id)
                     .subscribe(function (pos) {
@@ -1626,16 +1899,26 @@ var DrzaveComponent = (function () {
                         });
                     }
                     else {
-                        _this.router.navigate(['NotFound']);
+                        // this.router.navigate(['NotFound']);
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-danger',
+                            timeout: 5000
+                        });
+                        _this.drzave.splice(index, 0, tdrzava);
                     }
                 }, function (error) {
-                    //alert("Could not delete radnik.");
                     _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
                     // Revert the view back to its original state
                     _this.drzave.splice(index, 0, tdrzava);
+                    if (error.status === 404) {
+                        _this.router.navigate(['NotFound']);
+                    }
+                    if (error.status === 401) {
+                        _this.router.navigate(['login']);
+                    }
                 });
             }
         });
@@ -1662,10 +1945,17 @@ var _a, _b, _c, _d;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Drzave; });
+/* unused harmony export PickDrzave */
 var Drzave = (function () {
     function Drzave() {
     }
     return Drzave;
+}());
+
+var PickDrzave = (function () {
+    function PickDrzave() {
+    }
+    return PickDrzave;
 }());
 
 //# sourceMappingURL=drzave.model.js.map
@@ -1686,12 +1976,14 @@ var Drzave = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__drzave_form_drzave_form_component__ = __webpack_require__("../../../../../src/app/components/drzave/drzave-form/drzave-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__drzave_service__ = __webpack_require__("../../../../../src/app/components/drzave/drzave.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__drzave_routing_module__ = __webpack_require__("../../../../../src/app/components/drzave/drzave-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1720,6 +2012,7 @@ DrzaveModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_7__drzave_routing_module__["a" /* DrzaveRoutingModule */]
         ],
         declarations: [
@@ -1749,9 +2042,18 @@ DrzaveModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1769,34 +2071,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DrzaveService = (function () {
+var DrzaveService = (function (_super) {
+    __extends(DrzaveService, _super);
     function DrzaveService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    DrzaveService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     DrzaveService.prototype.getDrzave = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // let ep = this.prepEndpoint('api/drzave'); 
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/');
-        // console.log("getDrzave link", ep );
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
-        ;
+    };
+    DrzaveService.prototype.getPickDrzave = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/pickdrzave/');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     DrzaveService.prototype.getDrzava = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //let ep = this.prepEndpoint('api/drzave/'+id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1805,8 +2110,7 @@ var DrzaveService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // let ep = this.prepEndpoint('api/drzave');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/');
         return this.http.post(ep, JSON.stringify(drzava), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1815,8 +2119,7 @@ var DrzaveService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //let ep = this.prepEndpoint('api/drzave/' + drzava._id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + drzava._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + drzava._id);
         return this.http.put(ep, JSON.stringify(drzava), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -1825,21 +2128,12 @@ var DrzaveService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // let ep = this.prepEndpoint('api/drzave/'+id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/drzave/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    // prepEndpoint(ep){
-    // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    //   return ServiceConfig.PrepareHost(this.isDev,ep);
-    // }
-    DrzaveService.prototype.handleError = function (error) {
-        console.error(error);
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(error.json().error || 'Server error');
-    };
     return DrzaveService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 DrzaveService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -1871,7 +2165,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/fond-sati/fond-sati-form/fond-sati-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  radnik-form works!\r\n</p> -->\r\n\r\n<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5> \r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n  </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formFSAT\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"fnsatN._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Godina:\r\n              <input class=\"form-control\" formControlName=\"Godina\"  [(ngModel)]=\"fnsatN.Godina\"  (keypress)=\"serValidate.validateOnlyDigit($event)\" required>\r\n            </label>\r\n            <div *ngIf=\"Godina.invalid && (Godina.dirty || Godina.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Godina.errors.required\">\r\n                    <strong>Godina je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Godina.errors.maxValue\">\r\n                  <strong>Godina nije pravilno uneta (>2040)  !!!</strong>\r\n                </div>\r\n              <div *ngIf=\"Godina.errors.minValue\">\r\n                  <strong>Godina nije pravilno uneta (<2000)  !!!</strong>\r\n                </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Mesec:\r\n                <input class=\"form-control\" formControlName=\"Mesec\"  [(ngModel)]=\"fnsatN.Mesec\"  (keypress)=\"serValidate.validateOnlyDigit($event)\" required>\r\n              </label>\r\n              <div *ngIf=\"Mesec.invalid && (Mesec.dirty || Mesec.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"Mesec.errors.required\">\r\n                      <strong>Mesec je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Mesec.errors.maxValue\">\r\n                      <strong>Mesec nije pravilno unet(>12)  !!!</strong>\r\n                    </div>\r\n                  <div *ngIf=\"Mesec.errors.minValue\">\r\n                      <strong>Mesec nije pravilno unet(<1)  !!!</strong>\r\n                    </div>\r\n              </div>\r\n              \r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Sati:\r\n                <input class=\"form-control\" formControlName=\"Sati\"  [(ngModel)]=\"fnsatN.Sati\"  (keypress)=\"serValidate.validateOnlyDigit($event)\" required>\r\n              </label>\r\n              <div *ngIf=\"Sati.invalid && (Sati.dirty || Sati.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"Sati.errors.required\">\r\n                      <strong>Sati je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Sati.errors.maxValue\">\r\n                      <strong>Sati nisu pravilno uneti(>248)  !!!</strong>\r\n                    </div>\r\n                  <div *ngIf=\"Sati.errors.minValue\">\r\n                      <strong>Sati nisu pravilno uneti(<1)  !!!</strong>\r\n                    </div>\r\n              </div>\r\n            </div>\r\n            \r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Minimalna osnovica:\r\n                  <input  class=\"form-control\" formControlName=\"MinOsnov\"  [(ngModel)]=\"fnsatN.MinOsnov\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                </label>\r\n                <div *ngIf=\"MinOsnov.invalid && (MinOsnov.dirty || MinOsnov.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"MinOsnov.errors.required\">\r\n                        <strong>Minimalna osnovica je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"MinOsnov.errors.minValue\">\r\n                        <strong>Minimalna osnovica nije pravilno uneta(<1)  !!!</strong>\r\n                      </div>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Maksimalna osnovica:\r\n                  <input class=\"form-control\" formControlName=\"MaxOsnov\"  [(ngModel)]=\"fnsatN.MaxOsnov\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                </label>\r\n                \r\n                <div *ngIf=\"MaxOsnov.invalid && (MaxOsnov.dirty || MaxOsnov.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"MaxOsnov.errors.required\">\r\n                        <strong>Maksimalna osnovica je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"MaxOsnov.errors.minValue\">\r\n                        <strong>Maksimalna osnovica nije pravilno uneta(<1)  !!!</strong>\r\n                      </div>\r\n                </div>\r\n              </div>\r\n\r\n              \r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"fnsatN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formFSAT.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formFSAT.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>\r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formFSAT\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"fnsatN._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Godina:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control text-right\" formControlName=\"Godina\" [(ngModel)]=\"fnsatN.Godina\" (keypress)=\"serValidate.validateOnlyDigit($event)\"\r\n                  required>\r\n                <span class=\"input-group-addon\">[0-9]</span>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"Godina.invalid && (Godina.dirty || Godina.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Godina.errors.required\">\r\n              <strong>Godina je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Godina.errors.maxValue\">\r\n              <strong>Godina nije pravilno uneta (>2040) !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Godina.errors.minValue\">\r\n              <strong>Godina nije pravilno uneta ( < 2000 ) !!!</strong>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Mesec:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control text-right\" formControlName=\"Mesec\" [(ngModel)]=\"fnsatN.Mesec\" (keypress)=\"serValidate.validateOnlyDigit($event)\"\r\n                  required>\r\n                <span class=\"input-group-addon\">[0-9]</span>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"Mesec.invalid && (Mesec.dirty || Mesec.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Mesec.errors.required\">\r\n              <strong>Mesec je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Mesec.errors.maxValue\">\r\n              <strong>Mesec nije pravilno unet(>12) !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Mesec.errors.minValue\">\r\n              <strong>Mesec nije pravilno unet(\r\n                <1) !!!</strong>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Sati:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control text-right\" formControlName=\"Sati\" [(ngModel)]=\"fnsatN.Sati\" (keypress)=\"serValidate.validateOnlyDigit($event)\"\r\n                  required>\r\n                <span class=\"input-group-addon\">[0-9]</span>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"Sati.invalid && (Sati.dirty || Sati.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Sati.errors.required\">\r\n              <strong>Sati je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Sati.errors.maxValue\">\r\n              <strong>Sati nisu pravilno uneti(>248) !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Sati.errors.minValue\">\r\n              <strong>Sati nisu pravilno uneti(\r\n                <1) !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group  col-md-4\">\r\n          <label class=\"center-block\">Minimalna osnovica:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control text-right\" formControlName=\"MinOsnov\" [(ngModel)]=\"fnsatN.MinOsnov\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                  required>\r\n                <span class=\"input-group-addon\">RSD</span>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"MinOsnov.invalid && (MinOsnov.dirty || MinOsnov.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"MinOsnov.errors.required\">\r\n              <strong>Minimalna osnovica je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"MinOsnov.errors.minValue\">\r\n              <strong>Minimalna osnovica nije pravilno uneta(<1) !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group  col-md-4\">\r\n          <label class=\"center-block\">Maksimalna osnovica:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control text-right\" formControlName=\"MaxOsnov\" [(ngModel)]=\"fnsatN.MaxOsnov\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                  required>\r\n                <span class=\"input-group-addon\">RSD</span>\r\n              </div>\r\n            </div>\r\n          </label>\r\n\r\n          <div *ngIf=\"MaxOsnov.invalid && (MaxOsnov.dirty || MaxOsnov.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"MaxOsnov.errors.required\">\r\n              <strong>Maksimalna osnovica je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"MaxOsnov.errors.minValue\">\r\n              <strong>Maksimalna osnovica nije pravilno uneta(<1) !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group  col-md-4\">\r\n        </div>\r\n\r\n      </div>\r\n\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"fnsatN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formFSAT.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formFSAT.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1982,16 +2276,17 @@ var FondSatiFormComponent = (function () {
                         cssClass: 'alert-danger',
                         timeout: 9000
                     });
-                    _this.router.navigate(['NotFound']);
+                    // this.router.navigate(['NotFound']);
                 }
             }, function (error) {
                 _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
-                _this.router.navigate(['NotFound']);
-                // }
+                // this.router.navigate(['NotFound']);
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
             });
         });
     };
@@ -2010,14 +2305,23 @@ var FondSatiFormComponent = (function () {
                     _this.router.navigate(['fondsati']);
                 }
                 else {
-                    _this.router.navigate(['NotFound']);
+                    // this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
                 }
             }, function (error) {
                 _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // console.log(" forma UPDATE  " + error);
+                if (error.status === 404) {
+                    _this.router.navigate(['NotFound']);
+                }
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
             });
         }
         else {
@@ -2033,14 +2337,23 @@ var FondSatiFormComponent = (function () {
                     _this.router.navigate(['fondsati']);
                 }
                 else {
-                    _this.router.navigate(['NotFound']);
+                    // this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
                 }
             }, function (error) {
                 _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                //console.log(" forma INSERT "  + error.toString()  + " ima li jos nesto" + error);
+                if (error.status === 404) {
+                    _this.router.navigate(['NotFound']);
+                }
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
             });
         }
     };
@@ -2067,17 +2380,19 @@ var FondSatiFormComponent = (function () {
     FondSatiFormComponent.prototype.backClicked = function (event) {
         this.setTempData();
         this._location.back();
-        //event.stopPropagation();
     };
-    FondSatiFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    FondSatiFormComponent.prototype.ngOnChanges = function () {
+    FondSatiFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formFSAT.reset();
+    };
+    FondSatiFormComponent.prototype.clearFormData = function () {
         this.formFSAT.reset({
-            Mesec: "",
-            Godina: "",
-            Sati: "",
+            Mesec: '',
+            Godina: '',
+            Sati: '',
             MinOsnov: 0,
             MaxOsnov: 0,
-            Opis: ""
+            Opis: ''
         });
     };
     FondSatiFormComponent.prototype.ngOnDestroy = function () {
@@ -2121,7 +2436,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/fond-sati/fond-sati.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  fond-sati works!\r\n</p> -->\r\n\r\n\r\n<div *ngIf=\"fnsati;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"fnsati\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedFnSati\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Godina\" header=\"Godina\" sortable=\"true\" styleClass=\"text-center\"></p-column>\r\n      <p-column field=\"Mesec\" header=\"Mesec\" sortable=\"true\"  styleClass=\"text-center\" ></p-column> \r\n      <p-column field=\"Sati\" header=\"Sati\" sortable=\"true\" styleClass=\"text-right\"></p-column>   \r\n      <p-column field=\"MinOsnov\" header=\"MinOsnov\" sortable=\"true\" styleClass=\"text-right\" >\r\n        <ng-template let-col let-fsati=\"rowData\" pTemplate=\"body\">\r\n            <span>{{fsati[col.field] | number:'1.2-6'}}</span>\r\n        </ng-template>\r\n\r\n      </p-column>\r\n      <p-column field=\"MaxOsnov\" header=\"MaxOsnov\" sortable=\"true\" styleClass=\"text-right\">\r\n        <ng-template let-col let-fsati=\"rowData\" pTemplate=\"body\">\r\n            <span>{{fsati[col.field] | number:'1.2-6'}}</span>\r\n        </ng-template>\r\n      </p-column>\r\n      \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n          <ng-template let-fsat=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectItem(fsat)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateFSati(fsat._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteFSati(fsat)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n       <p-footer *ngIf=\"fnsati.length > 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addFSati()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n           \r\n            <div class=\"row\">\r\n                 <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                  <h2>No records found</h2>\r\n                  <i class=\"fa fa-file-text-o fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n                 \r\n                  <!-- <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addFSati()\" label=\"Add\"></button> -->\r\n                  <h3>\r\n                  <a   (click)=\"addFSati()\">\r\n                    Add records       \r\n                  </a>\r\n                </h3>\r\n\r\n                </div>\r\n              \r\n            </div>\r\n        </ng-template>\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n                <!-- Custom content goes here -->\r\n                <div class=\"row\">\r\n                     <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                        <div class=\"hidden-xs dtempty_message_h1\">\r\n                            Još niste kreirali podatak.\r\n                        </div>\r\n                        <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                        <br/>\r\n                        <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                         <h3 class=\" hidden-xs dtempty_message\" >\r\n                             Da biste ručno dodali podatak kliknite: \r\n                            <a  class=\"dtempty_message_text\" (click)=\"addFSati()\">\r\n                                    Kreiraj podatak\r\n                            </a>\r\n                        </h3>\r\n                        <h5 class=\"visible-xs\" >\r\n                            Da biste ručno dodali podatak kliknite : \r\n                            <a   (click)=\"addFSati()\">\r\n                                    Kreiraj podatak\r\n                            </a>\r\n                        </h5>\r\n    \r\n                    </div>\r\n                </div>\r\n            </ng-template>\r\n\r\n\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"FOND SATI\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                         ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{fsatiShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                          GODINA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                             {{fsatiShow.Godina}} \r\n                        </dd>\r\n                        <dt>\r\n                            MESEC\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{fsatiShow.Mesec}}\r\n                        </dd>\r\n                          \r\n                        <dt>\r\n                            SATI\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{fsatiShow.Sati}} \r\n                          </dd> \r\n                     \r\n                        <dt>\r\n                         MINIMALNA OSNOVICA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{fsatiShow.MinOsnov}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                           MAKSIMALNA OSNOVICA\r\n                           </dt>\r\n                           <dd class=\"text-success\">\r\n                               {{fsatiShow.MaxOsnov}}\r\n                               \r\n                           </dd>\r\n                        \r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{fsatiShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{fsatiShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{fsatiShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{fsatiShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer>\r\n                    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n \r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n    \r\n  "
+module.exports = "<div *ngIf=\"fnsati;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"fnsati\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\"\r\n    selectionMode=\"single\" [(selection)]=\"selectedFnSati\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\"\r\n    [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Godina\" header=\"Godina\" sortable=\"true\" styleClass=\"text-center\"></p-column>\r\n    <p-column field=\"Mesec\" header=\"Mesec\" sortable=\"true\" styleClass=\"text-center\"></p-column>\r\n    <p-column field=\"Sati\" header=\"Sati\" sortable=\"true\" styleClass=\"text-right\"></p-column>\r\n    <p-column field=\"MinOsnov\" header=\"MinOsnov\" sortable=\"true\" styleClass=\"text-right\">\r\n      <ng-template let-col let-fsati=\"rowData\" pTemplate=\"body\">\r\n        <span>{{fsati[col.field] | number:'1.2-6'}}</span>\r\n      </ng-template>\r\n\r\n    </p-column>\r\n    <p-column field=\"MaxOsnov\" header=\"MaxOsnov\" sortable=\"true\" styleClass=\"text-right\">\r\n      <ng-template let-col let-fsati=\"rowData\" pTemplate=\"body\">\r\n        <span>{{fsati[col.field] | number:'1.2-6'}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n      <ng-template let-fsat=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectItem(fsat)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateFSati(fsat._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteFSati(fsat)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"fnsati.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addFSati()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <h2>No records found</h2>\r\n          <i class=\"fa fa-file-text-o fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n\r\n          <!-- <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addFSati()\" label=\"Add\"></button> -->\r\n          <h3>\r\n            <a (click)=\"addFSati()\">\r\n              Add records\r\n            </a>\r\n          </h3>\r\n\r\n        </div>\r\n\r\n      </div>\r\n    </ng-template>\r\n\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addFSati()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n          <h5 class=\"visible-xs\">\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addFSati()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"FOND SATI\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow._id}}\r\n      </dd>\r\n      <dt>\r\n        GODINA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.Godina}}\r\n      </dd>\r\n      <dt>\r\n        MESEC\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.Mesec}}\r\n      </dd>\r\n\r\n      <dt>\r\n        SATI\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.Sati}}\r\n      </dd>\r\n\r\n      <dt>\r\n        MINIMALNA OSNOVICA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.MinOsnov | number:'1.2-6'}}\r\n\r\n      </dd>\r\n      <dt>\r\n        MAKSIMALNA OSNOVICA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.MaxOsnov | number:'1.2-6'}}\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{fsatiShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -2163,19 +2478,16 @@ var FondSatiComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.fsatiShow = new __WEBPACK_IMPORTED_MODULE_6__fondsati_model__["a" /* FondSati */]();
-        this.Title = "PREGLED FONDA SATI";
+        this.auto = 'auto';
+        this.Title = 'PREGLED FONDA SATI';
     }
     FondSatiComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.fnsatiService.getFondSate()
             .subscribe(function (profile) {
             if (profile.success === true) {
-                // console.log(" subscribe funkcije " + profile);
-                //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
-                //this.fnsati = profile.data;
                 _this.fnsati = profile.data;
             }
-            // }
         }, function (error) {
             _this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
@@ -2183,16 +2495,22 @@ var FondSatiComponent = (function () {
             });
             console.log(error.message);
             _this.fnsati = [];
+            if (error.status === 404) {
+                _this.router.navigate(['NotFound']);
+            }
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
     };
     FondSatiComponent.prototype.selectItem = function (work) {
-        // this.selectedOpstina=opstina;  
         this.displayDetals = true;
         this.fsatiShow = this.cloneData(work);
     };
     FondSatiComponent.prototype.cloneData = function (c) {
         var work = new __WEBPACK_IMPORTED_MODULE_6__fondsati_model__["a" /* FondSati */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
         }
@@ -2210,9 +2528,7 @@ var FondSatiComponent = (function () {
             message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ?   ",
             header: tfnsati.Godina + " - " + tfnsati.Mesec,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.fnsati.indexOf(tfnsati);
-                // console.log("index je " + index);
                 _this.fnsati.splice(index, 1);
                 _this.fnsatiService.delFondSati(tfnsati._id)
                     .subscribe(function (pos) {
@@ -2226,13 +2542,18 @@ var FondSatiComponent = (function () {
                         _this.router.navigate(['NotFound']);
                     }
                 }, function (error) {
-                    //alert("Could not delete radnik.");
                     _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
                     // Revert the view back to its original state
                     _this.fnsati.splice(index, 0, tfnsati);
+                    if (error.status === 404) {
+                        _this.router.navigate(['NotFound']);
+                    }
+                    if (error.status === 401) {
+                        _this.router.navigate(['login']);
+                    }
                 });
             }
         });
@@ -2331,10 +2652,18 @@ FondSatiModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2352,11 +2681,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var FondSatiService = (function () {
+var FondSatiService = (function (_super) {
+    __extends(FondSatiService, _super);
+    // authToken: any;
+    // isDev: boolean;
     function FondSatiService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
+        // this.isDev = ServiceConfig.isDev;
     }
     FondSatiService.prototype.loadToken = function () {
         var token = localStorage.getItem('id_token');
@@ -2367,7 +2700,7 @@ var FondSatiService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -2376,7 +2709,7 @@ var FondSatiService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -2385,7 +2718,7 @@ var FondSatiService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/');
         return this.http.post(ep, JSON.stringify(fsati), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -2394,7 +2727,7 @@ var FondSatiService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + fsati._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + fsati._id);
         return this.http.put(ep, JSON.stringify(fsati), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -2403,40 +2736,12 @@ var FondSatiService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/fondsati/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    //   prepEndpoint(ep){
-    //      return ServiceConfig.PrepareHost(this.isDev,ep);
-    //  }
-    FondSatiService.prototype.handleError = function (error) {
-        //let greska =error.status + "  " + error.statusText;
-        //  let myerror = new Animal('Pera');
-        //  console.log(myerror.move(5));
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        //  console.log(myerror.getPorukaG());
-        //  console.log(myerror.getTextP());
-        //  console.log( "samo status text " + myerror.message);
-        //console.log('error.json' + JSON.stringify(error.json()));
-        //  myerror.fillFromJSON(JSON.parse(JSON.stringify(error)));
-        //console.log("Moj error " + myerror._body.message);
-        //   myerror=<IErrorReq> Response;
-        // if(myerror._body){
-        //   greska =error.status + "  " + error._body.message;
-        // }
-        // let texterror:string= JSON.stringify(error);
-        // console.log('moj text error' + texterror);
-        //console.log(JSON.parse(JSON.stringify(error)));
-        //return Observable.throw(error.statusText || 'Server error');
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
-    };
     return FondSatiService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 FondSatiService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -2504,30 +2809,6 @@ var FondSati = (function () {
     return FondSati;
 }());
 
-// export interface IFondSati {
-//     _id:string;
-//     SifraRad: string;
-//     Ime:string;
-//     Prezime:string;
-//     Jmbg:string;
-//     Aktivan:boolean;
-//     Opis?: string;
-//     NameUser?: string;
-//     created_at?:Date;
-//     updatedAt?:Date;
-//  }
-// export class FondSati  implements IFondSati{
-//     _id:string;
-//     SifraRad: string;
-//     Ime:string;
-//     Prezime:string;
-//     Jmbg:string;
-//     Aktivan:boolean;
-//     Opis?: string;
-//     NameUser?: string;
-//     created_at?:Date;
-//     updatedAt?:Date;
-// }
 //# sourceMappingURL=fondsati.model.js.map
 
 /***/ }),
@@ -2553,7 +2834,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"row\"> -->\r\n  <!-- <div class=\"jumbotron text-center \">\r\n    <h1>MEAN Authentication App</h1>\r\n    <p class=\"lead\">Welcome to our custom MEAN authentication application built from scratch</p>\r\n    <div>\r\n      <a class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    </div>\r\n  </div> -->\r\n<!-- </div> -->\r\n\r\n<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\" data-interval=\"6000\">\r\n  <ol class=\"carousel-indicators\">\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\r\n      <li data-target=\"#myCarousel\" data-slide-to=\"2\"></li>\r\n  </ol>\r\n  <div class=\"carousel-inner\" role=\"listbox\">\r\n      <div class=\"item active\">\r\n         <img src=\"assets\\img\\Home.jpg\" alt=\"Home \" class=\"img-thumbnail\" />\r\n         \r\n      </div>\r\n      <div class=\"item\">\r\n         <img src=\"assets\\img\\Banners1.jpg\"  alt=\"Skills\" class=\"img-thumbnail\"/>\r\n      </div>\r\n \r\n      <div class=\"item\">\r\n        \r\n          <img src=\"assets\\img\\Banners2.jpg\"  alt=\"Group\" class=\"img-thumbnail\"/>\r\n      </div>\r\n  </div>\r\n  <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n  </a>\r\n  <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n  </a>\r\n</div>  \r\n"
+module.exports = "<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\" data-interval=\"6000\">\r\n  <ol class=\"carousel-indicators\">\r\n    <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n    <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\r\n    <li data-target=\"#myCarousel\" data-slide-to=\"2\"></li>\r\n  </ol>\r\n  <div class=\"carousel-inner\" role=\"listbox\">\r\n    <div class=\"item active\">\r\n      <img src=\"assets\\img\\Home.jpg\" alt=\"Home \" class=\"img-thumbnail\" />\r\n\r\n    </div>\r\n    <div class=\"item\">\r\n      <img src=\"assets\\img\\Banners1.jpg\" alt=\"Skills\" class=\"img-thumbnail\" />\r\n    </div>\r\n\r\n    <div class=\"item\">\r\n\r\n      <img src=\"assets\\img\\Banners2.jpg\" alt=\"Group\" class=\"img-thumbnail\" />\r\n    </div>\r\n  </div>\r\n  <a class=\"left carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n    <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Previous</span>\r\n  </a>\r\n  <a class=\"right carousel-control\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n    <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Next</span>\r\n  </a>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2621,7 +2902,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/konstanta/konstanta-form/konstanta-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  konstanta-form works!\r\n</p> -->\r\n\r\n<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n        <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n          <h5>{{title}}</h5> \r\n        </div>\r\n        <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n          <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n        </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formKonst\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"konstN._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Važe od datuma:\r\n                    <div class=\"input-group\">\r\n                        <div class=\"input-group\">\r\n                            <input [ngModel]=\"konstN.Datum | date:'yyyy-MM-dd'\"  type=\"date\" formControlName=\"Datum\" name=\"Datum\" class=\"form-control\" required>\r\n                         \r\n                        </div>\r\n                        <!-- [(ngModel)]=\"konstN.Datum\"    | date:'yyyy-MM-dd'\"   -->\r\n                    </div>\r\n            </label>\r\n            <div *ngIf=\"Datum.invalid && (Datum.dirty || Datum.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Datum.errors.required\">\r\n                    <strong>Datum je obavezan podatak !!!</strong>\r\n                </div>\r\n            </div>\r\n          </div>\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-heading\">\r\n                Zadruga\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div class=\"form-group col-md-6\" > <!-- PDV porez -->\r\n                    <label class=\"center-block\">Stopa poreza(Pdv):\r\n                        <div class=\"input-group\">   \r\n                            <div class=\"input-group\">\r\n                                <input class=\"form-control text-right\" formControlName=\"Pdv\"  [(ngModel)]=\"konstN.Pdv\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                <span class=\"input-group-addon\">%</span>\r\n                            </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"Pdv.invalid && (Pdv.dirty || Pdv.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"Pdv.errors.required\">\r\n                            <strong>Pdv je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"Pdv.errors.minValue\">\r\n                            <strong>Pdv nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n        \r\n                <div class=\"form-group col-md-3\" > <!-- Članarina zadruzi -->\r\n                    <label class=\"center-block\">Članarina(zadruzi):\r\n                            <div class=\"input-group\"> \r\n                                <div class=\"input-group\"> \r\n                                    <input class=\"form-control text-right\" formControlName=\"Clanarin\"  [(ngModel)]=\"konstN.Clanarin\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\"required>\r\n                                    <span class=\"input-group-addon\">RSD</span>\r\n                                </div>\r\n                            </div>\r\n                    </label>\r\n                    \r\n                    <div *ngIf=\"Clanarin.invalid && (Clanarin.dirty || Clanarin.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"Clanarin.errors.required\">\r\n                            <strong>Članarina je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"Clanarin.errors.minValue\">\r\n                            <strong>Članarina nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        \r\n        </div>\r\n\r\n  \r\n    <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n            Učenici\r\n        </div>\r\n        <div class=\"panel-body\">\r\n\r\n        <div class=\"row\">\r\n        \r\n            <div class=\"form-group col-md-3\">\r\n                <label class=\"center-block\">Doprinosi penziono:\r\n                    <div class=\"input-group\">\r\n                        <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"UcPenz\"  [(ngModel)]=\"konstN.UcPenz\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                        </div>\r\n                    </div>\r\n                </label>\r\n                <div *ngIf=\"UcPenz.invalid && (UcPenz.dirty || UcPenz.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"UcPenz.errors.required\">\r\n                        <strong>Učenički doprinosi za penziono su obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"UcPenz.errors.minValue\">\r\n                        <strong>Učenički doprinosi za penziono nisu pravilno uneti (<0)  !!!</strong>\r\n                        </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-3\">\r\n                <label class=\"center-block\">Doprinosi za zdravstveno:\r\n                    <div class=\"input-group\"> \r\n                        <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"UcZdrav\"  [(ngModel)]=\"konstN.UcZdrav\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                        </div>\r\n                    </div>\r\n                </label>\r\n                <div *ngIf=\"UcZdrav.invalid && (UcZdrav.dirty || UcZdrav.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"UcZdrav.errors.required\">\r\n                        <strong>Doprinosi za zdravstveno su obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"UcZdrav.errors.minValue\">\r\n                        <strong>Učenički doprinosi za zdravstveno nisu pravilno uneti (<0)  !!!</strong>\r\n                        </div>\r\n                </div>\r\n            </div>\r\n                \r\n            <div class=\"form-group col-md-3\">\r\n                    <label class=\"center-block\">Normirani troškovi:\r\n                        <div class=\"input-group\"> \r\n                            <div class=\"input-group\">\r\n                                <input  class=\"form-control text-right\" formControlName=\"UcNormTr\"  [(ngModel)]=\"konstN.UcNormTr\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                <span class=\"input-group-addon\">%</span>\r\n                            </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"UcNormTr.invalid && (UcNormTr.dirty || UcNormTr.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"UcNormTr.errors.required\">\r\n                            <strong>Normirani troškovi su obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"UcNormTr.errors.minValue\">\r\n                            <strong>Normirani troškovi nisu pravilno uneti (<0)  !!!</strong>\r\n                        </div>\r\n                    </div>\r\n            </div>\r\n        </div> <!-- kraj prve grupe-->\r\n\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-3\">\r\n                <label class=\"center-block\">Stopa olakšice:\r\n                    <div class=\"input-group\">\r\n                        <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"UcOlak\"  [(ngModel)]=\"konstN.UcOlak\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                        </div>\r\n                    </div>\r\n                </label>\r\n                \r\n                <div *ngIf=\"UcOlak.invalid && (UcOlak.dirty || UcOlak.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"UcOlak.errors.required\">\r\n                        <strong>Stopa olakšice je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"UcOlak.errors.minValue\">\r\n                        <strong>Stopa olakšice nije pravilno uneta (<0) !!!</strong>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group col-md-3\"> <!-- učenička stopa poreza -->\r\n                <label class=\"center-block\">Stopa poreza:\r\n                    <div class=\"input-group\">\r\n                        <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"UcPorez\"  [(ngModel)]=\"konstN.UcPorez\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                        </div>\r\n                    </div>\r\n                </label>\r\n                <div *ngIf=\"UcPorez.invalid && (UcPorez.dirty || UcPorez.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"UcPorez.errors.required\">\r\n                        <strong>Stopa poreza je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"UcPorez.errors.minValue\">\r\n                        <strong>Stopa poreza nije pravilno uneta (<0) !!!</strong>\r\n                    </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div><!-- Kraj druge grupe-->\r\n    \r\n    </div>\r\n\r\n  \r\n\r\n    <div class=\"panel panel-default\">   \r\n        <div class=\"panel-heading\">\r\n            Osiguranici\r\n        </div>  \r\n        <div class=\"panel-body\">\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-md-6\">  <!-- Osnovica poreza -->\r\n                        <label class=\"center-block\">OsPorez:\r\n                            <div class=\"input-group\"> \r\n                                <div class=\"input-group\"> \r\n                                <input class=\"form-control text-right\" formControlName=\"OsPorez\"  [(ngModel)]=\"konstN.OsPorez\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                <span class=\"input-group-addon\">RSD</span>\r\n                                </div>\r\n                            </div>\r\n                        </label>\r\n                        \r\n                        <div *ngIf=\"OsPorez.invalid && (OsPorez.dirty || OsPorez.touched)\" class=\"alert alert-danger\">\r\n                            <div *ngIf=\"OsPorez.errors.required\">\r\n                                <strong>OsPorez je obavezan podatak !!!</strong>\r\n                            </div>\r\n                            <div *ngIf=\"OsPorez.errors.minValue\">\r\n                                <strong>OsPorez nije dobar podatak (<0) !!!</strong>\r\n                            </div>\r\n                        </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-md-6\">  <!-- Umanjenje osnovice poreza za osiguranika -->\r\n                    <label class=\"center-block\">Umanjene poreske osnovice:\r\n                        <div class=\"input-group\"> \r\n                            <div class=\"input-group\"> \r\n                                <input class=\"form-control text-right\" formControlName=\"OsUmanjen\"  [(ngModel)]=\"konstN.OsUmanjen\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                <span class=\"input-group-addon\">RSD</span>\r\n                            </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsUmanjen.invalid && (OsUmanjen.dirty || OsUmanjen.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsUmanjen.errors.required\">\r\n                            <strong>Umanjenje poreske osnovice je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsUmanjen.errors.minValue\">\r\n                            <strong>Umanjenje poreske osnovice nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-md-6\">  <!-- Stopa pio prema radniku-->\r\n                    <label class=\"center-block\">Stopa pio(prema radniku):\r\n                        <div class=\"input-group\">\r\n                            <div class=\"input-group\">\r\n                                <input  class=\"form-control text-right\"  formControlName=\"OsPio1\"  [(ngModel)]=\"konstN.OsPio1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                <span class=\"input-group-addon\">%</span>\r\n                            </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsPio1.invalid && (OsPio1.dirty || OsPio1.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsPio1.errors.required\">\r\n                            <strong>Stopa pio je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsPio1.errors.minValue\">\r\n                            <strong>Stopa pio nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group col-md-6\">  <!-- Stopa pio prema poslodavcu  -->\r\n                    <label class=\"center-block\">Stopa pio(prema poslodavcu):\r\n                            <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"OsPio2\"  [(ngModel)]=\"konstN.OsPio2\"  (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                                </div>\r\n                            </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsPio2.invalid && (OsPio2.dirty || OsPio2.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsPio2.errors.required\">\r\n                            <strong>Stopa pio je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsPio2.errors.minValue\">\r\n                            <strong>Stopa pio nije dobar podatak (<0) !!!</strong>\r\n                            </div>\r\n                    </div>\r\n                </div> \r\n            </div> <!--Kraj rowa za stopu pio -->\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-md-6\">  <!-- Stopa zdravstveno prema radniku  -->\r\n                    <label class=\"center-block\">Stopa zdravstveno(prema radniku):\r\n                        <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"OsZdrav1\"  [(ngModel)]=\"konstN.OsZdrav1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                                </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsZdrav1.invalid && (OsZdrav1.dirty || OsZdrav1.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsZdrav1.errors.required\">\r\n                            <strong>Stopa zdravstveno je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsZdrav1.errors.minValue\">\r\n                            <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-md-6\"> <!-- Stopa zdravstvo prema poslodavcu  -->\r\n                    <label class=\"center-block\">Stopa zdravstveno(prema poslodavcu):\r\n                            <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"OsZdrav2\"  [(ngModel)]=\"konstN.OsZdrav2\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                                </div>\r\n                            </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsZdrav2.invalid && (OsZdrav2.dirty || OsZdrav2.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsZdrav2.errors.required\">\r\n                            <strong>Stopa zdravstveno je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsZdrav2.errors.minValue\">\r\n                            <strong>Stopa zdravstveno nije dobar podatak (<0) !!!</strong>\r\n                            </div>\r\n                    </div>\r\n                </div>\r\n            </div> <!--Kraj rowa za stopu zdravstvenog -->\r\n\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-md-6\"><!-- Stopa nezaposlenost prema radniku  -->\r\n                    <label class=\"center-block\">Stopa nezaposlenost(prema radniku):\r\n                        <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                            <input class=\"form-control text-right\" formControlName=\"OsNez1\"  [(ngModel)]=\"konstN.OsNez1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                            <span class=\"input-group-addon\">%</span>\r\n                                </div>\r\n                        </div>\r\n                    </label>\r\n                    <div *ngIf=\"OsNez1.invalid && (OsNez1.dirty || OsNez1.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsNez1.errors.required\">\r\n                            <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsNez1.errors.minValue\">\r\n                            <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-md-6\"><!-- Stopa nezaposlenost prema poslodavcu  -->\r\n                        <label class=\"center-block\">Stopa nezaposlenost(prema poslodavcu):\r\n                            <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                                    <input class=\"form-control text-right\" formControlName=\"OsNez2\"  [(ngModel)]=\"konstN.OsNez2\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                    <span class=\"input-group-addon\">%</span>\r\n                                </div>\r\n                            </div>\r\n                        </label>\r\n                            <div *ngIf=\"OsNez2.invalid && (OsNez2.dirty || OsNez2.touched)\" class=\"alert alert-danger\">\r\n                            <div *ngIf=\"OsNez2.errors.required\">\r\n                                <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>\r\n                            </div>\r\n                            <div *ngIf=\"OsNez2.errors.minValue\">\r\n                                <strong>Stopa nezaposlenost nije dobar podatak (<0) !!!</strong>\r\n                            </div>\r\n                        </div>\r\n                </div>\r\n            </div> <!--Kraj rowa za stopu nezaposlenosti osiguranici  -->\r\n\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-md-6\"> <!-- Minimalna osnovica za placanje doprinosa  -->\r\n                    <label class=\"center-block\">Minimalna osnovica doprinosa:\r\n                            <div class=\"input-group\">\r\n                                <div class=\"input-group\">\r\n                                    <input class=\"form-control text-right\" formControlName=\"OsMinOsDop\"  [(ngModel)]=\"konstN.OsMinOsDop\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                                    <span class=\"input-group-addon\">RSD</span>\r\n                                </div>\r\n                            </div>\r\n                    </label>\r\n                    \r\n                    <div *ngIf=\"OsMinOsDop.invalid && (OsMinOsDop.dirty || OsMinOsDop.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsMinOsDop.errors.required\">\r\n                            <strong>Minimalna osnovica doprinosa je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsMinOsDop.errors.minValue\">\r\n                            <strong>Minimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-md-6\"> <!--Maksimalna osnovica za placanje doprinosa  -->\r\n                    <label class=\"center-block\">Maksimalna osnovica doprinosa:\r\n                            <div class=\"input-group\">\r\n                                    <div class=\"input-group\">\r\n                                        <input class=\"form-control text-right\" formControlName=\"OsMaxOsDop\"  [(ngModel)]=\"konstN.OsMaxOsDop\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"  required>\r\n                                        <span class=\"input-group-addon\">RSD</span>\r\n\r\n                                    </div>\r\n                            </div>\r\n                    </label>\r\n                    \r\n                    <div *ngIf=\"OsMaxOsDop.invalid && (OsMaxOsDop.dirty || OsMaxOsDop.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"OsMaxOsDop.errors.required\">\r\n                            <strong>Maksimalna osnovica doprinosa je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"OsMaxOsDop.errors.minValue\">\r\n                            <strong>Maksimalna osnovica doprinosa nije dobar podatak (<0) !!!</strong>\r\n                            </div>\r\n                    </div>\r\n                </div>\r\n            </div> <!--Kraj rowa za osnovice osiguranici  -->\r\n        </div>\r\n    </div>\r\n        <div class=\"form-group\">\r\n            <label class=\"center-block\">Opis:\r\n                <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"konstN.Opis\">\r\n                </textarea>\r\n            </label>\r\n        </div>\r\n        \r\n        <div class=\"form-group\">\r\n            <div class=\"col-md-offset-5 col-md-12\">\r\n                    <button type=\"submit\" [disabled]=\"!formKonst.valid\"\r\n                        class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-saved\"></span>\r\n                       Save\r\n                    </button>\r\n\r\n                <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formKonst.pristine\"  (click)=\"revert()\">\r\n                    <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                    Clear data\r\n                </button>\r\n                \r\n            </div>\r\n        </div>\r\n          \r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>\r\n\r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formKonst\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"konstN._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Važe od datuma:\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group\">\r\n              <input [ngModel]=\"konstN.Datum | date:'yyyy-MM-dd'\" type=\"date\" formControlName=\"Datum\" name=\"Datum\" class=\"form-control\"\r\n                required>\r\n            </div>\r\n          </div>\r\n        </label>\r\n        <div *ngIf=\"Datum.invalid && (Datum.dirty || Datum.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Datum.errors.required\">\r\n            <strong>Datum je obavezan podatak !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n          Zadruga\r\n        </div>\r\n        <div class=\"panel-body\">\r\n          <div class=\"form-group col-md-6\">\r\n            <!-- PDV porez -->\r\n            <label class=\"center-block\">Stopa poreza(Pdv):\r\n              <div class=\"input-group\">\r\n                <div class=\"input-group\">\r\n                  <input class=\"form-control text-right\" formControlName=\"Pdv\" [(ngModel)]=\"konstN.Pdv\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                    required>\r\n                  <span class=\"input-group-addon\">%</span>\r\n                </div>\r\n              </div>\r\n            </label>\r\n            <div *ngIf=\"Pdv.invalid && (Pdv.dirty || Pdv.touched)\" class=\"alert alert-danger\">\r\n              <div *ngIf=\"Pdv.errors.required\">\r\n                <strong>Pdv je obavezan podatak !!!</strong>\r\n              </div>\r\n              <div *ngIf=\"Pdv.errors.minValue\">\r\n                <strong>Pdv nije dobar podatak (\r\n                  <0) !!!</strong>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"form-group col-md-3\">\r\n            <!-- Članarina zadruzi -->\r\n            <label class=\"center-block\">Članarina(zadruzi):\r\n              <div class=\"input-group\">\r\n                <div class=\"input-group\">\r\n                  <input class=\"form-control text-right\" formControlName=\"Clanarin\" [(ngModel)]=\"konstN.Clanarin\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                    required>\r\n                  <span class=\"input-group-addon\">RSD</span>\r\n                </div>\r\n              </div>\r\n            </label>\r\n\r\n            <div *ngIf=\"Clanarin.invalid && (Clanarin.dirty || Clanarin.touched)\" class=\"alert alert-danger\">\r\n              <div *ngIf=\"Clanarin.errors.required\">\r\n                <strong>Članarina je obavezan podatak !!!</strong>\r\n              </div>\r\n              <div *ngIf=\"Clanarin.errors.minValue\">\r\n                <strong>Članarina nije dobar podatak (\r\n                  <0) !!!</strong>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n\r\n\r\n      <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n          Učenici\r\n        </div>\r\n        <div class=\"panel-body\">\r\n\r\n          <div class=\"row\">\r\n\r\n            <div class=\"form-group col-md-3\">\r\n              <label class=\"center-block\">Doprinosi penziono:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"UcPenz\" [(ngModel)]=\"konstN.UcPenz\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"UcPenz.invalid && (UcPenz.dirty || UcPenz.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"UcPenz.errors.required\">\r\n                  <strong>Učenički doprinosi za penziono su obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"UcPenz.errors.minValue\">\r\n                  <strong>Učenički doprinosi za penziono nisu pravilno uneti (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-3\">\r\n              <label class=\"center-block\">Doprinosi za zdravstveno:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"UcZdrav\" [(ngModel)]=\"konstN.UcZdrav\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"UcZdrav.invalid && (UcZdrav.dirty || UcZdrav.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"UcZdrav.errors.required\">\r\n                  <strong>Doprinosi za zdravstveno su obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"UcZdrav.errors.minValue\">\r\n                  <strong>Učenički doprinosi za zdravstveno nisu pravilno uneti (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-3\">\r\n              <label class=\"center-block\">Normirani troškovi:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"UcNormTr\" [(ngModel)]=\"konstN.UcNormTr\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"UcNormTr.invalid && (UcNormTr.dirty || UcNormTr.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"UcNormTr.errors.required\">\r\n                  <strong>Normirani troškovi su obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"UcNormTr.errors.minValue\">\r\n                  <strong>Normirani troškovi nisu pravilno uneti (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- kraj prve grupe-->\r\n\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-3\">\r\n              <label class=\"center-block\">Stopa olakšice:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"UcOlak\" [(ngModel)]=\"konstN.UcOlak\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n\r\n              <div *ngIf=\"UcOlak.invalid && (UcOlak.dirty || UcOlak.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"UcOlak.errors.required\">\r\n                  <strong>Stopa olakšice je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"UcOlak.errors.minValue\">\r\n                  <strong>Stopa olakšice nije pravilno uneta (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group col-md-3\">\r\n              <!-- učenička stopa poreza -->\r\n              <label class=\"center-block\">Stopa poreza:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"UcPorez\" [(ngModel)]=\"konstN.UcPorez\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"UcPorez.invalid && (UcPorez.dirty || UcPorez.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"UcPorez.errors.required\">\r\n                  <strong>Stopa poreza je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"UcPorez.errors.minValue\">\r\n                  <strong>Stopa poreza nije pravilno uneta (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- Kraj druge grupe-->\r\n\r\n      </div>\r\n\r\n\r\n\r\n      <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n          Osiguranici\r\n        </div>\r\n        <div class=\"panel-body\">\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Osnovica poreza -->\r\n              <label class=\"center-block\">OsPorez:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsPorez\" [(ngModel)]=\"konstN.OsPorez\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">RSD</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n\r\n              <div *ngIf=\"OsPorez.invalid && (OsPorez.dirty || OsPorez.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsPorez.errors.required\">\r\n                  <strong>OsPorez je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsPorez.errors.minValue\">\r\n                  <strong>OsPorez nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Umanjenje osnovice poreza za osiguranika -->\r\n              <label class=\"center-block\">Umanjene poreske osnovice:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsUmanjen\" [(ngModel)]=\"konstN.OsUmanjen\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">RSD</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsUmanjen.invalid && (OsUmanjen.dirty || OsUmanjen.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsUmanjen.errors.required\">\r\n                  <strong>Umanjenje poreske osnovice je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsUmanjen.errors.minValue\">\r\n                  <strong>Umanjenje poreske osnovice nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa pio prema radniku-->\r\n              <label class=\"center-block\">Stopa pio(prema radniku):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsPio1\" [(ngModel)]=\"konstN.OsPio1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsPio1.invalid && (OsPio1.dirty || OsPio1.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsPio1.errors.required\">\r\n                  <strong>Stopa pio je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsPio1.errors.minValue\">\r\n                  <strong>Stopa pio nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa pio prema poslodavcu  -->\r\n              <label class=\"center-block\">Stopa pio(prema poslodavcu):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsPio2\" [(ngModel)]=\"konstN.OsPio2\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsPio2.invalid && (OsPio2.dirty || OsPio2.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsPio2.errors.required\">\r\n                  <strong>Stopa pio je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsPio2.errors.minValue\">\r\n                  <strong>Stopa pio nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!--Kraj rowa za stopu pio -->\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa zdravstveno prema radniku  -->\r\n              <label class=\"center-block\">Stopa zdravstveno(prema radniku):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsZdrav1\" [(ngModel)]=\"konstN.OsZdrav1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsZdrav1.invalid && (OsZdrav1.dirty || OsZdrav1.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsZdrav1.errors.required\">\r\n                  <strong>Stopa zdravstveno je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsZdrav1.errors.minValue\">\r\n                  <strong>Stopa zdravstveno nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa zdravstvo prema poslodavcu  -->\r\n              <label class=\"center-block\">Stopa zdravstveno(prema poslodavcu):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsZdrav2\" [(ngModel)]=\"konstN.OsZdrav2\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsZdrav2.invalid && (OsZdrav2.dirty || OsZdrav2.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsZdrav2.errors.required\">\r\n                  <strong>Stopa zdravstveno je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsZdrav2.errors.minValue\">\r\n                  <strong>Stopa zdravstveno nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!--Kraj rowa za stopu zdravstvenog -->\r\n\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa nezaposlenost prema radniku  -->\r\n              <label class=\"center-block\">Stopa nezaposlenost(prema radniku):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsNez1\" [(ngModel)]=\"konstN.OsNez1\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsNez1.invalid && (OsNez1.dirty || OsNez1.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsNez1.errors.required\">\r\n                  <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsNez1.errors.minValue\">\r\n                  <strong>Stopa nezaposlenost nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Stopa nezaposlenost prema poslodavcu  -->\r\n              <label class=\"center-block\">Stopa nezaposlenost(prema poslodavcu):\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsNez2\" [(ngModel)]=\"konstN.OsNez2\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">%</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n              <div *ngIf=\"OsNez2.invalid && (OsNez2.dirty || OsNez2.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsNez2.errors.required\">\r\n                  <strong>Stopa nezaposlenost je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsNez2.errors.minValue\">\r\n                  <strong>Stopa nezaposlenost nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!--Kraj rowa za stopu nezaposlenosti osiguranici  -->\r\n\r\n          <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n              <!-- Minimalna osnovica za placanje doprinosa  -->\r\n              <label class=\"center-block\">Minimalna osnovica doprinosa:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsMinOsDop\" [(ngModel)]=\"konstN.OsMinOsDop\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">RSD</span>\r\n                  </div>\r\n                </div>\r\n              </label>\r\n\r\n              <div *ngIf=\"OsMinOsDop.invalid && (OsMinOsDop.dirty || OsMinOsDop.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsMinOsDop.errors.required\">\r\n                  <strong>Minimalna osnovica doprinosa je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsMinOsDop.errors.minValue\">\r\n                  <strong>Minimalna osnovica doprinosa nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-6\">\r\n              <!--Maksimalna osnovica za placanje doprinosa  -->\r\n              <label class=\"center-block\">Maksimalna osnovica doprinosa:\r\n                <div class=\"input-group\">\r\n                  <div class=\"input-group\">\r\n                    <input class=\"form-control text-right\" formControlName=\"OsMaxOsDop\" [(ngModel)]=\"konstN.OsMaxOsDop\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                      required>\r\n                    <span class=\"input-group-addon\">RSD</span>\r\n\r\n                  </div>\r\n                </div>\r\n              </label>\r\n\r\n              <div *ngIf=\"OsMaxOsDop.invalid && (OsMaxOsDop.dirty || OsMaxOsDop.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"OsMaxOsDop.errors.required\">\r\n                  <strong>Maksimalna osnovica doprinosa je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"OsMaxOsDop.errors.minValue\">\r\n                  <strong>Maksimalna osnovica doprinosa nije dobar podatak (\r\n                    <0) !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!--Kraj rowa za osnovice osiguranici  -->\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"konstN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formKonst.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formKonst.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n      </div>\r\n\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2658,7 +2939,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import {MyDateInput} from '../../../shared/frmDatum/date.input';
 var KonstantaFormComponent = (function () {
     function KonstantaFormComponent(konstService, router, route, formBuilder, _location, flashMessage, serValidate) {
         this.konstService = konstService;
@@ -2731,9 +3011,6 @@ var KonstantaFormComponent = (function () {
         configurable: true
     });
     Object.defineProperty(KonstantaFormComponent.prototype, "UcPenz", {
-        // set Datum(value:Date) { 
-        //     this.formKonst.setValue(value); 
-        // }
         get: function () { return this.formKonst.get('UcPenz'); },
         enumerable: true,
         configurable: true
@@ -2820,7 +3097,7 @@ var KonstantaFormComponent = (function () {
     });
     KonstantaFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             var id = params['id'];
             _this.title = id ? 'Ažuriranje Konstante' : 'Nova konstanta';
             if (!id) {
@@ -2843,22 +3120,9 @@ var KonstantaFormComponent = (function () {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
                 _this.router.navigate(['NotFound']);
-                // }
             });
         });
-    };
-    KonstantaFormComponent.prototype.validateOnlyNumbers = function (evt) {
-        var theEvent = evt || window.event;
-        var key = theEvent.keyCode || theEvent.which;
-        key = String.fromCharCode(key);
-        var regex = /[0-9]|\./;
-        if (!regex.test(key)) {
-            theEvent.returnValue = false;
-            if (theEvent.preventDefault)
-                theEvent.preventDefault();
-        }
     };
     KonstantaFormComponent.prototype.save = function () {
         var _this = this;
@@ -2906,10 +3170,10 @@ var KonstantaFormComponent = (function () {
     KonstantaFormComponent.prototype.backClicked = function (event) {
         this._location.back();
     };
-    KonstantaFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    KonstantaFormComponent.prototype.ngOnChanges = function () {
+    KonstantaFormComponent.prototype.revert = function () { this.clearFormData(); };
+    KonstantaFormComponent.prototype.clearFormData = function () {
         this.formKonst.reset({
-            Datum: "",
+            Datum: '',
             UcPenz: 0,
             UcZdrav: 0,
             UcNormTr: 0,
@@ -2927,25 +3191,8 @@ var KonstantaFormComponent = (function () {
             OsNez2: 0,
             OsMinOsDop: 0,
             OsMaxOsDop: 0,
-            Opis: ""
+            Opis: ''
         });
-    };
-    KonstantaFormComponent.prototype.getExcatDate = function (string) {
-        //let year=new Date(this.konstN.Datum.toString()).getFullYear();
-        // let month=new Date(this.konstN.Datum.toString()).getMonth();
-        //let date=new Date(this.konstN.Datum.toString()).getDate();
-        //  let year= this.konstN.Datum.getFullYear();
-        //  let month= this.konstN.Datum.getMonth();
-        var date = new Date().getDay();
-        // console.log(" datum iz konstante " + date);
-        var year = new Date().getFullYear(); //date.getFullYear();
-        var month = new Date().getMonth();
-        var local = (date.toString().length === 1 ? '0' + date : date) + '/' +
-            (month.toString().length === 1 ? '0' + month : month)
-            + '/' + year.toString().substring(0);
-        console.log(" proba local " + local);
-        this.konstN.Datum = new Date(local);
-        return local;
     };
     return KonstantaFormComponent;
 }());
@@ -3046,7 +3293,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/konstanta/konstanta.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  konstanta works!\r\n</p> -->\r\n\r\n\r\n<div *ngIf=\"konstL;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"konstL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedKonst\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Datum\" header=\"Datum\"  styleClass=\"text-center\">\r\n            <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n                <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>\r\n            </ng-template>\r\n        \r\n      </p-column>\r\n      <p-column field=\"UcPenz\" header=\"Porez Učenici\"   styleClass=\"text-right\" >\r\n            <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n                    <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n            </ng-template> \r\n      </p-column> \r\n\r\n      <p-column field=\"OsPorez\" header=\"Porez osiguranici\"  styleClass=\"text-right\">\r\n            <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n                    <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n            </ng-template>\r\n      </p-column>   \r\n      <p-column field=\"Clanarin\" header=\"Članarina\"  styleClass=\"text-right\" >\r\n        <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n            <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n        </ng-template>\r\n\r\n      </p-column>\r\n      <p-column field=\"Pdv\" header=\"Pdv\" styleClass=\"text-right\">\r\n        <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n            <span>{{konst[col.field] | number:'1.2-4'}}</span>\r\n        </ng-template>\r\n\r\n\r\n      </p-column>\r\n      \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n       \r\n          <ng-template let-konst=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\" >\r\n\r\n              <button type=\"button\" pButton (click)=\"selectItem(konst)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateKonst(konst._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteKonst(konst)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n       <!-- <p-footer *ngIf=\"konstL.length == 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addKonst()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer> -->\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n            <div class=\"row\">\r\n                 <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                    <div class=\"hidden-xs dtempty_message_h1\">\r\n                        <!-- You Haven't Created A Konstant Yet. -->\r\n                        Još niste kreirali podatak.\r\n                    </div>\r\n                    \r\n                    <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                    <br/>\r\n                    <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                    <!-- <div >\r\n                        <img src=\"./assets/images/wrench.svg\" alt=\"Malo malo\" class=\"center_pic\"/> \r\n                     </div> -->\r\n                    <h3 class=\" hidden-xs dtempty_message\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite: \r\n                        <a  class=\"dtempty_message_text\" (click)=\"addKonst()\">\r\n                                <!-- Create konstant       -->\r\n                                <!--  konstantu -->\r\n                                Kreiraj podatak\r\n                        </a>\r\n                    </h3>\r\n\r\n                    <h5 class=\"visible-xs\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite : \r\n                        <a   (click)=\"addKonst()\">\r\n                                <!-- Create konstant       -->\r\n                                Kreiraj podatak\r\n                        </a>\r\n                    </h5>\r\n\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"KONSTANTA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\" >\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                          ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{konstShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                        VAŽE OD DATUMA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                        {{konstShow.Datum | date}} \r\n                        </dd>\r\n                        <hr id=\"zadzad\">\r\n                        <dt>\r\n                        STOPA POREZA(Pdv)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.Pdv |  number:'1.2-2'}}\r\n                        </dd>\r\n                        <dt>\r\n                        ČLANARINA(zadruzi)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.Clanarin |  number:'1.2-4'}}\r\n                        </dd>\r\n                        <hr>\r\n                        <dt>\r\n                            Doprinosi penziono\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{konstShow.UcPenz |  number:'1.2-2'}}\r\n                        </dd>\r\n                        \r\n                        <dt>\r\n                          Doprinosi za zdravstveno\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                            {{konstShow.UcZdrav |  number:'1.2-2' }} \r\n                          </dd> \r\n                     \r\n                        <dt>\r\n                         Normirani troškovi\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.UcNormTr |  number:'1.2-2' }}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        Stopa olakšice\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.UcOlak |  number:'1.2-2'}}\r\n                            \r\n                        </dd>\r\n                    \r\n                        <dt>\r\n                          Stopa poreza\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.UcPorez |  number:'1.2-2'}}\r\n                            \r\n                        </dd>\r\n                        <hr>\r\n                        <dt>\r\n                            OsPorez-ovo treba pogledati\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsPorez |  number:'1.2-4'}}\r\n                            \r\n                        </dd>\r\n      \r\n                        <dt>\r\n                        Umanjene poreske osnovice\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{konstShow.OsUmanjen |  number:'1.2-4'}}\r\n                        </dd>\r\n\r\n                        <dt>\r\n                         Stopa pio(prema radniku)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsPio1 |  number:'1.2-2'}}\r\n                        </dd>\r\n                          \r\n                        <dt>\r\n                         Stopa pio(prema poslodavcu)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsPio2 |  number:'1.2-2'}}\r\n                        </dd>\r\n                        <dt>\r\n                        Stopa zdravstveno(prema radniku)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsZdrav1 |  number:'1.2-2'}}\r\n                        </dd>\r\n                        <dt>\r\n                        Stopa zdravstveno(prema poslodavcu)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsZdrav2 |  number:'1.2-2'}}\r\n                        </dd>      \r\n                        <dt>\r\n                        Stopa nezaposlenost(prema radniku)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsNez1 |  number:'1.2-2'}}\r\n                        </dd>      \r\n                        <dt>\r\n                        Stopa nezaposlenost(prema poslodavcu)\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsNez2 |  number:'1.2-2'}}\r\n                        </dd>   \r\n\r\n                        <dt>\r\n                        Minimalna osnovica doprinosa\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsMinOsDop |  number:'1.2-4'}}\r\n                        </dd>\r\n                        <dt>\r\n                        Maksimalna osnovica doprinosa\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.OsMaxOsDop |  number:'1.2-4'}}\r\n                        </dd>\r\n                        <hr>\r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{konstShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer> \r\n             \r\n            <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n            \r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n \r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n    \r\n"
+module.exports = "<div *ngIf=\"konstL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"konstL\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedKonst\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=false resizableColumns=\"true\"\r\n    columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Datum\" header=\"Datum\" styleClass=\"text-center\">\r\n      <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n        <span>{{konst[col.field] | date: 'dd.MM.yyyy'}}</span>\r\n      </ng-template>\r\n\r\n    </p-column>\r\n    <p-column field=\"UcPenz\" header=\"Porez Učenici\" styleClass=\"text-right\">\r\n      <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n        <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column field=\"OsPorez\" header=\"Porez osiguranici\" styleClass=\"text-right\">\r\n      <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n        <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"Clanarin\" header=\"Članarina\" styleClass=\"text-right\">\r\n      <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n        <span>{{konst[col.field] | number:'1.2-2'}}</span>\r\n      </ng-template>\r\n\r\n    </p-column>\r\n    <p-column field=\"Pdv\" header=\"Pdv\" styleClass=\"text-right\">\r\n      <ng-template let-col let-konst=\"rowData\" pTemplate=\"body\">\r\n        <span>{{konst[col.field] | number:'1.2-4'}}</span>\r\n      </ng-template>\r\n\r\n\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n\r\n      <ng-template let-konst=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n\r\n        <button type=\"button\" pButton (click)=\"selectItem(konst)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateKonst(konst._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteKonst(konst)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <!-- <p-footer *ngIf=\"konstL.length == 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addKonst()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer> -->\r\n    <div *ngIf=\"konstL.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              <!-- You Haven't Created A Konstant Yet. -->\r\n              Još niste kreirali podatak.\r\n            </div>\r\n\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <!-- <div >\r\n                            <img src=\"./assets/images/wrench.svg\" alt=\"Malo malo\" class=\"center_pic\"/> \r\n                        </div> -->\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addKonst()\">\r\n                <!-- Create konstant       -->\r\n                <!--  konstantu -->\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n\r\n            <h5 class=\"visible-xs\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addKonst()\">\r\n                <!-- Create konstant       -->\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"KONSTANTA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow._id}}\r\n      </dd>\r\n      <dt>\r\n        VAŽE OD DATUMA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.Datum | date}}\r\n      </dd>\r\n      <hr id=\"zadzad\">\r\n      <dt>\r\n        STOPA POREZA(Pdv)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.Pdv | number:'1.2-2'}}\r\n      </dd>\r\n      <dt>\r\n        ČLANARINA(zadruzi)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.Clanarin | number:'1.2-4'}}\r\n      </dd>\r\n      <hr>\r\n      <dt>\r\n        Doprinosi penziono\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.UcPenz | number:'1.2-2'}}\r\n      </dd>\r\n\r\n      <dt>\r\n        Doprinosi za zdravstveno\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.UcZdrav | number:'1.2-2' }}\r\n      </dd>\r\n\r\n      <dt>\r\n        Normirani troškovi\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.UcNormTr | number:'1.2-2' }}\r\n\r\n      </dd>\r\n      <dt>\r\n        Stopa olakšice\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.UcOlak | number:'1.2-2'}}\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        Stopa poreza\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.UcPorez | number:'1.2-2'}}\r\n\r\n      </dd>\r\n      <hr>\r\n      <dt>\r\n        OsPorez-ovo treba pogledati\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsPorez | number:'1.2-4'}}\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        Umanjene poreske osnovice\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsUmanjen | number:'1.2-4'}}\r\n      </dd>\r\n\r\n      <dt>\r\n        Stopa pio(prema radniku)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsPio1 | number:'1.2-2'}}\r\n      </dd>\r\n\r\n      <dt>\r\n        Stopa pio(prema poslodavcu)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsPio2 | number:'1.2-2'}}\r\n      </dd>\r\n      <dt>\r\n        Stopa zdravstveno(prema radniku)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsZdrav1 | number:'1.2-2'}}\r\n      </dd>\r\n      <dt>\r\n        Stopa zdravstveno(prema poslodavcu)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsZdrav2 | number:'1.2-2'}}\r\n      </dd>\r\n      <dt>\r\n        Stopa nezaposlenost(prema radniku)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsNez1 | number:'1.2-2'}}\r\n      </dd>\r\n      <dt>\r\n        Stopa nezaposlenost(prema poslodavcu)\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsNez2 | number:'1.2-2'}}\r\n      </dd>\r\n\r\n      <dt>\r\n        Minimalna osnovica doprinosa\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsMinOsDop | number:'1.2-4'}}\r\n      </dd>\r\n      <dt>\r\n        Maksimalna osnovica doprinosa\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.OsMaxOsDop | number:'1.2-4'}}\r\n      </dd>\r\n      <hr>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{konstShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -3088,6 +3335,7 @@ var KonstantaComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.konstShow = new __WEBPACK_IMPORTED_MODULE_6__konstanta_model__["a" /* KonstantaModel */]();
+        this.auto = 'auto';
         this.Title = 'PREGLED KONSTANTE';
     }
     KonstantaComponent.prototype.ngOnInit = function () {
@@ -3097,7 +3345,6 @@ var KonstantaComponent = (function () {
             if (profile.success === true) {
                 _this.konstL = profile.data;
             }
-            // }
         }, function (error) {
             _this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
@@ -3248,10 +3495,18 @@ KonstantaModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3269,22 +3524,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var KonstantaService = (function () {
+var KonstantaService = (function (_super) {
+    __extends(KonstantaService, _super);
     function KonstantaService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    KonstantaService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     KonstantaService.prototype.getKonstante = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3293,7 +3545,7 @@ var KonstantaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3302,7 +3554,7 @@ var KonstantaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/');
         return this.http.post(ep, JSON.stringify(konst), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -3312,7 +3564,7 @@ var KonstantaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + konst._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + konst._id);
         return this.http.put(ep, JSON.stringify(konst), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3321,20 +3573,12 @@ var KonstantaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/konstanta/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    KonstantaService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
-    };
     return KonstantaService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 KonstantaService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -3366,7 +3610,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"col-lg-9 col-md-9 col-xs-10\"> -->\r\n\r\n    <div class=\"panel panel-default \">\r\n        <div class=\"panel-heading\">\r\n            <h3>Login</h3>\r\n        </div>\r\n      <div class=\"panel-body panel-info\">\r\n        <form (submit)=\"onLoginSubmit()\" novalidate>\r\n          \r\n          <div>\r\n            <label>Username</label>\r\n            <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"username\" name=\"username\">\r\n          </div>\r\n          \r\n          <div>\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n          </div>\r\n\r\n          <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\r\n        </form>\r\n\r\n      </div>\r\n\r\n    </div>\r\n<!-- </div> -->\r\n<!-- \r\n<p-growl [(value)]=\"msgs\" class=\"zindex\"></p-growl>  -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n "
+module.exports = "<div class=\"row\">\r\n  <div class=\" col-md-3\">\r\n  </div>\r\n  <div class=\" col-md-6\">\r\n    <div class=\"panel panel-danger\">\r\n        <div class=\"panel-heading\">\r\n            <h4>Login</h4>\r\n        </div>\r\n      <div class=\"panel-body panel-danger\">\r\n        <form (submit)=\"onLoginSubmit()\" novalidate>\r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Username\r\n              <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"username\" name=\"username\">\r\n            </label>\r\n            \r\n          </div >\r\n          \r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Password\r\n              <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n            </label>\r\n          </div>\r\n\r\n          <input type=\"submit\" class=\"btn btn-success\" value=\"Login\">\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n <div class=\" col-md-3\">\r\n </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n "
 
 /***/ }),
 
@@ -3462,7 +3706,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/mesta/mesta-form/mesta-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n              <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n     </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formMEST\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"mesto._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Opština:\r\n                <select  formControlName=\"Opstina\" class=\"form-control\" \r\n                    placeholder=\"Select Opštinu\"  name=\"Select Opštinu\" [(ngModel)]=\"mesto.Opstina\" >\r\n                  <option *ngFor=\"let list of opstine\" [value]=\"list._id\"   >\r\n                    {{ list.Naziv }}\r\n                  </option>\r\n                </select>\r\n              </label>\r\n          </div>\r\n          \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv mesta:\r\n                <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"mesto.Naziv\" >\r\n              </label>\r\n               <div class=\"text-danger\" *ngIf=\"!formMEST.controls['Naziv'].valid && formMEST.controls['Naziv'].touched\">{{ titleAlertNaziv }}</div> \r\n              \r\n            </div>\r\n            \r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Ptt:\r\n                  <input class=\"form-control\" formControlName=\"Ptt\"  [(ngModel)]=\"mesto.Ptt\" >\r\n                </label>\r\n              </div>\r\n              \r\n             \r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"mesto.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formMEST.valid\"\r\n                            class=\"btn btn-default\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formMEST.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear Data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formMEST\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"mesto._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-8\">\r\n          <label class=\"center-block\">Opština:\r\n            <select formControlName=\"Opstina\" class=\"form-control\" required>\r\n              <option [value]=\"\" disabled=\"true\" [selected]=\"true\"> --Please select-- </option>\r\n              <option *ngFor=\"let list of opstL\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <!-- [(ngModel)]=\"mesto.Opstina\" -->\r\n          <div *ngIf=\"Opstina.invalid && (Opstina.dirty || Opstina.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Opstina.errors.required\">\r\n              <strong>Opština je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">&nbsp;&nbsp;&nbsp;\r\n            <button type=\"button\" class=\"btn btn-info form-control\" (click)=\"GetPickOpstina()\">\r\n              <span class=\"glyphicon glyphicon-search\"></span>\r\n              <!-- ... -->\r\n              ...\r\n            </button>\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <!-- [(ngModel)]=\"mesto.Naziv\" -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Naziv mesta:\r\n          <input class=\"form-control\" formControlName=\"Naziv\" required>\r\n        </label>\r\n\r\n        <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Naziv.errors.required\">\r\n            <strong>Naziv je obavezan podatak !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- [(ngModel)]=\"mesto.Ptt\" -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Ptt:\r\n          <input class=\"form-control\" formControlName=\"Ptt\">\r\n        </label>\r\n      </div>\r\n\r\n\r\n      <!-- [(ngModel)]=\"mesto.Opis\" -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formMEST.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formMEST.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear Data\r\n          </button>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<p-dialog header=\"ODABIR OPŠTINE\" [(visible)]=\"displayPick\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n\r\n  <app-pick-opstina [opstL]=\"opstL\" (pickRow)=\"PickOpstina($event)\" (pickNothing)=\"displayPick=false\">\r\n  </app-pick-opstina>\r\n\r\n</p-dialog>\r\n"
 
 /***/ }),
 
@@ -3479,6 +3723,8 @@ module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__opstine_opstine_service__ = __webpack_require__("../../../../../src/app/components/opstine/opstine.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3488,7 +3734,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-//import { LoginComponent } from './../../login/login.component';
+
 
 
 
@@ -3498,14 +3744,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MestaFormComponent = (function () {
-    function MestaFormComponent(opstService, mestaService, router, route, formBuilder, _location) {
+    function MestaFormComponent(opstService, mestaService, router, route, formBuilder, _location, flashMessage) {
+        var _this = this;
         this.opstService = opstService;
         this.mestaService = mestaService;
         this.router = router;
         this.route = route;
         this._location = _location;
+        this.flashMessage = flashMessage;
         this.mesto = new __WEBPACK_IMPORTED_MODULE_3__mesta_model__["a" /* Mesta */]();
-        this.titleAlertNaziv = "Naziv,This field is required !!!";
+        this.saveTemp = true;
+        this.displayPick = false;
+        // pickHeight = (window.screen.height) * 0.8;
+        // pickWidth = (window.screen.width) * 0.8;
+        this.auto = 'auto';
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
         this.formMEST = formBuilder.group({
             _id: [],
             Opstina: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
@@ -3515,62 +3769,223 @@ var MestaFormComponent = (function () {
             Ptt: [],
             Opis: []
         });
+        this.formMEST.valueChanges
+            .filter(function (data) { return _this.formMEST.valid; })
+            .map(function (data) {
+            var strOpis = data.Opis;
+            if (strOpis) {
+                strOpis = strOpis.replace(/<(?:.|\n)*?>/gm, '');
+                // console.log('Opis u if ' + strOpis);
+                data.Opis = strOpis;
+            }
+            var strNaziv = data.Naziv;
+            if (strOpis) {
+                strNaziv = strNaziv.replace(/<(?:.|\n)*?>/gm, '');
+                data.Naziv = strNaziv;
+            }
+            return data;
+        })
+            .subscribe(function (data) {
+            // console.log(JSON.stringify(data));
+            //  this.updateForm();
+        });
     }
+    Object.defineProperty(MestaFormComponent.prototype, "Naziv", {
+        get: function () { return this.formMEST.get('Naziv'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MestaFormComponent.prototype, "Opstina", {
+        get: function () { return this.formMEST.get('Opstina'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MestaFormComponent.prototype, "Ptt", {
+        get: function () { return this.formMEST.get('Ptt'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MestaFormComponent.prototype, "Opis", {
+        get: function () { return this.formMEST.get('Opis'); },
+        enumerable: true,
+        configurable: true
+    });
+    MestaFormComponent.prototype.GetPickOpstina = function () {
+        this.displayPick = true;
+    };
+    MestaFormComponent.prototype.PickOpstina = function (event) {
+        this.displayPick = false;
+        //  console.log('Ovo parametar koji sam dobio' + JSON.stringify(event));
+        this.selectedPickOpst = event;
+        // console.log(JSON.stringify(this.selectedKupac));
+        if (this.selectedPickOpst) {
+            if (this.selectedPickOpst._id) {
+                this.Opstina.setValue(this.selectedPickOpst._id);
+                // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
+            }
+        }
+    };
     MestaFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.opstService.getOpstine().subscribe(function (profile) {
+        this.opstService.getPickOpstine().subscribe(function (profile) {
             if (profile.success === true) {
-                // console.log(profile);
-                // console.log(" data je " + profile.data);
-                _this.opstine = profile.data;
+                _this.opstL = profile.data;
+                //   console.log('opstina' + JSON.stringify(this.opstL) );
             }
-        }, function (err) {
-            console.log(err);
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 5000
+                });
+            }
+        }, function (error) {
+            _this.opstL = [];
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
             return false;
         });
-        var id = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             var id = params['id'];
             _this.title = id ? 'Ažuriranje mesta' : 'Novo mesto';
-            if (!id)
+            if (!id) {
+                _this.loadTempData();
                 return;
+            }
             _this.mestaService.getMesto(id)
-                .subscribe(function (mesto) {
-                if (mesto.success) {
-                    _this.mesto = mesto.data[0];
+                .subscribe(function (result) {
+                if (result.success) {
+                    _this.saveTemp = false;
+                    _this.mesto = result.data[0];
+                    _this.updateForm();
                 }
                 else {
-                    _this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(result.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 9000
+                    });
+                    //  this.router.navigate(['NotFound']);
                 }
-            }, function (response) {
-                if (response.status == 404) {
-                    _this.router.navigate(['NotFound']);
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
                 }
+                _this.router.navigate(['NotFound']);
             });
         });
     };
+    MestaFormComponent.prototype.updateForm = function () {
+        this.Opstina.setValue(this.mesto.Opstina);
+        this.Naziv.setValue(this.mesto.Naziv);
+        this.Ptt.setValue(this.mesto.Ptt);
+        this.Opis.setValue(this.mesto.Opis);
+    };
+    MestaFormComponent.prototype.loadTempData = function () {
+        var mest = JSON.parse(localStorage.getItem('data_mesto'));
+        if (mest) {
+            this.mesto = mest;
+            this.updateForm();
+        }
+    };
+    MestaFormComponent.prototype.setTempData = function () {
+        var mestValue = JSON.stringify(this.formMEST.value);
+        if (mestValue) {
+            if (this.saveTemp) {
+                localStorage.setItem('data_mesto', mestValue);
+            }
+            else {
+                this.clearTempData();
+            }
+        }
+    };
+    MestaFormComponent.prototype.clearTempData = function () {
+        localStorage.removeItem('data_mesto');
+    };
     MestaFormComponent.prototype.backClicked = function (event) {
+        this.setTempData();
         this._location.back();
-        //event.stopPropagation();
     };
     MestaFormComponent.prototype.save = function () {
         var _this = this;
-        var result, mestaValue = this.formMEST.value;
-        console.log(mestaValue.Opstine);
+        var mestaValue = this.formMEST.value;
+        // console.log('Ovo za memo ' + JSON.stringify(mestaValue));
         if (mestaValue._id) {
-            result = this.mestaService.updateMesto(mestaValue);
+            //  console.log('Ovo za memo ' + JSON.stringify(mestaValue));
+            this.mestaService.updateMesto(mestaValue).subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['mesta']);
+                }
+                else {
+                    // this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
+            });
         }
         else {
-            result = this.mestaService.addMesto(mestaValue);
+            this.mestaService.addMesto(mestaValue)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['mesta']);
+                }
+                else {
+                    // this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
+            });
         }
-        result.subscribe(function (data) { return _this.router.navigate(['mesta']); });
     };
-    MestaFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    MestaFormComponent.prototype.ngOnChanges = function () {
+    MestaFormComponent.prototype.revert = function () { this.clearFormData(); };
+    MestaFormComponent.prototype.clearFormData = function () {
         this.formMEST.reset({
-            Naziv: "",
-            Ptt: "",
-            Opis: ""
+            Naziv: '',
+            Ptt: '',
+            Opis: ''
         });
+    };
+    MestaFormComponent.prototype.ngOnDestroy = function () {
+        this.setTempData();
     };
     return MestaFormComponent;
 }());
@@ -3581,10 +3996,10 @@ MestaFormComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/components/mesta/mesta-form/mesta-form.component.css")],
         animations: [Object(__WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__["a" /* formsTransition */])()]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_7__opstine_opstine_service__["a" /* OpstineService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__opstine_opstine_service__["a" /* OpstineService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__mesta_service__["a" /* MestaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__mesta_service__["a" /* MestaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_7__opstine_opstine_service__["a" /* OpstineService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__opstine_opstine_service__["a" /* OpstineService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__mesta_service__["a" /* MestaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__mesta_service__["a" /* MestaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesService"]) === "function" && _g || Object])
 ], MestaFormComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=mesta-form.component.js.map
 
 /***/ }),
@@ -3656,7 +4071,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/mesta/mesta.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"mestaL;else  waiting\"  [@routerTransition]>\r\n\r\n    <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n      <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n        <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n    </div>\r\n    <p-dataTable [value]=\"mestaL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n              selectionMode=\"single\" [(selection)]=\"selectedMesto\" dataKey=\"_id\"  \r\n              styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n              <p-header><strong>{{Title}}</strong></p-header>   \r\n        \r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n    <p-column field=\"Opstina.Drzava.Naziv\" header=\"Država\" sortable=\"true\"></p-column>   \r\n     <p-column field=\"Opstina.Naziv\" header=\"Opština\" sortable=\"true\"></p-column> \r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n    <p-column field=\"Ptt\" header=\"Ptt\" sortable=\"true\" styleClass=\"text-center\"></p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"Opcije\">\r\n        <ng-template let-mes=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n            <button type=\"button\" pButton (click)=\"selectMesto(mes)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n            <button type=\"button\" pButton (click)=\"updateMesta(mes._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n            <button type=\"button\" pButton (click)=\"deleteMesto(mes)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n        </ng-template>\r\n    </p-column>\r\n    <p-footer>\r\n            <div class=\"ui-helper-clearfix\" style=\"width:100%\" *ngIf=\"mestaL.length > 0\">\r\n                <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addMesta()\" label=\"Add\"></button>\r\n            </div>\r\n    </p-footer>\r\n    <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n                 <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                    <div class=\"hidden-xs dtempty_message_h1\">\r\n                       Još niste kreirali podatak.\r\n                    </div>\r\n                    \r\n                    <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                    <br/>\r\n                    <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                   <h3 class=\" hidden-xs dtempty_message\" >\r\n                        Da biste ručno dodali podatak kliknite: \r\n                        <a  class=\"dtempty_message_text\" (click)=\"addMesta()\">\r\n                             Kreiraj podatak\r\n                        </a>\r\n                    </h3>\r\n  \r\n                    <h5 class=\"visible-xs\" >\r\n                       Da biste ručno dodali podatak kliknite : \r\n                        <a   (click)=\"addMesta()\">\r\n                            Kreiraj podatak\r\n                        </a>\r\n                    </h5>\r\n  \r\n                </div>\r\n        </div>\r\n    </ng-template>\r\n    </p-dataTable>\r\n  </div>\r\n  \r\n  \r\n  <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n    <p-footer>\r\n        <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n        <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n     </p-footer>\r\n</p-confirmDialog>\r\n  \r\n  \r\n  \r\n  <p-dialog header=\"MESTO\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n  \r\n          <div>\r\n                  <dl class=\"dl-horizontal\">\r\n                      <dt>\r\n                       ID\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                         {{mesShow._id}}\r\n                      </dd>\r\n                      <dt>\r\n                      NAZIV MESTA\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                           {{mesShow.Naziv}}\r\n                      </dd>\r\n                      <dt>\r\n                       PTT\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                          {{mesShow.Ptt}}\r\n                          \r\n                      </dd>\r\n                      \r\n                      <dt>\r\n                      OPIS\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                          {{mesShow.Opis}}\r\n                          \r\n                      </dd>\r\n                      <dt>\r\n                      DATUM UNOSA\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                          {{mesShow.created_at}}\r\n                          \r\n                      </dd>\r\n                      <dt>\r\n                      DATUM AŽURIRANJA\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                          {{mesShow.updatedAt}}\r\n                          \r\n                      </dd>\r\n                      <dt>\r\n                      KORISNIK\r\n                      </dt>\r\n                      <dd class=\"text-success\">\r\n                          {{mesShow.NameUser}}\r\n                          \r\n                      </dd>\r\n              \r\n                  </dl>                        \r\n          </div>\r\n          <p-footer>\r\n                  <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n         </p-footer>\r\n  </p-dialog>\r\n  \r\n  \r\n  <ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n  \r\n"
+module.exports = "<div *ngIf=\"mestaL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"mestaL\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\"\r\n    selectionMode=\"single\" [(selection)]=\"selectedMesto\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\"\r\n    [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Ptt\" header=\"Ptt\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'35%'}\"></p-column>\r\n    <p-column field=\"Opstina.Naziv\" header=\"Opština\" sortable=\"true\" [style]=\"{'width':'20%'}\"></p-column>\r\n    <p-column field=\"Opstina.Drzava.Naziv\" header=\"Država\" sortable=\"true\" [style]=\"{'width':'20%'}\"></p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-mes=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectMesto(mes)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateMesta(mes._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteMesto(mes)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"mestaL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addMesta()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addMesta()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n\r\n          <h5 class=\"visible-xs\">\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addMesta()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n\r\n<p-dialog header=\"MESTO\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{mesShow._id}}\r\n      </dd>\r\n      <dt>\r\n        DRŽAVA/OPŠTINA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <div [innerHTML]=\"mesShow.Opstina | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        <!-- <dt>\r\n                    DRZAVA\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        <div [innerHTML]=\"mesShow.Opstina.Drzava | prettyprint\"></div> \r\n                    </dd> -->\r\n        <dt>\r\n          NAZIV MESTA\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.Naziv}}\r\n        </dd>\r\n        <dt>\r\n          PTT\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.Ptt}}\r\n\r\n        </dd>\r\n\r\n        <dt>\r\n          OPIS\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.Opis}}\r\n\r\n        </dd>\r\n        <dt>\r\n          DATUM UNOSA\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.created_at}}\r\n\r\n        </dd>\r\n        <dt>\r\n          DATUM AŽURIRANJA\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.updatedAt}}\r\n\r\n        </dd>\r\n        <dt>\r\n          KORISNIK\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{mesShow.NameUser}}\r\n\r\n        </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -3698,18 +4113,28 @@ var MestaComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.mesShow = new __WEBPACK_IMPORTED_MODULE_3__mesta_model__["a" /* Mesta */]();
-        this.Title = "PREGLED MESTA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED MESTA';
     }
     MestaComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.mestaService.getMesta().subscribe(function (profile) {
             if (profile.success === true) {
-                //console.log(profile.data);
-                //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
                 _this.mestaL = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.router.navigate(['NotFound']);
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.mestaL = [];
             return false;
         });
     };
@@ -3719,6 +4144,7 @@ var MestaComponent = (function () {
     };
     MestaComponent.prototype.cloneData = function (c) {
         var mesto = new __WEBPACK_IMPORTED_MODULE_3__mesta_model__["a" /* Mesta */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             mesto[prop] = c[prop];
         }
@@ -3730,34 +4156,14 @@ var MestaComponent = (function () {
     MestaComponent.prototype.updateMesta = function (id) {
         this.router.navigate(['/mesta/', id]);
     };
-    // deleteMesto(tmesto){
-    //   // console.log(tdrzava);
-    //   this.confirmationService.confirm({
-    //     message: 'Are you sure that you want to perform this action?',
-    //       accept: () => {
-    //         //Actual logic to perform a confirmation
-    //         var index = this.mestaL.indexOf(tmesto);
-    //        // console.log("index je " + index);
-    //         this.mestaL.splice(index, 1);
-    //         this.mestaService.delMesto(tmesto._id)
-    //           .subscribe(null,
-    //             err => {
-    //               alert("Could not delete mesto.");
-    //               // Revert the view back to its original state
-    //               this.mestaL.splice(index, 0, tmesto);
-    //             });
-    //       }
-    //     });
-    // }
     MestaComponent.prototype.deleteMesto = function (tmesto) {
         var _this = this;
         this.confirmationService.confirm({
-            message: "Jeste li sigurni da \u017Eelite uklonite izabrano mesto ?   ",
+            message: "Jeste li sigurni da \u017Eelite uklonite izabrano mesto ?",
             header: "" + tmesto.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
+                // Actual logic to perform a confirmation
                 var index = _this.mestaL.indexOf(tmesto);
-                // console.log("index je " + index);
                 _this.mestaL.splice(index, 1);
                 _this.mestaService.delMesto(tmesto._id)
                     .subscribe(function (pos) {
@@ -3768,11 +4174,14 @@ var MestaComponent = (function () {
                         });
                     }
                     else {
-                        _this.router.navigate(['NotFound']);
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-danger',
+                            timeout: 5000
+                        });
+                        _this.mestaL.splice(index, 0, tmesto);
                     }
-                }, function (err) {
-                    //alert("Could not delete radnik.");
-                    _this.flashMessage.show('Could not delete mesto !!!', {
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
@@ -3804,11 +4213,17 @@ var _a, _b, _c, _d;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Mesta; });
-//import { Drzave } from './../drzave/drzave.model';
+/* unused harmony export PickMesta */
 var Mesta = (function () {
     function Mesta() {
     }
     return Mesta;
+}());
+
+var PickMesta = (function () {
+    function PickMesta() {
+    }
+    return PickMesta;
 }());
 
 //# sourceMappingURL=mesta.model.js.map
@@ -3829,12 +4244,16 @@ var Mesta = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mesta_component__ = __webpack_require__("../../../../../src/app/components/mesta/mesta.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mesta_form_mesta_form_component__ = __webpack_require__("../../../../../src/app/components/mesta/mesta-form/mesta-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mesta_routing_module__ = __webpack_require__("../../../../../src/app/components/mesta/mesta-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__ = __webpack_require__("../../../../../src/app/shared/pickup/pickup.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -3863,11 +4282,14 @@ MestaModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
+            __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__["a" /* PickupModule */],
             __WEBPACK_IMPORTED_MODULE_7__mesta_routing_module__["a" /* MestaRoutingModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__mesta_component__["a" /* MestaComponent */],
             __WEBPACK_IMPORTED_MODULE_6__mesta_form_mesta_form_component__["a" /* MestaFormComponent */]
+            //  PickOpstinaComponent
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_4__mesta_service__["a" /* MestaService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
     })
@@ -3892,9 +4314,18 @@ MestaModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3912,33 +4343,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MestaService = (function () {
+var MestaService = (function (_super) {
+    __extends(MestaService, _super);
     function MestaService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    MestaService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     MestaService.prototype.getMesta = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/'); //this.prepEndpoint('api/mesta'); 
-        // console.log("getDrzave link", ep );
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
-        ;
+    };
+    MestaService.prototype.getPickMesta = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/pickmesta/');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
     };
     MestaService.prototype.getMesto = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3947,7 +4384,7 @@ var MestaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/');
         return this.http.post(ep, JSON.stringify(mesto), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3956,7 +4393,7 @@ var MestaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + mesto._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + mesto._id);
         return this.http.put(ep, JSON.stringify(mesto), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -3965,20 +4402,12 @@ var MestaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + id); // this.prepEndpoint('api/drzave/'+id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/mesta/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    // prepEndpoint(ep){
-    // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    //   return ServiceConfig.PrepareHost(this.isDev,ep);
-    // }
-    MestaService.prototype.handleError = function (error) {
-        console.error(error);
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(error.json().error || 'Server error');
-    };
     return MestaService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 MestaService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -4012,13 +4441,13 @@ var ModalComponent = (function () {
     }
     ModalComponent.prototype.show = function () {
         var _this = this;
-        console.log("Modal show");
+        // console.log("Modal show");
         this.visible = true;
         setTimeout(function () { return _this.visibleAnimate = true; }, 100);
     };
     ModalComponent.prototype.hide = function () {
         var _this = this;
-        console.log("Hide show");
+        // console.log("Hide show");
         this.visibleAnimate = false;
         setTimeout(function () { return _this.visible = false; }, 300);
     };
@@ -4063,7 +4492,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar-left/navbar-left.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\"  styleClass=\"ui-sidebar-sm\"  > -->\r\n    \r\n        <h2>TEST MENU</h2>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/zadrugar']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-users\" aria-hidden=\"true\" ></i>&nbsp;Zadrugari</a>\r\n                </li>\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/partner']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"  ></i>&nbsp;Kupci</a>\r\n                </li> \r\n\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/banke']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"  ></i>&nbsp;Banke</a>\r\n                </li> \r\n\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/zanimanja']\" ><i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a>\r\n                </li>\r\n               \r\n                <li role=\"presentation\" (click)=\"OnClickMenu()\"  *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a  [routerLink]=\"['/posao']\" >\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; \r\n                        Poslovi\r\n                    </a>\r\n                </li>\r\n             \r\n                <li role=\"presentation\" (click)=\"OnClickMenu()\" *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/mesta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\"\r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/opstine']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\" *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/drzave']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n                    </a>\r\n                </li>\r\n                <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/vlasnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Vlasnik\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/konstanta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Konstante\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/fondsati']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Fond sati\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" > \r\n                        <a [routerLink]=\"['/radnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Radnik\r\n                        </a>\r\n                  </li>\r\n                  \r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/parametar']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Parametri\r\n                    </a>\r\n                 </li>\r\n                 <li *ngIf=\"authService.loggedIn()\"   role=\"presentation\" (click)=\"OnClickMenu()\"  \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/profile']\">Profile\r\n                      <i class=\" menu-icon pull-left hidden-xs showopacity fa fa-user-md\" aria-hidden=\"true\"></i>\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" \r\n                        [routerLinkActiveOptions] = \"{exact:true}\"  role=\"presentation\" (click)=\"OnClickMenu()\">\r\n                    <a [routerLink]=\"['/register']\">Register</a>\r\n                  </li>\r\n        </ul>\r\n \r\n     \r\n  <!-- <h1 style=\"font-weight:normal\">Left Sidebar</h1>\r\n  <button pButton type=\"button\" (click)=\"visibleSidebar1 = false\" label=\"Save\" class=\"ui-button-success\"></button>\r\n  <button pButton type=\"button\" (click)=\"visibleSidebar1 = false\" label=\"Cancel\" class=\"ui-button-secondary\"></button> -->\r\n\r\n\r\n\r\n<!-- </p-sidebar> -->"
+module.exports = "<!-- <p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\"  styleClass=\"ui-sidebar-sm\"  > -->\r\n    \r\n        <h2>TEST MENU</h2>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n              \r\n            <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/uput']\">\r\n                <i class=\"menu-icon hidden-xs fa fa-file\" aria-hidden=\"true\" ></i>&nbsp;Uput</a>\r\n            </li>\r\n            <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/uput']\">\r\n                <i class=\"menu-icon hidden-xs fa fa-book\" aria-hidden=\"true\" ></i>&nbsp;Faktura</a>\r\n            </li>\r\n\r\n            <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/uput']\">\r\n                <i class=\"menu-icon hidden-xs fa fa-gg\" aria-hidden=\"true\" ></i>&nbsp;Uplata</a>\r\n            </li>\r\n            <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/uput']\">\r\n                <i class=\"menu-icon hidden-xs fa fa-money\" aria-hidden=\"true\" ></i>&nbsp;Isplata</a>\r\n            </li>\r\n        \r\n            <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a [routerLink]=\"['/zadrugar']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-users\" aria-hidden=\"true\" ></i>&nbsp;Zadrugari</a>\r\n                </li>\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/partner']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"  ></i>&nbsp;Kupci</a>\r\n                </li> \r\n\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/banke']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"  ></i>&nbsp;Banke</a>\r\n                </li> \r\n\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/zanimanja']\" ><i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a>\r\n                </li>\r\n               \r\n                <li role=\"presentation\" (click)=\"OnClickMenu()\"  *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a  [routerLink]=\"['/posao']\" >\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; \r\n                        Poslovi\r\n                    </a>\r\n                </li>\r\n             \r\n                <li role=\"presentation\" (click)=\"OnClickMenu()\" *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/mesta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\"\r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/opstine']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\" *ngIf=\"authService.loggedIn()\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/drzave']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n                    </a>\r\n                </li>\r\n                <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/vlasnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Vlasnik\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/konstanta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Konstante\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/fondsati']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Fond sati\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\"\r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" > \r\n                        <a [routerLink]=\"['/radnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Radnik\r\n                        </a>\r\n                  </li>\r\n                  \r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"OnClickMenu()\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/parametar']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Parametri\r\n                    </a>\r\n                 </li>\r\n                 <li *ngIf=\"authService.loggedIn()\"   role=\"presentation\" (click)=\"OnClickMenu()\"  \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/profile']\">Profile\r\n                      <i class=\" menu-icon pull-left hidden-xs showopacity fa fa-user-md\" aria-hidden=\"true\"></i>\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" \r\n                        [routerLinkActiveOptions] = \"{exact:true}\"  role=\"presentation\" (click)=\"OnClickMenu()\">\r\n                    <a [routerLink]=\"['/register']\">Register</a>\r\n                  </li>\r\n        </ul>\r\n \r\n     \r\n  <!-- <h1 style=\"font-weight:normal\">Left Sidebar</h1>\r\n  <button pButton type=\"button\" (click)=\"visibleSidebar1 = false\" label=\"Save\" class=\"ui-button-success\"></button>\r\n  <button pButton type=\"button\" (click)=\"visibleSidebar1 = false\" label=\"Cancel\" class=\"ui-button-secondary\"></button> -->\r\n\r\n\r\n\r\n<!-- </p-sidebar> -->"
 
 /***/ }),
 
@@ -4143,7 +4572,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse  fixed-top\">\r\n  <!-- <div class=\"container\"> navbar-default -->\r\n    <div class=\"navbar-header\">\r\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <!-- <a class=\"navbar-brand navbar-left\" href=\"#\">GLAVNI</a> -->\r\n    </div>\r\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\r\n      <ul class=\"nav navbar-nav navbar-left\">\r\n         <li>\r\n          <a (click)=\"visibleSidebar1 = true\">\r\n            <i class=\"fa fa-sliders fa-2x\" aria-hidden=\"true\"></i>\r\n          </a>\r\n        </li>\r\n        <!-- &nbsp;&nbsp; -->\r\n        <li [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"><a [routerLink]=\"['/']\">\r\n          <i class=\"fa fa-home fa-2x\" aria-hidden=\"true\"></i>\r\n          OMLADINSKA ZADRUGA</a>\r\n        </li>\r\n          \r\n      </ul>\r\n\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        \r\n        <!-- (click)=\"onClickQuickMenu()\" -->\r\n        <li *ngIf=\"authService.loggedIn()\" >\r\n          <a (click)=\"modal1.show()\">\r\n            <span class=\"glyphicon glyphicon-plus-sign fa-2x\" aria-hidden=\"true\" title=\"Quick add\"></span>\r\n          </a>\r\n        </li>\r\n              \r\n        <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"><a [routerLink]=\"['/dashboard']\">Dashboard</a></li>\r\n        <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"><a [routerLink]=\"['/profile']\">Profile</a></li>\r\n\r\n        <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"><a [routerLink]=\"['/login']\">Login</a></li>\r\n        <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"><a [routerLink]=\"['/register']\">Register</a></li>\r\n        <li *ngIf=\"authService.loggedIn()\"><a (click)=\"onLogoutClick()\" href=\"#\">Logout</a></li>\r\n                \r\n        <li><a (click)=\"onClickHelp()\" href=\"#\">\r\n            <span class=\"glyphicon glyphicon-question-sign fa-2x\" aria-hidden=\"true\" title=\"Help\"></span>\r\n          \r\n        </a></li>\r\n        \r\n\r\n      </ul>\r\n    </div>\r\n   \r\n  <!-- </div> -->\r\n</nav>\r\n\r\n\r\n <app-modal #modal1>\r\n  <div class=\"app-modal-header\">\r\n    <a (click)=\"modal1.hide()\">\r\n     <span class=\"text-right\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\" title=\"Close\"></span>\r\n    </a>\r\n  </div>\r\n  <div class=\"app-modal-body\">\r\n      <div class=\"row\">\r\n            <div class=\"col-xs-6\">\r\n                <h3 class=\"text-primary\">Dokumenti</h3>\r\n                <ul class=\"nav nav-pills nav-stacked\" >\r\n                    <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"> <a [routerLink]=\"['/dashboard']\">Uputi</a></li>\r\n                    <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"> <a [routerLink]=\"['/dashboard']\">Fakture</a></li>\r\n                    <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"> <a [routerLink]=\"['/dashboard']\">Uplate</a></li>        \r\n                    <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"> <a [routerLink]=\"['/dashboard']\">Isplate</a></li>        \r\n                </ul>\r\n            </div>\r\n             <div class=\"col-xs-6\">\r\n                <h3 class=\"text-primary\">Šifarnici</h3>\r\n                <ul class=\"nav nav-pills nav-stacked\">\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"><a href=\"#\">\r\n                            <i class=\"menu-icon hidden-xs fa fa-neuter\" aria-hidden=\"true\"></i>&nbsp;Zadrugari</a></li>\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\"><a href=\"#\">\r\n                            <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"></i>&nbsp;Kupci</a></li> \r\n\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n                            <a href=\"#\"><i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a></li>\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n                            <a  [routerLink]=\"['/posao/new']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; \r\n                                Poslovi\r\n                            </a>\r\n                        </li>\r\n                     \r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n                                <a [routerLink]=\"['/mesta/new']\" >\r\n                                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n                                </a>\r\n                        </li>\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n                                <a [routerLink]=\"['/opstine/new']\" >\r\n                                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n                                </a>\r\n                        </li>\r\n                        <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n                            <a [routerLink]=\"['/drzave/new']\" >\r\n                                <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n                            </a>\r\n                        </li>\r\n                </ul>\r\n             </div>\r\n          \r\n      </div>\r\n       \r\n\r\n  </div>\r\n\r\n  <!-- <div class=\"app-modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"modal1.hide()\">Close</button>\r\n    <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\r\n  </div> -->\r\n</app-modal>\r\n\r\n<p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\"  styleClass=\"ui-sidebar-sm\" >\r\n    <app-navbar-left (closeSB)=\"getNotification($event)\"></app-navbar-left>\r\n</p-sidebar> \r\n\r\n<!-- <p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\"  styleClass=\"ui-sidebar-sm\"  >\r\n        <h1></h1>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a href=\"#\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-users\" aria-hidden=\"true\" ></i>&nbsp;Zadrugari</a>\r\n                </li>\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/partner']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"  ></i>&nbsp;Kupci</a>\r\n                </li> \r\n\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/banke']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"  ></i>&nbsp;Banke</a>\r\n                </li> \r\n\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/zanimanja']\" ><i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a>\r\n                </li>\r\n               \r\n                <li role=\"presentation\" (click)=\"visibleSidebar1 = false\"  *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a  [routerLink]=\"['/posao']\" >\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; \r\n                        Poslovi\r\n                    </a>\r\n                </li>\r\n             \r\n                <li role=\"presentation\" (click)=\"visibleSidebar1 = false\" *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/mesta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/opstine']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\" *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/drzave']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n                    </a>\r\n                </li>\r\n                <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/vlasnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Vlasnik\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/konstanta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Konstante\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/fondsati']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Fond sati\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" > \r\n                        <a [routerLink]=\"['/radnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Radnik\r\n                        </a>\r\n                  </li>\r\n                  \r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/parametar']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Parametri\r\n                    </a>\r\n                 </li>\r\n                 <li *ngIf=\"authService.loggedIn()\"   role=\"presentation\" (click)=\"visibleSidebar1 = false\"  \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/profile']\">Profile\r\n                      <i class=\" menu-icon pull-left hidden-xs showopacity fa fa-user-md\" aria-hidden=\"true\"></i>\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" \r\n                        [routerLinkActiveOptions] = \"{exact:true}\"  role=\"presentation\" (click)=\"visibleSidebar1 = false\">\r\n                    <a [routerLink]=\"['/register']\">Register</a>\r\n                  </li>\r\n        </ul>\r\n</p-sidebar> -->\r\n\r\n"
+module.exports = "<nav class=\"navbar navbar-inverse  fixed-top\">\r\n  <!-- <div class=\"container\"> navbar-default -->\r\n  <div class=\"navbar-header\">\r\n    <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\r\n      aria-controls=\"navbar\">\r\n      <span class=\"sr-only\">Toggle navigation</span>\r\n      <span class=\"icon-bar\"></span>\r\n      <span class=\"icon-bar\"></span>\r\n      <span class=\"icon-bar\"></span>\r\n    </button>\r\n  </div>\r\n  <div id=\"navbar\" class=\"collapse navbar-collapse\">\r\n    <ul class=\"nav navbar-nav navbar-left\">\r\n      <li>\r\n        <a (click)=\"visibleSidebar1 = true\">\r\n          <i class=\"fa fa-sliders fa-2x\" aria-hidden=\"true\"></i>\r\n        </a>\r\n      </li>\r\n      <!-- &nbsp;&nbsp; -->\r\n      <li [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\">\r\n        <a [routerLink]=\"['/']\">\r\n          <i class=\"fa fa-handshake-o fa-2x\" aria-hidden=\"true\"></i>\r\n          OMLADINSKA ZADRUGA</a>\r\n      </li>\r\n\r\n    </ul>\r\n\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n\r\n      <!-- (click)=\"onClickQuickMenu()\" -->\r\n      <li *ngIf=\"authService.loggedIn()\">\r\n        <a (click)=\"modal1.show()\">\r\n          <span class=\"glyphicon glyphicon-plus-sign fa-2x\" aria-hidden=\"true\" title=\"Quick add\"></span>\r\n        </a>\r\n      </li>\r\n\r\n      <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\">\r\n        <a [routerLink]=\"['/dashboard']\">Dashboard</a>\r\n      </li>\r\n      <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\">\r\n        <a [routerLink]=\"['/profile']\">Profile</a>\r\n      </li>\r\n\r\n      <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\">\r\n        <a [routerLink]=\"['/login']\">Login</a>\r\n      </li>\r\n      <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\">\r\n        <a [routerLink]=\"['/register']\">Register</a>\r\n      </li>\r\n      <li *ngIf=\"authService.loggedIn()\">\r\n        <a (click)=\"onLogoutClick()\" href=\"#\">Logout</a>\r\n      </li>\r\n\r\n      <li>\r\n        <a (click)=\"onClickHelp()\" href=\"#\">\r\n          <span class=\"glyphicon glyphicon-question-sign fa-2x\" aria-hidden=\"true\" title=\"Help\"></span>\r\n\r\n        </a>\r\n      </li>\r\n\r\n\r\n    </ul>\r\n  </div>\r\n\r\n  <!-- </div> -->\r\n</nav>\r\n\r\n\r\n<app-modal #modal1>\r\n  <div class=\"app-modal-header\">\r\n    <a (click)=\"modal1.hide()\">\r\n      <span class=\"text-right\" class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\" title=\"Close\"></span>\r\n    </a>\r\n  </div>\r\n  <div class=\"app-modal-body\">\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\">\r\n        <h3 class=\"text-primary\">Dokumenti</h3>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n          <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/dashboard']\">Uputi</a>\r\n          </li>\r\n          <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/dashboard']\">Fakture</a>\r\n          </li>\r\n          <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/dashboard']\">Uplate</a>\r\n          </li>\r\n          <li role=\"navigation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/dashboard']\">Isplate</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <h3 class=\"text-primary\">Šifarnici</h3>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a href=\"#\">\r\n              <i class=\"menu-icon hidden-xs fa fa-neuter\" aria-hidden=\"true\"></i>&nbsp;Zadrugari</a>\r\n          </li>\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a href=\"#\">\r\n              <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"></i>&nbsp;Kupci</a>\r\n          </li>\r\n\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a href=\"#\">\r\n              <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a>\r\n          </li>\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/posao/new']\">\r\n              <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; Poslovi\r\n            </a>\r\n          </li>\r\n\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/mesta/new']\">\r\n              <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n            </a>\r\n          </li>\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/opstine/new']\">\r\n              <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n            </a>\r\n          </li>\r\n          <li role=\"presentation\" (click)=\"modal1.hide()\" *ngIf=\"authService.loggedIn()\">\r\n            <a [routerLink]=\"['/drzave/new']\">\r\n              <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n\r\n  <!-- <div class=\"app-modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"modal1.hide()\">Close</button>\r\n    <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\r\n  </div> -->\r\n</app-modal>\r\n\r\n<p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\" styleClass=\"ui-sidebar-sm\">\r\n  <app-navbar-left (closeSB)=\"getNotification($event)\"></app-navbar-left>\r\n</p-sidebar>\r\n\r\n<!-- <p-sidebar [(visible)]=\"visibleSidebar1\" [baseZIndex]=\"10000\"  styleClass=\"ui-sidebar-sm\"  >\r\n        <h1></h1>\r\n        <ul class=\"nav nav-pills nav-stacked\">\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                <a href=\"#\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-users\" aria-hidden=\"true\" ></i>&nbsp;Zadrugari</a>\r\n                </li>\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/partner']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-address-card\" aria-hidden=\"true\"  ></i>&nbsp;Kupci</a>\r\n                </li> \r\n\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                    [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n                    <a [routerLink]=\"['/banke']\">\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"  ></i>&nbsp;Banke</a>\r\n                </li> \r\n\r\n                \r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/zanimanja']\" ><i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Zanimanja</a>\r\n                </li>\r\n               \r\n                <li role=\"presentation\" (click)=\"visibleSidebar1 = false\"  *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a  [routerLink]=\"['/posao']\" >\r\n                    <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp; \r\n                        Poslovi\r\n                    </a>\r\n                </li>\r\n             \r\n                <li role=\"presentation\" (click)=\"visibleSidebar1 = false\" *ngIf=\"authService.loggedIn()\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/mesta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Mesta\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\"  *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/opstine']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Opštine\r\n                        </a>\r\n                </li>\r\n                <li role=\"presentation\" *ngIf=\"authService.loggedIn()\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/drzave']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-list-alt\" aria-hidden=\"true\"></i>&nbsp;Države\r\n                    </a>\r\n                </li>\r\n                <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/vlasnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Vlasnik\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/konstanta']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Konstante\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                            [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                        <a [routerLink]=\"['/fondsati']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Fond sati\r\n                        </a>\r\n                  </li>\r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" > \r\n                        <a [routerLink]=\"['/radnik']\" >\r\n                            <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Radnik\r\n                        </a>\r\n                  </li>\r\n                  \r\n                  <li *ngIf=\"authService.loggedIn()\" role=\"presentation\" (click)=\"visibleSidebar1 = false\" \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/parametar']\" >\r\n                        <i class=\"menu-icon hidden-xs fa fa-object-group\" aria-hidden=\"true\"></i>Parametri\r\n                    </a>\r\n                 </li>\r\n                 <li *ngIf=\"authService.loggedIn()\"   role=\"presentation\" (click)=\"visibleSidebar1 = false\"  \r\n                        [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\" >\r\n                    <a [routerLink]=\"['/profile']\">Profile\r\n                      <i class=\" menu-icon pull-left hidden-xs showopacity fa fa-user-md\" aria-hidden=\"true\"></i>\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" \r\n                        [routerLinkActiveOptions] = \"{exact:true}\"  role=\"presentation\" (click)=\"visibleSidebar1 = false\">\r\n                    <a [routerLink]=\"['/register']\">Register</a>\r\n                  </li>\r\n        </ul>\r\n</p-sidebar> -->\r\n"
 
 /***/ }),
 
@@ -4177,7 +4606,8 @@ var NavbarComponent = (function () {
         this.flashMessage = flashMessage;
     }
     NavbarComponent.prototype.ngOnInit = function () {
-        // console.log("pozvao sam fukciju za meni");
+        // tslint:disable-next-line:max-line-length
+        // console.log("pozvao sam fukciju za meni");   "../node_modules/popper.js/dist/popper.min.js", "popper.js": "^1.12.9", "bootstrap": "^4.0.0-beta.2",
         // Configure tooltips for collapsed side navigation
         //  $('.navbar-sidenav [data-toggle="tooltip"]').tooltip({
         // tslint:disable-next-line:max-line-length
@@ -4225,7 +4655,7 @@ var NavbarComponent = (function () {
     };
     NavbarComponent.prototype.getNotification = function (evt) {
         // Do something with the notification (evt) sent by the child!
-        console.log('"getNotification u  navbaru');
+        // console.log('"getNotification u  navbaru');
         this.visibleSidebar1 = false;
     };
     NavbarComponent.prototype.onLogoutClick = function () {
@@ -4296,7 +4726,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/not-found/not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  not-found works! class=\"welcome-page\"\r\n</p> -->\r\n\r\n<div class=\"welcome-page\" [@routerTransition]>\r\n  <!-- <div class=\"row\"> -->\r\n      <!-- <div class=\"col-md-10 push-md-1\"> -->\r\n          <h1>404 - Page Not Found</h1>\r\n          <!-- <p >This page does not exist</p> -->\r\n          <p class=\"lead\">This page does not exist</p>\r\n          <!-- <p class=\"lead\">\r\n              <a class=\"btn rounded-btn\" [routerLink]=\"['/']\">Restart</a>\r\n          </p> -->\r\n\r\n          <button type=\"reset\" class=\"btn btn-default rounded-btn\"  [routerLink]=\"['/']\">\r\n            Restart\r\n           </button>\r\n\r\n      <!-- </div> -->\r\n  <!-- </div> -->\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"welcome-page\" [@routerTransition]>\r\n  <h1>404 - Page Not Found</h1>\r\n  <p class=\"lead\">This page does not exist</p>\r\n  <button type=\"reset\" class=\"btn btn-default rounded-btn\" [routerLink]=\"['/']\">\r\n    Restart\r\n  </button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4360,7 +4790,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/opstine/opstine-form/opstine-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"panel panel-primary\"  [@formsTransition]>\r\n      <div class=\"panel-heading\">\r\n          <div class=\"row\">\r\n              <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n                  <h5>{{title}}</h5> \r\n                </div>\r\n                <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n                  <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n                </div>\r\n         </div>\r\n      </div>\r\n      <div class=\"panel-body\">\r\n          <form [formGroup]=\"formOPST\" (ngSubmit)=\"save()\" novalidate>\r\n              <div class=\"form-group\" >\r\n                  <!-- <label class=\"center-block\">ID: -->\r\n                    <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"opstina._id\"   type=\"hidden\">\r\n                  <!-- <label> -->\r\n              </div>\r\n              <div class=\"form-group\">\r\n                  <label class=\"center-block\">Država:\r\n                    <select  formControlName=\"Drzava\" class=\"form-control\" placeholder=\"Select Državu\"  name=\"Select Državu\" [(ngModel)]=\"opstina.Drzava\" >\r\n                      <option *ngFor=\"let list of drzave\" [value]=\"list._id\"   >\r\n                        {{ list.Naziv }}\r\n                      </option>\r\n                    </select>\r\n                  </label>\r\n              </div>\r\n                \r\n                <div class=\"form-group\">\r\n                    <label class=\"center-block\">Kod opštine:\r\n                      <input  class=\"form-control\" formControlName=\"RegOzn\"  [(ngModel)]=\"opstina.RegOzn\" >\r\n                    </label>\r\n                    <div class=\"text-danger\" *ngIf=\"!formOPST.controls['RegOzn'].valid && formOPST.controls['RegOzn'].touched\">{{ titleAlertRegOzn }}</div>\r\n                    \r\n                  </div>\r\n\r\n                <div class=\"form-group\">\r\n                  <label class=\"center-block\">Naziv opštine:\r\n                    <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"opstina.Naziv\" >\r\n                  </label>\r\n                  <div class=\"text-danger\" *ngIf=\"!formOPST.controls['Naziv'].valid && formOPST.controls['Naziv'].touched\">{{ titleAlertNaziv }}</div>\r\n                  \r\n                </div>\r\n                \r\n                <div class=\"form-group\">\r\n                    <label class=\"center-block\">Šifra poreza opštine:\r\n                      <input class=\"form-control\" formControlName=\"SifPorez\"  [(ngModel)]=\"opstina.SifPorez\" >\r\n                    </label>\r\n                  </div>\r\n                  \r\n                  <div class=\"form-group\">\r\n                      <label class=\"center-block\">Kontrolni broj opštine:\r\n                        <input class=\"form-control\" formControlName=\"KontBr\"  [(ngModel)]=\"opstina.KontBr\" >\r\n                      </label>\r\n                    </div>\r\n\r\n                    <div class=\"form-group\">\r\n                        <label class=\"center-block\">Poziv na broj opštine:\r\n                          <input class=\"form-control\" formControlName=\"PozivNaBr\"  [(ngModel)]=\"opstina.PozivNaBr\" >\r\n                        </label>\r\n                      </div>\r\n\r\n                  <div class=\"form-group\">\r\n                    <label class=\"center-block\">Opis:\r\n                      <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"opstina.Opis\">\r\n\r\n                      </textarea>\r\n                    </label>\r\n                </div>\r\n              \r\n                <div class=\"form-group\">\r\n                        <div class=\"col-md-offset-5 col-md-12\">\r\n                            <button type=\"submit\" [disabled]=\"!formOPST.valid\"\r\n                                class=\"btn btn-default\">\r\n                            <span class=\"glyphicon glyphicon-saved\"></span>\r\n                            Save\r\n                            </button>\r\n\r\n                          <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formOPST.pristine\"  (click)=\"revert()\">\r\n                              <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                              Clear data\r\n                          </button>\r\n                          \r\n                        </div>\r\n                  \r\n                        \r\n              </div>\r\n                  \r\n\r\n\r\n          </form>\r\n      </div>\r\n     \r\n      <div class=\"panel-footer\">\r\n          <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n              <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n                <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n                Back\r\n            </button>\r\n          <!-- </div> -->\r\n      </div>\r\n      \r\n    </div>\r\n    \r\n    <!-- </div>   coll -->\r\n <!--   </div>  row -->\r\n\r\n    \r\n\r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formOPST\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"opstina._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-8\">\r\n          <label class=\"center-block\">Država:\r\n            <select formControlName=\"Drzava\" class=\"form-control\" placeholder=\"Select Državu\" name=\"Select Državu\" required>\r\n              <option [value]=\"\" disabled=\"true\" [selected]=\"true\"> --Please select-- </option>\r\n              <option *ngFor=\"let list of drzave\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"Drzava.invalid && (Drzava.dirty || Drzava.touched)\" class=\"alert alert-danger\" role=\"alert\">\r\n            <div *ngIf=\"Drzava.errors.required\">\r\n              <strong>Država je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">&nbsp;&nbsp;&nbsp;\r\n            <button type=\"button\" class=\"btn btn-info form-control\" (click)=\"GetPickDrzava()\">\r\n              <span class=\"glyphicon glyphicon-search\"></span>\r\n              <!-- ... -->\r\n              ...\r\n            </button>\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- [(ngModel)]=\"opstina.RegOzn\" -->\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Kod opštine:\r\n            <input class=\"form-control\" formControlName=\"RegOzn\" required>\r\n          </label>\r\n\r\n          <div *ngIf=\"RegOzn.invalid && (RegOzn.dirty || RegOzn.touched)\" class=\"alert alert-danger\" role=\"alert\">\r\n            <div *ngIf=\"RegOzn.errors.required\">\r\n              <strong>Oznaka je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"RegOzn.errors.maxlength\">\r\n              <strong>Predugačka oznaka !!!</strong>\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n        <!-- [(ngModel)]=\"opstina.Naziv\"  -->\r\n        <div class=\"form-group col-md-8\">\r\n          <label class=\"center-block\">Naziv opštine:\r\n            <input class=\"form-control\" formControlName=\"Naziv\" required>\r\n          </label>\r\n\r\n          <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\" role=\"alert\">\r\n            <div *ngIf=\"Naziv.errors.required\">\r\n              <strong>Naziv je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- [(ngModel)]=\"opstina.SifPorez\" -->\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Šifra poreza opštine:\r\n            <input class=\"form-control\" formControlName=\"SifPorez\">\r\n          </label>\r\n        </div>\r\n\r\n        <!-- [(ngModel)]=\"opstina.KontBr\" -->\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Kontrolni broj opštine:\r\n            <input class=\"form-control\" formControlName=\"KontBr\">\r\n          </label>\r\n        </div>\r\n        <!-- [(ngModel)]=\"opstina.PozivNaBr\"  -->\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Poziv na broj opštine:\r\n            <input class=\"form-control\" formControlName=\"PozivNaBr\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <!-- [(ngModel)]=\"opstina.Opis\" -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\">\r\n\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formOPST.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formOPST.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n  </div>\r\n</div>\r\n\r\n\r\n<p-dialog header=\"ODABIR DRŽAVE\" [(visible)]=\"displayPick\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n  <app-pick-drzava [drzL]=\"drzave\" (pickRow)=\"PickDrzava($event)\" (pickNothing)=\"displayPick=false\">\r\n  </app-pick-drzava>\r\n</p-dialog>\r\n"
 
 /***/ }),
 
@@ -4377,6 +4807,8 @@ module.exports = "\r\n    <div class=\"panel panel-primary\"  [@formsTransition]
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__opstine_model__ = __webpack_require__("../../../../../src/app/components/opstine/opstine.model.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4394,16 +4826,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var OpstineFormComponent = (function () {
-    function OpstineFormComponent(opstService, drzaveService, router, route, formBuilder, _location) {
+    function OpstineFormComponent(opstService, drzaveService, router, route, formBuilder, _location, flashMessage) {
         this.opstService = opstService;
         this.drzaveService = drzaveService;
         this.router = router;
         this.route = route;
         this._location = _location;
+        this.flashMessage = flashMessage;
         this.opstina = new __WEBPACK_IMPORTED_MODULE_5__opstine_model__["a" /* Opstine */]();
-        this.titleAlertNaziv = 'Naziv,This field is required !!!';
-        this.titleAlertRegOzn = 'Regionalna oznaka, This field is required !!!';
+        this.saveTemp = true;
+        this.displayPick = false;
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
+        this.auto = 'auto';
         this.formOPST = formBuilder.group({
             _id: [],
             Drzava: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
@@ -4420,64 +4857,195 @@ var OpstineFormComponent = (function () {
             Opis: []
         });
     }
+    OpstineFormComponent.prototype.GetPickDrzava = function () {
+        // this.flashMessage.show('Tražimo kupca iz pick liste', {
+        //   cssClass: 'alert-danger',
+        //   timeout: 9000});
+        this.displayPick = true;
+    };
+    OpstineFormComponent.prototype.PickDrzava = function (event) {
+        this.displayPick = false;
+        console.log('Ovo parametar koji sam dobio' + JSON.stringify(event));
+        this.selectedPickDrzavu = event;
+        // console.log(JSON.stringify(this.selectedKupac));
+        if (this.selectedPickDrzavu) {
+            if (this.selectedPickDrzavu._id) {
+                this.Drzava.setValue(this.selectedPickDrzavu._id);
+                // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
+            }
+        }
+    };
+    Object.defineProperty(OpstineFormComponent.prototype, "RegOzn", {
+        get: function () { return this.formOPST.get('RegOzn'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(OpstineFormComponent.prototype, "Naziv", {
+        get: function () { return this.formOPST.get('Naziv'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(OpstineFormComponent.prototype, "Drzava", {
+        get: function () { return this.formOPST.get('Drzava'); },
+        enumerable: true,
+        configurable: true
+    });
     OpstineFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.drzaveService.getDrzave().subscribe(function (profile) {
+        this.drzaveService.getPickDrzave().subscribe(function (profile) {
             if (profile.success === true) {
-                // console.log(profile);
-                // console.log(" data je " + profile.data);
                 _this.drzave = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+        }, function (error) {
+            _this.drzave = [];
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
-        var id = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             var id = params['id'];
             _this.title = id ? 'Ažuriranje opštine' : 'Nova opština';
-            if (!id)
+            if (!id) {
+                _this.loadTempData();
                 return;
+            }
             _this.opstService.getOpstina(id)
-                .subscribe(function (opstina) {
-                if (opstina.success) {
-                    _this.opstina = opstina.data[0];
+                .subscribe(function (result) {
+                if (result.success) {
+                    _this.saveTemp = false;
+                    _this.opstina = result.data[0];
                 }
                 else {
+                    _this.flashMessage.show(result.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                    // this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 404) {
                     _this.router.navigate(['NotFound']);
                 }
-            }, function (response) {
-                if (response.status == 404) {
-                    _this.router.navigate(['NotFound']);
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
                 }
             });
         });
     };
-    OpstineFormComponent.prototype.save = function () {
-        var _this = this;
-        var result, opstineValue = this.formOPST.value;
-        console.log(opstineValue.Drzava);
-        if (opstineValue._id) {
-            result = this.opstService.updateOpstine(opstineValue);
+    // GetPickWidth(): number {
+    //   return 500;
+    // }
+    OpstineFormComponent.prototype.loadTempData = function () {
+        var opst = JSON.parse(localStorage.getItem('data_opstina'));
+        if (opst) {
+            this.opstina = opst;
         }
-        else {
-            result = this.opstService.addOpstine(opstineValue);
+    };
+    OpstineFormComponent.prototype.setTempData = function () {
+        var opstValue = JSON.stringify(this.formOPST.value);
+        if (opstValue) {
+            if (this.saveTemp) {
+                localStorage.setItem('data_opstina', opstValue);
+            }
+            else {
+                this.clearTempData();
+            }
         }
-        result.subscribe(function (data) { return _this.router.navigate(['opstine']); });
+    };
+    OpstineFormComponent.prototype.clearTempData = function () {
+        localStorage.removeItem('data_opstina');
     };
     OpstineFormComponent.prototype.backClicked = function (event) {
+        this.setTempData();
         this._location.back();
-        //event.stopPropagation();
     };
-    OpstineFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    OpstineFormComponent.prototype.ngOnChanges = function () {
-        this.formOPST.reset({
-            Naziv: "",
-            RegOzn: "",
-            SifPorez: "",
-            KontBr: "",
-            PozivNaBr: "",
-            Opis: ""
-        });
+    OpstineFormComponent.prototype.save = function () {
+        var _this = this;
+        var opstineValue = this.formOPST.value;
+        if (opstineValue._id) {
+            this.opstService.updateOpstine(opstineValue).subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['opstine']);
+                }
+                else {
+                    //  this.router.navigate(['NotFound']);
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 404) {
+                    _this.router.navigate(['NotFound']);
+                }
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
+            });
+        }
+        else {
+            this.opstService.addOpstine(opstineValue)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['opstine']);
+                }
+                else {
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                if (error.status === 404) {
+                    _this.router.navigate(['NotFound']);
+                }
+                if (error.status === 401) {
+                    _this.router.navigate(['login']);
+                }
+            });
+        }
+    };
+    OpstineFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formOPST.reset();
+    };
+    // clearFormData() {
+    //   this.formOPST.reset({
+    //     Naziv: '',
+    //     RegOzn: '',
+    //     SifPorez: '',
+    //     KontBr: '',
+    //     PozivNaBr: '',
+    //     Opis: ''
+    //   });
+    // }
+    OpstineFormComponent.prototype.ngOnDestroy = function () {
+        this.setTempData();
     };
     return OpstineFormComponent;
 }());
@@ -4488,10 +5056,10 @@ OpstineFormComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/components/opstine/opstine-form/opstine-form.component.css")],
         animations: [Object(__WEBPACK_IMPORTED_MODULE_7__animation_forms_animations__["a" /* formsTransition */])()]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__opstine_service__["a" /* OpstineService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__opstine_service__["a" /* OpstineService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__drzave_drzave_service__["a" /* DrzaveService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__drzave_drzave_service__["a" /* DrzaveService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_common__["Location"]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__opstine_service__["a" /* OpstineService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__opstine_service__["a" /* OpstineService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__drzave_drzave_service__["a" /* DrzaveService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__drzave_drzave_service__["a" /* DrzaveService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_common__["Location"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesService"]) === "function" && _g || Object])
 ], OpstineFormComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=opstine-form.component.js.map
 
 /***/ }),
@@ -4563,7 +5131,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/opstine/opstine.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  opstine works!\r\n</p> -->\r\n\r\n<!-- <div class=\"row\"> -->\r\n    <div *ngIf=\"opstineL;else  waiting\" >\r\n      <!-- <h3 class=\"first\">PREGLED OPŠTINA</h3>\r\n      <input #gb type=\"text\" placeholder=\"Global search\" pInputText focus>\r\n      <p></p> -->\r\n\r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n         <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"opstineL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedOpstina\" dataKey=\"_id\" \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  \r\n                [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n                <p-header><strong>{{Title}}</strong></p-header>         \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>    \r\n      <p-column field=\"Drzava.Naziv\" header=\"Drzava\" sortable=\"true\"></p-column>  \r\n      <p-column field=\"RegOzn\" header=\"Oznaka\" sortable=\"true\"></p-column>                               \r\n      <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n      <p-column field=\"SifPorez\" header=\"SifPorez\" sortable=\"true\"></p-column>\r\n     \r\n\r\n      <p-column styleClass=\"col-button text-center\" heder=\"Opcije\">\r\n          <ng-template let-opst=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectOpstina(opst)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateOpstinu(opst._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteOpstinu(opst)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n     </p-column>\r\n      <p-footer>\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addOpstine()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n\r\n<!-- </div> -->\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n    <p-footer>\r\n        <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n        <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n     </p-footer>\r\n</p-confirmDialog>\r\n\r\n<p-dialog header=\"OPŠTINA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n\r\n        <div>\r\n                <dl class=\"dl-horizontal\">\r\n                    <dt>\r\n                     ID\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                       {{opstShow._id}}\r\n                    </dd>\r\n                  \r\n                    <dt>\r\n                      KOD OPŠTINE\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                         {{opstShow.RegOzn}} \r\n                    </dd>\r\n                    <dt>\r\n                    NAZIV OPŠTINE\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                         {{opstShow.Naziv}}\r\n                    </dd>\r\n                    <dt>\r\n                     ŠIFRA POREZA OPŠTINE\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.SifPorez}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    KONTROLNI BROJ OPŠTINE\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.KontBr}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    POZIV NA BROJ OPŠTINE\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.PozivNaBr}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    OPIS\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.Opis}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    DATUM UNOSA\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.created_at}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    DATUM AŽURIRANJA\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.updatedAt}}\r\n                        \r\n                    </dd>\r\n                    <dt>\r\n                    KORISNIK\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                        {{opstShow.NameUser}}\r\n                        \r\n                    </dd>\r\n            \r\n                </dl>                        \r\n        </div>\r\n                        \r\n\r\n        <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n            <p-footer>\r\n                 <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n            </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n"
+module.exports = "<div *ngIf=\"opstineL;else  waiting\">\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"opstineL\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\"\r\n    [paginator]=\"true\" selectionMode=\"single\" [(selection)]=\"selectedOpstina\" dataKey=\"_id\" styleClass=\"table table-striped\"\r\n    [responsive]=\"true\" [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"RegOzn\" header=\"Oznaka\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\r\n    <p-column field=\"DrzavaRef.name\" header=\"Država\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column>\r\n    <p-column field=\"SifPorez\" header=\"SifPorez\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n\r\n\r\n    <p-column styleClass=\"col-button text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-opst=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectOpstina(opst)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateOpstinu(opst._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteOpstinu(opst)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"opstineL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addOpstine()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addOpstine()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n\r\n          <h5 class=\"visible-xs\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addOpstine()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n<!-- </div> -->\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n<p-dialog header=\"OPŠTINA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow._id}}\r\n      </dd>\r\n\r\n      <dt>\r\n        DRŽAVA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n\r\n        <div [innerHTML]=\"opstShow.Drzava | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        KOD OPŠTINE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.RegOzn}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV OPŠTINE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA POREZA OPŠTINE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.SifPorez}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KONTROLNI BROJ OPŠTINE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.KontBr}}\r\n\r\n      </dd>\r\n      <dt>\r\n        POZIV NA BROJ OPŠTINE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.PozivNaBr}}\r\n\r\n      </dd>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{opstShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n\r\n\r\n  <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -4603,18 +5171,34 @@ var OpstineComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.opstShow = new __WEBPACK_IMPORTED_MODULE_3__opstine_model__["a" /* Opstine */]();
-        this.Title = '"PREGLED OPŠTINA';
+        this.auto = 'auto';
+        this.Title = 'PREGLED OPŠTINA';
     }
     OpstineComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.opstService.getOpstine().subscribe(function (profile) {
             if (profile.success === true) {
-                // console.log(profile);
-                //       console.log(" data je " + profile.data[0].Drzava.Naziv);
                 _this.opstineL = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.router.navigate(['NotFound']);
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.opstineL = [];
+            if (error.status === 404) {
+                _this.router.navigate(['NotFound']);
+            }
+            if (error.status === 401) {
+                _this.router.navigate(['login']);
+            }
             return false;
         });
     };
@@ -4624,6 +5208,7 @@ var OpstineComponent = (function () {
     };
     OpstineComponent.prototype.cloneData = function (c) {
         var opstina = new __WEBPACK_IMPORTED_MODULE_3__opstine_model__["a" /* Opstine */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             opstina[prop] = c[prop];
         }
@@ -4635,33 +5220,14 @@ var OpstineComponent = (function () {
     OpstineComponent.prototype.updateOpstinu = function (id) {
         this.router.navigate(['opstine/', id]);
     };
-    //deleteOpstinu(topstina){
-    // console.log(tdrzava);
-    // this.confirmationService.confirm({
-    //   message: 'Are you sure that you want to perform this action?',
-    //     accept: () => {
-    //       //Actual logic to perform a confirmation
-    //       var index = this.opstine.indexOf(topstina);
-    //       console.log("index je " + index);
-    //       this.opstine.splice(index, 1);
-    //       this.opstService.delOpstine(topstina._id)
-    //         .subscribe(null,
-    //           err => {
-    //             alert("Could not delete drzavu.");
-    //             // Revert the view back to its original state
-    //             this.opstine.splice(index, 0, topstina);
-    //           });
-    //     }
-    //   });
     OpstineComponent.prototype.deleteOpstinu = function (tOpstine) {
         var _this = this;
         this.confirmationService.confirm({
             message: "Jeste li sigurni da \u017Eelite uklonite izabranu op\u0161tinu ?   ",
             header: "" + tOpstine.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
+                // Actual logic to perform a confirmation
                 var index = _this.opstineL.indexOf(tOpstine);
-                // console.log("index je " + index);
                 _this.opstineL.splice(index, 1);
                 _this.opstService.delOpstine(tOpstine._id)
                     .subscribe(function (pos) {
@@ -4672,14 +5238,24 @@ var OpstineComponent = (function () {
                         });
                     }
                     else {
-                        _this.router.navigate(['NotFound']);
+                        // this.router.navigate(['NotFound']);
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-danger',
+                            timeout: 5000
+                        });
+                        _this.opstineL.splice(index, 0, tOpstine);
                     }
-                }, function (err) {
-                    //alert("Could not delete radnik.");
-                    _this.flashMessage.show('Could not delete opštinu !!!', {
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
+                    if (error.status === 404) {
+                        _this.router.navigate(['NotFound']);
+                    }
+                    if (error.status === 401) {
+                        _this.router.navigate(['login']);
+                    }
                     // Revert the view back to its original state
                     _this.opstineL.splice(index, 0, tOpstine);
                 });
@@ -4707,10 +5283,17 @@ var _a, _b, _c, _d;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Opstine; });
+/* unused harmony export PickOpstine */
 var Opstine = (function () {
     function Opstine() {
     }
     return Opstine;
+}());
+
+var PickOpstine = (function () {
+    function PickOpstine() {
+    }
+    return PickOpstine;
 }());
 
 //# sourceMappingURL=opstine.model.js.map
@@ -4731,12 +5314,16 @@ var Opstine = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__opstine_form_opstine_form_component__ = __webpack_require__("../../../../../src/app/components/opstine/opstine-form/opstine-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__opstine_service__ = __webpack_require__("../../../../../src/app/components/opstine/opstine.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__opstine_routing_module__ = __webpack_require__("../../../../../src/app/components/opstine/opstine-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__ = __webpack_require__("../../../../../src/app/shared/pickup/pickup.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -4765,11 +5352,14 @@ OpstineModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
+            __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__["a" /* PickupModule */],
             __WEBPACK_IMPORTED_MODULE_7__opstine_routing_module__["a" /* OpstineRoutingModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__opstine_component__["a" /* OpstineComponent */],
             __WEBPACK_IMPORTED_MODULE_5__opstine_form_opstine_form_component__["a" /* OpstineFormComponent */]
+            // PickDrzavaComponent
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_6__opstine_service__["a" /* OpstineService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
     })
@@ -4794,9 +5384,18 @@ OpstineModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4814,32 +5413,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var OpstineService = (function () {
+var OpstineService = (function (_super) {
+    __extends(OpstineService, _super);
     function OpstineService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    OpstineService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     OpstineService.prototype.getOpstine = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
-        ;
+    };
+    OpstineService.prototype.getPickOpstine = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/pickopstine/');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
     };
     OpstineService.prototype.getOpstina = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -4848,7 +5454,7 @@ var OpstineService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/');
         return this.http.post(ep, JSON.stringify(opstina), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -4857,7 +5463,7 @@ var OpstineService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + opstina._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + opstina._id);
         return this.http.put(ep, JSON.stringify(opstina), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -4866,16 +5472,12 @@ var OpstineService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/opstine/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    OpstineService.prototype.handleError = function (error) {
-        console.error(error);
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(error.json() || 'Server error');
-    };
     return OpstineService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 OpstineService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -4883,6 +5485,228 @@ OpstineService = __decorate([
 
 var _a;
 //# sourceMappingURL=opstine.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/parametar/parametar-form/parametar-form.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, " .move-left {\r\n    width: auto;\r\n    box-shadow: none;\r\n  } \r\n\r\n /* label{\r\n    display:inline;\r\n} */", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/parametar/parametar-form/parametar-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body \">\r\n    <form [formGroup]=\"frParam\" (ngSubmit)=\"save()\">\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"parametar._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Naziv:\r\n          <input class=\"form-control\" formControlName=\"Naziv\" [(ngModel)]=\"parametar.Naziv\" required>\r\n        </label>\r\n        <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Naziv.errors.required\">\r\n            <strong>Naziv je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.minlength\">\r\n            <strong>Naziv mora biti minimalno 3 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.maxlength\">\r\n            <strong>Predugački naziv !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.validateSifru\">\r\n            <strong>Naziv nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <!-- class=\"pull-left\" -->\r\n        <div class=\"row\">\r\n          <div class=\"col-md-2\">\r\n            <label class=\"center-block text-center\">Koristi</label>\r\n            <label class=\"center-block\">\r\n              <div class=\"checkbox\">\r\n                <label class=\"left-block\">\r\n                  <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"Koristi\" [(ngModel)]=\"parametar.Koristi\">\r\n                </label>\r\n              </div>\r\n            </label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Text vrednost:\r\n          <input class=\"form-control\" formControlName=\"VredString\" [(ngModel)]=\"parametar.VredString\">\r\n        </label>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Brojčana vrednost:\r\n          <input class=\"form-control\" formControlName=\"VredNumeric\" [(ngModel)]=\"parametar.VredNumeric\">\r\n        </label>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"parametar.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-4 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!frParam.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"frParam.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/parametar/parametar-form/parametar-form.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParametarFormComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__parametar_model__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__parametar_service__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var ParametarFormComponent = (function () {
+    function ParametarFormComponent(router, route, formBuilder, paramService, _location, flashMessage, serValidate) {
+        this.router = router;
+        this.route = route;
+        this.paramService = paramService;
+        this._location = _location;
+        this.flashMessage = flashMessage;
+        this.serValidate = serValidate;
+        this.parametar = new __WEBPACK_IMPORTED_MODULE_3__parametar_model__["a" /* Parametar */]();
+        this.saveTemp = true;
+        this.frParam = formBuilder.group({
+            _id: [],
+            Naziv: ['', [
+                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(3),
+                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(25),
+                    serValidate.validateRegExpSifru
+                ]],
+            Koristi: [],
+            VredString: [],
+            VredNumeric: [],
+            Opis: []
+        });
+    }
+    Object.defineProperty(ParametarFormComponent.prototype, "Naziv", {
+        get: function () { return this.frParam.get('Naziv'); },
+        enumerable: true,
+        configurable: true
+    });
+    ParametarFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.title = id ? 'Ažuriranje Parametra' : 'Novi Parametar';
+            if (!id) {
+                _this.loadTempData();
+                return;
+            }
+            _this.paramService.getParametar(id)
+                .subscribe(function (param) {
+                if (param.success) {
+                    _this.saveTemp = false;
+                    _this.parametar = param.data[0];
+                }
+                else {
+                    _this.flashMessage.show(param.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 9000
+                    });
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.router.navigate(['NotFound']);
+            });
+        });
+    };
+    ParametarFormComponent.prototype.loadTempData = function () {
+        var par = JSON.parse(localStorage.getItem('data_param'));
+        if (par) {
+            this.parametar = par;
+        }
+    };
+    ParametarFormComponent.prototype.setTempData = function () {
+        var parValue = JSON.stringify(this.frParam.value);
+        if (parValue) {
+            if (this.saveTemp) {
+                localStorage.setItem('data_param', parValue);
+            }
+            else {
+                this.clearTempData();
+            }
+        }
+    };
+    ParametarFormComponent.prototype.clearTempData = function () {
+        localStorage.removeItem('data_param');
+    };
+    ParametarFormComponent.prototype.backClicked = function (event) {
+        this.setTempData();
+        this._location.back();
+    };
+    ParametarFormComponent.prototype.save = function () {
+        var _this = this;
+        var paramValue = this.frParam.value;
+        if (paramValue._id) {
+            this.paramService.updateParametar(paramValue).subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['parametar']);
+                }
+                else {
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+            });
+        }
+        else {
+            this.paramService.addParametar(paramValue)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['parametar']);
+                }
+                else {
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+            });
+        }
+    };
+    ParametarFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.frParam.reset();
+    };
+    ParametarFormComponent.prototype.clearFormData = function () {
+        this.frParam.reset({
+            Naziv: '',
+            Koristi: '',
+            VredString: '',
+            VredNumeric: 0,
+            Opis: ''
+        });
+    };
+    ParametarFormComponent.prototype.ngOnDestroy = function () {
+        this.setTempData();
+    };
+    return ParametarFormComponent;
+}());
+ParametarFormComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-parametar-form',
+        template: __webpack_require__("../../../../../src/app/components/parametar/parametar-form/parametar-form.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/parametar/parametar-form/parametar-form.component.css")],
+        animations: [Object(__WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__["a" /* formsTransition */])()]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__parametar_service__["a" /* ParametarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__parametar_service__["a" /* ParametarService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */]) === "function" && _g || Object])
+], ParametarFormComponent);
+
+var _a, _b, _c, _d, _e, _f, _g;
+//# sourceMappingURL=parametar-form.component.js.map
 
 /***/ }),
 
@@ -4895,7 +5719,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__parametar_component__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__parmetar_form_parmetar_form_component__ = __webpack_require__("../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__parametar_form_parametar_form_component__ = __webpack_require__("../../../../../src/app/components/parametar/parametar-form/parametar-form.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4909,8 +5733,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var parametarRoutes = [
     { path: 'parametar', component: __WEBPACK_IMPORTED_MODULE_3__parametar_component__["a" /* ParametarComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'parametar/new', component: __WEBPACK_IMPORTED_MODULE_4__parmetar_form_parmetar_form_component__["a" /* ParmetarFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'parametar/:id', component: __WEBPACK_IMPORTED_MODULE_4__parmetar_form_parmetar_form_component__["a" /* ParmetarFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'parametar/new', component: __WEBPACK_IMPORTED_MODULE_4__parametar_form_parametar_form_component__["a" /* ParametarFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'parametar/:id', component: __WEBPACK_IMPORTED_MODULE_4__parametar_form_parametar_form_component__["a" /* ParametarFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
 ];
 var ParametarRoutingModule = (function () {
     function ParametarRoutingModule() {
@@ -4953,7 +5777,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/parametar/parametar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div *ngIf=\"params;else  waiting\"  [@routerTransition]>\r\n\r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n         <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"params\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedParam\" dataKey=\"_id\"\r\n                styleClass=\"table  table-striped \" [immutable]=false [responsive]=\"true\"  >\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>             \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>    \r\n      <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" ></p-column>\r\n      <p-column field=\"Koristi\" header=\"Koristi\" sortable=\"true\" styleClass=\"text-center\">\r\n        <ng-template let-col let-param=\"rowData\" pTemplate=\"body\">\r\n            <span [hidden]=\"param[col.field]==false\">DA</span> \r\n            <span [hidden]=\"param[col.field]==true\">NE</span> \r\n        </ng-template> \r\n      </p-column>\r\n      <p-column field=\"VredString\" header=\"STRING\" sortable=\"true\"></p-column> \r\n      <p-column field=\"VredNumeric\" header=\"NUMERIC\" sortable=\"true\" styleClass=\"text-right\">\r\n            <ng-template let-col let-param=\"rowData\" pTemplate=\"body\">\r\n                    <span>{{param[col.field] | number:'1.2-6'}}</span>\r\n                </ng-template>    \r\n      </p-column> \r\n      <!-- <p-column field=\"Opis\" header=\"Opis\" sortable=\"true\"></p-column> -->\r\n      <!-- <p-column field=\"NameUser\" header=\"User\" sortable=\"true\"></p-column> -->\r\n      \r\n      <p-column styleClass=\"col-button text-center\" heder=\"Action\">\r\n          <ng-template let-param=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectParam(param)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateParam(param._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteParam(param)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          \r\n            </ng-template>\r\n      </p-column>\r\n      <p-footer>\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"onAddParam()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n  \r\n\r\n\r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n\r\n\r\n\r\n<p-dialog header=\"PARAMETAR\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n\r\n    <div>\r\n            <dl class=\"dl-horizontal\">\r\n                <dt>\r\n                 ID\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                   {{parShow._id}}\r\n                </dd>\r\n                <dt>\r\n                NAZIV PARAMETRA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                     {{parShow.Naziv}}\r\n                </dd>\r\n                <dt>\r\n                 KORISTI PARAMETAR\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.Koristi}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                STRING VREDNOST PARAMETRA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.VredString}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                NUMERIČKA VREDNOST PARAMETRA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.VredNumeric}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                OPIS\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.Opis}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                DATUM UNOSA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.created_at}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                DATUM AŽURIRANJA\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.updatedAt}}\r\n                    \r\n                </dd>\r\n                <dt>\r\n                KORISNIK\r\n                </dt>\r\n                <dd class=\"text-success\">\r\n                    {{parShow.NameUser}}\r\n                    \r\n                </dd>\r\n        \r\n            </dl>                        \r\n    </div>\r\n                    \r\n\r\n    <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n        <p-footer>\r\n             <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n        </p-footer>\r\n</p-dialog>\r\n\r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n\r\n"
+module.exports = "<div *ngIf=\"params;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"params\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedParam\" dataKey=\"_id\" styleClass=\"table  table-striped \" [immutable]=false [responsive]=\"true\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n    <p-column field=\"Koristi\" header=\"Koristi\" sortable=\"true\" styleClass=\"text-center\">\r\n      <ng-template let-col let-param=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"param[col.field]==false\">DA</span>\r\n        <span [hidden]=\"param[col.field]==true\">NE</span>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"VredString\" header=\"STRING\" sortable=\"true\"></p-column>\r\n    <p-column field=\"VredNumeric\" header=\"NUMERIC\" sortable=\"true\" styleClass=\"text-right\">\r\n      <ng-template let-col let-param=\"rowData\" pTemplate=\"body\">\r\n        <span>{{param[col.field] | number:'1.2-6'}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"Action\">\r\n      <ng-template let-param=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectParam(param)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateParam(param._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteParam(param)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"params.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"AddParam()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"AddParam()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n\r\n          <h5 class=\"visible-xs\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"AddParam()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n\r\n<p-dialog header=\"PARAMETAR\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow._id}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV PARAMETRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        KORISTI PARAMETAR\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.Koristi | prettyavtiveprint}}\r\n\r\n      </dd>\r\n      <dt>\r\n        STRING VREDNOST PARAMETRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.VredString}}\r\n\r\n      </dd>\r\n      <dt>\r\n        NUMERIČKA VREDNOST PARAMETRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.VredNumeric | number:'1.2-6'}}\r\n      </dd>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.Opis}}\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.updatedAt}}\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{parShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n\r\n\r\n  <!-- <p>JSON.stringify({{selectedOpstina}})</p> -->\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -4987,7 +5811,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import * as $ from 'jquery';
+// import * as $ from 'jquery';
 var ParametarComponent = (function () {
     function ParametarComponent(paramService, router, confirmationService, flashMessage) {
         this.paramService = paramService;
@@ -4996,7 +5820,8 @@ var ParametarComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.parShow = new __WEBPACK_IMPORTED_MODULE_3__parametar_model__["a" /* Parametar */]();
-        this.Title = "PREGLED PARAMETARA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED PARAMETARA';
     }
     ParametarComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -5005,34 +5830,35 @@ var ParametarComponent = (function () {
             if (profile.success === true) {
                 _this.params = profile.data;
             }
-            // }
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.router.navigate(['NotFound']);
+            }
         }, function (error) {
             _this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000
             });
-            //  console.log(error.message);
             _this.params = [];
             return false;
         });
     };
-    ParametarComponent.prototype.onAddParam = function () {
-        //alert("Add param");
+    ParametarComponent.prototype.AddParam = function () {
         this.router.navigate(['parametar/new']);
     };
     ParametarComponent.prototype.updateParam = function (id) {
         this.router.navigate(['parametar/', id]);
     };
     ParametarComponent.prototype.deleteParam = function (tparam) {
-        // console.log(tdrzava);
         var _this = this;
         this.confirmationService.confirm({
-            message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ?   ",
+            message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ?",
             header: "" + tparam.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.params.indexOf(tparam);
-                // console.log("index je " + index);
                 _this.params.splice(index, 1);
                 _this.paramService.delParametar(tparam._id)
                     .subscribe(function (pos) {
@@ -5046,7 +5872,6 @@ var ParametarComponent = (function () {
                         _this.router.navigate(['NotFound']);
                     }
                 }, function (error) {
-                    //alert("Could not delete radnik.");
                     _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
@@ -5063,6 +5888,7 @@ var ParametarComponent = (function () {
     };
     ParametarComponent.prototype.cloneData = function (c) {
         var prmdata = new __WEBPACK_IMPORTED_MODULE_3__parametar_model__["a" /* Parametar */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             prmdata[prop] = c[prop];
         }
@@ -5112,14 +5938,16 @@ var Parametar = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_primeng_primeng__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__parametar_service__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__parametar_component__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__parmetar_form_parmetar_form_component__ = __webpack_require__("../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__parametar_form_parametar_form_component__ = __webpack_require__("../../../../../src/app/components/parametar/parametar-form/parametar-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__parametar_routing_module__ = __webpack_require__("../../../../../src/app/components/parametar/parametar-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -5148,11 +5976,12 @@ ParametarModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_7__parametar_routing_module__["a" /* ParametarRoutingModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__parametar_component__["a" /* ParametarComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__parmetar_form_parmetar_form_component__["a" /* ParmetarFormComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__parametar_form_parametar_form_component__["a" /* ParametarFormComponent */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_4__parametar_service__["a" /* ParametarService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
     })
@@ -5177,9 +6006,18 @@ ParametarModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5197,22 +6035,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ParametarService = (function () {
+var ParametarService = (function (_super) {
+    __extends(ParametarService, _super);
     function ParametarService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    ParametarService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     ParametarService.prototype.getParametars = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //  let ep = this.prepEndpoint('api/parametar'); 
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -5221,8 +6056,7 @@ var ParametarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //let ep = this.prepEndpoint('api/parametar/'+id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -5231,8 +6065,7 @@ var ParametarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //let ep = this.prepEndpoint('api/parametar');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/');
         return this.http.post(ep, JSON.stringify(param), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -5241,8 +6074,7 @@ var ParametarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        // let ep = this.prepEndpoint('api/parametar/' + param._id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + param._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + param._id);
         return this.http.put(ep, JSON.stringify(param), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -5251,26 +6083,12 @@ var ParametarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        //let ep = this.prepEndpoint('api/parametar/'+id);
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/parametar/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    // prepEndpoint(ep){
-    // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    //   return ServiceConfig.PrepareHost(this.isDev,ep);
-    // }
-    ParametarService.prototype.handleError = function (error) {
-        // console.error("handleError "  + error);
-        // //console.error("handleError +"  + error.json().error);
-        // if (!error.ok){
-        //   console.error("handleError greska text statusText "  + error.statusText);
-        // }
-        var greska = error.status + "  " + error.statusText;
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(greska || 'Server error');
-    };
     return ParametarService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 ParametarService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -5281,231 +6099,10 @@ var _a;
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, " .move-left {\r\n    width: auto;\r\n    box-shadow: none;\r\n  } \r\n\r\n /* label{\r\n    display:inline;\r\n} */", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"panel panel-primary\"  [@formsTransition] >\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n                <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n    </div>\r\n  </div>\r\n<div class=\"panel-body \">\r\n      <form [formGroup]=\"frParam\" (ngSubmit)=\"save()\">\r\n          <div class=\"form-group\" >\r\n                  <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"parametar._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv:\r\n                <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"parametar.Naziv\" required >\r\n              </label>\r\n              <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Naziv.errors.required\">\r\n                    <strong>Naziv je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.minlength\">\r\n                  <strong>Naziv mora biti minimalno 3 karaktera dužine !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.maxlength\">\r\n                  <strong>Predugački naziv !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.validateSifru\">\r\n                  <strong>Naziv nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\"> <!-- class=\"pull-left\" -->\r\n              <div class=\"row\">\r\n                  <div class=\"col-md-2\">\r\n                  <label class=\"center-block text-center\" >Koristi</label>\r\n                  <label class=\"center-block\" >\r\n                    <div class=\"checkbox\">\r\n                      <label class=\"left-block\" >\r\n                       <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"Koristi\" [(ngModel)]=\"parametar.Koristi\">\r\n                    </label>\r\n                    </div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Text vrednost:\r\n                  <input class=\"form-control\" formControlName=\"VredString\"  [(ngModel)]=\"parametar.VredString\" >\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Brojčana vrednost:\r\n                  <input class=\"form-control\" formControlName=\"VredNumeric\"  [(ngModel)]=\"parametar.VredNumeric\" >\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                       <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"parametar.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-4 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!frParam.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"frParam.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                   </div>\r\n              \r\n                      <!-- <div class=\"col-md-offset-2 col-md-6\">\r\n                              <button type=\"submit\" [disabled]=\"!frParam.valid\"\r\n                                class=\"btn btn-default\">\r\n                               <span class=\"glyphicon glyphicon-saved\"></span>\r\n                              Save\r\n                              </button>\r\n              \r\n                      </div> -->\r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n      \r\n    </div>\r\n\r\n    <div class=\"panel-footer\">\r\n        <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n            <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n              <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n              Back\r\n          </button>\r\n        <!-- </div> -->\r\n    </div>\r\n\r\n</div>\r\n    \r\n<!-- <div class=\"col-md-offset-2 col-md-9\">\r\n    <button (click)=\"backClicked()\"  class=\"btn btn-default btn-block\">\r\n    <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n    Back\r\n  </button>\r\n</div> -->\r\n\r\n\r\n<!-- </div>   coll\r\n</div>  row -->\r\n\r\n    "
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParmetarFormComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__parametar_model__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__parametar_service__ = __webpack_require__("../../../../../src/app/components/parametar/parametar.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-//import { Message } from 'primeng/components/common/api';
-
-
-
-
-
-
-
-
-
-var ParmetarFormComponent = (function () {
-    function ParmetarFormComponent(router, route, formBuilder, paramService, _location, flashMessage, serValidate) {
-        this.router = router;
-        this.route = route;
-        this.paramService = paramService;
-        this._location = _location;
-        this.flashMessage = flashMessage;
-        this.serValidate = serValidate;
-        this.parametar = new __WEBPACK_IMPORTED_MODULE_3__parametar_model__["a" /* Parametar */]();
-        this.saveTemp = true;
-        this.frParam = formBuilder.group({
-            _id: [],
-            Naziv: ['', [
-                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
-                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(3),
-                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(25),
-                    serValidate.validateRegExpSifru
-                ]],
-            Koristi: [],
-            VredString: [],
-            VredNumeric: [],
-            Opis: []
-        });
-    }
-    Object.defineProperty(ParmetarFormComponent.prototype, "Naziv", {
-        get: function () { return this.frParam.get('Naziv'); },
-        enumerable: true,
-        configurable: true
-    });
-    ParmetarFormComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        var id = this.route.params.subscribe(function (params) {
-            var id = params['id'];
-            _this.title = id ? 'Ažuriranje Parametra' : 'Novi Parametar';
-            if (!id) {
-                _this.loadTempData();
-                return;
-            }
-            _this.paramService.getParametar(id)
-                .subscribe(function (param) {
-                if (param.success) {
-                    _this.saveTemp = false;
-                    _this.parametar = param.data[0];
-                }
-                else {
-                    _this.flashMessage.show(param.message, {
-                        cssClass: 'alert-danger',
-                        timeout: 9000
-                    });
-                    _this.router.navigate(['NotFound']);
-                }
-            }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
-                    timeout: 9000
-                });
-                _this.router.navigate(['NotFound']);
-            });
-        });
-    };
-    ParmetarFormComponent.prototype.loadTempData = function () {
-        var par = JSON.parse(localStorage.getItem('data_param'));
-        if (par) {
-            this.parametar = par;
-        }
-    };
-    ParmetarFormComponent.prototype.setTempData = function () {
-        var parValue = JSON.stringify(this.frParam.value);
-        if (parValue) {
-            if (this.saveTemp) {
-                localStorage.setItem('data_param', parValue);
-            }
-            else {
-                this.clearTempData();
-            }
-        }
-    };
-    ParmetarFormComponent.prototype.clearTempData = function () {
-        localStorage.removeItem('data_param');
-    };
-    ParmetarFormComponent.prototype.backClicked = function (event) {
-        this.setTempData();
-        this._location.back();
-        //event.stopPropagation();
-    };
-    ParmetarFormComponent.prototype.save = function () {
-        var _this = this;
-        var result, paramValue = this.frParam.value;
-        if (paramValue._id) {
-            this.paramService.updateParametar(paramValue).subscribe(function (pos) {
-                if (pos.success) {
-                    _this.clearTempData();
-                    _this.saveTemp = false;
-                    _this.flashMessage.show(pos.message, {
-                        cssClass: 'alert-success',
-                        timeout: 5000
-                    });
-                    _this.router.navigate(['parametar']);
-                }
-                else {
-                    _this.router.navigate(['NotFound']);
-                }
-            }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
-                    timeout: 9000
-                });
-            });
-        }
-        else {
-            this.paramService.addParametar(paramValue)
-                .subscribe(function (pos) {
-                if (pos.success) {
-                    _this.clearTempData();
-                    _this.saveTemp = false;
-                    _this.flashMessage.show(pos.message, {
-                        cssClass: 'alert-success',
-                        timeout: 5000
-                    });
-                    _this.router.navigate(['parametar']);
-                }
-                else {
-                    _this.router.navigate(['NotFound']);
-                }
-            }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
-                    timeout: 9000
-                });
-            });
-        }
-    };
-    ParmetarFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    ParmetarFormComponent.prototype.ngOnChanges = function () {
-        this.frParam.reset({
-            Naziv: "",
-            Koristi: 0,
-            VredString: "",
-            VredNumeric: 0,
-            Opis: ""
-        });
-    };
-    ParmetarFormComponent.prototype.ngOnDestroy = function () {
-        this.setTempData();
-    };
-    return ParmetarFormComponent;
-}());
-ParmetarFormComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-parmetar-form',
-        template: __webpack_require__("../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/components/parametar/parmetar-form/parmetar-form.component.css")],
-        animations: [Object(__WEBPACK_IMPORTED_MODULE_6__animation_forms_animations__["a" /* formsTransition */])()]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__parametar_service__["a" /* ParametarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__parametar_service__["a" /* ParametarService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["Location"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */]) === "function" && _g || Object])
-], ParmetarFormComponent);
-
-var _a, _b, _c, _d, _e, _f, _g;
-//# sourceMappingURL=parmetar-form.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/components/partner/partner-form/kontaktpartner.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"Kontakt\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-6\">\r\n                <label>Naziv</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoNaziv\" required>\r\n                 <small [hidden]=\"Kontakt.controls.KoNaziv.valid\" class=\"text-danger\">\r\n                    Naziv je obavezan\r\n                </small> \r\n            </div>\r\n            <div class=\"form-group col-md-6\">\r\n                <label>Funkcija</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoFunkcija\" required>\r\n                 <small [hidden]=\"Kontakt.controls.KoFunkcija.valid\" class=\"text-danger\">\r\n                        Funkcija je obavezna\r\n                </small>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n                <div class=\"form-group col-md-4\">\r\n                    <label>Email</label>\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoEmail\" >\r\n                </div>\r\n                <div class=\"form-group col-md-4\">\r\n                    <label>Telefon</label>\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoTelef\" >\r\n               </div>\r\n                <div class=\"form-group col-md-4\">\r\n                    <label>Mobilni</label>\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoMobilni\" >\r\n                </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-8\">\r\n                <label class=\"center-block\">Opis:\r\n                    <textarea class=\"form-control input-sm\" formControlName=\"KoOpis\">\r\n                </textarea>\r\n                </label>\r\n            </div>\r\n        </div>\r\n    </div>"
+module.exports = "<div [formGroup]=\"Kontakt\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label>Naziv</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoNaziv\" required>\r\n      <small [hidden]=\"Kontakt.controls.KoNaziv.valid\" class=\"text-danger\">\r\n        Naziv je obavezan\r\n      </small>\r\n    </div>\r\n    <div class=\"form-group col-md-6\">\r\n      <label>Funkcija</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoFunkcija\" required>\r\n      <small [hidden]=\"Kontakt.controls.KoFunkcija.valid\" class=\"text-danger\">\r\n        Funkcija je obavezna\r\n      </small>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Email</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoEmail\">\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Telefon</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoTelef\">\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Mobilni</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"KoMobilni\">\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-8\">\r\n      <label class=\"center-block\">Opis:\r\n        <textarea class=\"form-control input-sm\" formControlName=\"KoOpis\">\r\n        </textarea>\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5539,6 +6136,7 @@ __decorate([
 KontaktPartnerComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         // moduleId: module.id,
+        // tslint:disable-next-line:component-selector
         selector: 'kontaktpartner',
         template: __webpack_require__("../../../../../src/app/components/partner/partner-form/kontaktpartner.component.html")
     })
@@ -5552,7 +6150,7 @@ var _a;
 /***/ "../../../../../src/app/components/partner/partner-form/padresa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\" [formGroup]=\"Adresa\">\r\n    <div class=\"row\">\r\n        <div class=\"form-group col-md-5\">\r\n            <label class=\"center-block\">Ulica:\r\n              <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdUlica\" required>\r\n            </label>\r\n            <!-- <small [hidden]=\"Adresa.controls.AdUlica.valid\" class=\"text-danger\">\r\n                Ulica je obavezna\r\n            </small> -->\r\n            <div *ngIf=\"Adresa.controls.AdUlica.invalid && (Adresa.controls.AdUlica.dirty || Adresa.controls.AdUlica.touched)\" class=\"alert alert-danger\">\r\n                    <div *ngIf=\"Adresa.controls.AdUlica.errors.required\">\r\n                        <strong> Ulica je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"Adresa.controls.AdUlica.errors.minlength\">\r\n                        <strong>Ulica mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                      </div>\r\n                    <div *ngIf=\"Adresa.controls.AdUlica.errors.maxlength\">\r\n                        <strong>Predugačak podatak o ulici !!!</strong>\r\n                   </div>\r\n            </div>\r\n\r\n        </div>\r\n        <div class=\"form-group col-md-2\">\r\n                <label>Broj:\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdBroj\">\r\n                </label>\r\n        </div>\r\n        <div class=\"form-group col-md-5\">\r\n            <label class=\"center-block\">Mesto:\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdMesto\" >\r\n            </label>\r\n        </div>\r\n       \r\n    </div>\r\n    <div class=\"row\">\r\n            <div class=\"form-group col-md-3\">\r\n                    <label class=\"center-block\">Ptt:\r\n                        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttReon\" >\r\n                    </label>\r\n            </div>\r\n            <div class=\"form-group col-md-3\">\r\n                 <label class=\"center-block\">Ptt pak:\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttPak\" >\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group col-md-6\">\r\n                 <label class=\"center-block\">Zemlja:\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdDrzava\" >\r\n                </label>\r\n            </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"form-group\" [formGroup]=\"Adresa\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Ulica:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdUlica\" required>\r\n      </label>\r\n      <!-- <small [hidden]=\"Adresa.controls.AdUlica.valid\" class=\"text-danger\">\r\n                Ulica je obavezna\r\n            </small> -->\r\n      <div *ngIf=\"Adresa.controls.AdUlica.invalid && (Adresa.controls.AdUlica.dirty || Adresa.controls.AdUlica.touched)\" class=\"alert alert-danger\">\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.required\">\r\n          <strong> Ulica je obavezan podatak !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.minlength\">\r\n          <strong>Ulica mora biti minimalno 2 karaktera dužine !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.maxlength\">\r\n          <strong>Predugačak podatak o ulici !!!</strong>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"form-group col-md-2\">\r\n      <label>Broj:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdBroj\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Mesto:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdMesto\">\r\n      </label>\r\n    </div>\r\n\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-3\">\r\n      <label class=\"center-block\">Ptt:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttReon\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-3\">\r\n      <label class=\"center-block\">Ptt pak:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttPak\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-6\">\r\n      <label class=\"center-block\">Zemlja:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdDrzava\">\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5586,6 +6184,7 @@ __decorate([
 PadresaComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         // moduleId: module.id,
+        // tslint:disable-next-line:component-selector
         selector: 'partadresa',
         template: __webpack_require__("../../../../../src/app/components/partner/partner-form/padresa.component.html")
     })
@@ -5617,7 +6216,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/partner/partner-form/partner-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  partner-form works!\r\n</p> -->\r\n\r\n<div class=\"panel panel-primary\"  [@formsTransition]>\r\n    <div class=\"panel-heading\">\r\n        <div class=\"row\">\r\n            <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n                <h5>{{title}}</h5> \r\n              </div>\r\n              <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n                <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n              </div>\r\n       </div>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <form [formGroup]=\"formPartn\" (ngSubmit)=\"save()\" novalidate>\r\n            <div class=\"form-group\" >\r\n                <!-- <label class=\"center-block\">ID: -->\r\n                  <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"partnN._id\"   type=\"hidden\">\r\n                <!-- <label> -->\r\n            </div>\r\n            <div class=\"form-group\">\r\n                    <label class=\"center-block\">Naziv:\r\n                      <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"partnN.Naziv\"  required>\r\n                    </label>\r\n                    <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"Naziv.errors.required\">\r\n                            <strong>Naziv je obavezan podatak !!!</strong>\r\n                        </div>\r\n                        <div *ngIf=\"Naziv.errors.minlength\">\r\n                            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                          </div>\r\n                        <div *ngIf=\"Naziv.errors.maxlength\">\r\n                            <strong>Predugačak naziv !!!</strong>\r\n                       </div>\r\n                    </div>\r\n            </div>\r\n\r\n            <div class=\"form-group col-md-8\">\r\n                  <label class=\"center-block\">Kod pretrage:\r\n                    <input class=\"form-control\" formControlName=\"KyeSearch\"  [(ngModel)]=\"partnN.KyeSearch\" required>\r\n                  </label>\r\n                  <div *ngIf=\"KyeSearch.invalid && (KyeSearch.dirty || KyeSearch.touched)\" class=\"alert alert-danger\">\r\n                      <div *ngIf=\"KyeSearch.errors.required\">\r\n                          <strong>Kod je obavezan podatak !!!</strong>\r\n                      </div>\r\n                      <div *ngIf=\"KyeSearch.errors.minlength\">\r\n                          <strong>Kod mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                        </div>\r\n                      <div *ngIf=\"KyeSearch.errors.maxlength\">\r\n                          <strong>Predugačak kod !!!</strong>\r\n                     </div>\r\n                  </div>\r\n            </div>\r\n            <div class=\"form-group col-md-4\">\r\n            <label class=\"center-block\">Ugovoreni procenat:\r\n                  <div class=\"input-group\">\r\n                      <div class=\"input-group\">\r\n                          <input class=\"form-control text-right\" formControlName=\"UgovProc\"  \r\n                          [(ngModel)]=\"partnN.UgovProc\" (keypress)=\"serValidate.validateOnlyNumbers($event)\" required>\r\n                          <span class=\"input-group-addon\">%</span>\r\n                      </div>\r\n                  </div>\r\n            </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Država:\r\n                <select  formControlName=\"Drzava\" class=\"form-control\" placeholder=\"Select Državu\"  \r\n                    name=\"Select Državu\" [(ngModel)]=\"partnN.Drzava\"  required>\r\n                    <option *ngFor=\"let list of drzave\" [value]=\"list._id\"   >\r\n                    {{ list.Naziv }}\r\n                    </option>\r\n                </select>\r\n                </label>\r\n            </div>\r\n\r\n             \r\n              <div class=\"form-group\">\r\n                  <div class=\"checkbox\">\r\n                    <label class=\"center-block\">\r\n                        <input type=\"checkbox\" formControlName=\"Aktivan\" [(ngModel)]=\"partnN.Aktivan\">Aktivan\r\n                    </label>\r\n                  </div>\r\n                </div>\r\n              \r\n                <div class=\"form-group\">\r\n                    <div class=\"panel panel-default\">\r\n                        <div class=\"panel-heading\"><strong>Adresa:</strong></div>\r\n                        <div class=\"panel-body\">\r\n                            <partadresa [groupadresa]=\"Adresa\" ></partadresa>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"center-block\">Email:\r\n                        <input class=\"form-control\" formControlName=\"Email\"  [(ngModel)]=\"partnN.Email\" >\r\n                    </label>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                        <div formArrayName=\"Telefon\">\r\n                            <div *ngFor=\"let Telefon of formPartn.controls.Telefon.controls; let i=index\" class=\"panel panel-info\"> \r\n                                <div class=\"panel-heading\">\r\n                                    <span><strong>Telefon {{i + 1}} </strong></span>\r\n                                    <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeTelefon(i)\"></span>\r\n                                </div>\r\n            \r\n                                <div [formGroupName]=\"i\" class=\"panel-body\" > \r\n                                    <telefonpartner [grouptel]=\"formPartn.controls.Telefon.controls[i]\"></telefonpartner>\r\n                                </div>\r\n                            </div>\r\n                      \r\n                            <div class=\"margin-20\" *ngIf=\"formPartn.controls.Telefon.controls.length < 6\">\r\n                              <div class=\"row\">\r\n                                <div class=\"col-xs-2\">\r\n                                  </div>\r\n                                  <div class=\" col-xs-10 \">\r\n                                      <button type=\"button\" class=\"btn btn-info btn-block\"   (click)=\"addTelefon()\" title=\" Add telefon\">\r\n                                          <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                          Dodaj telefon\r\n                                      </button>\r\n                                      \r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n                          \r\n                        </div>\r\n                  </div> \r\n      \r\n\r\n                <div class=\"row\">\r\n                <div class=\"form-group col-md-6\">\r\n                    <label class=\"center-block\">Pib:\r\n                        <input class=\"form-control\" formControlName=\"Pib\"  [(ngModel)]=\"partnN.Pib\" >\r\n                    </label>\r\n                </div>\r\n                      \r\n                <div class=\"form-group col-md-6\">\r\n                    <label class=\"center-block\">Matični broj:\r\n                         <input class=\"form-control\" formControlName=\"MatBroj\"  [(ngModel)]=\"partnN.MatBroj\" >\r\n                    </label>\r\n                </div>\r\n                  \r\n            <div class=\"form-group col-md-6\">\r\n                <label class=\"center-block\">Šifra delatnosti:\r\n                <input class=\"form-control\" formControlName=\"SifDelat\"  [(ngModel)]=\"partnN.SifDelat\" >\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group col-md-6\">\r\n                <label class=\"center-block\">Pdv broj:\r\n                    <input class=\"form-control\" formControlName=\"PdvBroj\"  [(ngModel)]=\"partnN.PdvBroj\" >\r\n                </label>\r\n            </div>\r\n        </div>\r\n              \r\n       \r\n            \r\n\r\n                <div class=\"form-group\">\r\n                    <div formArrayName=\"Ziro\">\r\n                        <div *ngFor=\"let Ziro of formPartn.controls.Ziro.controls; let i=index\" class=\"panel panel-info\"> \r\n                            <div class=\"panel-heading\">\r\n                                <span><strong>Ziro racun {{i + 1}} </strong></span>\r\n                                <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeZiro(i)\"></span>\r\n                            </div>\r\n        \r\n                            <div [formGroupName]=\"i\" class=\"panel-body\" > \r\n                                <ziropartner [groupziro]=\"formPartn.controls.Ziro.controls[i]\"></ziropartner>\r\n                            </div>\r\n                        </div>\r\n                  \r\n                        <div class=\"margin-20\" *ngIf=\"formPartn.controls.Ziro.controls.length < 6\">\r\n                          <div class=\"row\">\r\n                            <div class=\"col-xs-2\">\r\n                              </div>\r\n                              <div class=\" col-xs-10 \">\r\n                                  <button type=\"button\" class=\"btn btn-info btn-block\"   (click)=\"addZiro()\" title=\" Add Žiro račun\">\r\n                                      <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                      Dodaj žiro račun\r\n                                  </button>\r\n                                 \r\n                            </div>\r\n                          </div>\r\n                        </div>\r\n                      \r\n                    </div>\r\n                </div> \r\n\r\n                <div class=\"form-group\">\r\n                        <div formArrayName=\"Kontakt\">\r\n                            <div *ngFor=\"let kontak of formPartn.controls.Kontakt.controls; let i=index\" class=\"panel panel-info\"> \r\n                                <div class=\"panel-heading\">\r\n                                    <span><strong>Kontakt {{i + 1}} </strong></span>\r\n                                    <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeKontakt(i)\"></span>\r\n                                </div>\r\n            \r\n                                <div [formGroupName]=\"i\" class=\"panel-body\" > \r\n                                    <kontaktpartner [groupkontakt]=\"formPartn.controls.Kontakt.controls[i]\"></kontaktpartner>\r\n                                </div>\r\n                            </div>\r\n                      \r\n                            <div class=\"margin-20\" *ngIf=\"formPartn.controls.Kontakt.controls.length < 6\">\r\n                              <div class=\"row\">\r\n                                <div class=\"col-xs-2\">\r\n                                  </div>\r\n                                  <div class=\" col-xs-10 \">\r\n                                      <button type=\"button\" class=\"btn btn-info btn-block\"   (click)=\"addKontakt()\" title=\" Add kontakt\">\r\n                                          <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                          Dodaj kontakt\r\n                                      </button>\r\n                                     \r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n                          \r\n                        </div>\r\n                </div> \r\n\r\n                <div class=\"form-group\">\r\n                  <label class=\"center-block\">Opis:\r\n                    <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"partnN.Opis\">\r\n\r\n                    </textarea>\r\n                  </label>\r\n              </div>\r\n            \r\n              <div class=\"form-group\">\r\n                      <div class=\"col-md-offset-5 col-md-12\">\r\n                          <button type=\"submit\" [disabled]=\"!formPartn.valid\"\r\n                              class=\"btn btn-success\">\r\n                          <span class=\"glyphicon glyphicon-saved\"></span>\r\n                          Save\r\n                          </button>\r\n\r\n                        <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formPartn.pristine\"  (click)=\"revert()\">\r\n                            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                            Clear data\r\n                        </button>\r\n                        \r\n                      </div>\r\n                \r\n                      \r\n            </div>\r\n                \r\n\r\n\r\n        </form>\r\n    </div>\r\n   \r\n    <div class=\"panel-footer\">\r\n        <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n            <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n              <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n              Back\r\n          </button>\r\n        <!-- </div> -->\r\n    </div>\r\n    \r\n  </div>"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formPartn\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <!-- <label class=\"center-block\">ID: -->\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"partnN._id\" type=\"hidden\">\r\n        <!-- <label> -->\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Naziv:\r\n          <input class=\"form-control\" formControlName=\"Naziv\" [(ngModel)]=\"partnN.Naziv\" required>\r\n        </label>\r\n        <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Naziv.errors.required\">\r\n            <strong>Naziv je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.minlength\">\r\n            <strong>Naziv mora biti minimalno 2 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.maxlength\">\r\n            <strong>Predugačak naziv !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group col-md-8\">\r\n        <label class=\"center-block\">Kod pretrage:\r\n          <input class=\"form-control\" formControlName=\"KyeSearch\" [(ngModel)]=\"partnN.KyeSearch\" required>\r\n        </label>\r\n        <div *ngIf=\"KyeSearch.invalid && (KyeSearch.dirty || KyeSearch.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"KyeSearch.errors.required\">\r\n            <strong>Kod je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"KyeSearch.errors.minlength\">\r\n            <strong>Kod mora biti minimalno 2 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"KyeSearch.errors.maxlength\">\r\n            <strong>Predugačak kod !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group col-md-4\">\r\n        <label class=\"center-block\">Ugovoreni procenat:\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group\">\r\n              <input class=\"form-control text-right\" formControlName=\"UgovProc\" [(ngModel)]=\"partnN.UgovProc\" (keypress)=\"serValidate.validateOnlyNumbers($event)\"\r\n                required>\r\n              <span class=\"input-group-addon\">%</span>\r\n            </div>\r\n          </div>\r\n        </label>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Država:\r\n          <select formControlName=\"Drzava\" class=\"form-control\" placeholder=\"Select Državu\" name=\"Select Državu\" [(ngModel)]=\"partnN.Drzava\"\r\n            required>\r\n            <option *ngFor=\"let list of drzave\" [value]=\"list._id\">\r\n              {{ list.Naziv }}\r\n            </option>\r\n          </select>\r\n        </label>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"checkbox\">\r\n          <label class=\"center-block\">\r\n            <input type=\"checkbox\" formControlName=\"Aktivan\" [(ngModel)]=\"partnN.Aktivan\">Aktivan\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"panel panel-default\">\r\n          <div class=\"panel-heading\">\r\n            <strong>Adresa:</strong>\r\n          </div>\r\n          <div class=\"panel-body\">\r\n            <partadresa [groupadresa]=\"Adresa\"></partadresa>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Email:\r\n          <input class=\"form-control\" formControlName=\"Email\" [(ngModel)]=\"partnN.Email\">\r\n        </label>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div formArrayName=\"Telefon\">\r\n          <div *ngFor=\"let Telefon of formPartn.controls.Telefon.controls; let i=index\" class=\"panel panel-info\">\r\n            <div class=\"panel-heading\">\r\n              <span>\r\n                <strong>Telefon {{i + 1}} </strong>\r\n              </span>\r\n              <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeTelefon(i)\"></span>\r\n            </div>\r\n\r\n            <div [formGroupName]=\"i\" class=\"panel-body\">\r\n              <telefonpartner [grouptel]=\"formPartn.controls.Telefon.controls[i]\"></telefonpartner>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"margin-20\" *ngIf=\"formPartn.controls.Telefon.controls.length < 6\">\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-2\">\r\n              </div>\r\n              <div class=\" col-xs-10 \">\r\n                <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"addTelefon()\" title=\" Add telefon\">\r\n                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                  Dodaj telefon\r\n                </button>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Pib:\r\n            <input class=\"form-control\" formControlName=\"Pib\" [(ngModel)]=\"partnN.Pib\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Matični broj:\r\n            <input class=\"form-control\" formControlName=\"MatBroj\" [(ngModel)]=\"partnN.MatBroj\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Šifra delatnosti:\r\n            <input class=\"form-control\" formControlName=\"SifDelat\" [(ngModel)]=\"partnN.SifDelat\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Pdv broj:\r\n            <input class=\"form-control\" formControlName=\"PdvBroj\" [(ngModel)]=\"partnN.PdvBroj\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div formArrayName=\"Ziro\">\r\n          <div *ngFor=\"let Ziro of formPartn.controls.Ziro.controls; let i=index\" class=\"panel panel-info\">\r\n            <div class=\"panel-heading\">\r\n              <span>\r\n                <strong>Ziro racun {{i + 1}} </strong>\r\n              </span>\r\n              <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeZiro(i)\"></span>\r\n            </div>\r\n\r\n            <div [formGroupName]=\"i\" class=\"panel-body\">\r\n              <ziropartner [groupziro]=\"formPartn.controls.Ziro.controls[i]\"></ziropartner>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"margin-20\" *ngIf=\"formPartn.controls.Ziro.controls.length < 6\">\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-2\">\r\n              </div>\r\n              <div class=\" col-xs-10 \">\r\n                <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"addZiro()\" title=\" Add Žiro račun\">\r\n                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                  Dodaj žiro račun\r\n                </button>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div formArrayName=\"Kontakt\">\r\n          <div *ngFor=\"let kontak of formPartn.controls.Kontakt.controls; let i=index\" class=\"panel panel-info\">\r\n            <div class=\"panel-heading\">\r\n              <span>\r\n                <strong>Kontakt {{i + 1}} </strong>\r\n              </span>\r\n              <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeKontakt(i)\"></span>\r\n            </div>\r\n\r\n            <div [formGroupName]=\"i\" class=\"panel-body\">\r\n              <kontaktpartner [groupkontakt]=\"formPartn.controls.Kontakt.controls[i]\"></kontaktpartner>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"margin-20\" *ngIf=\"formPartn.controls.Kontakt.controls.length < 6\">\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-2\">\r\n              </div>\r\n              <div class=\" col-xs-10 \">\r\n                <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"addKontakt()\" title=\" Add kontakt\">\r\n                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                  Dodaj kontakt\r\n                </button>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"partnN.Opis\">\r\n\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formPartn.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formPartn.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n    <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n    <!-- </div> -->\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5734,7 +6333,7 @@ var PartnerFormComponent = (function () {
                     // console.log(JSON.stringify(this.vlasnN ));
                     _this.initDataZiro();
                     _this.initDataTelefon();
-                    _this.initDataKomtakt();
+                    _this.initDataKontakt();
                 }
                 else {
                     _this.flashMessage.show(pos.message, {
@@ -5786,14 +6385,14 @@ var PartnerFormComponent = (function () {
     });
     PartnerFormComponent.prototype.initAdresa = function (tAdresa) {
         // Adresa.
-        // console.log("Dobio sam adresu " + JSON.stringify(tAdresa));
+        // console.log('Dobio sam adresu ' + JSON.stringify(tAdresa));
         this.Adresa.setValue({
-            AdUlica: tAdresa.AdUlica,
-            AdBroj: tAdresa.AdBroj,
-            AdMesto: tAdresa.AdMesto,
-            AdPttReon: tAdresa.AdPttReon,
-            AdPttPak: tAdresa.AdPttPak,
-            AdDrzava: tAdresa.AdDrzava
+            AdUlica: tAdresa.AdUlica || '',
+            AdBroj: tAdresa.AdBroj || '',
+            AdMesto: tAdresa.AdMesto || '',
+            AdPttReon: tAdresa.AdPttReon || '',
+            AdPttPak: tAdresa.AdPttPak || '',
+            AdDrzava: tAdresa.AdDrzava || ''
         });
     };
     PartnerFormComponent.prototype.initDataZiro = function () {
@@ -5845,7 +6444,7 @@ var PartnerFormComponent = (function () {
         control.removeAt(i);
     };
     // Kontakt
-    PartnerFormComponent.prototype.initDataKomtakt = function () {
+    PartnerFormComponent.prototype.initDataKontakt = function () {
         for (var _i = 0, _a = this.partnN.Kontakt; _i < _a.length; _i++) {
             var item = _a[_i];
             var control = this.formPartn.controls['Kontakt'];
@@ -5944,8 +6543,8 @@ var PartnerFormComponent = (function () {
         this.setTempData();
         this._location.back();
     };
-    PartnerFormComponent.prototype.revert = function () { this.ClearData(); };
-    PartnerFormComponent.prototype.ClearData = function () {
+    PartnerFormComponent.prototype.revert = function () { this.clearFormData(); };
+    PartnerFormComponent.prototype.clearFormData = function () {
         this.formPartn.reset({
             KyeSearch: '',
             Naziv: '',
@@ -5987,7 +6586,7 @@ var _a, _b, _c, _d, _e, _f, _g, _h;
 /***/ "../../../../../src/app/components/partner/partner-form/telefonpartner.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"Telefon\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-2\">\r\n            </div>\r\n            <div class=\"form-group col-md-4\">\r\n                <label>Naziv</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"TlNaziv\" required>\r\n                 <small [hidden]=\"Telefon.controls.TlNaziv.valid\" class=\"text-danger\">\r\n                    Naziv je obavezan\r\n                </small> \r\n            </div>\r\n            <div class=\"form-group col-md-4\">\r\n                <label>Telefon</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"TlBroj\" required>\r\n                 <small [hidden]=\"Telefon.controls.TlBroj.valid\" class=\"text-danger\">\r\n                        Telefon je obavezan\r\n                </small>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n                <div class=\"form-group col-md-2\">\r\n                </div>\r\n                <div class=\"form-group col-md-2\">\r\n                    <div class=\"checkbox\">\r\n                        <label >\r\n                            <input type=\"checkbox\"  class=\"form-control input-sm\" formControlName=\"TlGlavni\" >\r\n                            Glavni\r\n                        </label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group col-md-8\">\r\n                    <label class=\"center-block\">Opis:\r\n                        <textarea class=\"form-control input-sm\" formControlName=\"TlOpis\">\r\n                    </textarea>\r\n                    </label>\r\n                </div>\r\n        </div>\r\n    </div>"
+module.exports = "<div [formGroup]=\"Telefon\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Naziv</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"TlNaziv\" required>\r\n      <small [hidden]=\"Telefon.controls.TlNaziv.valid\" class=\"text-danger\">\r\n        Naziv je obavezan\r\n      </small>\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Telefon</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"TlBroj\" required>\r\n      <small [hidden]=\"Telefon.controls.TlBroj.valid\" class=\"text-danger\">\r\n        Telefon je obavezan\r\n      </small>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-2\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"TlGlavni\"> Glavni\r\n        </label>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group col-md-8\">\r\n      <label class=\"center-block\">Opis:\r\n        <textarea class=\"form-control input-sm\" formControlName=\"TlOpis\">\r\n        </textarea>\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6021,6 +6620,7 @@ __decorate([
 TelefonPartnerComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         // moduleId: module.id,
+        // tslint:disable-next-line:component-selector
         selector: 'telefonpartner',
         template: __webpack_require__("../../../../../src/app/components/partner/partner-form/telefonpartner.component.html")
     })
@@ -6034,7 +6634,7 @@ var _a;
 /***/ "../../../../../src/app/components/partner/partner-form/ziropartner.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"Ziro\">\r\n    <div class=\"row\">\r\n        <div class=\"form-group col-md-2\">\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n            <label>Naziv</label>\r\n            <input type=\"text\" class=\"form-control input-sm\" formControlName=\"PzNaziv\" required>\r\n            <small [hidden]=\"Ziro.controls.PzNaziv.valid\" class=\"text-danger\">\r\n                Naziv je obavezan\r\n            </small>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n            <label>Racun</label>\r\n            <input type=\"text\" class=\"form-control input-sm\" formControlName=\"PzRacun\" required>\r\n            <small [hidden]=\"Ziro.controls.PzRacun.valid\" class=\"text-danger\">\r\n                   Racun je obavezan\r\n            </small>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n            <div class=\"form-group col-md-2\">\r\n            </div>\r\n            <div class=\"form-group col-md-2\">\r\n                <div class=\"checkbox\">\r\n                    <label >\r\n                        <input type=\"checkbox\"  class=\"form-control input-sm\" formControlName=\"PzGlavni\" >\r\n                        Glavni\r\n                    </label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group col-md-8\">\r\n                <label class=\"center-block\">Opis:\r\n                    <textarea class=\"form-control input-sm\" formControlName=\"PzOpis\">\r\n                </textarea>\r\n                </label>\r\n            </div>\r\n    </div>\r\n</div>"
+module.exports = "<div [formGroup]=\"Ziro\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Naziv</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"PzNaziv\" required>\r\n      <small [hidden]=\"Ziro.controls.PzNaziv.valid\" class=\"text-danger\">\r\n        Naziv je obavezan\r\n      </small>\r\n    </div>\r\n    <div class=\"form-group col-md-4\">\r\n      <label>Racun</label>\r\n      <input type=\"text\" class=\"form-control input-sm\" formControlName=\"PzRacun\" required>\r\n      <small [hidden]=\"Ziro.controls.PzRacun.valid\" class=\"text-danger\">\r\n        Racun je obavezan\r\n      </small>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-2\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"PzGlavni\"> Glavni\r\n        </label>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group col-md-8\">\r\n      <label class=\"center-block\">Opis:\r\n        <textarea class=\"form-control input-sm\" formControlName=\"PzOpis\">\r\n        </textarea>\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6068,6 +6668,7 @@ __decorate([
 ZiroPartnerComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         // moduleId: module.id,
+        // tslint:disable-next-line:component-selector
         selector: 'ziropartner',
         template: __webpack_require__("../../../../../src/app/components/partner/partner-form/ziropartner.component.html")
     })
@@ -6087,6 +6688,7 @@ var _a;
 /* unused harmony export PATelefonModel */
 /* unused harmony export PAKontaktModel */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartnerModel; });
+/* unused harmony export PickPartnerModel */
 var PAdresaModel = (function () {
     function PAdresaModel() {
     }
@@ -6115,6 +6717,12 @@ var PartnerModel = (function () {
     function PartnerModel() {
     }
     return PartnerModel;
+}());
+
+var PickPartnerModel = (function () {
+    function PickPartnerModel() {
+    }
+    return PickPartnerModel;
 }());
 
 //# sourceMappingURL=partner-model.js.map
@@ -6188,7 +6796,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/partner/partner.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  partner works!\r\n</p> -->\r\n\r\n<div *ngIf=\"partnerL;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"partnerL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedPartner\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"KyeSearch\" header=\"Ključ\" ></p-column>\r\n      <p-column field=\"Naziv\" header=\"Naziv\"  ></p-column>\r\n      <p-column field=\"UgovProc\" header=\"Ugovoreni %\"   styleClass=\"text-right\" >\r\n            <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n                    <span>{{partn[col.field] | number:'1.2-2'}}</span>\r\n            </ng-template> \r\n      </p-column> \r\n      <p-column field=\"Email\" header=\"Email\" ></p-column>\r\n      <p-column field=\"Pib\" header=\"Pib\"  ></p-column>\r\n      \r\n      <p-column field=\"Aktivan\" header=\"Aktivan\"   styleClass=\"text-center\" >\r\n        <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n                <span [hidden]=\"partn[col.field]==false\">DA</span> \r\n                <span [hidden]=\"partn[col.field]==true\">NE</span> \r\n                \r\n        </ng-template> \r\n      </p-column>\r\n      \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n       \r\n          <ng-template let-partn=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\" >\r\n\r\n              <button type=\"button\" pButton (click)=\"selectItem(partn)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updatePartner(partn._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deletePartner(partn)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n       <p-footer *ngIf=\"partnerL.length > 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addPartner()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n            <div class=\"row\">\r\n                 <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                    <div class=\"hidden-xs dtempty_message_h1\">\r\n                        Još niste kreirali podatak.\r\n                    </div>\r\n                    <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                    <br/>\r\n                    <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                    <h3 class=\" hidden-xs dtempty_message\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite: \r\n                        <a  class=\"dtempty_message_text\" (click)=\"addPartner()\">\r\n                             Kreiraj podatak\r\n                        </a>\r\n                    </h3>\r\n\r\n                    <h5 class=\"visible-xs\" >\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite : \r\n                        <a   (click)=\"addPartner()\">\r\n                             Kreiraj podatak\r\n                        </a>\r\n                    </h5>\r\n\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"KUPAC\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\" >\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                          ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{partnerShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                          KLJUČ PRETRAGE\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                          {{partnerShow.KyeSearch}} \r\n                          </dd>\r\n\r\n                        <dt>\r\n                        NAZIV\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                        {{partnerShow.Naziv}} \r\n                        </dd>\r\n                        <dt>\r\n                        UGOVORENI PROCENAT\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{partnerShow.UgovProc |  number:'1.2-2'}}\r\n                        </dd>\r\n                     \r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{partnerShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{partnerShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{partnerShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{partnerShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer> \r\n             \r\n            <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n            \r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n \r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n"
+module.exports = "<div *ngIf=\"partnerL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"partnerL\" [globalFilter]=\"gb\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\" [(selection)]=\"selectedPartner\"\r\n    selectionMode=\"single\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=\"false\" columnResizeMode=\"fit\"\r\n    resizableColumns=\"true\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <!-- <p-column field=\"KyeSearch\" header=\"Ključ\"  sortable=\"true\"></p-column> resizableColumns=\"true\" columnResizeMode=\"expand\" -->\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'33%'}\"></p-column>\r\n    <p-column field=\"UgovProc\" header=\"Ugovoreni %\" sortable=\"true\" styleClass=\"text-right\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n        <span>{{partn[col.field] | number:'1.2-2'}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"Email\" header=\"Email\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Pib\" header=\"Pib\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n    <p-column field=\"Adresa.AdMesto\" header=\"Mesto\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Aktivan\" header=\"Aktivan\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'7%'}\">\r\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"partn[col.field]==false\">DA</span>\r\n        <span [hidden]=\"partn[col.field]==true\">NE</span>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'width':'10%'}\">\r\n\r\n      <ng-template let-partn=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n\r\n        <button type=\"button\" pButton (click)=\"selectItem(partn)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updatePartner(partn._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deletePartner(partn)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"partnerL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addPartner()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <div *ngIf=\"partnerL.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              Još niste kreirali podatak.\r\n            </div>\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addPartner()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n\r\n            <h5 class=\"visible-xs\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addPartner()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"KUPAC\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow._id}}\r\n      </dd>\r\n      <dt>\r\n        KLJUČ PRETRAGE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.KyeSearch}}\r\n      </dd>\r\n\r\n      <dt>\r\n        NAZIV\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        UGOVORENI PROCENAT\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.UgovProc | number:'1.2-2'}}\r\n      </dd>\r\n\r\n      <dt>\r\n        DRŽAVA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- {{partnerShow.Drzava }} -->\r\n        <div [innerHTML]=\"partnerShow.Drzava | prettyprint\"></div>\r\n      </dd>\r\n\r\n      <dt>\r\n        AKTIVAN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.Aktivan | prettyavtiveprint}}\r\n      </dd>\r\n\r\n      <dt>\r\n        ADRESA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <div [innerHTML]=\"partnerShow.Adresa | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        EMAIL\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.Email }}\r\n      </dd>\r\n      <dt>\r\n        PIB\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.Pib}}\r\n\r\n      </dd>\r\n      <dt>\r\n        MATIČNI BROJ\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.MatBroj}}\r\n\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA DELATNOSTI\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.SifDelat}}\r\n\r\n      </dd>\r\n      <dt>\r\n        PDV BROJ\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.PdvBroj}}\r\n\r\n      </dd>\r\n      <dt>\r\n        TEKUĆI RAČUN\r\n      </dt>\r\n      <dd>\r\n        <div>\r\n          <dl class=\"dl-horizontal\">\r\n            <div *ngFor=\"let item of partnerShow.Ziro; let i = index\">\r\n              <dt>{{i+1}}.</dt>\r\n              <dd></dd>\r\n\r\n              <dt>Opis</dt>\r\n              <dd class=\"text-success\">{{item.PzNaziv}}</dd>\r\n\r\n              <dt>Broj</dt>\r\n              <dd class=\"text-success\">{{item.PzRacun}}</dd>\r\n\r\n              <dt>Primarni</dt>\r\n              <dd class=\"text-success\">{{item.PzGlavni}}</dd>\r\n\r\n              <dt>Napomena</dt>\r\n              <dd class=\"text-success\">{{item.PzOpis}}</dd>\r\n            </div>\r\n          </dl>\r\n        </div>\r\n\r\n      </dd>\r\n      <dt>\r\n        TELEFON\r\n      </dt>\r\n      <dd>\r\n        <div>\r\n          <dl class=\"dl-horizontal\">\r\n            <div *ngFor=\"let item of partnerShow.Telefon; let i = index\">\r\n              <dt>{{i+1}}.</dt>\r\n              <dd></dd>\r\n\r\n              <dt>Opis</dt>\r\n              <dd class=\"text-success\">{{item.TlNaziv}}</dd>\r\n\r\n              <dt>Broj telefona</dt>\r\n              <dd class=\"text-success\">{{item.TlBroj}}</dd>\r\n\r\n              <dt>Primarni</dt>\r\n              <dd class=\"text-success\">{{item.TlGlavni}}</dd>\r\n\r\n              <dt>Napomena</dt>\r\n              <dd class=\"text-success\">{{item.TlOpis}}</dd>\r\n            </div>\r\n          </dl>\r\n        </div>\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        KONTAKT\r\n      </dt>\r\n      <dd>\r\n        <div>\r\n          <dl class=\"dl-horizontal\">\r\n            <div *ngFor=\"let item of partnerShow.Kontakt; let i = index\">\r\n              <dt>{{i+1}}.</dt>\r\n              <dd></dd>\r\n\r\n              <dt>Naziv</dt>\r\n              <dd class=\"text-success\">{{item.KoNaziv}}</dd>\r\n              <dt>Funkcija</dt>\r\n              <dd class=\"text-success\">{{item.KoFunkcija}}</dd>\r\n\r\n              <dt>Email</dt>\r\n              <dd class=\"text-success\">{{item.KoEmail}}</dd>\r\n\r\n              <dt>Telefon</dt>\r\n              <dd class=\"text-success\">{{item.KoTelef}}</dd>\r\n\r\n              <dt>Mobilni</dt>\r\n              <dd class=\"text-success\">{{item.KoMobilni}}</dd>\r\n\r\n              <dt>Napomena</dt>\r\n              <dd class=\"text-success\">{{item.KoOpis}}</dd>\r\n            </div>\r\n          </dl>\r\n        </div>\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{partnerShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -6230,6 +6838,7 @@ var PartnerComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.partnerShow = new __WEBPACK_IMPORTED_MODULE_5__partner_model__["a" /* PartnerModel */]();
+        this.auto = 'auto';
         this.Title = 'PREGLED KUPACA';
     }
     PartnerComponent.prototype.ngOnInit = function () {
@@ -6334,12 +6943,14 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partner_form_kontaktpartner_component__ = __webpack_require__("../../../../../src/app/components/partner/partner-form/kontaktpartner.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partner_service__ = __webpack_require__("../../../../../src/app/components/partner/partner.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partner_routing_module__ = __webpack_require__("../../../../../src/app/components/partner/partner-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -6372,6 +6983,7 @@ PartnerModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_12__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_11__partner_routing_module__["a" /* PartnerRoutingModule */]
         ],
         declarations: [
@@ -6405,10 +7017,18 @@ PartnerModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6426,22 +7046,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var PartnerService = (function () {
+var PartnerService = (function (_super) {
+    __extends(PartnerService, _super);
     function PartnerService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    PartnerService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     PartnerService.prototype.getPartneri = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -6450,7 +7067,7 @@ var PartnerService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -6459,7 +7076,7 @@ var PartnerService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/');
         return this.http.post(ep, JSON.stringify(tpartner), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -6469,7 +7086,7 @@ var PartnerService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + tpartner._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + tpartner._id);
         return this.http.put(ep, JSON.stringify(tpartner), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -6478,20 +7095,30 @@ var PartnerService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/partner/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    PartnerService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
+    PartnerService.prototype.getActivPartner = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/activpartner');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    PartnerService.prototype.getPickPartner = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/pickpartner');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     return PartnerService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 PartnerService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -6523,7 +7150,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/posao/posao-form/posao-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  mesta-form works!\r\n</p>\r\n[@slideToRight] -->\r\n<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n              <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n     </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formPOSAO\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"posaoN._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Stručna sprema:\r\n                <select  formControlName=\"StepenSS\" class=\"form-control\"  [(ngModel)]=\"posaoN.StepenSS\"  required>\r\n                  <option *ngFor=\"let list of strSprema\" [value]=\"list\"   >\r\n                    {{ list }}\r\n                  </option>\r\n                </select>\r\n              </label>\r\n              <div *ngIf=\"StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"StepenSS.errors.required\">\r\n                    <strong>Stepen stručne spreme je obavezan podatak !!!</strong>\r\n                </div>\r\n                \r\n               </div>\r\n          </div>\r\n          \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv posla:\r\n                <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"posaoN.Naziv\"  required>\r\n              </label>\r\n              <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Naziv.errors.required\">\r\n                    <strong>Naziv je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.maxlength\">\r\n                  <strong>Predugački naziv !!!</strong>\r\n                </div>\r\n               </div>\r\n              \r\n            </div>\r\n            \r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Škola:\r\n                  <input class=\"form-control\" formControlName=\"Skola\"  [(ngModel)]=\"posaoN.Skola\" >\r\n                </label>\r\n              </div>\r\n              \r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Šifra:\r\n                  <input class=\"form-control\" formControlName=\"Sifra\"  [(ngModel)]=\"posaoN.Sifra\" >\r\n                </label>\r\n              </div>\r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Šifra1:\r\n                  <input class=\"form-control\" formControlName=\"Sifra1\"  [(ngModel)]=\"posaoN.Sifra1\" >\r\n                </label>\r\n              </div>\r\n\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"posaoN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formPOSAO.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formPOSAO.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h4>{{title}}</h4>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formPOSAO\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"posaoN._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Stručna sprema:\r\n          <select formControlName=\"StepenSS\" class=\"form-control\" [(ngModel)]=\"posaoN.StepenSS\" required>\r\n            <option *ngFor=\"let list of strSprema\" [value]=\"list\">\r\n              {{ list }}\r\n            </option>\r\n          </select>\r\n        </label>\r\n        <div *ngIf=\"StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"StepenSS.errors.required\">\r\n            <strong>Stepen stručne spreme je obavezan podatak !!!</strong>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Naziv posla:\r\n          <input class=\"form-control\" formControlName=\"Naziv\" [(ngModel)]=\"posaoN.Naziv\" required>\r\n        </label>\r\n        <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Naziv.errors.required\">\r\n            <strong>Naziv je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Naziv.errors.maxlength\">\r\n            <strong>Predugački naziv !!!</strong>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Škola:\r\n          <input class=\"form-control\" formControlName=\"Skola\" [(ngModel)]=\"posaoN.Skola\">\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Šifra:\r\n          <input class=\"form-control\" formControlName=\"Sifra\" [(ngModel)]=\"posaoN.Sifra\">\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Šifra1:\r\n          <input class=\"form-control\" formControlName=\"Sifra1\" [(ngModel)]=\"posaoN.Sifra1\">\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"posaoN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12 col-xs-12\">\r\n          <button type=\"submit\" [disabled]=\"!formPOSAO.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formPOSAO.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"panel-footer\">\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6594,7 +7221,7 @@ var PosaoFormComponent = (function () {
     });
     PosaoFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             var id = params['id'];
             _this.title = id ? 'Ažuriranje posla' : 'Novi posao';
             if (!id) {
@@ -6615,7 +7242,7 @@ var PosaoFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
@@ -6648,11 +7275,10 @@ var PosaoFormComponent = (function () {
     PosaoFormComponent.prototype.backClicked = function (event) {
         this.setTempData();
         this._location.back();
-        //event.stopPropagation();
     };
     PosaoFormComponent.prototype.save = function () {
         var _this = this;
-        var result, posValue = this.formPOSAO.value;
+        var posValue = this.formPOSAO.value;
         if (posValue._id) {
             this.posService.updatePosao(posValue).subscribe(function (pos) {
                 if (pos.success) {
@@ -6668,7 +7294,7 @@ var PosaoFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
@@ -6690,23 +7316,26 @@ var PosaoFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
             });
         }
     };
-    PosaoFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    PosaoFormComponent.prototype.ngOnChanges = function () {
-        this.formPOSAO.reset({
-            Naziv: "",
-            Skola: "",
-            Sifra: "",
-            Sifra1: "",
-            Opis: ""
-        });
+    PosaoFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formPOSAO.reset();
     };
+    // clearFormData() {
+    //   this.formPOSAO.reset({
+    //     Naziv: '',
+    //     Skola: '',
+    //     Sifra: '',
+    //     Sifra1: '',
+    //     Opis: ''
+    //   });
+    // }
     PosaoFormComponent.prototype.ngOnDestroy = function () {
         this.setTempData();
     };
@@ -6723,7 +7352,7 @@ PosaoFormComponent = __decorate([
 ], PosaoFormComponent);
 
 var _a, _b, _c, _d, _e, _f;
-//https://stackoverflow.com/questions/35750059/select-based-on-enum-in-angular2
+// https://stackoverflow.com/questions/35750059/select-based-on-enum-in-angular2
 // <select>
 // <option *ngFor="let item of strSprema | keys" [value]="item.key">{{item.value}}</option>
 // </select>
@@ -6798,7 +7427,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/posao/posao.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  posao works!\r\n</p> -->\r\n\r\n<div *ngIf=\"poslovi;else  waiting\"  [@routerTransition]>\r\n    \r\n        <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n          <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n            <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n        </div>\r\n        <p-dataTable [value]=\"poslovi\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                  selectionMode=\"single\" [(selection)]=\"selectedPosao\" dataKey=\"_id\"   \r\n                  styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                  resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n                <p-header><strong>{{Title}}</strong></p-header>       \r\n        <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n        <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n        <p-column field=\"StepenSS\" header=\"Sprema\" sortable=\"true\"></p-column>   \r\n        <p-column field=\"Skola\" header=\"Škola\" sortable=\"true\"></p-column> \r\n        <p-column field=\"Sifra\" header=\"Šifra\" sortable=\"true\"></p-column>\r\n    \r\n        <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n            <ng-template let-pos=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n                <button type=\"button\" pButton (click)=\"selectPosao(pos)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n                <button type=\"button\" pButton (click)=\"updatePosao(pos._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n                <button type=\"button\" pButton (click)=\"deletePosao(pos)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n            </ng-template>\r\n        </p-column>\r\n        <p-footer>\r\n            <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n                <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addPosao()\" label=\"Add\"></button>\r\n              </div>\r\n          </p-footer>\r\n        </p-dataTable>\r\n      </div>\r\n      \r\n      \r\n      \r\n      <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n      \r\n      \r\n      \r\n      <p-dialog header=\"POSAO\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"auto\"  [width]=\"auto\" [height]=\"auto\">\r\n      \r\n              <div>\r\n                      <dl class=\"dl-horizontal\">\r\n                          <dt>\r\n                           ID\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                             {{posShow._id}}\r\n                          </dd>\r\n                          <dt>\r\n                              NAZIV POSLA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                                {{posShow.Naziv}}\r\n                          </dd>\r\n                          <dt>\r\n                              STRUČNA SPREMA\r\n                            </dt>\r\n                            <dd class=\"text-success\">\r\n                                 {{posShow.StepenSS}} \r\n                            </dd>  \r\n                          <dt>\r\n                              ŠKOLA\r\n                            </dt>\r\n                            <dd class=\"text-success\">\r\n                                 {{posShow.Skola}} \r\n                            </dd> \r\n                       \r\n                          <dt>\r\n                           ŠIFRA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                              {{posShow.Sifra}}\r\n                              \r\n                          </dd>\r\n                          <dt>\r\n                              ŠIFRA 1\r\n                             </dt>\r\n                             <dd class=\"text-success\">\r\n                                 {{posShow.Sifra1}}\r\n                                 \r\n                             </dd>\r\n                          \r\n                          <dt>\r\n                          OPIS\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                              {{posShow.Opis}}\r\n                              \r\n                          </dd>\r\n                          <dt>\r\n                          DATUM UNOSA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                              {{posShow.created_at}}\r\n                              \r\n                          </dd>\r\n                          <dt>\r\n                          DATUM AŽURIRANJA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                              {{posShow.updatedAt}}\r\n                              \r\n                          </dd>\r\n                          <dt>\r\n                          KORISNIK\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                              {{posShow.NameUser}}\r\n                              \r\n                          </dd>\r\n                  \r\n                      </dl>                        \r\n              </div>\r\n              <p-footer>\r\n                      <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n             </p-footer>\r\n      </p-dialog>\r\n      \r\n      \r\n      <ng-template #waiting  >\r\n        <div class=\"centerWait\">\r\n        <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n        Loading...\r\n        </div>\r\n    </ng-template>\r\n      \r\n    "
+module.exports = "<div *ngIf=\"poslovi;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"poslovi\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\"\r\n    [paginator]=\"true\" selectionMode=\"single\" [(selection)]=\"selectedPosao\" dataKey=\"_id\" styleClass=\"table table-striped\"\r\n    [responsive]=\"true\" [immutable]=false resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\r\n    <p-column field=\"StepenSS\" header=\"Sprema\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Skola\" header=\"Škola\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Sifra\" header=\"Šifra\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'overflow':'visible', 'width':'15%' }\">\r\n      <ng-template let-col let-pos=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <!-- <button type=\"button\" pButton (click)=\"selectPosao(pos)\"  'width':'15%';  icon=\"fa fa-info\" title=\"Info\"></button>\r\n                <button type=\"button\" pButton (click)=\"updatePosao(pos._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n                <button type=\"button\" pButton (click)=\"deletePosao(pos)\" icon=\"fa fa-trash\" title=\"Delete\"></button> -->\r\n        <div class=\"btn-group\">\r\n          <button type=\"button\" class=\"btn btn-primary\">Action</button>\r\n          <button type=\"button\" class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n            <span class=\"caret\"></span>\r\n            <span class=\"sr-only\">Toggle Dropdown</span>\r\n          </button>\r\n          <ul class=\"dropdown-menu\" style=\"position: relative;z-index: 10000;\">\r\n            <li>\r\n              <a (click)=\"selectPosao(pos)\">\r\n                <!-- <i class=\"fa fa-info\" aria-hidden=\"true\"></i> position: relative; -->\r\n                <strong>Info</strong>\r\n              </a>\r\n            </li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li>\r\n              <a (click)=\"updatePosao(pos._id)\">\r\n                <!-- <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> -->\r\n                <strong>Update</strong>\r\n              </a>\r\n            </li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li>\r\n              <a (click)=\"deletePosao(pos)\">\r\n                <!-- <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>     -->\r\n                <strong>Delete</strong>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n\r\n        <!-- <div class=\"btn-group\"  >\r\n                    <button type=\"button\" class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                      Action <span class=\"caret\"></span>\r\n                      <span class=\"sr-only\">Toggle Dropdown</span>\r\n                    </button>\r\n                    <ul class=\"dropdown-menu\" style=\"position: relative;z-index: 10000;\">\r\n                      <li><a (click)=\"selectPosao(pos)\" >Info</a></li>\r\n                      <li role=\"separator\" class=\"divider\"></li>\r\n                      <li><a (click)=\"updatePosao(pos._id)\">Update</a></li>\r\n                      <li role=\"separator\" class=\"divider\"></li>\r\n                      <li><a (click)=\"deletePosao(pos)\">Delete</a></li>\r\n                    </ul>\r\n                  </div> -->\r\n\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"poslovi.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addPosao()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addPosao()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n\r\n          <h5 class=\"visible-xs\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addPosao()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n\r\n<p-dialog header=\"POSAO\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"auto\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow._id}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV POSLA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.Naziv}}\r\n      </dd>\r\n      <dt>\r\n        STRUČNA SPREMA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.StepenSS}}\r\n      </dd>\r\n      <dt>\r\n        ŠKOLA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.Skola}}\r\n      </dd>\r\n\r\n      <dt>\r\n        ŠIFRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.Sifra}}\r\n\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA 1\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.Sifra1}}\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{posShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -6840,28 +7469,32 @@ var PosaoComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.posShow = new __WEBPACK_IMPORTED_MODULE_2__posao_model__["a" /* Posao */]();
-        this.Title = "PREGLED POSLOVA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED POSLOVA';
     }
     PosaoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.posService.getPoslovi().subscribe(function (profile) {
+        this.posService.getPoslovi()
+            .subscribe(function (profile) {
             if (profile.success === true) {
-                // console.log(profile);
-                //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
                 _this.poslovi = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.poslovi = [];
             return false;
         });
     };
     PosaoComponent.prototype.selectPosao = function (work) {
-        // this.selectedOpstina=opstina;  
         this.displayDetals = true;
         this.posShow = this.cloneData(work);
     };
     PosaoComponent.prototype.cloneData = function (c) {
         var work = new __WEBPACK_IMPORTED_MODULE_2__posao_model__["a" /* Posao */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
         }
@@ -6879,9 +7512,7 @@ var PosaoComponent = (function () {
             message: "Jeste li sigurni da \u017Eelite uklonite izabrani posao ?   ",
             header: "" + tposao.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.poslovi.indexOf(tposao);
-                // console.log("index je " + index);
                 _this.poslovi.splice(index, 1);
                 _this.posService.delPosao(tposao._id)
                     .subscribe(function (pos) {
@@ -6894,9 +7525,8 @@ var PosaoComponent = (function () {
                     else {
                         _this.router.navigate(['NotFound']);
                     }
-                }, function (err) {
-                    //alert("Could not delete radnik.");
-                    _this.flashMessage.show('Could not delete posao !!!', {
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
@@ -7015,9 +7645,18 @@ PosaoModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7035,32 +7674,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var PosaoService = (function () {
+var PosaoService = (function (_super) {
+    __extends(PosaoService, _super);
     function PosaoService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev;
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    PosaoService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     PosaoService.prototype.getPoslovi = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
-        ;
     };
     PosaoService.prototype.getPosao = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -7069,7 +7705,7 @@ var PosaoService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/');
         return this.http.post(ep, JSON.stringify(posao), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -7077,8 +7713,8 @@ var PosaoService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
-        headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + posao._id);
+        headers.append('Content-Type', ' application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + posao._id);
         return this.http.put(ep, JSON.stringify(posao), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -7087,18 +7723,12 @@ var PosaoService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/posao/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    PosaoService.prototype.handleError = function (error) {
-        // console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
-        var greska = error.status + "  " + error.statusText;
-        //return Observable.throw(error.statusText || 'Server error');
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(greska || 'Server error');
-    };
     return PosaoService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 PosaoService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -7205,7 +7835,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/radnik/radnik-form/radnik-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  radnik-form works! \r\n</p> -->\r\n\r\n<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n              <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n      </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formRAD\" (ngSubmit)=\"save()\" novalidate >\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"radnikN._id\"   type=\"hidden\">\r\n          </div>\r\n          \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Šifra:\r\n                <input class=\"form-control\" formControlName=\"SifraRad\"  [(ngModel)]=\"radnikN.SifraRad\" required >\r\n              </label>\r\n              \r\n              <div *ngIf=\"SifraRad.invalid && (SifraRad.dirty || SifraRad.touched)\"\r\n                        class=\"alert alert-danger\">\r\n                    <div *ngIf=\"SifraRad.errors.required\">\r\n                        <strong>Šifra je obavezan podatak !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"SifraRad.errors.minlength\">\r\n                      <strong>Šifra mora biti minimalno 4 karaktera dužine !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"SifraRad.errors.maxlength\">\r\n                      <strong>Predugačka šifra !!!</strong>\r\n                    </div>\r\n                    <div *ngIf=\"SifraRad.errors.validateSifru\">\r\n                      <strong>Šifra nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Prezime:\r\n                <input class=\"form-control\" formControlName=\"Prezime\"  [(ngModel)]=\"radnikN.Prezime\" required>\r\n              </label>\r\n              <div *ngIf=\"Prezime.invalid && (Prezime.dirty || Prezime.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Prezime.errors.required\">\r\n                  <strong>Prezime je obavezan podatak !!!</strong>\r\n              </div>\r\n                <div *ngIf=\"Prezime.errors.maxlength\">\r\n                  <strong>Predugačko prezime !!!</strong>\r\n                </div>\r\n              </div>\r\n               <!-- <div class=\"alert alert-danger\" *ngIf=\"!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched\">Prezime nije uneto</div>  -->\r\n              \r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Ime:\r\n                <input class=\"form-control\" formControlName=\"Ime\"  [(ngModel)]=\"radnikN.Ime\" required>\r\n              </label>\r\n              <div *ngIf=\"Ime.invalid && (Ime.dirty || Ime.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Ime.errors.required\">\r\n                  <strong>Ime  je obavezan podatak !!!</strong>\r\n              </div>\r\n                <div *ngIf=\"Ime.errors.maxlength\">\r\n                  <strong>Predugačko ime !!!</strong>\r\n                </div>\r\n              </div>\r\n               <!-- <div class=\"alert alert-danger\" *ngIf=\"!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched\">Ime nije uneto</div>  -->\r\n            </div>\r\n            \r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Jmbg:\r\n                  <input class=\"form-control\" formControlName=\"Jmbg\"  [(ngModel)]=\"radnikN.Jmbg\" >\r\n                </label>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <div class=\"checkbox\">\r\n                  <label class=\"center-block\">\r\n                    <input type=\"checkbox\" formControlName=\"Aktivan\" [(ngModel)]=\"radnikN.Aktivan\"> Aktivan\r\n                  </label>\r\n                  \r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"radnikN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formRAD.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formRAD.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>\r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n\r\n    <form [formGroup]=\"formRAD\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"radnikN._id\" type=\"hidden\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Šifra:\r\n          <input class=\"form-control\" formControlName=\"SifraRad\" [(ngModel)]=\"radnikN.SifraRad\" required>\r\n        </label>\r\n\r\n        <div *ngIf=\"SifraRad.invalid && (SifraRad.dirty || SifraRad.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"SifraRad.errors.required\">\r\n            <strong>Šifra je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"SifraRad.errors.minlength\">\r\n            <strong>Šifra mora biti minimalno 4 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"SifraRad.errors.maxlength\">\r\n            <strong>Predugačka šifra !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"SifraRad.errors.validateSifru\">\r\n            <strong>Šifra nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Prezime:\r\n          <input class=\"form-control\" formControlName=\"Prezime\" [(ngModel)]=\"radnikN.Prezime\" required>\r\n        </label>\r\n        <div *ngIf=\"Prezime.invalid && (Prezime.dirty || Prezime.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Prezime.errors.required\">\r\n            <strong>Prezime je obavezan podatak !!!</strong>\r\n          </div>\r\n          <!-- <div *ngIf=\"Prezime.errors.maxlength\">\r\n            <strong>Predugačko prezime !!!</strong>\r\n          </div> -->\r\n          <div *ngIf=\"formRAD.controls['Prezime'].errors?.maxlength\">\r\n            <strong>Predugačko prezime !!!</strong>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"alert alert-danger\" *ngIf=\"!formRAD.controls['Prezime'].valid && formRAD.controls['Prezime'].touched\">Prezime nije uneto</div>  -->\r\n\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Ime:\r\n          <input class=\"form-control\" formControlName=\"Ime\" [(ngModel)]=\"radnikN.Ime\" required>\r\n        </label>\r\n        <div *ngIf=\"Ime.invalid && (Ime.dirty || Ime.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Ime.errors.required\">\r\n            <strong>Ime je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Ime.errors.maxlength\">\r\n            <strong>Predugačko ime !!!</strong>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"alert alert-danger\" *ngIf=\"!formRAD.controls['Ime'].valid && formRAD.controls['Ime'].touched\">Ime nije uneto</div>  -->\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Jmbg:\r\n          <input class=\"form-control\" formControlName=\"Jmbg\" [(ngModel)]=\"radnikN.Jmbg\">\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n\r\n        <div class=\"form-group col-md-2\">\r\n          <div class=\"checkbox\">\r\n            <label class=\"center-block\">\r\n              Aktivan\r\n            </label>\r\n            <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"Aktivan\" [(ngModel)]=\"radnikN.Aktivan\">\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"radnikN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formRAD.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formRAD.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -7242,7 +7872,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { PlatformLocation } from '@angular/common'
+// import { PlatformLocation } from '@angular/common'
 var RadnikFormComponent = (function () {
     function RadnikFormComponent(radService, router, route, formBuilder, _location, flashMessage, serValidate) {
         this.radService = radService;
@@ -7281,7 +7911,7 @@ var RadnikFormComponent = (function () {
     RadnikFormComponent.prototype.ngOnInit = function () {
         var _this = this;
         // this._location.subscribe(x => console.log(x));
-        var id = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             var id = params['id'];
             _this.title = id ? 'Ažuriranje radnika' : 'Novi radnik';
             if (!id) {
@@ -7302,15 +7932,13 @@ var RadnikFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
                 _this.router.navigate(['NotFound']);
-                // }
             }, function () {
-                console.log("Radnik servic get radnik kraj");
+                console.log('Radnik servic get radnik kraj');
             });
         });
     };
@@ -7337,11 +7965,10 @@ var RadnikFormComponent = (function () {
     RadnikFormComponent.prototype.backClicked = function (event) {
         this.setTempData();
         this._location.back();
-        //event.stopPropagation();
     };
     RadnikFormComponent.prototype.save = function () {
         var _this = this;
-        var result, radValue = this.formRAD.value;
+        var radValue = this.formRAD.value;
         if (radValue._id) {
             this.radService.updateRadnik(radValue).subscribe(function (pos) {
                 if (pos.success) {
@@ -7357,10 +7984,11 @@ var RadnikFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
+                _this.router.navigate(['NotFound']);
             });
         }
         else {
@@ -7379,24 +8007,27 @@ var RadnikFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
+                _this.flashMessage.show(error.message, {
                     cssClass: 'alert-danger',
                     timeout: 9000
                 });
             });
         }
     };
-    RadnikFormComponent.prototype.revert = function () { this.ngOnChanges(); };
-    RadnikFormComponent.prototype.ngOnChanges = function () {
-        this.formRAD.reset({
-            SifraRad: "",
-            Ime: "",
-            Prezime: "",
-            Jmbg: "",
-            Aktivan: false,
-            Opis: ""
-        });
+    RadnikFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formRAD.reset();
     };
+    // clearFormData() {
+    //   this.formRAD.reset({
+    //     SifraRad: '',
+    //     Ime: '',
+    //     Prezime: '',
+    //     Jmbg: '',
+    //     Aktivan: false,
+    //     Opis: ''
+    //   });
+    // }
     RadnikFormComponent.prototype.ngOnDestroy = function () {
         this.setTempData();
     };
@@ -7413,9 +8044,6 @@ RadnikFormComponent = __decorate([
 ], RadnikFormComponent);
 
 var _a, _b, _c, _d, _e, _f, _g;
-//   plloc.onPopState(() => {
-//             console.log('pressed back!');
-// }); 
 //# sourceMappingURL=radnik-form.component.js.map
 
 /***/ }),
@@ -7487,7 +8115,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/radnik/radnik.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  videcemo radnik works!\r\n\r\n</p> -->\r\n\r\n<div *ngIf=\"radnici;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"radnici\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedRadnik\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"SifraRad\" header=\"Šifra\" sortable=\"true\"></p-column> \r\n      <p-column field=\"Prezime\" header=\"Prezime\" sortable=\"true\"></p-column>\r\n      <p-column field=\"Ime\" header=\"Ime\" sortable=\"true\"></p-column>   \r\n      <p-column field=\"Aktivan\" header=\"Aktivan\" sortable=\"true\" styleClass=\"text-center\">\r\n        <ng-template let-col let-rad=\"rowData\" pTemplate=\"body\">\r\n            <span [hidden]=\"rad[col.field]==false\">DA</span> \r\n            <span [hidden]=\"rad[col.field]==true\">NE</span> \r\n        </ng-template> \r\n      </p-column>\r\n  \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n          <ng-template let-rad=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectRadnik(rad)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateRadnik(rad._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteRadnik(rad)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n      <p-footer>\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addRadnik()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"RADNIK\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                         ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{radShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                            ŠIFRA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{radShow.SifraRad}}\r\n                        </dd>\r\n                        <dt>\r\n                            PREZIME\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{radShow.Prezime}} \r\n                          </dd>  \r\n                        <dt>\r\n                            IME\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{radShow.Ime}} \r\n                          </dd> \r\n                     \r\n                        <dt>\r\n                         JMBG\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{radShow.Jmbg}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                           AKTIVAN\r\n                           </dt>\r\n                           <dd class=\"text-success\">\r\n                               {{radShow.Aktivan}}\r\n                               \r\n                           </dd>\r\n                        \r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{radShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{radShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{radShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{radShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer>\r\n                    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n    <ng-template #waiting  >\r\n        <div class=\"centerWait\">\r\n        <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n        Loading...\r\n        </div>\r\n    </ng-template>\r\n    \r\n  "
+module.exports = "<div *ngIf=\"radnici;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"radnici\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedRadnik\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=false resizableColumns=\"true\"\r\n    columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"SifraRad\" header=\"Šifra\" sortable=\"true\" [style]=\"{'width':'25%'}\"></p-column>\r\n    <!-- <p-column field=\"Prezime\" header=\"Prezime\" sortable=\"true\"></p-column>\r\n    <p-column field=\"Ime\" header=\"Ime\" sortable=\"true\"></p-column> -->\r\n    <p-column field=\"fullName\" header=\"Radnik\" sortable=\"true\" [style]=\"{'width':'50%'}\"></p-column>\r\n    <p-column field=\"Aktivan\" header=\"Aktivan\" sortable=\"true\" [style]=\"{'width':'15%'}\" styleClass=\"text-center\">\r\n      <ng-template let-col let-rad=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"rad[col.field]==false\">DA</span>\r\n        <span [hidden]=\"rad[col.field]==true\">NE</span>\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-rad=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <button type=\"button\" pButton (click)=\"selectRadnik(rad)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateRadnik(rad._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteRadnik(rad)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"radnici.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addRadnik()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addRadnik()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n\r\n          <h5 class=\"visible-xs\">\r\n            <!-- To manually add new one click here: -->\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addRadnik()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"RADNIK\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow._id}}\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.SifraRad}}\r\n      </dd>\r\n      <dt>\r\n        PREZIME\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.Prezime}}\r\n      </dd>\r\n      <dt>\r\n        IME\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.Ime}}\r\n      </dd>\r\n\r\n      <dt>\r\n        JMBG\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.Jmbg}}\r\n\r\n      </dd>\r\n      <dt>\r\n        AKTIVAN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.Aktivan | prettyavtiveprint}}\r\n\r\n      </dd>\r\n\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{radShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -7529,28 +8157,31 @@ var RadnikComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.radShow = new __WEBPACK_IMPORTED_MODULE_2__radnik_model__["a" /* Radnik */]();
-        this.Title = "PREGLED RADNIKA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED RADNIKA';
     }
     RadnikComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.radService.getRadnici().subscribe(function (profile) {
             if (profile.success === true) {
-                //console.log(profile);
-                //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
                 _this.radnici = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.radnici = [];
             return false;
         });
     };
     RadnikComponent.prototype.selectRadnik = function (work) {
-        // this.selectedOpstina=opstina;  
         this.displayDetals = true;
         this.radShow = this.cloneData(work);
     };
     RadnikComponent.prototype.cloneData = function (c) {
         var work = new __WEBPACK_IMPORTED_MODULE_2__radnik_model__["a" /* Radnik */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
         }
@@ -7565,17 +8196,15 @@ var RadnikComponent = (function () {
     RadnikComponent.prototype.deleteRadnik = function (tradnik) {
         var _this = this;
         this.confirmationService.confirm({
-            message: "Jeste li sigurni da \u017Eelite uklonite izabranog radnika ?   ",
+            message: "Jeste li sigurni da \u017Eelite uklonite izabranog radnika ?",
             header: tradnik.Prezime + " " + tradnik.Ime,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.radnici.indexOf(tradnik);
-                // console.log("index je " + index);
                 _this.radnici.splice(index, 1);
                 _this.radService.delRadnik(tradnik._id)
                     .subscribe(function (pos) {
                     if (pos.success) {
-                        _this.flashMessage.show('Radnik removed successfully ...', {
+                        _this.flashMessage.show(pos.message, {
                             cssClass: 'alert-success',
                             timeout: 1000
                         });
@@ -7583,9 +8212,8 @@ var RadnikComponent = (function () {
                     else {
                         _this.router.navigate(['NotFound']);
                     }
-                }, function (err) {
-                    //alert("Could not delete radnik.");
-                    _this.flashMessage.show('Could not delete radnik !!!', {
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
                     });
@@ -7641,12 +8269,14 @@ var Radnik = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__radnik_form_radnik_form_component__ = __webpack_require__("../../../../../src/app/components/radnik/radnik-form/radnik-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__radnik_service__ = __webpack_require__("../../../../../src/app/components/radnik/radnik.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__radnik_routing_module__ = __webpack_require__("../../../../../src/app/components/radnik/radnik-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -7675,6 +8305,7 @@ RadnikModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_8__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_7__radnik_routing_module__["a" /* RadnikRoutingModule */]
         ],
         declarations: [
@@ -7704,9 +8335,18 @@ RadnikModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7724,21 +8364,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var RadnikService = (function () {
+var RadnikService = (function (_super) {
+    __extends(RadnikService, _super);
     function RadnikService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    RadnikService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     RadnikService.prototype.getRadnici = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik'); //this.prepEndpoint('api/radnik'); 
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik');
         // console.log("getDrzave link", ep );
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
@@ -7748,7 +8386,7 @@ var RadnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -7757,7 +8395,7 @@ var RadnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/');
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/');
         return this.http.post(ep, JSON.stringify(radnik), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -7767,7 +8405,7 @@ var RadnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + radnik._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + radnik._id);
         return this.http.put(ep, JSON.stringify(radnik), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -7776,22 +8414,12 @@ var RadnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_6__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/radnik/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    // prepEndpoint(ep){
-    // //  console.log(ServiceConfig.PrepareHost(this.isDev,ep));
-    //   return ServiceConfig.PrepareHost(this.isDev,ep);
-    // }
-    RadnikService.prototype.handleError = function (error) {
-        // console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
-        var greska = error.status + "  " + error.statusText;
-        //return Observable.throw(error.statusText || 'Server error');
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(greska || 'Server error');
-    };
     return RadnikService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_7__services_base_service__["a" /* BaseService */]));
 RadnikService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -7823,7 +8451,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-primary\" >\r\n    <div class=\"panel-heading\">\r\n       \r\n        <div class=\"row\">\r\n            <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n                <h5>{{title}}</h5> \r\n              </div>\r\n              <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n                <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n              </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <form [formGroup]=\"formReg\" (ngSubmit)=\"onRegisterSubmit()\" novalidate>\r\n            <div class=\"form-group\" >\r\n                 <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"userN._id\"   type=\"hidden\">\r\n            </div>\r\n            \r\n            <div class=\"form-group\">\r\n                <label class=\"center-block\">Ime i prezime:\r\n                  <input class=\"form-control\" formControlName=\"name\"  [(ngModel)]=\"userN.name\" >\r\n                </label>\r\n                 <div class=\"text-danger\" *ngIf=\"!formReg.controls['name'].valid && formReg.controls['name'].touched\">Ime nije uneto</div> \r\n                \r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Korisničko ime:\r\n                  <input class=\"form-control\" formControlName=\"username\"  [(ngModel)]=\"userN.username\" >\r\n                </label>\r\n                 <div class=\"text-danger\" *ngIf=\"!formReg.controls['username'].valid && formReg.controls['username'].touched\">Korisničko ime nije uneto</div> \r\n                \r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label class=\"center-block\">Email:\r\n                  <input class=\"form-control\" formControlName=\"email\"  [(ngModel)]=\"userN.email\" >\r\n                </label>\r\n                 <div class=\"text-danger\" *ngIf=\"!formReg.controls['email'].valid && formReg.controls['email'].touched\">Email nije unet</div> \r\n              </div>\r\n              \r\n              <div class=\"form-group\">\r\n                  <label class=\"center-block\">Lozinka:\r\n                    <input type=\"password\" class=\"form-control\" formControlName=\"password\"  [(ngModel)]=\"userN.password\" >\r\n                  </label>\r\n                   <div class=\"text-danger\" *ngIf=\"!formReg.controls['password'].valid && formReg.controls['password'].touched\">Lozinka nije uneta</div> \r\n                </div>\r\n                \r\n                \r\n                <div class=\"form-group\">\r\n                  <label class=\"center-block\">Opis:\r\n                    <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"userN.Opis\">\r\n                    </textarea>\r\n                  </label>\r\n              </div>\r\n            \r\n              <div class=\"form-group\">\r\n                      <div class=\"col-md-offset-5 col-md-12\">\r\n                          <button type=\"submit\" [disabled]=\"!formReg.valid\"\r\n                              class=\"btn btn-default\">\r\n                          <span class=\"glyphicon glyphicon-saved\"></span>\r\n                          Save\r\n                          </button>\r\n  \r\n                        <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formReg.pristine\"  (click)=\"revert()\">\r\n                            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                            Clear data\r\n                        </button>\r\n                        \r\n                      </div>\r\n                \r\n                      \r\n            </div>\r\n                \r\n  \r\n  \r\n        </form>\r\n    </div>\r\n   \r\n    <div class=\"panel-footer\">\r\n        \r\n            <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n              <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n              Back\r\n          </button>\r\n   \r\n    </div>\r\n    \r\n  </div>\r\n  \r\n  \r\n  \r\n  \r\n\r\n\r\n<!-- <div class=\"panel panel-info \">\r\n  <div class=\"panel-heading\">\r\n      <h3>Register</h3>\r\n  </div>\r\n<div class=\"panel-body panel-info\">\r\n  <form (submit)=\"onRegisterSubmit()\" >\r\n    <div class=\"form-group\">\r\n      <label>Name</label>\r\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Username</label>\r\n      <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\" >\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Email</label>\r\n      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\"  value=\"\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Password</label>\r\n      <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\" value=\"\" >\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n             <button type=\"submit\" \r\n                 class=\"btn btn-default\">\r\n             <span class=\"glyphicon glyphicon-saved\"></span>\r\n             Submit\r\n             </button>\r\n\r\n        \r\n           \r\n        </div>\r\n    </div>\r\n  \r\n  </form>\r\n</div>\r\n</div>\r\n\r\n -->\r\n\r\n\r\n"
+module.exports = "<div class=\"panel panel-primary\">\r\n  <div class=\"panel-heading\">\r\n\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formReg\" (ngSubmit)=\"onRegisterSubmit()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"userN._id\" type=\"hidden\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Ime i prezime:\r\n          <input class=\"form-control\" formControlName=\"name\" [(ngModel)]=\"userN.name\">\r\n        </label>\r\n        <div class=\"text-danger\" *ngIf=\"!formReg.controls['name'].valid && formReg.controls['name'].touched\">Ime nije uneto</div>\r\n\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Korisničko ime:\r\n          <input class=\"form-control\" formControlName=\"username\" [(ngModel)]=\"userN.username\">\r\n        </label>\r\n        <div class=\"text-danger\" *ngIf=\"!formReg.controls['username'].valid && formReg.controls['username'].touched\">Korisničko ime nije uneto</div>\r\n\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Email:\r\n          <input class=\"form-control\" formControlName=\"email\" [(ngModel)]=\"userN.email\">\r\n        </label>\r\n        <div class=\"text-danger\" *ngIf=\"!formReg.controls['email'].valid && formReg.controls['email'].touched\">Email nije unet</div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Lozinka:\r\n          <input type=\"password\" class=\"form-control\" formControlName=\"password\" [(ngModel)]=\"userN.password\">\r\n        </label>\r\n        <div class=\"text-danger\" *ngIf=\"!formReg.controls['password'].valid && formReg.controls['password'].touched\">Lozinka nije uneta</div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"userN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formReg.valid\" class=\"btn btn-default\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formReg.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- <div class=\"panel panel-info \">\r\n  <div class=\"panel-heading\">\r\n      <h3>Register</h3>\r\n  </div>\r\n<div class=\"panel-body panel-info\">\r\n  <form (submit)=\"onRegisterSubmit()\" >\r\n    <div class=\"form-group\">\r\n      <label>Name</label>\r\n      <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Username</label>\r\n      <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\" >\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Email</label>\r\n      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\"  value=\"\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label>Password</label>\r\n      <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\" value=\"\" >\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n             <button type=\"submit\" \r\n                 class=\"btn btn-default\">\r\n             <span class=\"glyphicon glyphicon-saved\"></span>\r\n             Submit\r\n             </button>\r\n\r\n        \r\n           \r\n        </div>\r\n    </div>\r\n  \r\n  </form>\r\n</div>\r\n</div>\r\n\r\n -->\r\n"
 
 /***/ }),
 
@@ -7910,6 +8538,9 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.backClicked = function (event) {
         this._location.back();
     };
+    RegisterComponent.prototype.revert = function () {
+        this.formReg.reset();
+    };
     return RegisterComponent;
 }());
 RegisterComponent = __decorate([
@@ -7941,10 +8572,1331 @@ var UserModel = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/uput/uput-form/uput-form.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-form/uput-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formUput\" (ngSubmit)=\"save()\" novalidate>\r\n      <!-- <div class=\"form-group\" > -->\r\n      <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"uputN._id\" type=\"hidden\">\r\n      <!-- </div> -->\r\n      <div class=\"row\">\r\n\r\n        <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">Broj\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control\" formControlName=\"Broj\" readonly>\r\n              </div>\r\n            </div>\r\n          </label>\r\n        </div>\r\n        <!--[(ngModel)]=\"uputN.Broj\" -->\r\n        <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">Godina\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input class=\"form-control\" formControlName=\"Godina\" readonly>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <!-- [(ngModel)]=\"uputN.Godina\" -->\r\n        </div>\r\n\r\n        <!-- [ngModel]=\"uputN.Datum | date:'yyyy-MM-dd'\"  [ngModel]=\"uputN.Datum | date:'yyyy-MM-dd'\" -->\r\n        <div class=\"form-group col-md-3 col-lg-2\">\r\n          <label class=\"center-block\">Datum:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input type=\"date\" formControlName=\"Datum\" name=\"Datum\" class=\"form-control\" (blur)=\"onBlurDatum()\" required>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"Datum.invalid && (Datum.dirty || Datum.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Datum.errors.required\">\r\n              <strong>Datum je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- [(ngModel)]=\"uputN.RacVlasnika\" -->\r\n        <div class=\"form-group col-md-5 col-lg-6\">\r\n          <label class=\"center-block\">Racun za uplatu:\r\n            <select formControlName=\"RacVlasnika\" class=\"form-control\" [compareWith]=\"compareVlasRacun\" required>\r\n\r\n              <option *ngFor=\"let list of racvlasnikL\" [ngValue]=\"list\">\r\n                {{ list.Naziv }} - {{list.Racun}}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"RacVlasnika.invalid && (RacVlasnika.dirty || RacVlasnika.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"RacVlasnika.errors.required\">\r\n              <strong>Racun vlasnika je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <!-- [(ngModel)]=\"uputN.PartneriID\"  -->\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Kupac:\r\n            <div class=\"row\">\r\n              <div class=\"col-lg-10 col-md-10 col-xs-10\">\r\n                <select formControlName=\"PartneriID\" class=\"form-control\" required>\r\n                  <option [value]=\"\" disabled=\"true\" [selected]=\"true\"> --Please select-- </option>\r\n                  <option *ngFor=\"let list of kupacL\" [value]=\"list._id\">\r\n                    {{ list.Naziv }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-lg-2 col-md-2 col-xs-2\">\r\n                <button type=\"button\" class=\"btn btn-info form-control\" (click)=\"GetKupac()\">\r\n                  <span class=\"glyphicon glyphicon-search\"></span>\r\n                  ...\r\n                </button>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"PartneriID.invalid && (PartneriID.dirty || PartneriID.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"PartneriID.errors.required\">\r\n              <strong>Kupac je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- [(ngModel)]=\"uputN.PosloviID\"  -->\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Posao:\r\n            <select formControlName=\"PosloviID\" class=\"form-control\" required>\r\n              <!--  <option [value]=\"null\">Please Select</option> -->\r\n              <!-- <option [disabled]=\"true\" [selected]=\"true\">Select Option</option> -->\r\n              <option [value]=\"\" disabled=\"true\" [selected]=\"true\"> --Please select-- </option>\r\n              <option *ngFor=\"let list of poslL\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n\r\n            </select>\r\n\r\n          </label>\r\n          <div *ngIf=\"PosloviID.invalid && (PosloviID.dirty || PosloviID.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"PosloviID.errors.required\">\r\n              <strong>Poslovi su obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <!-- class=\"panel-body\"  class=\"panel panel-info\"-->\r\n      <div class=\"form-group\">\r\n        <!-- <div formArrayName=\"Stavke\"> -->\r\n        <table class=\"table  table-striped table-bordered table-condensed\" formArrayName=\"Stavke\">\r\n          <thead>\r\n\r\n            <div class=\"row\">\r\n\r\n              <div class=\"col-md-1  text-left\">\r\n                <strong>Rbr</strong>\r\n              </div>\r\n              <div class=\"col-md-2  text-center\">\r\n                <strong>ZadId</strong>\r\n              </div>\r\n              <div class=\"col-md-1  text-center\">...</div>\r\n              <div class=\"col-md-3  text-center\">\r\n                <strong>Zadrugar</strong>\r\n              </div>\r\n              <div class=\"col-md-3  text-center\">\r\n                <strong>Posao</strong>\r\n              </div>\r\n              <div class=\"col-md-1  text-center\"></div>\r\n\r\n            </div>\r\n            <hr>\r\n\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let stavke of formUput.controls.Stavke.controls; let i=index\">\r\n              <!-- <div class=\"panel-heading\">\r\n                                <span><strong>Stavka {{i + 1}} </strong></span>\r\n                                <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeStavke(i)\"></span> (OdbirZadStavke)=\"PickZadrugar(i)\"\r\n                            </div> -->\r\n\r\n              <div [formGroupName]=\"i\">\r\n                <app-uput-stavka [Stavke]=\"formUput.controls.Stavke.controls[i]\" [zadrugarL]=\"zadrL\" [poslL]=\"poslL\" (removeStavke)=\"removeStavke(i)\"\r\n                  (addStavke)=\"addStavke(i)\"></app-uput-stavka>\r\n              </div>\r\n\r\n            </tr>\r\n          </tbody>\r\n\r\n        </table>\r\n\r\n        <div class=\"margin-20\">\r\n          <div class=\"row\">\r\n            <div class=\"col-xs-2\">\r\n              <button type=\"button\" class=\"btn btn-info\" (click)=\"addStavke()\" title=\" Add stavku\">\r\n                <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                Dodaj stavku\r\n              </button>\r\n            </div>\r\n            <div class=\" col-xs-10 \">\r\n\r\n\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <!-- </div> -->\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formUput.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formUput.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n    <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n    <!-- </div> -->\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<p-dialog header=\"ODABIR KUPCA\" [(visible)]=\"displayKupac\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n  <app-pick-kupac [kupacL]=\"kupacL\" (pickRow)=\"PickKupac($event)\" (pickNothing)=\"displayKupac=false\">\r\n  </app-pick-kupac>\r\n</p-dialog>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-form/uput-form.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputFormComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__uput_service__ = __webpack_require__("../../../../../src/app/components/uput/uput.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__uput_model__ = __webpack_require__("../../../../../src/app/components/uput/uput.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__zadrugar_zadrugar_service__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partner_partner_service__ = __webpack_require__("../../../../../src/app/components/partner/partner.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__vlasnik_vlasnik_service__ = __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__posao_posao_service__ = __webpack_require__("../../../../../src/app/components/posao/posao.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/fromEvent';
+// import { Subscription } from 'rxjs/Subscription';
+// AfterViewInit, AfterViewChecked, AfterContentInit,
+var UputFormComponent = (function () {
+    // subscription: Subscription;
+    function UputFormComponent(partnService, posService, vlasnService, zadrService, uputService, router, route, _fb, _location, flashMessage, serValidate) {
+        this.partnService = partnService;
+        this.posService = posService;
+        this.vlasnService = vlasnService;
+        this.zadrService = zadrService;
+        this.uputService = uputService;
+        this.router = router;
+        this.route = route;
+        this._fb = _fb;
+        this._location = _location;
+        this.flashMessage = flashMessage;
+        this.serValidate = serValidate;
+        this.uputN = new __WEBPACK_IMPORTED_MODULE_6__uput_model__["b" /* UputModel */]();
+        this.saveTemp = true;
+        this.godbroj = new __WEBPACK_IMPORTED_MODULE_6__uput_model__["a" /* UputBrojGodina */]();
+        this.displayKupac = false;
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
+        this.auto = 'auto';
+        this.formUput = this._fb.group({
+            _id: [],
+            Broj: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            Godina: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            Datum: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            RacVlasnika: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            PosloviID: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            PartneriID: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            Opis: [''],
+            Stavke: this._fb.array([])
+        });
+    }
+    Object.defineProperty(UputFormComponent.prototype, "RacVlasnika", {
+        get: function () { return this.formUput.get('RacVlasnika'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "PosloviID", {
+        get: function () { return this.formUput.get('PosloviID'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "Datum", {
+        get: function () { return this.formUput.get('Datum'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "PartneriID", {
+        get: function () { return this.formUput.get('PartneriID'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "Stavke", {
+        get: function () { return this.formUput.get('Stavke'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "Broj", {
+        get: function () { return this.formUput.get('Broj'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UputFormComponent.prototype, "Godina", {
+        get: function () { return this.formUput.get('Godina'); },
+        enumerable: true,
+        configurable: true
+    });
+    UputFormComponent.prototype.ngOnInit = function () {
+        // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
+        //   console.log('glavna forma keapress' + e);
+        // });
+        var _this = this;
+        this.partnService.getPickPartner().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.kupacL = profile.data;
+            }
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.kupacL = [];
+            }
+        }, function (error) {
+            console.log(error);
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.kupacL = [];
+            return false;
+        });
+        this.vlasnService.getVlasnRacun().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.racvlasnikL = profile.data;
+            }
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.racvlasnikL = [];
+            }
+        }, function (error) {
+            console.log(error);
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.racvlasnikL = [];
+            return false;
+        });
+        this.zadrService.getPickZadrugari().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.zadrL = profile.data;
+                // this.addZadlist.emit(this.zadrL);
+            }
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.zadrL = [];
+                //  this.addZadlist.emit(this.zadrL);
+            }
+        }, function (error) {
+            console.log(error);
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.zadrL = [];
+            // this.addZadlist.emit(this.zadrL);
+            return false;
+        });
+        this.posService.getPoslovi().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.poslL = profile.data;
+            }
+            else {
+                _this.flashMessage.show(profile.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.poslL = [];
+            }
+        }, function (error) {
+            console.log(error);
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.poslL = [];
+            return false;
+        });
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.title = id ? 'Ažuriranje uputa' : 'Novi uput';
+            if (!id) {
+                // this.initAdresa("","","","","","");
+                // this.uputN.PosloviID = '';
+                //  this.PartneriID.setValue(null);
+                //  this.RacVlasnika.setValue(null);
+                //  this.PosloviID.setValue('');
+                _this.loadTempData();
+                _this.InitGodinaBroj();
+                //  if (this.Stavke.controls.length  === 0 ) {
+                //    this.addStavke();
+                //  }
+                return;
+            }
+            // this.InitGodinaBroj();
+            _this.uputService.getUput(id)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.saveTemp = false;
+                    _this.uputN = pos.data;
+                    // this.partAdresa = pos.data[0].Adresa;
+                    // this.initAdresa(this.partAdresa);
+                    // console.log(JSON.stringify(this.vlasnN ));
+                    _this.InitDokZag();
+                    _this.initDataStavke();
+                    // this.initDataTelefon();
+                    // this.initDataKomtakt();
+                }
+                else {
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 9000
+                    });
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                // if (error == 404 || error.status == 400 ) {
+                _this.router.navigate(['NotFound']);
+                // }
+            });
+        });
+    };
+    // ngAfterViewInit() {
+    //   // if (this.Stavke.controls.length  === 0 ) {
+    //   //   this.addStavke();
+    //   // }
+    // console.log('ngAfterViewInit');
+    // }
+    // ngAfterViewChecked() {
+    //   if (this.Stavke.controls.length  === 0 ) {
+    //    console.log('OVO - ngAfterViewChecked');
+    //   }
+    // }
+    // ngAfterContentInit() {
+    //   if (this.Stavke.controls.length  === 0 ) {
+    //   console.log('ngAfterContentInit');
+    //   }
+    // }
+    UputFormComponent.prototype.SetDatumForm = function () {
+        var dp = new __WEBPACK_IMPORTED_MODULE_1__angular_common__["DatePipe"](navigator.language);
+        var p = 'y-MM-dd'; // YYYY-MM-DD
+        var dtr = dp.transform(new Date(), p);
+        this.Datum.setValue({ effectiveEndDate: dtr });
+        // this.transitionForm.setValue({effectiveEndDate: dtr});
+    };
+    UputFormComponent.prototype.SetGodinaBroj = function (tDatum) {
+        var _this = this;
+        // console.log('Usao u SetGodinaBroj ' + tDatum);
+        //  this.Broj.setValue(1);
+        // this.Godina.setValue(new Date().getFullYear());
+        // this.uputN.Datum = new Date();
+        // this.Datum.setValue(new Date());
+        // this.formUput.controls['Broj'].setValue(1);
+        // const Datum = JSON.parse(this.Datum.value)
+        this.Broj.setValue(1);
+        this.Godina.setValue(new Date().getFullYear());
+        if (!tDatum) {
+            tDatum = new Date();
+        }
+        this.uputService.getUputBrojGod({ Datum: tDatum })
+            .subscribe(function (pos) {
+            if (pos.success) {
+                // console.log(' na dobrom mestu sam' + JSON.stringify(pos));
+                // console.log('Broj jurim' +  pos.data.broj);
+                _this.godbroj.broj = pos.data.broj;
+                _this.godbroj.godina = pos.data.godina;
+                _this.Broj.setValue(pos.data.broj);
+                // console.log(' A upisao sam ga u mom objektu '  + this.godbroj.broj);
+                // console.log(' Godinu jurim' +  pos.data.godina);
+                _this.Godina.setValue(pos.data.godina);
+                // console.log(' A upisao sam this.godbroj ga u mom objektu '  + this.godbroj.godina);
+            }
+            else {
+                _this.flashMessage.show(pos.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                _this.godbroj.broj = 1;
+                _this.godbroj.godina = new Date().getFullYear();
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.godbroj.broj = 1;
+            _this.godbroj.godina = new Date().getFullYear();
+            // console.log('Error servica');
+        });
+        // console.log(' A Broj pre upisa u mom objektu '  + this.godbroj.broj);
+        // console.log(' A Godina pre upisa u mom objektu '  + this.godbroj.godina);
+        // // this.formUput.get('Broj').setValue(this.godbroj.broj);
+        // this.Godina.setValue(this.godbroj.godina );
+        // this.Broj.setValue(this.godbroj.broj);
+    };
+    UputFormComponent.prototype.onBlurDatum = function () {
+        var Datum = this.Datum.value;
+        console.log('Datum u on blur' + Datum);
+        if (!Datum) {
+            Datum = new Date();
+        }
+        this.SetGodinaBroj(Datum);
+        // this.flashMessage.show(`onBlurDatum ${this.uputN.Datum} a iz forme ${this.Datum.value}`, {
+        //   cssClass: 'alert-danger',
+        //   timeout: 9000});
+    };
+    UputFormComponent.prototype.InitGodinaBroj = function () {
+        this.uputN.Datum = new Date();
+        this.Datum.setValue(this.uputN.Datum);
+        this.SetDatumForm();
+        this.SetGodinaBroj(this.uputN.Datum);
+        console.log('Ovo je sada u uputu' + JSON.stringify(this.uputN));
+    };
+    UputFormComponent.prototype.GetKupac = function () {
+        this.displayKupac = true;
+    };
+    UputFormComponent.prototype.PickKupac = function (event) {
+        this.displayKupac = false;
+        this.selectedKupac = event;
+        if (this.selectedKupac) {
+            if (this.selectedKupac._id) {
+                this.PartneriID.setValue(this.selectedKupac._id);
+            }
+        }
+    };
+    // Init zaglavlja
+    UputFormComponent.prototype.InitDokZag = function () {
+        this.Broj.setValue(this.uputN.Broj);
+        this.Godina.setValue(this.uputN.Godina);
+        this.PartneriID.setValue(this.uputN.PartneriID);
+        this.RacVlasnika.setValue(this.uputN.RacVlasnika);
+        this.Datum.setValue(this.uputN.Datum);
+        this.PosloviID.setValue(this.uputN.PosloviID);
+    };
+    // Stavke
+    UputFormComponent.prototype.initDataStavke = function () {
+        var rbr = 0;
+        for (var _i = 0, _a = this.uputN.Stavke; _i < _a.length; _i++) {
+            var item = _a[_i];
+            rbr = rbr + 1;
+            var control = this.formUput.controls['Stavke'];
+            control.push(this.initStavke(item.IDZadrugar, rbr, item.ZadrugarID, item.PosloviID));
+        }
+    };
+    UputFormComponent.prototype.initStavke = function (tIDZadrugar, tRbr, tZadrugarID, tPosloviID) {
+        return this._fb.group({
+            IDZadrugar: [tIDZadrugar, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
+            Rbr: [tRbr, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
+            ZadrugarID: [tZadrugarID, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
+            PosloviID: [tPosloviID, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]
+        });
+    };
+    UputFormComponent.prototype.addStavke = function () {
+        var control = this.formUput.controls['Stavke'];
+        var broj = control.controls.length + 1;
+        var posao = this.PosloviID.value;
+        // console.log('Poslovi su : ' + posao);
+        if (posao) {
+            control.push(this.initStavke(0, broj, '', posao));
+        }
+        else {
+            control.push(this.initStavke(0, broj, '', ''));
+        }
+        //  this.reorderStav();
+    };
+    UputFormComponent.prototype.removeStavke = function (i) {
+        if (i >= 0) {
+            var control = this.formUput.controls['Stavke'];
+            control.removeAt(i);
+        }
+        //  console.log('ovo sam dobio iz stavki' + i);
+        this.reorderStav();
+    };
+    UputFormComponent.prototype.reorderStav = function () {
+        var rbr = 0;
+        var controls = this.formUput.controls['Stavke'];
+        for (var _i = 0, _a = this.Stavke.controls; _i < _a.length; _i++) {
+            var item = _a[_i];
+            rbr = rbr + 1;
+            var Idzadr = item.get('IDZadrugar').value;
+            var id = item.get('ZadrugarID').value;
+            var idpos = item.get('PosloviID').value;
+            item.setValue({ 'Rbr': rbr, 'IDZadrugar': Idzadr, 'ZadrugarID': id, 'PosloviID': idpos });
+        }
+    };
+    UputFormComponent.prototype.save = function () {
+        var _this = this;
+        var FPValue = this.formUput.value;
+        if (this.Stavke.length === 0) {
+            this.flashMessage.show('Nema stavki uputa', {
+                cssClass: 'alert-danger',
+                timeout: 2000
+            });
+            return;
+        }
+        var NovUput = this.clearZadrugar(FPValue);
+        if (NovUput.Stavke.length === 0) {
+            this.flashMessage.show('Nema stavki uputa', {
+                cssClass: 'alert-danger',
+                timeout: 2000
+            });
+            return;
+        }
+        this.prepareStavke(NovUput);
+        // if (FPValue.Stavke.lenght === 0) {
+        // }
+        //  console.log('Ovo je save - objekat iz forme');
+        //  console.log(JSON.stringify(FPValue));
+        // return;
+        if (FPValue._id) {
+            this.uputService.updateUput(FPValue).subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['uput']);
+                }
+                else {
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                // console.log(" forma UPDATE  " + error);
+            });
+        }
+        else {
+            this.uputService.addUput(FPValue)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['uput']);
+                }
+                else {
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                console.log(' forma INSERT ' + JSON.stringify(error) + ' ima li jos nesto' + error);
+            });
+        }
+    };
+    UputFormComponent.prototype.loadTempData = function () {
+        var wdata = JSON.parse(localStorage.getItem('data_uput'));
+        if (wdata) {
+            this.uputN = wdata;
+        }
+    };
+    UputFormComponent.prototype.setTempData = function () {
+        var fsValue = JSON.stringify(this.formUput.value);
+        if (fsValue) {
+            if (this.saveTemp) {
+                localStorage.setItem('data_uput', fsValue);
+            }
+            else {
+                this.clearTempData();
+            }
+        }
+    };
+    UputFormComponent.prototype.clearTempData = function () {
+        localStorage.removeItem('data_uput');
+    };
+    UputFormComponent.prototype.backClicked = function (event) {
+        this.setTempData();
+        this._location.back();
+    };
+    UputFormComponent.prototype.revert = function () {
+        this.formUput.reset();
+        // this.clearFormData();
+    };
+    UputFormComponent.prototype.clearFormData = function () {
+        this.formUput.reset({
+            Broj: '',
+            Godina: '',
+            Datum: '',
+            RacVlasnika: null,
+            PosloviID: null,
+            PartneriID: null
+        });
+    };
+    UputFormComponent.prototype.ngOnDestroy = function () {
+        this.setTempData();
+        // this.subscription.unsubscribe();
+    };
+    UputFormComponent.prototype.compareVlasRacun = function (c1, c2) {
+        return c1 && c2 ? c1.Naziv === c2.Naziv : c1 === c2;
+    };
+    UputFormComponent.prototype.clearZadrugar = function (tuputN) {
+        var stavSet = new Set();
+        for (var _i = 0, _a = tuputN.Stavke; _i < _a.length; _i++) {
+            var item = _a[_i];
+            stavSet.add(item.IDZadrugar);
+        }
+        var myArrStav = Array.from(stavSet);
+        var newStavke = new Array();
+        var _loop_1 = function (item) {
+            console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip ' + typeof Number(item));
+            var idzad = Number(item);
+            // newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar ===  Number(item) ));
+            newStavke.push(tuputN.Stavke.find(function (x) { return x.IDZadrugar == idzad; }));
+        };
+        for (var _b = 0, myArrStav_1 = myArrStav; _b < myArrStav_1.length; _b++) {
+            var item = myArrStav_1[_b];
+            _loop_1(item);
+        }
+        // tuputN.Stavke = stavSet;
+        tuputN.Stavke.splice(0, tuputN.Stavke.length);
+        for (var _c = 0, newStavke_1 = newStavke; _c < newStavke_1.length; _c++) {
+            var item = newStavke_1[_c];
+            console.log('Nove stavke ' + item);
+            tuputN.Stavke.push(item);
+        }
+        return tuputN;
+    };
+    UputFormComponent.prototype.prepareStavke = function (tuputN) {
+        var rbr = 0;
+        for (var _i = 0, _a = tuputN.Stavke; _i < _a.length; _i++) {
+            var item = _a[_i];
+            var idZad = item.ZadrugarID;
+            var idPosao = item.PosloviID;
+            rbr = rbr + 1;
+            item.Rbr = rbr;
+            for (var _b = 0, _c = this.zadrL; _b < _c.length; _b++) {
+                var zadrugar = _c[_b];
+                if (zadrugar._id === idZad) {
+                    item.ZadRef = {
+                        _id: zadrugar._id,
+                        name: zadrugar.fullName,
+                        tipzadrugar: zadrugar.TipZadrugar,
+                        idzadrugar: zadrugar.IDZadrugar,
+                        jmbg: zadrugar.Jmbg
+                    };
+                    item.IDZadrugar = zadrugar.IDZadrugar;
+                }
+            }
+            for (var _d = 0, _e = this.poslL; _d < _e.length; _d++) {
+                var posao = _e[_d];
+                if (posao._id === idPosao) {
+                    item.PosloviRef = {
+                        _id: posao._id,
+                        name: posao.Naziv,
+                        stepenss: posao.StepenSS
+                    };
+                }
+            }
+        }
+    };
+    return UputFormComponent;
+}());
+UputFormComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-uput-form',
+        template: __webpack_require__("../../../../../src/app/components/uput/uput-form/uput-form.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/uput/uput-form/uput-form.component.css")],
+        animations: [Object(__WEBPACK_IMPORTED_MODULE_4__animation_forms_animations__["a" /* formsTransition */])()]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_10__partner_partner_service__["a" /* PartnerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__partner_partner_service__["a" /* PartnerService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_12__posao_posao_service__["a" /* PosaoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__posao_posao_service__["a" /* PosaoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_11__vlasnik_vlasnik_service__["a" /* VlasnikService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__vlasnik_vlasnik_service__["a" /* VlasnikService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_9__zadrugar_zadrugar_service__["a" /* ZadrugarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__zadrugar_zadrugar_service__["a" /* ZadrugarService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__uput_service__["a" /* UputService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__uput_service__["a" /* UputService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["ActivatedRoute"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_angular2_flash_messages__["FlashMessagesService"]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_service_validate_shared__["a" /* ServiceValidateShared */]) === "function" && _l || Object])
+], UputFormComponent);
+
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+//# sourceMappingURL=uput-form.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-routing.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputRoutingModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__uput_component__ = __webpack_require__("../../../../../src/app/components/uput/uput.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__uput_form_uput_form_component__ = __webpack_require__("../../../../../src/app/components/uput/uput-form/uput-form.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var uputRoutes = [
+    { path: 'uput', component: __WEBPACK_IMPORTED_MODULE_3__uput_component__["a" /* UputComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'uput/new', component: __WEBPACK_IMPORTED_MODULE_4__uput_form_uput_form_component__["a" /* UputFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'uput/:id', component: __WEBPACK_IMPORTED_MODULE_4__uput_form_uput_form_component__["a" /* UputFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__guards_auth_guard__["a" /* AuthGuard */]] },
+];
+var UputRoutingModule = (function () {
+    function UputRoutingModule() {
+    }
+    return UputRoutingModule;
+}());
+UputRoutingModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["RouterModule"].forChild(uputRoutes)
+        ],
+        exports: [
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["RouterModule"]
+        ]
+    })
+], UputRoutingModule);
+
+//# sourceMappingURL=uput-routing.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div [formGroup]=\"Stavke\" class=\"row\" (keydown.shift.arrowdown)=\"onPressDown($event)\">\r\n\r\n  <!-- <tbody> -->\r\n  <!-- <tr> -->\r\n  <td class=\"col-md-1\">\r\n    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Rbr\" readonly>\r\n  </td>\r\n  <td class=\"col-md-2\">\r\n    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"IDZadrugar\" (keypress)=\"serValidate.validateOnlyDigit($event)\">\r\n\r\n  </td>\r\n  <td class=\"col-md-1\">\r\n    <button type=\"button\" class=\"btn btn-sm btn-info\" (click)=\"GetZadrugar()\">\r\n      <span class=\"glyphicon glyphicon-search\"></span>\r\n      ...\r\n    </button>\r\n  </td>\r\n  <td class=\"col-md-3\">\r\n    <select formControlName=\"ZadrugarID\" class=\"form-control input-sm\" (change)=\"onChangeZadr($event.target.value)\" required>\r\n      <option [value]=\"\" disabled=\"true\" [selected]=\"true\"> --Please select-- </option>\r\n      <option *ngFor=\"let list of zadrugarL\" [value]=\"list._id\">\r\n        <!-- {{list.Prezime}} {{list.Ime}}   [selected]=\"true\"-->\r\n        {{list.fullName}}\r\n      </option>\r\n    </select>\r\n  </td>\r\n  <td class=\"col-md-3\">\r\n    <select formControlName=\"PosloviID\" class=\"form-control input-sm\" (change)=\"onChangePosao($event.target.value)\" required>\r\n      <option [value]=\"\" disabled=\"true\"> --Please select-- </option>\r\n      <option *ngFor=\"let list of poslL\" [value]=\"list._id\">\r\n        {{list.Naziv}}\r\n      </option>\r\n    </select>\r\n  </td>\r\n  <td class=\"col-md-1\">\r\n    <button type=\"button\" class=\"btn btn-sm btn-danger\" (click)=\"onClickRemove($event)\">\r\n      <span class=\"glyphicon glyphicon-remove\"></span>\r\n    </button>\r\n  </td>\r\n  <!-- </tr>     -->\r\n  <!-- </tbody> -->\r\n\r\n\r\n\r\n\r\n  <!-- <div class=\"row\">\r\n      <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">Rbr\r\n              <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Rbr\">\r\n          </label>\r\n      </div>\r\n      <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">ID zadrugar\r\n              <input type=\"text\" class=\"form-control input-sm\" formControlName=\"IDZadrugar\">\r\n          </label>\r\n      </div>\r\n      <div class=\"form-group col-md-4\">\r\n         \r\n              <label class=\"center-block\">Zadrugar:\r\n                  <select  formControlName=\"ZadrugarID\" class=\"form-control input-sm\" required>\r\n                      <option *ngFor=\"let list of zadrugarL\"  [value]=\"list._id\" >\r\n                            {{list.Prezime}} {{list.Ime}}\r\n                      </option>\r\n                  </select>\r\n              </label>\r\n               <div *ngIf=\"Stavke.controls.ZadrugarID.invalid && (Stavke.controls.ZadrugarID.dirty || Stavke.controls.ZadrugarID.touched)\" class=\"alert btn-danger\">\r\n                      <div *ngIf=\"Stavke.controls.ZadrugarID.errors.required\">\r\n                          <strong>Zadrugar je obavezan podatak !!!</strong>\r\n                      </div>\r\n              </div>\r\n      </div>\r\n      <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Posao:\r\n              <select  formControlName=\"PosloviID\" class=\"form-control input-sm\" placeholder=\"Select posao\" required>\r\n                  <option *ngFor=\"let list of poslL\" [value]=\"list._id\"   >\r\n                  {{list.Naziv}} \r\n                  </option>\r\n              </select>\r\n          </label>\r\n          <div *ngIf=\"Stavke.controls.PosloviID.invalid && (Stavke.controls.PosloviID.dirty || Stavke.controls.PosloviID.touched)\" class=\"alert btn-danger\">\r\n                  <div *ngIf=\"Stavke.controls.PosloviID.errors.required\">\r\n                      <strong>Posao je obavezan podatak !!!</strong>\r\n                  </div>\r\n          </div>\r\n      </div>\r\n  </div> -->\r\n\r\n</div>\r\n\r\n\r\n<p-dialog header=\"ODABIR ZADRUGARA\" [(visible)]=\"displayZadrugar\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n  <app-pick-zadrugar [zadrL]=\"zadrugarL\" (pickRow)=\"PickZadrugar($event)\" (pickNothing)=\"displayZadrugar=false\">\r\n  </app-pick-zadrugar>\r\n</p-dialog>\r\n\r\n<!--  tastatura dogadjaji\r\n<input (keydown.enter)=\"...\">\r\n<input (keydown.a)=\"...\">\r\n<input (keydown.esc)=\"...\">\r\n<input (keydown.shift.esc)=\"...\">\r\n<input (keydown.control)=\"...\">\r\n<input (keydown.alt)=\"...\">\r\n<input (keydown.meta)=\"...\">\r\n<input (keydown.9)=\"...\">\r\n<input (keydown.tab)=\"...\">\r\n<input (keydown.backspace)=\"...\">\r\n<input (keydown.arrowup)=\"...\">\r\n<input (keydown.shift.arrowdown)=\"...\">\r\n<input (keydown.shift.control.z)=\"...\">\r\n<input (keydown.f4)=\"...\"> -->\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputStavkaComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/observable/fromEvent';
+// import { Subscription } from 'rxjs/Subscription';
+
+
+
+var UputStavkaComponent = (function () {
+    // subscription: Subscription;
+    function UputStavkaComponent(serValidate) {
+        this.serValidate = serValidate;
+        this.removeStavke = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.addStavke = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.displayZadrugar = false;
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
+        this.auto = 'auto';
+    }
+    UputStavkaComponent.prototype.ngOnInit = function () {
+        // console.log('Zadrugari su +' + JSON.stringify(this.zadrugarL));
+        var _this = this;
+        this.Stavke.controls.IDZadrugar.valueChanges
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .subscribe(function (sifra) {
+            var zadrOdab = _this.zadrugarL.find(function (x) { return x.IDZadrugar == sifra; });
+            if (zadrOdab) {
+                _this.InputZadrugar(zadrOdab);
+            }
+            else {
+                _this.Stavke.controls.ZadrugarID.setValue('');
+            }
+            //  // console.log('Usao sam gde treba ' + term);
+            // for ( const zadrugar of this.zadrugarL) {
+            //  // console.log('ovo imam ' + zadrugar.IDZadrugar);
+            //   // tslint:disable-next-line:triple-equals
+            //   if (zadrugar.IDZadrugar == term) {
+            //      console.log('Nasao sam ga' + term);
+            //       // this.searches.push(zadrugar);
+            //       this.InputZadrugar(zadrugar);
+            //     }
+            //   }
+        });
+        // const keyUpsStream = Observable.fromEvent(document, 'keyup');
+        // const cursorMoveStream = keyUpsStream.filter(x =>  x > 36 && x < 41).map(x => {
+        //   let direction;
+        //   switch ( x ) {
+        //     case 37 :
+        //     direction = 'left';
+        //     break;
+        //     case 38 :
+        //     direction = 'up';
+        //     break;
+        //     case 39 :
+        //     direction = 'right';
+        //     break;
+        //     default :
+        //     direction = 'down';
+        //   }
+        //   console.log('stream ' + direction );
+        //   return direction;
+        // });
+        // this.subscription = Observable.fromEvent(document, 'keyup')
+        //     .map( (x: KeyboardEvent) => x.which )
+        //     .filter((x) => {
+        //      console.log('filter Observable' + x );
+        //       return x > 36 && x < 41;
+        //     })
+        //     .map(x => {
+        //       console.log('map u Observable ' + x );
+        //       let direction;
+        //       switch ( x ) {
+        //         case 37 :
+        //         direction = 'left';
+        //         break;
+        //         case 38 :
+        //         direction = 'up';
+        //         break;
+        //         case 39 :
+        //         direction = 'right';
+        //         break;
+        //         default :
+        //         direction = 'down';
+        //       }
+        //     console.log('map ' + direction );
+        //     return direction;
+        //   }).subscribe(x => console.log('samo keyup - stavke ' + x));
+        // this.subscription = cursorMoveStream.subscribe(x => console.log('samo keyup - stavke ' + x));
+        // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
+        //   console.log(' stavka ' + e);
+        // });
+        // this.subscription = Observable.fromEvent(document, 'keyup').subscribe(e => {
+        //   console.log(' stavka keyup' + e);
+        // });
+    };
+    UputStavkaComponent.prototype.onClickRemove = function (tStav) {
+        // console.log('Klik u stavkama' + tStav);
+        this.removeStavke.emit(tStav);
+    };
+    UputStavkaComponent.prototype.GetZadrugar = function () {
+        //  console.log('Klik GetZadrugar UputStavkaComponent');
+        if (this.zadrugarL.length === 0) {
+            return;
+        }
+        // this.flashMessage.show('Tražimo kupca iz pick liste', {
+        //   cssClass: 'alert-danger',
+        //   timeout: 9000});
+        // console.log('Klik GetZadrugar UputStavkaComponent - ima zadrugara');
+        this.displayZadrugar = true;
+    };
+    UputStavkaComponent.prototype.InputZadrugar = function (tzadr) {
+        // console.log(JSON.stringify(this.selectedKupac));
+        if (tzadr) {
+            if (tzadr._id) {
+                // this.PartneriID.setValue(this.selectedZadr._id);
+                //   console.log('saljem sada u glavnu formu' + JSON.stringify(this.selectedZadr));
+                //   this.OdbirZadStavke.emit(this.selectedZadr);
+                // this.Stavke[0]['ZadrugarID'].setValue(this.selectedZadr._id);
+                this.Stavke.controls.ZadrugarID.setValue(tzadr._id);
+                // this.Stavke.controls.PosaoID.setValue(1);
+                // this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
+                // console.log('Stavke u InputZadrugar' + (this.Stavke.controls.ZadrugarID.value));
+            }
+        }
+    };
+    UputStavkaComponent.prototype.PickZadrugar = function (event) {
+        this.displayZadrugar = false;
+        this.selectedZadr = event;
+        // console.log(JSON.stringify(this.selectedKupac));
+        if (this.selectedZadr) {
+            if (this.selectedZadr._id) {
+                // this.PartneriID.setValue(this.selectedZadr._id);
+                //   console.log('saljem sada u glavnu formu' + JSON.stringify(this.selectedZadr));
+                //   this.OdbirZadStavke.emit(this.selectedZadr);
+                // this.Stavke[0]['ZadrugarID'].setValue(this.selectedZadr._id);
+                this.Stavke.controls.ZadrugarID.setValue(this.selectedZadr._id);
+                this.Stavke.controls.IDZadrugar.setValue(this.selectedZadr.IDZadrugar);
+                // console.log('Stavke u uput-stav PickZadrugar' + (this.Stavke.controls.ZadrugarID.value));
+            }
+        }
+    };
+    UputStavkaComponent.prototype.onChangeZadr = function (event) {
+        // console.log(' onChangeZadr ' + event);
+        if (event) {
+            var zadrOdab = this.zadrugarL.find(function (x) { return x._id === event; });
+            if (zadrOdab) {
+                this.Stavke.controls.IDZadrugar.setValue(zadrOdab.IDZadrugar);
+            }
+        }
+    };
+    UputStavkaComponent.prototype.onChangePosao = function (event) {
+        if (event) {
+            var PosaoOdab = this.poslL.find(function (x) { return x._id === event; });
+            if (PosaoOdab) {
+                // this.Stavke.controls.IDZadrugar.setValue(PosaoOdab.IDZadrugar);
+                // console.log('Posao u onChangePosaoevent ' + this.Stavke.controls.PosloviID.value);
+                this.Stavke.controls.PosloviID.setValue(PosaoOdab._id);
+            }
+        }
+    };
+    UputStavkaComponent.prototype.onPressDown = function (event) {
+        // console.log('onPressDown ' + event);
+        this.addStavke.emit(event);
+    };
+    UputStavkaComponent.prototype.ngOnDestroy = function () {
+        // this.subscription.unsubscribe();
+    };
+    return UputStavkaComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormGroup"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormGroup"]) === "function" && _a || Object)
+], UputStavkaComponent.prototype, "Stavke", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('zadrugarL'),
+    __metadata("design:type", Object)
+], UputStavkaComponent.prototype, "zadrugarL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('poslL'),
+    __metadata("design:type", Object)
+], UputStavkaComponent.prototype, "poslL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], UputStavkaComponent.prototype, "removeStavke", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], UputStavkaComponent.prototype, "addStavke", void 0);
+UputStavkaComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-uput-stavka',
+        template: __webpack_require__("../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_service_validate_shared__["a" /* ServiceValidateShared */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_service_validate_shared__["a" /* ServiceValidateShared */]) === "function" && _b || Object])
+], UputStavkaComponent);
+
+var _a, _b;
+//# sourceMappingURL=uput-stavka.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"uputL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus>\r\n  </div>\r\n  <p-dataTable [value]=\"uputL\" [globalFilter]=\"gb\" dataKey=\"_id\"\r\n               [rows]=\"5\" [paginator]=\"true\" [rowsPerPageOptions]=\"[5,10,20]\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedUput\" \r\n     styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=\"false\" \r\n     [resizableColumns]=\"true\" columnResizeMode=\"expand\"  [reorderableColumns]=\"true\" expandableRows=\"true\">\r\n\r\n    <p-header>\r\n      <h4>\r\n        <strong>{{Title}}</strong>\r\n      </h4>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column expander=\"true\" styleClass=\"col-icon\" [style]=\"{'width':'5%'}\"></p-column>\r\n    <p-column field=\"Broj\" header=\"Broj\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'7%'}\"></p-column>\r\n    <p-column field=\"Godina\" header=\"Godina\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'7%'}\"></p-column>\r\n    <p-column field=\"Datum\" header=\"Datum\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-col let-uput=\"rowData\" pTemplate=\"body\">\r\n        <span>{{uput[col.field] | date}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"PartneriID.Naziv\" header=\"Kupac\" sortable=\"true\" [style]=\"{'width':'31%'}\"></p-column>\r\n    <p-column field=\"PosloviID.Naziv\" header=\"Posao\" sortable=\"true\" [style]=\"{'width':'20%'}\"></p-column>\r\n\r\n    <p-column field=\"Knjizeno\" header=\"Knjizen\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'8%'}\">\r\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"partn[col.field]==false\">DA</span>\r\n        <span [hidden]=\"partn[col.field]==true\">NE</span>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"Storno\" header=\"Storno\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'7%'}\">\r\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"partn[col.field]==false\">DA</span>\r\n        <span [hidden]=\"partn[col.field]==true\">NE</span>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'overflow':'visible', 'width':'10%' }\">\r\n\r\n      <ng-template let-uput=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n        <!-- <button type=\"button\" pButton (click)=\"selectItem(uput)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateUput(uput._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteUput(uput)\" icon=\"fa fa-trash\" title=\"Delete\"></button> -->\r\n        <div class=\"btn-group\">\r\n          <button type=\"button\" class=\"btn btn-primary\">Action</button>\r\n          <button type=\"button\" class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n            <span class=\"caret\"></span>\r\n            <span class=\"sr-only\">Toggle Dropdown</span>\r\n          </button>\r\n          <ul class=\"dropdown-menu\" style=\"position: relative;z-index: 10000;\">\r\n            <li>\r\n              <a (click)=\"selectItem(uput)\">\r\n                <!-- <i class=\"fa fa-info\" aria-hidden=\"true\"></i> position: relative; -->\r\n                <strong>\r\n                  <i class=\"fa fa-info\" aria-hidden=\"true\">&nbsp;&nbsp;</i>Info</strong>\r\n              </a>\r\n            </li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li>\r\n              <a (click)=\"updateUput(uput._id)\">\r\n                <!--  -->\r\n                <strong>\r\n                  <i class=\"fa fa-pencil\" aria-hidden=\"true\">&nbsp;&nbsp;</i>Update</strong>\r\n              </a>\r\n            </li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li>\r\n              <a (click)=\"deleteUput(uput)\">\r\n                <!-- <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>     -->\r\n                <strong>\r\n                  <i class=\"fa fa-trash\" aria-hidden=\"true\">&nbsp;&nbsp;</i>Delete</strong>\r\n              </a>\r\n            </li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li>\r\n              <a (click)=\"faktUput(uput._id)\">\r\n                <!-- <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>     -->\r\n                <strong>\r\n                  <i class=\"fa fa-eur\" aria-hidden=\"true\">&nbsp;&nbsp;</i>Fakturiši</strong>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n    <!-- *ngFor=\"let item of uput.Stavke; let i = index\" -->\r\n    <ng-template let-uput pTemplate=\"rowexpansion\">\r\n      <div class=\"ui-grid ui-grid-responsive ui-fluid\" style=\"font-size:16px;padding:20px\">\r\n        <div class=\"ui-grid-row\">\r\n          <div class=\"ui-grid-col-12\">\r\n            <div class=\"ui-grid-row\">\r\n\r\n              <!-- <p-dataTable [value]=\"uput.Stavke\" \r\n                                        styleClass=\"table table-bordered  table-hover table-striped table-condensed\" >\r\n                                        <p-header><strong>Pregled stavki</strong></p-header>\r\n                                        <p-column field=\"Rbr\" header=\"Rbr\" [style]=\"{'width':'10%'}\"></p-column>\r\n                                        <p-column field=\"ZadRef.idzadrugar\" header=\"ID\"  [style]=\"{'width':'10%'}\"></p-column>\r\n                                        <p-column field=\"ZadRef.name\" header=\"Zadrugar\"   [style]=\"{'width':'35%'}\"></p-column>\r\n                                        <p-column field=\"ZadRef.tipzadrugar\" header=\"TipZad\"   styleClass=\"text-center\" [style]=\"{'width':'10%'}\"></p-column>\r\n                                        <p-column field=\"PosloviRef.name\"  header=\"Posao\"  [style]=\"{'width':'35%'}\"></p-column>\r\n                                </p-dataTable> -->\r\n\r\n              <div [innerHTML]=\"uput.Stavke| prettyuputstav\">\r\n              </div>\r\n              <!-- \r\n                                    <div class=\"ui-grid-col-2 label\">Rbr: </div>\r\n                                    <div class=\"ui-grid-col-10\">{{item.Rbr}}</div> -->\r\n            </div>\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n\r\n    </ng-template>\r\n\r\n    <p-footer *ngIf=\"uputL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addUput()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n\r\n    <div *ngIf=\"uputL.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              Još niste kreirali podatak.\r\n            </div>\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addUput()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n\r\n            <h5 class=\"visible-xs\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addUput()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n<p-dialog header=\"UPUT\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{uputShow._id}}\r\n      </dd>\r\n      <dt>\r\n        BROJ/GODINA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{uputShow.Broj}}/{{uputShow.Godina}}\r\n      </dd>\r\n      <dt>\r\n        DATUM\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{uputShow.Datum | date}}\r\n      </dd>\r\n      <dt>\r\n        KUPAC\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- {{uputShow.Drzava }} -->\r\n        <div [innerHTML]=\"uputShow.PartnerRef | prettyprint\"></div>\r\n      </dd>\r\n\r\n      <dt>\r\n        POSAO\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- {{uputShow.Drzava }} -->\r\n        <div [innerHTML]=\"uputShow.PosloviRef | prettyprint\"></div>\r\n      </dd>\r\n\r\n      <dt>\r\n\r\n\r\n        <dt>\r\n          KNJIŽEN\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.Knjizeno | prettyavtiveprint}}\r\n        </dd>\r\n        <dt>\r\n          STORNIRAN\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.Storno | prettyavtiveprint}}\r\n        </dd>\r\n        <dt>\r\n          UPLATNI RAČUN\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          <div [innerHTML]=\"uputShow.RacVlasnika | prettyprint\"></div>\r\n        </dd>\r\n\r\n        <dt>\r\n          OPIS\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.Opis}}\r\n\r\n        </dd>\r\n\r\n        <dt>\r\n          STAVKE\r\n        </dt>\r\n        <hr>\r\n        <dd>\r\n          <dl class=\"dl-horizontal\" *ngFor=\"let item of uputShow.Stavke; let i = index\">\r\n            <!-- <div *ngFor=\"let item of uputShow.Stavke; let i = index\"> -->\r\n            <dt>Rbr</dt>\r\n            <dd class=\"text-success\">\r\n              {{item.Rbr}}\r\n            </dd>\r\n\r\n            <dt>Zadrugar</dt>\r\n            <dd class=\"text-success\">\r\n              <div [innerHTML]=\"item.ZadRef | prettyprint\"></div>\r\n            </dd>\r\n            <dt>Posao</dt>\r\n            <dd class=\"text-success\">\r\n              <div [innerHTML]=\"item.PosloviRef | prettyprint\"></div>\r\n            </dd>\r\n            <dt>Od Datuma</dt>\r\n            <dd class=\"text-success\">{{item.OdDatuma}}</dd>\r\n            <dt>Do Datuma</dt>\r\n            <dd class=\"text-success\">{{item.DoDatuma }}</dd>\r\n            <dt>Kolicina</dt>\r\n            <dd class=\"text-success\">{{item.Kolicina}}</dd>\r\n            <dt>JM</dt>\r\n            <dd class=\"text-success\">{{item.JedMer}}</dd>\r\n            <dt>Cena</dt>\r\n            <dd class=\"text-success\">{{item.Cena}}</dd>\r\n            <dt>Napomena</dt>\r\n            <dd class=\"text-success\">{{item.Opis}}</dd>\r\n            <hr>\r\n            <!-- </div> -->\r\n          </dl>\r\n        </dd>\r\n        <hr>\r\n\r\n        <dt>Napomena</dt>\r\n        <dd class=\"text-success\">{{uputShow.Opis}}</dd>\r\n        <dt>\r\n          DATUM UNOSA\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.created_at}}\r\n\r\n        </dd>\r\n        <dt>\r\n          DATUM AŽURIRANJA\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.updatedAt}}\r\n\r\n        </dd>\r\n        <dt>\r\n          KORISNIK\r\n        </dt>\r\n        <dd class=\"text-success\">\r\n          {{uputShow.NameUser}}\r\n\r\n        </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__uput_service__ = __webpack_require__("../../../../../src/app/components/uput/uput.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__uput_model__ = __webpack_require__("../../../../../src/app/components/uput/uput.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__animation_router_animations__ = __webpack_require__("../../../../../src/app/animation/router.animations.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var UputComponent = (function () {
+    function UputComponent(router, uputService, confirmationService, flashMessage) {
+        this.router = router;
+        this.uputService = uputService;
+        this.confirmationService = confirmationService;
+        this.flashMessage = flashMessage;
+        this.displayDetals = false;
+        this.uputShow = new __WEBPACK_IMPORTED_MODULE_5__uput_model__["b" /* UputModel */]();
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
+        this.auto = 'auto';
+        this.Title = 'PREGLED UPUTA';
+    }
+    UputComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.uputService.getUputi()
+            .subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.uputL = profile.data;
+            }
+            // }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.uputL = [];
+            return false;
+        });
+    };
+    UputComponent.prototype.selectItem = function (work) {
+        this.displayDetals = true;
+        this.uputShow = this.cloneData(work);
+    };
+    UputComponent.prototype.cloneData = function (c) {
+        var uput = new __WEBPACK_IMPORTED_MODULE_5__uput_model__["b" /* UputModel */]();
+        // tslint:disable-next-line:forin
+        for (var prop in c) {
+            uput[prop] = c[prop];
+        }
+        return uput;
+    };
+    UputComponent.prototype.addUput = function () {
+        this.router.navigate(['/uput/new']);
+    };
+    UputComponent.prototype.updateUput = function (id) {
+        this.router.navigate(['/uput/', id]);
+    };
+    UputComponent.prototype.faktUput = function (id) {
+        this.flashMessage.show('Fakturisanje uputa ' + id, {
+            cssClass: 'alert-danger',
+            timeout: 5000
+        });
+    };
+    UputComponent.prototype.deleteUput = function (tUput) {
+        var _this = this;
+        this.confirmationService.confirm({
+            message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ? ",
+            header: tUput.Broj + " / " + tUput.Godina,
+            accept: function () {
+                var index = _this.uputL.indexOf(tUput);
+                // console.log("index je " + index);
+                _this.uputL.splice(index, 1);
+                _this.uputService.delUput(tUput._id)
+                    .subscribe(function (pos) {
+                    if (pos.success) {
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'alert-success',
+                            timeout: 1000
+                        });
+                    }
+                    else {
+                        _this.router.navigate(['NotFound']);
+                    }
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 5000
+                    });
+                    // Revert the view back to its original state
+                    _this.uputL.splice(index, 0, tUput);
+                });
+            }
+        });
+    };
+    return UputComponent;
+}());
+UputComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-uput',
+        template: __webpack_require__("../../../../../src/app/components/uput/uput.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/uput/uput.component.css")],
+        animations: [Object(__WEBPACK_IMPORTED_MODULE_6__animation_router_animations__["a" /* routerTransition */])()]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__uput_service__["a" /* UputService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__uput_service__["a" /* UputService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_primeng_primeng__["ConfirmationService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_primeng_primeng__["ConfirmationService"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__["FlashMessagesService"]) === "function" && _d || Object])
+], UputComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=uput.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export UputStavModel */
+/* unused harmony export UputStavNew */
+/* unused harmony export UputRacVlasnikModel */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return UputModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputBrojGodina; });
+/* unused harmony export PosaoNG */
+var UputStavModel = (function () {
+    function UputStavModel() {
+    }
+    return UputStavModel;
+}());
+
+var ZadRefModel = (function () {
+    function ZadRefModel() {
+    }
+    return ZadRefModel;
+}());
+var PosloviRef = (function () {
+    function PosloviRef() {
+    }
+    return PosloviRef;
+}());
+var UputStavNew = (function () {
+    function UputStavNew() {
+    }
+    return UputStavNew;
+}());
+
+var UputRacVlasnikModel = (function () {
+    function UputRacVlasnikModel() {
+    }
+    return UputRacVlasnikModel;
+}());
+
+var UputModel = (function () {
+    function UputModel() {
+    }
+    return UputModel;
+}());
+
+var UputBrojGodina = (function () {
+    function UputBrojGodina() {
+    }
+    return UputBrojGodina;
+}());
+
+var PosaoNG = (function () {
+    function PosaoNG() {
+    }
+    return PosaoNG;
+}());
+
+//# sourceMappingURL=uput.model.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__uput_form_uput_form_component__ = __webpack_require__("../../../../../src/app/components/uput/uput-form/uput-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__uput_stavka_uput_stavka_component__ = __webpack_require__("../../../../../src/app/components/uput/uput-stavka/uput-stavka.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__uput_component__ = __webpack_require__("../../../../../src/app/components/uput/uput.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__uput_service__ = __webpack_require__("../../../../../src/app/components/uput/uput.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__uput_routing_module__ = __webpack_require__("../../../../../src/app/components/uput/uput-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__ = __webpack_require__("../../../../../src/app/shared/pickup/pickup.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var UputModule = (function () {
+    function UputModule() {
+    }
+    return UputModule;
+}());
+UputModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmDialogModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DialogModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__["a" /* PickupModule */],
+            __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
+            __WEBPACK_IMPORTED_MODULE_8__uput_routing_module__["a" /* UputRoutingModule */]
+        ],
+        declarations: [__WEBPACK_IMPORTED_MODULE_6__uput_component__["a" /* UputComponent */], __WEBPACK_IMPORTED_MODULE_4__uput_form_uput_form_component__["a" /* UputFormComponent */], __WEBPACK_IMPORTED_MODULE_5__uput_stavka_uput_stavka_component__["a" /* UputStavkaComponent */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_7__uput_service__["a" /* UputService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
+    })
+], UputModule);
+
+//# sourceMappingURL=uput.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/uput/uput.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UputService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var UputService = (function (_super) {
+    __extends(UputService, _super);
+    function UputService(http) {
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
+    }
+    UputService.prototype.getUputi = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/uput');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    UputService.prototype.getUput = function (id) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/uput/' + id);
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    UputService.prototype.addUput = function (tuput) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/uput/');
+        return this.http.post(ep, JSON.stringify(tuput), { headers: headers })
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UputService.prototype.updateUput = function (tuput) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/uput/' + tuput._id);
+        return this.http.put(ep, JSON.stringify(tuput), { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    UputService.prototype.delUput = function (id) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/uput/' + id);
+        return this.http.delete(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    UputService.prototype.getUputBrojGod = function (tdatum) {
+        // console.log(' parametar je u servicu ' + JSON.stringify(tdatum));
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/maxbroj');
+        return this.http.post(ep, JSON.stringify(tdatum), { headers: headers })
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    return UputService;
+}(__WEBPACK_IMPORTED_MODULE_6__services_base_service__["a" /* BaseService */]));
+UputService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
+], UputService);
+
+var _a;
+//# sourceMappingURL=uput.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/vlasnik/vlasnik-form/telefonvlasnik.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"telefForm\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-2\">\r\n            </div>\r\n            <div class=\"form-group col-md-4\">\r\n                <label>Naziv</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Naziv\" required>\r\n                 <small [hidden]=\"telefForm.controls.Naziv.valid\" class=\"text-danger\">\r\n                    Naziv je obavezan\r\n                </small> \r\n            </div>\r\n            <div class=\"form-group col-md-4\">\r\n                <label>Telefon</label>\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Telefon\" required>\r\n                 <small [hidden]=\"telefForm.controls.Telefon.valid\" class=\"text-danger\">\r\n                        Telefon je obavezan\r\n                </small>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n                <div class=\"form-group col-md-2\">\r\n                </div>\r\n                <div class=\"form-group col-md-2\">\r\n                    <div class=\"checkbox\">\r\n                        <label >\r\n                            <input type=\"checkbox\"  class=\"form-control input-sm\" formControlName=\"Glavni\" >\r\n                            Glavni\r\n                        </label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group col-md-8\">\r\n                    <label class=\"center-block\">Opis:\r\n                        <textarea class=\"form-control input-sm\" formControlName=\"Opis\">\r\n                    </textarea>\r\n                    </label>\r\n                </div>\r\n        </div>\r\n    </div>"
+module.exports = "<div [formGroup]=\"telefForm\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group col-md-2\">\r\n            </div>\r\n            <div class=\"form-group col-md-5\">\r\n                <label class=\"center-block\">Naziv/Opis:\r\n                    <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Naziv\" required>\r\n                    <div *ngIf=\"telefForm.controls.Naziv.invalid && (telefForm.controls.Naziv.dirty || telefForm.controls.Naziv.touched)\" class=\"alert alert-danger\">\r\n                            <div *ngIf=\"telefForm.controls.Naziv.errors.required\">\r\n                                <strong> Naziv/Opis je obavezan podatak !!!</strong>\r\n                            </div>\r\n                            <div *ngIf=\"telefForm.controls.Naziv.errors.minlength\">\r\n                                <strong>Naziv/Opis mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                              </div>\r\n                            <div *ngIf=\"telefForm.controls.Naziv.errors.maxlength\">\r\n                                <strong>Predugačak podatak o Naziv/Opis !!!</strong>\r\n                           </div>\r\n                    </div>\r\n                    <!-- <small [hidden]=\"telefForm.controls.Naziv.valid\" class=\"text-danger\">\r\n                        Naziv je obavezan\r\n                    </small>  -->\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group col-md-5\">\r\n            <label class=\"center-block\">Broj telefona:\r\n                <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Telefon\" required>\r\n                <div *ngIf=\"telefForm.controls.Telefon.invalid && (telefForm.controls.Telefon.dirty || telefForm.controls.Telefon.touched)\" class=\"alert alert-danger\">\r\n                        <div *ngIf=\"telefForm.controls.Telefon.errors.required\">\r\n                            <strong> Broj telefona je obavezan podatak !!!</strong>\r\n                        </div>\r\n                    </div>\r\n                <!-- <small [hidden]=\"telefForm.controls.Telefon.valid\" class=\"text-danger\">\r\n                        Telefon je obavezan\r\n                </small> -->\r\n                \r\n            </label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n                <div class=\"form-group col-md-2\">\r\n                </div>\r\n                <div class=\"form-group col-md-2\">\r\n                    <div class=\"checkbox\">\r\n                        <label class=\"center-block\" >\r\n                            Glavni:\r\n                        </label>\r\n                        <input type=\"checkbox\"  class=\"form-control input-sm\" formControlName=\"Glavni\" >\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group col-md-8\">\r\n                    <label class=\"center-block\">Napomena:\r\n                        <textarea class=\"form-control input-sm\" formControlName=\"Opis\">\r\n                    </textarea>\r\n                    </label>\r\n                </div>\r\n        </div>\r\n    </div>"
 
 /***/ }),
 
@@ -7977,8 +9929,7 @@ __decorate([
 ], TelefonVlasnikComponent.prototype, "telefForm", void 0);
 TelefonVlasnikComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        // moduleId: module.id,
-        selector: 'telefonvlasnik',
+        selector: 'app-telefon-vlasnik',
         template: __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik-form/telefonvlasnik.component.html")
     })
 ], TelefonVlasnikComponent);
@@ -8009,7 +9960,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/vlasnik/vlasnik-form/vlasnik-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  vlasnik-form works!\r\n</p> -->\r\n\r\n<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n                <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n      </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formVlasn\" (ngSubmit)=\"save()\" novalidate >\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"vlasnN._id\"   type=\"hidden\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Ime vlasnika:\r\n                  <input class=\"form-control\" formControlName=\"Ime\"  [(ngModel)]=\"vlasnN.Ime\" required >\r\n                </label>\r\n                <div *ngIf=\"Ime.invalid && (Ime.dirty || Ime.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"formVlasn.controls.Ime.errors.required\">\r\n                      <strong>Ime je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Ime.errors.minlength\">\r\n                    <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                  </div>\r\n                </div>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Adresa:\r\n                <input class=\"form-control\" formControlName=\"Adresa\"  [(ngModel)]=\"vlasnN.Adresa\" required>\r\n              </label>\r\n              <div *ngIf=\"Adresa.invalid && (Adresa.dirty || Adresa.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"Adresa.errors.required\">\r\n                    <strong>Adresa je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Adresa.errors.minlength\">\r\n                    <strong>Adresa mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Adresa.errors.maxlength\">\r\n                    <strong>Predugačka Adresa !!!</strong>\r\n                </div>\r\n              </div>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Mesto:\r\n                <input class=\"form-control\" formControlName=\"Mesto\"  [(ngModel)]=\"vlasnN.Mesto\" required>\r\n              </label>\r\n                <div *ngIf=\"Mesto.invalid && (Mesto.dirty || Mesto.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"Mesto.errors.required\">\r\n                    <strong>Mesto  je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  <div *ngIf=\"Mesto.errors.minlength\">\r\n                    <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>\r\n                  </div>\r\n              </div>\r\n            </div>\r\n                    \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Ptt:\r\n                <input class=\"form-control\" formControlName=\"PttReon\"  [(ngModel)]=\"vlasnN.PttReon\" >\r\n              </label>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Ptt reon:\r\n                <input class=\"form-control\" formControlName=\"PttPak\"  [(ngModel)]=\"vlasnN.PttPak\" >\r\n              </label>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Direktor:\r\n                <input class=\"form-control\" formControlName=\"Direktor\"  [(ngModel)]=\"vlasnN.Direktor\" >\r\n              </label>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Komercijalni rukovodioc:\r\n                <input class=\"form-control\" formControlName=\"KomRukovac\"  [(ngModel)]=\"vlasnN.KomRukovac\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Blagajnik:\r\n                <input class=\"form-control\" formControlName=\"Blagajnik\"  [(ngModel)]=\"vlasnN.Blagajnik\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Pib:\r\n                <input class=\"form-control\" formControlName=\"Pib\"  [(ngModel)]=\"vlasnN.Pib\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Matični broj:\r\n                <input class=\"form-control\" formControlName=\"MatBroj\"  [(ngModel)]=\"vlasnN.MatBroj\" >\r\n              </label>\r\n          </div>\r\n        \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Šifra delatnosti:\r\n                <input class=\"form-control\" formControlName=\"SifDelat\"  [(ngModel)]=\"vlasnN.SifDelat\" >\r\n              </label>\r\n          </div>\r\n          \r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Pdv broj:\r\n                <input class=\"form-control\" formControlName=\"PdvBroj\"  [(ngModel)]=\"vlasnN.PdvBroj\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Sud:\r\n                <input class=\"form-control\" formControlName=\"Sud\"  [(ngModel)]=\"vlasnN.Sud\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Uplatni račun poreske jedinice:\r\n                <input class=\"form-control\" formControlName=\"UplRacPorJed\"  [(ngModel)]=\"vlasnN.UplRacPorJed\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv poreske jedinice:\r\n                <input class=\"form-control\" formControlName=\"NazPorJed\"  [(ngModel)]=\"vlasnN.NazPorJed\" >\r\n              </label>\r\n          </div>\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Opis:\r\n                <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"vlasnN.Opis\">\r\n                </textarea>\r\n              </label>\r\n            </div>\r\n\r\n          <div class=\"form-group\">\r\n            <div formArrayName=\"ZiroVlasnik\">\r\n                <div *ngFor=\"let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index\" class=\"panel panel-info\"> \r\n                    <div class=\"panel-heading\">\r\n                        <span><strong>Ziro racun {{i + 1}} </strong></span>\r\n                        <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeZiroVlas(i)\"></span>\r\n                    </div>\r\n\r\n                    <div [formGroupName]=\"i\" class=\"panel-body\" > \r\n                        <zirovlasnik [groupziro]=\"formVlasn.controls.ZiroVlasnik.controls[i]\"></zirovlasnik>\r\n                    </div>\r\n                </div>\r\n          \r\n                <div class=\"margin-20\" *ngIf=\"formVlasn.controls.ZiroVlasnik.controls.length < 6\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-xs-2\">\r\n                      </div>\r\n                      <div class=\" col-xs-10 \">\r\n                          <button type=\"button\" class=\"btn btn-info btn-block\"   (click)=\"addZiroVlas()\" title=\" Add Žiro račun\">\r\n                              <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                              Dodaj žiro račun\r\n                          </button>\r\n                         \r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              \r\n            </div>\r\n          </div> \r\n           \r\n          <div class=\"form-group\">\r\n              <div formArrayName=\"TelefVlasnik\">\r\n                  <div *ngFor=\"let TelefVlasnik of formVlasn.controls.TelefVlasnik.controls; let j=index\" class=\"panel panel-info\"> \r\n                      <div class=\"panel-heading\">\r\n                          <span><strong>Telefon {{j + 1}} </strong></span>\r\n                          <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeTelVlas(j)\"></span>\r\n                      </div>\r\n                        <div [formGroupName]=\"j\" class=\"panel-body\" > \r\n                           <telefonvlasnik  [group]=\"formVlasn.controls.TelefVlasnik.controls[j]\"></telefonvlasnik>\r\n                      </div>\r\n                  </div>\r\n            \r\n                  <div class=\"margin-20\" *ngIf=\"formVlasn.controls.TelefVlasnik.controls.length < 10\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-xs-2\">\r\n                        </div>\r\n                        <div class=\" col-xs-10 \">\r\n                           <button type=\"button\" class=\"btn btn-info btn-block\"   (click)=\"addATelVlas()\" title=\" Add Phone\">\r\n                                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                  Dodaj telefon\r\n                              </button>\r\n                          \r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                \r\n              </div>\r\n          </div>\r\n\r\n          <div class=\"clearfix\"></div> \r\n         \r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-5 col-md-12\">\r\n                    <button type=\"submit\" [disabled]=\"!formVlasn.valid\"\r\n                        class=\"btn btn-success\">\r\n                    <span class=\"glyphicon glyphicon-saved\"></span>\r\n                    Save\r\n                    </button>\r\n\r\n                  <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formVlasn.pristine\"  (click)=\"revert()\">\r\n                      <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                      Clear data\r\n                  </button>\r\n                  \r\n                </div>\r\n          </div>\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n\r\n      <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n        <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n        Back\r\n    </button>\r\n\r\n  </div>\r\n  \r\n</div>\r\n\r\n\r\n\r\n<!-- <form [formGroup]=\"myForm\" novalidate (ngSubmit)=\"save(myForm)\">\r\n  <div class=\"form-group\">\r\n    <label>Name</label>\r\n    <input type=\"text\" class=\"form-control\" formControlName=\"name\">\r\n    <small *ngIf=\"!myForm.controls.name.valid\" class=\"text-danger\">\r\n        Name is required (minimum 5 characters).\r\n      </small>\r\n  </div> -->\r\n  <!--addresses-->\r\n  <!-- <div formArrayName=\"addresses\">\r\n    <div *ngFor=\"let address of myForm.controls.addresses.controls; let i=index\" class=\"panel panel-default\">\r\n      <div class=\"panel-heading\">\r\n        <span>Address {{i + 1}}</span>\r\n        <span class=\"glyphicon glyphicon-remove pull-right\" *ngIf=\"myForm.controls.addresses.controls.length > 1\" (click)=\"removeAddress(i)\"></span>\r\n      </div>\r\n      <div class=\"panel-body\" [formGroupName]=\"i\">\r\n        <div class=\"form-group col-xs-6\">\r\n          <label>street</label>\r\n          <input type=\"text\" class=\"form-control\" formControlName=\"street\">\r\n          <small [hidden]=\"myForm.controls.addresses.controls[i].controls.street.valid\" class=\"text-danger\">\r\n              Street is required\r\n          </small>\r\n        </div>\r\n        <div class=\"form-group col-xs-6\">\r\n          <label>postcode</label>\r\n          <input type=\"text\" class=\"form-control\" formControlName=\"postcode\">\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"margin-20\">\r\n    <a (click)=\"addAddress()\" style=\"cursor: default\">\r\n      Add another address +\r\n    </a>\r\n  </div>\r\n\r\n  <div class=\"margin-20\">\r\n    <button type=\"submit\" class=\"btn btn-primary pull-right\" [disabled]=\"!myForm.valid\">Submit</button>\r\n  </div>\r\n  <div class=\"clearfix\"></div> -->\r\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formVlasn\" (ngSubmit)=\"save()\" novalidate>\r\n      <div class=\"form-group\">\r\n        <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"vlasnN._id\" type=\"hidden\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Ime vlasnika:\r\n          <input class=\"form-control\" formControlName=\"Ime\" [(ngModel)]=\"vlasnN.Ime\" required>\r\n        </label>\r\n        <div *ngIf=\"Ime.invalid && (Ime.dirty || Ime.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"Ime.errors.required\">\r\n            <strong>Ime je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"Ime.errors.minlength\">\r\n            <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Adresa:\r\n            <input class=\"form-control\" formControlName=\"Adresa\" [(ngModel)]=\"vlasnN.Adresa\" required>\r\n          </label>\r\n          <div *ngIf=\"Adresa.invalid && (Adresa.dirty || Adresa.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Adresa.errors.required\">\r\n              <strong>Adresa je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Adresa.errors.minlength\">\r\n              <strong>Adresa mora biti minimalno 2 karaktera dužine !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Adresa.errors.maxlength\">\r\n              <strong>Predugačka Adresa !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Mesto:\r\n            <input class=\"form-control\" formControlName=\"Mesto\" [(ngModel)]=\"vlasnN.Mesto\" required>\r\n          </label>\r\n          <div *ngIf=\"Mesto.invalid && (Mesto.dirty || Mesto.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Mesto.errors.required\">\r\n              <strong>Mesto je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Mesto.errors.minlength\">\r\n              <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Ptt:\r\n            <input class=\"form-control\" formControlName=\"PttReon\" [(ngModel)]=\"vlasnN.PttReon\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Ptt reon:\r\n            <input class=\"form-control\" formControlName=\"PttPak\" [(ngModel)]=\"vlasnN.PttPak\">\r\n          </label>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Direktor:\r\n            <input class=\"form-control\" formControlName=\"Direktor\" [(ngModel)]=\"vlasnN.Direktor\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Komercijalni rukovodioc:\r\n            <input class=\"form-control\" formControlName=\"KomRukovac\" [(ngModel)]=\"vlasnN.KomRukovac\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Blagajnik:\r\n            <input class=\"form-control\" formControlName=\"Blagajnik\" [(ngModel)]=\"vlasnN.Blagajnik\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-3\">\r\n          <label class=\"center-block\">Pib:\r\n            <input class=\"form-control\" formControlName=\"Pib\" [(ngModel)]=\"vlasnN.Pib\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-3\">\r\n          <label class=\"center-block\">Matični broj:\r\n            <input class=\"form-control\" formControlName=\"MatBroj\" [(ngModel)]=\"vlasnN.MatBroj\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-3\">\r\n          <label class=\"center-block\">Šifra delatnosti:\r\n            <input class=\"form-control\" formControlName=\"SifDelat\" [(ngModel)]=\"vlasnN.SifDelat\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-3\">\r\n          <label class=\"center-block\">Pdv broj:\r\n            <input class=\"form-control\" formControlName=\"PdvBroj\" [(ngModel)]=\"vlasnN.PdvBroj\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Sud:\r\n            <input class=\"form-control\" formControlName=\"Sud\" [(ngModel)]=\"vlasnN.Sud\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Uplatni račun poreske jedinice:\r\n            <input class=\"form-control\" formControlName=\"UplRacPorJed\" [(ngModel)]=\"vlasnN.UplRacPorJed\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Naziv poreske jedinice:\r\n            <input class=\"form-control\" formControlName=\"NazPorJed\" [(ngModel)]=\"vlasnN.NazPorJed\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div formArrayName=\"ZiroVlasnik\">\r\n          <div *ngFor=\"let ZiroVlasnik of formVlasn.controls.ZiroVlasnik.controls; let i=index\" class=\"panel panel-info\">\r\n            <div class=\"panel-heading\">\r\n              <span>\r\n                <strong>Ziro racun {{i + 1}} </strong>\r\n              </span>\r\n              <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeZiroVlas(i)\"></span>\r\n            </div>\r\n\r\n            <div [formGroupName]=\"i\" class=\"panel-body\">\r\n              <app-ziro-vlasnik [groupziro]=\"formVlasn.controls.ZiroVlasnik.controls[i]\"></app-ziro-vlasnik>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"margin-20\" *ngIf=\"formVlasn.controls.ZiroVlasnik.controls.length < 6\">\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-2\">\r\n              </div>\r\n              <div class=\" col-xs-10 \">\r\n                <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"addZiroVlas()\" title=\" Add Žiro račun\">\r\n                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                  Dodaj žiro račun\r\n                </button>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div formArrayName=\"TelefVlasnik\">\r\n          <div *ngFor=\"let TelefVlasnik of formVlasn.controls.TelefVlasnik.controls; let j=index\" class=\"panel panel-info\">\r\n            <div class=\"panel-heading\">\r\n              <span>\r\n                <strong>Telefon {{j + 1}} </strong>\r\n              </span>\r\n              <span class=\"glyphicon glyphicon-remove pull-right\" (click)=\"removeTelVlas(j)\"></span>\r\n            </div>\r\n            <div [formGroupName]=\"j\" class=\"panel-body\">\r\n              <app-telefon-vlasnik [group]=\"formVlasn.controls.TelefVlasnik.controls[j]\"></app-telefon-vlasnik>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"margin-20\" *ngIf=\"formVlasn.controls.TelefVlasnik.controls.length < 10\">\r\n            <div class=\"row\">\r\n              <div class=\"col-xs-2\">\r\n              </div>\r\n              <div class=\" col-xs-10 \">\r\n                <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"addATelVlas()\" title=\" Add Phone\">\r\n                  <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                  Dodaj telefon\r\n                </button>\r\n\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis/Napomena:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"vlasnN.Opis\">\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"clearfix\"></div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formVlasn.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formVlasn.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n\r\n  </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -8120,7 +10071,7 @@ var VlasnikFormComponent = (function () {
     // Ziro racun vlasnika
     VlasnikFormComponent.prototype.initZiroVlas = function (tNaziv, tRacun, tGlavni, tOpis) {
         return this._fb.group({
-            Naziv: [tNaziv, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required],
+            Naziv: [tNaziv, [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(25)]],
             Racun: [tRacun, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required],
             Glavni: [tGlavni],
             Opis: [tOpis]
@@ -8145,7 +10096,7 @@ var VlasnikFormComponent = (function () {
     };
     VlasnikFormComponent.prototype.initTelVlas = function (tNaziv, tTelefon, tGlavni, tOpis) {
         return this._fb.group({
-            Naziv: [tNaziv, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required],
+            Naziv: [tNaziv, [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(25)]],
             Telefon: [tTelefon, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required],
             Glavni: [tGlavni],
             Opis: [tOpis]
@@ -8240,29 +10191,9 @@ var VlasnikFormComponent = (function () {
     VlasnikFormComponent.prototype.backClicked = function (event) {
         this._location.back();
     };
-    VlasnikFormComponent.prototype.revert = function () { this.clearData(); };
-    VlasnikFormComponent.prototype.clearData = function () {
-        this.formVlasn.reset({
-            Ime: '',
-            Adresa: '',
-            Mesto: '',
-            PttReon: '',
-            PttPak: '',
-            Direktor: '',
-            KomRukovac: '',
-            Blagajnik: '',
-            Pib: '',
-            MatBroj: '',
-            SifDelat: '',
-            PdvBroj: '',
-            Slika: '',
-            Sud: '',
-            UplRacPorJed: '',
-            NazPorJed: '',
-            ZiroVlasnik: null,
-            TelefVlasnik: null,
-            Opis: ''
-        });
+    VlasnikFormComponent.prototype.revert = function () {
+        // this.clearFormData();
+        this.formVlasn.reset();
     };
     return VlasnikFormComponent;
 }());
@@ -8284,7 +10215,7 @@ var _a, _b, _c, _d, _e, _f, _g;
 /***/ "../../../../../src/app/components/vlasnik/vlasnik-form/zirovlasnik.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [formGroup]=\"ziroForm\">\r\n    <div class=\"row\">\r\n        <div class=\"form-group col-md-2\">\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n            <label>Naziv</label>\r\n            <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Naziv\" required>\r\n            <small [hidden]=\"ziroForm.controls.Naziv.valid\" class=\"text-danger\">\r\n                Naziv je obavezan\r\n            </small>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n            <label>Racun</label>\r\n            <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Racun\" required>\r\n            <small [hidden]=\"ziroForm.controls.Racun.valid\" class=\"text-danger\">\r\n                   Racun je obavezan\r\n            </small>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n            <div class=\"form-group col-md-2\">\r\n            </div>\r\n            <div class=\"form-group col-md-2\">\r\n                <div class=\"checkbox\">\r\n                    <label >\r\n                        <input type=\"checkbox\"  class=\"form-control input-sm\" formControlName=\"Glavni\" >\r\n                        Glavni\r\n                    </label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group col-md-8\">\r\n                <label class=\"center-block\">Opis:\r\n                    <textarea class=\"form-control input-sm\" formControlName=\"Opis\">\r\n                </textarea>\r\n                </label>\r\n            </div>\r\n    </div>\r\n</div>"
+module.exports = "<div [formGroup]=\"ziroForm\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Naziv/Opis:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Naziv\" required>\r\n        <div *ngIf=\"ziroForm.controls.Naziv.invalid && (ziroForm.controls.Naziv.dirty || ziroForm.controls.Naziv.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"ziroForm.controls.Naziv.errors.required\">\r\n            <strong> Naziv/Opis je obavezan podatak !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"ziroForm.controls.Naziv.errors.minlength\">\r\n            <strong>Naziv/Opis mora biti minimalno 2 karaktera dužine !!!</strong>\r\n          </div>\r\n          <div *ngIf=\"ziroForm.controls.Naziv.errors.maxlength\">\r\n            <strong>Predugačak podatak o Naziv/Opis !!!</strong>\r\n          </div>\r\n        </div>\r\n      </label>\r\n\r\n      <!-- <small [hidden]=\"ziroForm.controls.Naziv.valid\" class=\"text-danger\">\r\n                Naziv je obavezan\r\n            </small> -->\r\n\r\n    </div>\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Broj racuna:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"Racun\" required>\r\n        <div *ngIf=\"ziroForm.controls.Racun.invalid && (ziroForm.controls.Racun.dirty || ziroForm.controls.Racun.touched)\" class=\"alert alert-danger\">\r\n          <div *ngIf=\"ziroForm.controls.Racun.errors.required\">\r\n            <strong>Racun je obavezan podatak !!!</strong>\r\n          </div>\r\n        </div>\r\n      </label>\r\n      <!-- <small [hidden]=\"ziroForm.controls.Racun.valid\" class=\"text-danger\">\r\n                   Racun je obavezan\r\n            </small> -->\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-2\">\r\n    </div>\r\n    <div class=\"form-group col-md-2\">\r\n      <div class=\"checkbox\">\r\n        <label class=\"center-block\">\r\n          Glavni:\r\n        </label>\r\n        <input type=\"checkbox\" class=\"form-control input-sm\" formControlName=\"Glavni\">\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group col-md-8\">\r\n      <label class=\"center-block\">Napomena:\r\n        <textarea class=\"form-control input-sm\" formControlName=\"Opis\">\r\n        </textarea>\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -8317,8 +10248,7 @@ __decorate([
 ], ZiroVlasnikComponent.prototype, "ziroForm", void 0);
 ZiroVlasnikComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        // moduleId: module.id,
-        selector: 'zirovlasnik',
+        selector: 'app-ziro-vlasnik',
         template: __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik-form/zirovlasnik.component.html")
     })
 ], ZiroVlasnikComponent);
@@ -8334,6 +10264,7 @@ var _a;
 "use strict";
 /* unused harmony export TelefVlasnikModel */
 /* unused harmony export ZiroVlasnikModel */
+/* unused harmony export RacunVlasnikModel */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VlasnikModel; });
 var TelefVlasnikModel = (function () {
     function TelefVlasnikModel() {
@@ -8345,6 +10276,12 @@ var ZiroVlasnikModel = (function () {
     function ZiroVlasnikModel() {
     }
     return ZiroVlasnikModel;
+}());
+
+var RacunVlasnikModel = (function () {
+    function RacunVlasnikModel() {
+    }
+    return RacunVlasnikModel;
 }());
 
 var VlasnikModel = (function () {
@@ -8411,7 +10348,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".borderDeo {\r\n    border: 1px darkblue;\r\n}", ""]);
 
 // exports
 
@@ -8424,7 +10361,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/vlasnik/vlasnik.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  vlasnik works!\r\n</p> -->\r\n\r\n<div *ngIf=\"vlasnL;else  waiting\"  [@routerTransition]>\r\n  \r\n      <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"vlasnL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedVlasn\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n      <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Ime\" header=\"Ime\"  ></p-column>\r\n      <p-column field=\"Adresa\" header=\"Adresa\"    ></p-column> \r\n      <p-column field=\"Mesto\" header=\"Mesto\"  ></p-column>   \r\n      <p-column field=\"Direktor\" header=\"Direktor\"   ></p-column>\r\n      <p-column field=\"Pib\" header=\"Pib\"  ></p-column>\r\n      \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n       \r\n          <ng-template let-vlasn=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\" >\r\n\r\n              <button type=\"button\" pButton (click)=\"selectItem(vlasn)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateVasnik(vlasn._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteVlasnik(vlasn)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n       <!-- <p-footer *ngIf=\"vlasnL.length == 0\">\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"vlasnL()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer> -->\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n          <!-- Custom content goes here -->\r\n          <div class=\"row\">\r\n               <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                  <div class=\"hidden-xs dtempty_message_h1\">\r\n                     Još niste kreirali podatak.\r\n                  </div>\r\n                  \r\n                  <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                  <br/>\r\n                  <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n                 <h3 class=\" hidden-xs dtempty_message\" >\r\n                      Da biste ručno dodali podatak kliknite: \r\n                      <a  class=\"dtempty_message_text\" (click)=\"addVlasnik()\">\r\n                           Kreiraj podatak\r\n                      </a>\r\n                  </h3>\r\n\r\n                  <h5 class=\"visible-xs\" >\r\n                     Da biste ručno dodali podatak kliknite : \r\n                      <a   (click)=\"addVlasnik()\">\r\n                          Kreiraj podatak\r\n                      </a>\r\n                  </h5>\r\n\r\n              </div>\r\n          </div>\r\n        </ng-template>\r\n\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n        <p-footer>\r\n            <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n            <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n         </p-footer>\r\n    </p-confirmDialog>\r\n    \r\n    \r\n    <p-dialog header=\"VLASNIK\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                         ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{vlasnShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                          IME\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                             {{vlasnShow.Ime}} \r\n                        </dd>\r\n                        <dt>\r\n                          Adresa\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{vlasnShow.Adresa}}\r\n                        </dd>\r\n                          \r\n                        <dt>\r\n                          Mesto\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{vlasnShow.Mesto}} \r\n                          </dd> \r\n                     \r\n                        <dt>\r\n                          PttReon\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{vlasnShow.PttReon}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                          Direktor\r\n                           </dt>\r\n                           <dd class=\"text-success\">\r\n                               {{vlasnShow.Direktor}}\r\n                               \r\n                           </dd>\r\n                      \r\n                        <dt>\r\n                          Pib\r\n                           </dt>\r\n                           <dd class=\"text-success\">\r\n                               {{vlasnShow.Pib}}\r\n                               \r\n                           </dd>\r\n\r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{vlasnShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{vlasnShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{vlasnShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{vlasnShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer>\r\n                    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n           </p-footer>\r\n    </p-dialog>\r\n    \r\n    \r\n \r\n<ng-template #waiting  >\r\n    <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n    </div>\r\n</ng-template>\r\n    \r\n"
+module.exports = "<div *ngIf=\"vlasnL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"vlasnL\" [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedVlasn\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=false resizableColumns=\"true\"\r\n    columnResizeMode=\"expand\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"Ime\" header=\"Ime\"></p-column>\r\n    <p-column field=\"Adresa\" header=\"Adresa\"></p-column>\r\n    <p-column field=\"Mesto\" header=\"Mesto\"></p-column>\r\n    <p-column field=\"Direktor\" header=\"Direktor\"></p-column>\r\n    <p-column field=\"Pib\" header=\"Pib\"></p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n\r\n      <ng-template let-vlasn=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n\r\n        <button type=\"button\" pButton (click)=\"selectItem(vlasn)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateVasnik(vlasn._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteVlasnik(vlasn)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n        <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n          <div class=\"hidden-xs dtempty_message_h1\">\r\n            Još niste kreirali podatak.\r\n          </div>\r\n\r\n          <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n          <br/>\r\n          <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n          <h3 class=\" hidden-xs dtempty_message\">\r\n            Da biste ručno dodali podatak kliknite:\r\n            <a class=\"dtempty_message_text\" (click)=\"addVlasnik()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h3>\r\n          <h5 class=\"visible-xs\">\r\n            Da biste ručno dodali podatak kliknite :\r\n            <a (click)=\"addVlasnik()\">\r\n              Kreiraj podatak\r\n            </a>\r\n          </h5>\r\n        </div>\r\n      </div>\r\n    </ng-template>\r\n\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"VLASNIK\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow._id}}\r\n      </dd>\r\n      <dt>\r\n        IME\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Ime}}\r\n      </dd>\r\n      <dt>\r\n        ADRESA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Adresa}}\r\n      </dd>\r\n      <dt>\r\n        MESTO\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Mesto}}\r\n      </dd>\r\n      <dt>\r\n        Ptt REON\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.PttReon}}\r\n      </dd>\r\n      <dt>\r\n        Ptt PAK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.PttPak}}\r\n      </dd>\r\n      <dt>\r\n        DIREKTOR\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Direktor}}\r\n      </dd>\r\n      <dt>\r\n        KOMERCIJALNI\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.KomRukovac}}\r\n      </dd>\r\n      <dt>\r\n        BLAGAJNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Blagajnik}}\r\n      </dd>\r\n      <dt>\r\n        PIB\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Pib}}\r\n      </dd>\r\n      <dt>\r\n        MATIČNI BROJ\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.MatBroj}}\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA DELATNOSTI\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.SifDelat}}\r\n      </dd>\r\n      <dt>\r\n        PDV BROJ\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.PdvBroj}}\r\n      </dd>\r\n      <dt>\r\n        SLIKA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Slika}}\r\n      </dd>\r\n      <dt>\r\n        SUD\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Sud}}\r\n      </dd>\r\n      <dt>\r\n        RAČUN PORESKE JEDINICE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.UplRacPorJed}}\r\n      </dd>\r\n      <dt>\r\n        NAZIV PORESKE JEDINICE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.NazPorJed}}\r\n      </dd>\r\n      <dt>\r\n        ŽIRO RAČUN\r\n      </dt>\r\n      <dd>\r\n        <div>\r\n          <dl class=\"dl-horizontal\">\r\n            <div *ngFor=\"let item of vlasnShow.ZiroVlasnik; let i = index\">\r\n              <dt>{{i+1}}.</dt>\r\n              <dd></dd>\r\n\r\n              <dt>Opis</dt>\r\n              <dd class=\"text-success\">{{item.Naziv}}</dd>\r\n\r\n              <dt>Broj računa</dt>\r\n              <dd class=\"text-success\">{{item.Racun}}</dd>\r\n\r\n              <dt>Primarni</dt>\r\n              <dd class=\"text-success\">{{item.Glavni}}</dd>\r\n\r\n              <dt>Napomena</dt>\r\n              <dd class=\"text-success\">{{item.Opis}}</dd>\r\n            </div>\r\n          </dl>\r\n        </div>\r\n\r\n        <!-- <div>\r\n                                    <ul *ngFor=\"let item of vlasnShow.ZiroVlasnik; let i = index\">\r\n                                        <li>{{item.Naziv}}:{{item.Racun}} {{item.Opis}} </li>\r\n                                    </ul>\r\n                                </div> -->\r\n        <!-- {{vlasnShow.ZiroVlasnik}} -->\r\n      </dd>\r\n      <dt>\r\n        TELEFON\r\n      </dt>\r\n      <dd>\r\n        <div>\r\n          <dl class=\"dl-horizontal\">\r\n            <div *ngFor=\"let item of vlasnShow.TelefVlasnik; let i = index\">\r\n              <dt>{{i+1}}.</dt>\r\n              <dd></dd>\r\n\r\n              <dt>Opis</dt>\r\n              <dd class=\"text-success\">{{item.Naziv}}</dd>\r\n\r\n              <dt>Broj telefona</dt>\r\n              <dd class=\"text-success\">{{item.Telefon}}</dd>\r\n\r\n              <dt>Primarni</dt>\r\n              <dd class=\"text-success\">{{item.Glavni}}</dd>\r\n\r\n              <dt>Napomena</dt>\r\n              <dd class=\"text-success\">{{item.Opis}}</dd>\r\n            </div>\r\n          </dl>\r\n        </div>\r\n        <!-- {{vlasnShow.TelefVlasnik}} -->\r\n      </dd>\r\n\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{vlasnShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -8466,7 +10403,8 @@ var VlasnikComponent = (function () {
         this.flashMessage = flashMessage;
         this.displayDetals = false;
         this.vlasnShow = new __WEBPACK_IMPORTED_MODULE_6__vlasnik_model__["a" /* VlasnikModel */]();
-        this.Title = "PREGLED VLASNIKA";
+        this.auto = 'auto';
+        this.Title = 'PREGLED VLASNIKA';
     }
     VlasnikComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -8475,24 +10413,22 @@ var VlasnikComponent = (function () {
             if (profile.success === true) {
                 _this.vlasnL = profile.data;
             }
-            // }
         }, function (error) {
             _this.flashMessage.show(error.message, {
                 cssClass: 'alert-danger',
                 timeout: 9000
             });
-            console.log(error.message);
             _this.vlasnL = [];
             return false;
         });
     };
     VlasnikComponent.prototype.selectItem = function (work) {
-        // this.selectedOpstina=opstina;  
         this.displayDetals = true;
         this.vlasnShow = this.cloneData(work);
     };
     VlasnikComponent.prototype.cloneData = function (c) {
         var work = new __WEBPACK_IMPORTED_MODULE_6__vlasnik_model__["a" /* VlasnikModel */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
         }
@@ -8510,7 +10446,6 @@ var VlasnikComponent = (function () {
             message: "Jeste li sigurni da \u017Eelite uklonite izabrani podatak ?   ",
             header: "" + tvlasn.Ime,
             accept: function () {
-                //Actual logic to perform a confirmation
                 var index = _this.vlasnL.indexOf(tvlasn);
                 // console.log("index je " + index);
                 _this.vlasnL.splice(index, 1);
@@ -8526,7 +10461,6 @@ var VlasnikComponent = (function () {
                         _this.router.navigate(['NotFound']);
                     }
                 }, function (error) {
-                    //alert("Could not delete radnik.");
                     _this.flashMessage.show(error.message, {
                         cssClass: 'alert-danger',
                         timeout: 5000
@@ -8570,12 +10504,14 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__vlasnik_routing_module__ = __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__vlasnik_form_zirovlasnik_component__ = __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik-form/zirovlasnik.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__vlasnik_form_telefonvlasnik_component__ = __webpack_require__("../../../../../src/app/components/vlasnik/vlasnik-form/telefonvlasnik.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -8606,6 +10542,7 @@ VlasnikModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
+            __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */],
             __WEBPACK_IMPORTED_MODULE_7__vlasnik_routing_module__["a" /* VlasnikRoutingModule */]
         ],
         declarations: [
@@ -8631,16 +10568,22 @@ VlasnikModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__ = __webpack_require__("../../../../rxjs/add/operator/do.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8653,27 +10596,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import 'rxjs/add/operator/do';
 
 
 
+// import { ResponeCustom } from './../../shared/models/ErrorRes';
 
-
-
-var VlasnikService = (function () {
+var VlasnikService = (function (_super) {
+    __extends(VlasnikService, _super);
     function VlasnikService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    VlasnikService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     VlasnikService.prototype.getVlasn = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -8682,7 +10623,7 @@ var VlasnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -8691,7 +10632,7 @@ var VlasnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/');
         return this.http.post(ep, JSON.stringify(vlasn), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -8701,7 +10642,7 @@ var VlasnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + vlasn._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + vlasn._id);
         return this.http.put(ep, JSON.stringify(vlasn), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -8710,20 +10651,21 @@ var VlasnikService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/vlasnik/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    VlasnikService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
+    VlasnikService.prototype.getVlasnRacun = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/getvlasracun');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     return VlasnikService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_6__services_base_service__["a" /* BaseService */]));
 VlasnikService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -8731,6 +10673,53 @@ VlasnikService = __decorate([
 
 var _a;
 //# sourceMappingURL=vlasnik.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/zadrugar/zadrugar-form/zadruga-adresa.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"form-group\" [formGroup]=\"Adresa\">\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Ulica:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdUlica\" required>\r\n      </label>\r\n      <div *ngIf=\"Adresa.controls.AdUlica.invalid && (Adresa.controls.AdUlica.dirty || Adresa.controls.AdUlica.touched)\" class=\"alert alert-danger\">\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.required\">\r\n          <strong> Ulica je obavezan podatak !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.minlength\">\r\n          <strong>Ulica mora biti minimalno 2 karaktera dužine !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdUlica.errors.maxlength\">\r\n          <strong>Predugačak podatak o ulici !!!</strong>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"form-group col-md-2\">\r\n      <label>Broj:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdBroj\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-5\">\r\n      <label class=\"center-block\">Mesto:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdMesto\" required>\r\n      </label>\r\n      <div *ngIf=\"Adresa.controls.AdMesto.invalid && (Adresa.controls.AdMesto.dirty || Adresa.controls.AdMesto.touched)\" class=\"alert alert-danger\">\r\n        <div *ngIf=\"Adresa.controls.AdMesto.errors.required\">\r\n          <strong> Mesto je obavezan podatak !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdMesto.errors.minlength\">\r\n          <strong>Mesto mora biti minimalno 2 karaktera dužine !!!</strong>\r\n        </div>\r\n        <div *ngIf=\"Adresa.controls.AdMesto.errors.maxlength\">\r\n          <strong>Predugačak podatak o mestu !!!</strong>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"form-group col-md-3\">\r\n      <label class=\"center-block\">Ptt:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttReon\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-3\">\r\n      <label class=\"center-block\">Ptt pak:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdPttPak\">\r\n      </label>\r\n    </div>\r\n    <div class=\"form-group col-md-6\">\r\n      <label class=\"center-block\">Zemlja:\r\n        <input type=\"text\" class=\"form-control input-sm\" formControlName=\"AdDrzava\">\r\n      </label>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/zadrugar/zadrugar-form/zadruga-adresa.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ZadrugarAdresaComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ZadrugarAdresaComponent = (function () {
+    function ZadrugarAdresaComponent() {
+    }
+    return ZadrugarAdresaComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('groupAdresa'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormGroup"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormGroup"]) === "function" && _a || Object)
+], ZadrugarAdresaComponent.prototype, "Adresa", void 0);
+ZadrugarAdresaComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        // moduleId: module.id,
+        selector: 'app-zadrugar-adresa',
+        template: __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadruga-adresa.component.html")
+    })
+], ZadrugarAdresaComponent);
+
+var _a;
+//# sourceMappingURL=zadruga-adresa.component.js.map
 
 /***/ }),
 
@@ -8755,7 +10744,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/zadrugar/zadrugar-form/zadrugar-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  zadrugar-form works!\n</p>\n"
+module.exports = "<div class=\"panel panel-primary\" [@formsTransition]>\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n        <h5>{{title}}</h5>\r\n      </div>\r\n      <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n        <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <form [formGroup]=\"formZadr\" (ngSubmit)=\"save()\" novalidate>\r\n      <!-- <div class=\"form-group\" > -->\r\n      <input class=\"form-control\" formControlName=\"_id\" [(ngModel)]=\"zadrN._id\" type=\"hidden\">\r\n      <!-- </div> -->\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">ID:\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group\">\r\n              <input class=\"form-control text-right\" formControlName=\"IDZadrugar\" [(ngModel)]=\"zadrN.IDZadrugar\" (keypress)=\"serValidate.validateOnlyDigit($event)\"\r\n                required>\r\n            </div>\r\n          </div>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Ime:\r\n            <input class=\"form-control\" formControlName=\"Ime\" [(ngModel)]=\"zadrN.Ime\" required>\r\n          </label>\r\n          <div *ngIf=\"Ime.invalid && (Ime.dirty || Ime.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Ime.errors.required\">\r\n              <strong>Ime je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Ime.errors.minlength\">\r\n              <strong>Ime mora biti minimalno 2 karaktera dužine !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Ime.errors.maxlength\">\r\n              <strong>Predugačko Ime !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Prezime:\r\n            <input class=\"form-control\" formControlName=\"Prezime\" [(ngModel)]=\"zadrN.Prezime\" required>\r\n          </label>\r\n          <div *ngIf=\"Prezime.invalid && (Prezime.dirty || Prezime.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"Prezime.errors.required\">\r\n              <strong>Prezime je obavezan podatak !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Prezime.errors.minlength\">\r\n              <strong>Prezime mora biti minimalno 2 karaktera dužine !!!</strong>\r\n            </div>\r\n            <div *ngIf=\"Prezime.errors.maxlength\">\r\n              <strong>Predugačko prezime !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Ime Roditelja:\r\n            <input class=\"form-control\" formControlName=\"ImeRoditelja\" [(ngModel)]=\"zadrN.ImeRoditelja\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Datum rodjenja:\r\n            <div class=\"input-group\">\r\n              <div class=\"input-group\">\r\n                <input [ngModel]=\"zadrN.DatRodjenja | date:'yyyy-MM-dd'\" type=\"date\" formControlName=\"DatRodjenja\" name=\"DatRodjenja\" class=\"form-control\"\r\n                  required>\r\n              </div>\r\n            </div>\r\n          </label>\r\n          <div *ngIf=\"DatRodjenja.invalid && (DatRodjenja.dirty || DatRodjenja.touched)\" class=\"alert alert-danger\">\r\n            <div *ngIf=\"DatRodjenja.errors.required\">\r\n              <strong>Datum je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-4\">\r\n          <div class=\"checkbox\">\r\n            <label class=\"center-block\">\r\n              <input type=\"checkbox\" formControlName=\"Aktivan\" [(ngModel)]=\"zadrN.Aktivan\">Aktivan\r\n            </label>\r\n          </div>\r\n        </div>\r\n\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Pol:\r\n            <select formControlName=\"Pol\" class=\"form-control\" [(ngModel)]=\"zadrN.Pol\" required>\r\n              <option *ngFor=\"let list of zadPolC\" [value]=\"list\">\r\n                {{ list }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"Pol.invalid && (Pol.dirty || Pol.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"Pol.errors.required\">\r\n              <strong>Pol je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Opština rođenja:\r\n            <input class=\"form-control\" formControlName=\"OpstinaRodj\" [(ngModel)]=\"zadrN.OpstinaRodj\">\r\n          </label>\r\n        </div>\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Mesto rođenja:\r\n            <input class=\"form-control\" formControlName=\"MestoRodj\" [(ngModel)]=\"zadrN.MestoRodj\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Vrsta idetifikatora primaoca:\r\n            <select formControlName=\"VrstaIdentifikatoraPrimaoca\" class=\"form-control\" [(ngModel)]=\"zadrN.VrstaIdentifikatoraPrimaoca\"\r\n              required>\r\n              <option *ngFor=\"let list of zadIdentC\" [value]=\"list\">\r\n                {{ list }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"VrstaIdentifikatoraPrimaoca.invalid && (VrstaIdentifikatoraPrimaoca.dirty || VrstaIdentifikatoraPrimaoca.touched)\"\r\n            class=\"alert btn-danger\">\r\n            <div *ngIf=\"VrstaIdentifikatoraPrimaoca.errors.required\">\r\n              <strong>Idetifikator je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Jmbg:\r\n            <input class=\"form-control\" formControlName=\"Jmbg\" [(ngModel)]=\"zadrN.Jmbg\">\r\n          </label>\r\n          <div *ngIf=\"Jmbg.invalid && (Jmbg.dirty || Jmbg.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"Jmbg.errors.required\">\r\n              <strong>Jmbg je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"panel panel-default\">\r\n          <div class=\"panel-heading\">\r\n            <strong>Adresa:</strong>\r\n          </div>\r\n          <div class=\"panel-body\">\r\n            <app-zadrugar-adresa [groupAdresa]=\"Adresa\"></app-zadrugar-adresa>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Broj lične karte:\r\n            <input class=\"form-control\" formControlName=\"BrLK\" [(ngModel)]=\"zadrN.BrLK\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Telefon:\r\n            <input class=\"form-control\" formControlName=\"Telefon\" [(ngModel)]=\"zadrN.Telefon\">\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Email:\r\n            <input class=\"form-control\" formControlName=\"ZadEmail\" [(ngModel)]=\"zadrN.ZadEmail\">\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-5\">\r\n          <label class=\"center-block\">Mesto zadruga:\r\n            <select formControlName=\"MestaID\" class=\"form-control\" placeholder=\"Select mesto\" [(ngModel)]=\"zadrN.MestaID\" required>\r\n              <option *ngFor=\"let list of mestaL\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"MestaID.invalid && (MestaID.dirty || MestaID.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"MestaID.errors.required\">\r\n              <strong>Mesto je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-1\">\r\n          <label class=\"center-block\">&nbsp;&nbsp;&nbsp;\r\n            <button type=\"button\" class=\"btn btn-info form-control\" (click)=\"GetPickMesto()\">\r\n              <span class=\"glyphicon glyphicon-search\"></span>\r\n              <!-- ... -->\r\n              ...\r\n            </button>\r\n          </label>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-5\">\r\n          <label class=\"center-block\">Zanimanje zadruga:\r\n            <select formControlName=\"ZanimanjaID\" class=\"form-control\" placeholder=\"Select zanimanje\" [(ngModel)]=\"zadrN.ZanimanjaID\"\r\n              required>\r\n              <option *ngFor=\"let list of zanimL\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"ZanimanjaID.invalid && (ZanimanjaID.dirty || ZanimanjaID.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"ZanimanjaID.errors.required\">\r\n              <strong>Zanimanje je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group col-md-1\">\r\n          <label class=\"center-block\">&nbsp;&nbsp;&nbsp;\r\n            <button type=\"button\" class=\"btn btn-info form-control\" (click)=\"GetPickMesto()\">\r\n              <span class=\"glyphicon glyphicon-search\"></span>\r\n              <!-- ... -->\r\n              ...\r\n            </button>\r\n          </label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">Tip zadrugara:\r\n            <select formControlName=\"TipZadrugar\" class=\"form-control\" [(ngModel)]=\"zadrN.TipZadrugar\" required>\r\n              <option *ngFor=\"let list of zadTipC\" [value]=\"list\">\r\n                {{ list }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"TipZadrugar.invalid && (TipZadrugar.dirty || TipZadrugar.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"TipZadrugar.errors.required\">\r\n              <strong>Tip zadrugara je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-5\">\r\n          <label class=\"center-block\">Broj indexa:\r\n            <input class=\"form-control\" formControlName=\"BrIndexa\" [(ngModel)]=\"zadrN.BrIndexa\">\r\n          </label>\r\n          <div *ngIf=\"BrIndexa.invalid && (BrIndexa.dirty || BrIndexa.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"BrIndexa.errors.required\">\r\n              <strong>Broj indexa je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-5\">\r\n          <label class=\"center-block\">Broj radne knjižice:\r\n            <input class=\"form-control\" formControlName=\"BrRadneKnjiz\" [(ngModel)]=\"zadrN.BrRadneKnjiz\">\r\n          </label>\r\n          <div *ngIf=\"BrRadneKnjiz.invalid && (BrRadneKnjiz.dirty || BrRadneKnjiz.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"BrRadneKnjiz.errors.required\">\r\n              <strong>Broj radne knjižice je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"form-group col-md-2\">\r\n          <label class=\"center-block\">Tip isplate:\r\n            <select formControlName=\"TipIsplate\" class=\"form-control\" [(ngModel)]=\"zadrN.TipIsplate\" required>\r\n              <option *ngFor=\"let list of zadIsplC\" [value]=\"list\">\r\n                {{ list }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"TipIsplate.invalid && (TipIsplate.dirty || TipIsplate.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"TipIsplate.errors.required\">\r\n              <strong>Tip isplate je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-4\">\r\n          <label class=\"center-block\">Banka:\r\n            <select formControlName=\"BankaID\" class=\"form-control\" [(ngModel)]=\"zadrN.BankaID\">\r\n              <option *ngFor=\"let list of bankeL\" [value]=\"list._id\">\r\n                {{ list.Naziv }}\r\n              </option>\r\n            </select>\r\n          </label>\r\n          <div *ngIf=\"BankaID.invalid && (BankaID.dirty || BankaID.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"BankaID.errors.required\">\r\n              <strong>Banka je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <label class=\"center-block\">Broj računa:\r\n            <input class=\"form-control\" formControlName=\"BrojRacuna\" [(ngModel)]=\"zadrN.BrojRacuna\">\r\n          </label>\r\n          <div *ngIf=\"BrojRacuna.invalid && (BrojRacuna.dirty || BrojRacuna.touched)\" class=\"alert btn-danger\">\r\n            <div *ngIf=\"BrojRacuna.errors.required\">\r\n              <strong>Broj računa je obavezan podatak !!!</strong>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label class=\"center-block\">Opis:\r\n          <textarea class=\"form-control\" formControlName=\"Opis\" [(ngModel)]=\"zadrN.Opis\">\r\n\r\n          </textarea>\r\n        </label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-offset-5 col-md-12\">\r\n          <button type=\"submit\" [disabled]=\"!formZadr.valid\" class=\"btn btn-success\">\r\n            <span class=\"glyphicon glyphicon-saved\"></span>\r\n            Save\r\n          </button>\r\n\r\n          <button type=\"reset\" class=\"btn btn-danger\" [disabled]=\"formZadr.pristine\" (click)=\"revert()\">\r\n            <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n            Clear data\r\n          </button>\r\n\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"panel-footer\">\r\n    <!-- <div class=\"col-md-offset-2 col-md-9\"> -->\r\n    <button (click)=\"backClicked()\" class=\"btn btn-primary btn-block\">\r\n      <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n      Back\r\n    </button>\r\n    <!-- </div> -->\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<p-dialog header=\"ODABIR MESTA\" [(visible)]=\"displayPickMesto\" modal=\"modal\" [responsive]=\"true\" [width]=\"pickWidth\" [height]=\"auto\">\r\n\r\n  <app-pick-mesto [mestaL]=\"mestaL\" (pickRow)=\"PickMesto($event)\" (pickNothing)=\"displayPickMesto=false\">\r\n  </app-pick-mesto>\r\n\r\n</p-dialog>\r\n"
 
 /***/ }),
 
@@ -8765,6 +10754,20 @@ module.exports = "<p>\n  zadrugar-form works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ZadrugarFormComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__animation_forms_animations__ = __webpack_require__("../../../../../src/app/animation/forms.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_service_validate_shared__ = __webpack_require__("../../../../../src/app/services/service.validate.shared.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__zadrugar_model__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__zadrugar_service__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__zanimanja_zanimanja_service__ = __webpack_require__("../../../../../src/app/components/zanimanja/zanimanja.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__mesta_mesta_service__ = __webpack_require__("../../../../../src/app/components/mesta/mesta.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__banke_banke_service__ = __webpack_require__("../../../../../src/app/components/banke/banke.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_EnumApp_zadrugar_enum__ = __webpack_require__("../../../../../src/app/shared/EnumApp/zadrugar.enum.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dashboard_dashboard_service__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8775,10 +10778,430 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 var ZadrugarFormComponent = (function () {
-    function ZadrugarFormComponent() {
+    function ZadrugarFormComponent(zadrService, router, route, _fb, _location, flashMessage, serValidate, mestaService, zanService, bankService, dhServ) {
+        this.zadrService = zadrService;
+        this.router = router;
+        this.route = route;
+        this._fb = _fb;
+        this._location = _location;
+        this.flashMessage = flashMessage;
+        this.serValidate = serValidate;
+        this.mestaService = mestaService;
+        this.zanService = zanService;
+        this.bankService = bankService;
+        this.dhServ = dhServ;
+        this.zadrN = new __WEBPACK_IMPORTED_MODULE_7__zadrugar_model__["b" /* ZadrugarModel */]();
+        this.saveTemp = true;
+        this.zadPolC = __WEBPACK_IMPORTED_MODULE_12__shared_EnumApp_zadrugar_enum__["c" /* PolZadruga */];
+        this.zadIsplC = __WEBPACK_IMPORTED_MODULE_12__shared_EnumApp_zadrugar_enum__["b" /* IsplateTip */];
+        this.zadTipC = __WEBPACK_IMPORTED_MODULE_12__shared_EnumApp_zadrugar_enum__["d" /* ZadrugarTip */];
+        this.zadIdentC = __WEBPACK_IMPORTED_MODULE_12__shared_EnumApp_zadrugar_enum__["a" /* IdentZadrugara */];
+        this.displayPickMesto = false;
+        this.pickHeight = (window.innerHeight) * 0.8;
+        this.pickWidth = (window.innerWidth) * 0.8;
+        this.formZadr = this._fb.group({
+            _id: [],
+            IDZadrugar: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            Ime: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)]],
+            Prezime: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)]],
+            ImeRoditelja: [''],
+            DatRodjenja: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            Aktivan: [false],
+            Pol: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            OpstinaRodj: [''],
+            MestoRodj: [''],
+            VrstaIdentifikatoraPrimaoca: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            Jmbg: [''],
+            Adresa: this._fb.group({
+                AdUlica: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)]],
+                AdBroj: [''],
+                AdMesto: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(2), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)]],
+                AdPttReon: [''],
+                AdPttPak: [''],
+                AdDrzava: ['']
+            }),
+            BrLK: [''],
+            Telefon: [''],
+            ZadEmail: [''],
+            MestaID: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            ZanimanjaID: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            TipZadrugar: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            BrRadneKnjiz: [''],
+            BrIndexa: [''],
+            TipIsplate: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
+            BankaID: [''],
+            BrojRacuna: [''],
+            BeliBroj: [''],
+            BrojDana: [''],
+            Slika: [''],
+            Opis: ['']
+        });
     }
     ZadrugarFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.bankService.getBanke()
+            .subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.bankeL = profile.data;
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.bankeL = [];
+        });
+        this.zanService.getZanimanja()
+            .subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.zanimL = profile.data;
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'btn-danger',
+                timeout: 9000
+            });
+            _this.zanimL = [];
+        });
+        this.mestaService.getPickMesta().subscribe(function (profile) {
+            if (profile.success === true) {
+                _this.mestaL = profile.data;
+            }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'alert-danger',
+                timeout: 9000
+            });
+            _this.mestaL = [];
+        });
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.title = id ? 'Ažuriranje zadrugara' : 'Novi zadrugar';
+            if (!id) {
+                _this.loadTempData();
+                _this.getNewIdNumber();
+                return;
+            }
+            _this.zadrService.getZadrugar(id)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.saveTemp = false;
+                    // this.zadrN = pos.data[0];
+                    _this.zadrN = pos.data;
+                    _this.zadrAdresa = pos.data.Adresa;
+                    _this.initAdresa(_this.zadrAdresa);
+                }
+                else {
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-danger',
+                        timeout: 9000
+                    });
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+                // if (error == 404 || error.status == 400 ) {
+                _this.router.navigate(['NotFound']);
+                // }
+            });
+        });
+        this.VrstaIdentifikatoraPrimaoca.valueChanges.subscribe(function (validate) {
+            if (validate === 'JMBG_EBS') {
+                _this.Jmbg.setValidators([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(13), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(13)]);
+            }
+            else {
+                _this.Jmbg.setValidators(null);
+            }
+            _this.Jmbg.updateValueAndValidity();
+        });
+        this.TipZadrugar.valueChanges.subscribe(function (validate) {
+            _this.BrIndexa.setValidators(null);
+            _this.BrRadneKnjiz.setValidators(null);
+            if (validate === 'Ucenik') {
+                _this.BrIndexa.setValidators([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]);
+                _this.BrRadneKnjiz.setValidators(null);
+            }
+            else if (validate === 'Osiguranik') {
+                _this.BrIndexa.setValidators(null);
+                _this.BrRadneKnjiz.setValidators([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]);
+            }
+            _this.BrIndexa.updateValueAndValidity();
+            _this.BrRadneKnjiz.updateValueAndValidity();
+        });
+        this.TipIsplate.valueChanges.subscribe(function (validate) {
+            _this.BankaID.setValidators(null);
+            _this.BrojRacuna.setValidators(null);
+            // this.BrojRacuna.setValue(null);
+            // this.BankaID.setValue(null);
+            if (validate === 'Gotovina') {
+                _this.BankaID.setValidators(null);
+                _this.BrojRacuna.setValidators(null);
+                // this.BrojRacuna.setValue(null);
+                // this.BankaID.setValue(null);
+            }
+            else if (validate === 'Tekuci' || validate === 'Stedna') {
+                _this.BankaID.setValidators([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]);
+                _this.BrojRacuna.setValidators([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]);
+            }
+            _this.BankaID.updateValueAndValidity();
+            _this.BrojRacuna.updateValueAndValidity();
+        });
+    };
+    ZadrugarFormComponent.prototype.getNewIdNumber = function () {
+        var _this = this;
+        this.dhServ.getZadrugariCount().subscribe(function (profile) {
+            if (profile.success === true) {
+                var broj = profile.number + 1;
+                _this.IDZadrugar.setValue(broj);
+            }
+        }, function (err) {
+            console.log(err);
+            _this.IDZadrugar.setValue(0);
+            return false;
+        });
+    };
+    Object.defineProperty(ZadrugarFormComponent.prototype, "IDZadrugar", {
+        get: function () { return this.formZadr.get('IDZadrugar'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "Ime", {
+        get: function () { return this.formZadr.get('Ime'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "Prezime", {
+        get: function () { return this.formZadr.get('Prezime'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "DatRodjenja", {
+        get: function () { return this.formZadr.get('DatRodjenja'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "Pol", {
+        get: function () { return this.formZadr.get('Pol'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "VrstaIdentifikatoraPrimaoca", {
+        get: function () { return this.formZadr.get('VrstaIdentifikatoraPrimaoca'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "Jmbg", {
+        get: function () { return this.formZadr.get('Jmbg'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "MestaID", {
+        get: function () { return this.formZadr.get('MestaID'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "ZanimanjaID", {
+        get: function () { return this.formZadr.get('ZanimanjaID'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "TipZadrugar", {
+        get: function () { return this.formZadr.get('TipZadrugar'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "BrRadneKnjiz", {
+        get: function () { return this.formZadr.get('BrRadneKnjiz'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "BrIndexa", {
+        get: function () { return this.formZadr.get('BrIndexa'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "TipIsplate", {
+        get: function () { return this.formZadr.get('TipIsplate'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "BankaID", {
+        get: function () { return this.formZadr.get('BankaID'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "BrojRacuna", {
+        get: function () { return this.formZadr.get('BrojRacuna'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ZadrugarFormComponent.prototype, "Adresa", {
+        get: function () { return this.formZadr.get('Adresa'); },
+        enumerable: true,
+        configurable: true
+    });
+    ZadrugarFormComponent.prototype.GetPickMesto = function () {
+        this.displayPickMesto = true;
+    };
+    ZadrugarFormComponent.prototype.PickMesto = function (event) {
+        this.displayPickMesto = false;
+        console.log('Ovo parametar koji sam dobio PickMesto' + JSON.stringify(event));
+        this.selectedPickMesto = event;
+        // console.log(JSON.stringify(this.selectedKupac));
+        if (this.selectedPickMesto) {
+            if (this.selectedPickMesto._id) {
+                this.MestaID.setValue(this.selectedPickMesto._id);
+                // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
+            }
+        }
+    };
+    ZadrugarFormComponent.prototype.initAdresa = function (tAdresa) {
+        this.Adresa.setValue({
+            AdUlica: tAdresa.AdUlica,
+            AdBroj: tAdresa.AdBroj,
+            AdMesto: tAdresa.AdMesto,
+            AdPttReon: tAdresa.AdPttReon,
+            AdPttPak: tAdresa.AdPttPak,
+            AdDrzava: tAdresa.AdDrzava
+        });
+    };
+    ZadrugarFormComponent.prototype.save = function () {
+        var _this = this;
+        var FZValue = this.formZadr.value;
+        if (FZValue._id) {
+            this.zadrService.updateZadrugar(FZValue).subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['zadrugar']);
+                }
+                else {
+                    _this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+            });
+        }
+        else {
+            this.zadrService.addZadrugar(FZValue)
+                .subscribe(function (pos) {
+                if (pos.success) {
+                    _this.clearTempData();
+                    _this.saveTemp = false;
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    _this.router.navigate(['zadrugar']);
+                }
+                else {
+                    _this.flashMessage.show(pos.message, {
+                        cssClass: 'alert-success',
+                        timeout: 5000
+                    });
+                    // this.router.navigate(['NotFound']);
+                }
+            }, function (error) {
+                _this.flashMessage.show('Error !!! ' + error.message, {
+                    cssClass: 'alert-danger',
+                    timeout: 9000
+                });
+            });
+        }
+    };
+    ZadrugarFormComponent.prototype.loadTempData = function () {
+        var wdata = JSON.parse(localStorage.getItem('data_zadrugar'));
+        if (wdata) {
+            this.zadrN = wdata;
+            if (this.zadrN.Adresa) {
+                var adresUpi = new __WEBPACK_IMPORTED_MODULE_7__zadrugar_model__["a" /* ZDAdresaModel */]();
+                adresUpi.AdUlica = this.zadrN.Adresa.AdUlica || '';
+                adresUpi.AdBroj = this.zadrN.Adresa.AdBroj || '';
+                adresUpi.AdMesto = this.zadrN.Adresa.AdMesto || '';
+                adresUpi.AdPttReon = this.zadrN.Adresa.AdPttReon || '';
+                adresUpi.AdPttPak = this.zadrN.Adresa.AdPttPak || '';
+                adresUpi.AdDrzava = this.zadrN.Adresa.AdDrzava || '';
+                this.initAdresa(adresUpi);
+            }
+            // console.log(this.zadrN.Adresa);
+        }
+    };
+    ZadrugarFormComponent.prototype.setTempData = function () {
+        var fsValue = JSON.stringify(this.formZadr.value);
+        if (fsValue) {
+            if (this.saveTemp) {
+                localStorage.setItem('data_zadrugar', fsValue);
+            }
+            else {
+                this.clearTempData();
+            }
+        }
+    };
+    ZadrugarFormComponent.prototype.backClicked = function (event) {
+        this.setTempData();
+        this._location.back();
+    };
+    ZadrugarFormComponent.prototype.clearTempData = function () {
+        localStorage.removeItem('data_zadrugar');
+    };
+    ZadrugarFormComponent.prototype.revert = function () { this.clearFormData(); };
+    ZadrugarFormComponent.prototype.clearFormData = function () {
+        this.formZadr.reset({
+            IDZadrugar: '',
+            Ime: '',
+            Prezime: '',
+            ImeRoditelja: '',
+            DatRodjenja: '',
+            Aktivan: '',
+            Pol: '',
+            OpstinaRodj: '',
+            MestoRodj: '',
+            VrstaIdentifikatoraPrimaoca: '',
+            Jmbg: '',
+            Adresa: null,
+            BrLK: '',
+            Telefon: '',
+            ZadEmail: '',
+            MestaID: '',
+            ZanimanjaID: '',
+            TipZadrugar: '',
+            BrRadneKnjiz: '',
+            BrIndexa: '',
+            TipIsplate: '',
+            BankaID: '',
+            BrojRacuna: '',
+            BeliBroj: '',
+            BrojDana: '',
+            Slika: '',
+            Opis: ''
+        });
+    };
+    ZadrugarFormComponent.prototype.ngOnDestroy = function () {
+        this.setTempData();
     };
     return ZadrugarFormComponent;
 }());
@@ -8786,11 +11209,13 @@ ZadrugarFormComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-zadrugar-form',
         template: __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadrugar-form.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadrugar-form.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadrugar-form.component.css")],
+        animations: [Object(__WEBPACK_IMPORTED_MODULE_4__animation_forms_animations__["a" /* formsTransition */])()]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__zadrugar_service__["a" /* ZadrugarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__zadrugar_service__["a" /* ZadrugarService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["Location"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__["FlashMessagesService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_flash_messages__["FlashMessagesService"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__services_service_validate_shared__["a" /* ServiceValidateShared */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_service_validate_shared__["a" /* ServiceValidateShared */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_10__mesta_mesta_service__["a" /* MestaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__mesta_mesta_service__["a" /* MestaService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_9__zanimanja_zanimanja_service__["a" /* ZanimanjaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__zanimanja_zanimanja_service__["a" /* ZanimanjaService */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_11__banke_banke_service__["a" /* BankeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__banke_banke_service__["a" /* BankeService */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_13__dashboard_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__dashboard_dashboard_service__["a" /* DashboardService */]) === "function" && _l || Object])
 ], ZadrugarFormComponent);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 //# sourceMappingURL=zadrugar-form.component.js.map
 
 /***/ }),
@@ -8799,8 +11224,9 @@ ZadrugarFormComponent = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export ZDAdresaModel */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ZadrugarModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ZDAdresaModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ZadrugarModel; });
+/* unused harmony export PickZadrugarModel */
 var ZDAdresaModel = (function () {
     function ZDAdresaModel() {
     }
@@ -8811,6 +11237,12 @@ var ZadrugarModel = (function () {
     function ZadrugarModel() {
     }
     return ZadrugarModel;
+}());
+
+var PickZadrugarModel = (function () {
+    function PickZadrugarModel() {
+    }
+    return PickZadrugarModel;
 }());
 
 //# sourceMappingURL=zadrugar-model.js.map
@@ -8884,7 +11316,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/zadrugar/zadrugar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\n  zadrugar works!\n</p> -->\n\n<div *ngIf=\"zadrL;else  waiting\"  [@routerTransition]>\n\n    <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\n      <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\n        <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\n    </div>\n    <p-dataTable [value]=\"zadrL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\n              selectionMode=\"single\" [(selection)]=\"selectedZadrugar\" dataKey=\"_id\"   \n              styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \n              resizableColumns=\"true\" columnResizeMode=\"expand\">\n\n    <p-header><strong>{{Title}}</strong></p-header>       \n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \n    <p-column field=\"IDZadrugar\" header=\"Šifra\" ></p-column>\n    <p-column field=\"Ime\" header=\"Ime\"  ></p-column>\n    <p-column field=\"Prezime\" header=\"Prezime\"  ></p-column>\n    <p-column field=\"DatRodjenja\" header=\"Datum rodj.\"   styleClass=\"text-right\" >\n          <ng-template let-col let-zadr=\"rowData\" pTemplate=\"body\">\n                  <span>{{zadr[col.field] | date}}</span>\n          </ng-template> \n    </p-column> \n    <p-column field=\"TipZadrugar\" header=\"Tip\" ></p-column>\n    <p-column field=\"ZadEmail\" header=\"ZadEmail\" ></p-column>\n    <p-column field=\"Jmbg\" header=\"Jmbg\"  ></p-column>\n    \n    <p-column field=\"Aktivan\" header=\"Aktivan\"   styleClass=\"text-center\" >\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\n              <span [hidden]=\"partn[col.field]==false\">DA</span> \n              <span [hidden]=\"partn[col.field]==true\">NE</span> \n              \n      </ng-template> \n    </p-column>\n    \n    <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\n     \n        <ng-template let-zadr=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\" >\n\n            <button type=\"button\" pButton (click)=\"selectItem(zadr)\" icon=\"fa fa-info\" title=\"Info\"></button>\n            <button type=\"button\" pButton (click)=\"updateZadrugar(zadr._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\n            <button type=\"button\" pButton (click)=\"deleteZadrugar(zadr)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\n        </ng-template>\n    </p-column>\n     <p-footer *ngIf=\"zadrL.length > 0\">\n        <div class=\"ui-helper-clearfix\" style=\"width:100%\">\n            <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addZadrugar()\" label=\"Add\"></button>\n          </div>\n      </p-footer>\n\n      <ng-template pTemplate=\"emptymessage\">\n          <!-- Custom content goes here -->\n          <div class=\"row\">\n               <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\n                  <div class=\"hidden-xs dtempty_message_h1\">\n                      Još niste kreirali podatak.\n                  </div>\n                  <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\n                  <br/>\n                  <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \n                  <h3 class=\" hidden-xs dtempty_message\" >\n                      <!-- To manually add new one click here: -->\n                      Da biste ručno dodali podatak kliknite: \n                      <a  class=\"dtempty_message_text\" (click)=\"addZadrugar()\">\n                           Kreiraj podatak\n                      </a>\n                  </h3>\n\n                  <h5 class=\"visible-xs\" >\n                      <!-- To manually add new one click here: -->\n                      Da biste ručno dodali podatak kliknite : \n                      <a   (click)=\"addZadrugar()\">\n                           Kreiraj podatak\n                      </a>\n                  </h5>\n\n              </div>\n          </div>\n      </ng-template>\n\n    </p-dataTable>\n  </div>\n  \n  \n  \n  <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\n      <p-footer>\n          <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\n          <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\n       </p-footer>\n  </p-confirmDialog>\n  \n  \n  <p-dialog header=\"ZADRUGAR\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\" >\n  \n          <div>\n                  <dl class=\"dl-horizontal\">\n                      <dt>\n                        ID\n                      </dt>\n                      <dd class=\"text-success\">\n                         {{zadrShow._id}}\n                      </dd>\n                      <dt>\n                        ŠIFRA \n                        </dt>\n                        <dd class=\"text-success\">\n                        {{zadrShow.IDZadrugar}} \n                        </dd>\n\n                      <dt>\n                      IME\n                      </dt>\n                      <dd class=\"text-success\">\n                      {{zadrShow.Ime}} \n                      </dd>\n                      <dt>\n                     PREZIME\n                      </dt>\n                      <dd class=\"text-success\">\n                          {{zadrShow.Prezime}}\n                      </dd>\n                   \n                      <dt>\n                      OPIS\n                      </dt>\n                      <dd class=\"text-success\">\n                          {{zadrShow.Opis}}\n                          \n                      </dd>\n                      <dt>\n                      DATUM UNOSA\n                      </dt>\n                      <dd class=\"text-success\">\n                          {{zadrShow.created_at}}\n                          \n                      </dd>\n                      <dt>\n                      DATUM AŽURIRANJA\n                      </dt>\n                      <dd class=\"text-success\">\n                          {{zadrShow.updatedAt}}\n                          \n                      </dd>\n                      <dt>\n                      KORISNIK\n                      </dt>\n                      <dd class=\"text-success\">\n                          {{zadrShow.NameUser}}\n                          \n                      </dd>\n              \n                  </dl>                        \n          </div>\n          <p-footer> \n           \n          <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\n          \n         </p-footer>\n  </p-dialog>\n  \n  \n\n<ng-template #waiting  >\n  <div class=\"centerWait\">\n  <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\n  Loading...\n  </div>\n</ng-template>\n\n"
+module.exports = "<div *ngIf=\"zadrL;else  waiting\" [@routerTransition]>\r\n\r\n  <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n  </div>\r\n  <p-dataTable [value]=\"zadrL\" [globalFilter]=\"gb\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\" selectionMode=\"single\"\r\n    [(selection)]=\"selectedZadrugar\" dataKey=\"_id\" styleClass=\"table table-striped\" [responsive]=\"true\" [immutable]=\"false\"\r\n    [resizableColumns]=\"true\" columnResizeMode=\"expand\" [reorderableColumns]=\"true\">\r\n\r\n    <p-header>\r\n      <strong>{{Title}}</strong>\r\n    </p-header>\r\n    <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n    <p-column field=\"IDZadrugar\" header=\"Šifra\" sortable=\"true\" [style]=\"{'width':'8%'}\"></p-column>\r\n    <p-column field=\"fullName\" header=\"Zadrugar\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column>\r\n     <p-column field=\"DatRodjenja\" header=\"Datum rodj.\" sortable=\"true\" styleClass=\"text-right\" [style]=\"{'width':'10%'}\">\r\n      <ng-template let-col let-zadr=\"rowData\" pTemplate=\"body\">\r\n        <span>{{zadr[col.field] | date}}</span>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-column field=\"TipZadrugar\" header=\"Tip\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n    <p-column field=\"ZadEmail\" header=\"ZadEmail\" sortable=\"true\" [style]=\"{'width':'15%'}\"></p-column>\r\n    <p-column field=\"Jmbg\" header=\"Jmbg\" sortable=\"true\" [style]=\"{'width':'10%'}\"></p-column>\r\n\r\n    <p-column field=\"Aktivan\" header=\"Aktivan\" sortable=\"true\" styleClass=\"text-center\" [style]=\"{'width':'7%'}\">\r\n      <ng-template let-col let-partn=\"rowData\" pTemplate=\"body\">\r\n        <span [hidden]=\"partn[col.field]==false\">DA</span>\r\n        <span [hidden]=\"partn[col.field]==true\">NE</span>\r\n\r\n      </ng-template>\r\n    </p-column>\r\n\r\n    <p-column styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'width':'10%'}\">\r\n\r\n      <ng-template let-zadr=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n\r\n        <button type=\"button\" pButton (click)=\"selectItem(zadr)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n        <button type=\"button\" pButton (click)=\"updateZadrugar(zadr._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n        <button type=\"button\" pButton (click)=\"deleteZadrugar(zadr)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n      </ng-template>\r\n    </p-column>\r\n    <p-footer *ngIf=\"zadrL.length > 0\">\r\n      <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n        <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addZadrugar()\" label=\"Add\"></button>\r\n      </div>\r\n    </p-footer>\r\n\r\n    <div *ngIf=\"zadrL.length == 0\">\r\n      <ng-template pTemplate=\"emptymessage\">\r\n        <!-- Custom content goes here -->\r\n        <div class=\"row\">\r\n          <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n            <div class=\"hidden-xs dtempty_message_h1\">\r\n              Još niste kreirali podatak.\r\n            </div>\r\n            <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n            <br/>\r\n            <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n            <h3 class=\" hidden-xs dtempty_message\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite:\r\n              <a class=\"dtempty_message_text\" (click)=\"addZadrugar()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h3>\r\n\r\n            <h5 class=\"visible-xs\">\r\n              <!-- To manually add new one click here: -->\r\n              Da biste ručno dodali podatak kliknite :\r\n              <a (click)=\"addZadrugar()\">\r\n                Kreiraj podatak\r\n              </a>\r\n            </h5>\r\n\r\n          </div>\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </p-dataTable>\r\n</div>\r\n\r\n\r\n\r\n<p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\" #cd>\r\n  <p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n    <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n  </p-footer>\r\n</p-confirmDialog>\r\n\r\n\r\n<p-dialog header=\"ZADRUGAR\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\" [width]=\"auto\" [height]=\"auto\">\r\n\r\n  <div>\r\n    <dl class=\"dl-horizontal\">\r\n      <dt>\r\n        ID\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow._id}}\r\n      </dd>\r\n      <dt>\r\n        ŠIFRA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.IDZadrugar}}\r\n      </dd>\r\n\r\n      <dt>\r\n        IME\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Ime}}\r\n      </dd>\r\n      <dt>\r\n        PREZIME\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Prezime}}\r\n      </dd>\r\n\r\n      <dt>\r\n        IME RODITELJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.ImeRoditelja}}\r\n      </dd>\r\n\r\n      <dt>\r\n        DATUM ROĐENJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.DatRodjenja}}\r\n      </dd>\r\n      <dt>\r\n        AKTIVAN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Aktivan | prettyavtiveprint}}\r\n      </dd>\r\n      <dt>\r\n        POL\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Pol}}\r\n      </dd>\r\n      <dt>\r\n        OPŠTINA ROĐENJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.OpstinaRodj}}\r\n      </dd>\r\n      <dt>\r\n        MESTO ROĐENJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.MestoRodj}}\r\n      </dd>\r\n      <dt>\r\n        IDENTIFIKATOR\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.VrstaIdentifikatoraPrimaoca}}\r\n      </dd>\r\n      <dt>\r\n        JMBG\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Jmbg}}\r\n      </dd>\r\n      <dt>\r\n        ADRESA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n\r\n\r\n        <div [innerHTML]=\"zadrShow.Adresa | prettyprint\"></div>\r\n        <!-- {{zadrShow.Adresa | json}} -->\r\n\r\n\r\n\r\n        <!-- <div *ngFor=\"let item of zadrShow.Adresa; let i = index\" >\r\n                                            <dt>Opis</dt>\r\n                                            <dd class=\"text-success\">{{item.AdUlica}}</dd>\r\n                                    </div> -->\r\n\r\n      </dd>\r\n\r\n      <!-- <dt>\r\n                    ADRESA\r\n                    </dt>\r\n                    <dd class=\"text-success\">\r\n                            <dl class=\"dl-horizontal\">\r\n                                    <dt>\r\n                                    ULICA\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdUlica}}\r\n                                    </dd> \r\n                                    <dt>\r\n                                    BROJ\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdBroj}}\r\n                                    </dd> \r\n                                    <dt>\r\n                                    MESTO\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdMesto}}\r\n                                    </dd> \r\n                                    <dt>\r\n                                    PTT\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdPttReon}}\r\n                                    </dd> \r\n                                    <dt>\r\n                                    PAK\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdPttPak}}\r\n                                    </dd> \r\n                                    <dt>\r\n                                    DRŽAVA\r\n                                    </dt>\r\n                                    <dd class=\"text-success\">\r\n                                            {{zadrShow.Adresa.AdDrzava}}\r\n                                    </dd> \r\n                            </dl>\r\n                    </dd> \r\n                     -->\r\n      <dt>\r\n        LIČNA KARTA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BrLK}}\r\n\r\n      </dd>\r\n      <dt>\r\n        TELEFON\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Telefon}}\r\n\r\n      </dd>\r\n      <dt>\r\n        EMAIL\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.ZadEmail}}\r\n      </dd>\r\n      <dt>\r\n        MESTO\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- {{zadrShow.MestaID | json}} -->\r\n        <div [innerHTML]=\"zadrShow.MestaID | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        ZANIMANJE\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- {{zadrShow.ZanimanjaID | json}} -->\r\n        <div [innerHTML]=\"zadrShow.ZanimanjaID | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        TIP\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.TipZadrugar}}\r\n      </dd>\r\n      <dt>\r\n        RADNA KNJIŽICA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BrRadneKnjiz}}\r\n      </dd>\r\n      <dt>\r\n        ĐAČKA/INDEX\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BrIndexa}}\r\n      </dd>\r\n      <dt>\r\n        ISPLATA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.TipIsplate}}\r\n      </dd>\r\n      <dt>\r\n        BANKA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        <!-- <pre>{{zadrShow.BankaID | prettyprint }}</pre> -->\r\n        <div [innerHTML]=\"zadrShow.BankaID | prettyprint\"></div>\r\n      </dd>\r\n      <dt>\r\n        RAČUN\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BrojRacuna}}\r\n      </dd>\r\n      <dt>\r\n        BELI BROJ\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BeliBroj}}\r\n      </dd>\r\n      <dt>\r\n        DANA RADA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.BrojDana}}\r\n      </dd>\r\n      <dt>\r\n        OPIS\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.Opis}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM UNOSA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.created_at}}\r\n\r\n      </dd>\r\n      <dt>\r\n        DATUM AŽURIRANJA\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.updatedAt}}\r\n\r\n      </dd>\r\n      <dt>\r\n        KORISNIK\r\n      </dt>\r\n      <dd class=\"text-success\">\r\n        {{zadrShow.NameUser}}\r\n\r\n      </dd>\r\n\r\n    </dl>\r\n  </div>\r\n  <p-footer>\r\n\r\n    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n\r\n  </p-footer>\r\n</p-dialog>\r\n\r\n\r\n\r\n<ng-template #waiting>\r\n  <div class=\"centerWait\">\r\n    <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n    Loading...\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -8925,7 +11357,8 @@ var ZadrugarComponent = (function () {
         this.confirmationService = confirmationService;
         this.flashMessage = flashMessage;
         this.displayDetals = false;
-        this.zadrShow = new __WEBPACK_IMPORTED_MODULE_5__zadrugar_model__["a" /* ZadrugarModel */]();
+        this.zadrShow = new __WEBPACK_IMPORTED_MODULE_5__zadrugar_model__["b" /* ZadrugarModel */]();
+        this.auto = 'auto';
         this.Title = 'PREGLED ZADRUGARA';
     }
     ZadrugarComponent.prototype.ngOnInit = function () {
@@ -8949,9 +11382,10 @@ var ZadrugarComponent = (function () {
     ZadrugarComponent.prototype.selectItem = function (work) {
         this.displayDetals = true;
         this.zadrShow = this.cloneData(work);
+        console.log('Ulica' + this.zadrShow.Adresa.AdUlica);
     };
     ZadrugarComponent.prototype.cloneData = function (c) {
-        var work = new __WEBPACK_IMPORTED_MODULE_5__zadrugar_model__["a" /* ZadrugarModel */]();
+        var work = new __WEBPACK_IMPORTED_MODULE_5__zadrugar_model__["b" /* ZadrugarModel */]();
         // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
@@ -9024,14 +11458,20 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_primeng_primeng__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__zadrugar_component__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__zadrugar_form_zadrugar_form_component__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadrugar-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__zadrugar_service__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__zadrugar_routing_module__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__zadrugar_form_zadruga_adresa_component__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-form/zadruga-adresa.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__zadrugar_service__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__zadrugar_routing_module__ = __webpack_require__("../../../../../src/app/components/zadrugar/zadrugar-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__ = __webpack_require__("../../../../../src/app/shared/pickup/pickup.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__ = __webpack_require__("../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -9060,13 +11500,16 @@ ZadrugarModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
             __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"],
-            __WEBPACK_IMPORTED_MODULE_7__zadrugar_routing_module__["a" /* ZadrugarRoutingModule */]
+            __WEBPACK_IMPORTED_MODULE_9__shared_pickup_pickup_module__["a" /* PickupModule */],
+            __WEBPACK_IMPORTED_MODULE_8__zadrugar_routing_module__["a" /* ZadrugarRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_10__shared_PipeApp_apppipe_apppipe_module__["a" /* ApppipeModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__zadrugar_component__["a" /* ZadrugarComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__zadrugar_form_zadrugar_form_component__["a" /* ZadrugarFormComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__zadrugar_form_zadrugar_form_component__["a" /* ZadrugarFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__zadrugar_form_zadruga_adresa_component__["a" /* ZadrugarAdresaComponent */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_6__zadrugar_service__["a" /* ZadrugarService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
+        providers: [__WEBPACK_IMPORTED_MODULE_7__zadrugar_service__["a" /* ZadrugarService */], __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]]
     })
 ], ZadrugarModule);
 
@@ -9083,16 +11526,22 @@ ZadrugarModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__ = __webpack_require__("../../../../rxjs/add/operator/do.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9105,27 +11554,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import 'rxjs/add/operator/do';
 
 
 
 
-
-
-var ZadrugarService = (function () {
+var ZadrugarService = (function (_super) {
+    __extends(ZadrugarService, _super);
     function ZadrugarService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev; // Change to false before deployment  sredi ovo
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    ZadrugarService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
     ZadrugarService.prototype.getZadrugari = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    ZadrugarService.prototype.getPickZadrugari = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/pickzadrugar');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9134,7 +11589,7 @@ var ZadrugarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9143,7 +11598,7 @@ var ZadrugarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/');
         return this.http.post(ep, JSON.stringify(tzadrugar), { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
@@ -9153,7 +11608,7 @@ var ZadrugarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + tzadrugar._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + tzadrugar._id);
         return this.http.put(ep, JSON.stringify(tzadrugar), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9162,20 +11617,21 @@ var ZadrugarService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zadrugar/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    ZadrugarService.prototype.handleError = function (error) {
-        var myerror = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
-        var servererr = new __WEBPACK_IMPORTED_MODULE_8__shared_models_ErrorRes__["a" /* ResponeCustom */]();
-        servererr.message = 'Server error';
-        servererr.success = false;
-        servererr.data = [];
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(myerror || servererr);
+    ZadrugarService.prototype.getActivZadrugar = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/activzadrugar');
+        return this.http.get(ep, { headers: headers })
+            .map(function (res) { return res.json(); }).catch(this.handleError);
     };
     return ZadrugarService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_6__services_base_service__["a" /* BaseService */]));
 ZadrugarService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -9207,7 +11663,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/zanimanja/zanimanja-form/zanimanja-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  zanimanja-form works!\r\n</p> -->\r\n<div class=\"panel panel-primary\" [@routerTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n              <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n      </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formZAN\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"zanimN._id\"   type=\"hidden\">\r\n          </div>\r\n      \r\n            \r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Šifra:\r\n              <input class=\"form-control\" formControlName=\"Sifra\"  [(ngModel)]=\"zanimN.Sifra\" required >\r\n            </label>\r\n            <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['Sifra'].valid && formZAN.controls['Sifra'].touched\">Obavezno</div>  -->\r\n\r\n            <div *ngIf=\"Sifra.invalid && (Sifra.dirty || Sifra.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Sifra.errors.required\">\r\n                    <strong>Šifra je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.minlength\">\r\n                  <strong>Šifra mora biti minimalno 4 karaktera dužine !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.maxlength\">\r\n                  <strong>Predugačka šifra !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.validateSifru\">\r\n                  <strong>Šifra nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n                </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv zanimanja:\r\n                <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"zanimN.Naziv\"  required>\r\n              </label>\r\n               <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['Naziv'].valid && formZAN.controls['Naziv'].touched\">Obavezno</div>  -->\r\n               <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert alert-danger\">\r\n                <div *ngIf=\"Naziv.errors.required\">\r\n                    <strong>Naziv je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.maxlength\">\r\n                  <strong>Predugački naziv !!!</strong>\r\n                </div>\r\n               </div>\r\n\r\n\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Stručna sprema:\r\n                <select  formControlName=\"StepenSS\" class=\"form-control\"  [(ngModel)]=\"zanimN.StepenSS\"  required>\r\n                  <option *ngFor=\"let list of strSprema\" [value]=\"list\">\r\n                    {{ list }}\r\n                  </option>\r\n                </select>\r\n                <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['StepenSS'].valid && formZAN.controls['StepenSS'].touched\">Obavezno</div>  -->\r\n\r\n                <div *ngIf=\"StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)\" class=\"alert alert-danger\">\r\n                  <div *ngIf=\"StepenSS.errors.required\">\r\n                      <strong>Stepen stručne spreme je obavezan podatak !!!</strong>\r\n                  </div>\r\n                  \r\n                 </div>\r\n\r\n              </label>\r\n          </div>\r\n         \r\n          <div class=\"form-group\">\r\n                <label class=\"center-block\">Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"zanimN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formZAN.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formZAN.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n      \r\n          <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n            <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n            Back\r\n        </button>\r\n \r\n  </div>\r\n  \r\n</div>"
+module.exports = "<!-- <p>\r\n  zanimanja-form works!\r\n</p> -->\r\n<div class=\"panel panel-primary\" [@routerTransition]>\r\n  <div class=\"panel-heading\">\r\n      <div class=\"row\">\r\n          <div class=\"text-left col-lg-9 col-md-9 col-xs-9\">\r\n              <h5>{{title}}</h5> \r\n            </div>\r\n            <div class=\"text-right col-lg-3 col-md-3 col-xs-3 \">\r\n              <i class=\"fa fa-times cursorpointer pull-right\" aria-hidden=\"true\" (click)=\"backClicked()\"></i>\r\n            </div>\r\n      </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n      <form [formGroup]=\"formZAN\" (ngSubmit)=\"save()\" novalidate>\r\n          <div class=\"form-group\" >\r\n               <input class=\"form-control\" formControlName=\"_id\"  [(ngModel)]=\"zanimN._id\"   type=\"hidden\">\r\n          </div>\r\n      \r\n            \r\n          <div class=\"form-group\">\r\n            <label class=\"center-block\">Šifra:\r\n              <input class=\"form-control\" formControlName=\"Sifra\"  [(ngModel)]=\"zanimN.Sifra\" required >\r\n            </label>\r\n            <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['Sifra'].valid && formZAN.controls['Sifra'].touched\">Obavezno</div>  -->\r\n\r\n            <div *ngIf=\"Sifra.invalid && (Sifra.dirty || Sifra.touched)\" class=\"alert btn-danger\">\r\n                <div *ngIf=\"Sifra.errors.required\">\r\n                    <strong>Šifra je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.minlength\">\r\n                  <strong>Šifra mora biti minimalno 4 karaktera dužine !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.maxlength\">\r\n                  <strong>Predugačka šifra !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Sifra.errors.validateSifru\">\r\n                  <strong>Šifra nije u dobrom formatu, ima nedozvoljene karaktere !!!</strong>\r\n                </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n              <label class=\"center-block\">Naziv zanimanja:\r\n                <input class=\"form-control\" formControlName=\"Naziv\"  [(ngModel)]=\"zanimN.Naziv\"  required>\r\n              </label>\r\n               <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['Naziv'].valid && formZAN.controls['Naziv'].touched\">Obavezno</div>  -->\r\n               <div *ngIf=\"Naziv.invalid && (Naziv.dirty || Naziv.touched)\" class=\"alert btn-danger\">\r\n                <div *ngIf=\"Naziv.errors.required\">\r\n                    <strong>Naziv je obavezan podatak !!!</strong>\r\n                </div>\r\n                <div *ngIf=\"Naziv.errors.maxlength\">\r\n                  <strong>Predugački naziv !!!</strong>\r\n                </div>\r\n               </div>\r\n\r\n\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n              <label class=\"center-block\">Stručna sprema:\r\n                <select  formControlName=\"StepenSS\" class=\"form-control\"  [(ngModel)]=\"zanimN.StepenSS\"  required>\r\n                  <option *ngFor=\"let list of strSprema\" [value]=\"list\">\r\n                    {{ list }}\r\n                  </option>\r\n                </select>\r\n                <!-- <div class=\"text-danger\" *ngIf=\"!formZAN.controls['StepenSS'].valid && formZAN.controls['StepenSS'].touched\">Obavezno</div>  -->\r\n                </label>\r\n                <div *ngIf=\"StepenSS.invalid && (StepenSS.dirty || StepenSS.touched)\" class=\"alert btn-danger\">\r\n                  <div *ngIf=\"StepenSS.errors.required\">\r\n                      <strong>Stepen stručne spreme je obavezan podatak !!!</strong>\r\n                  </div>\r\n                 </div>\r\n            </div>\r\n         \r\n          <div class=\"form-group\">\r\n                <label class=\"center-block\">Napomena/Opis:\r\n                  <textarea class=\"form-control\" formControlName=\"Opis\"  [(ngModel)]=\"zanimN.Opis\">\r\n                  </textarea>\r\n                </label>\r\n            </div>\r\n          \r\n            <div class=\"form-group\">\r\n                    <div class=\"col-md-offset-5 col-md-12\">\r\n                        <button type=\"submit\" [disabled]=\"!formZAN.valid\"\r\n                            class=\"btn btn-success\">\r\n                        <span class=\"glyphicon glyphicon-saved\"></span>\r\n                        Save\r\n                        </button>\r\n\r\n                      <button type=\"reset\" class=\"btn btn-danger\"  [disabled]=\"formZAN.pristine\"  (click)=\"revert()\">\r\n                          <i class=\"fa fa-undo\" aria-hidden=\"true\"></i>\r\n                          Clear data\r\n                      </button>\r\n                      \r\n                    </div>\r\n              \r\n                    \r\n          </div>\r\n              \r\n\r\n\r\n      </form>\r\n  </div>\r\n \r\n  <div class=\"panel-footer\">\r\n        <button (click)=\"backClicked()\"  class=\"btn btn-primary btn-block\">\r\n          <i class=\"glyphicon glyphicon-arrow-left\" aria-hidden=\"true\"></i>\r\n          Back\r\n      </button>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -9260,12 +11716,8 @@ var ZanimanjaFormComponent = (function () {
         this.formZAN = formBuilder.group({
             _id: [],
             Sifra: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].minLength(4), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(4), serValidate.validateRegExpSifru]],
-            Naziv: ['', [
-                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)
-                ]],
-            StepenSS: ['', [
-                    __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required
-                ]],
+            Naziv: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].maxLength(100)]],
+            StepenSS: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]],
             Opis: []
         });
     }
@@ -9301,19 +11753,17 @@ var ZanimanjaFormComponent = (function () {
                 }
                 else {
                     _this.flashMessage.show(pos.message, {
-                        cssClass: 'alert-danger',
+                        cssClass: 'btn-danger',
                         timeout: 9000
                     });
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'btn  -danger',
                     timeout: 9000
                 });
-                // if (error == 404 || error.status == 400 ) {
                 _this.router.navigate(['NotFound']);
-                // }
             });
         });
     };
@@ -9341,8 +11791,8 @@ var ZanimanjaFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'btn-danger',
                     timeout: 9000
                 });
             });
@@ -9354,7 +11804,7 @@ var ZanimanjaFormComponent = (function () {
                     _this.clearTempData();
                     _this.saveTemp = false;
                     _this.flashMessage.show(pos.message, {
-                        cssClass: 'alert-success',
+                        cssClass: 'btn-success',
                         timeout: 5000
                     });
                     _this.router.navigate(['zanimanja']);
@@ -9363,8 +11813,8 @@ var ZanimanjaFormComponent = (function () {
                     _this.router.navigate(['NotFound']);
                 }
             }, function (error) {
-                _this.flashMessage.show(error, {
-                    cssClass: 'alert-danger',
+                _this.flashMessage.show(error.message, {
+                    cssClass: 'btn-danger',
                     timeout: 9000
                 });
             });
@@ -9394,8 +11844,8 @@ var ZanimanjaFormComponent = (function () {
         // console.log("radnik destroy");
         this.setTempData();
     };
-    ZanimanjaFormComponent.prototype.revert = function () { this.clearData(); };
-    ZanimanjaFormComponent.prototype.clearData = function () {
+    ZanimanjaFormComponent.prototype.revert = function () { this.clearFormData(); };
+    ZanimanjaFormComponent.prototype.clearFormData = function () {
         this.formZAN.reset({
             Sifra: '',
             Naziv: '',
@@ -9487,7 +11937,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/zanimanja/zanimanja.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\r\n  zanimanja works!\r\n</p> -->\r\n\r\n <div *ngIf=\"zanimanja;else  waiting\"  [@routerTransition]>\r\n  \r\n     <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i> \r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"zanimanja\"  [globalFilter]=\"gb\"  [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedZan\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n              <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Sifra\" header=\"Šifra\" sortable=\"true\"></p-column> \r\n      <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\"></p-column>\r\n      <p-column field=\"StepenSS\" header=\"StepenSS\" sortable=\"true\"></p-column>   \r\n        \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\">\r\n          <ng-template let-zan=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectPosao(zan)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateZanimanja(zan._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteZanimanje(zan)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n      <p-footer>\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addZnimanja()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n   \r\n    \r\n    \r\n    \r\n     <p-dialog header=\"ZANIMANJA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                         ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{zanShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                            ŠIFRA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{zanShow.Sifra}}\r\n                        </dd>\r\n                        <dt>\r\n                            NAZIV\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{zanShow.Naziv}} \r\n                          </dd>  \r\n                        <dt>\r\n                            STRUČNA SPREMA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{zanShow.StepenSS}} \r\n                          </dd> \r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer>\r\n                    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n           </p-footer>\r\n    </p-dialog>\r\n       \r\n     <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\"  #cd>\r\n      \r\n        <p-footer>\r\n          <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n          <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n       </p-footer>\r\n    </p-confirmDialog>\r\n\r\n    <ng-template #waiting  >\r\n        <div class=\"centerWait\">\r\n        <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n        Loading...\r\n        </div>\r\n    </ng-template>\r\n  "
+module.exports = "<!-- <p>\r\n  zanimanja works!\r\n</p> -->\r\n\r\n <div *ngIf=\"zanL;else  waiting\"  [@routerTransition]>\r\n  \r\n     <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n        <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i> \r\n          <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\">\r\n      </div>\r\n      <p-dataTable [value]=\"zanL\"  [globalFilter]=\"gb\"  [resizableColumns]=\"true\" [rows]=\"5\" [rowsPerPageOptions]=\"[5,10,20]\" [paginator]=\"true\"\r\n                selectionMode=\"single\" [(selection)]=\"selectedZan\" dataKey=\"_id\"   \r\n                styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=false \r\n                resizableColumns=\"true\" columnResizeMode=\"expand\">\r\n\r\n              <p-header><strong>{{Title}}</strong></p-header>       \r\n      <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \r\n      <p-column field=\"Sifra\" header=\"Šifra\" sortable=\"true\" [style]=\"{'width':'20%'}\" ></p-column> \r\n      <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\" ></p-column>\r\n      <p-column field=\"StepenSS\" header=\"StepenSS\" sortable=\"true\" [style]=\"{'width':'25%'}\"></p-column>   \r\n        \r\n      <p-column  styleClass=\"col-button text-center\" heder=\"ACTION\" [style]=\"{'width':'15%'}\">\r\n          <ng-template let-zan=\"rowData\" let-i=\"rowIndex\" pTemplate=\"body\">\r\n              <button type=\"button\" pButton (click)=\"selectPosao(zan)\" icon=\"fa fa-info\" title=\"Info\"></button>\r\n              <button type=\"button\" pButton (click)=\"updateZanimanja(zan._id)\" icon=\"fa fa-pencil\" title=\"Update\"></button>\r\n              <button type=\"button\" pButton (click)=\"deleteZanimanje(zan)\" icon=\"fa fa-trash\" title=\"Delete\"></button>\r\n          </ng-template>\r\n      </p-column>\r\n      <p-footer>\r\n          <div class=\"ui-helper-clearfix\" style=\"width:100%\">\r\n              <button type=\"button\" pButton icon=\"fa fa-plus\" style=\"float:left\" (click)=\"addZnimanja()\" label=\"Add\"></button>\r\n            </div>\r\n        </p-footer>\r\n      </p-dataTable>\r\n    </div>\r\n    \r\n    \r\n    \r\n   \r\n    \r\n    \r\n    \r\n     <p-dialog header=\"ZANIMANJA\" [(visible)]=\"displayDetals\" modal=\"modal\" [responsive]=\"true\"  [width]=\"auto\" [height]=\"auto\">\r\n    \r\n            <div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>\r\n                         ID\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                           {{zanShow._id}}\r\n                        </dd>\r\n                        <dt>\r\n                            ŠIFRA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                              {{zanShow.Sifra}}\r\n                        </dd>\r\n                        <dt>\r\n                            NAZIV\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{zanShow.Naziv}} \r\n                          </dd>  \r\n                        <dt>\r\n                            STRUČNA SPREMA\r\n                          </dt>\r\n                          <dd class=\"text-success\">\r\n                               {{zanShow.StepenSS}} \r\n                          </dd> \r\n                        <dt>\r\n                        OPIS\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.Opis}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM UNOSA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.created_at}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        DATUM AŽURIRANJA\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.updatedAt}}\r\n                            \r\n                        </dd>\r\n                        <dt>\r\n                        KORISNIK\r\n                        </dt>\r\n                        <dd class=\"text-success\">\r\n                            {{zanShow.NameUser}}\r\n                            \r\n                        </dd>\r\n                \r\n                    </dl>                        \r\n            </div>\r\n            <p-footer>\r\n                    <button type=\"button\" pButton icon=\"fa-close\" (click)=\"displayDetals=false\" label=\"Close\"></button>\r\n           </p-footer>\r\n    </p-dialog>\r\n       \r\n     <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" [width]=\"auto\" [responsive]=\"true\"  #cd>\r\n      \r\n        <p-footer>\r\n          <button type=\"button\" pButton icon=\"fa-close\" label=\"Ne\" (click)=\"cd.reject()\"></button>\r\n          <button type=\"button\" pButton icon=\"fa-check\" label=\"Da\" class=\"ui-button-danger\" (click)=\"cd.accept()\"></button>\r\n       </p-footer>\r\n    </p-confirmDialog>\r\n\r\n    <ng-template #waiting  >\r\n        <div class=\"centerWait\">\r\n        <i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>\r\n        Loading...\r\n        </div>\r\n    </ng-template>\r\n  "
 
 /***/ }),
 
@@ -9533,17 +11983,21 @@ var ZanimanjaComponent = (function () {
     }
     ZanimanjaComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.zanService.getZanimanja().subscribe(function (profile) {
+        this.zanService.getZanimanja()
+            .subscribe(function (profile) {
             if (profile.success === true) {
-                //  console.log(profile);
-                //   console.log(" data je " + profile.data[0].Opstina.Naziv + "  drzava" + profile.data[0].Opstina.Drzava.Naziv);
-                _this.zanimanja = profile.data;
+                _this.zanL = profile.data;
             }
-        }, function (err) {
-            console.log(err);
+            // }
+        }, function (error) {
+            _this.flashMessage.show(error.message, {
+                cssClass: 'btn-danger',
+                timeout: 9000
+            });
+            //  console.log(error.message);
+            _this.zanL = [];
             return false;
         });
-        // this.flashMessage.grayOut(false);
     };
     ZanimanjaComponent.prototype.selectPosao = function (work) {
         // this.selectedOpstina=opstina;
@@ -9552,6 +12006,7 @@ var ZanimanjaComponent = (function () {
     };
     ZanimanjaComponent.prototype.cloneData = function (c) {
         var work = new __WEBPACK_IMPORTED_MODULE_2__zanimanja_model__["a" /* ZanimanjaModel */]();
+        // tslint:disable-next-line:forin
         for (var prop in c) {
             work[prop] = c[prop];
         }
@@ -9569,29 +12024,33 @@ var ZanimanjaComponent = (function () {
             message: "Jeste li sigurni da \u017Eeite uklonite izabrano zanimanje ?   ",
             header: "" + tzanim.Naziv,
             accept: function () {
-                //Actual logic to perform a confirmation
-                var index = _this.zanimanja.indexOf(tzanim);
+                var index = _this.zanL.indexOf(tzanim);
                 // console.log("index je " + index);
-                _this.zanimanja.splice(index, 1);
+                _this.zanL.splice(index, 1);
                 _this.zanService.delZanimanje(tzanim._id)
                     .subscribe(function (pos) {
+                    // console.log(pos);
                     if (pos.success) {
-                        _this.flashMessage.show('Zanimanje removed successfully ...', {
-                            cssClass: 'alert-success',
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-success',
                             timeout: 1000
                         });
                     }
                     else {
-                        _this.router.navigate(['NotFound']);
+                        _this.flashMessage.show(pos.message, {
+                            cssClass: 'btn-danger',
+                            timeout: 5000
+                        });
+                        _this.zanL.splice(index, 0, tzanim);
+                        // this.router.navigate(['NotFound']);
                     }
-                }, function (err) {
-                    //alert("Could not delete radnik.");
-                    _this.flashMessage.show('Could not delete zanimanje !!!', {
-                        cssClass: 'alert-danger',
+                }, function (error) {
+                    _this.flashMessage.show(error.message, {
+                        cssClass: 'btn-danger',
                         timeout: 5000
                     });
                     // Revert the view back to its original state
-                    _this.zanimanja.splice(index, 0, tzanim);
+                    _this.zanL.splice(index, 0, tzanim);
                 });
             }
         });
@@ -9699,15 +12158,22 @@ ZanimanjaModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__ = __webpack_require__("../../../../rxjs/add/operator/do.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_do__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_observable_throw__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__ = __webpack_require__("../../../../rxjs/add/observable/throw.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_throw__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_base_service__ = __webpack_require__("../../../../../src/app/services/base.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9720,26 +12186,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import 'rxjs/add/operator/do';
 
 
 
 
-
-var ZanimanjaService = (function () {
+var ZanimanjaService = (function (_super) {
+    __extends(ZanimanjaService, _super);
+    // authToken: any;
+    // isDev: boolean;
     function ZanimanjaService(http) {
-        this.http = http;
-        this.isDev = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].isDev;
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
+        // this.isDev = ServiceConfig.isDev;
     }
-    ZanimanjaService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
-    };
+    // loadToken() {
+    //   const token = localStorage.getItem('id_token');
+    //   this.authToken = token;
+    // }
     ZanimanjaService.prototype.getZanimanja = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/');
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9748,7 +12219,7 @@ var ZanimanjaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + id);
         return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9757,7 +12228,7 @@ var ZanimanjaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/');
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/');
         return this.http.post(ep, JSON.stringify(zanimanje), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9766,7 +12237,7 @@ var ZanimanjaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + zanimanje._id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + zanimanje._id);
         return this.http.put(ep, JSON.stringify(zanimanje), { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
@@ -9775,18 +12246,12 @@ var ZanimanjaService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = __WEBPACK_IMPORTED_MODULE_7__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + id);
+        var ep = __WEBPACK_IMPORTED_MODULE_5__services_service_config__["a" /* ServiceConfig */].PrepareHost(this.isDev, 'api/zanimanja/' + id);
         return this.http.delete(ep, { headers: headers })
             .map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    ZanimanjaService.prototype.handleError = function (error) {
-        //console.error(" handleError  " + error + "  ovde da vidim moze li jos nesto da se uhvati  " + error.json().message );
-        var greska = error.status + "  " + error.statusText;
-        //return Observable.throw(error.statusText || 'Server error');
-        return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].throw(greska || 'Server error');
-    };
     return ZanimanjaService;
-}());
+}(__WEBPACK_IMPORTED_MODULE_6__services_base_service__["a" /* BaseService */]));
 ZanimanjaService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
@@ -10054,32 +12519,68 @@ ValidateService = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/services/base.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_config__ = __webpack_require__("../../../../../src/app/services/service.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_models_ErrorRes__ = __webpack_require__("../../../../../src/app/shared/models/ErrorRes.ts");
+
+
+
+var BaseService = (function () {
+    function BaseService() {
+        this.isDev = __WEBPACK_IMPORTED_MODULE_1__service_config__["a" /* ServiceConfig */].isDev;
+    }
+    BaseService.prototype.loadToken = function () {
+        var token = localStorage.getItem('id_token');
+        this.authToken = token;
+    };
+    BaseService.prototype.handleError = function (error) {
+        if (error.status === 401) {
+            console.log(' status ' + error.statusText);
+            var servererr_1 = new __WEBPACK_IMPORTED_MODULE_2__shared_models_ErrorRes__["a" /* ResponeCustom */]();
+            servererr_1.message = error.statusText;
+            servererr_1.success = false;
+            servererr_1.status = error.status;
+            servererr_1.data = [];
+            return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"].throw(servererr_1);
+        }
+        var myerror = new __WEBPACK_IMPORTED_MODULE_2__shared_models_ErrorRes__["a" /* ResponeCustom */]().fromJSON(error.json());
+        var servererr = new __WEBPACK_IMPORTED_MODULE_2__shared_models_ErrorRes__["a" /* ResponeCustom */]();
+        servererr.message = 'Server error' + error.statusText;
+        servererr.success = false;
+        servererr.data = [];
+        return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"].throw(myerror || servererr);
+    };
+    return BaseService;
+}());
+
+//# sourceMappingURL=base.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/services/service.config.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceConfig; });
 var ServiceConfig = {
-    HostUrl: "http://localhost:3000/",
+    HostUrl: 'http://localhost:3000/',
     PrepareHost: function (tisDev, endPoint) {
         if (this.isDev) {
             return endPoint;
         }
         else {
-            //return 'http://localhost:8080/'+ep;
+            // return 'http://localhost:8080/'+ep;
             return ServiceConfig.HostUrl + endPoint;
         }
-        //return 'HOST PREPARE' + ServiceConfig.HostUrl;
     },
     isDev: false
 };
-// export class ServiceConfig {
-//     private _hosturl:string = "http://localhost:3000/";
-//     get  hosturl(): string {
-//         return this._hosturl;
-//     }
-//     static  hosturl : string= "http://localhost:3000/";
-// } 
 //# sourceMappingURL=service.config.js.map
 
 /***/ }),
@@ -10106,19 +12607,23 @@ var ServiceValidateShared = (function () {
     ServiceValidateShared.prototype.maxValue = function (max) {
         return function (control) {
             var input = control.value, isValid = input > max;
-            if (isValid)
+            if (isValid) {
                 return { 'maxValue': { max: max } };
-            else
+            }
+            else {
                 return null;
+            }
         };
     };
     ServiceValidateShared.prototype.minValue = function (min) {
         return function (control) {
             var input = control.value, isValid = input < min;
-            if (isValid)
+            if (isValid) {
                 return { 'minValue': { min: min } };
-            else
+            }
+            else {
                 return null;
+            }
         };
     };
     ServiceValidateShared.prototype.validateRegExpSifru = function (c) {
@@ -10135,40 +12640,40 @@ var ServiceValidateShared = (function () {
         key = String.fromCharCode(key);
         var regex = /[0-9]|\./;
         var TABKEY = 9;
-        if (theEvent.keyCode == TABKEY) {
-            //console.log("Uhvatio tab");
-            // if(theEvent.preventDefault) theEvent.preventDefault();
+        if (theEvent.keyCode === TABKEY) {
             return true;
         }
         var BACKSPACE = 8;
-        if (theEvent.keyCode == BACKSPACE) {
+        if (theEvent.keyCode === BACKSPACE) {
             return true;
         }
         if (!regex.test(key)) {
             theEvent.returnValue = false;
-            if (theEvent.preventDefault)
+            if (theEvent.preventDefault) {
                 theEvent.preventDefault();
+            }
         }
     };
     ServiceValidateShared.prototype.validateOnlyDigit = function (evt) {
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode(key);
-        var regex = /[0-9]/; // [^0-9] 
+        var regex = /[0-9]/;
         var TABKEY = 9;
-        if (theEvent.keyCode == TABKEY) {
+        if (theEvent.keyCode === TABKEY) {
             // console.log("Uhvatio tab");
             // if(theEvent.preventDefault) theEvent.preventDefault();
             return true;
         }
         var BACKSPACE = 8;
-        if (theEvent.keyCode == BACKSPACE) {
+        if (theEvent.keyCode === BACKSPACE) {
             return true;
         }
         if (!regex.test(key)) {
             theEvent.returnValue = false;
-            if (theEvent.preventDefault)
+            if (theEvent.preventDefault) {
                 theEvent.preventDefault();
+            }
         }
     };
     return ServiceValidateShared;
@@ -10199,6 +12704,297 @@ var StepenSS = [
     'Doktor Nauka'
 ];
 //# sourceMappingURL=StepenSS.enum.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/EnumApp/zadrugar.enum.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return IsplateTip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ZadrugarTip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return PolZadruga; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IdentZadrugara; });
+var IsplateTip = [
+    'Gotovina',
+    'Tekuci',
+    'Stedna'
+];
+var ZadrugarTip = [
+    'Ucenik',
+    'Osiguranik'
+];
+var PolZadruga = [
+    'Musko',
+    'Zensko',
+    'Neodredjen'
+];
+var IdentZadrugara = [
+    'JMBG_EBS',
+    'Izbeglicka_Legitimacija',
+    'Pasos',
+    'Eksterni_Identifikator',
+    'Ostalo'
+];
+//# sourceMappingURL=zadrugar.enum.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/PipeApp/PrettyActivePipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrettyActivePipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+// import * as $ from 'jquery';
+var PrettyActivePipe = (function () {
+    function PrettyActivePipe() {
+    }
+    PrettyActivePipe.prototype.transform = function (val, args) {
+        // const lepi = JSON.stringify(val, null, 2);
+        // console.log('lepi string -' + lepi);
+        // if (val) {
+        if (typeof (val) === 'boolean') {
+            if (val) {
+                return 'DA';
+            }
+            else {
+                return 'NE';
+            }
+        }
+        else {
+            return '';
+        }
+        // }else {
+        //     return '';
+        // }
+    };
+    return PrettyActivePipe;
+}());
+PrettyActivePipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'prettyavtiveprint'
+    })
+], PrettyActivePipe);
+
+//# sourceMappingURL=PrettyActivePipe.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/PipeApp/PrettyPrintPipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrettyPrintPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var PrettyPrintPipe = (function () {
+    function PrettyPrintPipe() {
+    }
+    PrettyPrintPipe.prototype.transform = function (val, args) {
+        // const lepi = JSON.stringify(val, null, 2);
+        // console.log('lepi string -' + lepi);
+        if (val) {
+            // return lepi.replace(' ', '&nbsp;').replace('\n', '<br/>');
+            return GetJsonTable(JSON.stringify(val));
+            // return JSON.stringify(val, null, 2)
+            //     .replace('"', '')
+            //     .replace(':', '-')
+            //     .replace(' ', '&nbsp;')
+            //     .replace('\n', '<br/>');
+        }
+        else {
+            return '';
+        }
+        //   return JSON.stringify(val, null, 2)
+        //     .replace(' ', '&nbsp;')
+        //     .replace('\n', '<br/>');
+    };
+    return PrettyPrintPipe;
+}());
+PrettyPrintPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'prettyprint'
+    })
+], PrettyPrintPipe);
+
+function GetJsonTable(myJson) {
+    var table;
+    var jsonObj = __WEBPACK_IMPORTED_MODULE_1_jquery__["parseJSON"](myJson);
+    var html = '<table>';
+    __WEBPACK_IMPORTED_MODULE_1_jquery__["each"](jsonObj, function (key, value) {
+        if (typeof value !== 'object') {
+            if (key !== '_id') {
+                html += '<tr>';
+                //  html += '<td>' + key + '</td>';
+                html += '<td>' + value + '</td>';
+                html += '</tr>';
+            }
+        }
+        else {
+            var valueObj = __WEBPACK_IMPORTED_MODULE_1_jquery__["parseJSON"](JSON.stringify(value));
+            __WEBPACK_IMPORTED_MODULE_1_jquery__["each"](valueObj, function (key1, value1) {
+                if (key1 !== '_id') {
+                    html += '<tr>';
+                    //  html += '<td>' + key + '</td>';
+                    html += '<td>' + value1 + '</td>';
+                    html += '</tr>';
+                }
+            });
+        }
+    });
+    html += '</table>';
+    table = html;
+    return table;
+}
+// $(function(){
+//     var jsonObj = $.parseJSON('{"a":1,"b":3,"ds":4}');
+//     var html = '<table border="1">';
+//     $.each(jsonObj, function(key, value){
+//         html += '<tr>';
+//         html += '<td>' + key + '</td>';
+//         html += '<td>' + value + '</td>';
+//         html += '</tr>';
+//     });
+//     html += '</table>';
+//     $('div').html(html);
+// });
+// https://stackoverflow.com/questions/20467785/how-to-convert-json-object-to-html-data
+// https://stackoverflow.com/questions/37308420/angular-2-pipe-that-transforms-json-object-to-pretty-printed-json
+//# sourceMappingURL=PrettyPrintPipe.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/PipeApp/PrettyUputStavPipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrettyUputStavPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var PrettyUputStavPipe = (function () {
+    function PrettyUputStavPipe() {
+    }
+    PrettyUputStavPipe.prototype.transform = function (val, args) {
+        if (val) {
+            return this.GetTable(val);
+        }
+        else {
+            return '';
+        }
+    };
+    PrettyUputStavPipe.prototype.GetTable = function (tUputStav) {
+        var table;
+        var html = '<table class="table  table-hover table-condensed">';
+        html += '<thead>';
+        html += '<tr>';
+        html += '<th class="col-md-1"><p class="text-left">Rbr</p></th>';
+        html += '<th class="col-md-1"><p class="text-left">IdZad</p></th>';
+        html += '<th class="col-md-3"><p class="text-left">Zadrugar</p></th>';
+        html += '<th class="col-md-2"><p class="text-center">TipZad</p></th>';
+        html += '<th class="col-md-3"><p class="text-left">Posao</p></th>';
+        html += '</tr>';
+        html += '</thead>';
+        html += '<tbody>';
+        tUputStav.forEach(function (element) {
+            html += '<tr>';
+            html += '<td class="col-md-1">' + element.Rbr + '</td>';
+            html += '<td class="col-md-1">' + element.ZadRef.idzadrugar + '</td>';
+            html += '<td class="col-md-3">' + element.ZadRef.name + '</td>';
+            html += '<td class="col-md-2"> <p class="text-center">' + element.ZadRef.tipzadrugar + '</p></td>';
+            html += '<td class="col-md-3"><p>' + element.PosloviRef.name + '</p></td>';
+            html += '</tr>';
+        });
+        html += '</tbody>';
+        html += '</table>';
+        table = html;
+        return table;
+    };
+    return PrettyUputStavPipe;
+}());
+PrettyUputStavPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"])({
+        name: 'prettyuputstav'
+    })
+], PrettyUputStavPipe);
+
+// $(function(){
+//     var jsonObj = $.parseJSON('{"a":1,"b":3,"ds":4}');
+//     var html = '<table border="1">';
+//     $.each(jsonObj, function(key, value){
+//         html += '<tr>';
+//         html += '<td>' + key + '</td>';
+//         html += '<td>' + value + '</td>';
+//         html += '</tr>';
+//     });
+//     html += '</table>';
+//     $('div').html(html);
+// });
+// https://stackoverflow.com/questions/20467785/how-to-convert-json-object-to-html-data
+// https://stackoverflow.com/questions/37308420/angular-2-pipe-that-transforms-json-object-to-pretty-printed-json
+//# sourceMappingURL=PrettyUputStavPipe.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/PipeApp/apppipe/apppipe.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApppipeModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PrettyActivePipe__ = __webpack_require__("../../../../../src/app/shared/PipeApp/PrettyActivePipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PrettyPrintPipe__ = __webpack_require__("../../../../../src/app/shared/PipeApp/PrettyPrintPipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PrettyUputStavPipe__ = __webpack_require__("../../../../../src/app/shared/PipeApp/PrettyUputStavPipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var ApppipeModule = (function () {
+    function ApppipeModule() {
+    }
+    return ApppipeModule;
+}());
+ApppipeModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_4__angular_common__["CommonModule"]
+        ],
+        declarations: [__WEBPACK_IMPORTED_MODULE_1__PrettyPrintPipe__["a" /* PrettyPrintPipe */], __WEBPACK_IMPORTED_MODULE_0__PrettyActivePipe__["a" /* PrettyActivePipe */], __WEBPACK_IMPORTED_MODULE_2__PrettyUputStavPipe__["a" /* PrettyUputStavPipe */]],
+        exports: [__WEBPACK_IMPORTED_MODULE_1__PrettyPrintPipe__["a" /* PrettyPrintPipe */], __WEBPACK_IMPORTED_MODULE_0__PrettyActivePipe__["a" /* PrettyActivePipe */], __WEBPACK_IMPORTED_MODULE_2__PrettyUputStavPipe__["a" /* PrettyUputStavPipe */]]
+    })
+], ApppipeModule);
+
+//# sourceMappingURL=apppipe.module.js.map
 
 /***/ }),
 
@@ -10348,18 +13144,6 @@ var ErrorRespone = (function (_super) {
     return ErrorRespone;
 }(__WEBPACK_IMPORTED_MODULE_0__Serizable__["a" /* Serializable */]));
 
-// export interface IRest {
-//     success:boolean;
-//     message: string;
-//     data: Array<Object>;
-//     ver?:string;
-// }
-// export class Rest implements IRest{
-//     success:boolean;
-//     message: string;
-//     data: Array<Object>;
-//     ver?:string;
-// } 
 //# sourceMappingURL=ErrorRes.js.map
 
 /***/ }),
@@ -10373,34 +13157,568 @@ var Serializable = (function () {
     function Serializable() {
     }
     Serializable.prototype.fromJSON = function (json) {
-        //  console.log("Klasa Serializable primila " + json);
+        // tslint:disable-next-line:forin
         for (var propName in json) {
             this[propName] = json[propName];
-            console.log(" propName" + propName);
-            // console.log(" this[propName]" +  this[propName])
-            // console.log(" json[propName]" +  json[propName])
         }
         return this;
     };
     return Serializable;
 }());
 
-// export class Serializable {
-//     //  fillFromJSON(json: string) {
-//     //      var jsonObj = JSON.parse(json);
-//     //      for (var propName in jsonObj) {
-//     //          this[propName] = jsonObj[propName]
-//     //      }
-//     // }
-//      fillfromJSON(json) {
-//           for (var propName in json)
-//               this[propName] = json[propName];
-//           return this;
-//       }
-// }
-//https://stackoverflow.com/questions/36014161/angular2-http-get-cast-response-into-full-object
-//https://stackoverflow.com/questions/29758765/json-to-typescript-class-instance/29759472#29759472 
+// https://stackoverflow.com/questions/36014161/angular2-http-get-cast-response-into-full-object
+// https://stackoverflow.com/questions/29758765/json-to-typescript-class-instance/29759472#29759472
 //# sourceMappingURL=Serizable.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<!-- <p>\r\n  pick-drzava works!\r\n</p> -->\r\n\r\n<!-- <div> -->\r\n    <div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n       <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n           <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus >\r\n   </div>\r\n    <p-dataTable [value]=\"drzL\"  [globalFilter]=\"gb\"\r\n               [(selection)]=\"selectedDrzava\" (onRowSelect)=\"PickDrzava($event)\"\r\n               selectionMode=\"single\"  dataKey=\"_id\"\r\n               styleClass=\"table table-striped\" [responsive]=\"false\">\r\n\r\n             <p-header><strong>{{Title}}</strong></p-header>\r\n             <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n             <p-column field=\"KodDrzave\" header=\"Kod\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column>                               \r\n             <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'70%'}\"></p-column>\r\n            \r\n\r\n\r\n           <ng-template pTemplate=\"emptymessage\">\r\n               <!-- Custom content goes here -->\r\n               <div class=\"row\">\r\n                   <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                       <div class=\"hidden-xs dtempty_message_h1\">\r\n                           Još niste kreirali podatak.\r\n                       </div>\r\n                       <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                       <br/>\r\n                       <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n                       <h3 class=\"hidden-xs dtempty_message\" (click)=\"displayDrz=false\">\r\n                           <!-- To manually add new one click here: [routerLink]=\"['/drzava/new']\" -->\r\n                           Da biste ručno dodali podatak kliknite: \r\n                               <a class=\"dtempty_message_text\" (click)=\"addDrzave()\" >\r\n                               Kreiraj podatak\r\n                           </a>\r\n                       </h3>\r\n\r\n                       <h5 class=\"visible-xs\"  (click)=\"displayDrz=false\">\r\n                           <!-- To manually add new one click here:  [routerLink]=\"['/drzava/new']\"-->\r\n                           Da biste ručno dodali podatak kliknite :\r\n                           <a class=\"dtempty_message_text\"  (click)=\"addDrzave()\" >\r\n                               Kreiraj podatak\r\n                           </a>\r\n                       </h5>\r\n\r\n                   </div>\r\n               </div>\r\n           </ng-template>\r\n\r\n\r\n   </p-dataTable>\r\n\r\n<!-- </div> -->\r\n\r\n<p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-check\" (click)=\"PickDrzava()\" label=\"OK\"></button>\r\n</p-footer>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickDrzavaComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PickDrzavaComponent = (function () {
+    function PickDrzavaComponent(router, route) {
+        this.router = router;
+        this.route = route;
+        this.Title = 'ODABIR DRŽAVE';
+        this.pickRow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.pickNothing = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    PickDrzavaComponent.prototype.ngOnInit = function () {
+    };
+    PickDrzavaComponent.prototype.ngAfterViewInit = function () {
+        this.searchinput.changes.subscribe(function (elements) {
+            // elements.last.nativeElement.focus();
+            // elements.first.nativeElement.focus();
+        });
+    };
+    PickDrzavaComponent.prototype.PickDrzava = function (event) {
+        console.log('Pick drzava iz PickDrzavaComponent' + JSON.stringify(this.selectedDrzava));
+        // this.displayDrz = false;
+        if (this.selectedDrzava) {
+            if (this.selectedDrzava._id) {
+                this.pickRow.emit(this.selectedDrzava);
+            }
+        }
+        else {
+            console.log('saljem nista');
+            this.pickNothing.emit(null);
+        }
+    };
+    PickDrzavaComponent.prototype.addDrzave = function () {
+        this.router.navigate(['drzave/new']);
+    };
+    return PickDrzavaComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('drzL'),
+    __metadata("design:type", Object)
+], PickDrzavaComponent.prototype, "drzL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('input'),
+    __metadata("design:type", Object)
+], PickDrzavaComponent.prototype, "searchinput", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickDrzavaComponent.prototype, "pickRow", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickDrzavaComponent.prototype, "pickNothing", void 0);
+PickDrzavaComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-pick-drzava',
+        template: __webpack_require__("../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _b || Object])
+], PickDrzavaComponent);
+
+var _a, _b;
+//# sourceMappingURL=pick-drzava.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n    <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus>\r\n</div>\r\n<p-dataTable [value]=\"kupacL\"  [globalFilter]=\"gb\"\r\n            [(selection)]=\"selectedKupac\" (onRowSelect)=\"PickKupac($event)\"\r\n            selectionMode=\"single\"  dataKey=\"_id\"\r\n            styleClass=\"table table-striped\" [responsive]=\"true\" >\r\n\r\n          <p-header><strong>{{Title}}</strong></p-header>\r\n          <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>\r\n          <p-column field=\"KyeSearch\" header=\"Ključ\"  sortable=\"true\"></p-column>\r\n          <p-column field=\"Naziv\" header=\"Naziv\"  sortable=\"true\"></p-column>\r\n          <p-column field=\"Email\" header=\"Email\" sortable=\"true\"></p-column>\r\n          <p-column field=\"Pib\" header=\"Pib\" sortable=\"true\" ></p-column>\r\n\r\n        <ng-template pTemplate=\"emptymessage\">\r\n            <!-- Custom content goes here -->\r\n            <div class=\"row\">\r\n                <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                    <div class=\"hidden-xs dtempty_message_h1\">\r\n                        Još niste kreirali podatak.\r\n                    </div>\r\n                    <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                    <br/>\r\n                    <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n                    <h3 class=\"hidden-xs dtempty_message\" (click)=\"displayKupac=false\">\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite:\r\n                            <a class=\"dtempty_message_text\"  (click)=\"addPartner()\" >\r\n                            Kreiraj podatak\r\n                        </a>\r\n                    </h3>\r\n\r\n                    <h5 class=\"visible-xs\"  (click)=\"displayKupac=false\">\r\n                        <!-- To manually add new one click here: -->\r\n                        Da biste ručno dodali podatak kliknite :\r\n                        <a class=\"dtempty_message_text\" (click)=\"addPartner()\"  >\r\n                            Kreiraj podatak\r\n                        </a>\r\n                    </h5>\r\n\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n\r\n\r\n</p-dataTable>\r\n<p-footer>\r\n    <button type=\"button\" pButton icon=\"fa-check\" (click)=\"PickKupac()\" label=\"OK\"></button>\r\n</p-footer>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickKupacComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PickKupacComponent = (function () {
+    function PickKupacComponent(router) {
+        this.router = router;
+        this.Title = 'ODABIR KUPCA';
+        this.pickRow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.pickNothing = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    PickKupacComponent.prototype.ngOnInit = function () {
+    };
+    PickKupacComponent.prototype.addPartner = function () {
+        this.router.navigate(['/partner/new']);
+    };
+    PickKupacComponent.prototype.PickKupac = function () {
+        // console.log('Pick iz PickKupac' + JSON.stringify(this.selectedKupac));
+        if (this.selectedKupac) {
+            if (this.selectedKupac._id) {
+                this.pickRow.emit(this.selectedKupac);
+            }
+        }
+        else {
+            // console.log('saljem nista');
+            this.pickNothing.emit(null);
+        }
+    };
+    return PickKupacComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('kupacL'),
+    __metadata("design:type", Object)
+], PickKupacComponent.prototype, "kupacL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickKupacComponent.prototype, "pickRow", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickKupacComponent.prototype, "pickNothing", void 0);
+PickKupacComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-pick-kupac',
+        template: __webpack_require__("../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object])
+], PickKupacComponent);
+
+var _a;
+//# sourceMappingURL=pick-kupac.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\n  <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\n    <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus>\n</div>\n  <p-dataTable [value]=\"mestaL\"  [globalFilter]=\"gb\" [resizableColumns]=\"true\" [rows]=\"10\" [paginator]=\"true\"\n            selectionMode=\"single\" [(selection)]=\"selectedMesto\" dataKey=\"_id\"  \n            styleClass=\"table table-striped\" [responsive]=\"true\"  (onRowSelect)=\"PickMesto($event)\">\n            <p-header><strong>{{Title}}</strong></p-header>   \n      \n  <p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column> \n  <p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\n  <p-column field=\"OpstinaRef.name\" header=\"Opština\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column> \n  <p-column field=\"DrzavaRef.name\" header=\"Država\" sortable=\"true\" [style]=\"{'width':'30%'}\"></p-column>  \n \n  <ng-template pTemplate=\"emptymessage\">\n          <!-- Custom content goes here -->\n      <div class=\"row\">\n                <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\n                  <div class=\"hidden-xs dtempty_message_h1\">\n                      Još niste kreirali podatak.\n                  </div>\n                  \n                  <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\n                  <br/>\n                  <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \n                  <h3 class=\" hidden-xs dtempty_message\" >\n                      Da biste ručno dodali podatak kliknite: \n                      <a  class=\"dtempty_message_text\" (click)=\"addMesta()\">\n                            Kreiraj podatak\n                      </a>\n                  </h3>\n\n                  <h5 class=\"visible-xs\" >\n                      Da biste ručno dodali podatak kliknite : \n                      <a   (click)=\"addMesta()\">\n                          Kreiraj podatak\n                      </a>\n                  </h5>\n\n              </div>\n      </div>\n  </ng-template>\n  </p-dataTable>\n\n  <p-footer>\n        <button type=\"button\" pButton icon=\"fa-check\" (click)=\"PickMesto()\" label=\"OK\"></button>\n    </p-footer>\n    "
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickMestoComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PickMestoComponent = (function () {
+    function PickMestoComponent(router) {
+        this.router = router;
+        this.Title = 'ODABIR OPŠTINE';
+        this.pickRow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.pickNothing = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    PickMestoComponent.prototype.ngOnInit = function () {
+    };
+    PickMestoComponent.prototype.PickMesto = function (event) {
+        console.log('Pick mesto iz PickMestaComponent' + JSON.stringify(this.selectedMesto));
+        // this.displayDrz = false;
+        if (this.selectedMesto) {
+            if (this.selectedMesto._id) {
+                this.pickRow.emit(this.selectedMesto);
+            }
+        }
+        else {
+            // console.log('saljem nista');
+            this.pickNothing.emit(null);
+        }
+    };
+    PickMestoComponent.prototype.addMesta = function () {
+        this.router.navigate(['/mesta/new']);
+    };
+    return PickMestoComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('mestaL'),
+    __metadata("design:type", Object)
+], PickMestoComponent.prototype, "mestaL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickMestoComponent.prototype, "pickRow", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickMestoComponent.prototype, "pickNothing", void 0);
+PickMestoComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-pick-mesto',
+        template: __webpack_require__("../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object])
+], PickMestoComponent);
+
+var _a;
+//# sourceMappingURL=pick-mesto.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  pick-opstina works!\r\n</p>\r\n\r\n<div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n  <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n   <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus>\r\n</div>\r\n<p-dataTable [value]=\"opstL\"  [globalFilter]=\"gb\" \r\n          selectionMode=\"single\" [(selection)]=\"selectedOpstina\" dataKey=\"_id\" \r\n          styleClass=\"table table-striped\" (onRowSelect)=\"PickOpstina($event)\">\r\n\r\n          <p-header><strong>{{Title}}</strong></p-header>         \r\n<p-column field=\"_id\" header=\"ID\" sortable=\"true\" hidden=\"false\"></p-column>    \r\n<p-column field=\"RegOzn\" header=\"Oznaka\" sortable=\"true\" [style]=\"{'width':'20%'}\"></p-column>                               \r\n<p-column field=\"Naziv\" header=\"Naziv\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>\r\n<p-column field=\"DrzavaRef.name\" header=\"Država\" sortable=\"true\" [style]=\"{'width':'40%'}\"></p-column>  \r\n<ng-template pTemplate=\"emptymessage\">\r\n      <!-- Custom content goes here -->\r\n      <div class=\"row\">\r\n           <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n              <div class=\"hidden-xs dtempty_message_h1\">\r\n                  Još niste kreirali podatak.\r\n              </div>\r\n              <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n              <br/>\r\n              <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i> \r\n              <h3 class=\" hidden-xs dtempty_message\" >\r\n                  <!-- To manually add new one click here: -->\r\n                  Da biste ručno dodali podatak kliknite: \r\n                  <a  class=\"dtempty_message_text\" (click)=\"addOpstine()\">\r\n                       Kreiraj podatak\r\n                  </a>\r\n              </h3>\r\n\r\n              <h5 class=\"visible-xs\" >\r\n                  <!-- To manually add new one click here: -->\r\n                  Da biste ručno dodali podatak kliknite : \r\n                  <a   (click)=\"addOpstine()\">\r\n                       Kreiraj podatak\r\n                  </a>\r\n              </h5>\r\n\r\n          </div>\r\n      </div>\r\n  </ng-template>\r\n\r\n</p-dataTable>\r\n<p-footer>\r\n  <button type=\"button\" pButton icon=\"fa-check\" (click)=\"PickOpstina()\" label=\"OK\"></button>\r\n</p-footer>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickOpstinaComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PickOpstinaComponent = (function () {
+    function PickOpstinaComponent(router, route) {
+        this.router = router;
+        this.route = route;
+        this.Title = 'ODABIR OPŠTINE';
+        this.pickRow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.pickNothing = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    PickOpstinaComponent.prototype.ngOnInit = function () {
+    };
+    PickOpstinaComponent.prototype.PickOpstina = function (event) {
+        console.log('Pick drzava iz PickOpstinaComponent' + JSON.stringify(this.selectedOpstina));
+        // this.displayDrz = false;
+        if (this.selectedOpstina) {
+            if (this.selectedOpstina._id) {
+                this.pickRow.emit(this.selectedOpstina);
+            }
+        }
+        else {
+            // console.log('saljem nista');
+            this.pickNothing.emit(null);
+        }
+    };
+    PickOpstinaComponent.prototype.addOpstine = function () {
+        this.router.navigate(['opstine/new']);
+    };
+    return PickOpstinaComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('opstL'),
+    __metadata("design:type", Object)
+], PickOpstinaComponent.prototype, "opstL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickOpstinaComponent.prototype, "pickRow", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickOpstinaComponent.prototype, "pickNothing", void 0);
+PickOpstinaComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-pick-opstina',
+        template: __webpack_require__("../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"]) === "function" && _b || Object])
+], PickOpstinaComponent);
+
+var _a, _b;
+//# sourceMappingURL=pick-opstina.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  pick-zadrugar works!\r\n</p>\r\n<div class=\"ui-widget-header\" style=\"padding:4px 10px;border-bottom: 0 none\">\r\n  <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\r\n  <input #gb type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" autofocus>\r\n</div>\r\n<p-dataTable [value]=\"zadrL\"  [globalFilter]=\"gb\" (onRowSelect)=\"PickZadrugar($event)\"\r\n      selectionMode=\"single\" [(selection)]=\"selectedZadrugar\" dataKey=\"_id\"   \r\n      styleClass=\"table table-striped\" [responsive]=\"true\"  [immutable]=\"false\" >\r\n\r\n        <p-header><strong>{{Title}}</strong></p-header>\r\n        <p-column field=\"_id\" header=\"ID\"  hidden=\"false\"></p-column>\r\n        <p-column field=\"IDZadrugar\" header=\"Šifra\" [style]=\"{'width':'8%'}\"></p-column>\r\n        <p-column field=\"fullName\" header=\"Zadrugar\"   [style]=\"{'width':'30%'}\"></p-column>\r\n        <p-column field=\"DatRodjenja\" header=\"Datum rodj.\"    styleClass=\"text-right\" [style]=\"{'width':'12%'}\" >\r\n              <ng-template let-col let-zadr=\"rowData\" pTemplate=\"body\">\r\n                      <span>{{zadr[col.field] | date}}</span>\r\n              </ng-template> \r\n        </p-column> \r\n        <p-column field=\"TipZadrugar\" header=\"Tip\"   [style]=\"{'width':'15%'}\"></p-column>\r\n        <p-column field=\"ZanimanjaRef.name\" header=\"Zanimanje\"   [style]=\"{'width':'25%'}\"></p-column>\r\n        <p-column field=\"MestaRef.name\" header=\"Mesto\"  [style]=\"{'width':'10%'}\"></p-column>\r\n        \r\n        \r\n\r\n      <ng-template pTemplate=\"emptymessage\">\r\n          <!-- Custom content goes here -->\r\n          <div class=\"row\">\r\n              <div class=\"text-center col-lg-12 col-md-12 col-xs-12\">\r\n                  <div class=\"hidden-xs dtempty_message_h1\">\r\n                      Još niste kreirali podatak.\r\n                  </div>\r\n                  <h4 class=\"visible-xs\">Još niste kreirali podatak.</h4>\r\n                  <br/>\r\n                  <i class=\"fa fa-info fa-5x cursorpointer\" aria-hidden=\"true\"></i>\r\n                  <h3 class=\"hidden-xs dtempty_message\" (click)=\"displayKupac=false\">\r\n                      <!-- To manually add new one click here: -->\r\n                      Da biste ručno dodali podatak kliknite:\r\n                          <a class=\"dtempty_message_text\"  (click)=\"addZadrugar()\" >\r\n                          Kreiraj podatak\r\n                      </a>\r\n                  </h3>\r\n\r\n                  <h5 class=\"visible-xs\"  (click)=\"displayKupac=false\">\r\n                      <!-- To manually add new one click here: -->\r\n                      Da biste ručno dodali podatak kliknite :\r\n                      <a class=\"dtempty_message_text\" (click)=\"addZadrugar()\"  >\r\n                          Kreiraj podatak\r\n                      </a>\r\n                  </h5>\r\n\r\n              </div>\r\n          </div>\r\n      </ng-template>\r\n\r\n\r\n</p-dataTable>\r\n<p-footer>\r\n  <button type=\"button\" pButton icon=\"fa-check\" (click)=\"PickZadrugar()\" label=\"OK\"></button>\r\n</p-footer>\r\n\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickZadrugarComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PickZadrugarComponent = (function () {
+    function PickZadrugarComponent(router) {
+        this.router = router;
+        this.Title = 'ODABIR ZADRUGARA';
+        this.pickRow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.pickNothing = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    PickZadrugarComponent.prototype.ngOnInit = function () {
+    };
+    PickZadrugarComponent.prototype.addZadrugar = function () {
+        this.router.navigate(['/zadrugar/new']);
+    };
+    PickZadrugarComponent.prototype.PickZadrugar = function () {
+        // console.log('Pick iz PickZadrugar' + JSON.stringify(this.selectedZadrugar));
+        if (this.selectedZadrugar) {
+            if (this.selectedZadrugar._id) {
+                this.pickRow.emit(this.selectedZadrugar);
+            }
+        }
+        else {
+            // console.log('saljem nista');
+            this.pickNothing.emit(null);
+        }
+    };
+    return PickZadrugarComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('zadrL'),
+    __metadata("design:type", Object)
+], PickZadrugarComponent.prototype, "zadrL", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickZadrugarComponent.prototype, "pickRow", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", Object)
+], PickZadrugarComponent.prototype, "pickNothing", void 0);
+PickZadrugarComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-pick-zadrugar',
+        template: __webpack_require__("../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === "function" && _a || Object])
+], PickZadrugarComponent);
+
+var _a;
+//# sourceMappingURL=pick-zadrugar.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/pickup/pickup.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PickupModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pick_drzava_pick_drzava_component__ = __webpack_require__("../../../../../src/app/shared/pickup/pick-drzava/pick-drzava.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pick_opstina_pick_opstina_component__ = __webpack_require__("../../../../../src/app/shared/pickup/pick-opstina/pick-opstina.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pick_kupac_pick_kupac_component__ = __webpack_require__("../../../../../src/app/shared/pickup/pick-kupac/pick-kupac.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pick_zadrugar_pick_zadrugar_component__ = __webpack_require__("../../../../../src/app/shared/pickup/pick-zadrugar/pick-zadrugar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pick_mesto_pick_mesto_component__ = __webpack_require__("../../../../../src/app/shared/pickup/pick-mesto/pick-mesto.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var PickupModule = (function () {
+    function PickupModule() {
+    }
+    return PickupModule;
+}());
+PickupModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmDialogModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DialogModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ButtonModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["DataTableModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["SharedModule"],
+            __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["InputTextModule"]
+        ],
+        declarations: [__WEBPACK_IMPORTED_MODULE_4__pick_drzava_pick_drzava_component__["a" /* PickDrzavaComponent */], __WEBPACK_IMPORTED_MODULE_5__pick_opstina_pick_opstina_component__["a" /* PickOpstinaComponent */], __WEBPACK_IMPORTED_MODULE_6__pick_kupac_pick_kupac_component__["a" /* PickKupacComponent */], __WEBPACK_IMPORTED_MODULE_7__pick_zadrugar_pick_zadrugar_component__["a" /* PickZadrugarComponent */], __WEBPACK_IMPORTED_MODULE_8__pick_mesto_pick_mesto_component__["a" /* PickMestoComponent */]],
+        exports: [__WEBPACK_IMPORTED_MODULE_4__pick_drzava_pick_drzava_component__["a" /* PickDrzavaComponent */], __WEBPACK_IMPORTED_MODULE_5__pick_opstina_pick_opstina_component__["a" /* PickOpstinaComponent */], __WEBPACK_IMPORTED_MODULE_6__pick_kupac_pick_kupac_component__["a" /* PickKupacComponent */], __WEBPACK_IMPORTED_MODULE_7__pick_zadrugar_pick_zadrugar_component__["a" /* PickZadrugarComponent */], __WEBPACK_IMPORTED_MODULE_8__pick_mesto_pick_mesto_component__["a" /* PickMestoComponent */]]
+    })
+], PickupModule);
+
+//# sourceMappingURL=pickup.module.js.map
 
 /***/ }),
 
@@ -10448,13 +13766,8 @@ KeysPipe = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: false
+    production: true
 };
 //# sourceMappingURL=environment.js.map
 
