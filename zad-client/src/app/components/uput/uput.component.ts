@@ -27,6 +27,7 @@ export class UputComponent implements OnInit {
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
   auto = 'auto';
+  brojuputa = 0;
 
   constructor(private router: Router, private uputService: UputService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -38,6 +39,7 @@ export class UputComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.uputL = profile.data;
+          this.brojuputa = this.uputL.length ;
         }
         // }
       },

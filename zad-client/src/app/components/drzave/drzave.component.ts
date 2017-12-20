@@ -25,6 +25,7 @@ export class DrzaveComponent implements OnInit {
   displayDetals = false;
   drzShow: Drzave = new Drzave();
   auto = 'auto';
+  brojslogova = 0;
   constructor(private drzaveService: DrzaveService, private router: Router,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
     this.Title = 'PREGLED DRŽAVA';
@@ -35,6 +36,7 @@ export class DrzaveComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.drzave = profile.data;
+          this.brojslogova = this.drzave.length ;
         }
       },
       (error: ResponeCustom) => {

@@ -22,6 +22,7 @@ export class OpstineComponent implements OnInit {
   displayDetals = false;
   opstShow: Opstine = new Opstine();
   auto = 'auto';
+  brojslogova = 0;
 
   constructor(private router: Router, private opstService: OpstineService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -32,6 +33,7 @@ export class OpstineComponent implements OnInit {
     this.opstService.getOpstine().subscribe(profile => {
       if (profile.success === true) {
         this.opstineL = profile.data;
+        this.brojslogova = this.opstineL.length ;
       } else {
         this.flashMessage.show(profile.message, {
           cssClass: 'alert-danger',

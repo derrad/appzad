@@ -26,6 +26,7 @@ export class FondSatiComponent implements OnInit {
   displayDetals = false;
   fsatiShow: FondSati = new FondSati();
   auto = 'auto';
+  brojslogova = 0;
 
   constructor(private router: Router, private fnsatiService: FondSatiService,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -38,6 +39,7 @@ export class FondSatiComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.fnsati = profile.data;
+          this.brojslogova = this.fnsati.length ;
         }
       },
       (error: ResponeCustom) => {

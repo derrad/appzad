@@ -27,6 +27,7 @@ export class ParametarComponent implements OnInit {
   displayDetals = false;
   parShow: Parametar = new Parametar();
   auto = 'auto';
+  brojslogova = 0;
 
   constructor(private paramService: ParametarService, private router: Router,
     private confirmationService: ConfirmationService, private flashMessage: FlashMessagesService) {
@@ -38,6 +39,7 @@ export class ParametarComponent implements OnInit {
       .subscribe((profile) => {
         if (profile.success === true) {
           this.params = profile.data;
+          this.brojslogova = this.params.length ;
         } else {
           this.flashMessage.show(profile.message, {
             cssClass: 'alert-danger',
