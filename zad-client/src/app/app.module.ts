@@ -7,13 +7,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {SidebarModule} from 'primeng/primeng';
 import {AppComponent } from './app.component';
 import {FlashMessagesModule} from 'angular2-flash-messages';
-import {DateValueAccessorModule} from './shared/frmDatum/DateValueAccessorModule ';
+// import {DateValueAccessorModule} from './shared/frmDatum/DateValueAccessorModule ';
 
 // Meni and app komponente
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+// import { HomeComponent } from './components/home/home.component';
+// import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+// import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
@@ -51,17 +51,18 @@ import { PartnerModule } from './components/partner/partner.module';
 import { BankeModule } from './components/banke/banke.module';
 import { ZadrugarModule } from './components/zadrugar/zadrugar.module';
 import { UputModule } from './components/uput/uput.module';
+import { HomeModule  } from './components/home/home.module';
+import { LoginModule  } from './components/login/login.module';
+import { ProfileModule} from './components/profile/profile.module';
+
 // import { ApppipeModule } from './shared/PipeApp/apppipe/apppipe.module';
 
-
+//    HomeComponent,   LoginComponent, ProfileComponent,
 
 @NgModule({
   declarations: [
       AppComponent,
-      HomeComponent,
-      LoginComponent,
       DashboardComponent,
-      ProfileComponent,
       RegisterComponent,
       NavbarComponent,
       NavbarLeftComponent,
@@ -76,8 +77,10 @@ import { UputModule } from './components/uput/uput.module';
     ReactiveFormsModule ,
     HttpModule,
     FlashMessagesModule,
-    DateValueAccessorModule,
     SidebarModule,
+    HomeModule,
+    LoginModule,
+    ProfileModule,
     DrzaveModule,
     OpstineModule,
     ZanimanjaModule,
