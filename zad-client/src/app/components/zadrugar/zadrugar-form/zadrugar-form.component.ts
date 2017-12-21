@@ -11,7 +11,7 @@ import { ZadrugarService } from './../zadrugar.service';
 import { ZanimanjaService } from './../../zanimanja/zanimanja.service';
 import { MestaService } from './../../mesta/mesta.service';
 import { BankeService } from './../../banke/banke.service';
-import { ZanimanjaModel } from './../../zanimanja/zanimanja.model';
+import { PickZanimanjaModel} from './../../zanimanja/zanimanja.model';
 import { PickMesta } from './../../mesta/mesta.model';
 import { IsplateTip, ZadrugarTip, PolZadruga, IdentZadrugara } from './../../../shared/EnumApp/zadrugar.enum';
 import { BankeModel } from './../../banke/banke-model';
@@ -31,14 +31,16 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
   zadrAdresa: ZDAdresaModel;
   saveTemp = true;
   mestaL: Array<PickMesta>;
-  zanimL: Array<ZanimanjaModel>;
+  zanL: Array<PickZanimanjaModel>;
   bankeL: Array<BankeModel>;
   zadPolC = PolZadruga;
   zadIsplC = IsplateTip;
   zadTipC = ZadrugarTip;
   zadIdentC = IdentZadrugara;
   displayPickMesto = false;
+  displayPickZanim = false;
   selectedPickMesto: PickMesta;
+  selectedPickZanim: PickZanimanjaModel;
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
 
@@ -106,14 +108,14 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
     this.zanService.getZanimanja()
     .subscribe((profile) => {
       if (profile.success === true) {
-        this.zanimL = profile.data;
+        this.zanL = profile.data;
       }
       },
       (error: ResponeCustom) => {
         this.flashMessage.show(error.message, {
           cssClass: 'btn-danger',
           timeout: 9000});
-          this.zanimL = [];
+          this.zanL = [];
       }
       );
 
@@ -258,6 +260,23 @@ export class ZadrugarFormComponent implements OnInit, OnDestroy {
     if (this.selectedPickMesto) {
       if (this.selectedPickMesto._id) {
         this.MestaID.setValue(this.selectedPickMesto._id);
+    // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
+      }
+    }
+  }
+
+  GetPickZanim() {
+    this.displayPickZanim = true;
+  }
+
+  PickZanim(event) {
+    this.displayPickZanim = false;
+    console.log('Ovo parametar koji sam dobio PickZanim' + JSON.stringify(event));
+    this.selectedPickZanim = event;
+   // console.log(JSON.stringify(this.selectedKupac));
+    if (this.selectedPickZanim) {
+      if (this.selectedPickZanim._id) {
+        this.ZanimanjaID.setValue(this.selectedPickZanim._id);
     // console.log('Ovo je id koji sam dobio' + this.selectedPickDrzavu._id);
       }
     }

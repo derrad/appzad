@@ -91,11 +91,13 @@ cloneData(c: ZanimanjaModel): ZanimanjaModel {
                this.flashMessage.show(pos.message , {
                   cssClass: 'btn-success',
                   timeout: 1000});
+                  this.brojzanim  = this.zanL.length;
             }else {
               this.flashMessage.show(pos.message , {
                 cssClass: 'btn-danger',
                 timeout: 5000});
                 this.zanL.splice(index, 0, tzanim);
+                this.brojzanim  = this.zanL.length;
               // this.router.navigate(['NotFound']);
             }
             } ,
@@ -105,6 +107,7 @@ cloneData(c: ZanimanjaModel): ZanimanjaModel {
                 timeout: 5000});
               // Revert the view back to its original state
               this.zanL.splice(index, 0, tzanim);
+              this.brojzanim  = this.zanL.length;
             });
         }
       });

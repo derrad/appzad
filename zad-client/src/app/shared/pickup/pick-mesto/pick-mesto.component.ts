@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PickMestoComponent implements OnInit {
 
   @Input('mestaL') public mestaL: Array<PickMesta> ;
-  Title = 'ODABIR OPŠTINE';
+  Title = 'ODABIR MESTA';
   selectedMesto: PickMesta;
   @Output() pickRow = new EventEmitter<PickMesta>();
   @Output() pickNothing = new EventEmitter<any>();

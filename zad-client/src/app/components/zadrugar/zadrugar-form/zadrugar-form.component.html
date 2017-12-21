@@ -203,9 +203,9 @@
 
         <div class="form-group col-md-5">
           <label class="center-block">Zanimanje zadruga:
-            <select formControlName="ZanimanjaID" class="form-control" placeholder="Select zanimanje" [(ngModel)]="zadrN.ZanimanjaID"
+            <select formControlName="ZanimanjaID" class="form-control"  [(ngModel)]="zadrN.ZanimanjaID"
               required>
-              <option *ngFor="let list of zanimL" [value]="list._id">
+              <option *ngFor="let list of zanL" [value]="list._id">
                 {{ list.Naziv }}
               </option>
             </select>
@@ -218,7 +218,7 @@
         </div>
         <div class="form-group col-md-1">
           <label class="center-block">&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-info form-control" (click)="GetPickMesto()">
+            <button type="button" class="btn btn-info form-control" (click)="GetPickZanim()">
               <span class="glyphicon glyphicon-search"></span>
               <!-- ... -->
               ...
@@ -351,5 +351,12 @@
 
   <app-pick-mesto [mestaL]="mestaL" (pickRow)="PickMesto($event)" (pickNothing)="displayPickMesto=false">
   </app-pick-mesto>
+
+</p-dialog>
+
+<p-dialog header="ODABIR ZANIMANJA" [(visible)]="displayPickZanim" modal="modal" [responsive]="true" [width]="pickWidth" [height]="auto">
+
+  <app-pick-zanim [zanL]="zanL" (pickRow)="PickZanim($event)" (pickNothing)="displayPickZanim=false">
+  </app-pick-zanim>
 
 </p-dialog>

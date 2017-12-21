@@ -20,5 +20,12 @@ export class ZanimanjaModel implements IZanimanjaModel {
     updatedAt?: Date;
 }
 
+export class PickZanimanjaModel {
+    _id: string;
+    Sifra: string;
+    Naziv: string;
+    StepenSS: string;
+}
+
 
 
