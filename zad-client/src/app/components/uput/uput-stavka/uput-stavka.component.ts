@@ -39,7 +39,7 @@ export class UputStavkaComponent implements OnInit, OnDestroy {
     // console.log('Zadrugari su +' + JSON.stringify(this.zadrugarL));
 
     this.Stavke.controls.IDZadrugar.valueChanges
-      .debounceTime(400)
+      .debounceTime(200)
       .distinctUntilChanged()
       .subscribe((sifra) => {
         const zadrOdab = this.zadrugarL.find(x => x.IDZadrugar == sifra);

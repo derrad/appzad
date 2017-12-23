@@ -107,6 +107,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
     this.vlasnService.getVlasnRacun().subscribe(profile => {
       if (profile.success === true) {
         this.racvlasnikL = profile.data;
+        console.log('Racun vlasnika' + JSON.stringify(this.racvlasnikL) );
       } else {
         this.flashMessage.show(profile.message, {
           cssClass: 'alert-danger',
@@ -481,7 +482,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
             cssClass: 'alert-danger',
             timeout: 9000
           });
-          console.log(' forma INSERT ' + JSON.stringify(error) + ' ima li jos nesto' + error);
+       //   console.log(' forma INSERT ' + JSON.stringify(error) + ' ima li jos nesto' + error);
         },
       );
     }
@@ -550,7 +551,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
     const myArrStav = Array.from(stavSet);
     const newStavke = new Array<UputStavModel>();
     for (const item of myArrStav) {
-      console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip ' + typeof Number(item));
+     // console.log(item + ' ovo je number u funkciji ' + Number(item) + '   ovo je tip ' + typeof Number(item));
       const idzad = Number(item);
       // newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar ===  Number(item) ));
       newStavke.push(tuputN.Stavke.find(x => x.IDZadrugar == idzad));
@@ -558,7 +559,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
     // tuputN.Stavke = stavSet;
     tuputN.Stavke.splice(0, tuputN.Stavke.length);
     for (const item of newStavke) {
-      console.log('Nove stavke ' + item);
+    //  console.log('Nove stavke ' + item);
       tuputN.Stavke.push(item);
     }
     return tuputN;
