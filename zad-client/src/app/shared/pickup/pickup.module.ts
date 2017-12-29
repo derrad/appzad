@@ -11,6 +11,7 @@ import { PickKupacComponent } from './pick-kupac/pick-kupac.component';
 import { PickZadrugarComponent } from './pick-zadrugar/pick-zadrugar.component';
 import { PickMestoComponent } from './pick-mesto/pick-mesto.component';
 import { PickZanimComponent } from './pick-zanim/pick-zanim.component';
+import { PickPosaoComponent } from './pick-posao/pick-posao.component';
 
 @NgModule({
   imports: [
@@ -25,8 +26,8 @@ import { PickZanimComponent } from './pick-zanim/pick-zanim.component';
     InputTextModule
   ],
   declarations: [PickDrzavaComponent, PickOpstinaComponent, PickKupacComponent, PickZadrugarComponent, PickMestoComponent, 
-                 PickZanimComponent],
+                 PickZanimComponent, PickPosaoComponent],
   exports: [PickDrzavaComponent, PickOpstinaComponent, PickKupacComponent, PickZadrugarComponent, PickMestoComponent,
-            PickZanimComponent]
+            PickZanimComponent, PickPosaoComponent]
 })
 export class PickupModule { }
