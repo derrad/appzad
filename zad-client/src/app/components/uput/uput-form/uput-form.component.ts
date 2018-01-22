@@ -17,7 +17,7 @@ import { PickPartnerModel } from './../../partner/partner-model';
 import { VlasnikService } from './../../vlasnik/vlasnik.service';
 import { RacunVlasnikModel } from './../../vlasnik/vlasnik-model';
 import { PosaoService } from './../../posao/posao.service';
-import { Posao } from './../../posao/posao.model';
+import { PickPosao } from './../../posao/posao.model';
 import { UputStavkaComponent } from '../uput-stavka/uput-stavka.component';
 // import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/observable/fromEvent';
@@ -38,12 +38,16 @@ export class UputFormComponent implements OnInit, OnDestroy {
   racvlasnikL: Array<RacunVlasnikModel>;
   kupacL: Array<PickPartnerModel>;
   zadrL: Array<PickZadrugarModel>;
-  poslL: Array<Posao>;
-  PosaoSel: Posao;
+  poslL: Array<PickPosao>;
+  PosaoSel: PickPosao;
   saveTemp = true;
   godbroj: UputBrojGodina = new UputBrojGodina();
   displayKupac = false;
   selectedKupac: PickPartnerModel;
+
+  displayPosao = false;
+  selectedPosao: PickPosao;
+
   pickHeight = (window.innerHeight) * 0.8;
   pickWidth = (window.innerWidth) * 0.8;
   auto = 'auto';
@@ -77,6 +81,7 @@ export class UputFormComponent implements OnInit, OnDestroy {
   get Stavke(): FormArray { return this.formUput.get('Stavke') as FormArray; }
   get Broj() { return this.formUput.get('Broj'); }
   get Godina() { return this.formUput.get('Godina'); }
+  get Opis() { return this.formUput.get('Opis'); }
 
   ngOnInit() {
     // this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
@@ -341,6 +346,23 @@ export class UputFormComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+
+  GetPosao() {
+   // console.log('Usao sam u getPosao');
+    this.displayPosao = true;
+  }
+
+  PickPosao(event) {
+    this.displayPosao = false;
+    this.selectedPosao = event;
+    if (this.selectedPosao) {
+      if (this.selectedPosao._id) {
+        this.PosloviID.setValue(this.selectedPosao._id);
+      }
+    }
+  }
+
 
   // Init zaglavlja
   InitDokZag() {

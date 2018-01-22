@@ -23,3 +23,9 @@ export class Posao implements IPosaoModel {
     created_at?: Date;
     updatedAt?: Date;
 }
+
+export class PickPosao  {
+    _id: string;
+    StepenSS: string;
+    Naziv: string;
+}
