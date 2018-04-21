@@ -35,6 +35,7 @@ export class MestaComponent implements OnInit {
 
   ngOnInit() {
     this.mestaService.getMesta().subscribe(profile => {
+      console.log(' zovem getmesta -  ' + JSON.stringify(profile) );
       if (profile.success === true) {
         this.mestaL = profile.data;
         this.brojmesta = this.mestaL.length;

@@ -19,6 +19,7 @@ export class BaseService {
 
 
     protected handleError(error: Response) {
+      console.log(' usao sam u  handleError ' );
         if (error.status === 401) {
           console.log(' status ' + error.statusText);
           const servererr = new ResponeCustom();
@@ -33,6 +34,7 @@ export class BaseService {
         servererr.message = 'Server error' + error.statusText;
         servererr.success = false;
         servererr.data = [];
+        console.log(JSON.stringify(myerror));
         return Observable.throw(myerror || servererr);
 
       }

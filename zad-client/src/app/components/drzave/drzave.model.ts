@@ -1,5 +1,6 @@
 // import { IDrzave } from './drzave.model';
 export interface IDrzave {
+    DrzaveID: number;
     _id: string;
     KodDrzave: string;
     Naziv: string;
@@ -11,6 +12,7 @@ export interface IDrzave {
 
 }
 export class Drzave implements IDrzave {
+    DrzaveID: number;
     _id: string;
     KodDrzave: string;
     Naziv: string;
