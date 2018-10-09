@@ -199,41 +199,42 @@ module.exports.countposao = function (req, res, next) {
 	});
 };
 
-module.exports.countActivposao = function (req, res, next) {
-	// const aggregatorOpts = [{
-	//       $unwind: "$prUputDok"
-	//   },
-	//   {
-	//       $group: {
-	//         _id: "$prUputDok.PosloviID",
-	//         total: { $sum: 1 }
-	//       }
-	//   }
-	//   ];
+ module.exports.countActivposao = function (req, res, next) {
+// 	// const aggregatorOpts = [{
+// 	//       $unwind: "$prUputDok"
+// 	//   },
+// 	//   {
+// 	//       $group: {
+// 	//         _id: "$prUputDok.PosloviID",
+// 	//         total: { $sum: 1 }
+// 	//       }
+// 	//   }
+// 	//   ];
 
-	const aggregatorOpts = [{
-		$group: {
-			_id: '$PosloviID',
-			total: {
-				$sum: 1
-			}
-		}
-	}];
+ 	const aggregatorOpts = [{
+ 		$group: {
+ 			_id: '$PosloviID',
+ 			total: {
+ 				$sum: 1
+ 			}
+ 		}
+	 }];
+	 Uput.aggregate(aggregatorOpts, function (err, logs) {
+ 		if (err) {
+ 			return res.status(400).json({
+ 				success: false,
+ 				message: 'Error processing request ' + err,
+ 				number: 0
+ 			});
+ 		}
 
-	Uput.aggregate(aggregatorOpts, function (err, logs) {
-		if (err) {
-			return res.status(400).json({
-				success: false,
-				message: 'Error processing request ' + err,
-				number: 0
-			});
-		}
+// 		// console.log(logs);
+ 		return res.status(200).json({
+ 			success: true,
+ 			message: 'Successfully',
+ 			data: logs
+ 		});
+ 	});
+ };
 
-		// console.log(logs);
-		return res.status(200).json({
-			success: true,
-			message: 'Successfully',
-			data: logs
-		});
-	});
-};
+

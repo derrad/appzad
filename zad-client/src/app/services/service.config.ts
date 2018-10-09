@@ -1,6 +1,6 @@
 export const ServiceConfig = {
-   //  HostUrl: 'http://localhost:3000/',
-    HostUrl: 'http://apizad.com/',
+     HostUrl: 'http://localhost:3000/',
+   // HostUrl: 'http://apizad.com/',
     PrepareHost: function(tisDev, endPoint){
         if (this.isDev) {
             return endPoint;
